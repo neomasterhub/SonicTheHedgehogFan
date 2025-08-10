@@ -3,6 +3,7 @@ using UnityEngine;
 public class SonicController : MonoBehaviour
 {
   private bool _isGrounded;
+  private bool _isTouchingWall;
   private Rigidbody2D _rb;
   private Vector2 _velocity;
 
@@ -23,6 +24,8 @@ public class SonicController : MonoBehaviour
   [Header("Sensors")]
   public Vector2 SensorA = new(0.2f, -0.5f);
   public Vector2 SensorB = new(-0.2f, -0.5f);
+  public Vector2 SensorC = new(0.5f, 0f);
+  public Vector2 SensorD = new(-0.5f, 0f);
   public float SensorRadius = 0.05f;
 
   private void Start()
@@ -34,6 +37,14 @@ public class SonicController : MonoBehaviour
   private void Update()
   {
     var input = Input.GetAxisRaw(CommonConsts.InputAxis.Horizontal);
+
+    _isTouchingWall = IsSensorTouchingWall(SensorC) || IsSensorTouchingWall(SensorD);
+
+    if ((input > 0 && IsSensorTouchingWall(SensorC))
+      || (input < 0 && IsSensorTouchingWall(SensorD)))
+    {
+      input = 0;
+    }
 
     if (input != 0)
     {
@@ -98,9 +109,20 @@ public class SonicController : MonoBehaviour
     Gizmos.color = Color.green;
     Gizmos.DrawWireSphere((Vector2)transform.position + SensorA, SensorRadius);
     Gizmos.DrawWireSphere((Vector2)transform.position + SensorB, SensorRadius);
+    Gizmos.color = Color.red;
+    Gizmos.DrawWireSphere((Vector2)transform.position + SensorC, SensorRadius);
+    Gizmos.DrawWireSphere((Vector2)transform.position + SensorD, SensorRadius);
   }
 
   private bool IsSensorTouchingGround(Vector2 sensor)
+  {
+    var sensorPosition = (Vector2)transform.position + sensor;
+    var hit = Physics2D.OverlapCircle(sensorPosition, SensorRadius, GroundLayer);
+
+    return hit != null;
+  }
+
+  private bool IsSensorTouchingWall(Vector2 sensor)
   {
     var sensorPosition = (Vector2)transform.position + sensor;
     var hit = Physics2D.OverlapCircle(sensorPosition, SensorRadius, GroundLayer);
