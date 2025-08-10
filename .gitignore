@@ -70,3 +70,5 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
+/SonicTheHedgehogFan.Engine/obj
+/SonicTheHedgehogFan.Engine/bin/Debug/netstandard2.1
