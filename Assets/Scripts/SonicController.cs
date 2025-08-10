@@ -18,8 +18,12 @@ public class SonicController : MonoBehaviour
   public float MaxFallSpeed = -30f;
 
   [Header("Ground Settings")]
-  public float GroundCheckDistance = 0.6f;
   public LayerMask GroundLayer;
+
+  [Header("Sensors")]
+  public Vector2 SensorA = new(0.2f, -0.5f);
+  public Vector2 SensorB = new(-0.2f, -0.5f);
+  public float SensorRadius = 0.05f;
 
   private void Start()
   {
@@ -48,7 +52,7 @@ public class SonicController : MonoBehaviour
       }
     }
 
-    _isGrounded = Physics2D.Raycast(transform.position, Vector2.down, GroundCheckDistance, GroundLayer);
+    _isGrounded = IsSensorTouchingGround(SensorA) || IsSensorTouchingGround(SensorB);
 
     var velocityY = _rb.linearVelocity.y;
     if (_isGrounded)
@@ -86,5 +90,21 @@ public class SonicController : MonoBehaviour
     }
 
     _rb.linearVelocity = new Vector2(_velocity.x, velocityY);
+  }
+
+  private void OnDrawGizmos()
+  {
+    // Sensor visualization.
+    Gizmos.color = Color.green;
+    Gizmos.DrawWireSphere((Vector2)transform.position + SensorA, SensorRadius);
+    Gizmos.DrawWireSphere((Vector2)transform.position + SensorB, SensorRadius);
+  }
+
+  private bool IsSensorTouchingGround(Vector2 sensor)
+  {
+    var sensorPosition = (Vector2)transform.position + sensor;
+    var hit = Physics2D.OverlapCircle(sensorPosition, SensorRadius, GroundLayer);
+
+    return hit != null;
   }
 }
