@@ -225,7 +225,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 2.8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -422,7 +422,7 @@ Rigidbody2D:
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &710850499
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -467,7 +467,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 85a3fdad9091f0342b7c315f40cd947d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -505,16 +505,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2c0cadcfb1bf4943909139fe351c3e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isGrounded: 0
   Acceleration: 10
-  MaxSpeed: 8
   Friction: 5
-  Gravity: 20
-  JumpForce: 10
-  GroundCheckDistance: 0.6
+  MaxSpeed: 8
+  GravityDown: 40
+  GravityUp: 15
+  JumpSpeed: 10
+  MaxFallSpeed: -30
   GroundLayer:
     serializedVersion: 2
     m_Bits: 8
+  SensorA: {x: 0.2, y: -0.45}
+  SensorB: {x: -0.2, y: -0.45}
+  SensorC: {x: 0.25, y: 0}
+  SensorD: {x: -0.25, y: 0}
+  SensorALabel: {x: 0.1, y: -0.1}
+  SensorBLabel: {x: -0.1, y: -0.1}
+  SensorCLabel: {x: 0.15, y: 0}
+  SensorDLabel: {x: -0.15, y: 0}
+  SensorRadius: 0.05
 --- !u!1 &1549164656
 GameObject:
   m_ObjectHideFlags: 0

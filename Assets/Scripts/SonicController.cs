@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 public class SonicController : MonoBehaviour
@@ -26,6 +27,10 @@ public class SonicController : MonoBehaviour
   public Vector2 SensorB = new(-0.2f, -0.5f);
   public Vector2 SensorC = new(0.5f, 0f);
   public Vector2 SensorD = new(-0.5f, 0f);
+  public Vector2 SensorALabel = new(0.1f, 0.1f);
+  public Vector2 SensorBLabel = new(-0.1f, 0.1f);
+  public Vector2 SensorCLabel = new(0.15f, 0);
+  public Vector2 SensorDLabel = new(0.15f, 0);
   public float SensorRadius = 0.05f;
 
   private void Start()
@@ -105,13 +110,22 @@ public class SonicController : MonoBehaviour
 
   private void OnDrawGizmos()
   {
-    // Sensor visualization.
+    var sensorLabelStyle = new GUIStyle();
+    sensorLabelStyle.normal.textColor = Color.yellow;
+    sensorLabelStyle.alignment = TextAnchor.MiddleCenter;
+    sensorLabelStyle.fontSize = 20;
+
     Gizmos.color = Color.green;
     Gizmos.DrawWireSphere((Vector2)transform.position + SensorA, SensorRadius);
     Gizmos.DrawWireSphere((Vector2)transform.position + SensorB, SensorRadius);
+    Handles.Label((Vector2)transform.position + SensorA + SensorALabel, "A", sensorLabelStyle);
+    Handles.Label((Vector2)transform.position + SensorB + SensorBLabel, "B", sensorLabelStyle);
+
     Gizmos.color = Color.red;
     Gizmos.DrawWireSphere((Vector2)transform.position + SensorC, SensorRadius);
     Gizmos.DrawWireSphere((Vector2)transform.position + SensorD, SensorRadius);
+    Handles.Label((Vector2)transform.position + SensorC + SensorCLabel, "C", sensorLabelStyle);
+    Handles.Label((Vector2)transform.position + SensorD + SensorDLabel, "D", sensorLabelStyle);
   }
 
   private bool IsSensorTouchingGround(Vector2 sensor)
