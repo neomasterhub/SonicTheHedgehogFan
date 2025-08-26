@@ -48,7 +48,6 @@ public class SonicController : MonoBehaviour
     var input = Input.GetAxisRaw(CommonConsts.InputAxis.Horizontal);
 
     DirectSprite(input);
-    SetAnimatorState(input);
 
     _isTouchingWall = IsSensorTouchingWall(SensorC) || IsSensorTouchingWall(SensorD);
 
@@ -113,6 +112,8 @@ public class SonicController : MonoBehaviour
     }
 
     _rb.linearVelocity = new Vector2(_velocity.x, velocityY);
+
+    SetAnimatorState(_rb.linearVelocity);
   }
 
   private void OnDrawGizmos()
@@ -163,15 +164,17 @@ public class SonicController : MonoBehaviour
     }
   }
 
-  private void SetAnimatorState(float input)
+  private void SetAnimatorState(Vector2 velocity)
   {
-    if (Mathf.Abs(input) > 0.01f)
+    if (Mathf.Abs(velocity.x) > 0.01f)
     {
       _animator.Play(AnimatorStates.Walking);
+      _animator.speed = Mathf.Abs(_velocity.x) / MaxSpeed;
     }
     else
     {
       _animator.Play(AnimatorStates.Idle);
+      _animator.speed = 1f;
     }
   }
 
