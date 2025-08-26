@@ -6,6 +6,7 @@ public class SonicController : MonoBehaviour
   private bool _isGrounded;
   private bool _isTouchingWall;
   private Rigidbody2D _rb;
+  private SpriteRenderer _spriteRenderer;
   private Vector2 _velocity;
 
   [Header("Horizontal Movement")]
@@ -36,12 +37,15 @@ public class SonicController : MonoBehaviour
   private void Start()
   {
     _rb = GetComponent<Rigidbody2D>();
+    _spriteRenderer = GetComponent<SpriteRenderer>();
     _velocity = Vector2.zero;
   }
 
   private void Update()
   {
     var input = Input.GetAxisRaw(CommonConsts.InputAxis.Horizontal);
+
+    DirectSprite(_spriteRenderer, input);
 
     _isTouchingWall = IsSensorTouchingWall(SensorC) || IsSensorTouchingWall(SensorD);
 
@@ -142,5 +146,17 @@ public class SonicController : MonoBehaviour
     var hit = Physics2D.OverlapCircle(sensorPosition, SensorRadius, GroundLayer);
 
     return hit != null;
+  }
+
+  private void DirectSprite(SpriteRenderer sprite, float input)
+  {
+    if (input > 0)
+    {
+      sprite.flipX = false;
+    }
+    else if (input < 0)
+    {
+      sprite.flipX = true;
+    }
   }
 }
