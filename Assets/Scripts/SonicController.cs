@@ -5,6 +5,7 @@ public class SonicController : MonoBehaviour
 {
   private bool _isGrounded;
   private bool _isTouchingWall;
+  private Animator _animator;
   private Rigidbody2D _rb;
   private SpriteRenderer _spriteRenderer;
   private Vector2 _velocity;
@@ -36,6 +37,7 @@ public class SonicController : MonoBehaviour
 
   private void Start()
   {
+    _animator = GetComponent<Animator>();
     _rb = GetComponent<Rigidbody2D>();
     _spriteRenderer = GetComponent<SpriteRenderer>();
     _velocity = Vector2.zero;
@@ -45,7 +47,8 @@ public class SonicController : MonoBehaviour
   {
     var input = Input.GetAxisRaw(CommonConsts.InputAxis.Horizontal);
 
-    DirectSprite(_spriteRenderer, input);
+    DirectSprite(input);
+    SetAnimatorState(input);
 
     _isTouchingWall = IsSensorTouchingWall(SensorC) || IsSensorTouchingWall(SensorD);
 
@@ -148,15 +151,35 @@ public class SonicController : MonoBehaviour
     return hit != null;
   }
 
-  private void DirectSprite(SpriteRenderer sprite, float input)
+  private void DirectSprite(float input)
   {
     if (input > 0)
     {
-      sprite.flipX = false;
+      _spriteRenderer.flipX = false;
     }
     else if (input < 0)
     {
-      sprite.flipX = true;
+      _spriteRenderer.flipX = true;
     }
+  }
+
+  private void SetAnimatorState(float input)
+  {
+    if (Mathf.Abs(input) > 0.01f)
+    {
+      _animator.Play(AnimatorStates.Walking);
+    }
+    else
+    {
+      _animator.Play(AnimatorStates.Idle);
+    }
+  }
+
+  private static class AnimatorStates
+  {
+    public const string Idle = nameof(Idle);
+    public const string Bored = nameof(Bored);
+    public const string Waiting = nameof(Waiting);
+    public const string Walking = nameof(Walking);
   }
 }
