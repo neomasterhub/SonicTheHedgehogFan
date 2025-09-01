@@ -5,7 +5,9 @@ public class SonicController : MonoBehaviour
 {
   private bool _isGrounded;
   private bool _isTouchingWall;
+  private Animator _animator;
   private Rigidbody2D _rb;
+  private SpriteRenderer _spriteRenderer;
   private Vector2 _velocity;
 
   [Header("Horizontal Movement")]
@@ -35,13 +37,17 @@ public class SonicController : MonoBehaviour
 
   private void Start()
   {
+    _animator = GetComponent<Animator>();
     _rb = GetComponent<Rigidbody2D>();
+    _spriteRenderer = GetComponent<SpriteRenderer>();
     _velocity = Vector2.zero;
   }
 
   private void Update()
   {
     var input = Input.GetAxisRaw(CommonConsts.InputAxis.Horizontal);
+
+    DirectSprite(input);
 
     _isTouchingWall = IsSensorTouchingWall(SensorC) || IsSensorTouchingWall(SensorD);
 
@@ -106,6 +112,8 @@ public class SonicController : MonoBehaviour
     }
 
     _rb.linearVelocity = new Vector2(_velocity.x, velocityY);
+
+    SetAnimatorState();
   }
 
   private void OnDrawGizmos()
@@ -142,5 +150,46 @@ public class SonicController : MonoBehaviour
     var hit = Physics2D.OverlapCircle(sensorPosition, SensorRadius, GroundLayer);
 
     return hit != null;
+  }
+
+  private void DirectSprite(float input)
+  {
+    if (input > 0)
+    {
+      _spriteRenderer.flipX = false;
+    }
+    else if (input < 0)
+    {
+      _spriteRenderer.flipX = true;
+    }
+  }
+
+  private void SetAnimatorState()
+  {
+    var velocityXAbs = Mathf.Abs(_rb.linearVelocity.x);
+
+    _animator.SetFloat(AnimatorParameterNames.Speed, velocityXAbs);
+
+    if (_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimatorStateNames.Walking))
+    {
+      _animator.speed = Mathf.Abs(velocityXAbs) / MaxSpeed;
+    }
+    else
+    {
+      _animator.speed = 1f;
+    }
+  }
+
+  private static class AnimatorStateNames
+  {
+    public const string Idle = nameof(Idle);
+    public const string Bored = nameof(Bored);
+    public const string Waiting = nameof(Waiting);
+    public const string Walking = nameof(Walking);
+  }
+
+  private static class AnimatorParameterNames
+  {
+    public const string Speed = nameof(Speed);
   }
 }
