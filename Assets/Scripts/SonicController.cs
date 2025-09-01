@@ -113,7 +113,7 @@ public class SonicController : MonoBehaviour
 
     _rb.linearVelocity = new Vector2(_velocity.x, velocityY);
 
-    SetAnimatorState(_rb.linearVelocity);
+    SetAnimatorState();
   }
 
   private void OnDrawGizmos()
@@ -164,25 +164,32 @@ public class SonicController : MonoBehaviour
     }
   }
 
-  private void SetAnimatorState(Vector2 velocity)
+  private void SetAnimatorState()
   {
-    if (Mathf.Abs(velocity.x) > 0.01f)
+    var velocityXAbs = Mathf.Abs(_rb.linearVelocity.x);
+
+    _animator.SetFloat(AnimatorParameterNames.Speed, velocityXAbs);
+
+    if (_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimatorStateNames.Walking))
     {
-      _animator.Play(AnimatorStates.Walking);
-      _animator.speed = Mathf.Abs(_velocity.x) / MaxSpeed;
+      _animator.speed = Mathf.Abs(velocityXAbs) / MaxSpeed;
     }
     else
     {
-      _animator.Play(AnimatorStates.Idle);
       _animator.speed = 1f;
     }
   }
 
-  private static class AnimatorStates
+  private static class AnimatorStateNames
   {
     public const string Idle = nameof(Idle);
     public const string Bored = nameof(Bored);
     public const string Waiting = nameof(Waiting);
     public const string Walking = nameof(Walking);
+  }
+
+  private static class AnimatorParameterNames
+  {
+    public const string Speed = nameof(Speed);
   }
 }
