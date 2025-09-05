@@ -7,6 +7,7 @@ public class SonicController : MonoBehaviour
   private bool _isTouchingWall;
   private Animator _animator;
   private Rigidbody2D _rb;
+  private SonicPose _pose = SonicPose.Standing;
   private SpriteRenderer _spriteRenderer;
   private Vector2 _velocity;
 
@@ -45,21 +46,27 @@ public class SonicController : MonoBehaviour
 
   private void Update()
   {
-    var input = Input.GetAxisRaw(CommonConsts.InputAxis.Horizontal);
+    var hInput = Input.GetAxisRaw(CommonConsts.InputAxis.Horizontal);
+    var vInput = Input.GetAxisRaw(CommonConsts.InputAxis.Vertical);
 
-    DirectSprite(input);
+    if (_pose == SonicPose.Crouching)
+    {
+      hInput = 0;
+    }
+
+    DirectSprite(hInput);
 
     _isTouchingWall = IsSensorTouchingWall(SensorC) || IsSensorTouchingWall(SensorD);
 
-    if ((input > 0 && IsSensorTouchingWall(SensorC))
-      || (input < 0 && IsSensorTouchingWall(SensorD)))
+    if ((hInput > 0 && IsSensorTouchingWall(SensorC))
+      || (hInput < 0 && IsSensorTouchingWall(SensorD)))
     {
-      input = 0;
+      hInput = 0;
     }
 
-    if (input != 0)
+    if (hInput != 0)
     {
-      _velocity.x += input * Acceleration * Time.deltaTime;
+      _velocity.x += hInput * Acceleration * Time.deltaTime;
       _velocity.x = Mathf.Clamp(_velocity.x, -MaxSpeed, MaxSpeed);
     }
     else
@@ -79,13 +86,13 @@ public class SonicController : MonoBehaviour
     var velocityY = _rb.linearVelocity.y;
     if (_isGrounded)
     {
-      if (Input.GetButtonDown(CommonConsts.InputAxis.Jump))
+      if (_pose == SonicPose.Standing && Input.GetButtonDown(CommonConsts.InputAxis.Jump))
       {
         velocityY = JumpSpeed;
       }
       else
       {
-        // To prevent falling through the ground.
+        // Prevent falling through the ground.
         velocityY = Mathf.Max(velocityY, 0);
       }
     }
@@ -113,6 +120,7 @@ public class SonicController : MonoBehaviour
 
     _rb.linearVelocity = new Vector2(_velocity.x, velocityY);
 
+    HandlePose(vInput);
     SetAnimatorState();
   }
 
@@ -136,6 +144,12 @@ public class SonicController : MonoBehaviour
     Handles.Label((Vector2)transform.position + SensorD + SensorDLabel, "D", sensorLabelStyle);
   }
 
+  private bool IsSensorTouchingCeiling(Vector2 sensor)
+  {
+    Vector2 pos = (Vector2)transform.position + sensor;
+    return Physics2D.OverlapCircle(pos, SensorRadius, GroundLayer) != null;
+  }
+
   private bool IsSensorTouchingGround(Vector2 sensor)
   {
     var sensorPosition = (Vector2)transform.position + sensor;
@@ -152,13 +166,13 @@ public class SonicController : MonoBehaviour
     return hit != null;
   }
 
-  private void DirectSprite(float input)
+  private void DirectSprite(float hInput)
   {
-    if (input > 0)
+    if (hInput > 0)
     {
       _spriteRenderer.flipX = false;
     }
-    else if (input < 0)
+    else if (hInput < 0)
     {
       _spriteRenderer.flipX = true;
     }
@@ -177,6 +191,34 @@ public class SonicController : MonoBehaviour
     else
     {
       _animator.speed = 1f;
+    }
+  }
+
+  private void HandlePose(float vInput)
+  {
+    switch (_pose)
+    {
+      case SonicPose.Standing:
+
+        if (_isGrounded && vInput < 0)
+        {
+          _pose = SonicPose.Crouching;
+          _animator.SetBool(SonicConsts.AnimatorStateNames.Crouching, true);
+        }
+
+        break;
+
+      case SonicPose.Crouching:
+
+        var canStand = !IsSensorTouchingCeiling(SensorC) && !IsSensorTouchingCeiling(SensorD);
+
+        if (vInput >= 0 && canStand)
+        {
+          _pose = SonicPose.Standing;
+          _animator.SetBool(SonicConsts.AnimatorStateNames.Crouching, false);
+        }
+
+        break;
     }
   }
 }
