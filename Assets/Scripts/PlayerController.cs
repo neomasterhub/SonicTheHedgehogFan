@@ -2,14 +2,25 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-  [Header("UI")]
-  public float SensorSourceRadius = 0.03f;
+  private bool _isGrounded;
+  private bool _isTouchingWall;
+  private Vector2 _velocity;
 
   [Header("Ground Settings")]
   public LayerMask GroundLayer;
+  public float GroundCheckDistance = 0.1f;
+
+  [Header("Jump & Gravity")]
+  public float GravityDown = 40f;
+  public float GravityUp = 15f;
+  public float JumpSpeed = 10f;
+  public float MaxFallSpeed = -30f;
 
   [Header("Sensors")]
   public float SensorLength = 0.5f;
+
+  [Header("UI")]
+  public float SensorSourceRadius = 0.03f;
 
   public Vector2 SensorA => (Vector2)transform.position + SonicConsts.SensorOffsets.Default.AOffset;
   public Vector2 SensorB => (Vector2)transform.position + SonicConsts.SensorOffsets.Default.BOffset;
@@ -20,8 +31,14 @@ public class PlayerController : MonoBehaviour
 
   private void Update()
   {
-    var isGrounded = IsGrounded();
-    var isTouchingWall = IsTouchingWall();
+    _isGrounded = IsGrounded();
+    _isTouchingWall = IsTouchingWall();
+
+    var hi = Input.GetAxisRaw(CommonConsts.InputAxis.Horizontal);
+    var vi = Input.GetAxisRaw(CommonConsts.InputAxis.Vertical);
+
+    Gravity();
+    Move();
   }
 
   private void OnDrawGizmos()
@@ -66,5 +83,27 @@ public class PlayerController : MonoBehaviour
   {
     return Physics2D.Raycast(SensorC, Vector2.right, SensorLength, GroundLayer)
       || Physics2D.Raycast(SensorD, Vector2.left, SensorLength, GroundLayer);
+  }
+
+  private void Gravity()
+  {
+    if (!_isGrounded)
+    {
+      _velocity.y -= GravityDown * Time.deltaTime;
+
+      if (_velocity.y < MaxFallSpeed)
+      {
+        _velocity.y = MaxFallSpeed;
+      }
+    }
+    else
+    {
+      _velocity.y = 0;
+    }
+  }
+
+  private void Move()
+  {
+    transform.position += (Vector3)(_velocity * Time.deltaTime);
   }
 }

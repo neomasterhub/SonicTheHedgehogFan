@@ -45,6 +45,10 @@ public class SonicController : MonoBehaviour
 
   private void Update()
   {
+  }
+
+  private void Update1()
+  {
     var input = Input.GetAxisRaw(CommonConsts.InputAxis.Horizontal);
 
     DirectSprite(input);
@@ -118,23 +122,7 @@ public class SonicController : MonoBehaviour
 
   private void OnDrawGizmos()
   {
-    var sensorLabelStyle = new GUIStyle();
-    sensorLabelStyle.normal.textColor = Color.yellow;
-    sensorLabelStyle.alignment = TextAnchor.MiddleCenter;
-    sensorLabelStyle.fontSize = 20;
-
-    Gizmos.color = Color.green;
-    Gizmos.DrawWireSphere((Vector2)transform.position + SensorA, SensorRadius);
-    Gizmos.DrawWireSphere((Vector2)transform.position + SensorB, SensorRadius);
-    Handles.Label((Vector2)transform.position + SensorA + SensorALabel, "A", sensorLabelStyle);
-    Handles.Label((Vector2)transform.position + SensorB + SensorBLabel, "B", sensorLabelStyle);
-
-    Gizmos.color = Color.red;
-    Gizmos.DrawWireSphere((Vector2)transform.position + SensorC, SensorRadius);
-    Gizmos.DrawWireSphere((Vector2)transform.position + SensorD, SensorRadius);
-    Handles.Label((Vector2)transform.position + SensorC + SensorCLabel, "C", sensorLabelStyle);
-    Handles.Label((Vector2)transform.position + SensorD + SensorDLabel, "D", sensorLabelStyle);
-  }
+     }
 
   private bool IsSensorTouchingGround(Vector2 sensor)
   {

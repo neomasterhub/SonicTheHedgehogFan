@@ -18,7 +18,7 @@ public static class SonicConsts
     public static class Default
     {
       public const float HRadiusPx = 9f;
-      public const float VRadiusPx = 19f;
+      public const float VRadiusPx = 18f;
       public const float HRadius = HRadiusPx / ConvertValues.PPU;
       public const float VRadius = VRadiusPx / ConvertValues.PPU;
 
