@@ -168,9 +168,9 @@ public class SonicController : MonoBehaviour
   {
     var velocityXAbs = Mathf.Abs(_rb.linearVelocity.x);
 
-    _animator.SetFloat(AnimatorParameterNames.Speed, velocityXAbs);
+    _animator.SetFloat(SonicConsts.AnimatorParameterNames.Speed, velocityXAbs);
 
-    if (_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimatorStateNames.Walking))
+    if (_animator.GetCurrentAnimatorStateInfo(0).IsName(SonicConsts.AnimatorStateNames.Walking))
     {
       _animator.speed = Mathf.Abs(velocityXAbs) / MaxSpeed;
     }
@@ -178,18 +178,5 @@ public class SonicController : MonoBehaviour
     {
       _animator.speed = 1f;
     }
-  }
-
-  private static class AnimatorStateNames
-  {
-    public const string Idle = nameof(Idle);
-    public const string Bored = nameof(Bored);
-    public const string Waiting = nameof(Waiting);
-    public const string Walking = nameof(Walking);
-  }
-
-  private static class AnimatorParameterNames
-  {
-    public const string Speed = nameof(Speed);
   }
 }
