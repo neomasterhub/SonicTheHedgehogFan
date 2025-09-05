@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
   public Vector2 SensorB => (Vector2)transform.position + SonicConsts.SensorOffsets.Default.BOffset;
   public Vector2 SensorC => (Vector2)transform.position + SonicConsts.SensorOffsets.Default.COffset;
   public Vector2 SensorD => (Vector2)transform.position + SonicConsts.SensorOffsets.Default.DOffset;
+  public Vector2 SensorE => (Vector2)transform.position + SonicConsts.SensorOffsets.Default.EOffset;
+  public Vector2 SensorF => (Vector2)transform.position + SonicConsts.SensorOffsets.Default.FOffset;
 
   private void Update()
   {
@@ -29,17 +31,29 @@ public class PlayerController : MonoBehaviour
 
   private void DrawSensors()
   {
-    Gizmos.color = Color.green;
-    Gizmos.DrawSphere(SensorA, SensorSourceRadius);
-    Gizmos.DrawSphere(SensorB, SensorSourceRadius);
+    Gizmos.color = SonicConsts.SensorColors.AColor;
     Gizmos.DrawLine(SensorA, SensorA + (Vector2.down * SensorLength));
+    Gizmos.DrawSphere(SensorA, SensorSourceRadius);
+
+    Gizmos.color = SonicConsts.SensorColors.BColor;
+    Gizmos.DrawSphere(SensorB, SensorSourceRadius);
     Gizmos.DrawLine(SensorB, SensorB + (Vector2.down * SensorLength));
 
-    Gizmos.color = Color.red;
+    Gizmos.color = SonicConsts.SensorColors.CColor;
     Gizmos.DrawSphere(SensorC, SensorSourceRadius);
+    Gizmos.DrawLine(SensorC, SensorC + (Vector2.left * SensorLength));
+
+    Gizmos.color = SonicConsts.SensorColors.DColor;
     Gizmos.DrawSphere(SensorD, SensorSourceRadius);
-    Gizmos.DrawLine(SensorC, SensorC + (Vector2.right * SensorLength));
-    Gizmos.DrawLine(SensorD, SensorD + (Vector2.left * SensorLength));
+    Gizmos.DrawLine(SensorD, SensorD + (Vector2.right * SensorLength));
+
+    Gizmos.color = SonicConsts.SensorColors.EColor;
+    Gizmos.DrawSphere(SensorE, SensorSourceRadius);
+    Gizmos.DrawLine(SensorE, SensorE + (Vector2.up * SensorLength));
+
+    Gizmos.color = SonicConsts.SensorColors.FColor;
+    Gizmos.DrawSphere(SensorF, SensorSourceRadius);
+    Gizmos.DrawLine(SensorF, SensorF + (Vector2.up * SensorLength));
   }
 
   private bool IsGrounded()
