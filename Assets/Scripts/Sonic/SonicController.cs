@@ -14,11 +14,16 @@ public class SonicController : MonoBehaviour
 
   private void Update()
   {
-    _sonicSensorSystem.Update(transform.position, _sonicSizeMode, _groundSide, SensorLength);
+    UpdateSensors();
   }
 
   private void OnDrawGizmos()
   {
     _sonicSensorSystem.Draw(SensorBeginRadius, SensorEndRadius);
+  }
+
+  private void UpdateSensors()
+  {
+    _sonicSensorSystem.Update(transform.position, _sonicSizeMode, _groundSide, SensorLength);
   }
 }
