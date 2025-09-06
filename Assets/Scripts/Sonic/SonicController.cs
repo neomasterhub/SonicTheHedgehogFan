@@ -4,8 +4,12 @@ using UnityEngine;
 public class SonicController : MonoBehaviour
 {
   private GroundSide _groundSide = GroundSide.Down;
-  private SonicSizeMode _sonicSizeMode = SonicSizeMode.Big;
   private SonicSensorSystem _sonicSensorSystem = new();
+  private SonicSizeMode _sonicSizeMode = SonicSizeMode.Big;
+  private SonicState _state = SonicState.None;
+
+  [Header("Ground")]
+  public LayerMask GroundLayer;
 
   [Header("UI")]
   public float SensorLength = SonicConsts.Sensors.Length;
@@ -15,6 +19,7 @@ public class SonicController : MonoBehaviour
   private void Update()
   {
     UpdateSensors();
+    UpdateState();
   }
 
   private void OnDrawGizmos()
@@ -25,5 +30,26 @@ public class SonicController : MonoBehaviour
   private void UpdateSensors()
   {
     _sonicSensorSystem.Update(transform.position, _sonicSizeMode, _groundSide, SensorLength);
+  }
+
+  private void UpdateState()
+  {
+    var state = SonicState.None;
+
+    if (IsGrounded())
+    {
+      state |= SonicState.Grounded;
+    }
+
+    _state = state;
+  }
+
+  private bool IsGrounded()
+  {
+    var a = _sonicSensorSystem.Sensors[SensorId.A];
+    var b = _sonicSensorSystem.Sensors[SensorId.B];
+
+    return Physics2D.Raycast(a.Begin, a.Direction, a.Length, GroundLayer)
+      || Physics2D.Raycast(b.Begin, b.Direction, b.Length, GroundLayer);
   }
 }
