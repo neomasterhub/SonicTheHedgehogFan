@@ -7,6 +7,7 @@ public class SonicController : MonoBehaviour
   private SonicSensorSystem _sonicSensorSystem = new();
   private SonicSizeMode _sonicSizeMode = SonicSizeMode.Big;
   private SonicState _state = SonicState.None;
+  private Vector2 _velocity;
 
   [Header("Ground")]
   public LayerMask GroundLayer;
@@ -20,6 +21,7 @@ public class SonicController : MonoBehaviour
   {
     UpdateSensors();
     UpdateState();
+    UpdatePosition();
   }
 
   private void OnDrawGizmos()
@@ -42,6 +44,11 @@ public class SonicController : MonoBehaviour
     }
 
     _state = state;
+  }
+
+  private void UpdatePosition()
+  {
+    transform.position += (Vector3)(_velocity * Time.deltaTime);
   }
 
   private bool IsGrounded()
