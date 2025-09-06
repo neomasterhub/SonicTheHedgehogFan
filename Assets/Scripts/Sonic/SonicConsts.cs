@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using static CommonConsts;
 
@@ -5,47 +6,49 @@ public static class SonicConsts
 {
   public static class Sensors
   {
-    public static class Colors
-    {
-      public static readonly Color A = Color.yellow;
-      public static readonly Color B = Color.green;
-      public static readonly Color C = Color.cyan;
-      public static readonly Color D = Color.blue;
-      public static readonly Color E = Color.magenta;
-      public static readonly Color F = Color.red;
-    }
+    public const float Length = 0.05f;
 
-    public static class Offsets
+    public static readonly Dictionary<SensorId, Color> Colors = new()
     {
-      public static class Big
+      [SensorId.A] = Color.yellow,
+      [SensorId.B] = Color.green,
+      [SensorId.C] = Color.white,
+      [SensorId.D] = Color.cyan,
+      [SensorId.E] = Color.magenta,
+      [SensorId.F] = Color.red,
+    };
+
+    public static readonly Dictionary<SonicSizeMode, Dictionary<GroundSide, Dictionary<SensorId, SensorDef>>> Offsets = new()
+    {
+      [SonicSizeMode.Big] = new()
       {
-        public static class OnGround
+        [GroundSide.Down] = new()
         {
-          public static readonly Vector2 A = new(-Sizes.Big.HRadius, -Sizes.Big.VRadius);
-          public static readonly Vector2 B = new(Sizes.Big.HRadius, -Sizes.Big.VRadius);
-          public static readonly Vector2 C = new(-Sizes.Big.HRadius, 0);
-          public static readonly Vector2 D = new(Sizes.Big.HRadius, 0);
-          public static readonly Vector2 E = new(-Sizes.Big.HRadius, Sizes.Big.VRadius);
-          public static readonly Vector2 F = new(Sizes.Big.HRadius, Sizes.Big.VRadius);
-        }
-      }
-    }
+          [SensorId.A] = new(new(-Sizes.Big.HRadius, -Sizes.Big.VRadius), Vector2.down),
+          [SensorId.B] = new(new(Sizes.Big.HRadius, -Sizes.Big.VRadius), Vector2.down),
+          [SensorId.C] = new(new(-Sizes.Big.HRadius, 0), Vector2.left),
+          [SensorId.D] = new(new(Sizes.Big.HRadius, 0), Vector2.right),
+          [SensorId.E] = new(new(-Sizes.Big.HRadius, Sizes.Big.VRadius), Vector2.up),
+          [SensorId.F] = new(new(Sizes.Big.HRadius, Sizes.Big.VRadius), Vector2.up),
+        },
+      },
+    };
   }
 
   public static class Sizes
   {
     public static class Big
     {
-      public const float HRadiusPx = 9f;
-      public const float VRadiusPx = 19f;
+      public const float HRadiusPx = 9;
+      public const float VRadiusPx = 19;
       public const float HRadius = HRadiusPx / ConvertValues.PPU;
       public const float VRadius = VRadiusPx / ConvertValues.PPU;
     }
 
     public static class Small
     {
-      public const float HRadiusPx = 7f;
-      public const float VRadiusPx = 14f;
+      public const float HRadiusPx = 7;
+      public const float VRadiusPx = 14;
       public const float HRadius = HRadiusPx / ConvertValues.PPU;
       public const float VRadius = VRadiusPx / ConvertValues.PPU;
     }
