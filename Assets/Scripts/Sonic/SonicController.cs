@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[ExecuteAlways]
 public class SonicController : MonoBehaviour
 {
   private GroundSide _groundSide = GroundSide.Down;
