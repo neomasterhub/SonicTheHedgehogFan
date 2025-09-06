@@ -5,12 +5,10 @@ using UnityEngine;
 
 public class SonicSensorSystem
 {
-  private readonly LayerMask _groundLayer;
+  private ABResult _abResult;
 
-  public SonicSensorSystem(LayerMask groundLayer)
+  public SonicSensorSystem()
   {
-    _groundLayer = groundLayer;
-
     Sensors = Enum
       .GetValues(typeof(SensorId))
       .Cast<SensorId>()
@@ -19,17 +17,18 @@ public class SonicSensorSystem
 
   public Dictionary<SensorId, SensorInfo> Sensors { get; }
 
-  public ABResult? ApplyAB()
+  public void ApplyAB(LayerMask groundLayer)
   {
     var a = Sensors[SensorId.A];
     var b = Sensors[SensorId.B];
 
-    var aHit = Physics2D.Raycast(a.Begin, a.Direction, a.Length, _groundLayer);
-    var bHit = Physics2D.Raycast(b.Begin, b.Direction, b.Length, _groundLayer);
+    var aHit = Physics2D.Raycast(a.Begin, a.Direction, a.Length, groundLayer);
+    var bHit = Physics2D.Raycast(b.Begin, b.Direction, b.Length, groundLayer);
 
     if (!aHit && !bHit)
     {
-      return null;
+      _abResult = default;
+      return;
     }
 
     RaycastHit2D hit = aHit && bHit
@@ -40,7 +39,7 @@ public class SonicSensorSystem
     var angleDeg = Vector2.SignedAngle(-a.Direction, hit.normal);
     var angleRad = angleDeg * Mathf.Deg2Rad;
 
-    return new ABResult(normal, angleDeg, angleRad);
+    _abResult = new ABResult(hit.point, normal, angleDeg, angleRad);
   }
 
   public void Update(
@@ -55,7 +54,7 @@ public class SonicSensorSystem
     }
   }
 
-  public void Draw(
+  public void DrawSensors(
     float beginRadius = 0,
     float endRadius = 0)
   {
@@ -63,5 +62,14 @@ public class SonicSensorSystem
     {
       sensorInfo.Draw(beginRadius, endRadius);
     }
+  }
+
+  public void DrawGroundNormal(
+    float length = 1,
+    float beginRadius = 0,
+    float endRadius = 0,
+    Color? color = null)
+  {
+    _abResult.Draw(length, beginRadius, endRadius, color);
   }
 }

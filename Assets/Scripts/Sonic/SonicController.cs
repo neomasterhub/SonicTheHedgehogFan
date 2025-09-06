@@ -13,50 +13,31 @@ public class SonicController : MonoBehaviour
   public LayerMask GroundLayer;
 
   [Header("UI")]
+  public float GroundNormalLength = 1.5f;
   public float SensorLength = SonicConsts.Sensors.Length;
   public float SensorBeginRadius = 0.03f;
   public float SensorEndRadius = 0.01f;
 
   private void Update()
   {
-    UpdateSensors();
-    UpdateState();
+    RunSensors();
     UpdatePosition();
   }
 
   private void OnDrawGizmos()
   {
-    _sonicSensorSystem.Draw(SensorBeginRadius, SensorEndRadius);
+    _sonicSensorSystem.DrawSensors(SensorBeginRadius, SensorEndRadius);
+    _sonicSensorSystem.DrawGroundNormal(GroundNormalLength, SensorBeginRadius, SensorEndRadius);
   }
 
-  private void UpdateSensors()
+  private void RunSensors()
   {
     _sonicSensorSystem.Update(transform.position, _sonicSizeMode, _groundSide, SensorLength);
-  }
-
-  private void UpdateState()
-  {
-    var state = SonicState.None;
-
-    if (IsGrounded())
-    {
-      state |= SonicState.Grounded;
-    }
-
-    _state = state;
+    _sonicSensorSystem.ApplyAB(GroundLayer);
   }
 
   private void UpdatePosition()
   {
-    transform.position += (Vector3)(_velocity * Time.deltaTime);
-  }
-
-  private bool IsGrounded()
-  {
-    var a = _sonicSensorSystem.Sensors[SensorId.A];
-    var b = _sonicSensorSystem.Sensors[SensorId.B];
-
-    return Physics2D.Raycast(a.Begin, a.Direction, a.Length, GroundLayer)
-      || Physics2D.Raycast(b.Begin, b.Direction, b.Length, GroundLayer);
+    transform.position += (Vector3)_velocity * Time.deltaTime;
   }
 }
