@@ -1,18 +1,20 @@
 using UnityEngine;
 
-public readonly struct ABResult
+public struct ABResult
 {
-  public readonly Vector2 Contact;
-  public readonly Vector2 Normal;
-  public readonly float AngleDeg;
-  public readonly float AngleRad;
+  public Vector2 Contact;
+  public Vector2 Normal;
+  public float AngleDeg;
+  public float AngleRad;
+  public bool GroundDetected;
 
-  public ABResult(Vector2 contact, Vector2 normal, float angleDeg, float angleRad)
+  public void Reset()
   {
-    Contact = contact;
-    Normal = normal;
-    AngleDeg = angleDeg;
-    AngleRad = angleRad;
+    Contact = Vector2.zero;
+    Normal = Vector2.zero;
+    AngleDeg = 0;
+    AngleRad = 0;
+    GroundDetected = false;
   }
 
   public void Draw(

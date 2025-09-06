@@ -15,6 +15,7 @@ public class SonicSensorSystem
       .ToDictionary(id => id, id => new SensorInfo());
   }
 
+  public ABResult ABResult => _abResult;
   public Dictionary<SensorId, SensorInfo> Sensors { get; }
 
   public void ApplyAB(LayerMask groundLayer)
@@ -27,7 +28,7 @@ public class SonicSensorSystem
 
     if (!aHit && !bHit)
     {
-      _abResult = default;
+      _abResult.Reset();
       return;
     }
 
@@ -35,11 +36,11 @@ public class SonicSensorSystem
       ? (aHit.distance < bHit.distance ? aHit : bHit)
       : (aHit ? aHit : bHit);
 
-    var normal = hit.normal;
-    var angleDeg = Vector2.SignedAngle(-a.Direction, hit.normal);
-    var angleRad = angleDeg * Mathf.Deg2Rad;
-
-    _abResult = new ABResult(hit.point, normal, angleDeg, angleRad);
+    _abResult.Contact = hit.point;
+    _abResult.Normal = hit.normal;
+    _abResult.AngleDeg = Vector2.SignedAngle(-a.Direction, hit.normal);
+    _abResult.AngleRad = _abResult.AngleDeg * Mathf.Deg2Rad;
+    _abResult.GroundDetected = true;
   }
 
   public void Update(
@@ -70,6 +71,6 @@ public class SonicSensorSystem
     float endRadius = 0,
     Color? color = null)
   {
-    _abResult.Draw(length, beginRadius, endRadius, color);
+    ABResult.Draw(length, beginRadius, endRadius, color);
   }
 }
