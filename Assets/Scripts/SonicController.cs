@@ -1,19 +1,14 @@
-using UnityEditor;
 using UnityEngine;
 
 public class SonicController : MonoBehaviour
 {
   private bool _isGrounded;
   private bool _isTouchingWall;
-  private Animator _animator;
-  private Rigidbody2D _rb;
-  private SpriteRenderer _spriteRenderer;
   private Vector2 _velocity;
 
-  [Header("Horizontal Movement")]
-  public float Acceleration = 10f;
-  public float Friction = 5f;
-  public float MaxSpeed = 8f;
+  [Header("Ground Settings")]
+  public LayerMask GroundLayer;
+  public float GroundCheckDistance = 0.1f;
 
   [Header("Jump & Gravity")]
   public float GravityDown = 40f;
@@ -21,163 +16,94 @@ public class SonicController : MonoBehaviour
   public float JumpSpeed = 10f;
   public float MaxFallSpeed = -30f;
 
-  [Header("Ground Settings")]
-  public LayerMask GroundLayer;
-
   [Header("Sensors")]
-  public Vector2 SensorA = new(0.2f, -0.5f);
-  public Vector2 SensorB = new(-0.2f, -0.5f);
-  public Vector2 SensorC = new(0.5f, 0f);
-  public Vector2 SensorD = new(-0.5f, 0f);
-  public Vector2 SensorALabel = new(0.1f, 0.1f);
-  public Vector2 SensorBLabel = new(-0.1f, 0.1f);
-  public Vector2 SensorCLabel = new(0.15f, 0);
-  public Vector2 SensorDLabel = new(0.15f, 0);
-  public float SensorRadius = 0.05f;
+  public float SensorLength = 0.5f;
 
-  private void Start()
-  {
-    _animator = GetComponent<Animator>();
-    _rb = GetComponent<Rigidbody2D>();
-    _spriteRenderer = GetComponent<SpriteRenderer>();
-    _velocity = Vector2.zero;
-  }
+  [Header("UI")]
+  public float SensorSourceRadius = 0.03f;
+
+  public Vector2 SensorA => (Vector2)transform.position + SonicConsts.SensorOffsets.Default.AOffset;
+  public Vector2 SensorB => (Vector2)transform.position + SonicConsts.SensorOffsets.Default.BOffset;
+  public Vector2 SensorC => (Vector2)transform.position + SonicConsts.SensorOffsets.Default.COffset;
+  public Vector2 SensorD => (Vector2)transform.position + SonicConsts.SensorOffsets.Default.DOffset;
+  public Vector2 SensorE => (Vector2)transform.position + SonicConsts.SensorOffsets.Default.EOffset;
+  public Vector2 SensorF => (Vector2)transform.position + SonicConsts.SensorOffsets.Default.FOffset;
 
   private void Update()
   {
-  }
+    _isGrounded = IsGrounded();
+    _isTouchingWall = IsTouchingWall();
 
-  private void Update1()
-  {
-    var input = Input.GetAxisRaw(CommonConsts.InputAxis.Horizontal);
+    var hi = Input.GetAxisRaw(CommonConsts.InputAxis.Horizontal);
+    var vi = Input.GetAxisRaw(CommonConsts.InputAxis.Vertical);
 
-    DirectSprite(input);
-
-    _isTouchingWall = IsSensorTouchingWall(SensorC) || IsSensorTouchingWall(SensorD);
-
-    if ((input > 0 && IsSensorTouchingWall(SensorC))
-      || (input < 0 && IsSensorTouchingWall(SensorD)))
-    {
-      input = 0;
-    }
-
-    if (input != 0)
-    {
-      _velocity.x += input * Acceleration * Time.deltaTime;
-      _velocity.x = Mathf.Clamp(_velocity.x, -MaxSpeed, MaxSpeed);
-    }
-    else
-    {
-      if (_velocity.x > 0)
-      {
-        _velocity.x = Mathf.Max(_velocity.x - (Friction * Time.deltaTime), 0);
-      }
-      else if (_velocity.x < 0)
-      {
-        _velocity.x = Mathf.Min(_velocity.x + (Friction * Time.deltaTime), 0);
-      }
-    }
-
-    _isGrounded = IsSensorTouchingGround(SensorA) || IsSensorTouchingGround(SensorB);
-
-    var velocityY = _rb.linearVelocity.y;
-    if (_isGrounded)
-    {
-      if (Input.GetButtonDown(CommonConsts.InputAxis.Jump))
-      {
-        velocityY = JumpSpeed;
-      }
-      else
-      {
-        // To prevent falling through the ground.
-        velocityY = Mathf.Max(velocityY, 0);
-      }
-    }
-    else
-    {
-      if (velocityY > 0)
-      {
-        if (Input.GetButton(CommonConsts.InputAxis.Jump))
-        {
-          // Lighter gravity while holding jump.
-          velocityY -= GravityUp * Time.deltaTime;
-        }
-        else
-        {
-          velocityY -= GravityDown * Time.deltaTime;
-        }
-      }
-      else
-      {
-        velocityY -= GravityDown * Time.deltaTime;
-      }
-
-      velocityY = Mathf.Max(velocityY, MaxFallSpeed);
-    }
-
-    _rb.linearVelocity = new Vector2(_velocity.x, velocityY);
-
-    SetAnimatorState();
+    Gravity();
+    Position();
   }
 
   private void OnDrawGizmos()
   {
-     }
-
-  private bool IsSensorTouchingGround(Vector2 sensor)
-  {
-    var sensorPosition = (Vector2)transform.position + sensor;
-    var hit = Physics2D.OverlapCircle(sensorPosition, SensorRadius, GroundLayer);
-
-    return hit != null;
+    DrawSensors();
   }
 
-  private bool IsSensorTouchingWall(Vector2 sensor)
+  private void DrawSensors()
   {
-    var sensorPosition = (Vector2)transform.position + sensor;
-    var hit = Physics2D.OverlapCircle(sensorPosition, SensorRadius, GroundLayer);
+    Gizmos.color = SonicConsts.SensorColors.AColor;
+    Gizmos.DrawLine(SensorA, SensorA + (Vector2.down * SensorLength));
+    Gizmos.DrawSphere(SensorA, SensorSourceRadius);
 
-    return hit != null;
+    Gizmos.color = SonicConsts.SensorColors.BColor;
+    Gizmos.DrawSphere(SensorB, SensorSourceRadius);
+    Gizmos.DrawLine(SensorB, SensorB + (Vector2.down * SensorLength));
+
+    Gizmos.color = SonicConsts.SensorColors.CColor;
+    Gizmos.DrawSphere(SensorC, SensorSourceRadius);
+    Gizmos.DrawLine(SensorC, SensorC + (Vector2.left * SensorLength));
+
+    Gizmos.color = SonicConsts.SensorColors.DColor;
+    Gizmos.DrawSphere(SensorD, SensorSourceRadius);
+    Gizmos.DrawLine(SensorD, SensorD + (Vector2.right * SensorLength));
+
+    Gizmos.color = SonicConsts.SensorColors.EColor;
+    Gizmos.DrawSphere(SensorE, SensorSourceRadius);
+    Gizmos.DrawLine(SensorE, SensorE + (Vector2.up * SensorLength));
+
+    Gizmos.color = SonicConsts.SensorColors.FColor;
+    Gizmos.DrawSphere(SensorF, SensorSourceRadius);
+    Gizmos.DrawLine(SensorF, SensorF + (Vector2.up * SensorLength));
   }
 
-  private void DirectSprite(float input)
+  private bool IsGrounded()
   {
-    if (input > 0)
-    {
-      _spriteRenderer.flipX = false;
-    }
-    else if (input < 0)
-    {
-      _spriteRenderer.flipX = true;
-    }
+    return Physics2D.Raycast(SensorA, Vector2.down, SensorLength, GroundLayer)
+      || Physics2D.Raycast(SensorB, Vector2.down, SensorLength, GroundLayer);
   }
 
-  private void SetAnimatorState()
+  private bool IsTouchingWall()
   {
-    var velocityXAbs = Mathf.Abs(_rb.linearVelocity.x);
+    return Physics2D.Raycast(SensorC, Vector2.right, SensorLength, GroundLayer)
+      || Physics2D.Raycast(SensorD, Vector2.left, SensorLength, GroundLayer);
+  }
 
-    _animator.SetFloat(AnimatorParameterNames.Speed, velocityXAbs);
-
-    if (_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimatorStateNames.Walking))
+  private void Gravity()
+  {
+    if (!_isGrounded)
     {
-      _animator.speed = Mathf.Abs(velocityXAbs) / MaxSpeed;
+      _velocity.y -= GravityDown * Time.deltaTime;
+
+      if (_velocity.y < MaxFallSpeed)
+      {
+        _velocity.y = MaxFallSpeed;
+      }
     }
     else
     {
-      _animator.speed = 1f;
+      _velocity.y = 0;
     }
   }
 
-  private static class AnimatorStateNames
+  private void Position()
   {
-    public const string Idle = nameof(Idle);
-    public const string Bored = nameof(Bored);
-    public const string Waiting = nameof(Waiting);
-    public const string Walking = nameof(Walking);
-  }
-
-  private static class AnimatorParameterNames
-  {
-    public const string Speed = nameof(Speed);
+    transform.position += (Vector3)(_velocity * Time.deltaTime);
   }
 }
