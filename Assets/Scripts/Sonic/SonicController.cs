@@ -22,6 +22,12 @@ public class SonicController : MonoBehaviour
   public float SensorBeginRadius = 0.03f;
   public float SensorEndRadius = 0.01f;
 
+  private void Awake()
+  {
+    Application.targetFrameRate = CommonConsts.ConvertValues.FramePerSec;
+    Time.fixedDeltaTime = 1f / CommonConsts.ConvertValues.FramePerSec;
+  }
+
   private void FixedUpdate()
   {
     RunSensors();
