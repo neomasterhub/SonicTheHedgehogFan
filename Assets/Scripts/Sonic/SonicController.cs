@@ -6,12 +6,16 @@ public class SonicController : MonoBehaviour
   private SonicSensorSystem _sonicSensorSystem = new();
   private SonicSizeMode _sonicSizeMode = SonicSizeMode.Big;
   private SonicState _state = SonicState.None;
+
+  /// <summary>
+  /// Offset is units per frame.
+  /// </summary>
   private Vector2 _velocity;
 
   [Header("Physics")]
-  public float GravityUp = 1f;
-  public float GravityDown = 1f;
-  public float MaxFallSpeed = 1f;
+  public float GravityUp = CommonConsts.Physics.GravityUp;
+  public float GravityDown = CommonConsts.Physics.GravityDown;
+  public float MaxFallSpeed = CommonConsts.Physics.MaxFallSpeed;
 
   [Header("Ground")]
   public LayerMask GroundLayer;
@@ -75,7 +79,7 @@ public class SonicController : MonoBehaviour
     }
 
     var g = _velocity.y > 0 ? GravityUp : GravityDown;
-    _velocity.y -= g * Time.deltaTime;
+    _velocity.y -= g;
 
     if (_velocity.y < -MaxFallSpeed)
     {
@@ -85,6 +89,6 @@ public class SonicController : MonoBehaviour
 
   private void UpdatePosition()
   {
-    transform.position += (Vector3)_velocity * Time.deltaTime;
+    transform.position += (Vector3)_velocity;
   }
 }
