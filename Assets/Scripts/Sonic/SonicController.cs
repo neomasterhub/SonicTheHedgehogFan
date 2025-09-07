@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[ExecuteAlways]
 public class SonicController : MonoBehaviour
 {
   private GroundSide _groundSide = GroundSide.Down;
@@ -21,6 +20,7 @@ public class SonicController : MonoBehaviour
   private void Update()
   {
     RunSensors();
+    UpdateState();
     UpdatePosition();
   }
 
@@ -34,6 +34,20 @@ public class SonicController : MonoBehaviour
   {
     _sonicSensorSystem.Update(transform.position, _sonicSizeMode, _groundSide, SensorLength);
     _sonicSensorSystem.ApplyAB(GroundLayer);
+  }
+
+  private void UpdateState()
+  {
+    var state = SonicState.None;
+
+    if (_sonicSensorSystem.ABResult.GroundDetected)
+    {
+      state |= SonicState.Grounded;
+    }
+
+    Debug.Log(state);
+
+    _state = state;
   }
 
   private void UpdatePosition()
