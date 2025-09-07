@@ -41,16 +41,16 @@ public static class SonicConsts
     {
       public const float HRadiusPx = 9;
       public const float VRadiusPx = 19;
-      public const float HRadius = HRadiusPx / ConvertValues.PPU;
-      public const float VRadius = VRadiusPx / ConvertValues.PPU;
+      public const float HRadius = HRadiusPx / ConvertValues.PxPerUnit;
+      public const float VRadius = VRadiusPx / ConvertValues.PxPerUnit;
     }
 
     public static class Small
     {
       public const float HRadiusPx = 7;
       public const float VRadiusPx = 14;
-      public const float HRadius = HRadiusPx / ConvertValues.PPU;
-      public const float VRadius = VRadiusPx / ConvertValues.PPU;
+      public const float HRadius = HRadiusPx / ConvertValues.PxPerUnit;
+      public const float VRadius = VRadiusPx / ConvertValues.PxPerUnit;
     }
   }
 }

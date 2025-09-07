@@ -8,6 +8,12 @@ public static class CommonConsts
     public const int SpxPerUnit = SpxPerPx * PxPerUnit;
   }
 
+  public static class Physics
+  {
+    public const float GravityDownSpx = 56;
+    public const float GravityDown = GravityDownSpx / ConvertValues.SpxPerUnit;
+  }
+
   public static class InputAxis
   {
     public const string Jump = nameof(Jump);
