@@ -2,7 +2,10 @@ public static class CommonConsts
 {
   public static class ConvertValues
   {
-    public const float PPU = 40f;
+    public const int FramePerSec = 60;
+    public const int PxPerUnit = 40;
+    public const int SpxPerPx = 256;
+    public const int SpxPerUnit = SpxPerPx * PxPerUnit;
   }
 
   public static class InputAxis
