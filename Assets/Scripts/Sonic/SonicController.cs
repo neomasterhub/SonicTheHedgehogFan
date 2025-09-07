@@ -22,7 +22,7 @@ public class SonicController : MonoBehaviour
   public float SensorBeginRadius = 0.03f;
   public float SensorEndRadius = 0.01f;
 
-  private void Update()
+  private void FixedUpdate()
   {
     RunSensors();
     UpdateState();
