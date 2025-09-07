@@ -8,6 +8,11 @@ public class SonicController : MonoBehaviour
   private SonicState _state = SonicState.None;
   private Vector2 _velocity;
 
+  [Header("Physics")]
+  public float GravityUp = 1f;
+  public float GravityDown = 1f;
+  public float MaxFallSpeed = 1f;
+
   [Header("Ground")]
   public LayerMask GroundLayer;
 
@@ -21,6 +26,7 @@ public class SonicController : MonoBehaviour
   {
     RunSensors();
     UpdateState();
+    UpdateGravity();
     UpdatePosition();
   }
 
@@ -48,6 +54,27 @@ public class SonicController : MonoBehaviour
     Debug.Log(state);
 
     _state = state;
+  }
+
+  private void UpdateGravity()
+  {
+    if (_state.HasFlag(SonicState.Grounded))
+    {
+      if (_velocity.y < 0)
+      {
+        _velocity.y = 0;
+      }
+
+      return;
+    }
+
+    var g = _velocity.y > 0 ? GravityUp : GravityDown;
+    _velocity.y -= g * Time.deltaTime;
+
+    if (_velocity.y < -MaxFallSpeed)
+    {
+      _velocity.y = -MaxFallSpeed;
+    }
   }
 
   private void UpdatePosition()
