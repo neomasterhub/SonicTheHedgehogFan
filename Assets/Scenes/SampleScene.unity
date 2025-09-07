@@ -423,7 +423,7 @@ Transform:
   m_GameObject: {fileID: 710850496}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.18, y: -1.09, z: 0}
+  m_LocalPosition: {x: 1.738, y: 0.65, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -463,10 +463,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5b15c981b4f0f84386f27d8b7de5c54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GravityUp: 0.0015625
+  GravityDown: 0.00546875
+  MaxFallSpeed: 0.4
   GroundLayer:
     serializedVersion: 2
     m_Bits: 8
-  GroundNormalLength: 1.51
+  GroundNormalLength: 1.5
   SensorLength: 0.05
   SensorBeginRadius: 0.03
   SensorEndRadius: 0.01
