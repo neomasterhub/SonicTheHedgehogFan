@@ -41,14 +41,18 @@ public class SonicController : MonoBehaviour
 
   private void FixedUpdate()
   {
+    RunSensors();
+    UpdateState();
+
+    // TODO: UpdateInputs();
     var xInput = Input.GetAxis(CommonConsts.InputAxis.Horizontal);
     _horizontalDirection = Mathf.Sign(xInput);
 
-    RunSensors();
-    UpdateState();
+    // Set specific speed.
     UpdateGravity();
     PreventGroundOvershoot();
     UpdateGroundSpeed(xInput);
+
     UpdatePosition();
   }
 
@@ -177,6 +181,9 @@ public class SonicController : MonoBehaviour
 
   private void UpdatePosition()
   {
+    // TODO: UpdateSpeed()
+    _speed.x = _groundSpeed * Mathf.Cos(_sonicSensorSystem.ABResult.AngleRad);
+    _speed.y = _groundSpeed * Mathf.Sin(_sonicSensorSystem.ABResult.AngleRad);
     transform.position += (Vector3)_speed;
   }
 }
