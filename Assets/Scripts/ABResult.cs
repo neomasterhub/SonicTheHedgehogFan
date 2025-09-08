@@ -4,27 +4,29 @@ public struct ABResult
 {
   public Vector2 Contact;
   public Vector2 Normal;
+  public float Distance;
   public float AngleDeg;
   public float AngleRad;
   public bool GroundDetected;
 
   public void Reset()
   {
-    Contact = Vector2.zero;
+    Contact = Vector2.positiveInfinity;
     Normal = Vector2.zero;
-    AngleDeg = 0;
-    AngleRad = 0;
+    Distance = float.PositiveInfinity;
+    AngleDeg = float.NaN;
+    AngleRad = float.NaN;
     GroundDetected = false;
   }
 
   public void Draw(
-    float length = 1,
+    float normalLength = 1,
     float beginRadius = 0,
     float endRadius = 0,
     Color? color = null)
   {
     var begin = Contact;
-    var end = Contact + (Normal * length);
+    var end = Contact + (Normal * normalLength);
 
     Gizmos.color = color ?? Color.yellow;
     Gizmos.DrawLine(begin, end);
