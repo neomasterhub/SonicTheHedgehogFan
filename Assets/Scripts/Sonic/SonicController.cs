@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class SonicController : MonoBehaviour
 {
+  private float _groundSpeed;
   private GroundSide _groundSide = GroundSide.Down;
   private SonicSensorSystem _sonicSensorSystem = new();
   private SonicSizeMode _sonicSizeMode = SonicSizeMode.Big;
@@ -10,7 +11,7 @@ public class SonicController : MonoBehaviour
   /// <summary>
   /// Offset in units per frame.
   /// </summary>
-  private Vector2 _velocity;
+  private Vector2 _speed;
 
   [Header("Physics")]
   public float GravityUp = CommonConsts.Physics.GravityUp;
@@ -37,10 +38,12 @@ public class SonicController : MonoBehaviour
 
   private void FixedUpdate()
   {
+    var xInput = Input.GetAxis(CommonConsts.InputAxis.Horizontal);
     RunSensors();
     UpdateState();
     UpdateGravity();
     PreventGroundOvershoot();
+    UpdateGroundSpeed(xInput);
     UpdatePosition();
   }
 
@@ -74,26 +77,26 @@ public class SonicController : MonoBehaviour
   {
     if (_state.HasFlag(SonicState.Grounded))
     {
-      if (_velocity.y < 0)
+      if (_speed.y < 0)
       {
-        _velocity.y = 0;
+        _speed.y = 0;
       }
 
       return;
     }
 
-    var g = _velocity.y > 0 ? GravityUp : GravityDown;
-    _velocity.y -= g;
+    var g = _speed.y > 0 ? GravityUp : GravityDown;
+    _speed.y -= g;
 
-    if (_velocity.y < -MaxFallSpeed)
+    if (_speed.y < -MaxFallSpeed)
     {
-      _velocity.y = -MaxFallSpeed;
+      _speed.y = -MaxFallSpeed;
     }
   }
 
   private void PreventGroundOvershoot()
   {
-    if (_velocity.y >= 0)
+    if (_speed.y >= 0)
     {
       return;
     }
@@ -101,11 +104,70 @@ public class SonicController : MonoBehaviour
     // Keeps surface normal aligned with slope.
     var yPositionOffset = SensorLength / 2;
 
-    _velocity.y = -Mathf.Min(Mathf.Abs(_velocity.y), _sonicSensorSystem.ABResult.Distance - yPositionOffset);
+    _speed.y = -Mathf.Min(Mathf.Abs(_speed.y), _sonicSensorSystem.ABResult.Distance - yPositionOffset);
+  }
+
+  private void UpdateGroundSpeed(float xInput)
+  {
+    if (xInput > 0)
+    {
+      SetForwardGroundSpeed();
+      return;
+    }
+
+    if (xInput < 0)
+    {
+      SetBackGroundSpeed();
+      return;
+    }
+  }
+
+  private void SetForwardGroundSpeed()
+  {
+    if (_groundSpeed < 0)
+    {
+      _groundSpeed += DecelerationSpeed;
+
+      if (_groundSpeed >= 0)
+      {
+        _groundSpeed = DecelerationSpeed;
+      }
+    }
+    else if (_groundSpeed < TopSpeed)
+    {
+      _groundSpeed += AccelerationSpeed;
+
+      if (_groundSpeed >= TopSpeed)
+      {
+        _groundSpeed = TopSpeed;
+      }
+    }
+  }
+
+  private void SetBackGroundSpeed()
+  {
+    if (_groundSpeed > 0)
+    {
+      _groundSpeed -= DecelerationSpeed;
+
+      if (_groundSpeed <= 0)
+      {
+        _groundSpeed = -DecelerationSpeed;
+      }
+    }
+    else if (_groundSpeed > -TopSpeed)
+    {
+      _groundSpeed -= AccelerationSpeed;
+
+      if (_groundSpeed <= -TopSpeed)
+      {
+        _groundSpeed = -TopSpeed;
+      }
+    }
   }
 
   private void UpdatePosition()
   {
-    transform.position += (Vector3)_velocity;
+    transform.position += (Vector3)_speed;
   }
 }
