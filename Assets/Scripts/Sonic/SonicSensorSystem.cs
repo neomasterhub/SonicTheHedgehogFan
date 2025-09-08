@@ -18,13 +18,15 @@ public class SonicSensorSystem
   public ABResult ABResult => _abResult;
   public Dictionary<SensorId, SensorInfo> Sensors { get; }
 
-  public void ApplyAB(LayerMask groundLayer)
+  public void ApplyAB(
+    LayerMask groundLayer,
+    float sensorLength)
   {
     var a = Sensors[SensorId.A];
     var b = Sensors[SensorId.B];
 
-    var aHit = Physics2D.Raycast(a.Begin, a.Direction, a.Length, groundLayer);
-    var bHit = Physics2D.Raycast(b.Begin, b.Direction, b.Length, groundLayer);
+    var aHit = Physics2D.Raycast(a.Begin, a.Direction, float.PositiveInfinity, groundLayer);
+    var bHit = Physics2D.Raycast(b.Begin, b.Direction, float.PositiveInfinity, groundLayer);
 
     if (!aHit && !bHit)
     {
@@ -32,15 +34,11 @@ public class SonicSensorSystem
       return;
     }
 
-    RaycastHit2D hit = aHit && bHit
+    var hit = aHit && bHit
       ? (aHit.distance < bHit.distance ? aHit : bHit)
       : (aHit ? aHit : bHit);
 
-    _abResult.Contact = hit.point;
-    _abResult.Normal = hit.normal;
-    _abResult.AngleDeg = Vector2.SignedAngle(-a.Direction, hit.normal);
-    _abResult.AngleRad = _abResult.AngleDeg * Mathf.Deg2Rad;
-    _abResult.GroundDetected = true;
+    _abResult.Set(hit, a.Direction, sensorLength);
   }
 
   public void Update(
