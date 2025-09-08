@@ -19,7 +19,20 @@ public struct ABResult
     GroundDetected = false;
   }
 
-  public void Draw(
+  public void Set(
+    RaycastHit2D hit,
+    Vector2 sensorDirection,
+    float sensorLength)
+  {
+    Contact = hit.point;
+    Normal = hit.normal;
+    Distance = hit.distance;
+    AngleDeg = Vector2.SignedAngle(-sensorDirection, hit.normal);
+    AngleRad = AngleDeg * Mathf.Deg2Rad;
+    GroundDetected = hit.distance <= sensorLength;
+  }
+
+  public readonly void Draw(
     float normalLength = 1,
     float beginRadius = 0,
     float endRadius = 0,
