@@ -8,7 +8,7 @@ public class SonicController : MonoBehaviour
   private SonicState _state = SonicState.None;
 
   /// <summary>
-  /// Offset is units per frame.
+  /// Offset in units per frame.
   /// </summary>
   private Vector2 _velocity;
 
@@ -37,6 +37,7 @@ public class SonicController : MonoBehaviour
     RunSensors();
     UpdateState();
     UpdateGravity();
+    PreventGroundOvershoot();
     UpdatePosition();
   }
 
@@ -49,7 +50,7 @@ public class SonicController : MonoBehaviour
   private void RunSensors()
   {
     _sonicSensorSystem.Update(transform.position, _sonicSizeMode, _groundSide, SensorLength);
-    _sonicSensorSystem.ApplyAB(GroundLayer);
+    _sonicSensorSystem.ApplyAB(GroundLayer, SensorLength);
   }
 
   private void UpdateState()
@@ -85,6 +86,19 @@ public class SonicController : MonoBehaviour
     {
       _velocity.y = -MaxFallSpeed;
     }
+  }
+
+  private void PreventGroundOvershoot()
+  {
+    if (_velocity.y >= 0)
+    {
+      return;
+    }
+
+    // Keeps surface normal aligned with slope.
+    var yPositionOffset = SensorLength / 2;
+
+    _velocity.y = -Mathf.Min(Mathf.Abs(_velocity.y), _sonicSensorSystem.ABResult.Distance - yPositionOffset);
   }
 
   private void UpdatePosition()
