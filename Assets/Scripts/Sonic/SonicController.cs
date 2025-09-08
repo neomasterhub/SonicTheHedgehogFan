@@ -16,6 +16,9 @@ public class SonicController : MonoBehaviour
   public float GravityUp = CommonConsts.Physics.GravityUp;
   public float GravityDown = CommonConsts.Physics.GravityDown;
   public float MaxFallSpeed = CommonConsts.Physics.MaxFallSpeed;
+  public float AccelerationSpeed = SonicConsts.Physics.AccelerationSpeed;
+  public float DecelerationSpeed = SonicConsts.Physics.AccelerationSpeed;
+  public float TopSpeed = SonicConsts.Physics.TopSpeed;
 
   [Header("Ground")]
   public LayerMask GroundLayer;
