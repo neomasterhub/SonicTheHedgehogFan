@@ -4,6 +4,16 @@ using static CommonConsts;
 
 public static class SonicConsts
 {
+  public static class Physics
+  {
+    public const float AccelerationSpeedSpx = 12;
+    public const float DecelerationSpeedSpx = 128;
+    public const float TopSpeedPx = 6;
+    public const float AccelerationSpeed = AccelerationSpeedSpx / ConvertValues.SpxPerUnit;
+    public const float DecelerationSpeed = AccelerationSpeedSpx / ConvertValues.SpxPerUnit;
+    public const float TopSpeed = TopSpeedPx / ConvertValues.PxPerUnit;
+  }
+
   public static class Sensors
   {
     public const float Length = 0.05f;
