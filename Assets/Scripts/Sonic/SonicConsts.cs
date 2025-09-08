@@ -8,9 +8,11 @@ public static class SonicConsts
   {
     public const float AccelerationSpeedSpx = 12;
     public const float DecelerationSpeedSpx = 128;
+    public const float FrictionSpeedSpx = 12;
     public const float TopSpeedPx = 6;
     public const float AccelerationSpeed = AccelerationSpeedSpx / ConvertValues.SpxPerUnit;
     public const float DecelerationSpeed = AccelerationSpeedSpx / ConvertValues.SpxPerUnit;
+    public const float FrictionSpeed = FrictionSpeedSpx / ConvertValues.SpxPerUnit;
     public const float TopSpeed = TopSpeedPx / ConvertValues.PxPerUnit;
   }
 

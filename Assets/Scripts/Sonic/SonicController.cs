@@ -3,6 +3,7 @@ using UnityEngine;
 public class SonicController : MonoBehaviour
 {
   private float _groundSpeed;
+  private float _horizontalDirection;
   private GroundSide _groundSide = GroundSide.Down;
   private SonicSensorSystem _sonicSensorSystem = new();
   private SonicSizeMode _sonicSizeMode = SonicSizeMode.Big;
@@ -19,7 +20,9 @@ public class SonicController : MonoBehaviour
   public float MaxFallSpeed = CommonConsts.Physics.MaxFallSpeed;
   public float AccelerationSpeed = SonicConsts.Physics.AccelerationSpeed;
   public float DecelerationSpeed = SonicConsts.Physics.AccelerationSpeed;
+  public float FrictionSpeed = SonicConsts.Physics.FrictionSpeed;
   public float TopSpeed = SonicConsts.Physics.TopSpeed;
+  public float GroundSpeedDead = 0.5f;
 
   [Header("Ground")]
   public LayerMask GroundLayer;
@@ -39,6 +42,8 @@ public class SonicController : MonoBehaviour
   private void FixedUpdate()
   {
     var xInput = Input.GetAxis(CommonConsts.InputAxis.Horizontal);
+    _horizontalDirection = Mathf.Sign(xInput);
+
     RunSensors();
     UpdateState();
     UpdateGravity();
@@ -120,6 +125,10 @@ public class SonicController : MonoBehaviour
       SetBackGroundSpeed();
       return;
     }
+
+    _groundSpeed = Mathf.Abs(_groundSpeed) > GroundSpeedDead
+      ? _groundSpeed - (FrictionSpeed * _horizontalDirection)
+      : 0;
   }
 
   private void SetForwardGroundSpeed()
