@@ -1,22 +1,15 @@
-using SonicTheHedgehogFan.Engine.Common;
 using UnityEngine;
 
 public class SonicController : MonoBehaviour
 {
-  private readonly InputInfo _inputInfo = new(
-    () => Input.GetAxis(CommonConsts.InputAxis.Horizontal),
-    () => Input.GetAxis(CommonConsts.InputAxis.Vertical));
   private readonly SonicSensorSystem _sonicSensorSystem = new();
 
-  private float _groundSpeed;
-  private GroundSide _groundSide = GroundSide.Down;
-  private SonicSizeMode _sonicSizeMode = SonicSizeMode.Big;
-  private SonicState _state = SonicState.None;
+  private InputInfo _inputInfo;
+  private PlayerSpeedManager _playerSpeedManager;
 
-  /// <summary>
-  /// Offset in units per frame.
-  /// </summary>
-  private Vector2 _speed;
+  private GroundSide _groundSide = GroundSide.Down;
+  private PlayerState _playerState = PlayerState.Grounded;
+  private SonicSizeMode _sonicSizeMode = SonicSizeMode.Big;
 
   [Header("Physics")]
   public float GravityUp = CommonConsts.Physics.GravityUp;
@@ -26,7 +19,7 @@ public class SonicController : MonoBehaviour
   public float DecelerationSpeed = SonicConsts.Physics.AccelerationSpeed;
   public float FrictionSpeed = SonicConsts.Physics.FrictionSpeed;
   public float TopSpeed = SonicConsts.Physics.TopSpeed;
-  public float GroundSpeedDead = 0.5f;
+  public float GroundSpeedDeadZone = 0.5f;
 
   [Header("Ground")]
   public LayerMask GroundLayer;
@@ -41,19 +34,19 @@ public class SonicController : MonoBehaviour
   {
     Application.targetFrameRate = CommonConsts.ConvertValues.FramePerSec;
     Time.fixedDeltaTime = 1f / CommonConsts.ConvertValues.FramePerSec;
+
+    _inputInfo = new InputInfo(
+      () => Input.GetAxis(CommonConsts.InputAxis.Horizontal),
+      () => Input.GetAxis(CommonConsts.InputAxis.Vertical));
+    _playerSpeedManager = new PlayerSpeedManager(_inputInfo);
   }
 
   private void FixedUpdate()
   {
     UpdateInput();
-
     RunSensors();
     UpdateState();
-    // Set specific speed.
-    UpdateGravity();
-    PreventGroundOvershoot();
-    UpdateGroundSpeed();
-
+    SetSpeed();
     UpdatePosition();
   }
 
@@ -68,6 +61,18 @@ public class SonicController : MonoBehaviour
     _inputInfo.Update();
   }
 
+  public void SetSpeed()
+  {
+    _playerSpeedManager.SetSpeed(
+      _playerState,
+      _sonicSensorSystem.ABResult.AngleRad,
+      TopSpeed,
+      AccelerationSpeed,
+      DecelerationSpeed,
+      FrictionSpeed,
+      GroundSpeedDeadZone);
+  }
+
   private void RunSensors()
   {
     _sonicSensorSystem.Update(transform.position, _sonicSizeMode, _groundSide, SensorLength);
@@ -76,120 +81,21 @@ public class SonicController : MonoBehaviour
 
   private void UpdateState()
   {
-    var state = SonicState.None;
+    var playerState = PlayerState.None;
 
     if (_sonicSensorSystem.ABResult.GroundDetected)
     {
-      state |= SonicState.Grounded;
+      playerState |= PlayerState.Grounded;
     }
 
-    Debug.Log(state);
+    Debug.Log(playerState);
 
-    _state = state;
-  }
-
-  private void UpdateGravity()
-  {
-    if (_state.HasFlag(SonicState.Grounded))
-    {
-      if (_speed.y < 0)
-      {
-        _speed.y = 0;
-      }
-
-      return;
-    }
-
-    var g = _speed.y > 0 ? GravityUp : GravityDown;
-    _speed.y -= g;
-
-    if (_speed.y < -MaxFallSpeed)
-    {
-      _speed.y = -MaxFallSpeed;
-    }
-  }
-
-  private void PreventGroundOvershoot()
-  {
-    if (_speed.y >= 0)
-    {
-      return;
-    }
-
-    // Keeps surface normal aligned with slope.
-    var yPositionOffset = SensorLength / 2;
-
-    _speed.y = -Mathf.Min(Mathf.Abs(_speed.y), _sonicSensorSystem.ABResult.Distance - yPositionOffset);
-  }
-
-  private void UpdateGroundSpeed()
-  {
-    if (_inputInfo.XDirection > 0)
-    {
-      SetForwardGroundSpeed();
-      return;
-    }
-
-    if (_inputInfo.XDirection < 0)
-    {
-      SetBackGroundSpeed();
-      return;
-    }
-
-    _groundSpeed = Mathf.Abs(_groundSpeed) > GroundSpeedDead
-      ? _groundSpeed - (FrictionSpeed * _inputInfo.XDirection)
-      : 0;
-  }
-
-  private void SetForwardGroundSpeed()
-  {
-    if (_groundSpeed < 0)
-    {
-      _groundSpeed += DecelerationSpeed;
-
-      if (_groundSpeed >= 0)
-      {
-        _groundSpeed = DecelerationSpeed;
-      }
-    }
-    else if (_groundSpeed < TopSpeed)
-    {
-      _groundSpeed += AccelerationSpeed;
-
-      if (_groundSpeed >= TopSpeed)
-      {
-        _groundSpeed = TopSpeed;
-      }
-    }
-  }
-
-  private void SetBackGroundSpeed()
-  {
-    if (_groundSpeed > 0)
-    {
-      _groundSpeed -= DecelerationSpeed;
-
-      if (_groundSpeed <= 0)
-      {
-        _groundSpeed = -DecelerationSpeed;
-      }
-    }
-    else if (_groundSpeed > -TopSpeed)
-    {
-      _groundSpeed -= AccelerationSpeed;
-
-      if (_groundSpeed <= -TopSpeed)
-      {
-        _groundSpeed = -TopSpeed;
-      }
-    }
+    _playerState = playerState;
   }
 
   private void UpdatePosition()
   {
-    // TODO: UpdateSpeed()
-    _speed.x = _groundSpeed * Mathf.Cos(_sonicSensorSystem.ABResult.AngleRad);
-    _speed.y = _groundSpeed * Mathf.Sin(_sonicSensorSystem.ABResult.AngleRad);
-    transform.position += (Vector3)_speed;
+    // Speed X, Y - offsets in units per frame.
+    transform.position += new Vector3(_playerSpeedManager.SpeedX, _playerSpeedManager.SpeedY);
   }
 }
