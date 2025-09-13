@@ -103,6 +103,8 @@ public class SonicController : MonoBehaviour
       GroundSpeedDeadZone,
       AirTopSpeed,
       AirAccelerationSpeed,
+      SensorLength,
+      _sonicSensorSystem.ABResult.Distance,
       InputDeadZone);
   }
 

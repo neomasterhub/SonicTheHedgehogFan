@@ -27,11 +27,13 @@ public class PlayerSpeedManager
     float groundSpeedDeadZone,
     float airTopSpeed,
     float airAccelerationSpeed,
+    float groundSensorLength,
+    float distanceToGround,
     float inputDeadZone)
   {
     if (playerState.HasFlag(PlayerState.Airborne))
     {
-      SetSpeed_Airborne(gravityUp, gravityDown, maxFallSpeed, airTopSpeed, airAccelerationSpeed, inputDeadZone);
+      SetSpeed_Airborne(gravityUp, gravityDown, maxFallSpeed, airTopSpeed, airAccelerationSpeed, inputDeadZone, groundSensorLength, distanceToGround);
     }
     else if (playerState.HasFlag(PlayerState.Grounded))
     {
@@ -45,9 +47,12 @@ public class PlayerSpeedManager
     float maxFallSpeed,
     float airTopSpeed,
     float airAccelerationSpeed,
+    float groundSensorLength,
+    float distanceToGround,
     float inputDeadZone)
   {
     SetSpeed_Airborne_Gravity(gravityUp, gravityDown, maxFallSpeed);
+    SetSpeed_Airborne_PreventGroundOvershoot(groundSensorLength, distanceToGround);
     SetSpeed_Airborne_Horizontal(airTopSpeed, airAccelerationSpeed, inputDeadZone);
   }
 
@@ -62,6 +67,26 @@ public class PlayerSpeedManager
     if (SpeedY < -maxFallSpeed)
     {
       SpeedY = -maxFallSpeed;
+    }
+  }
+
+  private void SetSpeed_Airborne_PreventGroundOvershoot(
+    float groundSensorLength,
+    float distanceToGround)
+  {
+    if (SpeedY > 0)
+    {
+      return;
+    }
+
+    // Keeps surface normal aligned with slope.
+    var yPositionOffset = groundSensorLength / 2;
+
+    var maxFallStep = distanceToGround - yPositionOffset;
+
+    if (SpeedY < -maxFallStep)
+    {
+      SpeedY = -maxFallStep;
     }
   }
 
