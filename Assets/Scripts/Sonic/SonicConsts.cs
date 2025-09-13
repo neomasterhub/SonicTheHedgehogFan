@@ -10,10 +10,14 @@ public static class SonicConsts
     public const float DecelerationSpeedSpx = 128;
     public const float FrictionSpeedSpx = 12;
     public const float TopSpeedPx = 6;
+    public const float AirAccelerationSpeedSpx = 14;
+    public const float AirTopSpeedPx = 6;
     public const float AccelerationSpeed = AccelerationSpeedSpx / ConvertValues.SpxPerUnit;
     public const float DecelerationSpeed = AccelerationSpeedSpx / ConvertValues.SpxPerUnit;
     public const float FrictionSpeed = FrictionSpeedSpx / ConvertValues.SpxPerUnit;
     public const float TopSpeed = TopSpeedPx / ConvertValues.PxPerUnit;
+    public const float AirAccelerationSpeed = AirAccelerationSpeedSpx / ConvertValues.SpxPerUnit;
+    public const float AirTopSpeed = AirTopSpeedPx / ConvertValues.PxPerUnit;
   }
 
   public static class Sensors
