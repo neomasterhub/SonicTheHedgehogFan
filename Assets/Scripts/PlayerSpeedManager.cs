@@ -41,6 +41,10 @@ public class PlayerSpeedManager
     {
       SetSpeed_Grounded_Forward(topSpeed, accelerationSpeed, decelerationSpeed);
     }
+    else if (_inputInfo.X < 0)
+    {
+      SetSpeed_Grounded_Back(topSpeed, accelerationSpeed, decelerationSpeed);
+    }
   }
 
   private void SetSpeed_Grounded_Forward(
@@ -64,6 +68,31 @@ public class PlayerSpeedManager
       if (_groundSpeed >= topSpeed)
       {
         _groundSpeed = topSpeed;
+      }
+    }
+  }
+
+  private void SetSpeed_Grounded_Back(
+    float topSpeed,
+    float accelerationSpeed,
+    float decelerationSpeed)
+  {
+    if (_groundSpeed > 0)
+    {
+      _groundSpeed -= decelerationSpeed;
+
+      if (_groundSpeed <= 0)
+      {
+        _groundSpeed = -decelerationSpeed;
+      }
+    }
+    else if (_groundSpeed > -topSpeed)
+    {
+      _groundSpeed -= accelerationSpeed;
+
+      if (_groundSpeed <= -topSpeed)
+      {
+        _groundSpeed = -topSpeed;
       }
     }
   }
