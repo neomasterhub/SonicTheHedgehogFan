@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class PlayerSpeedManager
 {
   private readonly InputInfo _inputInfo;
@@ -16,7 +18,9 @@ public class PlayerSpeedManager
     float groundAngleRad,
     float topSpeed,
     float accelerationSpeed,
-    float decelerationSpeed)
+    float decelerationSpeed,
+    float frictionSpeed,
+    float groundSpeedDeadZone)
   {
     if (playerState.HasFlag(PlayerState.Airborne))
     {
@@ -24,7 +28,7 @@ public class PlayerSpeedManager
     }
     else if (playerState.HasFlag(PlayerState.Grounded))
     {
-      SetSpeed_Grounded(topSpeed, accelerationSpeed, decelerationSpeed);
+      SetSpeed_Grounded(topSpeed, accelerationSpeed, decelerationSpeed, frictionSpeed, groundSpeedDeadZone);
     }
   }
 
@@ -35,7 +39,9 @@ public class PlayerSpeedManager
   private void SetSpeed_Grounded(
     float topSpeed,
     float accelerationSpeed,
-    float decelerationSpeed)
+    float decelerationSpeed,
+    float frictionSpeed,
+    float groundSpeedDeadZone)
   {
     if (_inputInfo.X > 0)
     {
@@ -44,6 +50,10 @@ public class PlayerSpeedManager
     else if (_inputInfo.X < 0)
     {
       SetSpeed_Grounded_Back(topSpeed, accelerationSpeed, decelerationSpeed);
+    }
+    else
+    {
+      SetSpeed_Grounded_Friction(frictionSpeed, groundSpeedDeadZone);
     }
   }
 
@@ -95,5 +105,18 @@ public class PlayerSpeedManager
         _groundSpeed = -topSpeed;
       }
     }
+  }
+
+  public void SetSpeed_Grounded_Friction(
+    float frictionSpeed,
+    float groundSpeedDeadZone)
+  {
+    if (Mathf.Abs(_groundSpeed) < groundSpeedDeadZone)
+    {
+      _groundSpeed = 0;
+      return;
+    }
+
+    _groundSpeed -= frictionSpeed * Mathf.Sign(_groundSpeed);
   }
 }
