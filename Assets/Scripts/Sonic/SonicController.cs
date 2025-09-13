@@ -1,3 +1,4 @@
+using SonicTheHedgehogFan.Engine.Common;
 using UnityEngine;
 
 public class SonicController : MonoBehaviour
