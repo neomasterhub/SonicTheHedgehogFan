@@ -423,7 +423,7 @@ Transform:
   m_GameObject: {fileID: 710850496}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.766, y: -0.01, z: 0}
+  m_LocalPosition: {x: -2.242, y: 1.664, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -463,15 +463,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5b15c981b4f0f84386f27d8b7de5c54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GravityUp: 0.0015625
-  GravityDown: 0.00546875
-  MaxFallSpeed: 0.4
+  TopSpeed: 0.15
+  FrictionSpeed: 0.001171875
   AccelerationSpeed: 0.001171875
   DecelerationSpeed: 0.001171875
-  FrictionSpeed: 0.001171875
-  TopSpeed: 0.15
-  AirAccelerationSpeed: 0.0013671875
   AirTopSpeed: 0.0013671875
+  AirAccelerationSpeed: 0.0013671875
+  MaxFallSpeed: 0.4
+  GravityUpSpeed: 0.0015625
+  GravityDownSpeed: 0.00546875
   GroundSpeedDeadZone: 0.5
   InputDeadZone: 0.001
   GroundLayer:
@@ -609,8 +609,8 @@ Transform:
   m_GameObject: {fileID: 1549164656}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.022527032, w: 0.99974626}
-  m_LocalPosition: {x: -0.27, y: -2.25, z: 0}
-  m_LocalScale: {x: 11.387306, y: 0.94295895, z: 1}
+  m_LocalPosition: {x: 5.5552, y: -1.9024, z: 0}
+  m_LocalScale: {x: 23.057018, y: 0.773132, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

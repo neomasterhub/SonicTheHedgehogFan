@@ -36,7 +36,7 @@ public class PlayerSpeedManager
 
   private void SetSpeed_Airborne_Gravity(PlayerSpeedInput input)
   {
-    var g = SpeedY > 0 ? input.GravityUpSpeed : input.GravityUpSpeed;
+    var g = SpeedY > 0 ? input.GravityUpSpeed : input.GravityDownSpeed;
     SpeedY -= g;
 
     if (SpeedY < -input.MaxFallSpeed)
@@ -55,12 +55,7 @@ public class PlayerSpeedManager
     // Keeps surface normal aligned with slope.
     var yPositionOffset = input.GroundSensorLength / 2;
 
-    var maxFallStep = input.DistanceToGround - yPositionOffset;
-
-    if (SpeedY < -maxFallStep)
-    {
-      SpeedY = -maxFallStep;
-    }
+    SpeedY = -Mathf.Min(Mathf.Abs(SpeedY), input.DistanceToGround - yPositionOffset);
   }
 
   private void SetSpeed_Airborne_Horizontal(PlayerSpeedInput input)

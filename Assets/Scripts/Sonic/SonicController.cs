@@ -12,15 +12,15 @@ public class SonicController : MonoBehaviour
   private SonicSizeMode _sonicSizeMode = SonicSizeMode.Big;
 
   [Header("Physics")]
-  public float GravityUp = CommonConsts.Physics.GravityUp;
-  public float GravityDown = CommonConsts.Physics.GravityDown;
-  public float MaxFallSpeed = CommonConsts.Physics.MaxFallSpeed;
+  public float TopSpeed = SonicConsts.Physics.TopSpeed;
+  public float FrictionSpeed = SonicConsts.Physics.FrictionSpeed;
   public float AccelerationSpeed = SonicConsts.Physics.AccelerationSpeed;
   public float DecelerationSpeed = SonicConsts.Physics.AccelerationSpeed;
-  public float FrictionSpeed = SonicConsts.Physics.FrictionSpeed;
-  public float TopSpeed = SonicConsts.Physics.TopSpeed;
-  public float AirAccelerationSpeed = SonicConsts.Physics.AirAccelerationSpeed;
   public float AirTopSpeed = SonicConsts.Physics.AirAccelerationSpeed;
+  public float AirAccelerationSpeed = SonicConsts.Physics.AirAccelerationSpeed;
+  public float MaxFallSpeed = CommonConsts.Physics.MaxFallSpeed;
+  public float GravityUpSpeed = CommonConsts.Physics.GravityUp;
+  public float GravityDownSpeed = CommonConsts.Physics.GravityDown;
   public float GroundSpeedDeadZone = 0.5f;
   public float InputDeadZone = 0.001f;
 
@@ -32,6 +32,24 @@ public class SonicController : MonoBehaviour
   public float SensorLength = SonicConsts.Sensors.Length;
   public float SensorBeginRadius = 0.03f;
   public float SensorEndRadius = 0.01f;
+
+  private PlayerSpeedInput PlayerSpeedInput => new()
+  {
+    DistanceToGround = _sonicSensorSystem.ABResult.Distance,
+    GroundAngleRad = _sonicSensorSystem.ABResult.AngleRad,
+    GroundSensorLength = SensorLength,
+    TopSpeed = TopSpeed,
+    FrictionSpeed = FrictionSpeed,
+    AccelerationSpeed = AccelerationSpeed,
+    DecelerationSpeed = DecelerationSpeed,
+    AirTopSpeed = AirTopSpeed,
+    AirAccelerationSpeed = AirAccelerationSpeed,
+    MaxFallSpeed = MaxFallSpeed,
+    GravityUpSpeed = GravityUpSpeed,
+    GravityDownSpeed = GravityDownSpeed,
+    GroundSpeedDeadZone = GroundSpeedDeadZone,
+    InputDeadZone = GroundSpeedDeadZone,
+  };
 
   private void Awake()
   {
@@ -90,22 +108,7 @@ public class SonicController : MonoBehaviour
 
   public void SetSpeed()
   {
-    _playerSpeedManager.SetSpeed(
-      _playerState,
-      _sonicSensorSystem.ABResult.AngleRad,
-      TopSpeed,
-      AccelerationSpeed,
-      DecelerationSpeed,
-      FrictionSpeed,
-      GravityUp,
-      GravityDown,
-      MaxFallSpeed,
-      GroundSpeedDeadZone,
-      AirTopSpeed,
-      AirAccelerationSpeed,
-      SensorLength,
-      _sonicSensorSystem.ABResult.Distance,
-      InputDeadZone);
+    _playerSpeedManager.SetSpeed(_playerState, PlayerSpeedInput);
   }
 
   private void UpdatePosition()
