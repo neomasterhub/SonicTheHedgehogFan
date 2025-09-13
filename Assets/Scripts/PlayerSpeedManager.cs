@@ -14,65 +14,38 @@ public class PlayerSpeedManager
   public float SpeedX { get; private set; }
   public float SpeedY { get; private set; }
 
-  public void SetSpeed(
-    PlayerState playerState,
-    float groundAngleRad,
-    float topSpeed,
-    float accelerationSpeed,
-    float decelerationSpeed,
-    float frictionSpeed,
-    float gravityUp,
-    float gravityDown,
-    float maxFallSpeed,
-    float groundSpeedDeadZone,
-    float airTopSpeed,
-    float airAccelerationSpeed,
-    float groundSensorLength,
-    float distanceToGround,
-    float inputDeadZone)
+  public void SetSpeed(PlayerState playerState, PlayerSpeedInput input)
   {
     if (playerState.HasFlag(PlayerState.Airborne))
     {
-      SetSpeed_Airborne(gravityUp, gravityDown, maxFallSpeed, airTopSpeed, airAccelerationSpeed, inputDeadZone, groundSensorLength, distanceToGround);
+      SetSpeed_Airborne(input);
     }
     else if (playerState.HasFlag(PlayerState.Grounded))
     {
-      SetSpeed_Grounded(topSpeed, accelerationSpeed, decelerationSpeed, frictionSpeed, groundSpeedDeadZone, groundAngleRad);
+      SetSpeed_Grounded(input);
     }
+
+    SetSpeed_PreventGroundOvershoot(input);
   }
 
-  private void SetSpeed_Airborne(
-    float gravityUp,
-    float gravityDown,
-    float maxFallSpeed,
-    float airTopSpeed,
-    float airAccelerationSpeed,
-    float groundSensorLength,
-    float distanceToGround,
-    float inputDeadZone)
+  private void SetSpeed_Airborne(PlayerSpeedInput input)
   {
-    SetSpeed_Airborne_Gravity(gravityUp, gravityDown, maxFallSpeed);
-    SetSpeed_Airborne_PreventGroundOvershoot(groundSensorLength, distanceToGround);
-    SetSpeed_Airborne_Horizontal(airTopSpeed, airAccelerationSpeed, inputDeadZone);
+    SetSpeed_Airborne_Gravity(input);
+    SetSpeed_Airborne_Horizontal(input);
   }
 
-  private void SetSpeed_Airborne_Gravity(
-    float gravityUp,
-    float gravityDown,
-    float maxFallSpeed)
+  private void SetSpeed_Airborne_Gravity(PlayerSpeedInput input)
   {
-    var g = SpeedY > 0 ? gravityUp : gravityDown;
+    var g = SpeedY > 0 ? input.GravityUpSpeed : input.GravityUpSpeed;
     SpeedY -= g;
 
-    if (SpeedY < -maxFallSpeed)
+    if (SpeedY < -input.MaxFallSpeed)
     {
-      SpeedY = -maxFallSpeed;
+      SpeedY = -input.MaxFallSpeed;
     }
   }
 
-  private void SetSpeed_Airborne_PreventGroundOvershoot(
-    float groundSensorLength,
-    float distanceToGround)
+  private void SetSpeed_PreventGroundOvershoot(PlayerSpeedInput input)
   {
     if (SpeedY > 0)
     {
@@ -80,9 +53,9 @@ public class PlayerSpeedManager
     }
 
     // Keeps surface normal aligned with slope.
-    var yPositionOffset = groundSensorLength / 2;
+    var yPositionOffset = input.GroundSensorLength / 2;
 
-    var maxFallStep = distanceToGround - yPositionOffset;
+    var maxFallStep = input.DistanceToGround - yPositionOffset;
 
     if (SpeedY < -maxFallStep)
     {
@@ -90,109 +63,92 @@ public class PlayerSpeedManager
     }
   }
 
-  private void SetSpeed_Airborne_Horizontal(
-    float airTopSpeed,
-    float airAccelerationSpeed,
-    float inputDeadZone)
+  private void SetSpeed_Airborne_Horizontal(PlayerSpeedInput input)
   {
-    if (Mathf.Abs(_inputInfo.X) < inputDeadZone)
+    if (Mathf.Abs(_inputInfo.X) < input.InputDeadZone)
     {
       return;
     }
 
-    SpeedX += _inputInfo.X * airAccelerationSpeed;
+    SpeedX += _inputInfo.X * input.AirAccelerationSpeed;
 
-    if (Mathf.Abs(SpeedX) > airTopSpeed)
+    if (Mathf.Abs(SpeedX) > input.AirTopSpeed)
     {
-      SpeedX = airTopSpeed * Mathf.Sign(SpeedX);
+      SpeedX = input.AirTopSpeed * Mathf.Sign(SpeedX);
     }
   }
 
-  private void SetSpeed_Grounded(
-    float topSpeed,
-    float accelerationSpeed,
-    float decelerationSpeed,
-    float frictionSpeed,
-    float groundSpeedDeadZone,
-    float groundAngleRad)
+  private void SetSpeed_Grounded(PlayerSpeedInput input)
   {
     if (_inputInfo.X > 0)
     {
-      SetSpeed_Grounded_Forward(topSpeed, accelerationSpeed, decelerationSpeed);
+      SetSpeed_Grounded_Forward(input);
     }
     else if (_inputInfo.X < 0)
     {
-      SetSpeed_Grounded_Backward(topSpeed, accelerationSpeed, decelerationSpeed);
+      SetSpeed_Grounded_Backward(input);
     }
     else
     {
-      SetSpeed_Grounded_Friction(frictionSpeed, groundSpeedDeadZone);
+      SetSpeed_Grounded_Friction(input);
     }
 
-    SpeedX = _groundSpeed * MathF.Cos(groundAngleRad);
-    SpeedY = _groundSpeed * MathF.Sin(groundAngleRad);
+    SpeedX = _groundSpeed * MathF.Cos(input.GroundAngleRad);
+    SpeedY = _groundSpeed * MathF.Sin(input.GroundAngleRad);
   }
 
-  private void SetSpeed_Grounded_Forward(
-    float topSpeed,
-    float accelerationSpeed,
-    float decelerationSpeed)
+  private void SetSpeed_Grounded_Forward(PlayerSpeedInput input)
   {
     if (_groundSpeed < 0)
     {
-      _groundSpeed += decelerationSpeed;
+      _groundSpeed += input.DecelerationSpeed;
 
       if (_groundSpeed >= 0)
       {
-        _groundSpeed = decelerationSpeed;
+        _groundSpeed = input.DecelerationSpeed;
       }
     }
-    else if (_groundSpeed < topSpeed)
+    else if (_groundSpeed < input.TopSpeed)
     {
-      _groundSpeed += accelerationSpeed;
+      _groundSpeed += input.AccelerationSpeed;
 
-      if (_groundSpeed >= topSpeed)
+      if (_groundSpeed >= input.TopSpeed)
       {
-        _groundSpeed = topSpeed;
+        _groundSpeed = input.TopSpeed;
       }
     }
   }
 
-  private void SetSpeed_Grounded_Backward(
-    float topSpeed,
-    float accelerationSpeed,
-    float decelerationSpeed)
+  private void SetSpeed_Grounded_Backward(PlayerSpeedInput input)
   {
     if (_groundSpeed > 0)
     {
-      _groundSpeed -= decelerationSpeed;
+      _groundSpeed -= input.DecelerationSpeed;
 
       if (_groundSpeed <= 0)
       {
-        _groundSpeed = -decelerationSpeed;
+        _groundSpeed = -input.DecelerationSpeed;
       }
     }
-    else if (_groundSpeed > -topSpeed)
+    else if (_groundSpeed > -input.TopSpeed)
     {
-      _groundSpeed -= accelerationSpeed;
+      _groundSpeed -= input.AccelerationSpeed;
 
-      if (_groundSpeed <= -topSpeed)
+      if (_groundSpeed <= -input.TopSpeed)
       {
-        _groundSpeed = -topSpeed;
+        _groundSpeed = -input.TopSpeed;
       }
     }
   }
 
-  public void SetSpeed_Grounded_Friction(
-    float frictionSpeed,
-    float groundSpeedDeadZone)
+  public void SetSpeed_Grounded_Friction(PlayerSpeedInput input)
   {
-    if (Mathf.Abs(_groundSpeed) < groundSpeedDeadZone)
+    if (Mathf.Abs(_groundSpeed) < input.GroundSpeedDeadZone)
     {
       _groundSpeed = 0;
       return;
     }
 
-    _groundSpeed -= frictionSpeed * Mathf.Sign(_groundSpeed);
+    _groundSpeed -= input.FrictionSpeed * Mathf.Sign(_groundSpeed);
   }
 }
