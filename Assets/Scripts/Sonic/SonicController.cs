@@ -1,11 +1,15 @@
+using SonicTheHedgehogFan.Engine.Common;
 using UnityEngine;
 
 public class SonicController : MonoBehaviour
 {
+  private readonly InputInfo _inputInfo = new(
+    () => Input.GetAxis(CommonConsts.InputAxis.Horizontal),
+    () => Input.GetAxis(CommonConsts.InputAxis.Vertical));
+  private readonly SonicSensorSystem _sonicSensorSystem = new();
+
   private float _groundSpeed;
-  private float _horizontalDirection;
   private GroundSide _groundSide = GroundSide.Down;
-  private SonicSensorSystem _sonicSensorSystem = new();
   private SonicSizeMode _sonicSizeMode = SonicSizeMode.Big;
   private SonicState _state = SonicState.None;
 
@@ -41,17 +45,14 @@ public class SonicController : MonoBehaviour
 
   private void FixedUpdate()
   {
+    UpdateInput();
+
     RunSensors();
     UpdateState();
-
-    // TODO: UpdateInputs();
-    var xInput = Input.GetAxis(CommonConsts.InputAxis.Horizontal);
-    _horizontalDirection = Mathf.Sign(xInput);
-
     // Set specific speed.
     UpdateGravity();
     PreventGroundOvershoot();
-    UpdateGroundSpeed(xInput);
+    UpdateGroundSpeed();
 
     UpdatePosition();
   }
@@ -60,6 +61,11 @@ public class SonicController : MonoBehaviour
   {
     _sonicSensorSystem.DrawSensors(SensorBeginRadius, SensorEndRadius);
     _sonicSensorSystem.DrawGroundNormal(GroundNormalLength, SensorBeginRadius, SensorEndRadius);
+  }
+
+  private void UpdateInput()
+  {
+    _inputInfo.Update();
   }
 
   private void RunSensors()
@@ -116,22 +122,22 @@ public class SonicController : MonoBehaviour
     _speed.y = -Mathf.Min(Mathf.Abs(_speed.y), _sonicSensorSystem.ABResult.Distance - yPositionOffset);
   }
 
-  private void UpdateGroundSpeed(float xInput)
+  private void UpdateGroundSpeed()
   {
-    if (xInput > 0)
+    if (_inputInfo.XDirection > 0)
     {
       SetForwardGroundSpeed();
       return;
     }
 
-    if (xInput < 0)
+    if (_inputInfo.XDirection < 0)
     {
       SetBackGroundSpeed();
       return;
     }
 
     _groundSpeed = Mathf.Abs(_groundSpeed) > GroundSpeedDead
-      ? _groundSpeed - (FrictionSpeed * _horizontalDirection)
+      ? _groundSpeed - (FrictionSpeed * _inputInfo.XDirection)
       : 0;
   }
 
