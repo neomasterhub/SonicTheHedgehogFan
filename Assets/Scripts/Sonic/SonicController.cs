@@ -19,7 +19,10 @@ public class SonicController : MonoBehaviour
   public float DecelerationSpeed = SonicConsts.Physics.AccelerationSpeed;
   public float FrictionSpeed = SonicConsts.Physics.FrictionSpeed;
   public float TopSpeed = SonicConsts.Physics.TopSpeed;
+  public float AirAccelerationSpeed = SonicConsts.Physics.AirAccelerationSpeed;
+  public float AirTopSpeed = SonicConsts.Physics.AirAccelerationSpeed;
   public float GroundSpeedDeadZone = 0.5f;
+  public float InputDeadZone = 0.001f;
 
   [Header("Ground")]
   public LayerMask GroundLayer;
@@ -97,7 +100,10 @@ public class SonicController : MonoBehaviour
       GravityUp,
       GravityDown,
       MaxFallSpeed,
-      GroundSpeedDeadZone);
+      GroundSpeedDeadZone,
+      AirTopSpeed,
+      AirAccelerationSpeed,
+      InputDeadZone);
   }
 
   private void UpdatePosition()
