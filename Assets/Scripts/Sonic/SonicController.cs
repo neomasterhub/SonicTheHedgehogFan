@@ -61,18 +61,6 @@ public class SonicController : MonoBehaviour
     _inputInfo.Update();
   }
 
-  public void SetSpeed()
-  {
-    _playerSpeedManager.SetSpeed(
-      _playerState,
-      _sonicSensorSystem.ABResult.AngleRad,
-      TopSpeed,
-      AccelerationSpeed,
-      DecelerationSpeed,
-      FrictionSpeed,
-      GroundSpeedDeadZone);
-  }
-
   private void RunSensors()
   {
     _sonicSensorSystem.Update(transform.position, _sonicSizeMode, _groundSide, SensorLength);
@@ -87,10 +75,29 @@ public class SonicController : MonoBehaviour
     {
       playerState |= PlayerState.Grounded;
     }
+    else
+    {
+      playerState |= PlayerState.Airborne;
+    }
 
     Debug.Log(playerState);
 
     _playerState = playerState;
+  }
+
+  public void SetSpeed()
+  {
+    _playerSpeedManager.SetSpeed(
+      _playerState,
+      _sonicSensorSystem.ABResult.AngleRad,
+      TopSpeed,
+      AccelerationSpeed,
+      DecelerationSpeed,
+      FrictionSpeed,
+      GravityUp,
+      GravityDown,
+      MaxFallSpeed,
+      GroundSpeedDeadZone);
   }
 
   private void UpdatePosition()
