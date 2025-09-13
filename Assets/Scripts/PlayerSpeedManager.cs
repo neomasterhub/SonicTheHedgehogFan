@@ -51,7 +51,7 @@ public class PlayerSpeedManager
     }
     else if (_inputInfo.X < 0)
     {
-      SetSpeed_Grounded_Back(topSpeed, accelerationSpeed, decelerationSpeed);
+      SetSpeed_Grounded_Backward(topSpeed, accelerationSpeed, decelerationSpeed);
     }
     else
     {
@@ -87,7 +87,7 @@ public class PlayerSpeedManager
     }
   }
 
-  private void SetSpeed_Grounded_Back(
+  private void SetSpeed_Grounded_Backward(
     float topSpeed,
     float accelerationSpeed,
     float decelerationSpeed)
