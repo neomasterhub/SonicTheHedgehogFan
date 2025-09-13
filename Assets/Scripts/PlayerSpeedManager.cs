@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerSpeedManager
@@ -28,7 +29,7 @@ public class PlayerSpeedManager
     }
     else if (playerState.HasFlag(PlayerState.Grounded))
     {
-      SetSpeed_Grounded(topSpeed, accelerationSpeed, decelerationSpeed, frictionSpeed, groundSpeedDeadZone);
+      SetSpeed_Grounded(topSpeed, accelerationSpeed, decelerationSpeed, frictionSpeed, groundSpeedDeadZone, groundAngleRad);
     }
   }
 
@@ -41,7 +42,8 @@ public class PlayerSpeedManager
     float accelerationSpeed,
     float decelerationSpeed,
     float frictionSpeed,
-    float groundSpeedDeadZone)
+    float groundSpeedDeadZone,
+    float groundAngleRad)
   {
     if (_inputInfo.X > 0)
     {
@@ -55,6 +57,9 @@ public class PlayerSpeedManager
     {
       SetSpeed_Grounded_Friction(frictionSpeed, groundSpeedDeadZone);
     }
+
+    SpeedX = _groundSpeed * MathF.Cos(groundAngleRad);
+    SpeedY = _groundSpeed * MathF.Sin(groundAngleRad);
   }
 
   private void SetSpeed_Grounded_Forward(
