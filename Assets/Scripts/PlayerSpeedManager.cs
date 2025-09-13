@@ -10,4 +10,24 @@ public class PlayerSpeedManager
 
   public float SpeedX { get; private set; }
   public float SpeedY { get; private set; }
+
+  public void SetSpeed(PlayerState playerState, float groundAngleRad)
+  {
+    if (playerState.HasFlag(PlayerState.Airborne))
+    {
+      SetSpeed_Airborne();
+    }
+    else if (playerState.HasFlag(PlayerState.Grounded))
+    {
+      SetSpeed_Grounded();
+    }
+  }
+
+  private void SetSpeed_Airborne()
+  {
+  }
+
+  private void SetSpeed_Grounded()
+  {
+  }
 }
