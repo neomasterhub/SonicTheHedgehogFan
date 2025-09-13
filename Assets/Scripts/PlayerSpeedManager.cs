@@ -21,11 +21,14 @@ public class PlayerSpeedManager
     float accelerationSpeed,
     float decelerationSpeed,
     float frictionSpeed,
+    float gravityUp,
+    float gravityDown,
+    float fallMaxSpeed,
     float groundSpeedDeadZone)
   {
     if (playerState.HasFlag(PlayerState.Airborne))
     {
-      SetSpeed_Airborne();
+      SetSpeed_Airborne(gravityUp, gravityDown, fallMaxSpeed);
     }
     else if (playerState.HasFlag(PlayerState.Grounded))
     {
@@ -33,8 +36,26 @@ public class PlayerSpeedManager
     }
   }
 
-  private void SetSpeed_Airborne()
+  private void SetSpeed_Airborne(
+    float gravityUp,
+    float gravityDown,
+    float fallMaxSpeed)
   {
+    SetSpeed_Airborne_Gravity(gravityUp, gravityDown, fallMaxSpeed);
+  }
+
+  private void SetSpeed_Airborne_Gravity(
+    float gravityUp,
+    float gravityDown,
+    float fallMaxSpeed)
+  {
+    var g = SpeedY > 0 ? gravityUp : gravityDown;
+    SpeedY -= g;
+
+    if (SpeedY < -fallMaxSpeed)
+    {
+      SpeedY = -fallMaxSpeed;
+    }
   }
 
   private void SetSpeed_Grounded(
