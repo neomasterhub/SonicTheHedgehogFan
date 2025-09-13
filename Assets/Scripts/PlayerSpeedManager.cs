@@ -23,12 +23,15 @@ public class PlayerSpeedManager
     float frictionSpeed,
     float gravityUp,
     float gravityDown,
-    float fallMaxSpeed,
-    float groundSpeedDeadZone)
+    float maxFallSpeed,
+    float groundSpeedDeadZone,
+    float airTopSpeed,
+    float airAccelerationSpeed,
+    float inputDeadZone)
   {
     if (playerState.HasFlag(PlayerState.Airborne))
     {
-      SetSpeed_Airborne(gravityUp, gravityDown, fallMaxSpeed);
+      SetSpeed_Airborne(gravityUp, gravityDown, maxFallSpeed, airTopSpeed, airAccelerationSpeed, inputDeadZone);
     }
     else if (playerState.HasFlag(PlayerState.Grounded))
     {
@@ -39,22 +42,44 @@ public class PlayerSpeedManager
   private void SetSpeed_Airborne(
     float gravityUp,
     float gravityDown,
-    float fallMaxSpeed)
+    float maxFallSpeed,
+    float airTopSpeed,
+    float airAccelerationSpeed,
+    float inputDeadZone)
   {
-    SetSpeed_Airborne_Gravity(gravityUp, gravityDown, fallMaxSpeed);
+    SetSpeed_Airborne_Gravity(gravityUp, gravityDown, maxFallSpeed);
+    SetSpeed_Airborne_Horizontal(airTopSpeed, airAccelerationSpeed, inputDeadZone);
   }
 
   private void SetSpeed_Airborne_Gravity(
     float gravityUp,
     float gravityDown,
-    float fallMaxSpeed)
+    float maxFallSpeed)
   {
     var g = SpeedY > 0 ? gravityUp : gravityDown;
     SpeedY -= g;
 
-    if (SpeedY < -fallMaxSpeed)
+    if (SpeedY < -maxFallSpeed)
     {
-      SpeedY = -fallMaxSpeed;
+      SpeedY = -maxFallSpeed;
+    }
+  }
+
+  private void SetSpeed_Airborne_Horizontal(
+    float airTopSpeed,
+    float airAccelerationSpeed,
+    float inputDeadZone)
+  {
+    if (Mathf.Abs(_inputInfo.X) < inputDeadZone)
+    {
+      return;
+    }
+
+    SpeedX += _inputInfo.X * airAccelerationSpeed;
+
+    if (Mathf.Abs(SpeedX) > airTopSpeed)
+    {
+      SpeedX = airTopSpeed * Mathf.Sign(SpeedX);
     }
   }
 
