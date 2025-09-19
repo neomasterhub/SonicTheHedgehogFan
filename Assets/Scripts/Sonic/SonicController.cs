@@ -48,7 +48,7 @@ public class SonicController : MonoBehaviour
     GravityUpSpeed = GravityUpSpeed,
     GravityDownSpeed = GravityDownSpeed,
     GroundSpeedDeadZone = GroundSpeedDeadZone,
-    InputDeadZone = GroundSpeedDeadZone,
+    InputDeadZone = InputDeadZone,
   };
 
   private void Awake()
