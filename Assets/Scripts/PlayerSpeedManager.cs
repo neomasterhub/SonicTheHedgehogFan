@@ -24,13 +24,12 @@ public class PlayerSpeedManager
     {
       SetSpeed_Grounded(input);
     }
-
-    SetSpeed_PreventGroundOvershoot(input);
   }
 
   private void SetSpeed_Airborne(PlayerSpeedInput input)
   {
     SetSpeed_Airborne_Gravity(input);
+    SetSpeed_Airborne_PreventGroundOvershoot(input);
     SetSpeed_Airborne_Horizontal(input);
   }
 
@@ -45,7 +44,7 @@ public class PlayerSpeedManager
     }
   }
 
-  private void SetSpeed_PreventGroundOvershoot(PlayerSpeedInput input)
+  private void SetSpeed_Airborne_PreventGroundOvershoot(PlayerSpeedInput input)
   {
     if (SpeedY > 0)
     {
