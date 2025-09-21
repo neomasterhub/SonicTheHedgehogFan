@@ -23,6 +23,7 @@ public class SonicController : MonoBehaviour
   public float GravityDownSpeed = CommonConsts.Physics.GravityDown;
   public float GroundSpeedDeadZone = 0.5f;
   public float InputDeadZone = 0.001f;
+  public bool GravityDownEnabled = true;
 
   [Header("Ground")]
   public LayerMask GroundLayer;
@@ -49,6 +50,7 @@ public class SonicController : MonoBehaviour
     GravityDownSpeed = GravityDownSpeed,
     GroundSpeedDeadZone = GroundSpeedDeadZone,
     InputDeadZone = InputDeadZone,
+    GravityDownEnabled = GravityDownEnabled,
   };
 
   private void Awake()
