@@ -18,6 +18,9 @@ public class SonicController : MonoBehaviour
   private PlayerState _playerState = PlayerState.Grounded;
   private SonicSizeMode _sonicSizeMode = SonicSizeMode.Big;
 
+  [Header("Animations")]
+  public float MinAnimatorWalkingSpeed = 0.5f;
+
   [Header("Physics")]
   public float TopSpeed = SonicConsts.Physics.TopSpeed;
   public float FrictionSpeed = SonicConsts.Physics.FrictionSpeed;
@@ -62,6 +65,7 @@ public class SonicController : MonoBehaviour
   private PlayerViewInput PlayerViewInput => new()
   {
     TopSpeed = TopSpeed,
+    MinAnimatorWalkingSpeed = MinAnimatorWalkingSpeed,
   };
 
   private void Awake()

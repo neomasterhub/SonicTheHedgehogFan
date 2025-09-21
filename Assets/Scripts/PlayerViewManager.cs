@@ -45,7 +45,9 @@ public class PlayerViewManager
 
     if (_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimatorStateNames.Walking))
     {
-      _animator.speed = Mathf.Abs(speedXAbs) / input.TopSpeed;
+      _animator.speed = Mathf.Max(
+        input.MinAnimatorWalkingSpeed,
+        Mathf.Abs(speedXAbs) / input.TopSpeed);
     }
     else
     {
