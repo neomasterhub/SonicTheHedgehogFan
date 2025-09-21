@@ -59,6 +59,10 @@ public class SonicController : MonoBehaviour
     InputDeadZone = InputDeadZone,
     GravityDownEnabled = GravityDownEnabled,
   };
+  private PlayerViewInput PlayerViewInput => new()
+  {
+    TopSpeed = TopSpeed,
+  };
 
   private void Awake()
   {
@@ -131,7 +135,7 @@ public class SonicController : MonoBehaviour
 
   public void UpdateView()
   {
-    _playerViewManager.Update();
+    _playerViewManager.Update(PlayerViewInput);
   }
 
   private void UpdatePosition()

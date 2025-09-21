@@ -19,10 +19,10 @@ public class PlayerViewManager
     _spriteRenderer = spriteRenderer;
   }
 
-  public void Update()
+  public void Update(PlayerViewInput input)
   {
     RotateSprite();
-    UpdateAnimator();
+    UpdateAnimator(input);
   }
 
   private void RotateSprite()
@@ -37,11 +37,20 @@ public class PlayerViewManager
     }
   }
 
-  private void UpdateAnimator()
+  private void UpdateAnimator(PlayerViewInput input)
   {
     var speedXAbs = Mathf.Abs(_playerSpeedManager.SpeedX);
 
     _animator.SetFloat(AnimatorParameterNames.Speed, speedXAbs);
+
+    if (_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimatorStateNames.Walking))
+    {
+      _animator.speed = Mathf.Abs(speedXAbs) / input.TopSpeed;
+    }
+    else
+    {
+      _animator.speed = 1f;
+    }
   }
 
   private static class AnimatorParameterNames
