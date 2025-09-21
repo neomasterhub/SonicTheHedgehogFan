@@ -474,6 +474,7 @@ MonoBehaviour:
   GravityDownSpeed: 0.00546875
   GroundSpeedDeadZone: 0.5
   InputDeadZone: 0.001
+  GravityDownEnabled: 0
   GroundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -536,7 +537,8 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: -6.8928146, y: 0.9543222}
-  - {x: -6.9013023, y: -1}
+  - {x: -6.861083, y: -1.3318095}
+  - {x: -2.4275887, y: -0.58535993}
   - {x: 2, y: -1}
   - {x: 2, y: 1.0339098}
   m_AdjacentStartPoint: {x: 0, y: 0}
