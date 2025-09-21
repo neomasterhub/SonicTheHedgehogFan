@@ -17,6 +17,7 @@ public struct PlayerSpeedInput
   public float GravityUpSpeed;
   public float GravityDownSpeed;
   public float MaxFallSpeed;
+  public bool GravityDownEnabled;
 
   // Dead Zones
   public float GroundSpeedDeadZone;
