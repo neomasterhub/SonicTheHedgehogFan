@@ -4,12 +4,22 @@ public class SonicController : MonoBehaviour
 {
   private readonly SonicSensorSystem _sonicSensorSystem = new();
 
+  // Components
+  private Animator _animator;
+  private SpriteRenderer _spriteRenderer;
+
+  // State info and managers
   private InputInfo _inputInfo;
   private PlayerSpeedManager _playerSpeedManager;
+  private PlayerViewManager _playerViewManager;
 
+  // States
   private GroundSide _groundSide = GroundSide.Down;
   private PlayerState _playerState = PlayerState.Grounded;
   private SonicSizeMode _sonicSizeMode = SonicSizeMode.Big;
+
+  [Header("Animations")]
+  public float MinAnimatorWalkingSpeed = 0.5f;
 
   [Header("Physics")]
   public float TopSpeed = SonicConsts.Physics.TopSpeed;
@@ -52,16 +62,29 @@ public class SonicController : MonoBehaviour
     InputDeadZone = InputDeadZone,
     GravityDownEnabled = GravityDownEnabled,
   };
+  private PlayerViewInput PlayerViewInput => new()
+  {
+    TopSpeed = TopSpeed,
+    MinAnimatorWalkingSpeed = MinAnimatorWalkingSpeed,
+  };
 
   private void Awake()
   {
     Application.targetFrameRate = CommonConsts.ConvertValues.FramePerSec;
     Time.fixedDeltaTime = 1f / CommonConsts.ConvertValues.FramePerSec;
 
+    _animator = GetComponent<Animator>();
+    _spriteRenderer = GetComponent<SpriteRenderer>();
+
     _inputInfo = new InputInfo(
       () => Input.GetAxis(CommonConsts.InputAxis.Horizontal),
       () => Input.GetAxis(CommonConsts.InputAxis.Vertical));
     _playerSpeedManager = new PlayerSpeedManager(_inputInfo);
+    _playerViewManager = new PlayerViewManager(
+      _animator,
+      _inputInfo,
+      _playerSpeedManager,
+      _spriteRenderer);
   }
 
   private void FixedUpdate()
@@ -70,6 +93,7 @@ public class SonicController : MonoBehaviour
     RunSensors();
     UpdateState();
     SetSpeed();
+    UpdateView();
     UpdatePosition();
   }
 
@@ -111,6 +135,11 @@ public class SonicController : MonoBehaviour
   public void SetSpeed()
   {
     _playerSpeedManager.SetSpeed(_playerState, PlayerSpeedInput);
+  }
+
+  public void UpdateView()
+  {
+    _playerViewManager.Update(PlayerViewInput);
   }
 
   private void UpdatePosition()
