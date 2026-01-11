@@ -14,4 +14,20 @@ public static class Consts
     public const string Horizontal = nameof(Horizontal);
     public const string Vertical = nameof(Vertical);
   }
+
+  public static class Animator
+  {
+    public static class Parameters
+    {
+      public const string Speed = nameof(Speed);
+    }
+
+    public static class States
+    {
+      public const string Idle = nameof(Idle);
+      public const string Bored = nameof(Bored);
+      public const string Waiting = nameof(Waiting);
+      public const string Walking = nameof(Walking);
+    }
+  }
 }
