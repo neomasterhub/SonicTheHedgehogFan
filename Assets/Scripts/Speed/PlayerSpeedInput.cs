@@ -20,6 +20,6 @@ public struct PlayerSpeedInput
   public bool GravityDownEnabled;
 
   // Dead Zones
-  public float GroundSpeedDeadZone;
   public float InputDeadZone;
+  public float GroundSpeedDeadZone;
 }
