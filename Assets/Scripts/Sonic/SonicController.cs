@@ -1,5 +1,7 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class SonicController : MonoBehaviour
 {
   private readonly SonicSensorSystem _sonicSensorSystem = new();
@@ -8,7 +10,7 @@ public class SonicController : MonoBehaviour
   private Animator _animator;
   private SpriteRenderer _spriteRenderer;
 
-  // State info and managers
+  // Managers
   private InputInfo _inputInfo;
   private PlayerSpeedManager _playerSpeedManager;
   private PlayerViewManager _playerViewManager;
@@ -62,6 +64,7 @@ public class SonicController : MonoBehaviour
     InputDeadZone = InputDeadZone,
     GravityDownEnabled = GravityDownEnabled,
   };
+
   private PlayerViewInput PlayerViewInput => new()
   {
     TopSpeed = TopSpeed,
