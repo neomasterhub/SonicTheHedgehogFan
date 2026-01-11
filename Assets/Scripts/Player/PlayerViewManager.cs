@@ -41,30 +41,17 @@ public class PlayerViewManager
   {
     var speedXAbs = Mathf.Abs(_playerSpeedManager.SpeedX);
 
-    _animator.SetFloat(AnimatorParameterNames.Speed, speedXAbs);
+    _animator.SetFloat(Consts.Animator.Parameters.Speed, speedXAbs);
 
-    if (_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimatorStateNames.Walking))
+    if (_animator.GetCurrentAnimatorStateInfo(0).IsName(Consts.Animator.States.Walking))
     {
       _animator.speed = Mathf.Max(
         input.MinAnimatorWalkingSpeed,
-        Mathf.Abs(speedXAbs) / input.TopSpeed);
+        speedXAbs / input.TopSpeed);
     }
     else
     {
       _animator.speed = 1f;
     }
-  }
-
-  private static class AnimatorParameterNames
-  {
-    public const string Speed = nameof(Speed);
-  }
-
-  private static class AnimatorStateNames
-  {
-    public const string Idle = nameof(Idle);
-    public const string Bored = nameof(Bored);
-    public const string Waiting = nameof(Waiting);
-    public const string Walking = nameof(Walking);
   }
 }

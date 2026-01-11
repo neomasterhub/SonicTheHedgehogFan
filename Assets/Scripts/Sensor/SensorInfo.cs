@@ -12,7 +12,7 @@ public class SensorInfo
   public void Update(
     SensorDef sensorDef,
     Vector2 parent,
-    float length = SonicConsts.Sensors.Length,
+    float length,
     Color? color = null)
   {
     Offset = sensorDef.Offset;

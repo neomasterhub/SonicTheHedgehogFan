@@ -40,8 +40,9 @@ public class PlayerSpeedManager
       return;
     }
 
-    var g = SpeedY > 0 ? input.GravityUpSpeed : input.GravityDownSpeed;
-    SpeedY -= g;
+    SpeedY -= SpeedY > 0
+      ? input.GravityUpSpeed
+      : input.GravityDownSpeed;
 
     if (SpeedY < -input.MaxFallSpeed)
     {
@@ -57,9 +58,9 @@ public class PlayerSpeedManager
     }
 
     // Keeps surface normal aligned with slope.
-    var yPositionOffset = input.GroundSensorLength / 2;
+    var yOffset = input.GroundSensorLength / 2;
 
-    SpeedY = -Mathf.Min(Mathf.Abs(SpeedY), input.DistanceToGround - yPositionOffset);
+    SpeedY = -Mathf.Min(Mathf.Abs(SpeedY), input.DistanceToGround - yOffset);
   }
 
   private void SetSpeed_Airborne_Horizontal(PlayerSpeedInput input)
@@ -140,7 +141,7 @@ public class PlayerSpeedManager
     }
   }
 
-  public void SetSpeed_Grounded_Friction(PlayerSpeedInput input)
+  private void SetSpeed_Grounded_Friction(PlayerSpeedInput input)
   {
     if (Mathf.Abs(_groundSpeed) < input.GroundSpeedDeadZone)
     {
