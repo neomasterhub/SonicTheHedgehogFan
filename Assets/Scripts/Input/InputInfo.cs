@@ -5,7 +5,9 @@ public class InputInfo
   private readonly Func<float> _xGetter;
   private readonly Func<float> _yGetter;
 
-  public InputInfo(Func<float> xGetter, Func<float> yGetter)
+  public InputInfo(
+    Func<float> xGetter,
+    Func<float> yGetter)
   {
     _xGetter = xGetter;
     _yGetter = yGetter;
