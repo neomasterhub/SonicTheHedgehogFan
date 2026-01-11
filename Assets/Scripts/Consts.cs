@@ -1,4 +1,4 @@
-public static class CommonConsts
+public static class Consts
 {
   public static class ConvertValues
   {

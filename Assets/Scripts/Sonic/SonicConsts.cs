@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-using static CommonConsts;
+using static Consts;
 
 public static class SonicConsts
 {

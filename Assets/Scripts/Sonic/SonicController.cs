@@ -28,9 +28,9 @@ public class SonicController : MonoBehaviour
   public float DecelerationSpeed = SonicConsts.Physics.AccelerationSpeed;
   public float AirTopSpeed = SonicConsts.Physics.AirAccelerationSpeed;
   public float AirAccelerationSpeed = SonicConsts.Physics.AirAccelerationSpeed;
-  public float MaxFallSpeed = CommonConsts.Physics.MaxFallSpeed;
-  public float GravityUpSpeed = CommonConsts.Physics.GravityUp;
-  public float GravityDownSpeed = CommonConsts.Physics.GravityDown;
+  public float MaxFallSpeed = Consts.Physics.MaxFallSpeed;
+  public float GravityUpSpeed = Consts.Physics.GravityUp;
+  public float GravityDownSpeed = Consts.Physics.GravityDown;
   public float GroundSpeedDeadZone = 0.5f;
   public float InputDeadZone = 0.001f;
   public bool GravityDownEnabled = true;
@@ -70,15 +70,15 @@ public class SonicController : MonoBehaviour
 
   private void Awake()
   {
-    Application.targetFrameRate = CommonConsts.ConvertValues.FramePerSec;
-    Time.fixedDeltaTime = 1f / CommonConsts.ConvertValues.FramePerSec;
+    Application.targetFrameRate = Consts.ConvertValues.FramePerSec;
+    Time.fixedDeltaTime = 1f / Consts.ConvertValues.FramePerSec;
 
     _animator = GetComponent<Animator>();
     _spriteRenderer = GetComponent<SpriteRenderer>();
 
     _inputInfo = new InputInfo(
-      () => Input.GetAxis(CommonConsts.InputAxis.Horizontal),
-      () => Input.GetAxis(CommonConsts.InputAxis.Vertical));
+      () => Input.GetAxis(Consts.InputAxis.Horizontal),
+      () => Input.GetAxis(Consts.InputAxis.Vertical));
     _playerSpeedManager = new PlayerSpeedManager(_inputInfo);
     _playerViewManager = new PlayerViewManager(
       _animator,
