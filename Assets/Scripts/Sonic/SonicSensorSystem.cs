@@ -30,6 +30,12 @@ public class SonicSensorSystem
 
     if (!aHit && !bHit)
     {
+      aHit = Physics2D.Raycast(a.Begin, -a.Direction, float.PositiveInfinity, groundLayer);
+      bHit = Physics2D.Raycast(b.Begin, -b.Direction, float.PositiveInfinity, groundLayer);
+    }
+
+    if (!aHit && !bHit)
+    {
       _abResult.Reset();
       return;
     }
@@ -38,7 +44,10 @@ public class SonicSensorSystem
       ? (aHit.distance < bHit.distance ? aHit : bHit)
       : (aHit ? aHit : bHit);
 
-    _abResult.Set(hit, a.Direction, sensorLength);
+    _abResult.Set(
+      hit,
+      a.Direction,
+      sensorLength);
   }
 
   public void Update(
