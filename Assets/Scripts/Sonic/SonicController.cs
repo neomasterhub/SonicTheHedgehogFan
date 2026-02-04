@@ -147,7 +147,16 @@ public class SonicController : MonoBehaviour
 
   private void UpdatePosition()
   {
+    // Snap to ground with small upward offset.
+    var speedY = _playerSpeedManager.SpeedY;
+    if (_playerState.HasFlag(PlayerState.Grounded))
+    {
+      speedY -= (_sonicSensorSystem.ABResult.Distance
+        * _sonicSensorSystem.ABResult.SensorDirectionSign
+        - 0.05f);
+    }
+
     // Speed X, Y - offsets in units per frame.
-    transform.position += new Vector3(_playerSpeedManager.SpeedX, _playerSpeedManager.SpeedY);
+    transform.position += new Vector3(_playerSpeedManager.SpeedX, speedY);
   }
 }

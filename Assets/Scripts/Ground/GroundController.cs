@@ -12,7 +12,7 @@ public class GroundController : MonoBehaviour
 
   private void OnDrawGizmos()
   {
-    if (_edgeCollider.pointCount < 2)
+    if (_edgeCollider == null || _edgeCollider.pointCount < 2)
     {
       return;
     }
@@ -23,7 +23,7 @@ public class GroundController : MonoBehaviour
     var transform = _edgeCollider.transform;
     var points = _edgeCollider.points;
 
-    for (var i = 0; i < _edgeCollider.pointCount; i++)
+    for (var i = 0; i < _edgeCollider.pointCount - 1; i++)
     {
       Gizmos.DrawLine(
         transform.TransformPoint(offset + points[i]),
