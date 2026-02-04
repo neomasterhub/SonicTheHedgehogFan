@@ -485,7 +485,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   GroundNormalLength: 1.5
-  SensorLength: 0.05
+  SensorLength: 0.1
   SensorBeginRadius: 0.03
   SensorEndRadius: 0.01
 --- !u!1 &1339579947
