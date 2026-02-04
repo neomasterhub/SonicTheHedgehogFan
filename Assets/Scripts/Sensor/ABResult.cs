@@ -8,6 +8,7 @@ public struct ABResult
   public float AngleDeg;
   public float AngleRad;
   public bool GroundDetected;
+  public int SensorDirectionSign;
 
   public void Reset()
   {
@@ -17,11 +18,13 @@ public struct ABResult
     AngleDeg = float.NaN;
     AngleRad = float.NaN;
     GroundDetected = false;
+    SensorDirectionSign = 1;
   }
 
   public void Set(
     RaycastHit2D hit,
     Vector2 sensorDirection,
+    int sensorDirectionSign,
     float sensorLength)
   {
     Contact = hit.point;
@@ -30,6 +33,7 @@ public struct ABResult
     AngleDeg = Vector2.SignedAngle(-sensorDirection, hit.normal);
     AngleRad = AngleDeg * Mathf.Deg2Rad;
     GroundDetected = hit.distance <= sensorLength;
+    SensorDirectionSign = sensorDirectionSign;
   }
 
   public readonly void Draw(
