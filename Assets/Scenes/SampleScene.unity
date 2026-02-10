@@ -484,6 +484,7 @@ MonoBehaviour:
   GroundLayer:
     serializedVersion: 2
     m_Bits: 8
+  GroundPositionOffset: 0.05
   GroundNormalLength: 1.5
   SensorLength: 0.1
   SensorBeginRadius: 0.03
@@ -587,6 +588,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 510c1a7137b28c24a95cd6cc28213a12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GroundController
+--- !u!1 &1466516574
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1466516575}
+  - component: {fileID: 1466516576}
+  m_Layer: 0
+  m_Name: Tools
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1466516575
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1466516574}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.5779, y: -0.01497, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1466516576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1466516574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8a5643893bc7c54fb85b5599192ed55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SceneViewFollower
+  Target: {fileID: 710850500}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -594,3 +640,4 @@ SceneRoots:
   - {fileID: 619394802}
   - {fileID: 710850500}
   - {fileID: 1339579949}
+  - {fileID: 1466516575}
