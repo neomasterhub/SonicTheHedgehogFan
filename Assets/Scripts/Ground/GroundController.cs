@@ -17,7 +17,7 @@ public class GroundController : MonoBehaviour
       return;
     }
 
-    Gizmos.color = Color.rosyBrown;
+    Gizmos.color = Color.green;
 
     var offset = _edgeCollider.offset;
     var transform = _edgeCollider.transform;
