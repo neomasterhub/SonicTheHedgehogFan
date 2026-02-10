@@ -40,6 +40,11 @@ public class SonicController : MonoBehaviour
   [Header("Ground")]
   public LayerMask GroundLayer;
 
+  /// <summary>
+  /// Keeps surface normal aligned with slope.
+  /// </summary>
+  public float GroundPositionOffset = SonicConsts.Sensors.Length / 2;
+
   [Header("UI")]
   public float GroundNormalLength = 1.5f;
   public float SensorLength = SonicConsts.Sensors.Length;
@@ -152,8 +157,8 @@ public class SonicController : MonoBehaviour
     if (_playerState.HasFlag(PlayerState.Grounded))
     {
       speedY -= (_sonicSensorSystem.ABResult.Distance
-        * _sonicSensorSystem.ABResult.SensorDirectionSign
-        - 0.05f);
+        * _sonicSensorSystem.ABResult.SensorDirectionSign)
+        - GroundPositionOffset;
     }
 
     // Speed X, Y - offsets in units per frame.
