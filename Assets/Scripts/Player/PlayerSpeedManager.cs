@@ -52,15 +52,10 @@ public class PlayerSpeedManager
 
   private void SetSpeed_Airborne_PreventGroundOvershoot(PlayerSpeedInput input)
   {
-    if (SpeedY > 0)
+    if (SpeedY < 0)
     {
-      return;
+      SpeedY = -Mathf.Min(Mathf.Abs(SpeedY), input.DistanceToGround);
     }
-
-    // Keeps surface normal aligned with slope.
-    var yOffset = input.GroundSensorLength / 2;
-
-    SpeedY = -Mathf.Min(Mathf.Abs(SpeedY), input.DistanceToGround - yOffset);
   }
 
   private void SetSpeed_Airborne_Horizontal(PlayerSpeedInput input)
