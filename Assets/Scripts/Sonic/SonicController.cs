@@ -33,12 +33,13 @@ public class SonicController : MonoBehaviour
   public float MaxFallSpeed = SonicConsts.Physics.MaxFallSpeed;
   public float GravityUpSpeed = SonicConsts.Physics.GravityUp;
   public float GravityDownSpeed = SonicConsts.Physics.GravityDown;
-  public float GroundSpeedDeadZone = 0.5f;
+  public float SlopeFactor = SonicConsts.Physics.SlopeFactor;
+  public float GroundSpeedDeadZone = 0.05f;
   public float InputDeadZone = 0.001f;
   public bool GravityDownEnabled = true;
 
   [Header("Ground")]
-  public LayerMask GroundLayer;
+  public LayerMask GroundLayer = 8;
 
   /// <summary>
   /// Keeps surface normal aligned with slope.
@@ -68,6 +69,7 @@ public class SonicController : MonoBehaviour
     GroundSpeedDeadZone = GroundSpeedDeadZone,
     InputDeadZone = InputDeadZone,
     GravityDownEnabled = GravityDownEnabled,
+    SlopeFactor = SlopeFactor,
   };
 
   private PlayerViewInput PlayerViewInput => new()
