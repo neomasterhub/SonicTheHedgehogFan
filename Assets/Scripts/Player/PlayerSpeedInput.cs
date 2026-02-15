@@ -22,5 +22,4 @@ public struct PlayerSpeedInput
 
   // Dead Zones
   public float InputDeadZone;
-  public float GroundSpeedDeadZone;
 }

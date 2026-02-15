@@ -140,7 +140,7 @@ public class PlayerSpeedManager
 
   private void SetSpeed_Grounded_Friction(PlayerSpeedInput input)
   {
-    if (Mathf.Abs(_groundSpeed) < input.GroundSpeedDeadZone)
+    if (Mathf.Abs(_groundSpeed) < input.FrictionSpeed)
     {
       _groundSpeed = 0;
       return;

@@ -34,7 +34,6 @@ public class SonicController : MonoBehaviour
   public float GravityUpSpeed = SonicConsts.Physics.GravityUp;
   public float GravityDownSpeed = SonicConsts.Physics.GravityDown;
   public float SlopeFactor = SonicConsts.Physics.SlopeFactor;
-  public float GroundSpeedDeadZone = 0.05f;
   public float InputDeadZone = 0.001f;
   public bool GravityDownEnabled = true;
 
@@ -66,7 +65,6 @@ public class SonicController : MonoBehaviour
     MaxFallSpeed = MaxFallSpeed,
     GravityUpSpeed = GravityUpSpeed,
     GravityDownSpeed = GravityDownSpeed,
-    GroundSpeedDeadZone = GroundSpeedDeadZone,
     InputDeadZone = InputDeadZone,
     GravityDownEnabled = GravityDownEnabled,
     SlopeFactor = SlopeFactor,
