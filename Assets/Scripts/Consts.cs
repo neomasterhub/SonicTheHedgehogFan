@@ -28,6 +28,7 @@ public static class Consts
       public const string Bored = nameof(Bored);
       public const string Waiting = nameof(Waiting);
       public const string Walking = nameof(Walking);
+      public const string Running = nameof(Running);
     }
   }
 }
