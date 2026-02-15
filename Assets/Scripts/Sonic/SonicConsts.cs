@@ -15,6 +15,7 @@ public static class SonicConsts
     public const float GravityDownSpx = 56;
     public const float GravityUpSpx = 16;
     public const float MaxFallSpeedPx = 16;
+    public const float SlopeFactorSpx = 32;
 
     public const float AccelerationSpeed = AccelerationSpeedSpx / ConvertValues.SpxPerUnit;
     public const float DecelerationSpeed = AccelerationSpeedSpx / ConvertValues.SpxPerUnit;
@@ -25,6 +26,7 @@ public static class SonicConsts
     public const float GravityDown = GravityDownSpx / ConvertValues.SpxPerUnit;
     public const float GravityUp = GravityUpSpx / ConvertValues.SpxPerUnit;
     public const float MaxFallSpeed = MaxFallSpeedPx / ConvertValues.PxPerUnit;
+    public const float SlopeFactor = SlopeFactorSpx / ConvertValues.SpxPerUnit;
   }
 
   public static class Sensors

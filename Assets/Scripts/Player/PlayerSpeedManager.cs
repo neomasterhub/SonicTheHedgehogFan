@@ -75,6 +75,8 @@ public class PlayerSpeedManager
 
   private void SetSpeed_Grounded(PlayerSpeedInput input)
   {
+    _groundSpeed -= input.SlopeFactor * MathF.Sin(input.GroundAngleRad);
+
     if (_inputInfo.X > 0)
     {
       SetSpeed_Grounded_Forward(input);
@@ -138,7 +140,7 @@ public class PlayerSpeedManager
 
   private void SetSpeed_Grounded_Friction(PlayerSpeedInput input)
   {
-    if (Mathf.Abs(_groundSpeed) < input.GroundSpeedDeadZone)
+    if (Mathf.Abs(_groundSpeed) < input.FrictionSpeed)
     {
       _groundSpeed = 0;
       return;

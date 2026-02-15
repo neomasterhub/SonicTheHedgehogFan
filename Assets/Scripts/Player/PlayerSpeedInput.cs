@@ -10,6 +10,7 @@ public struct PlayerSpeedInput
   public float FrictionSpeed;
   public float AccelerationSpeed;
   public float DecelerationSpeed;
+  public float SlopeFactor;
 
   // Air
   public float AirAccelerationSpeed;
@@ -21,5 +22,4 @@ public struct PlayerSpeedInput
 
   // Dead Zones
   public float InputDeadZone;
-  public float GroundSpeedDeadZone;
 }
