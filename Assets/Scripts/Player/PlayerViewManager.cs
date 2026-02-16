@@ -47,7 +47,7 @@ public class PlayerViewManager
     {
       _animator.speed = Mathf.Max(
         input.MinAnimatorWalkingSpeed,
-        speedXAbs / input.TopSpeed);
+        speedXAbs / input.TopSpeed * input.AnimatorWalkingSpeedFactor);
     }
     else
     {

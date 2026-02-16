@@ -22,6 +22,7 @@ public class SonicController : MonoBehaviour
 
   [Header("Animations")]
   public float MinAnimatorWalkingSpeed = 0.5f;
+  public float AnimatorWalkingSpeedFactor = 2.0f;
 
   [Header("Physics")]
   public float TopSpeed = SonicConsts.Physics.TopSpeed;
@@ -74,6 +75,7 @@ public class SonicController : MonoBehaviour
   {
     TopSpeed = TopSpeed,
     MinAnimatorWalkingSpeed = MinAnimatorWalkingSpeed,
+    AnimatorWalkingSpeedFactor = AnimatorWalkingSpeedFactor,
   };
 
   private void Awake()

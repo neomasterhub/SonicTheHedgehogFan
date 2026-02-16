@@ -469,10 +469,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SonicController
   MinAnimatorWalkingSpeed: 0.5
+  AnimatorWalkingSpeedFactor: 2
   TopSpeed: 0.15
   FrictionSpeed: 0.001171875
   AccelerationSpeed: 0.001171875
-  DecelerationSpeed: 0.001171875
+  DecelerationSpeed: 0.0125
   AirTopSpeed: 0.0013671875
   AirAccelerationSpeed: 0.0013671875
   MaxFallSpeed: 0.4
@@ -544,7 +545,7 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -1.1163509, y: 0.17997444}
+  - {x: -49.221336, y: 0.067616105}
   - {x: -0.54064083, y: 0.06740248}
   - {x: -0.1399126, y: 0.022292733}
   - {x: 1.506731, y: -0.0374676}
