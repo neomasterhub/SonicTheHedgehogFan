@@ -18,7 +18,7 @@ public static class SonicConsts
     public const float SlopeFactorSpx = 32;
 
     public const float AccelerationSpeed = AccelerationSpeedSpx / ConvertValues.SpxPerUnit;
-    public const float DecelerationSpeed = AccelerationSpeedSpx / ConvertValues.SpxPerUnit;
+    public const float DecelerationSpeed = DecelerationSpeedSpx / ConvertValues.SpxPerUnit;
     public const float FrictionSpeed = FrictionSpeedSpx / ConvertValues.SpxPerUnit;
     public const float TopSpeed = TopSpeedPx / ConvertValues.PxPerUnit;
     public const float AirAccelerationSpeed = AirAccelerationSpeedSpx / ConvertValues.SpxPerUnit;
