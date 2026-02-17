@@ -1,5 +1,13 @@
 public record Timer
 {
-  public string Key { get; set; }
+  public Timer()
+  {
+  }
+
+  public Timer(float remainingTime)
+  {
+    RemainingTime = remainingTime;
+  }
+
   public float RemainingTime { get; set; }
 }
