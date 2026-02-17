@@ -210,7 +210,7 @@ public class SonicController : MonoBehaviour
   {
     _timerManager.OnUpdate(Time.fixedDeltaTime);
 
-    if (_playerState.HasFlag(PlayerState.Skidding))
+    if (_playerState.HasFlag(PlayerState.Skidding) && !_sfxSkidding.isPlaying)
     {
       _timerManager.RunSingle(_sfxSkiddingTimer, () => _sfxSkidding.Play());
     }
