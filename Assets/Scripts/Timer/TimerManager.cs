@@ -1,31 +1,24 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 public class TimerManager
 {
-  private readonly Dictionary<string, float> _timers = new();
+  private readonly List<Timer> _timers = new();
 
   public void OnUpdate(float deltaTime)
   {
-    foreach (var key in _timers.Keys.ToArray())
-    {
-      _timers[key] -= deltaTime;
-      if (_timers[key] <= 0)
-      {
-        _timers.Remove(key);
-      }
-    }
+    _timers.ForEach(t => t.RemainingTime -= deltaTime);
+    _timers.RemoveAll(t => t.RemainingTime <= 0);
   }
 
-  public void RunSingle(string key, float remainingTime, Action action)
+  public void RunSingle(Timer timer, Action action)
   {
-    if (_timers.ContainsKey(key))
+    if (_timers.Contains(timer))
     {
       return;
     }
 
-    _timers.Add(key, remainingTime);
+    _timers.Add(timer);
     action();
   }
 }
