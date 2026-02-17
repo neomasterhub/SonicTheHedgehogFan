@@ -1,4 +1,5 @@
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEditor.Animations;
 using UnityEngine;
 
@@ -11,7 +12,6 @@ public class SonicController : MonoBehaviour
 
   // Components
   private Animator _animator;
-  private AudioSource _audioSource;
   private SpriteRenderer _spriteRenderer;
 
   // Managers
@@ -26,7 +26,7 @@ public class SonicController : MonoBehaviour
 
   // Audio
   private Timer _sfxSkiddingTimer;
-  private AudioClip _sfxSkidding;
+  private AudioSource _sfxSkidding;
 
   [Header("Animations")]
   public float MinAnimatorWalkingSpeed = 0.5f;
@@ -93,7 +93,6 @@ public class SonicController : MonoBehaviour
     Time.fixedDeltaTime = 1f / Consts.ConvertValues.FramePerSec;
 
     _animator = GetComponent<Animator>();
-    _audioSource = GetComponent<AudioSource>();
     _spriteRenderer = GetComponent<SpriteRenderer>();
 
     _inputInfo = new InputInfo(
@@ -106,8 +105,7 @@ public class SonicController : MonoBehaviour
       _playerSpeedManager,
       _spriteRenderer);
 
-    _sfxSkidding = Resources.Load<AudioClip>("Sonic/Audio/S1_A4");
-    InitAudioTimers();
+    InitAudio();
   }
 
   private void FixedUpdate()
@@ -187,7 +185,7 @@ public class SonicController : MonoBehaviour
     transform.position += new Vector3(_playerSpeedManager.SpeedX, speedY);
   }
 
-  private void InitAudioTimers()
+  private void InitAudio()
   {
     var states = (_animator.runtimeAnimatorController as AnimatorController)
       .layers[0].stateMachine.states;
@@ -201,8 +199,10 @@ public class SonicController : MonoBehaviour
     var skiddingClip = _animator.runtimeAnimatorController.animationClips
       .Single(c => c.name == Consts.Animator.States.Skidding);
 
+    _sfxSkidding = this.AddComponent<AudioSource>();
+    _sfxSkidding.clip = Resources.Load<AudioClip>("Sonic/Audio/S1_A4");
     _sfxSkiddingTimer = new(Mathf.Max(
-      _sfxSkidding.length,
+      _sfxSkidding.clip.length,
       skiddingToWalking.exitTime * skiddingClip.length));
   }
 
@@ -212,7 +212,7 @@ public class SonicController : MonoBehaviour
 
     if (_playerState.HasFlag(PlayerState.Skidding))
     {
-      _timerManager.RunSingle(_sfxSkiddingTimer, () => _audioSource.PlayOneShot(_sfxSkidding));
+      _timerManager.RunSingle(_sfxSkiddingTimer, () => _sfxSkidding.Play());
     }
   }
 }
