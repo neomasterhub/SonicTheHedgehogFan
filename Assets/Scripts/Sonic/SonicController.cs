@@ -1,9 +1,12 @@
+using System.Linq;
+using UnityEditor.Animations;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(SpriteRenderer))]
 public class SonicController : MonoBehaviour
 {
+  private readonly TimerManager _timerManager = new();
   private readonly SonicSensorSystem _sonicSensorSystem = new();
 
   // Components
@@ -19,6 +22,10 @@ public class SonicController : MonoBehaviour
   private GroundSide _groundSide = GroundSide.Down;
   private PlayerState _playerState = PlayerState.Grounded;
   private SonicSizeMode _sonicSizeMode = SonicSizeMode.Big;
+
+  // Audio
+  private Timer _sfxSkiddingTimer;
+  private AudioClip _sfxSkidding;
 
   [Header("Animations")]
   public float MinAnimatorWalkingSpeed = 0.5f;
@@ -96,6 +103,9 @@ public class SonicController : MonoBehaviour
       _inputInfo,
       _playerSpeedManager,
       _spriteRenderer);
+
+    _sfxSkidding = Resources.Load<AudioClip>("Sonic/Audio/S1_A4");
+    InitAudioTimers();
   }
 
   private void FixedUpdate()
@@ -172,5 +182,24 @@ public class SonicController : MonoBehaviour
 
     // Speed X, Y - offsets in units per frame.
     transform.position += new Vector3(_playerSpeedManager.SpeedX, speedY);
+  }
+
+  private void InitAudioTimers()
+  {
+    var states = (_animator.runtimeAnimatorController as AnimatorController)
+      .layers[0].stateMachine.states;
+
+    var skidding = states
+      .Single(s => s.state.name == Consts.Animator.States.Skidding);
+
+    var skiddingToWalking = skidding.state.transitions
+      .Single(t => t.destinationState.name == Consts.Animator.States.Walking);
+
+    var skiddingClip = _animator.runtimeAnimatorController.animationClips
+      .Single(c => c.name == Consts.Animator.States.Skidding);
+
+    _sfxSkiddingTimer = new(Mathf.Max(
+      _sfxSkidding.length,
+      skiddingToWalking.exitTime * skiddingClip.length));
   }
 }
