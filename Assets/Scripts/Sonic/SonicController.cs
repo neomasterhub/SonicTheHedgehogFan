@@ -131,13 +131,19 @@ public class SonicController : MonoBehaviour
     if (_sonicSensorSystem.ABResult.GroundDetected)
     {
       playerState |= PlayerState.Grounded;
+
+      if ((_inputInfo.X > 0
+        && _playerSpeedManager.SpeedX < 0)
+        || (_inputInfo.X < 0
+        && _playerSpeedManager.SpeedX > 0))
+      {
+        playerState |= PlayerState.Skidding;
+      }
     }
     else
     {
       playerState |= PlayerState.Airborne;
     }
-
-    Debug.Log(playerState);
 
     _playerState = playerState;
   }
@@ -149,7 +155,7 @@ public class SonicController : MonoBehaviour
 
   public void UpdateView()
   {
-    _playerViewManager.Update(PlayerViewInput);
+    _playerViewManager.Update(_playerState, PlayerViewInput);
   }
 
   private void UpdatePosition()
