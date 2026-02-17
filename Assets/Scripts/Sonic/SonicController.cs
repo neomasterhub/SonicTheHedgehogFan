@@ -23,6 +23,7 @@ public class SonicController : MonoBehaviour
   [Header("Animations")]
   public float MinAnimatorWalkingSpeed = 0.5f;
   public float AnimatorWalkingSpeedFactor = 2.0f;
+  public float SkiddingSpeedDeadZone = 0.1f;
 
   [Header("Physics")]
   public float TopSpeed = SonicConsts.Physics.TopSpeed;
@@ -132,10 +133,10 @@ public class SonicController : MonoBehaviour
     {
       playerState |= PlayerState.Grounded;
 
-      if ((_inputInfo.X > 0
-        && _playerSpeedManager.SpeedX < 0)
-        || (_inputInfo.X < 0
-        && _playerSpeedManager.SpeedX > 0))
+      if ((_inputInfo.X > InputDeadZone
+        && _playerSpeedManager.SpeedX < -SkiddingSpeedDeadZone)
+        || (_inputInfo.X < -InputDeadZone
+        && _playerSpeedManager.SpeedX > SkiddingSpeedDeadZone))
       {
         playerState |= PlayerState.Skidding;
       }
