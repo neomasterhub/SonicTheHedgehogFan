@@ -11,6 +11,7 @@ public class SonicController : MonoBehaviour
 
   // Components
   private Animator _animator;
+  private AudioSource _audioSource;
   private SpriteRenderer _spriteRenderer;
 
   // Managers
@@ -92,6 +93,7 @@ public class SonicController : MonoBehaviour
     Time.fixedDeltaTime = 1f / Consts.ConvertValues.FramePerSec;
 
     _animator = GetComponent<Animator>();
+    _audioSource = GetComponent<AudioSource>();
     _spriteRenderer = GetComponent<SpriteRenderer>();
 
     _inputInfo = new InputInfo(
@@ -116,6 +118,7 @@ public class SonicController : MonoBehaviour
     SetSpeed();
     UpdateView();
     UpdatePosition();
+    UpdateAudio();
   }
 
   private void OnDrawGizmos()
@@ -201,5 +204,15 @@ public class SonicController : MonoBehaviour
     _sfxSkiddingTimer = new(Mathf.Max(
       _sfxSkidding.length,
       skiddingToWalking.exitTime * skiddingClip.length));
+  }
+
+  private void UpdateAudio()
+  {
+    _timerManager.OnUpdate(Time.fixedDeltaTime);
+
+    if (_playerState.HasFlag(PlayerState.Skidding))
+    {
+      _timerManager.RunSingle(_sfxSkiddingTimer, () => _audioSource.PlayOneShot(_sfxSkidding));
+    }
   }
 }
