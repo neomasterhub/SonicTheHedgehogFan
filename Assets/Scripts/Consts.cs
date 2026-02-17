@@ -20,7 +20,7 @@ public static class Consts
     public static class Parameters
     {
       public const string Speed = nameof(Speed);
-      public const string IsSkidding = nameof(IsSkidding);
+      public const string Skidding = nameof(Skidding);
     }
 
     public static class States
