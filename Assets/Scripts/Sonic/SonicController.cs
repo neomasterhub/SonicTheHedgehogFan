@@ -1,9 +1,13 @@
+using System.Linq;
+using Unity.VisualScripting;
+using UnityEditor.Animations;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(SpriteRenderer))]
 public class SonicController : MonoBehaviour
 {
+  private readonly TimerManager _timerManager = new();
   private readonly SonicSensorSystem _sonicSensorSystem = new();
 
   // Components
@@ -20,9 +24,14 @@ public class SonicController : MonoBehaviour
   private PlayerState _playerState = PlayerState.Grounded;
   private SonicSizeMode _sonicSizeMode = SonicSizeMode.Big;
 
+  // Audio
+  private Timer _sfxSkiddingTimer;
+  private AudioSource _sfxSkidding;
+
   [Header("Animations")]
   public float MinAnimatorWalkingSpeed = 0.5f;
   public float AnimatorWalkingSpeedFactor = 2.0f;
+  public float SkiddingSpeedDeadZone = 0.1f;
 
   [Header("Physics")]
   public float TopSpeed = SonicConsts.Physics.TopSpeed;
@@ -95,6 +104,8 @@ public class SonicController : MonoBehaviour
       _inputInfo,
       _playerSpeedManager,
       _spriteRenderer);
+
+    InitAudio();
   }
 
   private void FixedUpdate()
@@ -105,6 +116,7 @@ public class SonicController : MonoBehaviour
     SetSpeed();
     UpdateView();
     UpdatePosition();
+    UpdateAudio();
   }
 
   private void OnDrawGizmos()
@@ -132,10 +144,10 @@ public class SonicController : MonoBehaviour
     {
       playerState |= PlayerState.Grounded;
 
-      if ((_inputInfo.X > 0
-        && _playerSpeedManager.SpeedX < 0)
-        || (_inputInfo.X < 0
-        && _playerSpeedManager.SpeedX > 0))
+      if ((_inputInfo.X > InputDeadZone
+        && _playerSpeedManager.SpeedX < -SkiddingSpeedDeadZone)
+        || (_inputInfo.X < -InputDeadZone
+        && _playerSpeedManager.SpeedX > SkiddingSpeedDeadZone))
       {
         playerState |= PlayerState.Skidding;
       }
@@ -171,5 +183,36 @@ public class SonicController : MonoBehaviour
 
     // Speed X, Y - offsets in units per frame.
     transform.position += new Vector3(_playerSpeedManager.SpeedX, speedY);
+  }
+
+  private void InitAudio()
+  {
+    var states = (_animator.runtimeAnimatorController as AnimatorController)
+      .layers[0].stateMachine.states;
+
+    var skidding = states
+      .Single(s => s.state.name == Consts.Animator.States.Skidding);
+
+    var skiddingToWalking = skidding.state.transitions
+      .Single(t => t.destinationState.name == Consts.Animator.States.Walking);
+
+    var skiddingClip = _animator.runtimeAnimatorController.animationClips
+      .Single(c => c.name == Consts.Animator.States.Skidding);
+
+    _sfxSkidding = this.AddComponent<AudioSource>();
+    _sfxSkidding.clip = Resources.Load<AudioClip>("Sonic/Audio/S1_A4");
+    _sfxSkiddingTimer = new(Mathf.Max(
+      _sfxSkidding.clip.length,
+      skiddingToWalking.exitTime * skiddingClip.length));
+  }
+
+  private void UpdateAudio()
+  {
+    _timerManager.OnUpdate(Time.fixedDeltaTime);
+
+    if (_playerState.HasFlag(PlayerState.Skidding) && !_sfxSkidding.isPlaying)
+    {
+      _timerManager.RunSingle(_sfxSkiddingTimer, () => _sfxSkidding.Play());
+    }
   }
 }

@@ -30,6 +30,7 @@ public static class Consts
       public const string Waiting = nameof(Waiting);
       public const string Walking = nameof(Walking);
       public const string Running = nameof(Running);
+      public const string Skidding = nameof(Skidding);
     }
   }
 }
