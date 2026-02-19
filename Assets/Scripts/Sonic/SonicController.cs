@@ -17,6 +17,7 @@ public class SonicController : MonoBehaviour
 
   // Managers
   private InputInfo _inputInfo;
+  private Timer _inputLockTimer;
   private PlayerSpeedManager _playerSpeedManager;
   private PlayerViewManager _playerViewManager;
 
@@ -99,7 +100,13 @@ public class SonicController : MonoBehaviour
     _inputInfo = new InputInfo(
       () => Input.GetAxis(Consts.InputAxis.Horizontal),
       () => Input.GetAxis(Consts.InputAxis.Vertical));
+
+    _inputLockTimer = new Timer(SonicConsts.Times.InputLockSeconds)
+      .WhenStarted(() => _inputInfo.Enabled = false)
+      .WhenCompleted(() => _inputInfo.Enabled = true);
+
     _playerSpeedManager = new PlayerSpeedManager(_inputInfo);
+
     _playerViewManager = new PlayerViewManager(
       _animator,
       _inputInfo,
@@ -114,6 +121,7 @@ public class SonicController : MonoBehaviour
     UpdateInput();
     RunSensors();
     UpdateState();
+    EnableInput();
     SetSpeed();
     UpdateView();
     UpdatePosition();
@@ -168,6 +176,14 @@ public class SonicController : MonoBehaviour
     }
 
     _playerState = playerState;
+  }
+
+  private void EnableInput()
+  {
+    if (_playerState.HasFlag(PlayerState.LockedInput) && !_inputLockTimer.IsRunning)
+    {
+      _timerManager.RunSingle(_inputLockTimer);
+    }
   }
 
   public void SetSpeed()

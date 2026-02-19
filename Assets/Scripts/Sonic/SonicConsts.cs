@@ -78,4 +78,9 @@ public static class SonicConsts
       public const float VRadius = VRadiusPx / ConvertValues.PxPerUnit;
     }
   }
+
+  public static class Times
+  {
+    public const float InputLockSeconds = 2;
+  }
 }
