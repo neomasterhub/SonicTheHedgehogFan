@@ -2,17 +2,18 @@ using System;
 
 public class InputInfo
 {
-  private readonly Func<float> _xGetter;
-  private readonly Func<float> _yGetter;
+  private readonly Func<float> _xSrc;
+  private readonly Func<float> _ySrc;
 
   public InputInfo(
-    Func<float> xGetter,
-    Func<float> yGetter)
+    Func<float> xSrc,
+    Func<float> ySrc)
   {
-    _xGetter = xGetter;
-    _yGetter = yGetter;
+    _xSrc = xSrc;
+    _ySrc = ySrc;
   }
 
+  public bool Enabled { get; set; } = true;
   public float X { get; private set; }
   public float Y { get; private set; }
   public float XDirection { get; private set; }
@@ -20,9 +21,17 @@ public class InputInfo
 
   public void Update()
   {
-    X = _xGetter();
-    Y = _yGetter();
-    XDirection = Math.Sign(X);
-    YDirection = Math.Sign(Y);
+    if (Enabled)
+    {
+      X = _xSrc();
+      Y = _ySrc();
+      XDirection = Math.Sign(X);
+      YDirection = Math.Sign(Y);
+    }
+    else
+    {
+      X = 0;
+      Y = 0;
+    }
   }
 }
