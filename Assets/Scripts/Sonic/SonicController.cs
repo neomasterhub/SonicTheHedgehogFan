@@ -141,10 +141,12 @@ public class SonicController : MonoBehaviour
   {
     var playerState = PlayerState.None;
 
-    if (_sonicSensorSystem.ABResult.GroundDetected)
-    {
-      playerState |= PlayerState.Grounded;
+    playerState |= _sonicSensorSystem.ABResult.GroundDetected
+      ? PlayerState.Grounded
+      : PlayerState.Airborne;
 
+    if (playerState.HasFlag(PlayerState.Grounded))
+    {
       if ((_inputInfo.X > InputDeadZone
         && _playerSpeedManager.SpeedX < -SkiddingSpeedDeadZone)
         || (_inputInfo.X < -InputDeadZone
@@ -152,10 +154,17 @@ public class SonicController : MonoBehaviour
       {
         playerState |= PlayerState.Skidding;
       }
+
+      _groundInfo.Update(_sonicSensorSystem.ABResult.AngleDeg);
+      if (_groundInfo.RangeId == GroundRangeId.Steep
+        && Mathf.Abs(_playerSpeedManager.GroundSpeed) < DecelerationSpeed)
+      {
+        playerState |= PlayerState.LockedInput;
+      }
     }
-    else
+
+    if (playerState == PlayerState.Airborne)
     {
-      playerState |= PlayerState.Airborne;
     }
 
     _playerState = playerState;
