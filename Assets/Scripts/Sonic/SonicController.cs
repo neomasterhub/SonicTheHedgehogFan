@@ -215,7 +215,7 @@ public class SonicController : MonoBehaviour
 
     if (_playerState.HasFlag(PlayerState.Skidding) && !_sfxSkidding.isPlaying)
     {
-      _timerManager.RunSingle(_sfxSkiddingTimer, () => _sfxSkidding.Play());
+      _timerManager.RunSingle(_sfxSkiddingTimer.WhenStarted(() => _sfxSkidding.Play()));
     }
   }
 }
