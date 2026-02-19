@@ -118,8 +118,6 @@ public class SonicController : MonoBehaviour
     UpdateView();
     UpdatePosition();
     UpdateAudio();
-
-    _groundInfo.Update(_sonicSensorSystem.ABResult.AngleDeg);
   }
 
   private void OnDrawGizmos()
@@ -207,6 +205,8 @@ public class SonicController : MonoBehaviour
     _sfxSkiddingTimer = new(Mathf.Max(
       _sfxSkidding.clip.length,
       skiddingToWalking.exitTime * skiddingClip.length));
+    _sfxSkiddingTimer
+      .WhenStarted(() => _sfxSkidding.Play());
   }
 
   private void UpdateAudio()
@@ -215,7 +215,7 @@ public class SonicController : MonoBehaviour
 
     if (_playerState.HasFlag(PlayerState.Skidding) && !_sfxSkidding.isPlaying)
     {
-      _timerManager.RunSingle(_sfxSkiddingTimer.WhenStarted(() => _sfxSkidding.Play()));
+      _timerManager.RunSingle(_sfxSkiddingTimer);
     }
   }
 }
