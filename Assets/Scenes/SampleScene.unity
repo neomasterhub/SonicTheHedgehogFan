@@ -470,7 +470,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SonicController
   MinAnimatorWalkingSpeed: 0.5
-  AnimatorWalkingSpeedFactor: 2
+  AnimatorWalkingSpeedFactor: 3
   SkiddingSpeedDeadZone: 0.1
   TopSpeed: 0.15
   FrictionSpeed: 0.001171875
