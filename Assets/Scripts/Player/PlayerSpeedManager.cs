@@ -107,7 +107,11 @@ public class PlayerSpeedManager
   {
     if (_groundSpeed < 0)
     {
+      if (_groundSpeed < -input.SkiddingSpeedDeadZone)
+      {
       _isSkidding = true;
+      }
+
       _groundSpeed += input.DecelerationSpeed;
 
       if (_groundSpeed >= 0)
@@ -131,7 +135,11 @@ public class PlayerSpeedManager
   {
     if (_groundSpeed > 0)
     {
+      if (_groundSpeed > input.SkiddingSpeedDeadZone)
+      {
       _isSkidding = true;
+      }
+
       _groundSpeed -= input.DecelerationSpeed;
 
       if (_groundSpeed <= 0)

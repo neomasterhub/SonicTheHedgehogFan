@@ -80,6 +80,7 @@ public class SonicController : MonoBehaviour
     InputDeadZone = InputDeadZone,
     GravityDownEnabled = GravityDownEnabled,
     SlopeFactor = SlopeFactor,
+    SkiddingSpeedDeadZone = SkiddingSpeedDeadZone,
   };
 
   private PlayerViewInput PlayerViewInput => new()
