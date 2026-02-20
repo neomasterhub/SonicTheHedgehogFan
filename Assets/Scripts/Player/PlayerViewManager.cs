@@ -21,12 +21,17 @@ public class PlayerViewManager
 
   public void Update(PlayerState playerState, PlayerViewInput input)
   {
-    RotateSprite();
-    UpdateAnimator(playerState, input);
+    RotateSprite(input);
+    UpdateAnimator(input);
   }
 
-  private void RotateSprite()
+  private void RotateSprite(PlayerViewInput input)
   {
+    if (input.IsSkidding)
+    {
+      return;
+    }
+
     if (_inputInfo.X > 0)
     {
       _spriteRenderer.flipX = false;
@@ -37,12 +42,12 @@ public class PlayerViewManager
     }
   }
 
-  private void UpdateAnimator(PlayerState playerState, PlayerViewInput input)
+  private void UpdateAnimator(PlayerViewInput input)
   {
     var speedXAbs = Mathf.Abs(_playerSpeedManager.SpeedX);
 
     _animator.SetFloat(Consts.Animator.Parameters.Speed, speedXAbs);
-    _animator.SetBool(Consts.Animator.Parameters.Skidding, playerState.HasFlag(PlayerState.Skidding));
+    _animator.SetBool(Consts.Animator.Parameters.Skidding, input.IsSkidding);
 
     if (_animator.GetCurrentAnimatorStateInfo(0).IsName(Consts.Animator.States.Walking))
     {

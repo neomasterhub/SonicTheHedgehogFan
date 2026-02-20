@@ -4,7 +4,9 @@ using UnityEngine;
 public class PlayerSpeedManager
 {
   private readonly InputInfo _inputInfo;
+
   private float _groundSpeed;
+  private bool _isSkidding;
 
   public PlayerSpeedManager(InputInfo inputInfo)
   {
@@ -14,6 +16,7 @@ public class PlayerSpeedManager
   public float SpeedX { get; private set; }
   public float SpeedY { get; private set; }
   public float GroundSpeed => _groundSpeed;
+  public bool IsSkidding => _isSkidding;
 
   public void ResetGroundSpeed()
   {
@@ -104,10 +107,12 @@ public class PlayerSpeedManager
   {
     if (_groundSpeed < 0)
     {
+      _isSkidding = true;
       _groundSpeed += input.DecelerationSpeed;
 
       if (_groundSpeed >= 0)
       {
+        _isSkidding = false;
         _groundSpeed = input.DecelerationSpeed;
       }
     }
@@ -126,10 +131,12 @@ public class PlayerSpeedManager
   {
     if (_groundSpeed > 0)
     {
+      _isSkidding = true;
       _groundSpeed -= input.DecelerationSpeed;
 
       if (_groundSpeed <= 0)
       {
+        _isSkidding = false;
         _groundSpeed = -input.DecelerationSpeed;
       }
     }

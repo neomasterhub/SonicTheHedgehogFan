@@ -84,6 +84,7 @@ public class SonicController : MonoBehaviour
 
   private PlayerViewInput PlayerViewInput => new()
   {
+    IsSkidding = _playerSpeedManager.IsSkidding,
     TopSpeed = TopSpeed,
     MinAnimatorWalkingSpeed = MinAnimatorWalkingSpeed,
     AnimatorWalkingSpeedFactor = AnimatorWalkingSpeedFactor,
