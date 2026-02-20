@@ -15,6 +15,11 @@ public class PlayerSpeedManager
   public float SpeedY { get; private set; }
   public float GroundSpeed => _groundSpeed;
 
+  public void ResetGroundSpeed()
+  {
+    _groundSpeed = 0;
+  }
+
   public void SetSpeed(PlayerState playerState, PlayerSpeedInput input)
   {
     if (playerState.HasFlag(PlayerState.Airborne))

@@ -102,7 +102,11 @@ public class SonicController : MonoBehaviour
       () => Input.GetAxis(Consts.InputAxis.Vertical));
 
     _inputLockTimer = new Timer(SonicConsts.Times.InputLockSeconds)
-      .WhenStarted(() => _inputInfo.Enabled = false)
+      .WhenStarted(() =>
+      {
+        _inputInfo.Enabled = false;
+        _playerSpeedManager.ResetGroundSpeed();
+      })
       .WhenCompleted(() => _inputInfo.Enabled = true);
 
     _playerSpeedManager = new PlayerSpeedManager(_inputInfo);
