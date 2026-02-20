@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 public class TimerManager
@@ -7,11 +6,20 @@ public class TimerManager
 
   public void OnUpdate(float deltaTime)
   {
-    _timers.ForEach(t => t.RemainingTime -= deltaTime);
-    _timers.RemoveAll(t => t.RemainingTime <= 0);
+    for (var i = _timers.Count - 1; i >= 0; i--)
+    {
+      var timer = _timers[i];
+
+      timer.Update(deltaTime);
+
+      if (timer.IsCompleted)
+      {
+        _timers.RemoveAt(i);
+      }
+    }
   }
 
-  public void RunSingle(Timer timer, Action action)
+  public void RunSingle(Timer timer)
   {
     if (_timers.Contains(timer))
     {
@@ -19,6 +27,6 @@ public class TimerManager
     }
 
     _timers.Add(timer);
-    action();
+    timer.Start();
   }
 }

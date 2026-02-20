@@ -13,6 +13,12 @@ public class PlayerSpeedManager
 
   public float SpeedX { get; private set; }
   public float SpeedY { get; private set; }
+  public float GroundSpeed => _groundSpeed;
+
+  public void ResetGroundSpeed()
+  {
+    _groundSpeed = 0;
+  }
 
   public void SetSpeed(PlayerState playerState, PlayerSpeedInput input)
   {

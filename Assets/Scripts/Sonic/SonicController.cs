@@ -9,6 +9,7 @@ public class SonicController : MonoBehaviour
 {
   private readonly TimerManager _timerManager = new();
   private readonly SonicSensorSystem _sonicSensorSystem = new();
+  private readonly GroundInfo _groundInfo = new();
 
   // Components
   private Animator _animator;
@@ -16,6 +17,7 @@ public class SonicController : MonoBehaviour
 
   // Managers
   private InputInfo _inputInfo;
+  private Timer _inputLockTimer;
   private PlayerSpeedManager _playerSpeedManager;
   private PlayerViewManager _playerViewManager;
 
@@ -98,7 +100,17 @@ public class SonicController : MonoBehaviour
     _inputInfo = new InputInfo(
       () => Input.GetAxis(Consts.InputAxis.Horizontal),
       () => Input.GetAxis(Consts.InputAxis.Vertical));
+
+    _inputLockTimer = new Timer(SonicConsts.Times.InputLockSeconds)
+      .WhenStarted(() =>
+      {
+        _inputInfo.Enabled = false;
+        _playerSpeedManager.ResetGroundSpeed();
+      })
+      .WhenCompleted(() => _inputInfo.Enabled = true);
+
     _playerSpeedManager = new PlayerSpeedManager(_inputInfo);
+
     _playerViewManager = new PlayerViewManager(
       _animator,
       _inputInfo,
@@ -113,6 +125,7 @@ public class SonicController : MonoBehaviour
     UpdateInput();
     RunSensors();
     UpdateState();
+    EnableInput();
     SetSpeed();
     UpdateView();
     UpdatePosition();
@@ -140,10 +153,12 @@ public class SonicController : MonoBehaviour
   {
     var playerState = PlayerState.None;
 
-    if (_sonicSensorSystem.ABResult.GroundDetected)
-    {
-      playerState |= PlayerState.Grounded;
+    playerState |= _sonicSensorSystem.ABResult.GroundDetected
+      ? PlayerState.Grounded
+      : PlayerState.Airborne;
 
+    if (playerState.HasFlag(PlayerState.Grounded))
+    {
       if ((_inputInfo.X > InputDeadZone
         && _playerSpeedManager.SpeedX < -SkiddingSpeedDeadZone)
         || (_inputInfo.X < -InputDeadZone
@@ -151,13 +166,28 @@ public class SonicController : MonoBehaviour
       {
         playerState |= PlayerState.Skidding;
       }
+
+      _groundInfo.Update(_sonicSensorSystem.ABResult.AngleDeg);
+      if (_groundInfo.RangeId == GroundRangeId.Steep
+        && Mathf.Abs(_playerSpeedManager.GroundSpeed) < DecelerationSpeed)
+      {
+        playerState |= PlayerState.LockedInput;
+      }
     }
-    else
+
+    if (playerState == PlayerState.Airborne)
     {
-      playerState |= PlayerState.Airborne;
     }
 
     _playerState = playerState;
+  }
+
+  private void EnableInput()
+  {
+    if (_playerState.HasFlag(PlayerState.LockedInput) && !_inputLockTimer.IsRunning)
+    {
+      _timerManager.RunSingle(_inputLockTimer);
+    }
   }
 
   public void SetSpeed()
@@ -204,6 +234,8 @@ public class SonicController : MonoBehaviour
     _sfxSkiddingTimer = new(Mathf.Max(
       _sfxSkidding.clip.length,
       skiddingToWalking.exitTime * skiddingClip.length));
+    _sfxSkiddingTimer
+      .WhenStarted(() => _sfxSkidding.Play());
   }
 
   private void UpdateAudio()
@@ -212,7 +244,7 @@ public class SonicController : MonoBehaviour
 
     if (_playerState.HasFlag(PlayerState.Skidding) && !_sfxSkidding.isPlaying)
     {
-      _timerManager.RunSingle(_sfxSkiddingTimer, () => _sfxSkidding.Play());
+      _timerManager.RunSingle(_sfxSkiddingTimer);
     }
   }
 }
