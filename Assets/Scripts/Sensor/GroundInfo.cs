@@ -7,7 +7,6 @@ public class GroundInfo
 
   public float AngleDeg { get; private set; }
   public float AngleRad { get; private set; }
-  public GroundSide Side { get; private set; }
   public GroundRangeId RangeId { get; private set; }
 
   public void Update(float angleDeg)
