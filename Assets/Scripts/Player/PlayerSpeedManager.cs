@@ -37,6 +37,7 @@ public class PlayerSpeedManager
 
   private void SetSpeed_Airborne(PlayerSpeedInput input)
   {
+    _isSkidding = false;
     SetSpeed_Airborne_Gravity(input);
     SetSpeed_Airborne_PreventGroundOvershoot(input);
     SetSpeed_Airborne_Horizontal(input);
@@ -109,7 +110,7 @@ public class PlayerSpeedManager
     {
       if (_groundSpeed < -input.SkiddingSpeedDeadZone)
       {
-      _isSkidding = true;
+        _isSkidding = true;
       }
 
       _groundSpeed += input.DecelerationSpeed;
@@ -137,7 +138,7 @@ public class PlayerSpeedManager
     {
       if (_groundSpeed > input.SkiddingSpeedDeadZone)
       {
-      _isSkidding = true;
+        _isSkidding = true;
       }
 
       _groundSpeed -= input.DecelerationSpeed;
