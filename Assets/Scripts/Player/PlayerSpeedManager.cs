@@ -165,6 +165,7 @@ public class PlayerSpeedManager
     if (Mathf.Abs(_groundSpeed) < input.FrictionSpeed)
     {
       _groundSpeed = 0;
+      _isSkidding = false;
       return;
     }
 
