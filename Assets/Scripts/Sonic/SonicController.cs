@@ -80,10 +80,12 @@ public class SonicController : MonoBehaviour
     InputDeadZone = InputDeadZone,
     GravityDownEnabled = GravityDownEnabled,
     SlopeFactor = SlopeFactor,
+    SkiddingSpeedDeadZone = SkiddingSpeedDeadZone,
   };
 
   private PlayerViewInput PlayerViewInput => new()
   {
+    IsSkidding = _playerSpeedManager.IsSkidding,
     TopSpeed = TopSpeed,
     MinAnimatorWalkingSpeed = MinAnimatorWalkingSpeed,
     AnimatorWalkingSpeedFactor = AnimatorWalkingSpeedFactor,
@@ -159,12 +161,13 @@ public class SonicController : MonoBehaviour
 
     if (playerState.HasFlag(PlayerState.Grounded))
     {
-      if ((_inputInfo.X > InputDeadZone
-        && _playerSpeedManager.SpeedX < -SkiddingSpeedDeadZone)
-        || (_inputInfo.X < -InputDeadZone
-        && _playerSpeedManager.SpeedX > SkiddingSpeedDeadZone))
+      if (_playerSpeedManager.IsSkidding)
       {
         playerState |= PlayerState.Skidding;
+      }
+      else
+      {
+        playerState &= ~PlayerState.Skidding;
       }
 
       _groundInfo.Update(_sonicSensorSystem.ABResult.AngleDeg);
