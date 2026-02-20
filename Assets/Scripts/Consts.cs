@@ -33,4 +33,13 @@ public static class Consts
       public const string Skidding = nameof(Skidding);
     }
   }
+
+  public static class Physics
+  {
+    public static class GroundAngleRanges
+    {
+      public static readonly Range Flat = new(-23, 23);
+      public static readonly Range Slope = new(-45, 45);
+    }
+  }
 }

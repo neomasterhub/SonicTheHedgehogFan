@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class GroundInfo
 {
-  private readonly Range _flatRangeDeg = new(-23, 23);
-  private readonly Range _slopeRangeDeg = new(-45, 45);
+  private readonly Range _flatRangeDeg = Consts.Physics.GroundAngleRanges.Flat;
+  private readonly Range _slopeRangeDeg = Consts.Physics.GroundAngleRanges.Slope;
 
   public float AngleDeg { get; private set; }
   public float AngleRad { get; private set; }
@@ -26,7 +26,5 @@ public class GroundInfo
     {
       RangeId = GroundRangeId.Flat;
     }
-
-    Debug.Log(RangeId);
   }
 }
