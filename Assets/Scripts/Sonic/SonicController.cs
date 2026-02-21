@@ -165,10 +165,6 @@ public class SonicController : MonoBehaviour
       {
         playerState |= PlayerState.Skidding;
       }
-      else
-      {
-        playerState &= ~PlayerState.Skidding;
-      }
 
       _groundInfo.Update(_sonicSensorSystem.ABResult.AngleDeg);
       if (_groundInfo.RangeId == GroundRangeId.Steep
