@@ -201,8 +201,10 @@ public class SonicController : MonoBehaviour
 
   private void UpdatePosition()
   {
-    // Snap to ground with small upward offset.
+    var speedX = _playerSpeedManager.SpeedX;
     var speedY = _playerSpeedManager.SpeedY;
+
+    // Snap to ground with small upward offset.
     if (_playerState.HasFlag(PlayerState.Grounded))
     {
       speedY -= (_sonicSensorSystem.ABResult.Distance
@@ -211,7 +213,20 @@ public class SonicController : MonoBehaviour
     }
 
     // Speed X, Y - offsets in units per frame.
-    transform.position += new Vector3(_playerSpeedManager.SpeedX, speedY);
+    switch (_groundSide)
+    {
+      case GroundSide.Down:
+        transform.position += new Vector3(speedX, speedY);
+        break;
+      case GroundSide.Left:
+        break;
+      case GroundSide.Right:
+        transform.position += new Vector3(-speedY, speedX);
+        break;
+      case GroundSide.Up:
+        break;
+      default: throw _groundSide.ArgumentOutOfRangeException();
+    }
   }
 
   private void InitAudio()
