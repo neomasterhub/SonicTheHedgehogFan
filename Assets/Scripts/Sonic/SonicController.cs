@@ -22,7 +22,7 @@ public class SonicController : MonoBehaviour
   private PlayerViewManager _playerViewManager;
 
   // States
-  private GroundSide _groundSide = GroundSide.Down;
+  private GroundSide _groundSide = GroundSide.Right;
   private PlayerState _playerState = PlayerState.Grounded;
   private SonicSizeMode _sonicSizeMode = SonicSizeMode.Big;
 
@@ -32,7 +32,7 @@ public class SonicController : MonoBehaviour
 
   [Header("Animations")]
   public float MinAnimatorWalkingSpeed = 0.5f;
-  public float AnimatorWalkingSpeedFactor = 2.0f;
+  public float AnimatorWalkingSpeedFactor = 3.0f;
   public float SkiddingSpeedDeadZone = 0.1f;
 
   [Header("Physics")]
@@ -201,8 +201,10 @@ public class SonicController : MonoBehaviour
 
   private void UpdatePosition()
   {
-    // Snap to ground with small upward offset.
+    var speedX = _playerSpeedManager.SpeedX;
     var speedY = _playerSpeedManager.SpeedY;
+
+    // Snap to ground with small upward offset.
     if (_playerState.HasFlag(PlayerState.Grounded))
     {
       speedY -= (_sonicSensorSystem.ABResult.Distance
@@ -211,7 +213,20 @@ public class SonicController : MonoBehaviour
     }
 
     // Speed X, Y - offsets in units per frame.
-    transform.position += new Vector3(_playerSpeedManager.SpeedX, speedY);
+    switch (_groundSide)
+    {
+      case GroundSide.Down:
+        transform.position += new Vector3(speedX, speedY);
+        break;
+      case GroundSide.Left:
+        break;
+      case GroundSide.Right:
+        transform.position += new Vector3(-speedY, speedX);
+        break;
+      case GroundSide.Up:
+        break;
+      default: throw _groundSide.ArgumentOutOfRangeException();
+    }
   }
 
   private void InitAudio()

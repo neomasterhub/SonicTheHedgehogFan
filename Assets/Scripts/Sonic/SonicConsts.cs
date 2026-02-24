@@ -56,6 +56,15 @@ public static class SonicConsts
           [SensorId.E] = new(new(-Sizes.Big.HRadius, Sizes.Big.VRadius), Vector2.up),
           [SensorId.F] = new(new(Sizes.Big.HRadius, Sizes.Big.VRadius), Vector2.up),
         },
+        [GroundSide.Right] = new()
+        {
+          [SensorId.A] = new(new(Sizes.Big.VRadius, -Sizes.Big.HRadius), Vector2.right),
+          [SensorId.B] = new(new(Sizes.Big.VRadius, Sizes.Big.HRadius), Vector2.right),
+          [SensorId.C] = new(new(0, -Sizes.Big.HRadius), Vector2.down),
+          [SensorId.D] = new(new(0, Sizes.Big.HRadius), Vector2.up),
+          [SensorId.E] = new(new(-Sizes.Big.VRadius, -Sizes.Big.HRadius), Vector2.left),
+          [SensorId.F] = new(new(-Sizes.Big.VRadius, Sizes.Big.HRadius), Vector2.left),
+        },
       },
     };
   }
