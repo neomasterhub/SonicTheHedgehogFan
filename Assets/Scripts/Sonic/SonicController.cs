@@ -22,7 +22,7 @@ public class SonicController : MonoBehaviour
   private PlayerViewManager _playerViewManager;
 
   // States
-  private GroundSide _groundSide = GroundSide.Down;
+  private GroundSide _groundSide = GroundSide.Right;
   private PlayerState _playerState = PlayerState.Grounded;
   private SonicSizeMode _sonicSizeMode = SonicSizeMode.Big;
 
@@ -32,7 +32,7 @@ public class SonicController : MonoBehaviour
 
   [Header("Animations")]
   public float MinAnimatorWalkingSpeed = 0.5f;
-  public float AnimatorWalkingSpeedFactor = 2.0f;
+  public float AnimatorWalkingSpeedFactor = 3.0f;
   public float SkiddingSpeedDeadZone = 0.1f;
 
   [Header("Physics")]
