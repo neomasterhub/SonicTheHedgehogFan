@@ -9,7 +9,7 @@ public class SonicController : MonoBehaviour
 {
   private readonly TimerManager _timerManager = new();
   private readonly SonicSensorSystem _sonicSensorSystem = new();
-  private readonly RelativeGroundInfo _groundInfo = new();
+  private readonly RelativeGroundInfo _relativeGroundInfo = new();
 
   // Components
   private Animator _animator;
@@ -125,6 +125,7 @@ public class SonicController : MonoBehaviour
   private void FixedUpdate()
   {
     UpdateInput();
+    SetGroundSide();
     RunSensors();
     UpdateState();
     EnableInput();
@@ -143,6 +144,12 @@ public class SonicController : MonoBehaviour
   private void UpdateInput()
   {
     _inputInfo.Update();
+  }
+
+  private void SetGroundSide()
+  {
+    _relativeGroundInfo.Update(_sonicSensorSystem.ABResult.AngleDeg);
+    _groundSide = _relativeGroundInfo.Side;
   }
 
   private void RunSensors()
@@ -166,8 +173,8 @@ public class SonicController : MonoBehaviour
         playerState |= PlayerState.Skidding;
       }
 
-      _groundInfo.Update(_sonicSensorSystem.ABResult.AngleDeg);
-      if (_groundInfo.RangeId == GroundRangeId.Steep
+      _relativeGroundInfo.Update(_sonicSensorSystem.ABResult.AngleDeg);
+      if (_relativeGroundInfo.RangeId == GroundRangeId.Steep
         && Mathf.Abs(_playerSpeedManager.GroundSpeed) < DecelerationSpeed)
       {
         playerState |= PlayerState.LockedInput;
