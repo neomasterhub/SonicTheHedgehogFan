@@ -149,8 +149,12 @@ public class SonicController : MonoBehaviour
   private void SetGroundSide()
   {
     _relativeGroundInfo.Update(_sonicSensorSystem.ABResult.AngleDeg);
-    //_groundSide = _relativeGroundInfo.Side;
-    Debug.Log(_relativeGroundInfo.Side);
+    _groundSide = _relativeGroundInfo.Side switch
+    {
+      GroundSide.Left => _groundSide.GetPrevious(),
+      GroundSide.Right => _groundSide.GetNext(),
+      _ => _groundSide
+    };
   }
 
   private void RunSensors()
