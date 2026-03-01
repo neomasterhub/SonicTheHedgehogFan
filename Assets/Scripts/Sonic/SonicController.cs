@@ -22,7 +22,7 @@ public class SonicController : MonoBehaviour
   private PlayerViewManager _playerViewManager;
 
   // States
-  private GroundSide _groundSide = GroundSide.Right;
+  private GroundSide _groundSide = GroundSide.Down;
   private PlayerState _playerState = PlayerState.Grounded;
   private SonicSizeMode _sonicSizeMode = SonicSizeMode.Big;
 
