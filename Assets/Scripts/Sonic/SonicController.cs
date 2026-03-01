@@ -189,12 +189,12 @@ public class SonicController : MonoBehaviour
     }
   }
 
-  public void SetSpeed()
+  private void SetSpeed()
   {
     _playerSpeedManager.SetSpeed(_playerState, PlayerSpeedInput);
   }
 
-  public void UpdateView()
+  private void UpdateView()
   {
     _playerViewManager.Update(_playerState, PlayerViewInput);
   }
