@@ -9,7 +9,7 @@ public class SonicController : MonoBehaviour
 {
   private readonly TimerManager _timerManager = new();
   private readonly SonicSensorSystem _sonicSensorSystem = new();
-  private readonly GroundInfo _groundInfo = new();
+  private readonly RelativeGroundInfo _groundInfo = new();
 
   // Components
   private Animator _animator;

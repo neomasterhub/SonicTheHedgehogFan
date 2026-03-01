@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GroundInfo
+public class RelativeGroundInfo
 {
   private readonly Range _flatRangeDeg = Consts.Physics.GroundAngleRanges.Flat;
   private readonly Range _slopeRangeDeg = Consts.Physics.GroundAngleRanges.Slope;
