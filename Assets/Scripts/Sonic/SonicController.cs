@@ -9,7 +9,7 @@ public class SonicController : MonoBehaviour
 {
   private readonly TimerManager _timerManager = new();
   private readonly SonicSensorSystem _sonicSensorSystem = new();
-  private readonly GroundInfo _groundInfo = new();
+  private readonly RelativeGroundInfo _relativeGroundInfo = new();
 
   // Components
   private Animator _animator;
@@ -22,7 +22,7 @@ public class SonicController : MonoBehaviour
   private PlayerViewManager _playerViewManager;
 
   // States
-  private GroundSide _groundSide = GroundSide.Right;
+  private GroundSide _groundSide = GroundSide.Down;
   private PlayerState _playerState = PlayerState.Grounded;
   private SonicSizeMode _sonicSizeMode = SonicSizeMode.Big;
 
@@ -125,6 +125,7 @@ public class SonicController : MonoBehaviour
   private void FixedUpdate()
   {
     UpdateInput();
+    SetGroundSide();
     RunSensors();
     UpdateState();
     EnableInput();
@@ -143,6 +144,17 @@ public class SonicController : MonoBehaviour
   private void UpdateInput()
   {
     _inputInfo.Update();
+  }
+
+  private void SetGroundSide()
+  {
+    _relativeGroundInfo.Update(_sonicSensorSystem.ABResult.AngleDeg);
+    _groundSide = _relativeGroundInfo.Side switch
+    {
+      GroundSide.Left => _groundSide.GetPrevious(),
+      GroundSide.Right => _groundSide.GetNext(),
+      _ => _groundSide
+    };
   }
 
   private void RunSensors()
@@ -166,8 +178,8 @@ public class SonicController : MonoBehaviour
         playerState |= PlayerState.Skidding;
       }
 
-      _groundInfo.Update(_sonicSensorSystem.ABResult.AngleDeg);
-      if (_groundInfo.RangeId == GroundRangeId.Steep
+      _relativeGroundInfo.Update(_sonicSensorSystem.ABResult.AngleDeg);
+      if (_relativeGroundInfo.RangeId == GroundRangeId.Steep
         && Mathf.Abs(_playerSpeedManager.GroundSpeed) < DecelerationSpeed)
       {
         playerState |= PlayerState.LockedInput;
@@ -189,12 +201,12 @@ public class SonicController : MonoBehaviour
     }
   }
 
-  public void SetSpeed()
+  private void SetSpeed()
   {
     _playerSpeedManager.SetSpeed(_playerState, PlayerSpeedInput);
   }
 
-  public void UpdateView()
+  private void UpdateView()
   {
     _playerViewManager.Update(_playerState, PlayerViewInput);
   }
