@@ -27,6 +27,17 @@ public class PlayerViewManager
 
   private void RotateSprite(PlayerViewInput input)
   {
+    var spriteAngle = input.GroundSide switch
+    {
+      GroundSide.Down => 0f,
+      GroundSide.Right => 90f,
+      GroundSide.Up => 180f,
+      GroundSide.Left => -90f,
+      _ => throw input.ArgumentOutOfRangeException()
+    };
+
+    _spriteRenderer.transform.localRotation = Quaternion.Euler(0f, 0f, spriteAngle);
+
     if (input.IsSkidding)
     {
       return;
