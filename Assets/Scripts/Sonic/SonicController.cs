@@ -225,20 +225,14 @@ public class SonicController : MonoBehaviour
     }
 
     // Speed X, Y - offsets in units per frame.
-    switch (_groundSide)
+    transform.position += _groundSide switch
     {
-      case GroundSide.Down:
-        transform.position += new Vector3(speedX, speedY);
-        break;
-      case GroundSide.Left:
-        break;
-      case GroundSide.Right:
-        transform.position += new Vector3(-speedY, speedX);
-        break;
-      case GroundSide.Up:
-        break;
-      default: throw _groundSide.ArgumentOutOfRangeException();
-    }
+      GroundSide.Down => new Vector3(speedX, speedY),
+      GroundSide.Right => new Vector3(-speedY, speedX),
+      GroundSide.Up => new Vector3(-speedX, -speedY),
+      GroundSide.Left => new Vector3(speedY, -speedX),
+      _ => throw _groundSide.ArgumentOutOfRangeException(),
+    };
   }
 
   private void InitAudio()

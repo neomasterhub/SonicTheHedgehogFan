@@ -65,6 +65,24 @@ public static class SonicConsts
           [SensorId.E] = new(new(-Sizes.Big.VRadius, -Sizes.Big.HRadius), Vector2.left),
           [SensorId.F] = new(new(-Sizes.Big.VRadius, Sizes.Big.HRadius), Vector2.left),
         },
+        [GroundSide.Up] = new()
+        {
+          [SensorId.F] = new(new(-Sizes.Big.HRadius, -Sizes.Big.VRadius), Vector2.down),
+          [SensorId.E] = new(new(Sizes.Big.HRadius, -Sizes.Big.VRadius), Vector2.down),
+          [SensorId.D] = new(new(-Sizes.Big.HRadius, 0), Vector2.left),
+          [SensorId.C] = new(new(Sizes.Big.HRadius, 0), Vector2.right),
+          [SensorId.B] = new(new(-Sizes.Big.HRadius, Sizes.Big.VRadius), Vector2.up),
+          [SensorId.A] = new(new(Sizes.Big.HRadius, Sizes.Big.VRadius), Vector2.up),
+        },
+        [GroundSide.Left] = new()
+        {
+          [SensorId.F] = new(new(Sizes.Big.VRadius, -Sizes.Big.HRadius), Vector2.right),
+          [SensorId.E] = new(new(Sizes.Big.VRadius, Sizes.Big.HRadius), Vector2.right),
+          [SensorId.D] = new(new(0, -Sizes.Big.HRadius), Vector2.down),
+          [SensorId.C] = new(new(0, Sizes.Big.HRadius), Vector2.up),
+          [SensorId.B] = new(new(-Sizes.Big.VRadius, -Sizes.Big.HRadius), Vector2.left),
+          [SensorId.A] = new(new(-Sizes.Big.VRadius, Sizes.Big.HRadius), Vector2.left),
+        },
       },
     };
   }
