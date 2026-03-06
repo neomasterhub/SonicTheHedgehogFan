@@ -89,6 +89,7 @@ public class SonicController : MonoBehaviour
     TopSpeed = TopSpeed,
     MinAnimatorWalkingSpeed = MinAnimatorWalkingSpeed,
     AnimatorWalkingSpeedFactor = AnimatorWalkingSpeedFactor,
+    GroundSide = _groundSide,
   };
 
   private void Awake()
