@@ -20,33 +20,14 @@ public class SonicSensorSystem
 
   public void ApplyAB(
     LayerMask groundLayer,
-    float sensorLength)
+    float sensorLength,
+    float reversedSensorLength)
   {
     var a = Sensors[SensorId.A];
     var b = Sensors[SensorId.B];
 
-    var sensorsDirectionSign = 1;
-    var aHit = Physics2D.Raycast(a.Begin, a.Direction, float.PositiveInfinity, groundLayer);
-    var bHit = Physics2D.Raycast(b.Begin, b.Direction, float.PositiveInfinity, groundLayer);
-
-    if (!aHit && !bHit)
-    {
-      sensorsDirectionSign = -1;
-      aHit = Physics2D.Raycast(a.Begin, -a.Direction, float.PositiveInfinity, groundLayer);
-      bHit = Physics2D.Raycast(b.Begin, -b.Direction, float.PositiveInfinity, groundLayer);
-    }
-
-    if (!aHit && !bHit)
-    {
-      _abResult.Reset();
-      return;
-    }
-
-    var hit = aHit && bHit
-      ? (aHit.distance < bHit.distance ? aHit : bHit)
-      : (aHit ? aHit : bHit);
-
-    _abResult.Set(hit, a.Direction, sensorsDirectionSign, sensorLength);
+    var aHit = Physics2D.Raycast(a.Begin, a.Direction, sensorLength, groundLayer);
+    var bHit = Physics2D.Raycast(b.Begin, b.Direction, sensorLength, groundLayer);
   }
 
   public void Update(

@@ -161,7 +161,7 @@ public class SonicController : MonoBehaviour
   private void RunSensors()
   {
     _sonicSensorSystem.Update(transform.position, _sonicSizeMode, _groundSide, ABSensorLength);
-    _sonicSensorSystem.ApplyAB(GroundLayer, ABSensorLength);
+    _sonicSensorSystem.ApplyAB(GroundLayer, ABSensorLength, ReversedABSensorLength);
   }
 
   private void UpdateState()
