@@ -28,6 +28,14 @@ public class SonicSensorSystem
 
     var aHit = Physics2D.Raycast(a.Begin, a.Direction, sensorLength, groundLayer);
     var bHit = Physics2D.Raycast(b.Begin, b.Direction, sensorLength, groundLayer);
+
+    if (aHit && bHit)
+    {
+      _abResult.Set(aHit.distance < bHit.distance ? aHit : bHit, a.Direction, 1, sensorLength);
+      return;
+    }
+
+    _abResult.Reset();
   }
 
   public void Update(
