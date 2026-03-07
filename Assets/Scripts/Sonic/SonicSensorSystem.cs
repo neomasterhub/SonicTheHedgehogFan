@@ -44,6 +44,30 @@ public class SonicSensorSystem
       return;
     }
 
+    if (raHit)
+    {
+      _abResult.Set(raHit, -a.Direction, -1, reversedSensorLength);
+      return;
+    }
+
+    if (rbHit)
+    {
+      _abResult.Set(rbHit, -b.Direction, -1, reversedSensorLength);
+      return;
+    }
+
+    if (aHit)
+    {
+      _abResult.Set(aHit, a.Direction, 1, sensorLength);
+      return;
+    }
+
+    if (bHit)
+    {
+      _abResult.Set(bHit, b.Direction, 1, sensorLength);
+      return;
+    }
+
     _abResult.Reset();
   }
 
