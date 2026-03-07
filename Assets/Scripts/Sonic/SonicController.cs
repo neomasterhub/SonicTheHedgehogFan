@@ -46,8 +46,8 @@ public class SonicController : MonoBehaviour
   public float GravityUpSpeed = SonicConsts.Physics.GravityUp;
   public float GravityDownSpeed = SonicConsts.Physics.GravityDown;
   public float SlopeFactor = SonicConsts.Physics.SlopeFactor;
-  public float ABSensorLength = SonicConsts.Sensors.Length;
-  public float ReversedABSensorLength = SonicConsts.Sensors.Length;
+  public float ABSensorLength = 0.1f;
+  public float ReversedABSensorLength = 0.4f;
   public float InputDeadZone = 0.001f;
   public bool GravityDownEnabled = true;
 
@@ -57,7 +57,7 @@ public class SonicController : MonoBehaviour
   /// <summary>
   /// Keeps surface normal aligned with slope.
   /// </summary>
-  public float GroundPositionOffset = SonicConsts.Sensors.Length / 2;
+  public float GroundPositionOffset = 0.05f; // ABSensorLength / 2
 
   [Header("UI")]
   public float GroundNormalLength = 1.5f;

@@ -31,8 +31,6 @@ public static class SonicConsts
 
   public static class Sensors
   {
-    public const float Length = 0.1f;
-
     public static readonly Dictionary<SensorId, Color> Colors = new()
     {
       [SensorId.A] = Color.yellow,
