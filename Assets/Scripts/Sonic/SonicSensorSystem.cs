@@ -35,6 +35,15 @@ public class SonicSensorSystem
       return;
     }
 
+    var raHit = Physics2D.Raycast(a.Begin, -a.Direction, reversedSensorLength, groundLayer);
+    var rbHit = Physics2D.Raycast(b.Begin, -b.Direction, reversedSensorLength, groundLayer);
+
+    if (raHit && rbHit)
+    {
+      _abResult.Set(raHit.distance > rbHit.distance ? raHit : rbHit, -a.Direction, -1, reversedSensorLength);
+      return;
+    }
+
     _abResult.Reset();
   }
 

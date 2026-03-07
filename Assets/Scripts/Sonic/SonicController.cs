@@ -126,7 +126,7 @@ public class SonicController : MonoBehaviour
   private void FixedUpdate()
   {
     UpdateInput();
-    SetGroundSide();
+    //SetGroundSide();
     RunSensors();
     UpdateState();
     EnableInput();
