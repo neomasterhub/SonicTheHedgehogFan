@@ -51,14 +51,16 @@ public class SonicSensorSystem
     Vector2 parent,
     SonicSizeMode sonicSizeMode,
     GroundSide groundSide,
-    float length)
+    float sensorLength,
+    float reversedSensorLength)
   {
     foreach (var sensor in SonicConsts.Sensors.Offsets[sonicSizeMode][groundSide])
     {
       Sensors[sensor.Key].Update(
         sensor.Value,
         parent,
-        length,
+        sensorLength,
+        reversedSensorLength,
         SonicConsts.Sensors.Colors[sensor.Key]);
     }
   }

@@ -47,7 +47,7 @@ public class SonicController : MonoBehaviour
   public float GravityDownSpeed = SonicConsts.Physics.GravityDown;
   public float SlopeFactor = SonicConsts.Physics.SlopeFactor;
   public float ABSensorLength = 0.1f;
-  public float ReversedABSensorLength = 0.4f;
+  public float ReversedABSensorLength = 0.2f;
   public float InputDeadZone = 0.001f;
   public bool GravityDownEnabled = true;
 
@@ -139,7 +139,7 @@ public class SonicController : MonoBehaviour
   private void OnDrawGizmos()
   {
     _sonicSensorSystem.DrawSensors(SensorBeginRadius, SensorEndRadius);
-    _sonicSensorSystem.DrawGroundNormal(GroundNormalLength, SensorBeginRadius, SensorEndRadius);
+    _sonicSensorSystem.DrawGroundNormal(GroundNormalLength, SensorBeginRadius, SensorEndRadius, Color.brown);
   }
 
   private void UpdateInput()
@@ -160,7 +160,7 @@ public class SonicController : MonoBehaviour
 
   private void RunSensors()
   {
-    _sonicSensorSystem.Update(transform.position, _sonicSizeMode, _groundSide, ABSensorLength);
+    _sonicSensorSystem.Update(transform.position, _sonicSizeMode, _groundSide, ABSensorLength, ReversedABSensorLength);
     _sonicSensorSystem.ApplyAB(GroundLayer, ABSensorLength, ReversedABSensorLength);
   }
 
