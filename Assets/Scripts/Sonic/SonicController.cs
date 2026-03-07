@@ -46,6 +46,8 @@ public class SonicController : MonoBehaviour
   public float GravityUpSpeed = SonicConsts.Physics.GravityUp;
   public float GravityDownSpeed = SonicConsts.Physics.GravityDown;
   public float SlopeFactor = SonicConsts.Physics.SlopeFactor;
+  public float ABSensorLength = 0.1f;
+  public float ReversedABSensorLength = 0.2f;
   public float InputDeadZone = 0.001f;
   public bool GravityDownEnabled = true;
 
@@ -55,11 +57,10 @@ public class SonicController : MonoBehaviour
   /// <summary>
   /// Keeps surface normal aligned with slope.
   /// </summary>
-  public float GroundPositionOffset = SonicConsts.Sensors.Length / 2;
+  public float GroundPositionOffset = 0.05f; // ABSensorLength / 2
 
   [Header("UI")]
   public float GroundNormalLength = 1.5f;
-  public float SensorLength = SonicConsts.Sensors.Length;
   public float SensorBeginRadius = 0.03f;
   public float SensorEndRadius = 0.01f;
 
@@ -67,7 +68,6 @@ public class SonicController : MonoBehaviour
   {
     DistanceToGround = _sonicSensorSystem.ABResult.Distance,
     GroundAngleRad = _sonicSensorSystem.ABResult.AngleRad,
-    GroundSensorLength = SensorLength,
     TopSpeed = TopSpeed,
     FrictionSpeed = FrictionSpeed,
     AccelerationSpeed = AccelerationSpeed,
@@ -126,7 +126,7 @@ public class SonicController : MonoBehaviour
   private void FixedUpdate()
   {
     UpdateInput();
-    SetGroundSide();
+    //SetGroundSide();
     RunSensors();
     UpdateState();
     EnableInput();
@@ -139,7 +139,7 @@ public class SonicController : MonoBehaviour
   private void OnDrawGizmos()
   {
     _sonicSensorSystem.DrawSensors(SensorBeginRadius, SensorEndRadius);
-    _sonicSensorSystem.DrawGroundNormal(GroundNormalLength, SensorBeginRadius, SensorEndRadius);
+    _sonicSensorSystem.DrawGroundNormal(GroundNormalLength, SensorBeginRadius, SensorEndRadius, Color.brown);
   }
 
   private void UpdateInput()
@@ -160,8 +160,8 @@ public class SonicController : MonoBehaviour
 
   private void RunSensors()
   {
-    _sonicSensorSystem.Update(transform.position, _sonicSizeMode, _groundSide, SensorLength);
-    _sonicSensorSystem.ApplyAB(GroundLayer, SensorLength);
+    _sonicSensorSystem.Update(transform.position, _sonicSizeMode, _groundSide, ABSensorLength, ReversedABSensorLength);
+    _sonicSensorSystem.ApplyAB(GroundLayer, ABSensorLength, ReversedABSensorLength);
   }
 
   private void UpdateState()

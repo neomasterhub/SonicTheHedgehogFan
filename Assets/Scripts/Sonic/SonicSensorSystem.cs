@@ -20,47 +20,71 @@ public class SonicSensorSystem
 
   public void ApplyAB(
     LayerMask groundLayer,
-    float sensorLength)
+    float sensorLength,
+    float reversedSensorLength)
   {
     var a = Sensors[SensorId.A];
     var b = Sensors[SensorId.B];
 
-    var sensorsDirectionSign = 1;
-    var aHit = Physics2D.Raycast(a.Begin, a.Direction, float.PositiveInfinity, groundLayer);
-    var bHit = Physics2D.Raycast(b.Begin, b.Direction, float.PositiveInfinity, groundLayer);
+    var aHit = Physics2D.Raycast(a.Begin, a.Direction, sensorLength, groundLayer);
+    var bHit = Physics2D.Raycast(b.Begin, b.Direction, sensorLength, groundLayer);
 
-    if (!aHit && !bHit)
+    if (aHit && bHit)
     {
-      sensorsDirectionSign = -1;
-      aHit = Physics2D.Raycast(a.Begin, -a.Direction, float.PositiveInfinity, groundLayer);
-      bHit = Physics2D.Raycast(b.Begin, -b.Direction, float.PositiveInfinity, groundLayer);
-    }
-
-    if (!aHit && !bHit)
-    {
-      _abResult.Reset();
+      _abResult.Set(aHit.distance < bHit.distance ? aHit : bHit, a.Direction, 1, sensorLength);
       return;
     }
 
-    var hit = aHit && bHit
-      ? (aHit.distance < bHit.distance ? aHit : bHit)
-      : (aHit ? aHit : bHit);
+    var raHit = Physics2D.Raycast(a.Begin, -a.Direction, reversedSensorLength, groundLayer);
+    var rbHit = Physics2D.Raycast(b.Begin, -b.Direction, reversedSensorLength, groundLayer);
 
-    _abResult.Set(hit, a.Direction, sensorsDirectionSign, sensorLength);
+    if (raHit && rbHit)
+    {
+      _abResult.Set(raHit.distance > rbHit.distance ? raHit : rbHit, -a.Direction, -1, reversedSensorLength);
+      return;
+    }
+
+    if (raHit)
+    {
+      _abResult.Set(raHit, -a.Direction, -1, reversedSensorLength);
+      return;
+    }
+
+    if (rbHit)
+    {
+      _abResult.Set(rbHit, -b.Direction, -1, reversedSensorLength);
+      return;
+    }
+
+    if (aHit)
+    {
+      _abResult.Set(aHit, a.Direction, 1, sensorLength);
+      return;
+    }
+
+    if (bHit)
+    {
+      _abResult.Set(bHit, b.Direction, 1, sensorLength);
+      return;
+    }
+
+    _abResult.Reset();
   }
 
   public void Update(
     Vector2 parent,
     SonicSizeMode sonicSizeMode,
     GroundSide groundSide,
-    float length)
+    float sensorLength,
+    float reversedSensorLength)
   {
     foreach (var sensor in SonicConsts.Sensors.Offsets[sonicSizeMode][groundSide])
     {
       Sensors[sensor.Key].Update(
         sensor.Value,
         parent,
-        length,
+        sensorLength,
+        reversedSensorLength,
         SonicConsts.Sensors.Colors[sensor.Key]);
     }
   }
