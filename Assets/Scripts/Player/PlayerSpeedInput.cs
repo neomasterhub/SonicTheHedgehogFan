@@ -3,7 +3,6 @@ public struct PlayerSpeedInput
   // Sensor Result
   public float DistanceToGround;
   public float GroundAngleRad;
-  public float GroundSensorLength;
 
   // Ground
   public float TopSpeed;

@@ -46,6 +46,8 @@ public class SonicController : MonoBehaviour
   public float GravityUpSpeed = SonicConsts.Physics.GravityUp;
   public float GravityDownSpeed = SonicConsts.Physics.GravityDown;
   public float SlopeFactor = SonicConsts.Physics.SlopeFactor;
+  public float ABSensorLength = SonicConsts.Sensors.Length;
+  public float ReversedABSensorLength = SonicConsts.Sensors.Length;
   public float InputDeadZone = 0.001f;
   public bool GravityDownEnabled = true;
 
@@ -59,7 +61,6 @@ public class SonicController : MonoBehaviour
 
   [Header("UI")]
   public float GroundNormalLength = 1.5f;
-  public float SensorLength = SonicConsts.Sensors.Length;
   public float SensorBeginRadius = 0.03f;
   public float SensorEndRadius = 0.01f;
 
@@ -67,7 +68,6 @@ public class SonicController : MonoBehaviour
   {
     DistanceToGround = _sonicSensorSystem.ABResult.Distance,
     GroundAngleRad = _sonicSensorSystem.ABResult.AngleRad,
-    GroundSensorLength = SensorLength,
     TopSpeed = TopSpeed,
     FrictionSpeed = FrictionSpeed,
     AccelerationSpeed = AccelerationSpeed,
@@ -160,8 +160,8 @@ public class SonicController : MonoBehaviour
 
   private void RunSensors()
   {
-    _sonicSensorSystem.Update(transform.position, _sonicSizeMode, _groundSide, SensorLength);
-    _sonicSensorSystem.ApplyAB(GroundLayer, SensorLength);
+    _sonicSensorSystem.Update(transform.position, _sonicSizeMode, _groundSide, ABSensorLength);
+    _sonicSensorSystem.ApplyAB(GroundLayer, ABSensorLength);
   }
 
   private void UpdateState()
