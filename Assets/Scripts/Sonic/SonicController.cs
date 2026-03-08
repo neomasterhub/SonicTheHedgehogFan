@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor.Animations;
@@ -126,7 +127,7 @@ public class SonicController : MonoBehaviour
   private void FixedUpdate()
   {
     UpdateInput();
-    //SetGroundSide();
+    SetGroundSide();
     RunSensors();
     UpdateState();
     EnableInput();
@@ -226,7 +227,7 @@ public class SonicController : MonoBehaviour
     }
 
     // Speed X, Y - offsets in units per frame.
-    transform.position += _groundSide switch
+    var pos = transform.position + _groundSide switch
     {
       GroundSide.Down => new Vector3(speedX, speedY),
       GroundSide.Right => new Vector3(-speedY, speedX),
@@ -234,6 +235,11 @@ public class SonicController : MonoBehaviour
       GroundSide.Left => new Vector3(speedY, -speedX),
       _ => throw _groundSide.ArgumentOutOfRangeException(),
     };
+
+    transform.position = new Vector3(
+      MathF.Round(pos.x, 3),
+      MathF.Round(pos.y, 3),
+      transform.position.z);
   }
 
   private void InitAudio()
