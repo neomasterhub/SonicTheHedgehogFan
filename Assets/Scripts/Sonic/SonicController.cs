@@ -8,28 +8,34 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class SonicController : MonoBehaviour
 {
-  private readonly TimerManager _timerManager = new();
-  private readonly SonicSensorSystem _sonicSensorSystem = new();
   private readonly RelativeGroundInfo _relativeGroundInfo = new();
+  private readonly SlopeFactorSpeedProvider _slopeFactorSpeedProvider = new(new()
+  {
+    [GroundSide.Up] = (_, _) => 0,
+    [GroundSide.Down] = (factor, groundAngleRad) => factor * MathF.Sin(groundAngleRad),
+    [GroundSide.Right] = (factor, groundAngleRad) => groundAngleRad >= 0 ? factor : factor * MathF.Cos(groundAngleRad),
+    [GroundSide.Left] = (factor, groundAngleRad) => groundAngleRad <= 0 ? factor : factor * MathF.Cos(groundAngleRad),
+  });
+  private readonly SonicSensorSystem _sonicSensorSystem = new();
+  private readonly TimerManager _timerManager = new();
 
   // Components
   private Animator _animator;
   private SpriteRenderer _spriteRenderer;
 
-  // Managers
-  private InputInfo _inputInfo;
-  private Timer _inputLockTimer;
-  private PlayerSpeedManager _playerSpeedManager;
-  private PlayerViewManager _playerViewManager;
-
-  // States
+  // State flags
   private GroundSide _groundSide = GroundSide.Down;
   private PlayerState _playerState = PlayerState.Grounded;
   private SonicSizeMode _sonicSizeMode = SonicSizeMode.Big;
 
   // Audio
-  private Timer _sfxSkiddingTimer;
   private AudioSource _sfxSkidding;
+  private Timer _sfxSkiddingTimer;
+
+  private InputInfo _inputInfo;
+  private Timer _inputLockTimer;
+  private PlayerSpeedManager _playerSpeedManager;
+  private PlayerViewManager _playerViewManager;
 
   [Header("Animations")]
   public float MinAnimatorWalkingSpeed = 0.5f;
@@ -121,7 +127,7 @@ public class SonicController : MonoBehaviour
       })
       .WhenCompleted(() => _inputInfo.Enabled = true);
 
-    _playerSpeedManager = new PlayerSpeedManager(_inputInfo);
+    _playerSpeedManager = new PlayerSpeedManager(_inputInfo, _slopeFactorSpeedProvider);
 
     _playerViewManager = new PlayerViewManager(
       _animator,

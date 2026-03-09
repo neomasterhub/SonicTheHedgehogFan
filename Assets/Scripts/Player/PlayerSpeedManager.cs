@@ -4,13 +4,15 @@ using UnityEngine;
 public class PlayerSpeedManager
 {
   private readonly InputInfo _inputInfo;
+  private readonly SlopeFactorSpeedProvider _slopeFactorSpeedProvider;
 
   private float _groundSpeed;
   private bool _isSkidding;
 
-  public PlayerSpeedManager(InputInfo inputInfo)
+  public PlayerSpeedManager(InputInfo inputInfo, SlopeFactorSpeedProvider slopeFactorSpeedProvider)
   {
     _inputInfo = inputInfo;
+    _slopeFactorSpeedProvider = slopeFactorSpeedProvider;
   }
 
   public float SpeedX { get; private set; }
@@ -106,15 +108,7 @@ public class PlayerSpeedManager
 
   private void SetSpeed_Grounded_Slope(PlayerSpeedInput input)
   {
-    var slopeSpeed = input.GroundSide switch
-    {
-      GroundSide.Up => 0,
-      GroundSide.Down => input.SlopeFactor * MathF.Sin(input.GroundAngleRad),
-      GroundSide.Right => input.GroundAngleRad >= 0 ? input.SlopeFactor : input.SlopeFactor * MathF.Cos(input.GroundAngleRad),
-      _ => throw input.GroundSide.ArgumentOutOfRangeException(),
-    };
-
-    _groundSpeed -= slopeSpeed;
+    _groundSpeed -= _slopeFactorSpeedProvider[input.GroundSide](input.SlopeFactor, input.GroundAngleRad);
   }
 
   private void SetSpeed_Grounded_Forward(PlayerSpeedInput input)
