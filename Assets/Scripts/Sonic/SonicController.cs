@@ -8,9 +8,16 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class SonicController : MonoBehaviour
 {
-  private readonly TimerManager _timerManager = new();
-  private readonly SonicSensorSystem _sonicSensorSystem = new();
   private readonly RelativeGroundInfo _relativeGroundInfo = new();
+  private readonly SlopeFactorSpeedProvider _slopeFactorSpeedProvider = new(new()
+  {
+    [GroundSide.Up] = (_, _) => 0,
+    [GroundSide.Down] = (factor, groundAngleRad) => factor * MathF.Sin(groundAngleRad),
+    [GroundSide.Right] = (factor, groundAngleRad) => groundAngleRad >= 0 ? factor : factor * MathF.Cos(groundAngleRad),
+    [GroundSide.Left] = (factor, groundAngleRad) => groundAngleRad <= 0 ? factor : factor * MathF.Cos(groundAngleRad),
+  });
+  private readonly SonicSensorSystem _sonicSensorSystem = new();
+  private readonly TimerManager _timerManager = new();
 
   // Components
   private Animator _animator;
