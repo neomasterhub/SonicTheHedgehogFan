@@ -106,7 +106,13 @@ public class PlayerSpeedManager
 
   private void SetSpeed_Grounded_Slope(PlayerSpeedInput input)
   {
-    var slopeSpeed = input.SlopeFactor * MathF.Cos(input.GroundAngleRad);
+    var slopeSpeed = input.GroundSide switch
+    {
+      GroundSide.Up => 0,
+      GroundSide.Down => input.SlopeFactor * MathF.Sin(input.GroundAngleRad),
+      GroundSide.Right => input.GroundAngleRad >= 0 ? input.SlopeFactor : input.SlopeFactor * MathF.Cos(input.GroundAngleRad),
+      _ => throw input.GroundSide.ArgumentOutOfRangeException(),
+    };
 
     _groundSpeed -= slopeSpeed;
   }
