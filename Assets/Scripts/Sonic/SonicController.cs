@@ -128,7 +128,7 @@ public class SonicController : MonoBehaviour
       })
       .WhenCompleted(() => _inputInfo.Enabled = true);
 
-    _playerSpeedManager = new PlayerSpeedManager(_inputInfo);
+    _playerSpeedManager = new PlayerSpeedManager(_inputInfo, _slopeFactorSpeedProvider);
 
     _playerViewManager = new PlayerViewManager(
       _animator,
