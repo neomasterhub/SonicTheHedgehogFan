@@ -23,20 +23,19 @@ public class SonicController : MonoBehaviour
   private Animator _animator;
   private SpriteRenderer _spriteRenderer;
 
-  // Managers
-  private InputInfo _inputInfo;
-  private Timer _inputLockTimer;
-  private PlayerSpeedManager _playerSpeedManager;
-  private PlayerViewManager _playerViewManager;
-
-  // States
+  // State flags
   private GroundSide _groundSide = GroundSide.Down;
   private PlayerState _playerState = PlayerState.Grounded;
   private SonicSizeMode _sonicSizeMode = SonicSizeMode.Big;
 
   // Audio
-  private Timer _sfxSkiddingTimer;
   private AudioSource _sfxSkidding;
+  private Timer _sfxSkiddingTimer;
+
+  private InputInfo _inputInfo;
+  private Timer _inputLockTimer;
+  private PlayerSpeedManager _playerSpeedManager;
+  private PlayerViewManager _playerViewManager;
 
   [Header("Animations")]
   public float MinAnimatorWalkingSpeed = 0.5f;
