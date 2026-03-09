@@ -175,20 +175,9 @@ public class SonicController : MonoBehaviour
 
     if (playerState.HasFlag(PlayerState.Grounded))
     {
-      if (_playerSpeedManager.IsSkidding)
-      {
-        playerState |= PlayerState.Skidding;
-      }
-
-      _relativeGroundInfo.Update(_sonicSensorSystem.ABResult.AngleDeg);
-      if (_relativeGroundInfo.RangeId == GroundRangeId.Steep
-        && Mathf.Abs(_playerSpeedManager.GroundSpeed) < DecelerationSpeed)
-      {
-        playerState |= PlayerState.LockedInput;
-      }
     }
 
-    if (playerState == PlayerState.Airborne)
+    if (playerState.HasFlag(PlayerState.Airborne))
     {
     }
 
