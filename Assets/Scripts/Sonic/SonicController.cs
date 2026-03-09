@@ -67,20 +67,28 @@ public class SonicController : MonoBehaviour
 
   private PlayerSpeedInput PlayerSpeedInput => new()
   {
+    // Sensor Result
     DistanceToGround = _sonicSensorSystem.ABResult.Distance,
     GroundAngleRad = _sonicSensorSystem.ABResult.AngleRad,
+
+    // Ground
     TopSpeed = TopSpeed,
     FrictionSpeed = FrictionSpeed,
     AccelerationSpeed = AccelerationSpeed,
     DecelerationSpeed = DecelerationSpeed,
+    SlopeFactor = SlopeFactor,
+    GroundSide = _groundSide,
+
+    // Air
     AirTopSpeed = AirTopSpeed,
     AirAccelerationSpeed = AirAccelerationSpeed,
-    MaxFallSpeed = MaxFallSpeed,
     GravityUpSpeed = GravityUpSpeed,
     GravityDownSpeed = GravityDownSpeed,
-    InputDeadZone = InputDeadZone,
+    MaxFallSpeed = MaxFallSpeed,
     GravityDownEnabled = GravityDownEnabled,
-    SlopeFactor = SlopeFactor,
+
+    // Dead Zones
+    InputDeadZone = InputDeadZone,
     SkiddingSpeedDeadZone = SkiddingSpeedDeadZone,
   };
 
@@ -175,20 +183,9 @@ public class SonicController : MonoBehaviour
 
     if (playerState.HasFlag(PlayerState.Grounded))
     {
-      if (_playerSpeedManager.IsSkidding)
-      {
-        playerState |= PlayerState.Skidding;
-      }
-
-      _relativeGroundInfo.Update(_sonicSensorSystem.ABResult.AngleDeg);
-      if (_relativeGroundInfo.RangeId == GroundRangeId.Steep
-        && Mathf.Abs(_playerSpeedManager.GroundSpeed) < DecelerationSpeed)
-      {
-        playerState |= PlayerState.LockedInput;
-      }
     }
 
-    if (playerState == PlayerState.Airborne)
+    if (playerState.HasFlag(PlayerState.Airborne))
     {
     }
 
