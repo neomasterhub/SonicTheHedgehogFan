@@ -10,10 +10,11 @@ public struct PlayerSpeedInput
   public float AccelerationSpeed;
   public float DecelerationSpeed;
   public float SlopeFactor;
+  public GroundSide GroundSide;
 
   // Air
-  public float AirAccelerationSpeed;
   public float AirTopSpeed;
+  public float AirAccelerationSpeed;
   public float GravityUpSpeed;
   public float GravityDownSpeed;
   public float MaxFallSpeed;
