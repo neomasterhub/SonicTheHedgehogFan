@@ -79,20 +79,15 @@ public class PlayerSensorSystemManager
     _abResult.Reset();
   }
 
-  public void Update(
-    Vector2 parent,
-    SizeMode sonicSizeMode,
-    GroundSide groundSide,
-    float sensorLength,
-    float reversedSensorLength)
+  public void Update(PlayerSensorSystemInput input)
   {
-    foreach (var sensor in SonicConsts.Sensors.Offsets[sonicSizeMode][groundSide])
+    foreach (var sensor in SonicConsts.Sensors.Offsets[input.SizeMode][input.GroundSide])
     {
       Sensors[sensor.Key].Update(
         sensor.Value,
-        parent,
-        sensorLength,
-        reversedSensorLength,
+        input.Parent,
+        input.GetSensorLength(sensor.Key),
+        input.GetReversedSensorLength(sensor.Key),
         SonicConsts.Sensors.Colors[sensor.Key]);
     }
   }

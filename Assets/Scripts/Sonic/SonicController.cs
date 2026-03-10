@@ -78,6 +78,7 @@ public class SonicController : MonoBehaviour
   private PlayerSensorSystemInput PlayerSensorSystemInput => new(
     transform.position,
     _playerSizeMode,
+    _groundSide,
     GroundLayer,
     ABSensorLength,
     CDSensorLength,
@@ -191,7 +192,7 @@ public class SonicController : MonoBehaviour
 
   private void RunSensors()
   {
-    _playerSensorSystemManager.Update(transform.position, _playerSizeMode, _groundSide, ABSensorLength, ReversedABSensorLength);
+    _playerSensorSystemManager.Update(PlayerSensorSystemInput);
     _playerSensorSystemManager.ApplyAB(PlayerSensorSystemInput);
   }
 

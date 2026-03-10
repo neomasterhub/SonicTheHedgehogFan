@@ -4,6 +4,7 @@ public readonly struct PlayerSensorSystemInput
 {
   public readonly Vector2 Parent;
   public readonly SizeMode SizeMode;
+  public readonly GroundSide GroundSide;
   public readonly LayerMask GroundLayer;
   public readonly float ABSensorLength;
   public readonly float CDSensorLength;
@@ -13,10 +14,11 @@ public readonly struct PlayerSensorSystemInput
   public readonly float ReversedEFSensorLength;
   public readonly bool HorizontalDirection;
 
-  public PlayerSensorSystemInput(Vector2 parent, SizeMode sizeMode, LayerMask groundLayer, float aBSensorLength, float cDSensorLength, float eFSensorLength, float reversedABSensorLength, float reversedCDSensorLength, float reversedEFSensorLength, bool horizontalDirection)
+  public PlayerSensorSystemInput(Vector2 parent, SizeMode sizeMode, GroundSide groundSide, LayerMask groundLayer, float aBSensorLength, float cDSensorLength, float eFSensorLength, float reversedABSensorLength, float reversedCDSensorLength, float reversedEFSensorLength, bool horizontalDirection)
   {
     Parent = parent;
     SizeMode = sizeMode;
+    GroundSide = groundSide;
     GroundLayer = groundLayer;
     ABSensorLength = aBSensorLength;
     CDSensorLength = cDSensorLength;
