@@ -20,30 +20,30 @@ public class SonicSensorSystem
 
   public void ApplyAB(PlayerSensorSystemInput input)
   {
-    var a = Sensors[SensorId.A];
+    var b = Sensors[SensorId.A];
     var f = Sensors[SensorId.B];
 
-    var aHit = Physics2D.Raycast(a.Begin, a.Direction, input.ABSensorLength, input.GroundLayer);
+    var bHit = Physics2D.Raycast(b.Begin, b.Direction, input.ABSensorLength, input.GroundLayer);
     var fHit = Physics2D.Raycast(f.Begin, f.Direction, input.ABSensorLength, input.GroundLayer);
 
-    if (aHit && fHit)
+    if (bHit && fHit)
     {
-      _abResult.Set(aHit.distance < fHit.distance ? aHit : fHit, a.Direction, 1, input.ABSensorLength);
+      _abResult.Set(bHit.distance < fHit.distance ? bHit : fHit, b.Direction, 1, input.ABSensorLength);
       return;
     }
 
-    var raHit = Physics2D.Raycast(a.Begin, -a.Direction, input.ReversedABSensorLength, input.GroundLayer);
+    var rbHit = Physics2D.Raycast(b.Begin, -b.Direction, input.ReversedABSensorLength, input.GroundLayer);
     var rfHit = Physics2D.Raycast(f.Begin, -f.Direction, input.ReversedABSensorLength, input.GroundLayer);
 
-    if (raHit && rfHit)
+    if (rbHit && rfHit)
     {
-      _abResult.Set(raHit.distance > rfHit.distance ? raHit : rfHit, -a.Direction, -1, input.ReversedABSensorLength);
+      _abResult.Set(rbHit.distance > rfHit.distance ? rbHit : rfHit, -b.Direction, -1, input.ReversedABSensorLength);
       return;
     }
 
-    if (raHit)
+    if (rbHit)
     {
-      _abResult.Set(raHit, -a.Direction, -1, input.ReversedABSensorLength);
+      _abResult.Set(rbHit, -b.Direction, -1, input.ReversedABSensorLength);
       return;
     }
 
@@ -53,9 +53,9 @@ public class SonicSensorSystem
       return;
     }
 
-    if (aHit)
+    if (bHit)
     {
-      _abResult.Set(aHit, a.Direction, 1, input.ABSensorLength);
+      _abResult.Set(bHit, b.Direction, 1, input.ABSensorLength);
       return;
     }
 
