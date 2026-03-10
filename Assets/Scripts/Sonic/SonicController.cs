@@ -228,7 +228,7 @@ public class SonicController : MonoBehaviour
 
   private void UpdateView()
   {
-    _playerViewManager.Update(_playerState, PlayerViewInput);
+    _playerViewManager.Update(PlayerViewInput);
   }
 
   private void UpdatePosition()
