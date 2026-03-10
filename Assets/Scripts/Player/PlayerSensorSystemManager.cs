@@ -81,7 +81,7 @@ public class PlayerSensorSystemManager
 
   public void Update(
     Vector2 parent,
-    SonicSizeMode sonicSizeMode,
+    SizeMode sonicSizeMode,
     GroundSide groundSide,
     float sensorLength,
     float reversedSensorLength)

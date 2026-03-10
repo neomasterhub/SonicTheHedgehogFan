@@ -26,7 +26,7 @@ public class SonicController : MonoBehaviour
   // State flags
   private GroundSide _groundSide = GroundSide.Down;
   private PlayerState _playerState = PlayerState.Grounded;
-  private SonicSizeMode _sonicSizeMode = SonicSizeMode.Big;
+  private SizeMode _playerSizeMode = SizeMode.Big;
 
   // Audio
   private AudioSource _sfxSkidding;
@@ -181,7 +181,7 @@ public class SonicController : MonoBehaviour
 
   private void RunSensors()
   {
-    _playerSensorSystemManager.Update(transform.position, _sonicSizeMode, _groundSide, ABSensorLength, ReversedABSensorLength);
+    _playerSensorSystemManager.Update(transform.position, _playerSizeMode, _groundSide, ABSensorLength, ReversedABSensorLength);
     _playerSensorSystemManager.ApplyAB(PlayerSensorSystemInput);
   }
 
