@@ -2480,7 +2480,11 @@ MonoBehaviour:
   GravityDownSpeed: 0.00546875
   SlopeFactor: 0.003125
   ABSensorLength: 0.1
-  ReversedABSensorLength: 0.4
+  CDSensorLength: 0.1
+  EFSensorLength: 0.1
+  ReversedABSensorLength: 0.3
+  ReversedCDSensorLength: 0.3
+  ReversedEFSensorLength: 0.3
   InputDeadZone: 0.001
   GravityDownEnabled: 1
   GroundLayer:
