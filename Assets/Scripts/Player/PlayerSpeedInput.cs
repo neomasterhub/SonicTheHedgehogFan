@@ -1,5 +1,7 @@
 public readonly struct PlayerSpeedInput
 {
+  public readonly PlayerState PlayerState;
+
   // Sensor Result
   public readonly float DistanceToGround;
   public readonly float GroundAngleRad;
@@ -24,8 +26,9 @@ public readonly struct PlayerSpeedInput
   public readonly float InputDeadZone;
   public readonly float SkiddingSpeedDeadZone;
 
-  public PlayerSpeedInput(float distanceToGround, float groundAngleRad, float topSpeed, float frictionSpeed, float accelerationSpeed, float decelerationSpeed, float slopeFactor, GroundSide groundSide, float airTopSpeed, float airAccelerationSpeed, float gravityUpSpeed, float gravityDownSpeed, float maxFallSpeed, bool gravityDownEnabled, float inputDeadZone, float skiddingSpeedDeadZone)
+  public PlayerSpeedInput(PlayerState playerState, float distanceToGround, float groundAngleRad, float topSpeed, float frictionSpeed, float accelerationSpeed, float decelerationSpeed, float slopeFactor, GroundSide groundSide, float airTopSpeed, float airAccelerationSpeed, float gravityUpSpeed, float gravityDownSpeed, float maxFallSpeed, bool gravityDownEnabled, float inputDeadZone, float skiddingSpeedDeadZone)
   {
+    PlayerState = playerState;
     DistanceToGround = distanceToGround;
     GroundAngleRad = groundAngleRad;
     TopSpeed = topSpeed;

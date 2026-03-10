@@ -89,6 +89,7 @@ public class SonicController : MonoBehaviour
     !_spriteRenderer.flipX);
 
   private PlayerSpeedInput PlayerSpeedInput => new(
+    _playerState,
 
     // Sensor Result
     _playerSensorSystemManager.ABResult.Distance,
@@ -222,7 +223,7 @@ public class SonicController : MonoBehaviour
 
   private void SetSpeed()
   {
-    _playerSpeedManager.SetSpeed(_playerState, PlayerSpeedInput);
+    _playerSpeedManager.SetSpeed(PlayerSpeedInput);
   }
 
   private void UpdateView()
