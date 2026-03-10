@@ -1,8 +1,17 @@
-public struct PlayerViewInput
+public readonly struct PlayerViewInput
 {
-  public bool IsSkidding;
-  public float TopSpeed;
-  public float MinAnimatorWalkingSpeed;
-  public float AnimatorWalkingSpeedFactor;
-  public GroundSide GroundSide;
+  public readonly bool IsSkidding;
+  public readonly float TopSpeed;
+  public readonly float MinAnimatorWalkingSpeed;
+  public readonly float AnimatorWalkingSpeedFactor;
+  public readonly GroundSide GroundSide;
+
+  public PlayerViewInput(bool isSkidding, float topSpeed, float minAnimatorWalkingSpeed, float animatorWalkingSpeedFactor, GroundSide groundSide)
+  {
+    IsSkidding = isSkidding;
+    TopSpeed = topSpeed;
+    MinAnimatorWalkingSpeed = minAnimatorWalkingSpeed;
+    AnimatorWalkingSpeedFactor = animatorWalkingSpeedFactor;
+    GroundSide = groundSide;
+  }
 }

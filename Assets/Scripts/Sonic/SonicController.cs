@@ -88,41 +88,39 @@ public class SonicController : MonoBehaviour
     ReversedEFSensorLength,
     !_spriteRenderer.flipX);
 
-  private PlayerSpeedInput PlayerSpeedInput => new()
-  {
+  private PlayerSpeedInput PlayerSpeedInput => new(
+    _playerState,
+
     // Sensor Result
-    DistanceToGround = _playerSensorSystemManager.ABResult.Distance,
-    GroundAngleRad = _playerSensorSystemManager.ABResult.AngleRad,
+    _playerSensorSystemManager.ABResult.Distance,
+    _playerSensorSystemManager.ABResult.AngleRad,
 
     // Ground
-    TopSpeed = TopSpeed,
-    FrictionSpeed = FrictionSpeed,
-    AccelerationSpeed = AccelerationSpeed,
-    DecelerationSpeed = DecelerationSpeed,
-    SlopeFactor = SlopeFactor,
-    GroundSide = _groundSide,
+    TopSpeed,
+    FrictionSpeed,
+    AccelerationSpeed,
+    DecelerationSpeed,
+    SlopeFactor,
+    _groundSide,
 
     // Air
-    AirTopSpeed = AirTopSpeed,
-    AirAccelerationSpeed = AirAccelerationSpeed,
-    GravityUpSpeed = GravityUpSpeed,
-    GravityDownSpeed = GravityDownSpeed,
-    MaxFallSpeed = MaxFallSpeed,
-    GravityDownEnabled = GravityDownEnabled,
+    AirTopSpeed,
+    AirAccelerationSpeed,
+    GravityUpSpeed,
+    GravityDownSpeed,
+    MaxFallSpeed,
+    GravityDownEnabled,
 
     // Dead Zones
-    InputDeadZone = InputDeadZone,
-    SkiddingSpeedDeadZone = SkiddingSpeedDeadZone,
-  };
+    InputDeadZone,
+    SkiddingSpeedDeadZone);
 
-  private PlayerViewInput PlayerViewInput => new()
-  {
-    IsSkidding = _playerSpeedManager.IsSkidding,
-    TopSpeed = TopSpeed,
-    MinAnimatorWalkingSpeed = MinAnimatorWalkingSpeed,
-    AnimatorWalkingSpeedFactor = AnimatorWalkingSpeedFactor,
-    GroundSide = _groundSide,
-  };
+  private PlayerViewInput PlayerViewInput => new(
+    _playerSpeedManager.IsSkidding,
+    TopSpeed,
+    MinAnimatorWalkingSpeed,
+    AnimatorWalkingSpeedFactor,
+    _groundSide);
 
   private void Awake()
   {
@@ -225,7 +223,7 @@ public class SonicController : MonoBehaviour
 
   private void SetSpeed()
   {
-    _playerSpeedManager.SetSpeed(_playerState, PlayerSpeedInput);
+    _playerSpeedManager.SetSpeed(PlayerSpeedInput);
   }
 
   private void UpdateView()

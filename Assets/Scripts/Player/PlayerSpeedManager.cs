@@ -25,13 +25,13 @@ public class PlayerSpeedManager
     _groundSpeed = 0;
   }
 
-  public void SetSpeed(PlayerState playerState, PlayerSpeedInput input)
+  public void SetSpeed(PlayerSpeedInput input)
   {
-    if (playerState.HasFlag(PlayerState.Airborne))
+    if (input.PlayerState.HasFlag(PlayerState.Airborne))
     {
       SetSpeed_Airborne(input);
     }
-    else if (playerState.HasFlag(PlayerState.Grounded))
+    else if (input.PlayerState.HasFlag(PlayerState.Grounded))
     {
       SetSpeed_Grounded(input);
     }
