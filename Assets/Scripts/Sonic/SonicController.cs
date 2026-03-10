@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEditor.Animations;
 using UnityEngine;
@@ -74,6 +75,9 @@ public class SonicController : MonoBehaviour
   public float GroundNormalLength = 1.5f;
   public float SensorBeginRadius = 0.03f;
   public float SensorEndRadius = 0.01f;
+
+  [Header("Canvas")]
+  public TextMeshProUGUI InfoText;
 
   private PlayerSensorSystemInput PlayerSensorSystemInput => new(
     transform.position,
@@ -155,6 +159,7 @@ public class SonicController : MonoBehaviour
 
   private void FixedUpdate()
   {
+    UpdateInfoText();
     UpdateInput();
     SetGroundSide();
     RunSensors();
@@ -291,5 +296,10 @@ public class SonicController : MonoBehaviour
     {
       _timerManager.RunSingle(_sfxSkiddingTimer);
     }
+  }
+
+  private void UpdateInfoText()
+  {
+    InfoText.SetText("test");
   }
 }
