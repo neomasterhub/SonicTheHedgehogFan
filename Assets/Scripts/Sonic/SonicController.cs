@@ -8,6 +8,7 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class SonicController : MonoBehaviour
 {
+  private readonly PlayerSensorSystemManager _playerSensorSystemManager = new();
   private readonly RelativeGroundInfo _relativeGroundInfo = new();
   private readonly SlopeFactorSpeedProvider _slopeFactorSpeedProvider = new(new()
   {
@@ -16,7 +17,6 @@ public class SonicController : MonoBehaviour
     [GroundSide.Right] = (factor, groundAngleRad) => groundAngleRad >= 0 ? factor : factor * MathF.Cos(groundAngleRad),
     [GroundSide.Left] = (factor, groundAngleRad) => groundAngleRad <= 0 ? factor : factor * MathF.Cos(groundAngleRad),
   });
-  private readonly SonicSensorSystem _sonicSensorSystem = new();
   private readonly TimerManager _timerManager = new();
 
   // Components
@@ -80,8 +80,8 @@ public class SonicController : MonoBehaviour
   private PlayerSpeedInput PlayerSpeedInput => new()
   {
     // Sensor Result
-    DistanceToGround = _sonicSensorSystem.ABResult.Distance,
-    GroundAngleRad = _sonicSensorSystem.ABResult.AngleRad,
+    DistanceToGround = _playerSensorSystemManager.ABResult.Distance,
+    GroundAngleRad = _playerSensorSystemManager.ABResult.AngleRad,
 
     // Ground
     TopSpeed = TopSpeed,
@@ -159,8 +159,8 @@ public class SonicController : MonoBehaviour
 
   private void OnDrawGizmos()
   {
-    _sonicSensorSystem.DrawSensors(SensorBeginRadius, SensorEndRadius);
-    _sonicSensorSystem.DrawGroundNormal(GroundNormalLength, SensorBeginRadius, SensorEndRadius, Color.brown);
+    _playerSensorSystemManager.DrawSensors(SensorBeginRadius, SensorEndRadius);
+    _playerSensorSystemManager.DrawGroundNormal(GroundNormalLength, SensorBeginRadius, SensorEndRadius, Color.brown);
   }
 
   private void UpdateInput()
@@ -170,7 +170,7 @@ public class SonicController : MonoBehaviour
 
   private void SetGroundSide()
   {
-    _relativeGroundInfo.Update(_sonicSensorSystem.ABResult.AngleDeg);
+    _relativeGroundInfo.Update(_playerSensorSystemManager.ABResult.AngleDeg);
     _groundSide = _relativeGroundInfo.Side switch
     {
       GroundSide.Left => _groundSide.GetPrevious(),
@@ -181,15 +181,15 @@ public class SonicController : MonoBehaviour
 
   private void RunSensors()
   {
-    _sonicSensorSystem.Update(transform.position, _sonicSizeMode, _groundSide, ABSensorLength, ReversedABSensorLength);
-    _sonicSensorSystem.ApplyAB(PlayerSensorSystemInput);
+    _playerSensorSystemManager.Update(transform.position, _sonicSizeMode, _groundSide, ABSensorLength, ReversedABSensorLength);
+    _playerSensorSystemManager.ApplyAB(PlayerSensorSystemInput);
   }
 
   private void UpdateState()
   {
     var playerState = PlayerState.None;
 
-    playerState |= _sonicSensorSystem.ABResult.GroundDetected
+    playerState |= _playerSensorSystemManager.ABResult.GroundDetected
       ? PlayerState.Grounded
       : PlayerState.Airborne;
 
@@ -230,8 +230,8 @@ public class SonicController : MonoBehaviour
     // Snap to ground with small upward offset.
     if (_playerState.HasFlag(PlayerState.Grounded))
     {
-      speedY -= (_sonicSensorSystem.ABResult.Distance
-        * _sonicSensorSystem.ABResult.SensorDirectionSign)
+      speedY -= (_playerSensorSystemManager.ABResult.Distance
+        * _playerSensorSystemManager.ABResult.SensorDirectionSign)
         - GroundPositionOffset;
     }
 

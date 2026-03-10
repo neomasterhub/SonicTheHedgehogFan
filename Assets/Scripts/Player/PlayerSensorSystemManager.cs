@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class SonicSensorSystem
+public class PlayerSensorSystemManager
 {
   private ABResult _abResult;
 
-  public SonicSensorSystem()
+  public PlayerSensorSystemManager()
   {
     Sensors = Enum
       .GetValues(typeof(SensorId))
