@@ -209,6 +209,11 @@ public class SonicController : MonoBehaviour
 
     if (playerState.HasFlag(PlayerState.Grounded))
     {
+      if (_relativeGroundInfo.RangeId == GroundRangeId.Steep
+        && Mathf.Abs(_playerSpeedManager.GroundSpeed) < DecelerationSpeed)
+      {
+        playerState |= PlayerState.LockedInput;
+      }
     }
 
     if (playerState.HasFlag(PlayerState.Airborne))
