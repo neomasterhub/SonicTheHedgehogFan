@@ -225,10 +225,7 @@ public class SonicController : MonoBehaviour
 
   private void EnableInput()
   {
-    if (_playerState.HasFlag(PlayerState.LockedInput) && !_inputLockTimer.IsRunning)
-    {
-      _timerManager.RunSingle(_inputLockTimer);
-    }
+    _inputInfo.Enabled = !_playerState.HasFlag(PlayerState.LockedInput);
   }
 
   private void SetSpeed()
@@ -305,6 +302,6 @@ public class SonicController : MonoBehaviour
 
   private void UpdateInfoText()
   {
-    InfoText.SetText("test");
+    InfoText.SetText($"Input Enabled: {_inputInfo.Enabled}");
   }
 }
