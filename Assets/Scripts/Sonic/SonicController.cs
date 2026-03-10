@@ -54,7 +54,11 @@ public class SonicController : MonoBehaviour
   public float GravityDownSpeed = SonicConsts.Physics.GravityDown;
   public float SlopeFactor = SonicConsts.Physics.SlopeFactor;
   public float ABSensorLength = 0.1f;
-  public float ReversedABSensorLength = 0.2f;
+  public float CDSensorLength = 0.1f;
+  public float EFSensorLength = 0.1f;
+  public float ReversedABSensorLength = 0.3f;
+  public float ReversedCDSensorLength = 0.3f;
+  public float ReversedEFSensorLength = 0.3f;
   public float InputDeadZone = 0.001f;
   public bool GravityDownEnabled = true;
 
@@ -76,7 +80,11 @@ public class SonicController : MonoBehaviour
     _playerSizeMode,
     GroundLayer,
     ABSensorLength,
+    CDSensorLength,
+    EFSensorLength,
     ReversedABSensorLength,
+    ReversedCDSensorLength,
+    ReversedEFSensorLength,
     !_spriteRenderer.flipX);
 
   private PlayerSpeedInput PlayerSpeedInput => new()
