@@ -72,6 +72,8 @@ public class SonicController : MonoBehaviour
   public float SensorEndRadius = 0.01f;
 
   private PlayerSensorSystemInput PlayerSensorSystemInput => new(
+    transform.position,
+    _playerSizeMode,
     GroundLayer,
     ABSensorLength,
     ReversedABSensorLength,
