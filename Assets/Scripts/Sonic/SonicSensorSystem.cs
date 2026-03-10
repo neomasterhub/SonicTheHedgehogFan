@@ -18,16 +18,13 @@ public class SonicSensorSystem
   public ABResult ABResult => _abResult;
   public Dictionary<SensorId, SensorInfo> Sensors { get; }
 
-  public void ApplyAB(
-    LayerMask groundLayer,
-    float sensorLength,
-    float reversedSensorLength)
+  public void ApplyAB(PlayerSensorSystemInput input)
   {
     var a = Sensors[SensorId.A];
     var b = Sensors[SensorId.B];
 
-    var aHit = Physics2D.Raycast(a.Begin, a.Direction, sensorLength, groundLayer);
-    var bHit = Physics2D.Raycast(b.Begin, b.Direction, sensorLength, groundLayer);
+    var aHit = Physics2D.Raycast(a.Begin, a.Direction, input.ABSensorLength, input.GroundLayer);
+    var bHit = Physics2D.Raycast(b.Begin, b.Direction, input.ABSensorLength, input.GroundLayer);
 
     if (aHit && bHit)
     {
@@ -35,8 +32,8 @@ public class SonicSensorSystem
       return;
     }
 
-    var raHit = Physics2D.Raycast(a.Begin, -a.Direction, reversedSensorLength, groundLayer);
-    var rbHit = Physics2D.Raycast(b.Begin, -b.Direction, reversedSensorLength, groundLayer);
+    var raHit = Physics2D.Raycast(a.Begin, -a.Direction, input.ReversedABSensorLength, input.GroundLayer);
+    var rbHit = Physics2D.Raycast(b.Begin, -b.Direction, input.ReversedABSensorLength, input.GroundLayer);
 
     if (raHit && rbHit)
     {

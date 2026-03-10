@@ -182,7 +182,7 @@ public class SonicController : MonoBehaviour
   private void RunSensors()
   {
     _sonicSensorSystem.Update(transform.position, _sonicSizeMode, _groundSide, ABSensorLength, ReversedABSensorLength);
-    _sonicSensorSystem.ApplyAB(GroundLayer, ABSensorLength, ReversedABSensorLength);
+    _sonicSensorSystem.ApplyAB(PlayerSensorSystemInput);
   }
 
   private void UpdateState()
