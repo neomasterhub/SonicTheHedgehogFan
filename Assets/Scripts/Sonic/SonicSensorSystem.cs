@@ -28,7 +28,7 @@ public class SonicSensorSystem
 
     if (aHit && bHit)
     {
-      _abResult.Set(aHit.distance < bHit.distance ? aHit : bHit, a.Direction, 1, sensorLength);
+      _abResult.Set(aHit.distance < bHit.distance ? aHit : bHit, a.Direction, 1, input.ABSensorLength);
       return;
     }
 
@@ -37,31 +37,31 @@ public class SonicSensorSystem
 
     if (raHit && rbHit)
     {
-      _abResult.Set(raHit.distance > rbHit.distance ? raHit : rbHit, -a.Direction, -1, reversedSensorLength);
+      _abResult.Set(raHit.distance > rbHit.distance ? raHit : rbHit, -a.Direction, -1, input.ReversedABSensorLength);
       return;
     }
 
     if (raHit)
     {
-      _abResult.Set(raHit, -a.Direction, -1, reversedSensorLength);
+      _abResult.Set(raHit, -a.Direction, -1, input.ReversedABSensorLength);
       return;
     }
 
     if (rbHit)
     {
-      _abResult.Set(rbHit, -b.Direction, -1, reversedSensorLength);
+      _abResult.Set(rbHit, -b.Direction, -1, input.ReversedABSensorLength);
       return;
     }
 
     if (aHit)
     {
-      _abResult.Set(aHit, a.Direction, 1, sensorLength);
+      _abResult.Set(aHit, a.Direction, 1, input.ABSensorLength);
       return;
     }
 
     if (bHit)
     {
-      _abResult.Set(bHit, b.Direction, 1, sensorLength);
+      _abResult.Set(bHit, b.Direction, 1, input.ABSensorLength);
       return;
     }
 
