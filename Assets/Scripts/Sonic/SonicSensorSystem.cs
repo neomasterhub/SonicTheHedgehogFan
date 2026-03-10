@@ -20,15 +20,26 @@ public class SonicSensorSystem
 
   public void ApplyAB(PlayerSensorSystemInput input)
   {
-    var b = Sensors[SensorId.A];
-    var f = Sensors[SensorId.B];
+    SensorInfo b; // back
+    SensorInfo f; // front
+
+    if (input.HorizontalDirection)
+    {
+      b = Sensors[SensorId.A];
+      f = Sensors[SensorId.B];
+    }
+    else
+    {
+      b = Sensors[SensorId.B];
+      f = Sensors[SensorId.A];
+    }
 
     var bHit = Physics2D.Raycast(b.Begin, b.Direction, input.ABSensorLength, input.GroundLayer);
     var fHit = Physics2D.Raycast(f.Begin, f.Direction, input.ABSensorLength, input.GroundLayer);
 
     if (bHit && fHit)
     {
-      _abResult.Set(bHit.distance < fHit.distance ? bHit : fHit, b.Direction, 1, input.ABSensorLength);
+      _abResult.Set(bHit.distance <= fHit.distance ? bHit : fHit, b.Direction, 1, input.ABSensorLength);
       return;
     }
 
@@ -37,7 +48,7 @@ public class SonicSensorSystem
 
     if (rbHit && rfHit)
     {
-      _abResult.Set(rbHit.distance > rfHit.distance ? rbHit : rfHit, -b.Direction, -1, input.ReversedABSensorLength);
+      _abResult.Set(rbHit.distance >= rfHit.distance ? rbHit : rfHit, -b.Direction, -1, input.ReversedABSensorLength);
       return;
     }
 
