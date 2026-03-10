@@ -19,7 +19,7 @@ public class PlayerViewManager
     _spriteRenderer = spriteRenderer;
   }
 
-  public void Update(PlayerState playerState, PlayerViewInput input)
+  public void Update(PlayerViewInput input)
   {
     RotateSprite(input);
     UpdateAnimator(input);
