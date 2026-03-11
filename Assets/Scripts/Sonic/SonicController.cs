@@ -136,7 +136,7 @@ public class SonicController : MonoBehaviour
     _spriteRenderer = GetComponent<SpriteRenderer>();
 
     _inputInfo = new InputInfo(
-      () => Input.GetAxis(Consts.InputAxis.Horizontal),
+      () => 1,
       () => Input.GetAxis(Consts.InputAxis.Vertical));
 
     _inputLockTimer = new Timer(SonicConsts.Times.InputLockSeconds)
@@ -210,10 +210,16 @@ public class SonicController : MonoBehaviour
 
     if (playerState.HasFlag(PlayerState.Grounded))
     {
-      if (_relativeGroundInfo.RangeId == GroundRangeId.Steep
-        && Mathf.Abs(_playerSpeedManager.GroundSpeed) < DecelerationSpeed)
+      if (!_inputLocked
+        && Mathf.Abs(_playerSpeedManager.GroundSpeed) < DecelerationSpeed
+        && (_groundSide != GroundSide.Down
+          || (_groundSide == GroundSide.Down && _relativeGroundInfo.RangeId == GroundRangeId.Steep)))
       {
         _inputLocked = true;
+        _groundSide = GroundSide.Down;
+        _playerSpeedManager.ResetGroundSpeed();
+        playerState &= PlayerState.Grounded;
+        playerState |= PlayerState.Airborne;
       }
     }
 
