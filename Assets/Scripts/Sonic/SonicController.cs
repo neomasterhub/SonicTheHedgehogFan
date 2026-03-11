@@ -205,6 +205,11 @@ public class SonicController : MonoBehaviour
 
     if (playerState.HasFlag(PlayerState.Grounded))
     {
+      if (!_inputInfo.Enabled && !_inputUnlockTimer.IsRunning)
+      {
+        _timerManager.RunSingle(_inputUnlockTimer);
+      }
+
       if (_inputInfo.Enabled
         && Mathf.Abs(_playerSpeedManager.GroundSpeed) < DecelerationSpeed
         && (_groundSide != GroundSide.Down || _relativeGroundInfo.RangeId == GroundRangeId.Steep))
@@ -214,11 +219,6 @@ public class SonicController : MonoBehaviour
         _playerSpeedManager.ResetGroundSpeed();
         playerState &= ~PlayerState.Grounded;
         playerState |= PlayerState.Airborne;
-      }
-
-      if (!_inputInfo.Enabled && !_inputUnlockTimer.IsRunning)
-      {
-        _timerManager.RunSingle(_inputUnlockTimer);
       }
     }
 
