@@ -135,10 +135,10 @@ public class SonicController : MonoBehaviour
     _spriteRenderer = GetComponent<SpriteRenderer>();
 
     _inputInfo = new InputInfo(
-      () => 1,
+      () => Input.GetAxis(Consts.InputAxis.Horizontal),
       () => Input.GetAxis(Consts.InputAxis.Vertical));
 
-    _inputUnlockTimer = new Timer(SonicConsts.Times.InputLockSeconds)
+    _inputUnlockTimer = new Timer(SonicConsts.Times.InputUnlockTimerSeconds)
       .WhenCompleted(() => _inputInfo.Enabled = true);
 
     _playerSpeedManager = new PlayerSpeedManager(_inputInfo, _slopeFactorSpeedProvider);
@@ -213,6 +213,11 @@ public class SonicController : MonoBehaviour
         _playerSpeedManager.ResetGroundSpeed();
         playerState &= PlayerState.Grounded;
         playerState |= PlayerState.Airborne;
+      }
+
+      if (!_inputInfo.Enabled && !_inputUnlockTimer.IsRunning)
+      {
+        _timerManager.RunSingle(_inputUnlockTimer);
       }
     }
 
@@ -297,6 +302,6 @@ public class SonicController : MonoBehaviour
 
   private void UpdateInfoText()
   {
-    InfoText.SetText($"Input Enabled: {_inputInfo.Enabled}");
+    InfoText.SetText($"Input Enabled: {_inputUnlockTimer.RemainingSeconds}");
   }
 }
