@@ -7,5 +7,4 @@ public enum PlayerState
   Airborne = 1 << 0,
   Grounded = 1 << 1,
   Skidding = 1 << 2,
-  LockedInput = 1 << 3,
 }

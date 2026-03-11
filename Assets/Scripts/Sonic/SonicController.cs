@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Text;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEditor.Animations;
@@ -18,6 +19,7 @@ public class SonicController : MonoBehaviour
     [GroundSide.Right] = (factor, groundAngleRad) => groundAngleRad >= 0 ? factor : factor * MathF.Cos(groundAngleRad),
     [GroundSide.Left] = (factor, groundAngleRad) => groundAngleRad <= 0 ? factor : factor * MathF.Cos(groundAngleRad),
   });
+  private readonly StringBuilder _info = new();
   private readonly TimerManager _timerManager = new();
 
   // Components
@@ -34,7 +36,7 @@ public class SonicController : MonoBehaviour
   private Timer _sfxSkiddingTimer;
 
   private InputInfo _inputInfo;
-  private Timer _inputLockTimer;
+  private Timer _inputUnlockTimer;
   private PlayerSpeedManager _playerSpeedManager;
   private PlayerViewManager _playerViewManager;
 
@@ -138,12 +140,7 @@ public class SonicController : MonoBehaviour
       () => Input.GetAxis(Consts.InputAxis.Horizontal),
       () => Input.GetAxis(Consts.InputAxis.Vertical));
 
-    _inputLockTimer = new Timer(SonicConsts.Times.InputLockSeconds)
-      .WhenStarted(() =>
-      {
-        _inputInfo.Enabled = false;
-        _playerSpeedManager.ResetGroundSpeed();
-      })
+    _inputUnlockTimer = new Timer(SonicConsts.Times.InputUnlockTimerSeconds)
       .WhenCompleted(() => _inputInfo.Enabled = true);
 
     _playerSpeedManager = new PlayerSpeedManager(_inputInfo, _slopeFactorSpeedProvider);
@@ -164,7 +161,6 @@ public class SonicController : MonoBehaviour
     SetGroundSide();
     RunSensors();
     UpdateState();
-    EnableInput();
     SetSpeed();
     UpdateView();
     UpdatePosition();
@@ -209,6 +205,21 @@ public class SonicController : MonoBehaviour
 
     if (playerState.HasFlag(PlayerState.Grounded))
     {
+      if (!_inputInfo.Enabled && !_inputUnlockTimer.IsRunning)
+      {
+        _timerManager.RunSingle(_inputUnlockTimer);
+      }
+
+      if (_inputInfo.Enabled
+        && Mathf.Abs(_playerSpeedManager.GroundSpeed) < DecelerationSpeed
+        && (_groundSide != GroundSide.Down || _relativeGroundInfo.RangeId == GroundRangeId.Steep))
+      {
+        _inputInfo.Enabled = false;
+        _groundSide = GroundSide.Down;
+        _playerSpeedManager.ResetGroundSpeed();
+        playerState &= ~PlayerState.Grounded;
+        playerState |= PlayerState.Airborne;
+      }
     }
 
     if (playerState.HasFlag(PlayerState.Airborne))
@@ -216,14 +227,6 @@ public class SonicController : MonoBehaviour
     }
 
     _playerState = playerState;
-  }
-
-  private void EnableInput()
-  {
-    if (_playerState.HasFlag(PlayerState.LockedInput) && !_inputLockTimer.IsRunning)
-    {
-      _timerManager.RunSingle(_inputLockTimer);
-    }
   }
 
   private void SetSpeed()
@@ -300,6 +303,14 @@ public class SonicController : MonoBehaviour
 
   private void UpdateInfoText()
   {
-    InfoText.SetText("test");
+    _info.Clear();
+
+    _info.AppendFormat("Input: {0}", _inputInfo.Enabled ? "on" : "locked");
+    if (_inputUnlockTimer.IsRunning)
+    {
+      _info.Append($" ({_inputUnlockTimer.RemainingSeconds.Round()} s)");
+    }
+
+    InfoText.SetText(_info);
   }
 }
