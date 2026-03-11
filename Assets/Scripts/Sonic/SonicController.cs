@@ -213,7 +213,7 @@ public class SonicController : MonoBehaviour
         _inputInfo.Enabled = false;
         _groundSide = GroundSide.Down;
         _playerSpeedManager.ResetGroundSpeed();
-        playerState &= PlayerState.Grounded;
+        playerState &= ~PlayerState.Grounded;
         playerState |= PlayerState.Airborne;
       }
 
