@@ -25,7 +25,6 @@ public class SonicController : MonoBehaviour
   private SpriteRenderer _spriteRenderer;
 
   // State flags
-  public bool _inputLocked;
   private GroundSide _groundSide = GroundSide.Down;
   private PlayerState _playerState = PlayerState.Grounded;
   private SizeMode _playerSizeMode = SizeMode.Big;
@@ -160,7 +159,6 @@ public class SonicController : MonoBehaviour
     SetGroundSide();
     RunSensors();
     UpdateState();
-    EnableInput();
     SetSpeed();
     UpdateView();
     UpdatePosition();
@@ -205,12 +203,12 @@ public class SonicController : MonoBehaviour
 
     if (playerState.HasFlag(PlayerState.Grounded))
     {
-      if (!_inputLocked
+      if (_inputInfo.Enabled
         && Mathf.Abs(_playerSpeedManager.GroundSpeed) < DecelerationSpeed
         && (_groundSide != GroundSide.Down
           || (_groundSide == GroundSide.Down && _relativeGroundInfo.RangeId == GroundRangeId.Steep)))
       {
-        _inputLocked = true;
+        _inputInfo.Enabled = false;
         _groundSide = GroundSide.Down;
         _playerSpeedManager.ResetGroundSpeed();
         playerState &= PlayerState.Grounded;
@@ -223,11 +221,6 @@ public class SonicController : MonoBehaviour
     }
 
     _playerState = playerState;
-  }
-
-  private void EnableInput()
-  {
-    _inputInfo.Enabled = !_inputLocked;
   }
 
   private void SetSpeed()
