@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Text;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEditor.Animations;
@@ -18,6 +19,7 @@ public class SonicController : MonoBehaviour
     [GroundSide.Right] = (factor, groundAngleRad) => groundAngleRad >= 0 ? factor : factor * MathF.Cos(groundAngleRad),
     [GroundSide.Left] = (factor, groundAngleRad) => groundAngleRad <= 0 ? factor : factor * MathF.Cos(groundAngleRad),
   });
+  private readonly StringBuilder _info = new();
   private readonly TimerManager _timerManager = new();
 
   // Components
@@ -302,13 +304,14 @@ public class SonicController : MonoBehaviour
 
   private void UpdateInfoText()
   {
-    var inputState = _inputInfo.Enabled ? "on" : "locked";
+    _info.Clear();
 
+    _info.AppendFormat("Input: {0}", _inputInfo.Enabled ? "on" : "locked");
     if (_inputUnlockTimer.IsRunning)
     {
-      inputState += $" ({_inputUnlockTimer.RemainingSeconds} s)";
+      _info.Append($" ({_inputUnlockTimer.RemainingSeconds.Round()} s)");
     }
 
-    InfoText.SetText($"Input: {inputState}");
+    InfoText.SetText(_info);
   }
 }
