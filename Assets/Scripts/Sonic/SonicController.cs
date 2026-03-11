@@ -207,8 +207,7 @@ public class SonicController : MonoBehaviour
     {
       if (_inputInfo.Enabled
         && Mathf.Abs(_playerSpeedManager.GroundSpeed) < DecelerationSpeed
-        && (_groundSide != GroundSide.Down
-          || (_groundSide == GroundSide.Down && _relativeGroundInfo.RangeId == GroundRangeId.Steep)))
+        && (_groundSide != GroundSide.Down || _relativeGroundInfo.RangeId == GroundRangeId.Steep))
       {
         _inputInfo.Enabled = false;
         _groundSide = GroundSide.Down;
