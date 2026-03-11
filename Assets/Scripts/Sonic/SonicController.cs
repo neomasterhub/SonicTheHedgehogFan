@@ -302,6 +302,13 @@ public class SonicController : MonoBehaviour
 
   private void UpdateInfoText()
   {
-    InfoText.SetText($"Input Enabled: {_inputUnlockTimer.RemainingSeconds}");
+    var inputState = _inputInfo.Enabled ? "on" : "locked";
+
+    if (_inputUnlockTimer.IsRunning)
+    {
+      inputState += $" ({_inputUnlockTimer.RemainingSeconds} s)";
+    }
+
+    InfoText.SetText($"Input: {inputState}");
   }
 }
