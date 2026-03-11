@@ -12,6 +12,11 @@ public class RelativeGroundInfo
 
   public void Update(float angleDeg)
   {
+    if (float.IsNaN(angleDeg))
+    {
+      return;
+    }
+
     AngleDeg = angleDeg;
     AngleRad = AngleDeg * Mathf.Deg2Rad;
 
