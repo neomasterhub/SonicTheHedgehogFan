@@ -35,7 +35,7 @@ public class SonicController : MonoBehaviour
   private Timer _sfxSkiddingTimer;
 
   private InputInfo _inputInfo;
-  private Timer _inputLockTimer;
+  private Timer _inputUnlockTimer;
   private PlayerSpeedManager _playerSpeedManager;
   private PlayerViewManager _playerViewManager;
 
@@ -139,12 +139,7 @@ public class SonicController : MonoBehaviour
       () => 1,
       () => Input.GetAxis(Consts.InputAxis.Vertical));
 
-    _inputLockTimer = new Timer(SonicConsts.Times.InputLockSeconds)
-      .WhenStarted(() =>
-      {
-        _inputInfo.Enabled = false;
-        _playerSpeedManager.ResetGroundSpeed();
-      })
+    _inputUnlockTimer = new Timer(SonicConsts.Times.InputLockSeconds)
       .WhenCompleted(() => _inputInfo.Enabled = true);
 
     _playerSpeedManager = new PlayerSpeedManager(_inputInfo, _slopeFactorSpeedProvider);

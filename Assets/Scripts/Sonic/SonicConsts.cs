@@ -106,6 +106,6 @@ public static class SonicConsts
 
   public static class Times
   {
-    public const float InputLockSeconds = 2;
+    public const float InputLockSeconds = 7;
   }
 }
