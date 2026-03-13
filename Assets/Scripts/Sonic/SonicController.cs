@@ -321,7 +321,7 @@ public class SonicController : MonoBehaviour
     _info.AppendLineFormat("Speed.Y: {0}", _playerSpeedManager.SpeedY.Round(4));
     _info.AppendLineFormat("Ground Speed: {0}", _playerSpeedManager.GroundSpeed.Round(4));
     _info.AppendLineFormat("Slope Factor Speed: {0}", _playerSpeedManager.SlopeFactorSpeed.Round(4));
-    _info.AppendLineFormat("Ground Side: {0}", _relativeGroundInfo.Side);
+    _info.AppendLineFormat("Ground Side: {0}", _groundSide);
     _info.AppendLineFormat("Ground Angle: {0}", _relativeGroundInfo.AngleDeg.Round());
 
     InfoText.SetText(_info);
