@@ -268,10 +268,7 @@ public class SonicController : MonoBehaviour
       _ => throw _groundSide.ArgumentOutOfRangeException(),
     };
 
-    transform.position = new Vector3(
-      MathF.Round(pos.x, 3),
-      MathF.Round(pos.y, 3),
-      transform.position.z);
+    transform.position = new Vector3(pos.x.Round(2), pos.y.Round(2), transform.position.z);
   }
 
   private void InitAudio()
