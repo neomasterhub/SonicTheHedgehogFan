@@ -88,6 +88,9 @@ public class PlayerSpeedManager
 
   private void SetSpeed_Grounded(PlayerSpeedInput input)
   {
+    _groundAngleCos = MathF.Cos(input.GroundAngleRad);
+    _groundAngleSin = MathF.Sin(input.GroundAngleRad);
+
     SetSpeed_Grounded_FromAirborne(input);
     SetSpeed_Grounded_Slope(input);
 
@@ -112,9 +115,6 @@ public class PlayerSpeedManager
   {
     if (input.PrevPlayerState.HasFlag(PlayerState.Airborne))
     {
-      _groundAngleCos = MathF.Cos(input.GroundAngleRad);
-      _groundAngleSin = MathF.Sin(input.GroundAngleRad);
-
       GroundSpeed = Mathf.Clamp(
         (SpeedX * _groundAngleCos) + (SpeedY * _groundAngleSin),
         -input.TopSpeed,
