@@ -130,6 +130,7 @@ public class SonicController : MonoBehaviour
     TopSpeed,
     MinAnimatorWalkingSpeed,
     AnimatorWalkingSpeedFactor,
+    _relativeGroundInfo.AngleDeg,
     _groundSide);
 
   private void Awake()

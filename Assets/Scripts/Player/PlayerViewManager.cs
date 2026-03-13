@@ -27,7 +27,7 @@ public class PlayerViewManager
 
   private void RotateSprite(PlayerViewInput input)
   {
-    var spriteAngle = input.GroundSide switch
+    var spriteAngle = input.GroundAngleDeg + input.GroundSide switch
     {
       GroundSide.Down => 0f,
       GroundSide.Right => 90f,
