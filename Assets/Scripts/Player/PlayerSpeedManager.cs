@@ -6,9 +6,6 @@ public class PlayerSpeedManager
   private readonly InputInfo _inputInfo;
   private readonly SlopeFactorSpeedProvider _slopeFactorSpeedProvider;
 
-  private float _groundSpeed;
-  private bool _isSkidding;
-
   public PlayerSpeedManager(InputInfo inputInfo, SlopeFactorSpeedProvider slopeFactorSpeedProvider)
   {
     _inputInfo = inputInfo;
@@ -18,12 +15,12 @@ public class PlayerSpeedManager
   public float SpeedX { get; private set; }
   public float SpeedY { get; private set; }
   public float SlopeFactorSpeed { get; private set; }
-  public float GroundSpeed => _groundSpeed;
-  public bool IsSkidding => _isSkidding;
+  public float GroundSpeed { get; private set; }
+  public bool IsSkidding { get; private set; }
 
   public void ResetGroundSpeed()
   {
-    _groundSpeed = 0;
+    GroundSpeed = 0;
   }
 
   public void SetSpeed(PlayerSpeedInput input)
@@ -40,7 +37,7 @@ public class PlayerSpeedManager
 
   private void SetSpeed_Airborne(PlayerSpeedInput input)
   {
-    _isSkidding = false;
+    IsSkidding = false;
     SetSpeed_Airborne_Gravity(input);
     SetSpeed_Airborne_PreventGroundOvershoot(input);
     SetSpeed_Airborne_Horizontal(input);
@@ -103,81 +100,81 @@ public class PlayerSpeedManager
       SetSpeed_Grounded_Friction(input);
     }
 
-    SpeedX = _groundSpeed * MathF.Cos(input.GroundAngleRad);
-    SpeedY = _groundSpeed * MathF.Sin(input.GroundAngleRad);
+    SpeedX = GroundSpeed * MathF.Cos(input.GroundAngleRad);
+    SpeedY = GroundSpeed * MathF.Sin(input.GroundAngleRad);
   }
 
   private void SetSpeed_Grounded_Slope(PlayerSpeedInput input)
   {
     SlopeFactorSpeed = _slopeFactorSpeedProvider[input.GroundSide](input.SlopeFactor, input.GroundAngleRad);
-    _groundSpeed -= SlopeFactorSpeed;
+    GroundSpeed -= SlopeFactorSpeed;
   }
 
   private void SetSpeed_Grounded_Forward(PlayerSpeedInput input)
   {
-    if (_groundSpeed < 0)
+    if (GroundSpeed < 0)
     {
-      if (_groundSpeed < -input.SkiddingSpeedDeadZone)
+      if (GroundSpeed < -input.SkiddingSpeedDeadZone)
       {
-        _isSkidding = true;
+        IsSkidding = true;
       }
 
-      _groundSpeed += input.DecelerationSpeed;
+      GroundSpeed += input.DecelerationSpeed;
 
-      if (_groundSpeed >= 0)
+      if (GroundSpeed >= 0)
       {
-        _isSkidding = false;
-        _groundSpeed = input.DecelerationSpeed;
+        IsSkidding = false;
+        GroundSpeed = input.DecelerationSpeed;
       }
     }
-    else if (_groundSpeed < input.TopSpeed)
+    else if (GroundSpeed < input.TopSpeed)
     {
-      _groundSpeed += input.AccelerationSpeed;
+      GroundSpeed += input.AccelerationSpeed;
 
-      if (_groundSpeed >= input.TopSpeed)
+      if (GroundSpeed >= input.TopSpeed)
       {
-        _groundSpeed = input.TopSpeed;
+        GroundSpeed = input.TopSpeed;
       }
     }
   }
 
   private void SetSpeed_Grounded_Backward(PlayerSpeedInput input)
   {
-    if (_groundSpeed > 0)
+    if (GroundSpeed > 0)
     {
-      if (_groundSpeed > input.SkiddingSpeedDeadZone)
+      if (GroundSpeed > input.SkiddingSpeedDeadZone)
       {
-        _isSkidding = true;
+        IsSkidding = true;
       }
 
-      _groundSpeed -= input.DecelerationSpeed;
+      GroundSpeed -= input.DecelerationSpeed;
 
-      if (_groundSpeed <= 0)
+      if (GroundSpeed <= 0)
       {
-        _isSkidding = false;
-        _groundSpeed = -input.DecelerationSpeed;
+        IsSkidding = false;
+        GroundSpeed = -input.DecelerationSpeed;
       }
     }
-    else if (_groundSpeed > -input.TopSpeed)
+    else if (GroundSpeed > -input.TopSpeed)
     {
-      _groundSpeed -= input.AccelerationSpeed;
+      GroundSpeed -= input.AccelerationSpeed;
 
-      if (_groundSpeed <= -input.TopSpeed)
+      if (GroundSpeed <= -input.TopSpeed)
       {
-        _groundSpeed = -input.TopSpeed;
+        GroundSpeed = -input.TopSpeed;
       }
     }
   }
 
   private void SetSpeed_Grounded_Friction(PlayerSpeedInput input)
   {
-    if (Mathf.Abs(_groundSpeed) < input.FrictionSpeed)
+    if (Mathf.Abs(GroundSpeed) < input.FrictionSpeed)
     {
-      _groundSpeed = 0;
-      _isSkidding = false;
+      GroundSpeed = 0;
+      IsSkidding = false;
       return;
     }
 
-    _groundSpeed -= input.FrictionSpeed * Mathf.Sign(_groundSpeed);
+    GroundSpeed -= input.FrictionSpeed * Mathf.Sign(GroundSpeed);
   }
 }
