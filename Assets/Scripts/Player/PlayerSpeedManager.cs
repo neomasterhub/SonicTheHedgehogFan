@@ -23,9 +23,11 @@ public class PlayerSpeedManager
 
   public void ResetSpeed()
   {
-    GroundSpeed = 0;
     SpeedX = 0;
     SpeedY = 0;
+    GroundSpeed = 0;
+    _groundAngleCos = 0;
+    _groundAngleSin = 0;
   }
 
   public void SetSpeed(PlayerSpeedInput input)
