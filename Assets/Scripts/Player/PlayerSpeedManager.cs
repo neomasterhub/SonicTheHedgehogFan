@@ -6,6 +6,9 @@ public class PlayerSpeedManager
   private readonly InputInfo _inputInfo;
   private readonly SlopeFactorSpeedProvider _slopeFactorSpeedProvider;
 
+  private float _groundAngleCos;
+  private float _groundAngleSin;
+
   public PlayerSpeedManager(InputInfo inputInfo, SlopeFactorSpeedProvider slopeFactorSpeedProvider)
   {
     _inputInfo = inputInfo;
@@ -85,6 +88,7 @@ public class PlayerSpeedManager
 
   private void SetSpeed_Grounded(PlayerSpeedInput input)
   {
+    SetSpeed_Grounded_FromAirborne(input);
     SetSpeed_Grounded_Slope(input);
 
     if (_inputInfo.X > 0)
@@ -100,8 +104,22 @@ public class PlayerSpeedManager
       SetSpeed_Grounded_Friction(input);
     }
 
-    SpeedX = GroundSpeed * MathF.Cos(input.GroundAngleRad);
-    SpeedY = GroundSpeed * MathF.Sin(input.GroundAngleRad);
+    SpeedX = GroundSpeed * _groundAngleCos;
+    SpeedY = GroundSpeed * _groundAngleSin;
+  }
+
+  private void SetSpeed_Grounded_FromAirborne(PlayerSpeedInput input)
+  {
+    if (input.PrevPlayerState.HasFlag(PlayerState.Airborne))
+    {
+      _groundAngleCos = MathF.Cos(input.GroundAngleRad);
+      _groundAngleSin = MathF.Sin(input.GroundAngleRad);
+
+      GroundSpeed = Mathf.Clamp(
+        (SpeedX * _groundAngleCos) + (SpeedY * _groundAngleSin),
+        -input.TopSpeed,
+        input.TopSpeed);
+    }
   }
 
   private void SetSpeed_Grounded_Slope(PlayerSpeedInput input)
