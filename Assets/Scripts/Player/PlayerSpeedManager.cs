@@ -17,6 +17,7 @@ public class PlayerSpeedManager
 
   public float SpeedX { get; private set; }
   public float SpeedY { get; private set; }
+  public float SlopeFactorSpeed { get; private set; }
   public float GroundSpeed => _groundSpeed;
   public bool IsSkidding => _isSkidding;
 
@@ -108,7 +109,8 @@ public class PlayerSpeedManager
 
   private void SetSpeed_Grounded_Slope(PlayerSpeedInput input)
   {
-    _groundSpeed -= _slopeFactorSpeedProvider[input.GroundSide](input.SlopeFactor, input.GroundAngleRad);
+    SlopeFactorSpeed = _slopeFactorSpeedProvider[input.GroundSide](input.SlopeFactor, input.GroundAngleRad);
+    _groundSpeed -= SlopeFactorSpeed;
   }
 
   private void SetSpeed_Grounded_Forward(PlayerSpeedInput input)
