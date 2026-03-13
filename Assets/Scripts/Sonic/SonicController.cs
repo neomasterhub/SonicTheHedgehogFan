@@ -30,6 +30,8 @@ public class SonicController : MonoBehaviour
   private GroundSide _groundSide = GroundSide.Down;
   private PlayerState _playerState = PlayerState.Grounded;
   private SizeMode _playerSizeMode = SizeMode.Big;
+  private bool _postDetachFall;
+  private bool _postDetachInputLocked;
 
   // Audio
   private AudioSource _sfxSkidding;
@@ -140,8 +142,8 @@ public class SonicController : MonoBehaviour
       () => Input.GetAxis(Consts.InputAxis.Horizontal),
       () => Input.GetAxis(Consts.InputAxis.Vertical));
 
-    _inputUnlockTimer = new Timer(SonicConsts.Times.InputUnlockTimerSeconds)
-      .WhenCompleted(() => _inputInfo.Enabled = true);
+    _inputUnlockTimer = new Timer(SonicConsts.Times.PostDetachInputUnlockTimerSeconds)
+      .WhenCompleted(() => _postDetachInputLocked = false);
 
     _playerSpeedManager = new PlayerSpeedManager(_inputInfo, _slopeFactorSpeedProvider);
 
@@ -175,7 +177,7 @@ public class SonicController : MonoBehaviour
 
   private void UpdateInput()
   {
-    _inputInfo.Update();
+    _inputInfo.Update(!_postDetachInputLocked);
   }
 
   private void SetGroundSide()
@@ -205,20 +207,26 @@ public class SonicController : MonoBehaviour
 
     if (playerState.HasFlag(PlayerState.Grounded))
     {
-      if (!_inputInfo.Enabled && !_inputUnlockTimer.IsRunning)
+      if (_postDetachFall)
       {
-        _timerManager.RunSingle(_inputUnlockTimer);
+        _postDetachFall = false;
+        if (!_inputUnlockTimer.IsRunning)
+        {
+          _timerManager.RunSingle(_inputUnlockTimer);
+        }
       }
-
-      if (_inputInfo.Enabled
-        && Mathf.Abs(_playerSpeedManager.GroundSpeed) < DecelerationSpeed
-        && (_groundSide != GroundSide.Down || _relativeGroundInfo.RangeId == GroundRangeId.Steep))
+      else
       {
-        _inputInfo.Enabled = false;
-        _groundSide = GroundSide.Down;
-        _playerSpeedManager.ResetGroundSpeed();
-        playerState &= ~PlayerState.Grounded;
-        playerState |= PlayerState.Airborne;
+        if (Mathf.Abs(_playerSpeedManager.GroundSpeed) < DecelerationSpeed
+          && (_groundSide != GroundSide.Down || _relativeGroundInfo.RangeId == GroundRangeId.Steep))
+        {
+          _postDetachFall = true;
+          _postDetachInputLocked = true;
+          _groundSide = GroundSide.Down;
+          _playerSpeedManager.ResetGroundSpeed();
+          playerState &= ~PlayerState.Grounded;
+          playerState |= PlayerState.Airborne;
+        }
       }
     }
 

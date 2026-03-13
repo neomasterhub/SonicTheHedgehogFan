@@ -19,8 +19,10 @@ public class InputInfo
   public float XDirection { get; private set; }
   public float YDirection { get; private set; }
 
-  public void Update()
+  public void Update(bool enabled = true)
   {
+    Enabled = enabled;
+
     if (Enabled)
     {
       X = _xSrc();
