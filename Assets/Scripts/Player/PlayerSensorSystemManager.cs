@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerSensorSystemManager
 {
+  private ABResult _abResult;
+
   public PlayerSensorSystemManager()
   {
     Sensors = Enum
@@ -14,7 +16,7 @@ public class PlayerSensorSystemManager
   }
 
   public Dictionary<SensorId, SensorInfo> Sensors { get; }
-  public ABResult ABResult { get; private set; }
+  public ABResult ABResult => _abResult;
 
   public void ApplyAB(PlayerSensorSystemInput input)
   {
@@ -37,7 +39,7 @@ public class PlayerSensorSystemManager
 
     if (bHit && fHit)
     {
-      ABResult.Set(bHit.distance <= fHit.distance ? bHit : fHit, b.Direction, 1, input.ABSensorLength);
+      _abResult.Set(bHit.distance <= fHit.distance ? bHit : fHit, b.Direction, 1, input.ABSensorLength);
       return;
     }
 
@@ -46,35 +48,35 @@ public class PlayerSensorSystemManager
 
     if (rbHit && rfHit)
     {
-      ABResult.Set(rbHit.distance >= rfHit.distance ? rbHit : rfHit, -b.Direction, -1, input.ReversedABSensorLength);
+      _abResult.Set(rbHit.distance >= rfHit.distance ? rbHit : rfHit, -b.Direction, -1, input.ReversedABSensorLength);
       return;
     }
 
     if (rbHit)
     {
-      ABResult.Set(rbHit, -b.Direction, -1, input.ReversedABSensorLength);
+      _abResult.Set(rbHit, -b.Direction, -1, input.ReversedABSensorLength);
       return;
     }
 
     if (rfHit)
     {
-      ABResult.Set(rfHit, -f.Direction, -1, input.ReversedABSensorLength);
+      _abResult.Set(rfHit, -f.Direction, -1, input.ReversedABSensorLength);
       return;
     }
 
     if (bHit)
     {
-      ABResult.Set(bHit, b.Direction, 1, input.ABSensorLength);
+      _abResult.Set(bHit, b.Direction, 1, input.ABSensorLength);
       return;
     }
 
     if (fHit)
     {
-      ABResult.Set(fHit, f.Direction, 1, input.ABSensorLength);
+      _abResult.Set(fHit, f.Direction, 1, input.ABSensorLength);
       return;
     }
 
-    ABResult.Reset();
+    _abResult.Reset();
   }
 
   public void Update(PlayerSensorSystemInput input)
@@ -106,6 +108,6 @@ public class PlayerSensorSystemManager
     float endRadius = 0,
     Color? color = null)
   {
-    ABResult.Draw(length, beginRadius, endRadius, color);
+    _abResult.Draw(length, beginRadius, endRadius, color);
   }
 }

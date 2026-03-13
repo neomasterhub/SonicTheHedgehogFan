@@ -28,7 +28,8 @@ public class SonicController : MonoBehaviour
 
   // State flags
   private GroundSide _groundSide = GroundSide.Down;
-  private PlayerState _playerState = PlayerState.Grounded;
+  private PlayerState _playerState;
+  private PlayerState _prevPlayerState;
   private SizeMode _playerSizeMode = SizeMode.Big;
   private bool _postDetachFall;
   private bool _postDetachInputLocked;
@@ -98,6 +99,7 @@ public class SonicController : MonoBehaviour
 
   private PlayerSpeedInput PlayerSpeedInput => new(
     _playerState,
+    _prevPlayerState,
 
     // Sensor Result
     _playerSensorSystemManager.ABResult.Distance,
@@ -128,6 +130,7 @@ public class SonicController : MonoBehaviour
     TopSpeed,
     MinAnimatorWalkingSpeed,
     AnimatorWalkingSpeedFactor,
+    _relativeGroundInfo.AngleDeg,
     _groundSide);
 
   private void Awake()
@@ -199,13 +202,12 @@ public class SonicController : MonoBehaviour
 
   private void UpdateState()
   {
-    var playerState = PlayerState.None;
-
-    playerState |= _playerSensorSystemManager.ABResult.GroundDetected
+    _prevPlayerState = _playerState;
+    _playerState = _playerSensorSystemManager.ABResult.GroundDetected
       ? PlayerState.Grounded
       : PlayerState.Airborne;
 
-    if (playerState.HasFlag(PlayerState.Grounded))
+    if (_playerState.HasFlag(PlayerState.Grounded))
     {
       if (_postDetachFall)
       {
@@ -224,17 +226,15 @@ public class SonicController : MonoBehaviour
           _postDetachInputLocked = true;
           _groundSide = GroundSide.Down;
           _playerSpeedManager.ResetGroundSpeed();
-          playerState &= ~PlayerState.Grounded;
-          playerState |= PlayerState.Airborne;
+          _playerState &= ~PlayerState.Grounded;
+          _playerState |= PlayerState.Airborne;
         }
       }
     }
 
-    if (playerState.HasFlag(PlayerState.Airborne))
+    if (_playerState.HasFlag(PlayerState.Airborne))
     {
     }
-
-    _playerState = playerState;
   }
 
   private void SetSpeed()
@@ -316,6 +316,11 @@ public class SonicController : MonoBehaviour
     _info.AppendFormat("Input: {0}", _inputInfo.Enabled ? "on" : "locked");
     _info.AppendLine(_inputUnlockTimer.IsRunning ? $" ({_inputUnlockTimer.RemainingSeconds.Round(2)} s)" : null);
 
+    _info.AppendLineFormat("Player State Prev: {0}", _prevPlayerState);
+    _info.AppendLineFormat("Player State Curr: {0}", _playerState);
+
+    _info.AppendLineFormat("Speed.X: {0}", _playerSpeedManager.SpeedX.Round(4));
+    _info.AppendLineFormat("Speed.Y: {0}", _playerSpeedManager.SpeedY.Round(4));
     _info.AppendLineFormat("Ground Speed: {0}", _playerSpeedManager.GroundSpeed.Round(4));
     _info.AppendLineFormat("Slope Factor Speed: {0}", _playerSpeedManager.SlopeFactorSpeed.Round(4));
 
