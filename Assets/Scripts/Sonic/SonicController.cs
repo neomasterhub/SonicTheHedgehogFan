@@ -99,6 +99,7 @@ public class SonicController : MonoBehaviour
 
   private PlayerSpeedInput PlayerSpeedInput => new(
     _playerState,
+    _prevPlayerState,
 
     // Sensor Result
     _playerSensorSystemManager.ABResult.Distance,
