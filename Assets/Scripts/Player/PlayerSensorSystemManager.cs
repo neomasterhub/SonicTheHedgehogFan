@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class PlayerSensorSystemManager
 {
-  private ABResult _abResult;
-
   public PlayerSensorSystemManager()
   {
     Sensors = Enum
@@ -15,8 +13,8 @@ public class PlayerSensorSystemManager
       .ToDictionary(id => id, id => new SensorInfo());
   }
 
-  public ABResult ABResult => _abResult;
   public Dictionary<SensorId, SensorInfo> Sensors { get; }
+  public ABResult ABResult { get; private set; }
 
   public void ApplyAB(PlayerSensorSystemInput input)
   {
@@ -39,7 +37,7 @@ public class PlayerSensorSystemManager
 
     if (bHit && fHit)
     {
-      _abResult.Set(bHit.distance <= fHit.distance ? bHit : fHit, b.Direction, 1, input.ABSensorLength);
+      ABResult.Set(bHit.distance <= fHit.distance ? bHit : fHit, b.Direction, 1, input.ABSensorLength);
       return;
     }
 
@@ -48,35 +46,35 @@ public class PlayerSensorSystemManager
 
     if (rbHit && rfHit)
     {
-      _abResult.Set(rbHit.distance >= rfHit.distance ? rbHit : rfHit, -b.Direction, -1, input.ReversedABSensorLength);
+      ABResult.Set(rbHit.distance >= rfHit.distance ? rbHit : rfHit, -b.Direction, -1, input.ReversedABSensorLength);
       return;
     }
 
     if (rbHit)
     {
-      _abResult.Set(rbHit, -b.Direction, -1, input.ReversedABSensorLength);
+      ABResult.Set(rbHit, -b.Direction, -1, input.ReversedABSensorLength);
       return;
     }
 
     if (rfHit)
     {
-      _abResult.Set(rfHit, -f.Direction, -1, input.ReversedABSensorLength);
+      ABResult.Set(rfHit, -f.Direction, -1, input.ReversedABSensorLength);
       return;
     }
 
     if (bHit)
     {
-      _abResult.Set(bHit, b.Direction, 1, input.ABSensorLength);
+      ABResult.Set(bHit, b.Direction, 1, input.ABSensorLength);
       return;
     }
 
     if (fHit)
     {
-      _abResult.Set(fHit, f.Direction, 1, input.ABSensorLength);
+      ABResult.Set(fHit, f.Direction, 1, input.ABSensorLength);
       return;
     }
 
-    _abResult.Reset();
+    ABResult.Reset();
   }
 
   public void Update(PlayerSensorSystemInput input)

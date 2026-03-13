@@ -306,10 +306,10 @@ public class SonicController : MonoBehaviour
     _info.Clear();
 
     _info.AppendFormat("Input: {0}", _inputInfo.Enabled ? "on" : "locked");
-    if (_inputUnlockTimer.IsRunning)
-    {
-      _info.Append($" ({_inputUnlockTimer.RemainingSeconds.Round()} s)");
-    }
+    _info.AppendLine(_inputUnlockTimer.IsRunning ? $" ({_inputUnlockTimer.RemainingSeconds.Round(2)} s)" : null);
+
+    _info.AppendLineFormat("Ground Speed: {0}", _playerSpeedManager.GroundSpeed.Round(4));
+    _info.AppendLineFormat("Slope Factor Speed: {0}", _playerSpeedManager.SlopeFactorSpeed.Round(4));
 
     InfoText.SetText(_info);
   }
