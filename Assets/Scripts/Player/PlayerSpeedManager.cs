@@ -105,6 +105,7 @@ public class PlayerSpeedManager
     else
     {
       SetSpeed_Grounded_Friction(input);
+      SetSpeed_Grounded_PreventSlopeStanding(input);
     }
 
     SpeedX = GroundSpeed * _groundAngleCos;
@@ -194,5 +195,14 @@ public class PlayerSpeedManager
     }
 
     GroundSpeed -= input.FrictionSpeed * Mathf.Sign(GroundSpeed);
+  }
+
+  private void SetSpeed_Grounded_PreventSlopeStanding(PlayerSpeedInput input)
+  {
+    if (GroundSpeed == 0
+      && input.GroundSide == GroundSide.Down)
+    {
+      GroundSpeed -= SlopeFactorSpeed;
+    }
   }
 }
