@@ -220,7 +220,7 @@ public class SonicController : MonoBehaviour
       else
       {
         if (Mathf.Abs(_playerSpeedManager.GroundSpeed) < DecelerationSpeed
-          && (_groundSide != GroundSide.Down || _relativeGroundInfo.RangeId == GroundRangeId.Steep))
+          && (_groundSide != GroundSide.Down || _relativeGroundInfo.RangeId != GroundRangeId.Flat))
         {
           _postDetachFall = true;
           _postDetachInputLocked = true;
