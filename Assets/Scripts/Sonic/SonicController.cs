@@ -225,7 +225,7 @@ public class SonicController : MonoBehaviour
           _postDetachFall = true;
           _postDetachInputLocked = true;
           _groundSide = GroundSide.Down;
-          _playerSpeedManager.ResetGroundSpeed();
+          _playerSpeedManager.ResetSpeed();
           _playerState &= ~PlayerState.Grounded;
           _playerState |= PlayerState.Airborne;
         }

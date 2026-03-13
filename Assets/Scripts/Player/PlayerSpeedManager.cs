@@ -21,9 +21,11 @@ public class PlayerSpeedManager
   public float GroundSpeed { get; private set; }
   public bool IsSkidding { get; private set; }
 
-  public void ResetGroundSpeed()
+  public void ResetSpeed()
   {
     GroundSpeed = 0;
+    SpeedX = 0;
+    SpeedY = 0;
   }
 
   public void SetSpeed(PlayerSpeedInput input)
