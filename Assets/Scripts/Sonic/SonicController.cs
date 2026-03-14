@@ -185,7 +185,6 @@ public class SonicController : MonoBehaviour
 
   private void SetGroundSide()
   {
-    _relativeGroundInfo.Update(_playerSensorSystemManager.ABResult.AngleDeg);
     _groundSide = _relativeGroundInfo.Side switch
     {
       GroundSide.Left => _groundSide.GetPrevious(),
@@ -198,6 +197,7 @@ public class SonicController : MonoBehaviour
   {
     _playerSensorSystemManager.Update(PlayerSensorSystemInput);
     _playerSensorSystemManager.ApplyAB(PlayerSensorSystemInput);
+    _relativeGroundInfo.Update(_playerSensorSystemManager.ABResult.AngleDeg);
   }
 
   private void UpdateState()
