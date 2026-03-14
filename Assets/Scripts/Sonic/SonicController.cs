@@ -161,7 +161,6 @@ public class SonicController : MonoBehaviour
 
   private void FixedUpdate()
   {
-    UpdateInfoText();
     UpdateInput();
     SetGroundSide();
     RunSensors();
@@ -170,6 +169,7 @@ public class SonicController : MonoBehaviour
     UpdateView();
     UpdatePosition();
     UpdateAudio();
+    UpdateInfoText();
   }
 
   private void OnDrawGizmos()
@@ -307,19 +307,6 @@ public class SonicController : MonoBehaviour
   private void UpdateInfoText()
   {
     _info.Clear();
-
-    _info.AppendFormat("Input: {0}", _inputInfo.Enabled ? "on" : "locked");
-    _info.AppendLine(_inputUnlockTimer.IsRunning ? $" ({_inputUnlockTimer.RemainingSeconds.Round(2)} s)" : null);
-
-    _info.AppendLineFormat("Player State Prev: {0}", _prevPlayerState);
-    _info.AppendLineFormat("Player State Curr: {0}", _playerState);
-
-    _info.AppendLineFormat("Speed.X: {0}", _playerSpeedManager.SpeedX.Round(4));
-    _info.AppendLineFormat("Speed.Y: {0}", _playerSpeedManager.SpeedY.Round(4));
-    _info.AppendLineFormat("Ground Speed: {0}", _playerSpeedManager.GroundSpeed.Round(4));
-    _info.AppendLineFormat("Slope Factor Speed: {0}", _playerSpeedManager.SlopeFactorSpeed.Round(4));
-    _info.AppendLineFormat("Ground Side: {0}", _groundSide);
-    _info.AppendLineFormat("Ground Angle: {0}", _relativeGroundInfo.AngleDeg.Round());
 
     InfoText.SetText(_info);
   }
