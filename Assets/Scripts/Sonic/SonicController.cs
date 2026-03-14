@@ -33,6 +33,7 @@ public class SonicController : MonoBehaviour
   private SizeMode _playerSizeMode = SizeMode.Big;
   private bool _postDetachFall;
   private bool _postDetachInputLocked;
+  private bool _wallDetachPositionOffset;
 
   // Audio
   private AudioSource _sfxSkidding;
@@ -66,6 +67,7 @@ public class SonicController : MonoBehaviour
   public float ReversedCDSensorLength = 0.3f;
   public float ReversedEFSensorLength = 0.3f;
   public float InputDeadZone = 0.001f;
+  public Vector2 WallDetachPositionOffset = new(-0.1f, 0.0f);
   public bool GravityDownEnabled = true;
 
   [Header("Ground")]
@@ -77,6 +79,7 @@ public class SonicController : MonoBehaviour
   public float GroundPositionOffset = 0.05f; // ABSensorLength / 2
 
   [Header("UI")]
+  public Color GroundNormalColor = Color.white;
   public float GroundNormalLength = 1.5f;
   public float SensorBeginRadius = 0.03f;
   public float SensorEndRadius = 0.01f;
@@ -127,6 +130,7 @@ public class SonicController : MonoBehaviour
 
   private PlayerViewInput PlayerViewInput => new(
     _playerSpeedManager.IsSkidding,
+    _postDetachFall,
     TopSpeed,
     MinAnimatorWalkingSpeed,
     AnimatorWalkingSpeedFactor,
@@ -161,7 +165,6 @@ public class SonicController : MonoBehaviour
 
   private void FixedUpdate()
   {
-    UpdateInfoText();
     UpdateInput();
     SetGroundSide();
     RunSensors();
@@ -170,12 +173,13 @@ public class SonicController : MonoBehaviour
     UpdateView();
     UpdatePosition();
     UpdateAudio();
+    UpdateInfoText();
   }
 
   private void OnDrawGizmos()
   {
+    _playerSensorSystemManager.DrawGroundNormal(GroundNormalLength, SensorBeginRadius, SensorEndRadius, GroundNormalColor);
     _playerSensorSystemManager.DrawSensors(SensorBeginRadius, SensorEndRadius);
-    _playerSensorSystemManager.DrawGroundNormal(GroundNormalLength, SensorBeginRadius, SensorEndRadius, Color.brown);
   }
 
   private void UpdateInput()
@@ -185,7 +189,6 @@ public class SonicController : MonoBehaviour
 
   private void SetGroundSide()
   {
-    _relativeGroundInfo.Update(_playerSensorSystemManager.ABResult.AngleDeg);
     _groundSide = _relativeGroundInfo.Side switch
     {
       GroundSide.Left => _groundSide.GetPrevious(),
@@ -198,6 +201,7 @@ public class SonicController : MonoBehaviour
   {
     _playerSensorSystemManager.Update(PlayerSensorSystemInput);
     _playerSensorSystemManager.ApplyAB(PlayerSensorSystemInput);
+    _relativeGroundInfo.Update(_playerSensorSystemManager.ABResult.AngleDeg);
   }
 
   private void UpdateState()
@@ -220,14 +224,14 @@ public class SonicController : MonoBehaviour
       else
       {
         if (Mathf.Abs(_playerSpeedManager.GroundSpeed) < DecelerationSpeed
-          && (_groundSide != GroundSide.Down || _relativeGroundInfo.RangeId != GroundRangeId.Flat))
+          && (_groundSide != GroundSide.Down || _relativeGroundInfo.RangeId == GroundRangeId.Steep))
         {
           _postDetachFall = true;
           _postDetachInputLocked = true;
+          _wallDetachPositionOffset = _groundSide is GroundSide.Left or GroundSide.Right;
+          _playerSpeedManager.ResetSpeeds();
+
           _groundSide = GroundSide.Down;
-          _playerSpeedManager.ResetGroundSpeed();
-          _playerState &= ~PlayerState.Grounded;
-          _playerState |= PlayerState.Airborne;
         }
       }
     }
@@ -252,9 +256,16 @@ public class SonicController : MonoBehaviour
     var speedX = _playerSpeedManager.SpeedX;
     var speedY = _playerSpeedManager.SpeedY;
 
-    // Snap to ground with small upward offset.
     if (_playerState.HasFlag(PlayerState.Grounded))
     {
+      if (_wallDetachPositionOffset)
+      {
+        _wallDetachPositionOffset = false;
+        speedX = WallDetachPositionOffset.x;
+        speedY = WallDetachPositionOffset.y;
+      }
+
+      // Snap to ground with small upward offset.
       speedY -= (_playerSensorSystemManager.ABResult.Distance
         * _playerSensorSystemManager.ABResult.SensorDirectionSign)
         - GroundPositionOffset;
@@ -270,10 +281,7 @@ public class SonicController : MonoBehaviour
       _ => throw _groundSide.ArgumentOutOfRangeException(),
     };
 
-    transform.position = new Vector3(
-      MathF.Round(pos.x, 3),
-      MathF.Round(pos.y, 3),
-      transform.position.z);
+    transform.position = new Vector3(pos.x.Round(2), pos.y.Round(2), transform.position.z);
   }
 
   private void InitAudio()
@@ -312,19 +320,6 @@ public class SonicController : MonoBehaviour
   private void UpdateInfoText()
   {
     _info.Clear();
-
-    _info.AppendFormat("Input: {0}", _inputInfo.Enabled ? "on" : "locked");
-    _info.AppendLine(_inputUnlockTimer.IsRunning ? $" ({_inputUnlockTimer.RemainingSeconds.Round(2)} s)" : null);
-
-    _info.AppendLineFormat("Player State Prev: {0}", _prevPlayerState);
-    _info.AppendLineFormat("Player State Curr: {0}", _playerState);
-
-    _info.AppendLineFormat("Speed.X: {0}", _playerSpeedManager.SpeedX.Round(4));
-    _info.AppendLineFormat("Speed.Y: {0}", _playerSpeedManager.SpeedY.Round(4));
-    _info.AppendLineFormat("Ground Speed: {0}", _playerSpeedManager.GroundSpeed.Round(4));
-    _info.AppendLineFormat("Slope Factor Speed: {0}", _playerSpeedManager.SlopeFactorSpeed.Round(4));
-    _info.AppendLineFormat("Ground Side: {0}", _relativeGroundInfo.Side);
-    _info.AppendLineFormat("Ground Angle: {0}", _relativeGroundInfo.AngleDeg.Round());
 
     InfoText.SetText(_info);
   }

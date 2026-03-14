@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class PlayerSpeedManager
 {
+  private const int _speedDigits = 3;
+
   private readonly InputInfo _inputInfo;
   private readonly SlopeFactorSpeedProvider _slopeFactorSpeedProvider;
 
@@ -21,9 +23,13 @@ public class PlayerSpeedManager
   public float GroundSpeed { get; private set; }
   public bool IsSkidding { get; private set; }
 
-  public void ResetGroundSpeed()
+  public void ResetSpeeds()
   {
+    SpeedX = 0;
+    SpeedY = 0;
     GroundSpeed = 0;
+    _groundAngleCos = 0;
+    _groundAngleSin = 0;
   }
 
   public void SetSpeed(PlayerSpeedInput input)
@@ -36,6 +42,15 @@ public class PlayerSpeedManager
     {
       SetSpeed_Grounded(input);
     }
+
+    RoundSpeeds();
+  }
+
+  private void RoundSpeeds()
+  {
+    SpeedX = SpeedX.Round(_speedDigits);
+    SpeedY = SpeedY.Round(_speedDigits);
+    GroundSpeed = GroundSpeed.Round(_speedDigits);
   }
 
   private void SetSpeed_Airborne(PlayerSpeedInput input)

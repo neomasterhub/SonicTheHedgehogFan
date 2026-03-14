@@ -108,6 +108,6 @@ public class PlayerSensorSystemManager
     float endRadius = 0,
     Color? color = null)
   {
-    _abResult.Draw(length, beginRadius, endRadius, color);
+    _abResult.DrawNormal(length, beginRadius, endRadius, color);
   }
 }
