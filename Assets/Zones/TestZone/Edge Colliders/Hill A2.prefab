@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4646739553011868425
+--- !u!1 &6581885413573267229
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,37 +8,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7573877009438188016}
-  - component: {fileID: 3755745289042453520}
+  - component: {fileID: 6518175376047109903}
+  - component: {fileID: 2820240986069488930}
   m_Layer: 3
-  m_Name: Hill A1
+  m_Name: Hill A2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7573877009438188016
+--- !u!4 &6518175376047109903
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4646739553011868425}
+  m_GameObject: {fileID: 6581885413573267229}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 15.25, y: 9.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!68 &3755745289042453520
+--- !u!68 &2820240986069488930
 EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4646739553011868425}
+  m_GameObject: {fileID: 6581885413573267229}
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
@@ -70,10 +70,12 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 0, y: 0}
-  - {x: 0.28, y: 0.03}
-  - {x: 0.9, y: 0.225}
-  - {x: 1.6, y: 0.225}
-  - {x: 2.24, y: 0.03}
+  - {x: 0.25, y: 0.075}
+  - {x: 0.75, y: 0.37}
+  - {x: 0.95, y: 0.475}
+  - {x: 1.55, y: 0.475}
+  - {x: 1.75, y: 0.37}
+  - {x: 2.25, y: 0.075}
   - {x: 2.5, y: 0}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}

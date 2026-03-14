@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4646739553011868425
+--- !u!1 &4432108862978657829
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,37 +8,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7573877009438188016}
-  - component: {fileID: 3755745289042453520}
+  - component: {fileID: 3868250502304356138}
+  - component: {fileID: 7575188799656461363}
   m_Layer: 3
-  m_Name: Hill A1
+  m_Name: Hill B3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7573877009438188016
+--- !u!4 &3868250502304356138
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4646739553011868425}
+  m_GameObject: {fileID: 4432108862978657829}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 15.25, y: 9.5, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 14.75, y: 9.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!68 &3755745289042453520
+--- !u!68 &7575188799656461363
 EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4646739553011868425}
+  m_GameObject: {fileID: 4432108862978657829}
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
@@ -70,11 +70,15 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: 0, y: 0}
-  - {x: 0.28, y: 0.03}
-  - {x: 0.9, y: 0.225}
-  - {x: 1.6, y: 0.225}
-  - {x: 2.24, y: 0.03}
-  - {x: 2.5, y: 0}
+  - {x: 0.28, y: 0.08}
+  - {x: 0.5, y: 0.23}
+  - {x: 1, y: 0.7}
+  - {x: 1.4, y: 0.95}
+  - {x: 2.1, y: 0.95}
+  - {x: 2.51, y: 0.7}
+  - {x: 3, y: 0.23}
+  - {x: 3.22, y: 0.08}
+  - {x: 3.5, y: 0}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
