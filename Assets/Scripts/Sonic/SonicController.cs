@@ -130,7 +130,7 @@ public class SonicController : MonoBehaviour
 
   private PlayerViewInput PlayerViewInput => new(
     _playerSpeedManager.IsSkidding,
-    _postDetachFall,
+    _postDetachFall || Mathf.Abs(_playerSpeedManager.GroundSpeed) < FrictionSpeed,
     TopSpeed,
     MinAnimatorWalkingSpeed,
     AnimatorWalkingSpeedFactor,
