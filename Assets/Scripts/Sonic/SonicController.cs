@@ -67,7 +67,7 @@ public class SonicController : MonoBehaviour
   public float ReversedCDSensorLength = 0.3f;
   public float ReversedEFSensorLength = 0.3f;
   public float InputDeadZone = 0.001f;
-  public Vector2 WallDetachPositionOffset = new(0.2f, 0.0f);
+  public Vector2 WallDetachPositionOffset = new(-0.1f, 0.0f);
   public bool GravityDownEnabled = true;
 
   [Header("Ground")]
@@ -228,8 +228,9 @@ public class SonicController : MonoBehaviour
           _postDetachFall = true;
           _postDetachInputLocked = true;
           _wallDetachPositionOffset = _groundSide is GroundSide.Left or GroundSide.Right;
-          _groundSide = GroundSide.Down;
           _playerSpeedManager.ResetSpeeds();
+
+          _groundSide = GroundSide.Down;
         }
       }
     }
