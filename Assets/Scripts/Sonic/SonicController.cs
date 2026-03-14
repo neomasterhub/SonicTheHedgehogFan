@@ -77,6 +77,7 @@ public class SonicController : MonoBehaviour
   public float GroundPositionOffset = 0.05f; // ABSensorLength / 2
 
   [Header("UI")]
+  public Color GroundNormalColor = Color.white;
   public float GroundNormalLength = 1.5f;
   public float SensorBeginRadius = 0.03f;
   public float SensorEndRadius = 0.01f;
@@ -174,8 +175,8 @@ public class SonicController : MonoBehaviour
 
   private void OnDrawGizmos()
   {
+    _playerSensorSystemManager.DrawGroundNormal(GroundNormalLength, SensorBeginRadius, SensorEndRadius, GroundNormalColor);
     _playerSensorSystemManager.DrawSensors(SensorBeginRadius, SensorEndRadius);
-    _playerSensorSystemManager.DrawGroundNormal(GroundNormalLength, SensorBeginRadius, SensorEndRadius, Color.brown);
   }
 
   private void UpdateInput()
