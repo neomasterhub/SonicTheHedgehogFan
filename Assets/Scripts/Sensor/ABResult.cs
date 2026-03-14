@@ -36,7 +36,7 @@ public struct ABResult
     SensorDirectionSign = sensorDirectionSign;
   }
 
-  public readonly void Draw(
+  public readonly void DrawNormal(
     float normalLength = 1,
     float beginRadius = 0,
     float endRadius = 0,
