@@ -1,15 +1,17 @@
 public readonly struct PlayerViewInput
 {
   public readonly bool IsSkidding;
+  public readonly bool PostDetachFall;
   public readonly float TopSpeed;
   public readonly float MinAnimatorWalkingSpeed;
   public readonly float AnimatorWalkingSpeedFactor;
   public readonly float GroundAngleDeg;
   public readonly GroundSide GroundSide;
 
-  public PlayerViewInput(bool isSkidding, float topSpeed, float minAnimatorWalkingSpeed, float animatorWalkingSpeedFactor, float groundAngleDeg, GroundSide groundSide)
+  public PlayerViewInput(bool isSkidding, bool postDetachFall, float topSpeed, float minAnimatorWalkingSpeed, float animatorWalkingSpeedFactor, float groundAngleDeg, GroundSide groundSide)
   {
     IsSkidding = isSkidding;
+    PostDetachFall = postDetachFall;
     TopSpeed = topSpeed;
     MinAnimatorWalkingSpeed = minAnimatorWalkingSpeed;
     AnimatorWalkingSpeedFactor = animatorWalkingSpeedFactor;

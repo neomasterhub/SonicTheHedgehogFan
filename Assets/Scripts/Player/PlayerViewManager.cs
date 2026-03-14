@@ -27,14 +27,22 @@ public class PlayerViewManager
 
   private void RotateSprite(PlayerViewInput input)
   {
-    var spriteAngle = input.GroundAngleDeg.Round() + input.GroundSide switch
+    float spriteAngle;
+    if (input.PostDetachFall)
     {
-      GroundSide.Down => 0f,
-      GroundSide.Right => 90f,
-      GroundSide.Up => 180f,
-      GroundSide.Left => -90f,
-      _ => throw input.ArgumentOutOfRangeException()
-    };
+      spriteAngle = 0;
+    }
+    else
+    {
+      spriteAngle = input.GroundAngleDeg.Round() + input.GroundSide switch
+      {
+        GroundSide.Down => 0f,
+        GroundSide.Right => 90f,
+        GroundSide.Up => 180f,
+        GroundSide.Left => -90f,
+        _ => throw input.ArgumentOutOfRangeException()
+      };
+    }
 
     _spriteRenderer.transform.localRotation = Quaternion.Euler(0, 0, spriteAngle);
 
