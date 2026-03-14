@@ -28,7 +28,7 @@ public class PlayerViewManager
   private void RotateSprite(PlayerViewInput input)
   {
     float spriteAngle;
-    if (input.PostDetachFall)
+    if (input.StandingStraight)
     {
       spriteAngle = 0;
     }
