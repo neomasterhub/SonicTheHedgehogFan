@@ -33,6 +33,7 @@ public class SonicController : MonoBehaviour
   private SizeMode _playerSizeMode = SizeMode.Big;
   private bool _postDetachFall;
   private bool _postDetachInputLocked;
+  private bool _wallDetachPositionOffset;
 
   // Audio
   private AudioSource _sfxSkidding;
@@ -66,6 +67,7 @@ public class SonicController : MonoBehaviour
   public float ReversedCDSensorLength = 0.3f;
   public float ReversedEFSensorLength = 0.3f;
   public float InputDeadZone = 0.001f;
+  public Vector2 WallDetachPositionOffset = new(0.2f, 0.0f);
   public bool GravityDownEnabled = true;
 
   [Header("Ground")]
@@ -225,6 +227,7 @@ public class SonicController : MonoBehaviour
         {
           _postDetachFall = true;
           _postDetachInputLocked = true;
+          _wallDetachPositionOffset = _groundSide is GroundSide.Left or GroundSide.Right;
           _groundSide = GroundSide.Down;
           _playerSpeedManager.ResetSpeeds();
         }
@@ -251,9 +254,16 @@ public class SonicController : MonoBehaviour
     var speedX = _playerSpeedManager.SpeedX;
     var speedY = _playerSpeedManager.SpeedY;
 
-    // Snap to ground with small upward offset.
     if (_playerState.HasFlag(PlayerState.Grounded))
     {
+      if (_wallDetachPositionOffset)
+      {
+        _wallDetachPositionOffset = false;
+        speedX = WallDetachPositionOffset.x;
+        speedY = WallDetachPositionOffset.y;
+      }
+
+      // Snap to ground with small upward offset.
       speedY -= (_playerSensorSystemManager.ABResult.Distance
         * _playerSensorSystemManager.ABResult.SensorDirectionSign)
         - GroundPositionOffset;

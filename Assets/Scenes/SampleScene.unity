@@ -1779,11 +1779,13 @@ MonoBehaviour:
   ReversedCDSensorLength: 0.3
   ReversedEFSensorLength: 0.3
   InputDeadZone: 0.001
+  WallDetachPositionOffset: {x: 0.2, y: 0}
   GravityDownEnabled: 1
   GroundLayer:
     serializedVersion: 2
     m_Bits: 8
   GroundPositionOffset: 0.05
+  GroundNormalColor: {r: 1, g: 1, b: 1, a: 1}
   GroundNormalLength: 1.5
   SensorBeginRadius: 0.03
   SensorEndRadius: 0.01
