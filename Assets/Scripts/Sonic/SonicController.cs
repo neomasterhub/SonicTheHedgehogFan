@@ -135,12 +135,13 @@ public class SonicController : MonoBehaviour
 
   private PlayerViewInput PlayerViewInput => new(
     _playerSpeedManager.IsSkidding,
-    _postDetachFall || Mathf.Abs(_playerSpeedManager.GroundSpeed) < FrictionSpeed,
     TopSpeed,
     MinAnimatorWalkingSpeed,
     AnimatorWalkingSpeedFactor,
     _relativeGroundInfo.AngleDeg,
-    _groundSide);
+    _groundAngleDeg,
+    _playerState,
+    _prevPlayerState);
 
   private void Awake()
   {
