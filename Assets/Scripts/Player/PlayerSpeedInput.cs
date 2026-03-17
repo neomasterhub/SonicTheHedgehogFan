@@ -14,6 +14,7 @@ public readonly struct PlayerSpeedInput
   public readonly float DecelerationSpeed;
   public readonly float SlopeFactor;
   public readonly GroundSide GroundSide;
+  public readonly GroundSide PrevGroundSide;
 
   // Air
   public readonly float AirTopSpeed;
@@ -27,7 +28,7 @@ public readonly struct PlayerSpeedInput
   public readonly float InputDeadZone;
   public readonly float SkiddingSpeedDeadZone;
 
-  public PlayerSpeedInput(PlayerState playerState, PlayerState prevPlayerState, float distanceToGround, float groundAngleRad, float topSpeed, float frictionSpeed, float accelerationSpeed, float decelerationSpeed, float slopeFactor, GroundSide groundSide, float airTopSpeed, float airAccelerationSpeed, float gravityUpSpeed, float gravityDownSpeed, float maxFallSpeed, bool gravityEnabled, float inputDeadZone, float skiddingSpeedDeadZone)
+  public PlayerSpeedInput(PlayerState playerState, PlayerState prevPlayerState, float distanceToGround, float groundAngleRad, float topSpeed, float frictionSpeed, float accelerationSpeed, float decelerationSpeed, float slopeFactor, GroundSide groundSide, GroundSide prevGroundSide, float airTopSpeed, float airAccelerationSpeed, float gravityUpSpeed, float gravityDownSpeed, float maxFallSpeed, bool gravityEnabled, float inputDeadZone, float skiddingSpeedDeadZone)
   {
     PlayerState = playerState;
     PrevPlayerState = prevPlayerState;
@@ -39,6 +40,7 @@ public readonly struct PlayerSpeedInput
     DecelerationSpeed = decelerationSpeed;
     SlopeFactor = slopeFactor;
     GroundSide = groundSide;
+    PrevGroundSide = prevGroundSide;
     AirTopSpeed = airTopSpeed;
     AirAccelerationSpeed = airAccelerationSpeed;
     GravityUpSpeed = gravityUpSpeed;

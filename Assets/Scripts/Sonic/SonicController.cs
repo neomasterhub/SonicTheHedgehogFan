@@ -28,6 +28,7 @@ public class SonicController : MonoBehaviour
 
   // State flags
   private GroundSide _groundSide = GroundSide.Down;
+  private GroundSide _prevGroundSide = GroundSide.Down;
   private PlayerState _playerState;
   private PlayerState _prevPlayerState;
   private SizeMode _playerSizeMode = SizeMode.Big;
@@ -115,6 +116,7 @@ public class SonicController : MonoBehaviour
     DecelerationSpeed,
     SlopeFactor,
     _groundSide,
+    _prevGroundSide,
 
     // Air
     AirTopSpeed,
@@ -189,6 +191,7 @@ public class SonicController : MonoBehaviour
 
   private void SetGroundSide()
   {
+    _prevGroundSide = _groundSide;
     _groundSide = _relativeGroundInfo.Side switch
     {
       GroundSide.Left => _groundSide.GetPrevious(),
