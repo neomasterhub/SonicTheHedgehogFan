@@ -122,7 +122,7 @@ public class SonicController : MonoBehaviour
     GravityUpSpeed,
     GravityDownSpeed,
     MaxFallSpeed,
-    GravityEnabled = GravityEnabled && _groundSide == GroundSide.Down,
+    GravityEnabled && _groundSide == GroundSide.Down,
 
     // Dead Zones
     InputDeadZone,
@@ -335,6 +335,11 @@ public class SonicController : MonoBehaviour
     _info.AddParLine("Ground Side Angle", _relativeGroundInfo.AngleDeg, 0, " °");
     _info.AddParLine("Slope Factor Speed", _playerSpeedManager.SlopeFactorSpeed, 4);
     _info.AddParLine("Ground Speed", _playerSpeedManager.GroundSpeed, 4);
+
+    _info.AppendLine();
+
+    _info.AddParLine("Global Gravity", GravityEnabled);
+    _info.AddParLine("Ground Side Gravity", PlayerSpeedInput.GravityEnabled);
 
     _info.AppendLine();
 
