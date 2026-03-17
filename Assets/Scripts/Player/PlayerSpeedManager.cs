@@ -71,6 +71,9 @@ public class PlayerSpeedManager
       case GroundSide.Left:
         break;
       case GroundSide.Right:
+        var speedX = SpeedX;
+        SpeedX = -SpeedY;
+        SpeedY = speedX;
         break;
       case GroundSide.Up:
         break;
