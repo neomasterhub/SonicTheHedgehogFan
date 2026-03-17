@@ -28,6 +28,7 @@ public class SonicController : MonoBehaviour
 
   // State flags
   private GroundSide _groundSide = GroundSide.Down;
+  private GroundSide _prevGroundSide = GroundSide.Down;
   private PlayerState _playerState;
   private PlayerState _prevPlayerState;
   private SizeMode _playerSizeMode = SizeMode.Big;
@@ -54,7 +55,7 @@ public class SonicController : MonoBehaviour
   public float FrictionSpeed = SonicConsts.Physics.FrictionSpeed;
   public float AccelerationSpeed = SonicConsts.Physics.AccelerationSpeed;
   public float DecelerationSpeed = SonicConsts.Physics.DecelerationSpeed;
-  public float AirTopSpeed = SonicConsts.Physics.AirAccelerationSpeed;
+  public float AirTopSpeed = SonicConsts.Physics.AirTopSpeed;
   public float AirAccelerationSpeed = SonicConsts.Physics.AirAccelerationSpeed;
   public float MaxFallSpeed = SonicConsts.Physics.MaxFallSpeed;
   public float GravityUpSpeed = SonicConsts.Physics.GravityUp;
@@ -68,7 +69,8 @@ public class SonicController : MonoBehaviour
   public float ReversedEFSensorLength = 0.3f;
   public float InputDeadZone = 0.001f;
   public Vector2 WallDetachPositionOffset = new(-0.1f, 0.0f);
-  public bool GravityDownEnabled = true;
+  public Vector2 WallToAirSpeedDelta = new(0.011f, 0.0f);
+  public bool GravityEnabled = true;
 
   [Header("Ground")]
   public LayerMask GroundLayer = 8;
@@ -115,14 +117,16 @@ public class SonicController : MonoBehaviour
     DecelerationSpeed,
     SlopeFactor,
     _groundSide,
+    _prevGroundSide,
 
     // Air
+    GravityEnabled && _groundSide == GroundSide.Down,
     AirTopSpeed,
     AirAccelerationSpeed,
     GravityUpSpeed,
     GravityDownSpeed,
     MaxFallSpeed,
-    GravityDownEnabled,
+    WallToAirSpeedDelta,
 
     // Dead Zones
     InputDeadZone,
@@ -189,6 +193,7 @@ public class SonicController : MonoBehaviour
 
   private void SetGroundSide()
   {
+    _prevGroundSide = _groundSide;
     _groundSide = _relativeGroundInfo.Side switch
     {
       GroundSide.Left => _groundSide.GetPrevious(),
@@ -238,6 +243,7 @@ public class SonicController : MonoBehaviour
 
     if (_playerState.HasFlag(PlayerState.Airborne))
     {
+      _groundSide = GroundSide.Down;
     }
   }
 
@@ -335,6 +341,11 @@ public class SonicController : MonoBehaviour
     _info.AddParLine("Ground Side Angle", _relativeGroundInfo.AngleDeg, 0, " °");
     _info.AddParLine("Slope Factor Speed", _playerSpeedManager.SlopeFactorSpeed, 4);
     _info.AddParLine("Ground Speed", _playerSpeedManager.GroundSpeed, 4);
+
+    _info.AppendLine();
+
+    _info.AddParLine("Global Gravity", GravityEnabled);
+    _info.AddParLine("Ground Side Gravity", PlayerSpeedInput.GravityEnabled);
 
     _info.AppendLine();
 
