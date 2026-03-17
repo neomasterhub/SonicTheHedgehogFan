@@ -21,13 +21,13 @@ public readonly struct PlayerSpeedInput
   public readonly float GravityUpSpeed;
   public readonly float GravityDownSpeed;
   public readonly float MaxFallSpeed;
-  public readonly bool GravityDownEnabled;
+  public readonly bool GravityEnabled;
 
   // Dead Zones
   public readonly float InputDeadZone;
   public readonly float SkiddingSpeedDeadZone;
 
-  public PlayerSpeedInput(PlayerState playerState, PlayerState prevPlayerState, float distanceToGround, float groundAngleRad, float topSpeed, float frictionSpeed, float accelerationSpeed, float decelerationSpeed, float slopeFactor, GroundSide groundSide, float airTopSpeed, float airAccelerationSpeed, float gravityUpSpeed, float gravityDownSpeed, float maxFallSpeed, bool gravityDownEnabled, float inputDeadZone, float skiddingSpeedDeadZone)
+  public PlayerSpeedInput(PlayerState playerState, PlayerState prevPlayerState, float distanceToGround, float groundAngleRad, float topSpeed, float frictionSpeed, float accelerationSpeed, float decelerationSpeed, float slopeFactor, GroundSide groundSide, float airTopSpeed, float airAccelerationSpeed, float gravityUpSpeed, float gravityDownSpeed, float maxFallSpeed, bool gravityEnabled, float inputDeadZone, float skiddingSpeedDeadZone)
   {
     PlayerState = playerState;
     PrevPlayerState = prevPlayerState;
@@ -44,7 +44,7 @@ public readonly struct PlayerSpeedInput
     GravityUpSpeed = gravityUpSpeed;
     GravityDownSpeed = gravityDownSpeed;
     MaxFallSpeed = maxFallSpeed;
-    GravityDownEnabled = gravityDownEnabled;
+    GravityEnabled = gravityEnabled;
     InputDeadZone = inputDeadZone;
     SkiddingSpeedDeadZone = skiddingSpeedDeadZone;
   }

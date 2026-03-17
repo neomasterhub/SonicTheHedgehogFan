@@ -68,7 +68,7 @@ public class SonicController : MonoBehaviour
   public float ReversedEFSensorLength = 0.3f;
   public float InputDeadZone = 0.001f;
   public Vector2 WallDetachPositionOffset = new(-0.1f, 0.0f);
-  public bool GravityDownEnabled = true;
+  public bool GravityEnabled = true;
 
   [Header("Ground")]
   public LayerMask GroundLayer = 8;
@@ -122,7 +122,7 @@ public class SonicController : MonoBehaviour
     GravityUpSpeed,
     GravityDownSpeed,
     MaxFallSpeed,
-    GravityDownEnabled,
+    GravityEnabled = GravityEnabled && _groundSide == GroundSide.Down,
 
     // Dead Zones
     InputDeadZone,

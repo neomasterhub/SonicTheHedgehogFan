@@ -63,7 +63,7 @@ public class PlayerSpeedManager
 
   private void SetSpeed_Airborne_Gravity(PlayerSpeedInput input)
   {
-    if (!input.GravityDownEnabled)
+    if (!input.GravityEnabled)
     {
       return;
     }
