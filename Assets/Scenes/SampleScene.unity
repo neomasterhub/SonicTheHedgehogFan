@@ -1018,7 +1018,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: 43, y: 26, z: 0}
+  - first: {x: 44, y: 25, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 40
@@ -1028,7 +1028,17 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: 43, y: 27, z: 0}
+  - first: {x: 45, y: 25, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 40
+      m_TileSpriteIndex: 40
+      m_TileMatrixIndex: 2
+      m_TileColorIndex: 31
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: 46, y: 25, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 40
@@ -1120,7 +1130,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 27ee59f559e1f7b4e8ad1551b4693091, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 4ccf070c626379948aba1dd73d88e39e, type: 2}
-  - m_RefCount: 77
+  - m_RefCount: 78
     m_Data: {fileID: 11400000, guid: a5432b7886b0e9646bb1f3e30da47fc0, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 51a95f58f9569bc4abc466da38785534, type: 2}
@@ -1205,7 +1215,7 @@ Tilemap:
     m_Data: {fileID: -352188332, guid: e0ea3ede9b32cfc4695c7b4257c7f275, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -2112933694, guid: e0ea3ede9b32cfc4695c7b4257c7f275, type: 3}
-  - m_RefCount: 77
+  - m_RefCount: 78
     m_Data: {fileID: 1928353128, guid: e0ea3ede9b32cfc4695c7b4257c7f275, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -250151606, guid: e0ea3ede9b32cfc4695c7b4257c7f275, type: 3}
@@ -1246,7 +1256,7 @@ Tilemap:
       e31: 0
       e32: 0
       e33: 4.5908e-41
-  - m_RefCount: 82
+  - m_RefCount: 83
     m_Data:
       e00: 1
       e01: 0
@@ -1327,7 +1337,7 @@ Tilemap:
     m_Data: {r: 2.6293085e+25, g: 2.6293085e+25, b: 2.6293085e+25, a: 2.6293085e+25}
   - m_RefCount: 0
     m_Data: {r: 2.6293085e+25, g: 2.6293085e+25, b: 2.6293085e+25, a: 2.6293085e+25}
-  - m_RefCount: 82
+  - m_RefCount: 83
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -1799,7 +1809,7 @@ MonoBehaviour:
   ReversedEFSensorLength: 0.3
   InputDeadZone: 0.001
   WallDetachPositionOffset: {x: -0.1, y: 0}
-  GravityDownEnabled: 1
+  GravityEnabled: 1
   GroundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -2460,6 +2470,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2233803765968004545, guid: 88cdd643388d11841816991c45793fee, type: 3}
+      propertyPath: m_Points.Array.data[8].y
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2233803765968004545, guid: 88cdd643388d11841816991c45793fee, type: 3}
+      propertyPath: m_Points.Array.data[9].x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2233803765968004545, guid: 88cdd643388d11841816991c45793fee, type: 3}
+      propertyPath: m_Points.Array.data[9].y
+      value: 3.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7020284103523656363, guid: 88cdd643388d11841816991c45793fee, type: 3}
       propertyPath: m_Name
       value: Wall R (temp)
