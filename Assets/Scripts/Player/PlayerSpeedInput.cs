@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public readonly struct PlayerSpeedInput
 {
   public readonly PlayerState PlayerState;
@@ -17,18 +19,19 @@ public readonly struct PlayerSpeedInput
   public readonly GroundSide PrevGroundSide;
 
   // Air
+  public readonly bool GravityEnabled;
   public readonly float AirTopSpeed;
   public readonly float AirAccelerationSpeed;
   public readonly float GravityUpSpeed;
   public readonly float GravityDownSpeed;
   public readonly float MaxFallSpeed;
-  public readonly bool GravityEnabled;
+  public readonly Vector2 WallToAirSpeedDelta;
 
   // Dead Zones
   public readonly float InputDeadZone;
   public readonly float SkiddingSpeedDeadZone;
 
-  public PlayerSpeedInput(PlayerState playerState, PlayerState prevPlayerState, float distanceToGround, float groundAngleRad, float topSpeed, float frictionSpeed, float accelerationSpeed, float decelerationSpeed, float slopeFactor, GroundSide groundSide, GroundSide prevGroundSide, float airTopSpeed, float airAccelerationSpeed, float gravityUpSpeed, float gravityDownSpeed, float maxFallSpeed, bool gravityEnabled, float inputDeadZone, float skiddingSpeedDeadZone)
+  public PlayerSpeedInput(PlayerState playerState, PlayerState prevPlayerState, float distanceToGround, float groundAngleRad, float topSpeed, float frictionSpeed, float accelerationSpeed, float decelerationSpeed, float slopeFactor, GroundSide groundSide, GroundSide prevGroundSide, bool gravityEnabled, float airTopSpeed, float airAccelerationSpeed, float gravityUpSpeed, float gravityDownSpeed, float maxFallSpeed, Vector2 wallToAirSpeedDelta, float inputDeadZone, float skiddingSpeedDeadZone)
   {
     PlayerState = playerState;
     PrevPlayerState = prevPlayerState;
@@ -41,12 +44,13 @@ public readonly struct PlayerSpeedInput
     SlopeFactor = slopeFactor;
     GroundSide = groundSide;
     PrevGroundSide = prevGroundSide;
+    GravityEnabled = gravityEnabled;
     AirTopSpeed = airTopSpeed;
     AirAccelerationSpeed = airAccelerationSpeed;
     GravityUpSpeed = gravityUpSpeed;
     GravityDownSpeed = gravityDownSpeed;
     MaxFallSpeed = maxFallSpeed;
-    GravityEnabled = gravityEnabled;
+    WallToAirSpeedDelta = wallToAirSpeedDelta;
     InputDeadZone = inputDeadZone;
     SkiddingSpeedDeadZone = skiddingSpeedDeadZone;
   }
