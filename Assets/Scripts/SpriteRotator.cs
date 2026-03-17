@@ -1,22 +1,31 @@
 public class SpriteRotator
 {
-  private const float _initAngleDeg = 90;
-  private const float _stepDeg = 5;
+  private readonly float _from;
+  private readonly float _to;
+  private readonly float _delta;
 
-  private float _angleDeg;
+  private float _curr;
+
+  public SpriteRotator(float from, float to, float delta, float? curr = null)
+  {
+    _from = from;
+    _to = to;
+    _delta = delta;
+    _curr = curr ?? from;
+  }
 
   public void Reset()
   {
-    _angleDeg = _initAngleDeg;
+    _curr = _from;
   }
 
-  public float GetNextAngleDeg()
+  public float GetNext()
   {
-    if (_angleDeg > 0)
+    if (_curr != _to)
     {
-      _angleDeg -= _stepDeg;
+      _curr += _delta;
     }
 
-    return _angleDeg;
+    return _curr;
   }
 }
