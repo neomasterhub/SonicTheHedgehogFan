@@ -1,10 +1,10 @@
-public class SpriteRotator : ISpriteRotator
+public class Rotator : IRotator
 {
   private readonly float _from;
   private readonly float _to;
   private readonly float _delta;
 
-  public SpriteRotator(float from, float to, float delta, float? curr = null)
+  public Rotator(float from, float to, float delta, float? curr = null)
   {
     _from = from;
     _to = to;

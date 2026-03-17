@@ -1,4 +1,4 @@
-public interface ISpriteRotator
+public interface IRotator
 {
   float Current { get; }
   void Reset();
