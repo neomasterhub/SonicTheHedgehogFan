@@ -241,6 +241,7 @@ public class SonicController : MonoBehaviour
 
     if (_playerState.HasFlag(PlayerState.Airborne))
     {
+      _groundSide = GroundSide.Down;
     }
   }
 
