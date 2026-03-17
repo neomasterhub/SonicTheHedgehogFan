@@ -4,28 +4,28 @@ public class SpriteRotator : ISpriteRotator
   private readonly float _to;
   private readonly float _delta;
 
-  private float _curr;
-
   public SpriteRotator(float from, float to, float delta, float? curr = null)
   {
     _from = from;
     _to = to;
     _delta = delta;
-    _curr = curr ?? from;
+    Current = curr ?? from;
   }
+
+  public float Current { get; private set; }
 
   public void Reset()
   {
-    _curr = _from;
+    Current = _from;
   }
 
   public float GetNext()
   {
-    if (_curr != _to)
+    if (Current != _to)
     {
-      _curr += _delta;
+      Current += _delta;
     }
 
-    return _curr;
+    return Current;
   }
 }
