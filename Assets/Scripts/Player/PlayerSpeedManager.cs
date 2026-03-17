@@ -64,7 +64,12 @@ public class PlayerSpeedManager
 
   private void SetSpeed_Airborne_FromGrounded(PlayerSpeedInput input)
   {
-    switch (input.GroundSide)
+    if (!input.PrevPlayerState.HasFlag(PlayerState.Grounded))
+    {
+      return;
+    }
+
+    switch (input.PrevGroundSide)
     {
       case GroundSide.Down:
         break;
