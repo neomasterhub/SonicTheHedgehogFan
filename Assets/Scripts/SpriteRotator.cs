@@ -1,4 +1,4 @@
-public class SpriteRotator
+public class SpriteRotator : ISpriteRotator
 {
   private readonly float _from;
   private readonly float _to;
