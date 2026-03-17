@@ -44,6 +44,7 @@ public class SonicController : MonoBehaviour
   private Timer _inputUnlockTimer;
   private PlayerSpeedManager _playerSpeedManager;
   private PlayerViewManager _playerViewManager;
+  private float _groundAngleDeg;
 
   [Header("Animations")]
   public float MinAnimatorWalkingSpeed = 0.5f;
@@ -245,6 +246,15 @@ public class SonicController : MonoBehaviour
     {
       _groundSide = GroundSide.Down;
     }
+
+    _groundAngleDeg = _relativeGroundInfo.AngleDeg + _groundSide switch
+    {
+      GroundSide.Down => 0f,
+      GroundSide.Right => 90f,
+      GroundSide.Up => 180f,
+      GroundSide.Left => -90f,
+      _ => throw _groundSide.ArgumentOutOfRangeException()
+    };
   }
 
   private void SetSpeed()
@@ -339,6 +349,7 @@ public class SonicController : MonoBehaviour
 
     _info.AddParLine("Ground Side", _groundSide);
     _info.AddParLine("Ground Side Angle", _relativeGroundInfo.AngleDeg, 0, " °");
+    _info.AddParLine("Ground Angle", _groundAngleDeg, 0, " °");
     _info.AddParLine("Slope Factor Speed", _playerSpeedManager.SlopeFactorSpeed, 4);
     _info.AddParLine("Ground Speed", _playerSpeedManager.GroundSpeed, 4);
 
