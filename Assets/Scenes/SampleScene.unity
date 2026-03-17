@@ -1809,6 +1809,7 @@ MonoBehaviour:
   ReversedEFSensorLength: 0.3
   InputDeadZone: 0.001
   WallDetachPositionOffset: {x: -0.1, y: 0}
+  WallToAirSpeedDelta: {x: 0.011, y: 0}
   GravityEnabled: 1
   GroundLayer:
     serializedVersion: 2

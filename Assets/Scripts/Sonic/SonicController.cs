@@ -69,7 +69,7 @@ public class SonicController : MonoBehaviour
   public float ReversedEFSensorLength = 0.3f;
   public float InputDeadZone = 0.001f;
   public Vector2 WallDetachPositionOffset = new(-0.1f, 0.0f);
-  public Vector2 WallToAirSpeedDelta = new(0.03f, 0.0f);
+  public Vector2 WallToAirSpeedDelta = new(0.011f, 0.0f);
   public bool GravityEnabled = true;
 
   [Header("Ground")]
