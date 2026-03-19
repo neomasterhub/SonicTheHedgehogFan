@@ -169,6 +169,7 @@ public class SonicController : MonoBehaviour
       _animator,
       _inputInfo,
       _playerSpeedManager,
+      _pvrProvider,
       _spriteRenderer);
 
     InitAudio();

@@ -5,17 +5,20 @@ public class PlayerViewManager
   private readonly Animator _animator;
   private readonly InputInfo _inputInfo;
   private readonly PlayerSpeedManager _playerSpeedManager;
+  private readonly PlayerViewRotatorProvider _playerViewRotatorProvider;
   private readonly SpriteRenderer _spriteRenderer;
 
   public PlayerViewManager(
     Animator animator,
     InputInfo inputInfo,
     PlayerSpeedManager playerSpeedManager,
+    PlayerViewRotatorProvider playerViewRotatorProvider,
     SpriteRenderer spriteRenderer)
   {
     _animator = animator;
     _inputInfo = inputInfo;
     _playerSpeedManager = playerSpeedManager;
+    _playerViewRotatorProvider = playerViewRotatorProvider;
     _spriteRenderer = spriteRenderer;
   }
 
