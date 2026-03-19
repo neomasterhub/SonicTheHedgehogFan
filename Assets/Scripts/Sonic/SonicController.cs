@@ -43,6 +43,7 @@ public class SonicController : MonoBehaviour
 
   private InputInfo _inputInfo;
   private IPlayerViewRotator _prvGrounded;
+  private IPlayerViewRotator _prvWallExit;
   private PlayerSpeedManager _playerSpeedManager;
   private PlayerViewManager _playerViewManager;
   private Timer _inputUnlockTimer;
@@ -165,9 +166,15 @@ public class SonicController : MonoBehaviour
 
     _playerSpeedManager = new PlayerSpeedManager(_inputInfo, _slopeFactorSpeedProvider);
 
-    _prvGrounded = new GroundedPlayerViewRotator(() => PRVGroundedEnabled && _groundSide == GroundSide.Down);
+    _prvGrounded = new GroundedPlayerViewRotator(
+      () => PRVGroundedEnabled
+      && _groundSide == GroundSide.Down);
+    _prvWallExit = new WallExitPlayerViewRotator(
+      () => _playerState.HasFlag(PlayerState.Airborne)
+      && _prevPlayerState.HasFlag(PlayerState.Grounded));
     _pvrProvider
-      .Add(_prvGrounded);
+      .Add(_prvGrounded)
+      .Add(_prvWallExit);
 
     _playerViewManager = new PlayerViewManager(
       _animator,
