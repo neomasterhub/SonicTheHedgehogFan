@@ -93,6 +93,7 @@ public class SonicController : MonoBehaviour
   [Header("Rotators")]
   public bool PRVGroundedEnabled = true;
   public bool PRVWallExitEnabled = true;
+  public float PRVWallExitDelta = 2.5f;
 
   [Header("Canvas")]
   public TextMeshProUGUI InfoText;
@@ -171,6 +172,7 @@ public class SonicController : MonoBehaviour
     _prvGrounded = new GroundedPlayerViewRotator(
       () => PRVGroundedEnabled && _playerState.HasFlag(PlayerState.Grounded));
     _prvWallExit = new WallExitPlayerViewRotator(
+      PRVWallExitDelta,
       () => PRVWallExitEnabled && _playerState.HasFlag(PlayerState.Airborne));
     _pvrProvider
       .Add(_prvGrounded)
