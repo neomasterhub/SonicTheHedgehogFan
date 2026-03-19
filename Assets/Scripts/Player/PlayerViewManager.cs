@@ -1,4 +1,3 @@
-using System.Linq;
 using UnityEngine;
 
 public class PlayerViewManager
@@ -37,7 +36,8 @@ public class PlayerViewManager
       0.001f,
       input.PlayerState);
 
-    foreach (var rotator in _playerViewRotatorProvider[rotatorInput].Where(r => r.Enabled))
+    var rotator = _playerViewRotatorProvider.First();
+    if (rotator != null)
     {
       rotator.Rotate(rotatorInput);
       _spriteRenderer.transform.localRotation = Quaternion.Euler(rotator.Rotation);

@@ -10,7 +10,6 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class SonicController : MonoBehaviour
 {
-  private readonly IPlayerViewRotator _pvrGrounded = new GroundedPlayerViewRotator();
   private readonly PlayerViewRotatorProvider _pvrProvider = new();
   private readonly PlayerSensorSystemManager _playerSensorSystemManager = new();
   private readonly RelativeGroundInfo _relativeGroundInfo = new();
@@ -43,9 +42,10 @@ public class SonicController : MonoBehaviour
   private Timer _sfxSkiddingTimer;
 
   private InputInfo _inputInfo;
-  private Timer _inputUnlockTimer;
+  private IPlayerViewRotator _prvGrounded;
   private PlayerSpeedManager _playerSpeedManager;
   private PlayerViewManager _playerViewManager;
+  private Timer _inputUnlockTimer;
   private float _groundAngleDeg;
 
   [Header("Animations")]
@@ -54,6 +54,7 @@ public class SonicController : MonoBehaviour
   public float SkiddingSpeedDeadZone = 0.1f;
 
   [Header("Physics")]
+  public bool GravityEnabled = true;
   public float TopSpeed = SonicConsts.Physics.TopSpeed;
   public float FrictionSpeed = SonicConsts.Physics.FrictionSpeed;
   public float AccelerationSpeed = SonicConsts.Physics.AccelerationSpeed;
@@ -73,7 +74,6 @@ public class SonicController : MonoBehaviour
   public float InputDeadZone = 0.001f;
   public Vector2 WallDetachPositionOffset = new(-0.1f, 0.0f);
   public Vector2 WallToAirSpeedDelta = new(0.011f, 0.0f);
-  public bool GravityEnabled = true;
 
   [Header("Ground")]
   public LayerMask GroundLayer = 8;
@@ -88,6 +88,9 @@ public class SonicController : MonoBehaviour
   public float GroundNormalLength = 1.5f;
   public float SensorBeginRadius = 0.03f;
   public float SensorEndRadius = 0.01f;
+
+  [Header("Rotators")]
+  public bool PRVGroundedEnabled = true;
 
   [Header("Canvas")]
   public TextMeshProUGUI InfoText;
@@ -162,8 +165,9 @@ public class SonicController : MonoBehaviour
 
     _playerSpeedManager = new PlayerSpeedManager(_inputInfo, _slopeFactorSpeedProvider);
 
+    _prvGrounded = new GroundedPlayerViewRotator(() => PRVGroundedEnabled && _groundSide == GroundSide.Down);
     _pvrProvider
-      .Add(_pvrGrounded);
+      .Add(_prvGrounded);
 
     _playerViewManager = new PlayerViewManager(
       _animator,
