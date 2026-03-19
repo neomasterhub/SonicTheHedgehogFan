@@ -163,7 +163,7 @@ public class SonicController : MonoBehaviour
     _playerSpeedManager = new PlayerSpeedManager(_inputInfo, _slopeFactorSpeedProvider);
 
     _pvrProvider
-      .Add(input => input.PlayerState.HasFlag(PlayerState.Grounded), _pvrGrounded);
+      .Add(_pvrGrounded);
 
     _playerViewManager = new PlayerViewManager(
       _animator,
