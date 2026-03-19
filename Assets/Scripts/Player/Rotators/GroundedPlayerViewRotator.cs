@@ -4,7 +4,7 @@ public class GroundedPlayerViewRotator : PlayerViewRotatorBase
 {
   public override void Rotate(PlayerViewRotatorInput input)
   {
-    if (!Enabled)
+    if (!Condition())
     {
       return;
     }
