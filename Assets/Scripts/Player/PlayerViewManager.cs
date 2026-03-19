@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public class PlayerViewManager
@@ -30,17 +31,17 @@ public class PlayerViewManager
 
   private void RotateSprite(PlayerViewInput input)
   {
-    float spriteAngle = input.GroundAngleDeg;
+    var rotInput = new PlayerViewRotatorInput(
+      input.GroundAngleDeg,
+      _playerSpeedManager.GroundSpeed,
+      0.001f,
+      input.PlayerState);
 
-    if (input.PlayerState.HasFlag(PlayerState.Grounded))
+    foreach (var rot in _playerViewRotatorProvider[rotInput].Where(r => r.Enabled))
     {
+      rot.Rotate(rotInput);
+      _spriteRenderer.transform.localRotation = Quaternion.Euler(0, 0, rot.Angle);
     }
-
-    if (input.PlayerState.HasFlag(PlayerState.Airborne))
-    {
-    }
-
-    _spriteRenderer.transform.localRotation = Quaternion.Euler(0, 0, spriteAngle);
 
     if (input.IsSkidding)
     {
