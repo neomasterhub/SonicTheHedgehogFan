@@ -34,7 +34,9 @@ public class PlayerViewManager
       input.GroundAngleDeg,
       _playerSpeedManager.GroundSpeed,
       0.001f,
-      input.PlayerState);
+      input.PrevGroundSide,
+      input.PlayerState,
+      input.PrevPlayerState);
 
     var rotator = _playerViewRotatorProvider.First();
     if (rotator != null)
