@@ -147,6 +147,7 @@ public class SonicController : MonoBehaviour
     AnimatorWalkingSpeedFactor,
     _relativeGroundInfo.AngleDeg,
     _groundAngleDeg,
+    _prevGroundSide,
     _playerState,
     _prevPlayerState);
 
