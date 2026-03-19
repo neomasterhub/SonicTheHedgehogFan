@@ -168,7 +168,7 @@ public class SonicController : MonoBehaviour
 
     _prvGrounded = new GroundedPlayerViewRotator(
       () => PRVGroundedEnabled
-      && _groundSide == GroundSide.Down);
+      && _playerState.HasFlag(PlayerState.Grounded));
     _prvWallExit = new WallExitPlayerViewRotator(
       () => _playerState.HasFlag(PlayerState.Airborne)
       && _prevPlayerState.HasFlag(PlayerState.Grounded));
