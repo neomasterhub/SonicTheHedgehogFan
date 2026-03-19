@@ -10,6 +10,8 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class SonicController : MonoBehaviour
 {
+  private readonly IPlayerViewRotator _pvrGrounded = new GroundedPlayerViewRotator();
+  private readonly PlayerViewRotatorProvider _pvrProvider = new();
   private readonly PlayerSensorSystemManager _playerSensorSystemManager = new();
   private readonly RelativeGroundInfo _relativeGroundInfo = new();
   private readonly SlopeFactorSpeedProvider _slopeFactorSpeedProvider = new(new()
@@ -159,6 +161,9 @@ public class SonicController : MonoBehaviour
       .WhenCompleted(() => _postDetachInputLocked = false);
 
     _playerSpeedManager = new PlayerSpeedManager(_inputInfo, _slopeFactorSpeedProvider);
+
+    _pvrProvider
+      .Add(input => input.PlayerState.HasFlag(PlayerState.Grounded), _pvrGrounded);
 
     _playerViewManager = new PlayerViewManager(
       _animator,
