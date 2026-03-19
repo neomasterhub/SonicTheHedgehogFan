@@ -9,8 +9,6 @@ public class GroundedPlayerViewRotator : PlayerViewRotatorBase
       return;
     }
 
-    Angle = Mathf.Abs(input.GroundSpeed) > input.StandingStraightGroundSpeedZone
-      ? input.GroundAngleDeg
-      : 0;
+    Rotation = new(0, 0, Mathf.Abs(input.GroundSpeed) > input.StandingStraightGroundSpeedZone ? input.GroundAngleDeg : 0);
   }
 }

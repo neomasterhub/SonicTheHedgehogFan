@@ -1,6 +1,8 @@
+using UnityEngine;
+
 public interface IPlayerViewRotator
 {
   bool Enabled { get; set; }
-  float Angle { get; }
+  Vector3 Rotation { get; }
   void Rotate(PlayerViewRotatorInput input);
 }

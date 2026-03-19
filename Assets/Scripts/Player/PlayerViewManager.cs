@@ -31,16 +31,16 @@ public class PlayerViewManager
 
   private void RotateSprite(PlayerViewInput input)
   {
-    var rotInput = new PlayerViewRotatorInput(
+    var rotatorInput = new PlayerViewRotatorInput(
       input.GroundAngleDeg,
       _playerSpeedManager.GroundSpeed,
       0.001f,
       input.PlayerState);
 
-    foreach (var rot in _playerViewRotatorProvider[rotInput].Where(r => r.Enabled))
+    foreach (var rotator in _playerViewRotatorProvider[rotatorInput].Where(r => r.Enabled))
     {
-      rot.Rotate(rotInput);
-      _spriteRenderer.transform.localRotation = Quaternion.Euler(0, 0, rot.Angle);
+      rotator.Rotate(rotatorInput);
+      _spriteRenderer.transform.localRotation = Quaternion.Euler(rotator.Rotation);
     }
 
     if (input.IsSkidding)
