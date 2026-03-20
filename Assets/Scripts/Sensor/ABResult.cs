@@ -30,7 +30,7 @@ public struct ABResult
     Contact = hit.point;
     Normal = hit.normal;
     Distance = hit.distance;
-    AngleDeg = Vector2.SignedAngle(-sensorDirection, hit.normal);
+    AngleDeg = Vector2.SignedAngle(-sensorDirection, hit.normal).Round();
     AngleRad = AngleDeg * Mathf.Deg2Rad;
     GroundDetected = hit.distance <= sensorLength;
     SensorDirectionSign = sensorDirectionSign;
