@@ -14,6 +14,7 @@ public class SonicController : MonoBehaviour
   private readonly PlayerSensorSystemManager _playerSensorSystemManager = new();
   private readonly RelativeGroundInfo _relativeGroundInfo = new();
   private readonly SpeedProvider<float> _slopeFactorSpeedProvider = new();
+  private readonly SpeedProvider<Vector2> _groundToAirSpeedProvider = new();
   private readonly StringBuilder _info = new();
   private readonly TimerManager _timerManager = new();
 
@@ -155,12 +156,7 @@ public class SonicController : MonoBehaviour
     _inputUnlockTimer = new Timer(SonicConsts.Times.PostDetachInputUnlockTimerSeconds)
       .WhenCompleted(() => _postDetachInputLocked = false);
 
-    _slopeFactorSpeedProvider
-      .Add(() => _groundSide == GroundSide.Down, () => SlopeFactor * MathF.Sin(_relativeGroundInfo.AngleRad))
-      .Add(() => _groundSide == GroundSide.Left, () => _relativeGroundInfo.AngleRad <= 0 ? SlopeFactor : SlopeFactor * MathF.Cos(_relativeGroundInfo.AngleRad))
-      .Add(() => _groundSide == GroundSide.Right, () => _relativeGroundInfo.AngleRad >= 0 ? SlopeFactor : SlopeFactor * MathF.Cos(_relativeGroundInfo.AngleRad));
-
-    _playerSpeedManager = new PlayerSpeedManager(_inputInfo, _slopeFactorSpeedProvider);
+    InitSpeed();
 
     _pvrGrounded = new GroundedPlayerViewRotator(
       () => PVRGroundedEnabled && _playerState.HasFlag(PlayerState.Grounded));
@@ -183,6 +179,20 @@ public class SonicController : MonoBehaviour
       _spriteRenderer);
 
     InitAudio();
+  }
+
+  private void InitSpeed()
+  {
+    _slopeFactorSpeedProvider
+      .Add(() => _groundSide == GroundSide.Down, () => SlopeFactor * MathF.Sin(_relativeGroundInfo.AngleRad))
+      .Add(() => _groundSide == GroundSide.Left, () => _relativeGroundInfo.AngleRad <= 0 ? SlopeFactor : SlopeFactor * MathF.Cos(_relativeGroundInfo.AngleRad))
+      .Add(() => _groundSide == GroundSide.Right, () => _relativeGroundInfo.AngleRad >= 0 ? SlopeFactor : SlopeFactor * MathF.Cos(_relativeGroundInfo.AngleRad));
+
+    _groundToAirSpeedProvider
+      .Add(() => _prevGroundSide == GroundSide.Right, () => WallToAirSpeedDelta + new Vector2(-_playerSpeedManager.SpeedY, _playerSpeedManager.SpeedX))
+      .Add(() => _prevGroundSide == GroundSide.Left, () => WallToAirSpeedDelta + new Vector2(_playerSpeedManager.SpeedY, -_playerSpeedManager.SpeedX));
+
+    _playerSpeedManager = new PlayerSpeedManager(_inputInfo, _slopeFactorSpeedProvider);
   }
 
   private void FixedUpdate()
