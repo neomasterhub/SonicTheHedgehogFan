@@ -24,8 +24,8 @@ public class SonicController : MonoBehaviour
   private readonly TimerManager _timerManager = new();
 
   private InputInfo _inputInfo;
-  private IPlayerViewRotator _prvGrounded;
-  private IPlayerViewRotator _prvWallExit;
+  private IPlayerViewRotator _pvrGrounded;
+  private IPlayerViewRotator _pvrWallExit;
   private PlayerSpeedManager _playerSpeedManager;
   private PlayerViewManager _playerViewManager;
   private Timer _inputUnlockTimer;
@@ -87,9 +87,9 @@ public class SonicController : MonoBehaviour
   public float SensorEndRadius = 0.01f;
 
   [Header("Rotators")]
-  public bool PRVGroundedEnabled = true;
-  public bool PRVWallExitEnabled = true;
-  public float PRVWallExitDelta = 3f;
+  public bool PVRGroundedEnabled = true;
+  public bool PVRWallExitEnabled = true;
+  public float PVRWallExitDelta = 3f;
 
   [Header("Canvas")]
   public TextMeshProUGUI InfoText;
@@ -165,18 +165,18 @@ public class SonicController : MonoBehaviour
 
     _playerSpeedManager = new PlayerSpeedManager(_inputInfo, _slopeFactorSpeedProvider);
 
-    _prvGrounded = new GroundedPlayerViewRotator(
-      () => PRVGroundedEnabled && _playerState.HasFlag(PlayerState.Grounded));
-    _prvWallExit = new WallExitPlayerViewRotator(
-      PRVWallExitDelta,
-      () => PRVWallExitEnabled
+    _pvrGrounded = new GroundedPlayerViewRotator(
+      () => PVRGroundedEnabled && _playerState.HasFlag(PlayerState.Grounded));
+    _pvrWallExit = new WallExitPlayerViewRotator(
+      PVRWallExitDelta,
+      () => PVRWallExitEnabled
       && _playerState.HasFlag(PlayerState.Airborne)
       && _prevPlayerState.HasFlag(PlayerState.Grounded)
       && _prevGroundSide is GroundSide.Left or GroundSide.Right);
     _pvrProvider
-      .Add(_prvGrounded)
-      .Add(_prvWallExit);
-    _pvrProvider.Default = _prvGrounded;
+      .Add(_pvrGrounded)
+      .Add(_pvrWallExit);
+    _pvrProvider.Default = _pvrGrounded;
 
     _playerViewManager = new PlayerViewManager(
       _animator,
@@ -383,6 +383,9 @@ public class SonicController : MonoBehaviour
 
     _info.AddParLine("Speed X", _playerSpeedManager.SpeedX, 4);
     _info.AddParLine("Speed Y", _playerSpeedManager.SpeedY, 4);
+
+    _info.AppendLine();
+    _info.AddParLine("Rotator", _pvrProvider.Current);
 
     InfoText.SetText(_info);
   }
