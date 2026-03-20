@@ -2,19 +2,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public class SpeedProvider
+public class SpeedProvider<TSpeed>
+  where TSpeed : struct
 {
-  private readonly Dictionary<Func<bool>, Func<float>> _condition2speed = new();
+  private readonly Dictionary<Func<bool>, Func<TSpeed>> _condition2speed = new();
 
-  public Func<float> Default { get; set; } = () => 0;
+  public Func<TSpeed> Default { get; set; } = () => default;
 
-  public SpeedProvider Add(Func<bool> condition, Func<float> speed)
+  public SpeedProvider<TSpeed> Add(Func<bool> condition, Func<TSpeed> speed)
   {
     _condition2speed.Add(condition, speed);
     return this;
   }
 
-  public float FirstTriggeredOrDefault()
+  public TSpeed FirstTriggeredOrDefault()
   {
     return (_condition2speed.FirstOrDefault(x => x.Key()).Value ?? Default)();
   }

@@ -6,12 +6,12 @@ public class PlayerSpeedManager
   private const int _speedDigits = 3;
 
   private readonly InputInfo _inputInfo;
-  private readonly SpeedProvider _slopeFactorSpeedProvider;
+  private readonly SpeedProvider<float> _slopeFactorSpeedProvider;
 
   private float _groundAngleCos;
   private float _groundAngleSin;
 
-  public PlayerSpeedManager(InputInfo inputInfo, SpeedProvider slopeFactorSpeedProvider)
+  public PlayerSpeedManager(InputInfo inputInfo, SpeedProvider<float> slopeFactorSpeedProvider)
   {
     _inputInfo = inputInfo;
     _slopeFactorSpeedProvider = slopeFactorSpeedProvider;

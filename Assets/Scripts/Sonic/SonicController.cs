@@ -13,7 +13,7 @@ public class SonicController : MonoBehaviour
   private readonly PlayerViewRotatorProvider _pvrProvider = new();
   private readonly PlayerSensorSystemManager _playerSensorSystemManager = new();
   private readonly RelativeGroundInfo _relativeGroundInfo = new();
-  private readonly SpeedProvider _slopeFactorSpeedProvider = new();
+  private readonly SpeedProvider<float> _slopeFactorSpeedProvider = new();
   private readonly StringBuilder _info = new();
   private readonly TimerManager _timerManager = new();
 
