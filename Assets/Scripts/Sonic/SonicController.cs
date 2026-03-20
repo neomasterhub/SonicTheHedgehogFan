@@ -115,7 +115,6 @@ public class SonicController : MonoBehaviour
     FrictionSpeed,
     AccelerationSpeed,
     DecelerationSpeed,
-    _slopeFactorSpeedProvider.FirstTriggeredOrDefault(),
 
     // Air
     GravityEnabled && _groundSide == GroundSide.Down,
