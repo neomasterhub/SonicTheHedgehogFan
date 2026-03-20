@@ -204,6 +204,29 @@ public class SonicController : MonoBehaviour
       _spriteRenderer);
   }
 
+  private void InitAudio()
+  {
+    var states = (_animator.runtimeAnimatorController as AnimatorController)
+      .layers[0].stateMachine.states;
+
+    var skidding = states
+      .Single(s => s.state.name == Consts.Animator.States.Skidding);
+
+    var skiddingToWalking = skidding.state.transitions
+      .Single(t => t.destinationState.name == Consts.Animator.States.Walking);
+
+    var skiddingClip = _animator.runtimeAnimatorController.animationClips
+      .Single(c => c.name == Consts.Animator.States.Skidding);
+
+    _sfxSkidding = this.AddComponent<AudioSource>();
+    _sfxSkidding.clip = Resources.Load<AudioClip>("Sonic/Audio/S1_A4");
+    _sfxSkiddingTimer = new(Mathf.Max(
+      _sfxSkidding.clip.length,
+      skiddingToWalking.exitTime * skiddingClip.length));
+    _sfxSkiddingTimer
+      .WhenStarted(() => _sfxSkidding.Play());
+  }
+
   private void FixedUpdate()
   {
     UpdateInput();
@@ -335,29 +358,6 @@ public class SonicController : MonoBehaviour
     };
 
     transform.position = new Vector3(pos.x.Round(2), pos.y.Round(2), transform.position.z);
-  }
-
-  private void InitAudio()
-  {
-    var states = (_animator.runtimeAnimatorController as AnimatorController)
-      .layers[0].stateMachine.states;
-
-    var skidding = states
-      .Single(s => s.state.name == Consts.Animator.States.Skidding);
-
-    var skiddingToWalking = skidding.state.transitions
-      .Single(t => t.destinationState.name == Consts.Animator.States.Walking);
-
-    var skiddingClip = _animator.runtimeAnimatorController.animationClips
-      .Single(c => c.name == Consts.Animator.States.Skidding);
-
-    _sfxSkidding = this.AddComponent<AudioSource>();
-    _sfxSkidding.clip = Resources.Load<AudioClip>("Sonic/Audio/S1_A4");
-    _sfxSkiddingTimer = new(Mathf.Max(
-      _sfxSkidding.clip.length,
-      skiddingToWalking.exitTime * skiddingClip.length));
-    _sfxSkiddingTimer
-      .WhenStarted(() => _sfxSkidding.Play());
   }
 
   private void UpdateAudio()
