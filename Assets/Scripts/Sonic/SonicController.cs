@@ -390,17 +390,12 @@ public class SonicController : MonoBehaviour
 
     _info.AppendLine();
 
+    _info.AddParLine("Gravity", GravityEnabled);
     _info.AddParLine("Ground Side", _groundSide);
     _info.AddParLine("Ground Side Angle", _relativeGroundInfo.AngleDeg, " °");
     _info.AddParLine("Ground Angle", _groundAngleDeg, " °");
     _info.AddParLine("Slope Factor Speed", _playerSpeedManager.SlopeFactorSpeed, 4);
     _info.AddParLine("Ground Speed", _playerSpeedManager.GroundSpeed, 4);
-
-    _info.AppendLine();
-
-    _info.AddParLine("Gravity", GravityEnabled);
-    _info.AddParLine("Gravity Speed Up", _playerSpeedManager.GravitySpeed.Up, 4);
-    _info.AddParLine("Gravity Speed Down", _playerSpeedManager.GravitySpeed.Down, 4);
 
     _info.AppendLine();
 
