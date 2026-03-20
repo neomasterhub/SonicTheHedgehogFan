@@ -122,8 +122,6 @@ public class SonicController : MonoBehaviour
     AccelerationSpeed,
     DecelerationSpeed,
     SlopeFactor,
-    _groundSide,
-    _prevGroundSide,
 
     // Air
     GravityEnabled && _groundSide == GroundSide.Down,
