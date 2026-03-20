@@ -243,6 +243,7 @@ public class SonicController : MonoBehaviour
     UpdatePosition();
     UpdateAudio();
     UpdateInfoText();
+    _timerManager.OnUpdate(Time.fixedDeltaTime);
   }
 
   private void OnDrawGizmos()
@@ -370,8 +371,6 @@ public class SonicController : MonoBehaviour
 
   private void UpdateAudio()
   {
-    _timerManager.OnUpdate(Time.fixedDeltaTime);
-
     if (_playerState.HasFlag(PlayerState.Skidding) && !_sfxSkidding.isPlaying)
     {
       _timerManager.RunSingle(_sfxSkiddingTimer);
