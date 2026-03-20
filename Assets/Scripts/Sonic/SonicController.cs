@@ -161,7 +161,7 @@ public class SonicController : MonoBehaviour
   private void InitSpeed()
   {
     _gravitySpeedProvider
-      .Add(() => GravityEnabled, () => new(GravityUpSpeed, GravityDownSpeed));
+      .Add(() => GravityEnabled && _groundSide == GroundSide.Down, () => new(GravityUpSpeed, GravityDownSpeed));
 
     _slopeFactorSpeedProvider
       .Add(() => _groundSide == GroundSide.Down, () => SlopeFactor * MathF.Sin(_relativeGroundInfo.AngleRad))
