@@ -4,7 +4,7 @@ using UnityEngine;
 public class GroundedPlayerViewRotator : PlayerViewRotatorBase
 {
   public GroundedPlayerViewRotator(Func<bool> condition)
-    : base(condition)
+    : base("Grounded", condition)
   {
   }
 

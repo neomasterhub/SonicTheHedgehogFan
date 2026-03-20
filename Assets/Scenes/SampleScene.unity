@@ -1821,7 +1821,7 @@ MonoBehaviour:
   SensorEndRadius: 0.01
   PVRGroundedEnabled: 1
   PVRWallExitEnabled: 1
-  PVRWallExitDelta: 2
+  PVRWallExitDelta: 3
   InfoText: {fileID: 1892464623}
 --- !u!82 &710850504
 AudioSource:
