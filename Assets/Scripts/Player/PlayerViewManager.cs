@@ -41,9 +41,17 @@ public class PlayerViewManager
       input.PlayerState,
       input.PrevPlayerState);
 
-    _playerViewRotator = _playerViewRotatorProvider.FirstTriggeredOrDefault();
-    _playerViewRotator.Rotate(rotatorInput);
-    _spriteRenderer.transform.localRotation = Quaternion.Euler(_playerViewRotator.Rotation);
+    var nextPlayerViewRotator = _playerViewRotatorProvider.FirstTriggered();
+    if (nextPlayerViewRotator != null)
+    {
+      _playerViewRotator = nextPlayerViewRotator;
+    }
+
+    if (_playerViewRotator != null)
+    {
+      _playerViewRotator.Rotate(rotatorInput);
+      _spriteRenderer.transform.localRotation = Quaternion.Euler(_playerViewRotator.Rotation);
+    }
 
     if (input.IsSkidding)
     {

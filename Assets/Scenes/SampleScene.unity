@@ -1819,9 +1819,9 @@ MonoBehaviour:
   GroundNormalLength: 1.5
   SensorBeginRadius: 0.03
   SensorEndRadius: 0.01
-  PRVGroundedEnabled: 1
-  PRVWallExitEnabled: 1
-  PRVWallExitDelta: 3
+  PVRGroundedEnabled: 1
+  PVRWallExitEnabled: 1
+  PVRWallExitDelta: 2
   InfoText: {fileID: 1892464623}
 --- !u!82 &710850504
 AudioSource:
