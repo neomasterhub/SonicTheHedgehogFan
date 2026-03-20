@@ -376,7 +376,7 @@ public class SonicController : MonoBehaviour
 
     _info.AddParLine("Prev State", _prevPlayerState);
     _info.AddParLine("Curr State", _playerState);
-    _info.AddParLine("Rotator", _pvrProvider.Current);
+    _info.AddParLine("Rotator", _pvrProvider.Triggered);
     _info.AddParLine(
       "Input",
       _inputInfo.Enabled ? "On" : "Locked",

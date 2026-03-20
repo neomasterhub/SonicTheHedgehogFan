@@ -5,7 +5,7 @@ public class PlayerViewRotatorProvider
 {
   private readonly HashSet<IPlayerViewRotator> _rotators = new();
 
-  public IPlayerViewRotator Current { get; private set; }
+  public IPlayerViewRotator Triggered { get; private set; }
   public IPlayerViewRotator Default { get; set; }
 
   public PlayerViewRotatorProvider Add(IPlayerViewRotator rotator)
@@ -20,7 +20,7 @@ public class PlayerViewRotatorProvider
 
     if (rotator != null)
     {
-      Current = rotator;
+      Triggered = rotator;
     }
 
     return rotator;
