@@ -66,13 +66,14 @@ public class SonicController : MonoBehaviour
   public float GravityUpSpeed = SonicConsts.Physics.GravityUp;
   public float GravityDownSpeed = SonicConsts.Physics.GravityDown;
   public float SlopeFactor = SonicConsts.Physics.SlopeFactor;
+  public float StandingStraightGroundSpeedZone = SonicConsts.Physics.FrictionSpeed;
+  public float InputDeadZone = 0.001f;
   public float ABSensorLength = 0.1f;
   public float CDSensorLength = 0.1f;
   public float EFSensorLength = 0.1f;
   public float ReversedABSensorLength = 0.3f;
   public float ReversedCDSensorLength = 0.3f;
   public float ReversedEFSensorLength = 0.3f;
-  public float InputDeadZone = 0.001f;
   public Vector2 WallDetachPositionOffset = new(-0.1f, 0.0f);
   public Vector2 WallToAirSpeedDelta = new(0.011f, 0.0f);
 
