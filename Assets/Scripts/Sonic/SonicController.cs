@@ -361,6 +361,7 @@ public class SonicController : MonoBehaviour
 
     _info.AddParLine("Prev State", _prevPlayerState);
     _info.AddParLine("Curr State", _playerState);
+    _info.AddParLine("Rotator", _pvrProvider.Current);
     _info.AddParLine(
       "Input",
       _inputInfo.Enabled ? "On" : "Locked",
@@ -370,8 +371,8 @@ public class SonicController : MonoBehaviour
     _info.AppendLine();
 
     _info.AddParLine("Ground Side", _groundSide);
-    _info.AddParLine("Ground Side Angle", _relativeGroundInfo.AngleDeg, 0, " °");
-    _info.AddParLine("Ground Angle", _groundAngleDeg, 0, " °");
+    _info.AddParLine("Ground Side Angle", _relativeGroundInfo.AngleDeg, " °");
+    _info.AddParLine("Ground Angle", _groundAngleDeg, " °");
     _info.AddParLine("Slope Factor Speed", _playerSpeedManager.SlopeFactorSpeed, 4);
     _info.AddParLine("Ground Speed", _playerSpeedManager.GroundSpeed, 4);
 
@@ -384,9 +385,6 @@ public class SonicController : MonoBehaviour
 
     _info.AddParLine("Speed X", _playerSpeedManager.SpeedX, 4);
     _info.AddParLine("Speed Y", _playerSpeedManager.SpeedY, 4);
-
-    _info.AppendLine();
-    _info.AddParLine("Rotator", _pvrProvider.Current);
 
     InfoText.SetText(_info);
   }
