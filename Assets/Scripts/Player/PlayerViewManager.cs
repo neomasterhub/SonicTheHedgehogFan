@@ -22,6 +22,7 @@ public class PlayerViewManager
     _playerSpeedManager = playerSpeedManager;
     _playerViewRotatorProvider = playerViewRotatorProvider;
     _spriteRenderer = spriteRenderer;
+    _playerViewRotator = _playerViewRotatorProvider.Default;
   }
 
   public void Update(PlayerViewInput input)
@@ -40,7 +41,7 @@ public class PlayerViewManager
       input.PlayerState,
       input.PrevPlayerState);
 
-    _playerViewRotator = _playerViewRotatorProvider.FirstTriggered();
+    _playerViewRotator = _playerViewRotatorProvider.FirstTriggeredOrDefault();
     _playerViewRotator.Rotate(rotatorInput);
     _spriteRenderer.transform.localRotation = Quaternion.Euler(_playerViewRotator.Rotation);
 

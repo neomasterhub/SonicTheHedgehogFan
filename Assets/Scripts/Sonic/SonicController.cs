@@ -78,10 +78,6 @@ public class SonicController : MonoBehaviour
 
   [Header("Ground")]
   public LayerMask GroundLayer = 8;
-
-  /// <summary>
-  /// Keeps surface normal aligned with slope.
-  /// </summary>
   public float GroundPositionOffset = 0.05f; // ABSensorLength / 2
 
   [Header("UI")]
@@ -93,7 +89,7 @@ public class SonicController : MonoBehaviour
   [Header("Rotators")]
   public bool PRVGroundedEnabled = true;
   public bool PRVWallExitEnabled = true;
-  public float PRVWallExitDelta = 2.5f;
+  public float PRVWallExitDelta = 3f;
 
   [Header("Canvas")]
   public TextMeshProUGUI InfoText;
@@ -305,6 +301,7 @@ public class SonicController : MonoBehaviour
       }
 
       // Snap to ground with small upward offset.
+      // Keeps surface normal aligned with slope.
       speedY -= (_playerSensorSystemManager.ABResult.Distance
         * _playerSensorSystemManager.ABResult.SensorDirectionSign)
         - GroundPositionOffset;
