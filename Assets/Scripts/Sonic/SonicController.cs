@@ -176,6 +176,7 @@ public class SonicController : MonoBehaviour
     _pvrProvider
       .Add(_prvGrounded)
       .Add(_prvWallExit);
+    _pvrProvider.Default = _prvGrounded;
 
     _playerViewManager = new PlayerViewManager(
       _animator,
