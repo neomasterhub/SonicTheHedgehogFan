@@ -20,7 +20,7 @@ public class SonicController : MonoBehaviour
 
   private InputInfo _inputInfo;
   private IPlayerViewRotator _pvrGrounded;
-  private IPlayerViewRotator _pvrWallExit;
+  private IPlayerViewRotator _pvrWallToAir;
   private PlayerSpeedManager _playerSpeedManager;
   private PlayerViewManager _playerViewManager;
   private Timer _inputUnlockTimer;
@@ -84,8 +84,8 @@ public class SonicController : MonoBehaviour
 
   [Header("Rotators")]
   public bool PVRGroundedEnabled = true;
-  public bool PVRWallExitEnabled = true;
-  public float PVRWallExitDelta = 3f;
+  public bool PVRWallToAirEnabled = true;
+  public float PVRWallToAirDelta = 3f;
 
   [Header("Canvas")]
   public TextMeshProUGUI InfoText;
@@ -180,16 +180,16 @@ public class SonicController : MonoBehaviour
     _pvrGrounded = new GroundedPlayerViewRotator(
       () => PVRGroundedEnabled && _playerState.HasFlag(PlayerState.Grounded));
 
-    _pvrWallExit = new WallExitPlayerViewRotator(
-      PVRWallExitDelta,
-      () => PVRWallExitEnabled
+    _pvrWallToAir = new WallToAirPlayerViewRotator(
+      PVRWallToAirDelta,
+      () => PVRWallToAirEnabled
       && _playerState.HasFlag(PlayerState.Airborne)
       && _prevPlayerState.HasFlag(PlayerState.Grounded)
       && _prevGroundSide is GroundSide.Left or GroundSide.Right);
 
     _pvrProvider
       .Add(_pvrGrounded)
-      .Add(_pvrWallExit);
+      .Add(_pvrWallToAir);
     _pvrProvider.Default = _pvrGrounded;
 
     _playerViewManager = new PlayerViewManager(

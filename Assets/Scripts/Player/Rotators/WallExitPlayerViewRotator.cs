@@ -1,10 +1,10 @@
 using System;
 
-public class WallExitPlayerViewRotator : PlayerViewRotatorBase
+public class WallToAirPlayerViewRotator : PlayerViewRotatorBase
 {
   private float _z;
 
-  public WallExitPlayerViewRotator(float delta, Func<bool> condition)
+  public WallToAirPlayerViewRotator(float delta, Func<bool> condition)
     : base("Wall Exit", condition)
   {
     Delta = delta;
