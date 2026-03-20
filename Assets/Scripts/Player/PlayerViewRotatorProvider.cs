@@ -16,13 +16,13 @@ public class PlayerViewRotatorProvider
 
   public IPlayerViewRotator FirstTriggered()
   {
-    Current = _rotators.FirstOrDefault(r => r.Condition());
-    return Current;
-  }
+    var rotator = _rotators.FirstOrDefault(r => r.Condition());
 
-  public IPlayerViewRotator FirstTriggeredOrDefault()
-  {
-    Current = FirstTriggered() ?? Default;
-    return Current;
+    if (rotator != null)
+    {
+      Current = rotator;
+    }
+
+    return rotator;
   }
 }
