@@ -61,9 +61,22 @@ public class PlayerSpeedManager
   private void SetSpeed_Airborne(PlayerSpeedInput input)
   {
     IsSkidding = false;
+    SetSpeed_Airborne_FromGrounded(input);
     SetSpeed_Airborne_Gravity(input);
     SetSpeed_Airborne_PreventGroundOvershoot(input);
     SetSpeed_Airborne_Horizontal(input);
+  }
+
+  private void SetSpeed_Airborne_FromGrounded(PlayerSpeedInput input)
+  {
+    if (!input.PrevPlayerState.HasFlag(PlayerState.Grounded))
+    {
+      return;
+    }
+
+    var speed = _groundToAirSpeedProvider.FirstTriggeredOrDefault();
+    SpeedX = speed.x;
+    SpeedY = speed.y;
   }
 
   private void SetSpeed_Airborne_Gravity(PlayerSpeedInput input)
