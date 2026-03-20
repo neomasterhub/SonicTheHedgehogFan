@@ -7,14 +7,19 @@ public class PlayerSpeedManager
 
   private readonly InputInfo _inputInfo;
   private readonly SpeedProvider<float> _slopeFactorSpeedProvider;
+  private readonly SpeedProvider<Vector2> _groundToAirSpeedProvider;
 
   private float _groundAngleCos;
   private float _groundAngleSin;
 
-  public PlayerSpeedManager(InputInfo inputInfo, SpeedProvider<float> slopeFactorSpeedProvider)
+  public PlayerSpeedManager(
+    InputInfo inputInfo,
+    SpeedProvider<float> slopeFactorSpeedProvider,
+    SpeedProvider<Vector2> groundToAirSpeedProvider)
   {
     _inputInfo = inputInfo;
     _slopeFactorSpeedProvider = slopeFactorSpeedProvider;
+    _groundToAirSpeedProvider = groundToAirSpeedProvider;
   }
 
   public float SpeedX { get; private set; }
