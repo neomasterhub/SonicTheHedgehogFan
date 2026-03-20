@@ -23,6 +23,14 @@ public class SonicController : MonoBehaviour
   private readonly StringBuilder _info = new();
   private readonly TimerManager _timerManager = new();
 
+  private InputInfo _inputInfo;
+  private IPlayerViewRotator _prvGrounded;
+  private IPlayerViewRotator _prvWallExit;
+  private PlayerSpeedManager _playerSpeedManager;
+  private PlayerViewManager _playerViewManager;
+  private Timer _inputUnlockTimer;
+  private float _groundAngleDeg;
+
   // Components
   private Animator _animator;
   private SpriteRenderer _spriteRenderer;
@@ -40,14 +48,6 @@ public class SonicController : MonoBehaviour
   // Audio
   private AudioSource _sfxSkidding;
   private Timer _sfxSkiddingTimer;
-
-  private InputInfo _inputInfo;
-  private IPlayerViewRotator _prvGrounded;
-  private IPlayerViewRotator _prvWallExit;
-  private PlayerSpeedManager _playerSpeedManager;
-  private PlayerViewManager _playerViewManager;
-  private Timer _inputUnlockTimer;
-  private float _groundAngleDeg;
 
   [Header("Animations")]
   public float MinAnimatorWalkingSpeed = 0.5f;
@@ -173,7 +173,10 @@ public class SonicController : MonoBehaviour
       () => PRVGroundedEnabled && _playerState.HasFlag(PlayerState.Grounded));
     _prvWallExit = new WallExitPlayerViewRotator(
       PRVWallExitDelta,
-      () => PRVWallExitEnabled && _playerState.HasFlag(PlayerState.Airborne));
+      () => PRVWallExitEnabled
+      && _playerState.HasFlag(PlayerState.Airborne)
+      && _prevPlayerState.HasFlag(PlayerState.Grounded)
+      && _prevGroundSide is GroundSide.Left or GroundSide.Right);
     _pvrProvider
       .Add(_prvGrounded)
       .Add(_prvWallExit);
