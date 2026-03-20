@@ -5,7 +5,7 @@ public class PlayerViewRotatorProvider
 {
   private readonly HashSet<IPlayerViewRotator> _rotators = new();
 
-  public IPlayerViewRotator First()
+  public IPlayerViewRotator FirstTriggered()
   {
     return _rotators.FirstOrDefault(r => r.Condition());
   }

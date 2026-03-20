@@ -8,6 +8,8 @@ public class PlayerViewManager
   private readonly PlayerViewRotatorProvider _playerViewRotatorProvider;
   private readonly SpriteRenderer _spriteRenderer;
 
+  private IPlayerViewRotator _playerViewRotator;
+
   public PlayerViewManager(
     Animator animator,
     InputInfo inputInfo,
@@ -38,12 +40,9 @@ public class PlayerViewManager
       input.PlayerState,
       input.PrevPlayerState);
 
-    var rotator = _playerViewRotatorProvider.First();
-    if (rotator != null)
-    {
-      rotator.Rotate(rotatorInput);
-      _spriteRenderer.transform.localRotation = Quaternion.Euler(rotator.Rotation);
-    }
+    _playerViewRotator = _playerViewRotatorProvider.FirstTriggered();
+    _playerViewRotator.Rotate(rotatorInput);
+    _spriteRenderer.transform.localRotation = Quaternion.Euler(_playerViewRotator.Rotation);
 
     if (input.IsSkidding)
     {
