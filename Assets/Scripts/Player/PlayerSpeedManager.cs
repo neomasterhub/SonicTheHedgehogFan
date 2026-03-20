@@ -164,7 +164,7 @@ public class PlayerSpeedManager
 
   private void SetSpeed_Grounded_Slope(PlayerSpeedInput input)
   {
-    SlopeFactorSpeed = _slopeFactorSpeedProvider[input.GroundSide](input.SlopeFactor, input.GroundAngleRad);
+    SlopeFactorSpeed = _slopeFactorSpeedProvider.FirstTriggeredOrDefault();
     GroundSpeed -= SlopeFactorSpeed;
   }
 

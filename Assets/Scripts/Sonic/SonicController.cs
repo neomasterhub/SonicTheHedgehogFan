@@ -13,13 +13,7 @@ public class SonicController : MonoBehaviour
   private readonly PlayerViewRotatorProvider _pvrProvider = new();
   private readonly PlayerSensorSystemManager _playerSensorSystemManager = new();
   private readonly RelativeGroundInfo _relativeGroundInfo = new();
-  private readonly SlopeFactorSpeedProvider _slopeFactorSpeedProvider = new(new()
-  {
-    [GroundSide.Up] = (_, _) => 0,
-    [GroundSide.Down] = (factor, groundAngleRad) => factor * MathF.Sin(groundAngleRad),
-    [GroundSide.Right] = (factor, groundAngleRad) => groundAngleRad >= 0 ? factor : factor * MathF.Cos(groundAngleRad),
-    [GroundSide.Left] = (factor, groundAngleRad) => groundAngleRad <= 0 ? factor : factor * MathF.Cos(groundAngleRad),
-  });
+  private readonly SlopeFactorSpeedProvider _slopeFactorSpeedProvider = new();
   private readonly StringBuilder _info = new();
   private readonly TimerManager _timerManager = new();
 
@@ -121,7 +115,7 @@ public class SonicController : MonoBehaviour
     FrictionSpeed,
     AccelerationSpeed,
     DecelerationSpeed,
-    SlopeFactor,
+    _slopeFactorSpeedProvider.FirstTriggeredOrDefault(),
 
     // Air
     GravityEnabled && _groundSide == GroundSide.Down,
@@ -161,6 +155,11 @@ public class SonicController : MonoBehaviour
 
     _inputUnlockTimer = new Timer(SonicConsts.Times.PostDetachInputUnlockTimerSeconds)
       .WhenCompleted(() => _postDetachInputLocked = false);
+
+    _slopeFactorSpeedProvider
+      .Add(() => _groundSide == GroundSide.Down, () => SlopeFactor * MathF.Sin(_relativeGroundInfo.AngleRad))
+      .Add(() => _groundSide == GroundSide.Left, () => _relativeGroundInfo.AngleRad <= 0 ? SlopeFactor : SlopeFactor * MathF.Cos(_relativeGroundInfo.AngleRad))
+      .Add(() => _groundSide == GroundSide.Right, () => _relativeGroundInfo.AngleRad >= 0 ? SlopeFactor : SlopeFactor * MathF.Cos(_relativeGroundInfo.AngleRad));
 
     _playerSpeedManager = new PlayerSpeedManager(_inputInfo, _slopeFactorSpeedProvider);
 
