@@ -22,7 +22,6 @@ public class PlayerViewManager
     _playerSpeedManager = playerSpeedManager;
     _playerViewRotatorProvider = playerViewRotatorProvider;
     _spriteRenderer = spriteRenderer;
-    _playerViewRotator = _playerViewRotatorProvider.Default;
   }
 
   public void Update(PlayerViewInput input)
