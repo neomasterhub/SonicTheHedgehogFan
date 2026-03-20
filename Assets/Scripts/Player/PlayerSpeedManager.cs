@@ -6,6 +6,7 @@ public class PlayerSpeedManager
   private const int _speedDigits = 3;
 
   private readonly InputInfo _inputInfo;
+  private readonly SpeedProvider<GravitySpeed> _gravitySpeedProvider = new();
   private readonly SpeedProvider<float> _slopeFactorSpeedProvider;
   private readonly SpeedProvider<Vector2> _groundToAirSpeedProvider;
 
@@ -14,10 +15,12 @@ public class PlayerSpeedManager
 
   public PlayerSpeedManager(
     InputInfo inputInfo,
+    SpeedProvider<GravitySpeed> gravitySpeedProvider,
     SpeedProvider<float> slopeFactorSpeedProvider,
     SpeedProvider<Vector2> groundToAirSpeedProvider)
   {
     _inputInfo = inputInfo;
+    _gravitySpeedProvider = gravitySpeedProvider;
     _slopeFactorSpeedProvider = slopeFactorSpeedProvider;
     _groundToAirSpeedProvider = groundToAirSpeedProvider;
   }
@@ -27,6 +30,7 @@ public class PlayerSpeedManager
   public float SlopeFactorSpeed { get; private set; }
   public float GroundSpeed { get; private set; }
   public bool IsSkidding { get; private set; }
+  public GravitySpeed GravitySpeed { get; private set; }
 
   public void ResetSpeeds()
   {
@@ -81,14 +85,9 @@ public class PlayerSpeedManager
 
   private void SetSpeed_Airborne_Gravity(PlayerSpeedInput input)
   {
-    if (!input.GravityEnabled)
-    {
-      return;
-    }
+    GravitySpeed = _gravitySpeedProvider.FirstTriggeredOrDefault();
 
-    SpeedY -= SpeedY > 0
-      ? input.GravityUpSpeed
-      : input.GravityDownSpeed;
+    SpeedY -= SpeedY > 0 ? GravitySpeed.Up : GravitySpeed.Down;
 
     if (SpeedY < -input.MaxFallSpeed)
     {

@@ -45,7 +45,7 @@ public class Timer
 
     if (RemainingSeconds <= 0)
     {
-      RemainingSeconds = 0f;
+      RemainingSeconds = 0;
       IsRunning = false;
       Completed?.Invoke();
     }
