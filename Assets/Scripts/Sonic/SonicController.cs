@@ -76,16 +76,16 @@ public class SonicController : MonoBehaviour
   public LayerMask GroundLayer = 8;
   public float GroundPositionOffset = 0.05f; // ABSensorLength / 2
 
+  [Header("Rotators")]
+  public bool PVRGroundedEnabled = true;
+  public bool PVRWallToAirEnabled = true;
+  public float PVRWallToAirDelta = 3f;
+
   [Header("UI")]
   public Color GroundNormalColor = Color.white;
   public float GroundNormalLength = 1.5f;
   public float SensorBeginRadius = 0.03f;
   public float SensorEndRadius = 0.01f;
-
-  [Header("Rotators")]
-  public bool PVRGroundedEnabled = true;
-  public bool PVRWallToAirEnabled = true;
-  public float PVRWallToAirDelta = 3f;
 
   [Header("Canvas")]
   public TextMeshProUGUI InfoText;
