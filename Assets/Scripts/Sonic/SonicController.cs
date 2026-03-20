@@ -13,6 +13,7 @@ public class SonicController : MonoBehaviour
   private readonly PlayerViewRotatorProvider _pvrProvider = new();
   private readonly PlayerSensorSystemManager _playerSensorSystemManager = new();
   private readonly RelativeGroundInfo _relativeGroundInfo = new();
+  private readonly SpeedProvider<GravitySpeed> _gravitySpeedProvider = new();
   private readonly SpeedProvider<float> _slopeFactorSpeedProvider = new();
   private readonly SpeedProvider<Vector2> _groundToAirSpeedProvider = new();
   private readonly StringBuilder _info = new();
@@ -163,6 +164,9 @@ public class SonicController : MonoBehaviour
 
   private void InitSpeed()
   {
+    _gravitySpeedProvider
+      .Add(() => GravityEnabled, () => new(GravityUpSpeed, GravityDownSpeed));
+
     _slopeFactorSpeedProvider
       .Add(() => _groundSide == GroundSide.Down, () => SlopeFactor * MathF.Sin(_relativeGroundInfo.AngleRad))
       .Add(() => _groundSide == GroundSide.Left, () => _relativeGroundInfo.AngleRad <= 0 ? SlopeFactor : SlopeFactor * MathF.Cos(_relativeGroundInfo.AngleRad))
@@ -172,9 +176,14 @@ public class SonicController : MonoBehaviour
       .Add(() => _prevGroundSide == GroundSide.Right, () => WallToAirSpeedDelta + new Vector2(-_playerSpeedManager.SpeedY, _playerSpeedManager.SpeedX))
       .Add(() => _prevGroundSide == GroundSide.Left, () => WallToAirSpeedDelta + new Vector2(_playerSpeedManager.SpeedY, -_playerSpeedManager.SpeedX));
 
+    _gravitySpeedProvider.Default = () => new(0, 0);
     _groundToAirSpeedProvider.Default = () => new(_playerSpeedManager.SpeedX, _playerSpeedManager.SpeedY);
 
-    _playerSpeedManager = new PlayerSpeedManager(_inputInfo, _slopeFactorSpeedProvider, _groundToAirSpeedProvider);
+    _playerSpeedManager = new PlayerSpeedManager(
+      _inputInfo,
+      _gravitySpeedProvider,
+      _slopeFactorSpeedProvider,
+      _groundToAirSpeedProvider);
   }
 
   private void InitView()
