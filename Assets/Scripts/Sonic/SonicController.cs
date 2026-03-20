@@ -172,13 +172,16 @@ public class SonicController : MonoBehaviour
       .Add(() => _prevGroundSide == GroundSide.Right, () => WallToAirSpeedDelta + new Vector2(-_playerSpeedManager.SpeedY, _playerSpeedManager.SpeedX))
       .Add(() => _prevGroundSide == GroundSide.Left, () => WallToAirSpeedDelta + new Vector2(_playerSpeedManager.SpeedY, -_playerSpeedManager.SpeedX));
 
-    _playerSpeedManager = new PlayerSpeedManager(_inputInfo, _slopeFactorSpeedProvider);
+    _groundToAirSpeedProvider.Default = () => new(_playerSpeedManager.SpeedX, _playerSpeedManager.SpeedY);
+
+    _playerSpeedManager = new PlayerSpeedManager(_inputInfo, _slopeFactorSpeedProvider, _groundToAirSpeedProvider);
   }
 
   private void InitView()
   {
     _pvrGrounded = new GroundedPlayerViewRotator(
-      () => PVRGroundedEnabled && _playerState.HasFlag(PlayerState.Grounded));
+      () => PVRGroundedEnabled
+      && _playerState.HasFlag(PlayerState.Grounded));
 
     _pvrWallToAir = new WallToAirPlayerViewRotator(
       PVRWallToAirDelta,
@@ -190,6 +193,7 @@ public class SonicController : MonoBehaviour
     _pvrProvider
       .Add(_pvrGrounded)
       .Add(_pvrWallToAir);
+
     _pvrProvider.Default = _pvrGrounded;
 
     _playerViewManager = new PlayerViewManager(
