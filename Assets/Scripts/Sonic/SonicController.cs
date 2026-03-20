@@ -157,27 +157,7 @@ public class SonicController : MonoBehaviour
       .WhenCompleted(() => _postDetachInputLocked = false);
 
     InitSpeed();
-
-    _pvrGrounded = new GroundedPlayerViewRotator(
-      () => PVRGroundedEnabled && _playerState.HasFlag(PlayerState.Grounded));
-    _pvrWallExit = new WallExitPlayerViewRotator(
-      PVRWallExitDelta,
-      () => PVRWallExitEnabled
-      && _playerState.HasFlag(PlayerState.Airborne)
-      && _prevPlayerState.HasFlag(PlayerState.Grounded)
-      && _prevGroundSide is GroundSide.Left or GroundSide.Right);
-    _pvrProvider
-      .Add(_pvrGrounded)
-      .Add(_pvrWallExit);
-    _pvrProvider.Default = _pvrGrounded;
-
-    _playerViewManager = new PlayerViewManager(
-      _animator,
-      _inputInfo,
-      _playerSpeedManager,
-      _pvrProvider,
-      _spriteRenderer);
-
+    InitView();
     InitAudio();
   }
 
@@ -193,6 +173,31 @@ public class SonicController : MonoBehaviour
       .Add(() => _prevGroundSide == GroundSide.Left, () => WallToAirSpeedDelta + new Vector2(_playerSpeedManager.SpeedY, -_playerSpeedManager.SpeedX));
 
     _playerSpeedManager = new PlayerSpeedManager(_inputInfo, _slopeFactorSpeedProvider);
+  }
+
+  private void InitView()
+  {
+    _pvrGrounded = new GroundedPlayerViewRotator(
+      () => PVRGroundedEnabled && _playerState.HasFlag(PlayerState.Grounded));
+
+    _pvrWallExit = new WallExitPlayerViewRotator(
+      PVRWallExitDelta,
+      () => PVRWallExitEnabled
+      && _playerState.HasFlag(PlayerState.Airborne)
+      && _prevPlayerState.HasFlag(PlayerState.Grounded)
+      && _prevGroundSide is GroundSide.Left or GroundSide.Right);
+
+    _pvrProvider
+      .Add(_pvrGrounded)
+      .Add(_pvrWallExit);
+    _pvrProvider.Default = _pvrGrounded;
+
+    _playerViewManager = new PlayerViewManager(
+      _animator,
+      _inputInfo,
+      _playerSpeedManager,
+      _pvrProvider,
+      _spriteRenderer);
   }
 
   private void FixedUpdate()
