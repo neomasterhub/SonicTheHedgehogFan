@@ -5,18 +5,24 @@ public class PlayerViewManager
   private readonly Animator _animator;
   private readonly InputInfo _inputInfo;
   private readonly PlayerSpeedManager _playerSpeedManager;
+  private readonly PlayerViewRotatorProvider _playerViewRotatorProvider;
   private readonly SpriteRenderer _spriteRenderer;
+
+  private IPlayerViewRotator _playerViewRotator;
 
   public PlayerViewManager(
     Animator animator,
     InputInfo inputInfo,
     PlayerSpeedManager playerSpeedManager,
+    PlayerViewRotatorProvider playerViewRotatorProvider,
     SpriteRenderer spriteRenderer)
   {
     _animator = animator;
     _inputInfo = inputInfo;
     _playerSpeedManager = playerSpeedManager;
+    _playerViewRotatorProvider = playerViewRotatorProvider;
     _spriteRenderer = spriteRenderer;
+    _playerViewRotator = _playerViewRotatorProvider.Default;
   }
 
   public void Update(PlayerViewInput input)
@@ -27,24 +33,25 @@ public class PlayerViewManager
 
   private void RotateSprite(PlayerViewInput input)
   {
-    float spriteAngle;
-    if (input.StandingStraight)
+    var rotatorInput = new PlayerViewRotatorInput(
+      input.GroundAngleDeg,
+      _playerSpeedManager.GroundSpeed,
+      0.001f,
+      input.PrevGroundSide,
+      input.PlayerState,
+      input.PrevPlayerState);
+
+    var nextPlayerViewRotator = _playerViewRotatorProvider.FirstTriggered();
+    if (nextPlayerViewRotator != null)
     {
-      spriteAngle = 0;
-    }
-    else
-    {
-      spriteAngle = input.GroundAngleDeg.Round() + input.GroundSide switch
-      {
-        GroundSide.Down => 0f,
-        GroundSide.Right => 90f,
-        GroundSide.Up => 180f,
-        GroundSide.Left => -90f,
-        _ => throw input.ArgumentOutOfRangeException()
-      };
+      _playerViewRotator = nextPlayerViewRotator;
     }
 
-    _spriteRenderer.transform.localRotation = Quaternion.Euler(0, 0, spriteAngle);
+    if (_playerViewRotator != null)
+    {
+      _playerViewRotator.Rotate(rotatorInput);
+      _spriteRenderer.transform.localRotation = Quaternion.Euler(_playerViewRotator.Rotation);
+    }
 
     if (input.IsSkidding)
     {

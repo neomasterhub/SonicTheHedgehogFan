@@ -1791,6 +1791,7 @@ MonoBehaviour:
   MinAnimatorWalkingSpeed: 0.5
   AnimatorWalkingSpeedFactor: 3
   SkiddingSpeedDeadZone: 0.1
+  GravityEnabled: 1
   TopSpeed: 0.15
   FrictionSpeed: 0.001171875
   AccelerationSpeed: 0.001171875
@@ -1810,7 +1811,6 @@ MonoBehaviour:
   InputDeadZone: 0.001
   WallDetachPositionOffset: {x: -0.1, y: 0}
   WallToAirSpeedDelta: {x: 0.011, y: 0}
-  GravityEnabled: 1
   GroundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -1819,6 +1819,9 @@ MonoBehaviour:
   GroundNormalLength: 1.5
   SensorBeginRadius: 0.03
   SensorEndRadius: 0.01
+  PVRGroundedEnabled: 1
+  PVRWallExitEnabled: 1
+  PVRWallExitDelta: 3
   InfoText: {fileID: 1892464623}
 --- !u!82 &710850504
 AudioSource:
