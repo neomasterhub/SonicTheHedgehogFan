@@ -119,13 +119,9 @@ public class SonicController : MonoBehaviour
     DecelerationSpeed,
 
     // Air
-    GravityEnabled && _groundSide == GroundSide.Down,
     AirTopSpeed,
     AirAccelerationSpeed,
-    GravityUpSpeed,
-    GravityDownSpeed,
     MaxFallSpeed,
-    WallToAirSpeedDelta,
 
     // Dead Zones
     InputDeadZone,
