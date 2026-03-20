@@ -30,6 +30,7 @@ public class PlayerSpeedManager
   public float SlopeFactorSpeed { get; private set; }
   public float GroundSpeed { get; private set; }
   public bool IsSkidding { get; private set; }
+  public GravitySpeed GravitySpeed { get; private set; }
 
   public void ResetSpeeds()
   {
@@ -84,9 +85,9 @@ public class PlayerSpeedManager
 
   private void SetSpeed_Airborne_Gravity(PlayerSpeedInput input)
   {
-    var gravitySpeed = _gravitySpeedProvider.FirstTriggeredOrDefault();
+    GravitySpeed = _gravitySpeedProvider.FirstTriggeredOrDefault();
 
-    SpeedY -= SpeedY > 0 ? gravitySpeed.Up : gravitySpeed.Down;
+    SpeedY -= SpeedY > 0 ? GravitySpeed.Up : GravitySpeed.Down;
 
     if (SpeedY < -input.MaxFallSpeed)
     {
