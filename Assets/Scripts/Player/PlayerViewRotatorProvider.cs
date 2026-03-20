@@ -5,6 +5,7 @@ public class PlayerViewRotatorProvider
 {
   private readonly HashSet<IPlayerViewRotator> _rotators = new();
 
+  public IPlayerViewRotator Current { get; private set; }
   public IPlayerViewRotator Default { get; set; }
 
   public PlayerViewRotatorProvider Add(IPlayerViewRotator rotator)
@@ -15,11 +16,13 @@ public class PlayerViewRotatorProvider
 
   public IPlayerViewRotator FirstTriggered()
   {
-    return _rotators.FirstOrDefault(r => r.Condition());
+    Current = _rotators.FirstOrDefault(r => r.Condition());
+    return Current;
   }
 
   public IPlayerViewRotator FirstTriggeredOrDefault()
   {
-    return FirstTriggered() ?? Default;
+    Current = FirstTriggered() ?? Default;
+    return Current;
   }
 }
