@@ -6,15 +6,20 @@ public class PlayerSpeedManager
   private const int _speedDigits = 3;
 
   private readonly InputInfo _inputInfo;
-  private readonly SlopeFactorSpeedProvider _slopeFactorSpeedProvider;
+  private readonly SpeedProvider<float> _slopeFactorSpeedProvider;
+  private readonly SpeedProvider<Vector2> _groundToAirSpeedProvider;
 
   private float _groundAngleCos;
   private float _groundAngleSin;
 
-  public PlayerSpeedManager(InputInfo inputInfo, SlopeFactorSpeedProvider slopeFactorSpeedProvider)
+  public PlayerSpeedManager(
+    InputInfo inputInfo,
+    SpeedProvider<float> slopeFactorSpeedProvider,
+    SpeedProvider<Vector2> groundToAirSpeedProvider)
   {
     _inputInfo = inputInfo;
     _slopeFactorSpeedProvider = slopeFactorSpeedProvider;
+    _groundToAirSpeedProvider = groundToAirSpeedProvider;
   }
 
   public float SpeedX { get; private set; }
@@ -56,9 +61,22 @@ public class PlayerSpeedManager
   private void SetSpeed_Airborne(PlayerSpeedInput input)
   {
     IsSkidding = false;
+    SetSpeed_Airborne_FromGrounded(input);
     SetSpeed_Airborne_Gravity(input);
     SetSpeed_Airborne_PreventGroundOvershoot(input);
     SetSpeed_Airborne_Horizontal(input);
+  }
+
+  private void SetSpeed_Airborne_FromGrounded(PlayerSpeedInput input)
+  {
+    if (!input.PrevPlayerState.HasFlag(PlayerState.Grounded))
+    {
+      return;
+    }
+
+    var speed = _groundToAirSpeedProvider.FirstTriggeredOrDefault();
+    SpeedX = speed.x;
+    SpeedY = speed.y;
   }
 
   private void SetSpeed_Airborne_Gravity(PlayerSpeedInput input)

@@ -13,13 +13,14 @@ public class SonicController : MonoBehaviour
   private readonly PlayerViewRotatorProvider _pvrProvider = new();
   private readonly PlayerSensorSystemManager _playerSensorSystemManager = new();
   private readonly RelativeGroundInfo _relativeGroundInfo = new();
-  private readonly SlopeFactorSpeedProvider _slopeFactorSpeedProvider = new();
+  private readonly SpeedProvider<float> _slopeFactorSpeedProvider = new();
+  private readonly SpeedProvider<Vector2> _groundToAirSpeedProvider = new();
   private readonly StringBuilder _info = new();
   private readonly TimerManager _timerManager = new();
 
   private InputInfo _inputInfo;
   private IPlayerViewRotator _pvrGrounded;
-  private IPlayerViewRotator _pvrWallExit;
+  private IPlayerViewRotator _pvrWallToAir;
   private PlayerSpeedManager _playerSpeedManager;
   private PlayerViewManager _playerViewManager;
   private Timer _inputUnlockTimer;
@@ -83,8 +84,8 @@ public class SonicController : MonoBehaviour
 
   [Header("Rotators")]
   public bool PVRGroundedEnabled = true;
-  public bool PVRWallExitEnabled = true;
-  public float PVRWallExitDelta = 3f;
+  public bool PVRWallToAirEnabled = true;
+  public float PVRWallToAirDelta = 3f;
 
   [Header("Canvas")]
   public TextMeshProUGUI InfoText;
@@ -155,24 +156,44 @@ public class SonicController : MonoBehaviour
     _inputUnlockTimer = new Timer(SonicConsts.Times.PostDetachInputUnlockTimerSeconds)
       .WhenCompleted(() => _postDetachInputLocked = false);
 
+    InitSpeed();
+    InitView();
+    InitAudio();
+  }
+
+  private void InitSpeed()
+  {
     _slopeFactorSpeedProvider
       .Add(() => _groundSide == GroundSide.Down, () => SlopeFactor * MathF.Sin(_relativeGroundInfo.AngleRad))
       .Add(() => _groundSide == GroundSide.Left, () => _relativeGroundInfo.AngleRad <= 0 ? SlopeFactor : SlopeFactor * MathF.Cos(_relativeGroundInfo.AngleRad))
       .Add(() => _groundSide == GroundSide.Right, () => _relativeGroundInfo.AngleRad >= 0 ? SlopeFactor : SlopeFactor * MathF.Cos(_relativeGroundInfo.AngleRad));
 
-    _playerSpeedManager = new PlayerSpeedManager(_inputInfo, _slopeFactorSpeedProvider);
+    _groundToAirSpeedProvider
+      .Add(() => _prevGroundSide == GroundSide.Right, () => WallToAirSpeedDelta + new Vector2(-_playerSpeedManager.SpeedY, _playerSpeedManager.SpeedX))
+      .Add(() => _prevGroundSide == GroundSide.Left, () => WallToAirSpeedDelta + new Vector2(_playerSpeedManager.SpeedY, -_playerSpeedManager.SpeedX));
 
+    _groundToAirSpeedProvider.Default = () => new(_playerSpeedManager.SpeedX, _playerSpeedManager.SpeedY);
+
+    _playerSpeedManager = new PlayerSpeedManager(_inputInfo, _slopeFactorSpeedProvider, _groundToAirSpeedProvider);
+  }
+
+  private void InitView()
+  {
     _pvrGrounded = new GroundedPlayerViewRotator(
-      () => PVRGroundedEnabled && _playerState.HasFlag(PlayerState.Grounded));
-    _pvrWallExit = new WallExitPlayerViewRotator(
-      PVRWallExitDelta,
-      () => PVRWallExitEnabled
+      () => PVRGroundedEnabled
+      && _playerState.HasFlag(PlayerState.Grounded));
+
+    _pvrWallToAir = new WallToAirPlayerViewRotator(
+      PVRWallToAirDelta,
+      () => PVRWallToAirEnabled
       && _playerState.HasFlag(PlayerState.Airborne)
       && _prevPlayerState.HasFlag(PlayerState.Grounded)
       && _prevGroundSide is GroundSide.Left or GroundSide.Right);
+
     _pvrProvider
       .Add(_pvrGrounded)
-      .Add(_pvrWallExit);
+      .Add(_pvrWallToAir);
+
     _pvrProvider.Default = _pvrGrounded;
 
     _playerViewManager = new PlayerViewManager(
@@ -181,8 +202,29 @@ public class SonicController : MonoBehaviour
       _playerSpeedManager,
       _pvrProvider,
       _spriteRenderer);
+  }
 
-    InitAudio();
+  private void InitAudio()
+  {
+    var states = (_animator.runtimeAnimatorController as AnimatorController)
+      .layers[0].stateMachine.states;
+
+    var skidding = states
+      .Single(s => s.state.name == Consts.Animator.States.Skidding);
+
+    var skiddingToWalking = skidding.state.transitions
+      .Single(t => t.destinationState.name == Consts.Animator.States.Walking);
+
+    var skiddingClip = _animator.runtimeAnimatorController.animationClips
+      .Single(c => c.name == Consts.Animator.States.Skidding);
+
+    _sfxSkidding = this.AddComponent<AudioSource>();
+    _sfxSkidding.clip = Resources.Load<AudioClip>("Sonic/Audio/S1_A4");
+    _sfxSkiddingTimer = new(Mathf.Max(
+      _sfxSkidding.clip.length,
+      skiddingToWalking.exitTime * skiddingClip.length));
+    _sfxSkiddingTimer
+      .WhenStarted(() => _sfxSkidding.Play());
   }
 
   private void FixedUpdate()
@@ -316,29 +358,6 @@ public class SonicController : MonoBehaviour
     };
 
     transform.position = new Vector3(pos.x.Round(2), pos.y.Round(2), transform.position.z);
-  }
-
-  private void InitAudio()
-  {
-    var states = (_animator.runtimeAnimatorController as AnimatorController)
-      .layers[0].stateMachine.states;
-
-    var skidding = states
-      .Single(s => s.state.name == Consts.Animator.States.Skidding);
-
-    var skiddingToWalking = skidding.state.transitions
-      .Single(t => t.destinationState.name == Consts.Animator.States.Walking);
-
-    var skiddingClip = _animator.runtimeAnimatorController.animationClips
-      .Single(c => c.name == Consts.Animator.States.Skidding);
-
-    _sfxSkidding = this.AddComponent<AudioSource>();
-    _sfxSkidding.clip = Resources.Load<AudioClip>("Sonic/Audio/S1_A4");
-    _sfxSkiddingTimer = new(Mathf.Max(
-      _sfxSkidding.clip.length,
-      skiddingToWalking.exitTime * skiddingClip.length));
-    _sfxSkiddingTimer
-      .WhenStarted(() => _sfxSkidding.Play());
   }
 
   private void UpdateAudio()
