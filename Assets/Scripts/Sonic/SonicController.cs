@@ -398,8 +398,9 @@ public class SonicController : MonoBehaviour
 
     _info.AppendLine();
 
-    _info.AddParLine("Global Gravity", GravityEnabled);
-    _info.AddParLine("Ground Side Gravity", PlayerSpeedInput.GravityEnabled);
+    _info.AddParLine("Gravity", GravityEnabled);
+    _info.AddParLine("Gravity Speed Up", _playerSpeedManager.GravitySpeed.Up, 4);
+    _info.AddParLine("Gravity Speed Down", _playerSpeedManager.GravitySpeed.Down, 4);
 
     _info.AppendLine();
 
