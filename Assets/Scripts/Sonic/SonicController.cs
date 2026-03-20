@@ -311,6 +311,9 @@ public class SonicController : MonoBehaviour
       _groundSide = GroundSide.Down;
     }
 
+    _playerState = _playerState
+      .SetFlag(PlayerState.PostDetachFall, _postDetachFall);
+
     _groundAngleDeg = _relativeGroundInfo.AngleDeg + _groundSide switch
     {
       GroundSide.Down => 0f,
