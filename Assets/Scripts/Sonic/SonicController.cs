@@ -363,7 +363,7 @@ public class SonicController : MonoBehaviour
     }
     else
     {
-      if (_sfxSkidding.isPlaying)
+      if (!_sfxSkidding.isPlaying)
       {
         _sfxSkidding.Stop();
       }
