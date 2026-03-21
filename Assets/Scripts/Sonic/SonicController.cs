@@ -220,7 +220,7 @@ public class SonicController : MonoBehaviour
     ShiftGroundSide();
     ApplySensors();
     UpdateStates();
-    SetSpeed();
+    ApplyMovement();
     UpdateView();
     UpdatePosition();
     UpdateAudio();
@@ -307,7 +307,7 @@ public class SonicController : MonoBehaviour
     };
   }
 
-  private void SetSpeed()
+  private void ApplyMovement()
   {
     _playerSpeedManager.SetSpeed(PlayerSpeedInput);
     _playerState = _playerState.SetFlag(PlayerState.Skidding, _playerSpeedManager.IsSkidding);
