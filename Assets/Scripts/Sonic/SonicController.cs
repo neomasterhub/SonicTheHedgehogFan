@@ -1,9 +1,7 @@
 using System;
-using System.Linq;
 using System.Text;
 using TMPro;
 using Unity.VisualScripting;
-using UnityEditor.Animations;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
@@ -19,6 +17,7 @@ public class SonicController : MonoBehaviour
   private readonly StringBuilder _info = new();
   private readonly TimerManager _timerManager = new();
 
+  private AudioSource _sfxSkidding;
   private InputInfo _inputInfo;
   private IPlayerViewRotator _pvrGrounded;
   private IPlayerViewRotator _pvrWallToAir;
@@ -40,10 +39,6 @@ public class SonicController : MonoBehaviour
   private bool _postDetachFall;
   private bool _postDetachInputLocked;
   private bool _wallDetachPositionOffset;
-
-  // Audio
-  private AudioSource _sfxSkidding;
-  private Timer _sfxSkiddingTimer;
 
   [Header("Animations")]
   public float MinAnimatorWalkingSpeed = 0.5f;
@@ -90,6 +85,9 @@ public class SonicController : MonoBehaviour
 
   [Header("Canvas")]
   public TextMeshProUGUI InfoText;
+
+  [Header("Audio")]
+  public AudioClip SkiddingAudioClip;
 
   private PlayerSensorSystemInput PlayerSensorSystemInput => new(
     transform.position,
@@ -211,25 +209,8 @@ public class SonicController : MonoBehaviour
 
   private void InitAudio()
   {
-    var states = (_animator.runtimeAnimatorController as AnimatorController)
-      .layers[0].stateMachine.states;
-
-    var skidding = states
-      .Single(s => s.state.name == Consts.Animator.States.Skidding);
-
-    var skiddingToWalking = skidding.state.transitions
-      .Single(t => t.destinationState.name == Consts.Animator.States.Walking);
-
-    var skiddingClip = _animator.runtimeAnimatorController.animationClips
-      .Single(c => c.name == Consts.Animator.States.Skidding);
-
     _sfxSkidding = this.AddComponent<AudioSource>();
-    _sfxSkidding.clip = Resources.Load<AudioClip>("Sonic/Audio/S1_A4");
-    _sfxSkiddingTimer = new(Mathf.Max(
-      _sfxSkidding.clip.length,
-      skiddingToWalking.exitTime * skiddingClip.length));
-    _sfxSkiddingTimer
-      .WhenStarted(() => _sfxSkidding.Play());
+    _sfxSkidding.clip = SkiddingAudioClip;
   }
 
   private void FixedUpdate()
@@ -237,7 +218,7 @@ public class SonicController : MonoBehaviour
     UpdateInput();
     SetGroundSide();
     RunSensors();
-    UpdateState();
+    UpdateStates();
     SetSpeed();
     UpdateView();
     UpdatePosition();
@@ -274,8 +255,10 @@ public class SonicController : MonoBehaviour
     _relativeGroundInfo.Update(_playerSensorSystemManager.ABResult.AngleDeg);
   }
 
-  private void UpdateState()
+  private void UpdateStates()
   {
+    _timerManager.OnUpdate(Time.fixedDeltaTime);
+
     _prevPlayerState = _playerState;
     _playerState = _playerSensorSystemManager.ABResult.GroundDetected
       ? PlayerState.Grounded
@@ -327,6 +310,7 @@ public class SonicController : MonoBehaviour
   private void SetSpeed()
   {
     _playerSpeedManager.SetSpeed(PlayerSpeedInput);
+    _playerState = _playerState.SetFlag(PlayerState.Skidding, _playerSpeedManager.IsSkidding);
   }
 
   private void UpdateView()
@@ -370,11 +354,19 @@ public class SonicController : MonoBehaviour
 
   private void UpdateAudio()
   {
-    _timerManager.OnUpdate(Time.fixedDeltaTime);
-
-    if (_playerState.HasFlag(PlayerState.Skidding) && !_sfxSkidding.isPlaying)
+    if (_playerState.HasFlag(PlayerState.Skidding))
     {
-      _timerManager.RunSingle(_sfxSkiddingTimer);
+      if (!_sfxSkidding.isPlaying)
+      {
+        _sfxSkidding.Play();
+      }
+    }
+    else
+    {
+      if (!_sfxSkidding.isPlaying)
+      {
+        _sfxSkidding.Stop();
+      }
     }
   }
 
