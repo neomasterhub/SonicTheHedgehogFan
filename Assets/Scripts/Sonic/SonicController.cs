@@ -218,7 +218,7 @@ public class SonicController : MonoBehaviour
   {
     UpdateInput();
     SetGroundSide();
-    RunSensors();
+    ApplySensors();
     UpdateStates();
     SetSpeed();
     UpdateView();
@@ -249,21 +249,21 @@ public class SonicController : MonoBehaviour
     };
   }
 
-  private void RunSensors()
+  private void ApplySensors()
   {
     _playerSensorSystemManager.Update(PlayerSensorSystemInput);
     _playerSensorSystemManager.ApplyAB(PlayerSensorSystemInput);
     _relativeGroundInfo.Update(_playerSensorSystemManager.ABResult.AngleDeg);
-  }
-
-  private void UpdateStates()
-  {
-    _timerManager.OnUpdate(Time.fixedDeltaTime);
 
     _prevPlayerState = _playerState;
     _playerState = _playerSensorSystemManager.ABResult.GroundDetected
       ? PlayerState.Grounded
       : PlayerState.Airborne;
+  }
+
+  private void UpdateStates()
+  {
+    _timerManager.OnUpdate(Time.fixedDeltaTime);
 
     if (_playerState.HasFlag(PlayerState.Grounded))
     {
