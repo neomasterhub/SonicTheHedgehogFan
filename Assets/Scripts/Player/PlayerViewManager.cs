@@ -1,4 +1,6 @@
 using UnityEngine;
+using AnimatorParameters = Consts.Animator.Parameters;
+using AnimatorStates = Consts.Animator.States;
 
 public class PlayerViewManager
 {
@@ -71,10 +73,10 @@ public class PlayerViewManager
   {
     var speedXAbs = Mathf.Abs(_playerSpeedManager.SpeedX);
 
-    _animator.SetFloat(Consts.Animator.Parameters.Speed, speedXAbs);
-    _animator.SetBool(Consts.Animator.Parameters.Skidding, _playerSpeedManager.IsSkidding);
+    _animator.SetFloat(AnimatorParameters.Speed, speedXAbs);
+    _animator.SetBool(AnimatorParameters.Skidding, _playerSpeedManager.IsSkidding);
 
-    if (_animator.GetCurrentAnimatorStateInfo(0).IsName(Consts.Animator.States.Walking))
+    if (_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimatorStates.Walking))
     {
       _animator.speed = Mathf.Max(
         input.MinAnimatorWalkingSpeed,
@@ -82,7 +84,7 @@ public class PlayerViewManager
     }
     else
     {
-      _animator.speed = 1f;
+      _animator.speed = 1;
     }
   }
 }
