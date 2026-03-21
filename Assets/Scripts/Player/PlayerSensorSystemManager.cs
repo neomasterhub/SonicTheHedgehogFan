@@ -42,10 +42,10 @@ public class PlayerSensorSystemManager
     }
 
     return !Physics2D.Raycast(
-      input.Parent,
+      _input.Parent,
       Sensors[SensorId.A].Direction,
-      _hvRadii.y + input.ABSensorLength,
-      input.GroundLayer);
+      _hvRadii.y + _input.ABSensorLength,
+      _input.GroundLayer);
   }
 
   public void ApplyAB()
@@ -53,7 +53,7 @@ public class PlayerSensorSystemManager
     SensorInfo b; // back
     SensorInfo f; // front
 
-    if (input.HorizontalDirection)
+    if (_input.HorizontalDirection)
     {
       b = Sensors[SensorId.A];
       f = Sensors[SensorId.B];
@@ -64,45 +64,45 @@ public class PlayerSensorSystemManager
       f = Sensors[SensorId.A];
     }
 
-    var bHit = Physics2D.Raycast(b.Begin, b.Direction, input.ABSensorLength, input.GroundLayer);
-    var fHit = Physics2D.Raycast(f.Begin, f.Direction, input.ABSensorLength, input.GroundLayer);
+    var bHit = Physics2D.Raycast(b.Begin, b.Direction, _input.ABSensorLength, _input.GroundLayer);
+    var fHit = Physics2D.Raycast(f.Begin, f.Direction, _input.ABSensorLength, _input.GroundLayer);
 
     if (bHit && fHit)
     {
-      _abResult.Set(bHit.distance <= fHit.distance ? bHit : fHit, b.Direction, 1, input.ABSensorLength, true);
+      _abResult.Set(bHit.distance <= fHit.distance ? bHit : fHit, b.Direction, 1, _input.ABSensorLength, true);
       return;
     }
 
-    var rbHit = Physics2D.Raycast(b.Begin, -b.Direction, input.ReversedABSensorLength, input.GroundLayer);
-    var rfHit = Physics2D.Raycast(f.Begin, -f.Direction, input.ReversedABSensorLength, input.GroundLayer);
+    var rbHit = Physics2D.Raycast(b.Begin, -b.Direction, _input.ReversedABSensorLength, _input.GroundLayer);
+    var rfHit = Physics2D.Raycast(f.Begin, -f.Direction, _input.ReversedABSensorLength, _input.GroundLayer);
 
     if (rbHit && rfHit)
     {
-      _abResult.Set(rbHit.distance >= rfHit.distance ? rbHit : rfHit, -b.Direction, -1, input.ReversedABSensorLength, true);
+      _abResult.Set(rbHit.distance >= rfHit.distance ? rbHit : rfHit, -b.Direction, -1, _input.ReversedABSensorLength, true);
       return;
     }
 
     if (rbHit)
     {
-      _abResult.Set(rbHit, -b.Direction, -1, input.ReversedABSensorLength);
+      _abResult.Set(rbHit, -b.Direction, -1, _input.ReversedABSensorLength);
       return;
     }
 
     if (rfHit)
     {
-      _abResult.Set(rfHit, -f.Direction, -1, input.ReversedABSensorLength);
+      _abResult.Set(rfHit, -f.Direction, -1, _input.ReversedABSensorLength);
       return;
     }
 
     if (bHit)
     {
-      _abResult.Set(bHit, b.Direction, 1, input.ABSensorLength);
+      _abResult.Set(bHit, b.Direction, 1, _input.ABSensorLength);
       return;
     }
 
     if (fHit)
     {
-      _abResult.Set(fHit, f.Direction, 1, input.ABSensorLength);
+      _abResult.Set(fHit, f.Direction, 1, _input.ABSensorLength);
       return;
     }
 
@@ -112,15 +112,15 @@ public class PlayerSensorSystemManager
   public void Update(PlayerSensorSystemInput input)
   {
     _input = input;
-    _hvRadii = input.SizeMode == SizeMode.Small ? _smallHVRadii : _bigHVRadii;
+    _hvRadii = _input.SizeMode == SizeMode.Small ? _smallHVRadii : _bigHVRadii;
 
-    foreach (var sensor in _sensorsOffsets[input.SizeMode][input.GroundSide])
+    foreach (var sensor in _sensorsOffsets[_input.SizeMode][_input.GroundSide])
     {
       Sensors[sensor.Key].Update(
         sensor.Value,
-        input.Parent,
-        input.GetSensorLength(sensor.Key),
-        input.GetReversedSensorLength(sensor.Key),
+        _input.Parent,
+        _input.GetSensorLength(sensor.Key),
+        _input.GetReversedSensorLength(sensor.Key),
         _sensorsColors[sensor.Key]);
     }
   }

@@ -257,7 +257,7 @@ public class SonicController : MonoBehaviour
   private void ApplySensors()
   {
     _playerSensorSystemManager.Update(PlayerSensorSystemInput);
-    _playerSensorSystemManager.ApplyAB(PlayerSensorSystemInput);
+    _playerSensorSystemManager.ApplyAB();
     _relativeGroundInfo.Update(_playerSensorSystemManager.ABResult.AngleDeg);
 
     _prevPlayerState = _playerState;
