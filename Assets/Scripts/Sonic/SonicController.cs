@@ -9,7 +9,7 @@ using UnityEngine;
 public class SonicController : MonoBehaviour
 {
   private readonly PlayerViewRotatorProvider _pvrProvider = new();
-  private readonly PlayerSensorSystemManager _playerSensorSystemManager = new();
+  private readonly PlayerSensorSystemManager _playerSensorSystemManager = new(SonicConsts.Sizes.Small.HVRadii, SonicConsts.Sizes.Big.HVRadii);
   private readonly RelativeGroundInfo _relativeGroundInfo = new();
   private readonly SpeedProvider<GravitySpeed> _gravitySpeedProvider = new();
   private readonly SpeedProvider<float> _slopeFactorSpeedProvider = new();

@@ -5,10 +5,18 @@ using UnityEngine;
 
 public class PlayerSensorSystemManager
 {
+  private readonly Vector2 _smallHVRadii;
+  private readonly Vector2 _bigHVRadii;
+
   private ABResult _abResult;
 
-  public PlayerSensorSystemManager()
+  public PlayerSensorSystemManager(
+    Vector2 smallHVRadii,
+    Vector2 bigHVRadii)
   {
+    _smallHVRadii = smallHVRadii;
+    _bigHVRadii = bigHVRadii;
+
     Sensors = Enum
       .GetValues(typeof(SensorId))
       .Cast<SensorId>()
