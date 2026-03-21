@@ -216,11 +216,11 @@ public class SonicController : MonoBehaviour
 
   private void FixedUpdate()
   {
-    UpdateInput();
-    SetGroundSide();
-    RunSensors();
-    UpdateStates();
-    SetSpeed();
+    UpdateTools();
+    ShiftGroundSide();
+    ApplySensors();
+    ProcessEvents();
+    ApplyMovement();
     UpdateView();
     UpdatePosition();
     UpdateAudio();
@@ -233,12 +233,13 @@ public class SonicController : MonoBehaviour
     _playerSensorSystemManager.DrawSensors(SensorBeginRadius, SensorEndRadius);
   }
 
-  private void UpdateInput()
+  private void UpdateTools()
   {
     _inputInfo.Update(!_postDetachInputLocked);
+    _timerManager.OnUpdate(Time.fixedDeltaTime);
   }
 
-  private void SetGroundSide()
+  private void ShiftGroundSide()
   {
     _prevGroundSide = _groundSide;
     _groundSide = _relativeGroundInfo.Side switch
@@ -249,22 +250,20 @@ public class SonicController : MonoBehaviour
     };
   }
 
-  private void RunSensors()
+  private void ApplySensors()
   {
     _playerSensorSystemManager.Update(PlayerSensorSystemInput);
     _playerSensorSystemManager.ApplyAB(PlayerSensorSystemInput);
     _relativeGroundInfo.Update(_playerSensorSystemManager.ABResult.AngleDeg);
-  }
-
-  private void UpdateStates()
-  {
-    _timerManager.OnUpdate(Time.fixedDeltaTime);
 
     _prevPlayerState = _playerState;
     _playerState = _playerSensorSystemManager.ABResult.GroundDetected
       ? PlayerState.Grounded
       : PlayerState.Airborne;
+  }
 
+  private void ProcessEvents()
+  {
     if (_playerState.HasFlag(PlayerState.Grounded))
     {
       if (_postDetachFall)
@@ -300,15 +299,15 @@ public class SonicController : MonoBehaviour
 
     _groundAngleDeg = _relativeGroundInfo.AngleDeg + _groundSide switch
     {
-      GroundSide.Down => 0f,
-      GroundSide.Right => 90f,
-      GroundSide.Up => 180f,
-      GroundSide.Left => -90f,
+      GroundSide.Down => 0,
+      GroundSide.Right => 90,
+      GroundSide.Up => 180,
+      GroundSide.Left => -90,
       _ => throw _groundSide.ArgumentOutOfRangeException()
     };
   }
 
-  private void SetSpeed()
+  private void ApplyMovement()
   {
     _playerSpeedManager.SetSpeed(PlayerSpeedInput);
     _playerState = _playerState.SetFlag(PlayerState.Skidding, _playerSpeedManager.IsSkidding);
