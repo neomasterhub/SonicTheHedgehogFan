@@ -8,6 +8,7 @@ public struct ABResult
   public float AngleDeg;
   public float AngleRad;
   public bool GroundDetected;
+  public bool BothTriggered;
   public int SensorDirectionSign;
 
   public void Reset()
@@ -18,6 +19,7 @@ public struct ABResult
     AngleDeg = float.NaN;
     AngleRad = float.NaN;
     GroundDetected = false;
+    BothTriggered = false;
     SensorDirectionSign = 1;
   }
 
@@ -25,7 +27,8 @@ public struct ABResult
     RaycastHit2D hit,
     Vector2 sensorDirection,
     int sensorDirectionSign,
-    float sensorLength)
+    float sensorLength,
+    bool bothTriggered = false)
   {
     Contact = hit.point;
     Normal = hit.normal;
@@ -34,6 +37,7 @@ public struct ABResult
     AngleRad = AngleDeg * Mathf.Deg2Rad;
     GroundDetected = hit.distance <= sensorLength;
     SensorDirectionSign = sensorDirectionSign;
+    BothTriggered = bothTriggered;
   }
 
   public readonly void DrawNormal(

@@ -39,7 +39,7 @@ public class PlayerSensorSystemManager
 
     if (bHit && fHit)
     {
-      _abResult.Set(bHit.distance <= fHit.distance ? bHit : fHit, b.Direction, 1, input.ABSensorLength);
+      _abResult.Set(bHit.distance <= fHit.distance ? bHit : fHit, b.Direction, 1, input.ABSensorLength, true);
       return;
     }
 
@@ -48,7 +48,7 @@ public class PlayerSensorSystemManager
 
     if (rbHit && rfHit)
     {
-      _abResult.Set(rbHit.distance >= rfHit.distance ? rbHit : rfHit, -b.Direction, -1, input.ReversedABSensorLength);
+      _abResult.Set(rbHit.distance >= rfHit.distance ? rbHit : rfHit, -b.Direction, -1, input.ReversedABSensorLength, true);
       return;
     }
 
