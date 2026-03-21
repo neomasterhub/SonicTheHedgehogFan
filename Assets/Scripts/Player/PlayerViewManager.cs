@@ -74,7 +74,7 @@ public class PlayerViewManager
     var animatorParSpeed = Mathf.Abs(_playerSpeedManager.SpeedX);
     if (input.PlayerState.HasFlag(PlayerState.Airborne))
     {
-      animatorParSpeed = Mathf.Max(animatorParSpeed, input.MinAnimatorWalkingSpeed);
+      animatorParSpeed = Mathf.Max(animatorParSpeed, input.AnimatorSpeedWalkingMin);
     }
 
     _animator.SetFloat(AnimatorParameters.Speed, animatorParSpeed);
@@ -83,8 +83,8 @@ public class PlayerViewManager
     if (_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimatorStates.Walking))
     {
       _animator.speed = Mathf.Max(
-        input.MinAnimatorWalkingSpeed,
-        animatorParSpeed / input.TopSpeed * input.AnimatorWalkingSpeedFactor);
+        input.AnimatorSpeedWalkingMin,
+        animatorParSpeed / input.TopSpeed * input.AnimatorSpeedWalkingFactor);
     }
     else
     {
