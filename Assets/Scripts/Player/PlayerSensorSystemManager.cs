@@ -12,6 +12,7 @@ public class PlayerSensorSystemManager
 
   private Vector2 _hvRadii;
   private ABResult _abResult;
+  private PlayerSensorSystemInput _input;
 
   public PlayerSensorSystemManager(
     Vector2 smallHVRadii,
@@ -33,7 +34,7 @@ public class PlayerSensorSystemManager
   public Dictionary<SensorId, SensorInfo> Sensors { get; }
   public ABResult ABResult => _abResult;
 
-  public bool IsOnGroundEdge(PlayerSensorSystemInput input)
+  public bool IsOnGroundEdge()
   {
     if (!_abResult.GroundDetected || _abResult.BothTriggered)
     {
@@ -47,7 +48,7 @@ public class PlayerSensorSystemManager
       input.GroundLayer);
   }
 
-  public void ApplyAB(PlayerSensorSystemInput input)
+  public void ApplyAB()
   {
     SensorInfo b; // back
     SensorInfo f; // front
@@ -110,6 +111,7 @@ public class PlayerSensorSystemManager
 
   public void Update(PlayerSensorSystemInput input)
   {
+    _input = input;
     _hvRadii = input.SizeMode == SizeMode.Small ? _smallHVRadii : _bigHVRadii;
 
     foreach (var sensor in _sensorsOffsets[input.SizeMode][input.GroundSide])
