@@ -1,4 +1,6 @@
 using UnityEngine;
+using AnimatorParameters = Consts.Animator.Parameters;
+using AnimatorStates = Consts.Animator.States;
 
 public class PlayerViewManager
 {
@@ -9,6 +11,7 @@ public class PlayerViewManager
   private readonly SpriteRenderer _spriteRenderer;
 
   private IPlayerViewRotator _playerViewRotator;
+  private float _groundedAnimatorParameterSpeed;
 
   public PlayerViewManager(
     Animator animator,
@@ -69,20 +72,29 @@ public class PlayerViewManager
 
   private void UpdateAnimator(PlayerViewInput input)
   {
-    var speedXAbs = Mathf.Abs(_playerSpeedManager.SpeedX);
+    var animatorParameterSpeed = 0f;
+    if (input.PlayerState.HasFlag(PlayerState.Grounded))
+    {
+      _groundedAnimatorParameterSpeed = Mathf.Abs(_playerSpeedManager.SpeedX);
+      animatorParameterSpeed = _groundedAnimatorParameterSpeed;
+    }
+    else if (input.PlayerState.HasFlag(PlayerState.Airborne))
+    {
+      animatorParameterSpeed = Mathf.Max(_groundedAnimatorParameterSpeed, input.AnimatorParameterSpeedAirborneMin);
+    }
 
-    _animator.SetFloat(Consts.Animator.Parameters.Speed, speedXAbs);
-    _animator.SetBool(Consts.Animator.Parameters.Skidding, _playerSpeedManager.IsSkidding);
+    _animator.SetFloat(AnimatorParameters.Speed, animatorParameterSpeed);
+    _animator.SetBool(AnimatorParameters.Skidding, _playerSpeedManager.IsSkidding);
 
-    if (_animator.GetCurrentAnimatorStateInfo(0).IsName(Consts.Animator.States.Walking))
+    if (_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimatorStates.Walking))
     {
       _animator.speed = Mathf.Max(
-        input.MinAnimatorWalkingSpeed,
-        speedXAbs / input.TopSpeed * input.AnimatorWalkingSpeedFactor);
+        input.AnimatorSpeedWalkingMin,
+        animatorParameterSpeed / input.TopSpeed * input.AnimatorSpeedWalkingFactor);
     }
     else
     {
-      _animator.speed = 1f;
+      _animator.speed = 1;
     }
   }
 }

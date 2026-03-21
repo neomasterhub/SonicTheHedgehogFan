@@ -41,9 +41,9 @@ public class SonicController : MonoBehaviour
   private bool _wallDetachPositionOffset;
 
   [Header("Animations")]
-  public float MinAnimatorWalkingSpeed = 0.5f;
-  public float AnimatorWalkingSpeedFactor = 3.0f;
-  public float SkiddingSpeedDeadZone = 0.1f;
+  public float AnimatorParameterSpeedAirborneMin = 0.02f;
+  public float AnimatorSpeedWalkingMin = 0.5f;
+  public float AnimatorSpeedWalkingFactor = 3.0f;
 
   [Header("Physics")]
   public bool GravityEnabled = true;
@@ -58,6 +58,7 @@ public class SonicController : MonoBehaviour
   public float GravityDownSpeed = SonicConsts.Physics.GravityDown;
   public float SlopeFactor = SonicConsts.Physics.SlopeFactor;
   public float StandingStraightGroundSpeedZone = SonicConsts.Physics.FrictionSpeed;
+  public float SkiddingSpeedDeadZone = 0.1f;
   public float InputDeadZone = 0.001f;
   public float ABSensorLength = 0.1f;
   public float CDSensorLength = 0.1f;
@@ -127,8 +128,9 @@ public class SonicController : MonoBehaviour
 
   private PlayerViewInput PlayerViewInput => new(
     TopSpeed,
-    MinAnimatorWalkingSpeed,
-    AnimatorWalkingSpeedFactor,
+    AnimatorParameterSpeedAirborneMin,
+    AnimatorSpeedWalkingMin,
+    AnimatorSpeedWalkingFactor,
     _relativeGroundInfo.AngleDeg,
     _groundAngleDeg,
     _prevGroundSide,
