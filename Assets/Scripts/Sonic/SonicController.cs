@@ -219,7 +219,7 @@ public class SonicController : MonoBehaviour
     UpdateTools();
     ShiftGroundSide();
     ApplySensors();
-    UpdateStates();
+    ProcessEvents();
     ApplyMovement();
     UpdateView();
     UpdatePosition();
@@ -262,7 +262,7 @@ public class SonicController : MonoBehaviour
       : PlayerState.Airborne;
   }
 
-  private void UpdateStates()
+  private void ProcessEvents()
   {
     if (_playerState.HasFlag(PlayerState.Grounded))
     {
@@ -299,10 +299,10 @@ public class SonicController : MonoBehaviour
 
     _groundAngleDeg = _relativeGroundInfo.AngleDeg + _groundSide switch
     {
-      GroundSide.Down => 0f,
-      GroundSide.Right => 90f,
-      GroundSide.Up => 180f,
-      GroundSide.Left => -90f,
+      GroundSide.Down => 0,
+      GroundSide.Right => 90,
+      GroundSide.Up => 180,
+      GroundSide.Left => -90,
       _ => throw _groundSide.ArgumentOutOfRangeException()
     };
   }
