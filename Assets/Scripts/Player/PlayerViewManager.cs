@@ -71,16 +71,20 @@ public class PlayerViewManager
 
   private void UpdateAnimator(PlayerViewInput input)
   {
-    var speedXAbs = Mathf.Abs(_playerSpeedManager.SpeedX);
+    var animatorParSpeed = Mathf.Abs(_playerSpeedManager.SpeedX);
+    if (input.PlayerState.HasFlag(PlayerState.Airborne))
+    {
+      animatorParSpeed = Mathf.Max(animatorParSpeed, input.MinAnimatorWalkingSpeed);
+    }
 
-    _animator.SetFloat(AnimatorParameters.Speed, speedXAbs);
+    _animator.SetFloat(AnimatorParameters.Speed, animatorParSpeed);
     _animator.SetBool(AnimatorParameters.Skidding, _playerSpeedManager.IsSkidding);
 
     if (_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimatorStates.Walking))
     {
       _animator.speed = Mathf.Max(
         input.MinAnimatorWalkingSpeed,
-        speedXAbs / input.TopSpeed * input.AnimatorWalkingSpeedFactor);
+        animatorParSpeed / input.TopSpeed * input.AnimatorWalkingSpeedFactor);
     }
     else
     {
