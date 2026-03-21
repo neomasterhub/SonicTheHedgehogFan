@@ -354,9 +354,19 @@ public class SonicController : MonoBehaviour
 
   private void UpdateAudio()
   {
-    if (_playerState.HasFlag(PlayerState.Skidding) && !_sfxSkidding.isPlaying)
+    if (_playerState.HasFlag(PlayerState.Skidding))
     {
-      _timerManager.RunSingle(_sfxSkiddingTimer);
+      if (!_sfxSkidding.isPlaying)
+      {
+        _sfxSkidding.Play();
+      }
+    }
+    else
+    {
+      if (_sfxSkidding.isPlaying)
+      {
+        _sfxSkidding.Stop();
+      }
     }
   }
 
