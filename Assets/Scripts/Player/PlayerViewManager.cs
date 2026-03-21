@@ -52,7 +52,7 @@ public class PlayerViewManager
       _spriteRenderer.transform.localRotation = Quaternion.Euler(_playerViewRotator.Rotation);
     }
 
-    if (input.IsSkidding)
+    if (_playerSpeedManager.IsSkidding)
     {
       return;
     }
@@ -72,7 +72,7 @@ public class PlayerViewManager
     var speedXAbs = Mathf.Abs(_playerSpeedManager.SpeedX);
 
     _animator.SetFloat(Consts.Animator.Parameters.Speed, speedXAbs);
-    _animator.SetBool(Consts.Animator.Parameters.Skidding, input.IsSkidding);
+    _animator.SetBool(Consts.Animator.Parameters.Skidding, _playerSpeedManager.IsSkidding);
 
     if (_animator.GetCurrentAnimatorStateInfo(0).IsName(Consts.Animator.States.Walking))
     {
