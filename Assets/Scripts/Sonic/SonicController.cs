@@ -237,13 +237,12 @@ public class SonicController : MonoBehaviour
     UpdateInput();
     SetGroundSide();
     RunSensors();
-    UpdateState();
+    UpdateStates();
     SetSpeed();
     UpdateView();
     UpdatePosition();
     UpdateAudio();
     UpdateInfoText();
-    _timerManager.OnUpdate(Time.fixedDeltaTime);
   }
 
   private void OnDrawGizmos()
@@ -275,8 +274,10 @@ public class SonicController : MonoBehaviour
     _relativeGroundInfo.Update(_playerSensorSystemManager.ABResult.AngleDeg);
   }
 
-  private void UpdateState()
+  private void UpdateStates()
   {
+    _timerManager.OnUpdate(Time.fixedDeltaTime);
+
     _prevPlayerState = _playerState;
     _playerState = _playerSensorSystemManager.ABResult.GroundDetected
       ? PlayerState.Grounded
