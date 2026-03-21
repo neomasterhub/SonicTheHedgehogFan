@@ -216,7 +216,7 @@ public class SonicController : MonoBehaviour
 
   private void FixedUpdate()
   {
-    UpdateInput();
+    UpdateTools();
     SetGroundSide();
     ApplySensors();
     UpdateStates();
@@ -233,9 +233,10 @@ public class SonicController : MonoBehaviour
     _playerSensorSystemManager.DrawSensors(SensorBeginRadius, SensorEndRadius);
   }
 
-  private void UpdateInput()
+  private void UpdateTools()
   {
     _inputInfo.Update(!_postDetachInputLocked);
+    _timerManager.OnUpdate(Time.fixedDeltaTime);
   }
 
   private void SetGroundSide()
@@ -263,8 +264,6 @@ public class SonicController : MonoBehaviour
 
   private void UpdateStates()
   {
-    _timerManager.OnUpdate(Time.fixedDeltaTime);
-
     if (_playerState.HasFlag(PlayerState.Grounded))
     {
       if (_postDetachFall)
