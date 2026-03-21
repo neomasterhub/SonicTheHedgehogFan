@@ -33,6 +33,20 @@ public class PlayerSensorSystemManager
   public Dictionary<SensorId, SensorInfo> Sensors { get; }
   public ABResult ABResult => _abResult;
 
+  public bool IsOnGroundEdge(PlayerSensorSystemInput input)
+  {
+    if (!_abResult.GroundDetected || _abResult.BothTriggered)
+    {
+      return false;
+    }
+
+    return !Physics2D.Raycast(
+      input.Parent,
+      Sensors[SensorId.A].Direction,
+      _hvRadii.y + input.ABSensorLength,
+      input.GroundLayer);
+  }
+
   public void ApplyAB(PlayerSensorSystemInput input)
   {
     SensorInfo b; // back
