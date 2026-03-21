@@ -126,7 +126,6 @@ public class SonicController : MonoBehaviour
     SkiddingSpeedDeadZone);
 
   private PlayerViewInput PlayerViewInput => new(
-    _playerSpeedManager.IsSkidding,
     TopSpeed,
     MinAnimatorWalkingSpeed,
     AnimatorWalkingSpeedFactor,
