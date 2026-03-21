@@ -10,6 +10,7 @@ public class PlayerSensorSystemManager
   private readonly Dictionary<SensorId, Color> _sensorsColors;
   private readonly Dictionary<SizeMode, Dictionary<GroundSide, Dictionary<SensorId, SensorDef>>> _sensorsOffsets;
 
+  private Vector2 _hvRadii;
   private ABResult _abResult;
 
   public PlayerSensorSystemManager(
@@ -95,6 +96,8 @@ public class PlayerSensorSystemManager
 
   public void Update(PlayerSensorSystemInput input)
   {
+    _hvRadii = input.SizeMode == SizeMode.Small ? _smallHVRadii : _bigHVRadii;
+
     foreach (var sensor in _sensorsOffsets[input.SizeMode][input.GroundSide])
     {
       Sensors[sensor.Key].Update(
