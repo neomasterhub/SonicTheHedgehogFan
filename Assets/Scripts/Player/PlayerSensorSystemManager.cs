@@ -7,15 +7,21 @@ public class PlayerSensorSystemManager
 {
   private readonly Vector2 _smallHVRadii;
   private readonly Vector2 _bigHVRadii;
+  private readonly Dictionary<SensorId, Color> _sensorsColors;
+  private readonly Dictionary<SizeMode, Dictionary<GroundSide, Dictionary<SensorId, SensorDef>>> _sensorsOffsets;
 
   private ABResult _abResult;
 
   public PlayerSensorSystemManager(
     Vector2 smallHVRadii,
-    Vector2 bigHVRadii)
+    Vector2 bigHVRadii,
+    Dictionary<SensorId, Color> sensorsColors,
+    Dictionary<SizeMode, Dictionary<GroundSide, Dictionary<SensorId, SensorDef>>> sensorsOffsets)
   {
     _smallHVRadii = smallHVRadii;
     _bigHVRadii = bigHVRadii;
+    _sensorsColors = sensorsColors;
+    _sensorsOffsets = sensorsOffsets;
 
     Sensors = Enum
       .GetValues(typeof(SensorId))
@@ -89,14 +95,14 @@ public class PlayerSensorSystemManager
 
   public void Update(PlayerSensorSystemInput input)
   {
-    foreach (var sensor in SonicConsts.Sensors.Offsets[input.SizeMode][input.GroundSide])
+    foreach (var sensor in _sensorsOffsets[input.SizeMode][input.GroundSide])
     {
       Sensors[sensor.Key].Update(
         sensor.Value,
         input.Parent,
         input.GetSensorLength(sensor.Key),
         input.GetReversedSensorLength(sensor.Key),
-        SonicConsts.Sensors.Colors[sensor.Key]);
+        _sensorsColors[sensor.Key]);
     }
   }
 
