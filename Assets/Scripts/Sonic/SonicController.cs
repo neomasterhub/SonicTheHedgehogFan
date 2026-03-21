@@ -329,6 +329,7 @@ public class SonicController : MonoBehaviour
   private void SetSpeed()
   {
     _playerSpeedManager.SetSpeed(PlayerSpeedInput);
+    _playerState = _playerState.SetFlag(PlayerState.Skidding, _playerSpeedManager.IsSkidding);
   }
 
   private void UpdateView()
