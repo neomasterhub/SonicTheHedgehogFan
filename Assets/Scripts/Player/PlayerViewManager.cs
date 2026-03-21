@@ -11,6 +11,7 @@ public class PlayerViewManager
   private readonly SpriteRenderer _spriteRenderer;
 
   private IPlayerViewRotator _playerViewRotator;
+  private float _groundedAnimatorParameterSpeed;
 
   public PlayerViewManager(
     Animator animator,
@@ -71,20 +72,25 @@ public class PlayerViewManager
 
   private void UpdateAnimator(PlayerViewInput input)
   {
-    var animatorParSpeed = Mathf.Abs(_playerSpeedManager.SpeedX);
-    if (input.PlayerState.HasFlag(PlayerState.Airborne))
+    var animatorParameterSpeed = 0f;
+    if (input.PlayerState.HasFlag(PlayerState.Grounded))
     {
-      animatorParSpeed = Mathf.Max(animatorParSpeed, input.AnimatorSpeedWalkingMin);
+      _groundedAnimatorParameterSpeed = Mathf.Abs(_playerSpeedManager.SpeedX);
+      animatorParameterSpeed = _groundedAnimatorParameterSpeed;
+    }
+    else if (input.PlayerState.HasFlag(PlayerState.Airborne))
+    {
+      animatorParameterSpeed = Mathf.Max(_groundedAnimatorParameterSpeed, input.AnimatorParameterSpeedAirborneMin);
     }
 
-    _animator.SetFloat(AnimatorParameters.Speed, animatorParSpeed);
+    _animator.SetFloat(AnimatorParameters.Speed, animatorParameterSpeed);
     _animator.SetBool(AnimatorParameters.Skidding, _playerSpeedManager.IsSkidding);
 
     if (_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimatorStates.Walking))
     {
       _animator.speed = Mathf.Max(
         input.AnimatorSpeedWalkingMin,
-        animatorParSpeed / input.TopSpeed * input.AnimatorSpeedWalkingFactor);
+        animatorParameterSpeed / input.TopSpeed * input.AnimatorSpeedWalkingFactor);
     }
     else
     {
