@@ -217,7 +217,7 @@ public class SonicController : MonoBehaviour
   private void FixedUpdate()
   {
     UpdateTools();
-    SetGroundSide();
+    ShiftGroundSide();
     ApplySensors();
     UpdateStates();
     SetSpeed();
@@ -239,7 +239,7 @@ public class SonicController : MonoBehaviour
     _timerManager.OnUpdate(Time.fixedDeltaTime);
   }
 
-  private void SetGroundSide()
+  private void ShiftGroundSide()
   {
     _prevGroundSide = _groundSide;
     _groundSide = _relativeGroundInfo.Side switch
