@@ -265,6 +265,9 @@ public class SonicController : MonoBehaviour
     _playerState = _playerSensorSystemManager.ABResult.GroundDetected
       ? PlayerState.Grounded
       : PlayerState.Airborne;
+    _playerState = _playerState.SetFlag(
+      PlayerState.Balancing,
+      _playerSpeedManager.GroundSpeed == 0 && _playerSensorSystemManager.IsOnGroundEdge());
   }
 
   private void ProcessEvents()
