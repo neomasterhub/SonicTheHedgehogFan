@@ -13,6 +13,8 @@ public class PlayerViewManager
   private PlayerViewInput _input;
   private IPlayerViewRotator _playerViewRotator;
   private float _groundedAnimatorParameterSpeed;
+  private bool _isBalancing;
+  private bool _isSkidding;
 
   public PlayerViewManager(
     Animator animator,
@@ -31,6 +33,9 @@ public class PlayerViewManager
   public void Update(PlayerViewInput input)
   {
     _input = input;
+    _isBalancing = _input.PlayerState.HasFlag(PlayerState.Balancing);
+    _isSkidding = _input.PlayerState.HasFlag(PlayerState.Skidding);
+
     UpdateAnimator();
     RotateSprite();
   }
@@ -51,8 +56,8 @@ public class PlayerViewManager
     }
 
     _animator.SetFloat(AnimatorParameters.Speed, animatorParameterSpeed);
-    _animator.SetBool(AnimatorParameters.Skidding, _playerSpeedManager.IsSkidding);
-    _animator.SetBool(AnimatorParameters.Balancing, _input.PlayerState.HasFlag(PlayerState.Balancing));
+    _animator.SetBool(AnimatorParameters.Balancing, _isBalancing);
+    _animator.SetBool(AnimatorParameters.Skidding, _isSkidding);
 
     if (_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimatorStates.Walking))
     {
@@ -88,7 +93,7 @@ public class PlayerViewManager
       _spriteRenderer.transform.localRotation = Quaternion.Euler(_playerViewRotator.Rotation);
     }
 
-    if (_input.PlayerState.HasFlag(PlayerState.Skidding | PlayerState.Balancing))
+    if (_isBalancing || _isSkidding)
     {
       return;
     }
