@@ -406,7 +406,8 @@ public class SonicController : MonoBehaviour
       _playerState = _playerState.SetFlag(PlayerState.Balancing, true);
     }
 
-    if (Mathf.Abs(_playerSpeedManager.GroundSpeed) < DecelerationSpeed
+    if (_prevPlayerState.HasFlag(PlayerState.Grounded)
+      && Mathf.Abs(_playerSpeedManager.GroundSpeed) < DecelerationSpeed
       && (_groundSide != GroundSide.Down || _relativeGroundInfo.RangeId == GroundRangeId.Steep))
     {
       _postDetachFall = true;
