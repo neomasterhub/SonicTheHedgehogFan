@@ -52,6 +52,7 @@ public class PlayerViewManager
 
     _animator.SetFloat(AnimatorParameters.Speed, animatorParameterSpeed);
     _animator.SetBool(AnimatorParameters.Skidding, _playerSpeedManager.IsSkidding);
+    _animator.SetBool(AnimatorParameters.Balancing, _input.PlayerState.HasFlag(PlayerState.Balancing));
 
     if (_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimatorStates.Walking))
     {
@@ -87,7 +88,7 @@ public class PlayerViewManager
       _spriteRenderer.transform.localRotation = Quaternion.Euler(_playerViewRotator.Rotation);
     }
 
-    if (_playerSpeedManager.IsSkidding)
+    if (_input.PlayerState.HasFlag(PlayerState.Skidding | PlayerState.Balancing))
     {
       return;
     }
