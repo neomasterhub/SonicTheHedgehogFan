@@ -40,7 +40,7 @@ public class PlayerViewManager
     var rotatorInput = new PlayerViewRotatorInput(
       _input.GroundAngleDeg,
       _playerSpeedManager.GroundSpeed,
-      0.001f,
+      _input.StandingStraightGroundSpeedZone,
       _input.PrevGroundSide,
       _input.PlayerState,
       _input.PrevPlayerState);

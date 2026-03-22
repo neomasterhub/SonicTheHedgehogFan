@@ -135,6 +135,7 @@ public class SonicController : MonoBehaviour
     AnimatorParameterSpeedAirborneMin,
     AnimatorSpeedWalkingMin,
     AnimatorSpeedWalkingFactor,
+    StandingStraightGroundSpeedZone,
     _relativeGroundInfo.AngleDeg,
     _groundAngleDeg,
     _prevGroundSide,
