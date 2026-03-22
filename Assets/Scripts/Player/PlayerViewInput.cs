@@ -10,8 +10,9 @@ public readonly struct PlayerViewInput
   public readonly GroundSide PrevGroundSide;
   public readonly PlayerState PlayerState;
   public readonly PlayerState PrevPlayerState;
+  public readonly SensorId? GroundSensorIdApplied;
 
-  public PlayerViewInput(float topSpeed, float animatorParameterSpeedAirborneMin, float animatorSpeedWalkingMin, float animatorSpeedWalkingFactor, float standingStraightGroundSpeedZone, float groundSideAngleDeg, float groundAngleDeg, GroundSide prevGroundSide, PlayerState playerState, PlayerState prevPlayerState)
+  public PlayerViewInput(float topSpeed, float animatorParameterSpeedAirborneMin, float animatorSpeedWalkingMin, float animatorSpeedWalkingFactor, float standingStraightGroundSpeedZone, float groundSideAngleDeg, float groundAngleDeg, GroundSide prevGroundSide, PlayerState playerState, PlayerState prevPlayerState, SensorId? groundSensorIdApplied)
   {
     TopSpeed = topSpeed;
     AnimatorParameterSpeedAirborneMin = animatorParameterSpeedAirborneMin;
@@ -23,5 +24,6 @@ public readonly struct PlayerViewInput
     PrevGroundSide = prevGroundSide;
     PlayerState = playerState;
     PrevPlayerState = prevPlayerState;
+    GroundSensorIdApplied = groundSensorIdApplied;
   }
 }

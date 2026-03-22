@@ -140,7 +140,8 @@ public class SonicController : MonoBehaviour
     _groundAngleDeg,
     _prevGroundSide,
     _playerState,
-    _prevPlayerState);
+    _prevPlayerState,
+    _playerSensorSystemManager.ABResult.AppliedSensorId);
 
   private void Awake()
   {
