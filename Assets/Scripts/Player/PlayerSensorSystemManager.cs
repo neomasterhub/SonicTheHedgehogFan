@@ -50,26 +50,30 @@ public class PlayerSensorSystemManager
 
   public void ApplyAB()
   {
-    SensorInfo b; // back
-    SensorInfo f; // front
+    SensorId backId;
+    SensorId frontId;
 
     if (_input.HorizontalDirection)
     {
-      b = Sensors[SensorId.A];
-      f = Sensors[SensorId.B];
+      backId = SensorId.A;
+      frontId = SensorId.B;
     }
     else
     {
-      b = Sensors[SensorId.B];
-      f = Sensors[SensorId.A];
+      backId = SensorId.B;
+      frontId = SensorId.A;
     }
+
+    var b = Sensors[backId];
+    var f = Sensors[frontId];
 
     var bHit = Physics2D.Raycast(b.Begin, b.Direction, _input.ABSensorLength, _input.GroundLayer);
     var fHit = Physics2D.Raycast(f.Begin, f.Direction, _input.ABSensorLength, _input.GroundLayer);
 
     if (bHit && fHit)
     {
-      _abResult.Set(bHit.distance <= fHit.distance ? bHit : fHit, b.Direction, 1, _input.ABSensorLength, true);
+      var (id, hit) = bHit.distance <= fHit.distance ? (backId, bHit) : (frontId, fHit);
+      _abResult.Set(id, hit, b.Direction, 1, _input.ABSensorLength, true);
       return;
     }
 
@@ -78,31 +82,32 @@ public class PlayerSensorSystemManager
 
     if (rbHit && rfHit)
     {
-      _abResult.Set(rbHit.distance >= rfHit.distance ? rbHit : rfHit, -b.Direction, -1, _input.ReversedABSensorLength, true);
+      var (id, hit) = bHit.distance <= fHit.distance ? (backId, bHit) : (frontId, fHit);
+      _abResult.Set(id, hit, -b.Direction, -1, _input.ReversedABSensorLength, true);
       return;
     }
 
     if (rbHit)
     {
-      _abResult.Set(rbHit, -b.Direction, -1, _input.ReversedABSensorLength);
+      _abResult.Set(backId, rbHit, -b.Direction, -1, _input.ReversedABSensorLength);
       return;
     }
 
     if (rfHit)
     {
-      _abResult.Set(rfHit, -f.Direction, -1, _input.ReversedABSensorLength);
+      _abResult.Set(frontId, rfHit, -f.Direction, -1, _input.ReversedABSensorLength);
       return;
     }
 
     if (bHit)
     {
-      _abResult.Set(bHit, b.Direction, 1, _input.ABSensorLength);
+      _abResult.Set(backId, bHit, b.Direction, 1, _input.ABSensorLength);
       return;
     }
 
     if (fHit)
     {
-      _abResult.Set(fHit, f.Direction, 1, _input.ABSensorLength);
+      _abResult.Set(frontId, fHit, f.Direction, 1, _input.ABSensorLength);
       return;
     }
 
