@@ -398,26 +398,28 @@ public class SonicController : MonoBehaviour
       return;
     }
 
-    if (_playerSpeedManager.GroundSpeed == 0
-      && _groundAngleDeg == 0
-      && _prevPlayerState.HasFlag(PlayerState.Grounded)
-      && _playerSensorSystemManager.IsOnGroundEdge())
+    if (_prevPlayerState.HasFlag(PlayerState.Grounded))
     {
-      _playerState = _playerState.SetFlag(PlayerState.Balancing, true);
-    }
+      if (_playerSpeedManager.GroundSpeed == 0
+        && _groundAngleDeg == 0
+        && _playerSensorSystemManager.IsOnGroundEdge())
+      {
+        _playerState = _playerState.SetFlag(PlayerState.Balancing, true);
+        return;
+      }
 
-    if (_prevPlayerState.HasFlag(PlayerState.Grounded)
-      && Mathf.Abs(_playerSpeedManager.GroundSpeed) < DecelerationSpeed
-      && (_groundSide != GroundSide.Down || _relativeGroundInfo.RangeId == GroundRangeId.Steep))
-    {
-      _postDetachFall = true;
-      _postDetachInputLocked = true;
-      _wallDetachPositionOffset = _groundSide is GroundSide.Left or GroundSide.Right;
-      _playerSpeedManager.ResetSpeeds();
+      if (Mathf.Abs(_playerSpeedManager.GroundSpeed) < DecelerationSpeed
+        && (_groundSide != GroundSide.Down || _relativeGroundInfo.RangeId == GroundRangeId.Steep))
+      {
+        _postDetachFall = true;
+        _postDetachInputLocked = true;
+        _wallDetachPositionOffset = _groundSide is GroundSide.Left or GroundSide.Right;
+        _playerSpeedManager.ResetSpeeds();
 
-      _groundSide = GroundSide.Down;
+        _groundSide = GroundSide.Down;
 
-      return;
+        return;
+      }
     }
   }
 
