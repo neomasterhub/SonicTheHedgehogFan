@@ -29,8 +29,8 @@ public class PlayerViewManager
 
   public void Update(PlayerViewInput input)
   {
-    RotateSprite(input);
     UpdateAnimator(input);
+    RotateSprite(input);
   }
 
   private void RotateSprite(PlayerViewInput input)
