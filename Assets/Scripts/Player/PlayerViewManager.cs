@@ -10,6 +10,7 @@ public class PlayerViewManager
   private readonly PlayerViewRotatorProvider _playerViewRotatorProvider;
   private readonly SpriteRenderer _spriteRenderer;
 
+  private PlayerViewInput _input;
   private IPlayerViewRotator _playerViewRotator;
   private float _groundedAnimatorParameterSpeed;
 
@@ -29,19 +30,20 @@ public class PlayerViewManager
 
   public void Update(PlayerViewInput input)
   {
-    UpdateAnimator(input);
-    RotateSprite(input);
+    _input = input;
+    UpdateAnimator();
+    RotateSprite();
   }
 
-  private void RotateSprite(PlayerViewInput input)
+  private void RotateSprite()
   {
     var rotatorInput = new PlayerViewRotatorInput(
-      input.GroundAngleDeg,
+      _input.GroundAngleDeg,
       _playerSpeedManager.GroundSpeed,
       0.001f,
-      input.PrevGroundSide,
-      input.PlayerState,
-      input.PrevPlayerState);
+      _input.PrevGroundSide,
+      _input.PlayerState,
+      _input.PrevPlayerState);
 
     var nextPlayerViewRotator = _playerViewRotatorProvider.FirstTriggered();
     if (nextPlayerViewRotator != null)
@@ -70,17 +72,19 @@ public class PlayerViewManager
     }
   }
 
-  private void UpdateAnimator(PlayerViewInput input)
+  private void UpdateAnimator()
   {
     var animatorParameterSpeed = 0f;
-    if (input.PlayerState.HasFlag(PlayerState.Grounded))
+    if (_input.PlayerState.HasFlag(PlayerState.Grounded))
     {
       _groundedAnimatorParameterSpeed = Mathf.Abs(_playerSpeedManager.SpeedX);
       animatorParameterSpeed = _groundedAnimatorParameterSpeed;
     }
-    else if (input.PlayerState.HasFlag(PlayerState.Airborne))
+    else if (_input.PlayerState.HasFlag(PlayerState.Airborne))
     {
-      animatorParameterSpeed = Mathf.Max(_groundedAnimatorParameterSpeed, input.AnimatorParameterSpeedAirborneMin);
+      animatorParameterSpeed = Mathf.Max(
+        _groundedAnimatorParameterSpeed,
+        _input.AnimatorParameterSpeedAirborneMin);
     }
 
     _animator.SetFloat(AnimatorParameters.Speed, animatorParameterSpeed);
@@ -89,8 +93,8 @@ public class PlayerViewManager
     if (_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimatorStates.Walking))
     {
       _animator.speed = Mathf.Max(
-        input.AnimatorSpeedWalkingMin,
-        animatorParameterSpeed / input.TopSpeed * input.AnimatorSpeedWalkingFactor);
+        _input.AnimatorSpeedWalkingMin,
+        animatorParameterSpeed / _input.TopSpeed * _input.AnimatorSpeedWalkingFactor);
     }
     else
     {
