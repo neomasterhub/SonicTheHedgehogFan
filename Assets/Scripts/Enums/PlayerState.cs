@@ -8,4 +8,5 @@ public enum PlayerState
   Grounded = 1 << 1,
   Skidding = 1 << 2,
   PostDetachFall = 1 << 3,
+  Balancing = 1 << 4,
 }
