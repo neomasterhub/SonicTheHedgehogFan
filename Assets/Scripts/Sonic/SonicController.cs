@@ -266,42 +266,12 @@ public class SonicController : MonoBehaviour
     _playerState = _playerSensorSystemManager.ABResult.GroundDetected
       ? PlayerState.Grounded
       : PlayerState.Airborne;
-    _playerState = _playerState.SetFlag(
-      PlayerState.Balancing,
-      _playerSpeedManager.GroundSpeed == 0 && _groundAngleDeg == 0 && _playerSensorSystemManager.IsOnGroundEdge());
   }
 
   private void ProcessEvents()
   {
-    if (_playerState.HasFlag(PlayerState.Grounded))
-    {
-      if (_postDetachFall)
-      {
-        _postDetachFall = false;
-        if (!_inputUnlockTimer.IsRunning)
-        {
-          _timerManager.RunSingle(_inputUnlockTimer);
-        }
-      }
-      else
-      {
-        if (Mathf.Abs(_playerSpeedManager.GroundSpeed) < DecelerationSpeed
-          && (_groundSide != GroundSide.Down || _relativeGroundInfo.RangeId == GroundRangeId.Steep))
-        {
-          _postDetachFall = true;
-          _postDetachInputLocked = true;
-          _wallDetachPositionOffset = _groundSide is GroundSide.Left or GroundSide.Right;
-          _playerSpeedManager.ResetSpeeds();
-
-          _groundSide = GroundSide.Down;
-        }
-      }
-    }
-
-    if (_playerState.HasFlag(PlayerState.Airborne))
-    {
-      _groundSide = GroundSide.Down;
-    }
+    ProcessEvents_Grounded();
+    ProcessEvents_Airborne();
 
     _playerState = _playerState
       .SetFlag(PlayerState.PostDetachFall, _postDetachFall);
@@ -407,5 +377,59 @@ public class SonicController : MonoBehaviour
     _info.AddParLine("Speed Y", _playerSpeedManager.SpeedY, 4);
 
     InfoText.SetText(_info);
+  }
+
+  private void ProcessEvents_Grounded()
+  {
+    if (!_playerState.HasFlag(PlayerState.Grounded))
+    {
+      return;
+    }
+
+    if (_postDetachFall)
+    {
+      _postDetachFall = false;
+
+      if (!_inputUnlockTimer.IsRunning)
+      {
+        _timerManager.RunSingle(_inputUnlockTimer);
+      }
+
+      return;
+    }
+
+    if (_prevPlayerState.HasFlag(PlayerState.Grounded))
+    {
+      if (_playerSpeedManager.GroundSpeed == 0
+        && _groundAngleDeg == 0
+        && _playerSensorSystemManager.IsOnGroundEdge())
+      {
+        _playerState = _playerState.SetFlag(PlayerState.Balancing, true);
+        return;
+      }
+
+      if (Mathf.Abs(_playerSpeedManager.GroundSpeed) < DecelerationSpeed
+        && (_groundSide != GroundSide.Down || _relativeGroundInfo.RangeId == GroundRangeId.Steep))
+      {
+        _postDetachFall = true;
+        _postDetachInputLocked = true;
+        _wallDetachPositionOffset = _groundSide is GroundSide.Left or GroundSide.Right;
+        _playerSpeedManager.ResetSpeeds();
+
+        _groundSide = GroundSide.Down;
+
+        return;
+      }
+    }
+  }
+
+  private void ProcessEvents_Airborne()
+  {
+    if (!_playerState.HasFlag(PlayerState.Airborne))
+    {
+      return;
+    }
+
+    _groundSide = GroundSide.Down;
   }
 }
