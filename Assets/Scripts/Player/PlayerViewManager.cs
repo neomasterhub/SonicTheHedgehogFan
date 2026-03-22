@@ -10,8 +10,11 @@ public class PlayerViewManager
   private readonly PlayerViewRotatorProvider _playerViewRotatorProvider;
   private readonly SpriteRenderer _spriteRenderer;
 
+  private PlayerViewInput _input;
   private IPlayerViewRotator _playerViewRotator;
   private float _groundedAnimatorParameterSpeed;
+  private bool _isBalancing;
+  private bool _isSkidding;
 
   public PlayerViewManager(
     Animator animator,
@@ -29,19 +32,54 @@ public class PlayerViewManager
 
   public void Update(PlayerViewInput input)
   {
-    RotateSprite(input);
-    UpdateAnimator(input);
+    _input = input;
+    _isBalancing = _input.PlayerState.HasFlag(PlayerState.Balancing);
+    _isSkidding = _input.PlayerState.HasFlag(PlayerState.Skidding);
+
+    UpdateAnimator();
+    RotateSprite();
   }
 
-  private void RotateSprite(PlayerViewInput input)
+  private void UpdateAnimator()
+  {
+    var animatorParameterSpeed = 0f;
+    if (_input.PlayerState.HasFlag(PlayerState.Grounded))
+    {
+      _groundedAnimatorParameterSpeed = Mathf.Abs(_playerSpeedManager.SpeedX);
+      animatorParameterSpeed = _groundedAnimatorParameterSpeed;
+    }
+    else if (_input.PlayerState.HasFlag(PlayerState.Airborne))
+    {
+      animatorParameterSpeed = Mathf.Max(
+        _groundedAnimatorParameterSpeed,
+        _input.AnimatorParameterSpeedAirborneMin);
+    }
+
+    _animator.SetFloat(AnimatorParameters.Speed, animatorParameterSpeed);
+    _animator.SetBool(AnimatorParameters.Balancing, _isBalancing);
+    _animator.SetBool(AnimatorParameters.Skidding, _isSkidding);
+
+    if (_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimatorStates.Walking))
+    {
+      _animator.speed = Mathf.Max(
+        _input.AnimatorSpeedWalkingMin,
+        animatorParameterSpeed / _input.TopSpeed * _input.AnimatorSpeedWalkingFactor);
+    }
+    else
+    {
+      _animator.speed = 1;
+    }
+  }
+
+  private void RotateSprite()
   {
     var rotatorInput = new PlayerViewRotatorInput(
-      input.GroundAngleDeg,
+      _input.GroundAngleDeg,
       _playerSpeedManager.GroundSpeed,
-      0.001f,
-      input.PrevGroundSide,
-      input.PlayerState,
-      input.PrevPlayerState);
+      _input.StandingStraightGroundSpeedZone,
+      _input.PrevGroundSide,
+      _input.PlayerState,
+      _input.PrevPlayerState);
 
     var nextPlayerViewRotator = _playerViewRotatorProvider.FirstTriggered();
     if (nextPlayerViewRotator != null)
@@ -55,8 +93,26 @@ public class PlayerViewManager
       _spriteRenderer.transform.localRotation = Quaternion.Euler(_playerViewRotator.Rotation);
     }
 
-    if (_playerSpeedManager.IsSkidding)
+    if (_isSkidding)
     {
+      return;
+    }
+
+    if (_isBalancing)
+    {
+      if (_input.GroundSensorIdApplied == SensorId.A)
+      {
+        _spriteRenderer.flipX = false;
+      }
+      else if (_input.GroundSensorIdApplied == SensorId.B)
+      {
+        _spriteRenderer.flipX = true;
+      }
+      else
+      {
+        throw _input.GroundSensorIdApplied.ArgumentOutOfRangeException();
+      }
+
       return;
     }
 
@@ -67,34 +123,6 @@ public class PlayerViewManager
     else if (_inputInfo.X < 0)
     {
       _spriteRenderer.flipX = true;
-    }
-  }
-
-  private void UpdateAnimator(PlayerViewInput input)
-  {
-    var animatorParameterSpeed = 0f;
-    if (input.PlayerState.HasFlag(PlayerState.Grounded))
-    {
-      _groundedAnimatorParameterSpeed = Mathf.Abs(_playerSpeedManager.SpeedX);
-      animatorParameterSpeed = _groundedAnimatorParameterSpeed;
-    }
-    else if (input.PlayerState.HasFlag(PlayerState.Airborne))
-    {
-      animatorParameterSpeed = Mathf.Max(_groundedAnimatorParameterSpeed, input.AnimatorParameterSpeedAirborneMin);
-    }
-
-    _animator.SetFloat(AnimatorParameters.Speed, animatorParameterSpeed);
-    _animator.SetBool(AnimatorParameters.Skidding, _playerSpeedManager.IsSkidding);
-
-    if (_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimatorStates.Walking))
-    {
-      _animator.speed = Mathf.Max(
-        input.AnimatorSpeedWalkingMin,
-        animatorParameterSpeed / input.TopSpeed * input.AnimatorSpeedWalkingFactor);
-    }
-    else
-    {
-      _animator.speed = 1;
     }
   }
 }

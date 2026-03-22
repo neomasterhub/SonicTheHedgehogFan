@@ -21,6 +21,7 @@ public static class Consts
     {
       public const string Speed = nameof(Speed);
       public const string Skidding = nameof(Skidding);
+      public const string Balancing = nameof(Balancing);
     }
 
     public static class States
@@ -31,6 +32,7 @@ public static class Consts
       public const string Walking = nameof(Walking);
       public const string Running = nameof(Running);
       public const string Skidding = nameof(Skidding);
+      public const string Balancing = nameof(Balancing);
     }
   }
 

@@ -9,7 +9,11 @@ using UnityEngine;
 public class SonicController : MonoBehaviour
 {
   private readonly PlayerViewRotatorProvider _pvrProvider = new();
-  private readonly PlayerSensorSystemManager _playerSensorSystemManager = new();
+  private readonly PlayerSensorSystemManager _playerSensorSystemManager = new(
+    SonicConsts.Sizes.Small.HVRadii,
+    SonicConsts.Sizes.Big.HVRadii,
+    SonicConsts.Sensors.Colors,
+    SonicConsts.Sensors.Offsets);
   private readonly RelativeGroundInfo _relativeGroundInfo = new();
   private readonly SpeedProvider<GravitySpeed> _gravitySpeedProvider = new();
   private readonly SpeedProvider<float> _slopeFactorSpeedProvider = new();
@@ -131,11 +135,13 @@ public class SonicController : MonoBehaviour
     AnimatorParameterSpeedAirborneMin,
     AnimatorSpeedWalkingMin,
     AnimatorSpeedWalkingFactor,
+    StandingStraightGroundSpeedZone,
     _relativeGroundInfo.AngleDeg,
     _groundAngleDeg,
     _prevGroundSide,
     _playerState,
-    _prevPlayerState);
+    _prevPlayerState,
+    _playerSensorSystemManager.ABResult.AppliedSensorId);
 
   private void Awake()
   {
@@ -253,13 +259,16 @@ public class SonicController : MonoBehaviour
   private void ApplySensors()
   {
     _playerSensorSystemManager.Update(PlayerSensorSystemInput);
-    _playerSensorSystemManager.ApplyAB(PlayerSensorSystemInput);
+    _playerSensorSystemManager.ApplyAB();
     _relativeGroundInfo.Update(_playerSensorSystemManager.ABResult.AngleDeg);
 
     _prevPlayerState = _playerState;
     _playerState = _playerSensorSystemManager.ABResult.GroundDetected
       ? PlayerState.Grounded
       : PlayerState.Airborne;
+    _playerState = _playerState.SetFlag(
+      PlayerState.Balancing,
+      _playerSpeedManager.GroundSpeed == 0 && _playerSensorSystemManager.IsOnGroundEdge());
   }
 
   private void ProcessEvents()
