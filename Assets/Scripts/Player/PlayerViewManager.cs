@@ -93,8 +93,26 @@ public class PlayerViewManager
       _spriteRenderer.transform.localRotation = Quaternion.Euler(_playerViewRotator.Rotation);
     }
 
-    if (_isBalancing || _isSkidding)
+    if (_isSkidding)
     {
+      return;
+    }
+
+    if (_isBalancing)
+    {
+      if (_input.GroundSensorIdApplied == SensorId.A)
+      {
+        _spriteRenderer.flipX = false;
+      }
+      else if (_input.GroundSensorIdApplied == SensorId.B)
+      {
+        _spriteRenderer.flipX = true;
+      }
+      else
+      {
+        throw _input.GroundSensorIdApplied.ArgumentOutOfRangeException();
+      }
+
       return;
     }
 
