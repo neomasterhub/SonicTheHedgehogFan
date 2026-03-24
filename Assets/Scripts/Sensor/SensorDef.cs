@@ -1,13 +1,23 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-public readonly struct SensorDef
+public class SensorDef
 {
-  public readonly Vector2 Offset;
-  public readonly Vector2 Direction;
+  private readonly Dictionary<char, SensorRay> _rays = new();
 
-  public SensorDef(Vector2 offset, Vector2 direction)
+  public SensorDef(Vector2 offset)
   {
     Offset = offset;
-    Direction = direction;
+  }
+
+  public Vector2 Offset { get; private set; }
+  public Color EnabledColor { get; private set; }
+  public Color? DisabledColor { get; private set; }
+  public IReadOnlyDictionary<char, SensorRay> Rays => _rays;
+
+  public SensorDef AddRay(char id, SensorRay ray)
+  {
+    _rays.Add(id, ray);
+    return this;
   }
 }
