@@ -165,6 +165,7 @@ public class SonicController : MonoBehaviour
     _inputUnlockTimer = new Timer(SonicConsts.Times.PostDetachInputUnlockTimerSeconds)
       .WhenCompleted(() => _postDetachInputLocked = false);
 
+    InitSensorSettings();
     InitSpeed();
     InitView();
     InitAudio();
