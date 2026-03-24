@@ -70,10 +70,10 @@ public class SonicController : MonoBehaviour
   public float SkiddingSpeedDeadZone = 0.1f;
   public float InputDeadZone = 0.001f;
   public float ABSensorLength = 0.1f;
-  public float CDSensorLength = 0.1f;
+  public float CDSensorLength = 0.5f;
   public float EFSensorLength = 0.1f;
   public float ReversedABSensorLength = 0.3f;
-  public float ReversedCDSensorLength = 0.3f;
+  public float ReversedCDSensorLength = 0;
   public float ReversedEFSensorLength = 0.3f;
   public Vector2 WallDetachPositionOffset = new(-0.1f, 0.0f);
   public Vector2 WallToAirSpeedDelta = new(0.011f, 0.0f);
