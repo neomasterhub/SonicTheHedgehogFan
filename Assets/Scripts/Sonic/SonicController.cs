@@ -12,7 +12,7 @@ public class SonicController : MonoBehaviour
   private readonly PlayerSensorSystemManager _playerSensorSystemManager = new(
     SonicConsts.Sizes.Small.HVRadii,
     SonicConsts.Sizes.Big.HVRadii,
-    SonicConsts.Sensors.Offsets);
+    SonicConsts.Sensors.Defs);
   private readonly RelativeGroundInfo _relativeGroundInfo = new();
   private readonly SpeedProvider<GravitySpeed> _gravitySpeedProvider = new();
   private readonly SpeedProvider<float> _slopeFactorSpeedProvider = new();

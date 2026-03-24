@@ -31,7 +31,7 @@ public static class SonicConsts
 
   public static class Sensors
   {
-    public static readonly Dictionary<SonicSizeMode, Dictionary<GroundSide, Dictionary<SensorId, SensorDef>>> Offsets = new()
+    public static readonly Dictionary<SonicSizeMode, Dictionary<GroundSide, Dictionary<SensorId, SensorDef>>> Defs = new()
     {
       [SonicSizeMode.Big] = new()
       {
