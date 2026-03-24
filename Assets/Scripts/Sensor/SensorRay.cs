@@ -1,7 +1,6 @@
 using UnityEngine;
 
-public struct SensorRay<TId>
-  where TId : struct
+public struct SensorRay
 {
   public bool Enabled;
   public float Length;

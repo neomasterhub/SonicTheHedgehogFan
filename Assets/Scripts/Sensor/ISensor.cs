@@ -7,5 +7,5 @@ public interface ISensor<TRayId>
   Vector2 Offset { get; set; }
   Color EnabledColor { get; set; }
   Color? DisabledColor { get; set; }
-  SensorRay<TRayId> GetRay(TRayId id);
+  SensorRay GetRay(TRayId id);
 }
