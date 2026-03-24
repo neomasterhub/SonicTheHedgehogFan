@@ -32,22 +32,18 @@ public class SensorInfo
     ReversedLength = sensorSettings.ReversedLength;
   }
 
-  public void Draw(
-    float beginRadius = 0,
-    float endRadius = 0)
+  public void Draw(float sourceRadius = 0)
   {
     if (Enabled)
     {
       Gizmos.color = EnabledColor;
       Gizmos.DrawLine(ReversedEnd, End);
-      Gizmos.DrawSphere(Begin, beginRadius);
-      Gizmos.DrawSphere(End, endRadius);
-      Gizmos.DrawSphere(ReversedEnd, endRadius);
+      Gizmos.DrawSphere(Begin, sourceRadius);
     }
     else
     {
       Gizmos.color = DisabledColor;
-      Gizmos.DrawSphere(Begin, beginRadius);
+      Gizmos.DrawSphere(Begin, sourceRadius);
     }
   }
 }

@@ -46,8 +46,7 @@ public struct ABResult
 
   public readonly void DrawNormal(
     float normalLength = 1,
-    float beginRadius = 0,
-    float endRadius = 0,
+    float sourceRadius = 0,
     Color? color = null)
   {
     var begin = Contact;
@@ -55,7 +54,6 @@ public struct ABResult
 
     Gizmos.color = color ?? Color.yellow;
     Gizmos.DrawLine(begin, end);
-    Gizmos.DrawSphere(begin, beginRadius);
-    Gizmos.DrawSphere(end, endRadius);
+    Gizmos.DrawSphere(begin, sourceRadius);
   }
 }

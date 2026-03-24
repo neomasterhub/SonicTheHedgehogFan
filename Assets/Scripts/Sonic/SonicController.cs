@@ -90,8 +90,7 @@ public class SonicController : MonoBehaviour
   [Header("UI")]
   public Color GroundNormalColor = Color.white;
   public float GroundNormalLength = 1.5f;
-  public float SensorBeginRadius = 0.03f;
-  public float SensorEndRadius = 0.01f;
+  public float SensorSourceRadius = 0.03f;
 
   [Header("Canvas")]
   public TextMeshProUGUI InfoText;
@@ -276,8 +275,8 @@ public class SonicController : MonoBehaviour
 
   private void OnDrawGizmos()
   {
-    _playerSensorSystemManager.DrawGroundNormal(GroundNormalLength, SensorBeginRadius, SensorEndRadius, GroundNormalColor);
-    _playerSensorSystemManager.DrawSensors(SensorBeginRadius, SensorEndRadius);
+    _playerSensorSystemManager.DrawGroundNormal(GroundNormalLength, SensorSourceRadius, GroundNormalColor);
+    _playerSensorSystemManager.DrawSensors(SensorSourceRadius);
   }
 
   private void UpdateTools()

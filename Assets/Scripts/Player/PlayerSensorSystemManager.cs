@@ -149,22 +149,19 @@ public class PlayerSensorSystemManager
     }
   }
 
-  public void DrawSensors(
-    float beginRadius = 0,
-    float endRadius = 0)
+  public void DrawSensors(float sourceRadius)
   {
     foreach (var sensorInfo in Sensors.Values)
     {
-      sensorInfo.Draw(beginRadius, endRadius);
+      sensorInfo.Draw(sourceRadius);
     }
   }
 
   public void DrawGroundNormal(
     float length = 1,
-    float beginRadius = 0,
-    float endRadius = 0,
+    float sourceRadius = 1,
     Color? color = null)
   {
-    _abResult.DrawNormal(length, beginRadius, endRadius, color);
+    _abResult.DrawNormal(length, sourceRadius, color);
   }
 }
