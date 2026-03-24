@@ -51,9 +51,9 @@ public static class SonicConsts
       [SensorId.F] = Color.gray,
     };
 
-    public static readonly Dictionary<SizeMode, Dictionary<GroundSide, Dictionary<SensorId, SensorDef>>> Offsets = new()
+    public static readonly Dictionary<SonicSizeMode, Dictionary<GroundSide, Dictionary<SensorId, SensorDef>>> Offsets = new()
     {
-      [SizeMode.Big] = new()
+      [SonicSizeMode.Big] = new()
       {
         [GroundSide.Down] = new()
         {
