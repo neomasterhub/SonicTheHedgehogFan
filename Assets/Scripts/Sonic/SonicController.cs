@@ -131,13 +131,15 @@ public class SonicController : MonoBehaviour
     SkiddingSpeedDeadZone);
 
   private PlayerViewInput PlayerViewInput => new(
-    TopSpeed,
     AnimatorParameterSpeedAirborneMin,
     AnimatorSpeedWalkingMin,
     AnimatorSpeedWalkingFactor,
-    StandingStraightGroundSpeedZone,
-    _relativeGroundInfo.AngleDeg,
+    _playerSpeedManager.SpeedX,
+    TopSpeed,
+    _playerSpeedManager.GroundSpeed,
     _groundAngleDeg,
+    _relativeGroundInfo.AngleDeg,
+    StandingStraightGroundSpeedZone,
     _prevGroundSide,
     _playerState,
     _prevPlayerState,
