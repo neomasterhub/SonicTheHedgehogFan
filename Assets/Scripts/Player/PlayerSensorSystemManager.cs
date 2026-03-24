@@ -116,14 +116,12 @@ public class PlayerSensorSystemManager
     _input = input;
     _hvRadii = _input.SizeMode == SizeMode.Small ? _smallHVRadii : _bigHVRadii;
 
-    foreach (var sensor in _sensorsOffsets[_input.SizeMode][_input.GroundSide])
+    foreach (var (key, value) in _sensorsOffsets[_input.SizeMode][_input.GroundSide])
     {
-      Sensors[sensor.Key].Update(
-        sensor.Value,
+      Sensors[key].Update(
+        value,
         _input.Parent,
-        _input.GetSensorLength(sensor.Key),
-        _input.GetReversedSensorLength(sensor.Key),
-        _sensorsColors[sensor.Key]);
+        _input[key]);
     }
   }
 
