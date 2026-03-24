@@ -78,38 +78,36 @@ public class PlayerSensorSystemManager
 
     var b = Sensors[backId];
     var f = Sensors[frontId];
-    var bs = _input[backId];
-    var fs = _input[frontId];
 
-    var bHit = Physics2D.Raycast(b.Begin, b.Direction, bs.Length, _input.GroundLayer);
-    var fHit = Physics2D.Raycast(f.Begin, f.Direction, fs.Length, _input.GroundLayer);
+    var bHit = Physics2D.Raycast(b.Begin, b.Direction, b.Length, _input.GroundLayer);
+    var fHit = Physics2D.Raycast(f.Begin, f.Direction, f.Length, _input.GroundLayer);
 
     if (bHit && fHit)
     {
       if (bHit.distance <= fHit.distance)
       {
-        _abResult.Set(backId, bHit, b.Direction, 1, bs.Length, true);
+        _abResult.Set(backId, bHit, b.Direction, 1, b.Length, true);
       }
       else
       {
-        _abResult.Set(frontId, fHit, f.Direction, 1, fs.Length, true);
+        _abResult.Set(frontId, fHit, f.Direction, 1, f.Length, true);
       }
 
       return;
     }
 
-    var rbHit = Physics2D.Raycast(b.Begin, -b.Direction, bs.ReversedLength, _input.GroundLayer);
-    var rfHit = Physics2D.Raycast(f.Begin, -f.Direction, fs.ReversedLength, _input.GroundLayer);
+    var rbHit = Physics2D.Raycast(b.Begin, -b.Direction, b.ReversedLength, _input.GroundLayer);
+    var rfHit = Physics2D.Raycast(f.Begin, -f.Direction, f.ReversedLength, _input.GroundLayer);
 
     if (rbHit && rfHit)
     {
       if (rbHit.distance >= rfHit.distance)
       {
-        _abResult.Set(backId, rbHit, -b.Direction, -1, bs.ReversedLength, true);
+        _abResult.Set(backId, rbHit, -b.Direction, -1, b.ReversedLength, true);
       }
       else
       {
-        _abResult.Set(frontId, rfHit, -f.Direction, -1, fs.ReversedLength, true);
+        _abResult.Set(frontId, rfHit, -f.Direction, -1, f.ReversedLength, true);
       }
 
       return;
@@ -117,25 +115,25 @@ public class PlayerSensorSystemManager
 
     if (rbHit)
     {
-      _abResult.Set(backId, rbHit, -b.Direction, -1, bs.ReversedLength);
+      _abResult.Set(backId, rbHit, -b.Direction, -1, b.ReversedLength);
       return;
     }
 
     if (rfHit)
     {
-      _abResult.Set(frontId, rfHit, -f.Direction, -1, fs.ReversedLength);
+      _abResult.Set(frontId, rfHit, -f.Direction, -1, f.ReversedLength);
       return;
     }
 
     if (bHit)
     {
-      _abResult.Set(backId, bHit, b.Direction, 1, bs.Length);
+      _abResult.Set(backId, bHit, b.Direction, 1, b.Length);
       return;
     }
 
     if (fHit)
     {
-      _abResult.Set(frontId, fHit, f.Direction, 1, fs.Length);
+      _abResult.Set(frontId, fHit, f.Direction, 1, f.Length);
       return;
     }
 
@@ -179,6 +177,6 @@ public class PlayerSensorSystemManager
       return;
     }
 
-    var hit = Physics2D.Raycast(si.Begin, si.Direction, si.Length);
+    var hit = Physics2D.Raycast(si.Begin, si.Direction, si.Length, _input.GroundLayer);
   }
 }
