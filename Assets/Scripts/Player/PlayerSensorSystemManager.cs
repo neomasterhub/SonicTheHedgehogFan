@@ -7,7 +7,6 @@ public class PlayerSensorSystemManager
 {
   private readonly Vector2 _smallHVRadii;
   private readonly Vector2 _bigHVRadii;
-  private readonly Dictionary<SensorId, Color> _sensorsColors;
   private readonly Dictionary<SizeMode, Dictionary<GroundSide, Dictionary<SensorId, SensorDef>>> _sensorsOffsets;
 
   private Vector2 _hvRadii;
@@ -17,12 +16,10 @@ public class PlayerSensorSystemManager
   public PlayerSensorSystemManager(
     Vector2 smallHVRadii,
     Vector2 bigHVRadii,
-    Dictionary<SensorId, Color> sensorsColors,
     Dictionary<SizeMode, Dictionary<GroundSide, Dictionary<SensorId, SensorDef>>> sensorsOffsets)
   {
     _smallHVRadii = smallHVRadii;
     _bigHVRadii = bigHVRadii;
-    _sensorsColors = sensorsColors;
     _sensorsOffsets = sensorsOffsets;
 
     Sensors = Enum
