@@ -34,6 +34,8 @@ public class PlayerSensorSystemManager
 
   public void ApplyWallSensors()
   {
+    ApplyWallSensor(Sensors[SensorId.C]);
+    ApplyWallSensor(Sensors[SensorId.D]);
   }
 
   public bool IsOnGroundEdge()
@@ -168,5 +170,15 @@ public class PlayerSensorSystemManager
     Color? color = null)
   {
     _abResult.DrawNormal(length, sourceRadius, color);
+  }
+
+  private void ApplyWallSensor(SensorInfo si)
+  {
+    if (!si.Enabled)
+    {
+      return;
+    }
+
+    var hit = Physics2D.Raycast(si.Begin, si.Direction, si.Length);
   }
 }
