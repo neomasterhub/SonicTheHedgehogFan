@@ -211,7 +211,6 @@ public class SonicController : MonoBehaviour
     _playerViewManager = new PlayerViewManager(
       _animator,
       _inputInfo,
-      _playerSpeedManager,
       _pvrProvider,
       _spriteRenderer);
   }
