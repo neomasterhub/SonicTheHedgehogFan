@@ -176,33 +176,33 @@ public class SonicController : MonoBehaviour
     _aSensorSettings = new SensorSettings(
       ABSensorLength,
       ReversedABSensorLength,
-      SonicConsts.Sensors.Colors[SensorId.A],
-      SonicConsts.Sensors.Colors[SensorId.A]);
+      SonicConsts.Sensors.EnabledColors[SensorId.A],
+      SonicConsts.Sensors.DisabledColors[SensorId.A]);
     _bSensorSettings = new SensorSettings(
       ABSensorLength,
       ReversedABSensorLength,
-      SonicConsts.Sensors.Colors[SensorId.B],
-      SonicConsts.Sensors.Colors[SensorId.B]);
+      SonicConsts.Sensors.EnabledColors[SensorId.B],
+      SonicConsts.Sensors.DisabledColors[SensorId.B]);
     _cSensorSettings = new SensorSettings(
       CDSensorLength,
       ReversedCDSensorLength,
-      SonicConsts.Sensors.Colors[SensorId.C],
-      SonicConsts.Sensors.Colors[SensorId.C]);
+      SonicConsts.Sensors.EnabledColors[SensorId.C],
+      SonicConsts.Sensors.DisabledColors[SensorId.C]);
     _dSensorSettings = new SensorSettings(
       CDSensorLength,
       ReversedCDSensorLength,
-      SonicConsts.Sensors.Colors[SensorId.D],
-      SonicConsts.Sensors.Colors[SensorId.D]);
+      SonicConsts.Sensors.EnabledColors[SensorId.D],
+      SonicConsts.Sensors.DisabledColors[SensorId.D]);
     _eSensorSettings = new SensorSettings(
       EFSensorLength,
       ReversedEFSensorLength,
-      SonicConsts.Sensors.Colors[SensorId.E],
-      SonicConsts.Sensors.Colors[SensorId.E]);
+      SonicConsts.Sensors.EnabledColors[SensorId.E],
+      SonicConsts.Sensors.DisabledColors[SensorId.E]);
     _fSensorSettings = new SensorSettings(
       EFSensorLength,
       ReversedEFSensorLength,
-      SonicConsts.Sensors.Colors[SensorId.F],
-      SonicConsts.Sensors.Colors[SensorId.F]);
+      SonicConsts.Sensors.EnabledColors[SensorId.F],
+      SonicConsts.Sensors.DisabledColors[SensorId.F]);
   }
 
   private void InitSpeed()

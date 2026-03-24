@@ -31,14 +31,24 @@ public static class SonicConsts
 
   public static class Sensors
   {
-    public static readonly Dictionary<SensorId, Color> Colors = new()
+    public static readonly Dictionary<SensorId, Color> EnabledColors = new()
     {
-      [SensorId.A] = Color.yellow,
-      [SensorId.B] = Color.green,
-      [SensorId.C] = Color.white,
-      [SensorId.D] = Color.cyan,
-      [SensorId.E] = Color.magenta,
-      [SensorId.F] = Color.red,
+      [SensorId.A] = Color.orange,
+      [SensorId.B] = Color.red,
+      [SensorId.C] = Color.khaki,
+      [SensorId.D] = Color.green,
+      [SensorId.E] = Color.cyan,
+      [SensorId.F] = Color.blue,
+    };
+
+    public static readonly Dictionary<SensorId, Color> DisabledColors = new()
+    {
+      [SensorId.A] = Color.darkOrange,
+      [SensorId.B] = Color.darkRed,
+      [SensorId.C] = Color.darkKhaki,
+      [SensorId.D] = Color.darkGreen,
+      [SensorId.E] = Color.darkCyan,
+      [SensorId.F] = Color.darkBlue,
     };
 
     public static readonly Dictionary<SizeMode, Dictionary<GroundSide, Dictionary<SensorId, SensorDef>>> Offsets = new()
