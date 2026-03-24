@@ -300,6 +300,8 @@ public class SonicController : MonoBehaviour
   {
     _playerSensorSystemManager.Update(PlayerSensorSystemInput);
     _playerSensorSystemManager.ApplyAB();
+    _playerSensorSystemManager.ApplyWallSensors();
+
     _relativeGroundInfo.Update(_playerSensorSystemManager.ABResult.AngleDeg);
 
     _prevPlayerState = _playerState;
