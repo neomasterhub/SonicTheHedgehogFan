@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class SensorInfo
 {
-  public Color Color { get; private set; }
+  public bool Enabled { get; private set; }
+  public Color EnabledColor { get; private set; }
+  public Color DisabledColor { get; private set; }
   public Vector2 Offset { get; private set; }
   public Vector2 Direction { get; private set; }
   public Vector2 Begin { get; private set; }
@@ -14,30 +16,38 @@ public class SensorInfo
   public void Update(
     SensorDef sensorDef,
     Vector2 parent,
-    float length,
-    float reversedLength = 0,
-    Color? color = null)
+    SensorSettings sensorSettings)
   {
-    Color = color ?? Color.yellow;
+    Enabled = sensorSettings.Enabled;
+    EnabledColor = sensorSettings.EnabledColor;
+    DisabledColor = sensorSettings.DisabledColor;
     Offset = sensorDef.Offset;
     Direction = sensorDef.Direction;
 
     Begin = parent + sensorDef.Offset;
-    End = Begin + (sensorDef.Direction * length);
-    ReversedEnd = Begin - (sensorDef.Direction * reversedLength);
+    End = Begin + (sensorDef.Direction * sensorSettings.Length);
+    ReversedEnd = Begin - (sensorDef.Direction * sensorSettings.ReversedLength);
 
-    Length = length;
-    ReversedLength = reversedLength;
+    Length = sensorSettings.Length;
+    ReversedLength = sensorSettings.ReversedLength;
   }
 
   public void Draw(
     float beginRadius = 0,
     float endRadius = 0)
   {
-    Gizmos.color = Color;
-    Gizmos.DrawLine(ReversedEnd, End);
-    Gizmos.DrawSphere(Begin, beginRadius);
-    Gizmos.DrawSphere(End, endRadius);
-    Gizmos.DrawSphere(ReversedEnd, endRadius);
+    if (Enabled)
+    {
+      Gizmos.color = EnabledColor;
+      Gizmos.DrawLine(ReversedEnd, End);
+      Gizmos.DrawSphere(Begin, beginRadius);
+      Gizmos.DrawSphere(End, endRadius);
+      Gizmos.DrawSphere(ReversedEnd, endRadius);
+    }
+    else
+    {
+      Gizmos.color = DisabledColor;
+      Gizmos.DrawSphere(Begin, beginRadius);
+    }
   }
 }
