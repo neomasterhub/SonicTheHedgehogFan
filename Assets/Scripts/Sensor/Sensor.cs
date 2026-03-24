@@ -3,21 +3,21 @@ using UnityEngine;
 
 public class Sensor : ISensor
 {
-  private readonly Dictionary<char, SensorRay> _rays = new();
+  private IReadOnlyDictionary<char, SensorRay> _rays;
 
-  public bool Enabled { get; set; }
-  public Vector2 Position { get; set; }
-  public Color EnabledColor { get; set; }
-  public Color? DisabledColor { get; set; }
+  public bool Enabled { get; set; } = true;
+  public Vector2 Position { get; private set; }
+  public Color EnabledColor { get; private set; }
+  public Color? DisabledColor { get; private set; }
 
   public SensorRay GetRay(char id)
   {
     return _rays[id];
   }
 
-  public Sensor AddRay(char id, SensorRay ray)
+  public void Update(Vector2 parentPosition, SensorDef def)
   {
-    _rays.Add(id, ray);
-    return this;
+    _rays = def.Rays;
+    Position = parentPosition + def.Offset;
   }
 }
