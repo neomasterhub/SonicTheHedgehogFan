@@ -5,7 +5,7 @@ public class WallToAirPlayerViewRotator : PlayerViewRotatorBase
   private float _z;
 
   public WallToAirPlayerViewRotator(float delta, Func<bool> condition)
-    : base("Wall Exit", condition)
+    : base("Wall-to-Air", condition)
   {
     Delta = delta;
   }
