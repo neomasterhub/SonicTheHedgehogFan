@@ -24,7 +24,7 @@ public class PlayerSensorSystemManager2<TSizeMode>
 
     foreach (var (key, value) in _sensorDefs[_input.SizeMode][_input.GroundSide])
     {
-      _sensors[key].Update(_input.Parent, value);
+      _sensors[key].Update(_input.ParentPosition, value);
     }
   }
 }
