@@ -57,31 +57,31 @@ public static class SonicConsts
       {
         [GroundSide.Down] = new()
         {
-          [SensorId.A] = new SensorDef(new(-Sizes.Big.HRadius, -Sizes.Big.VRadius)).AddRayDirection('d', Vector2.down),
-          [SensorId.B] = new SensorDef(new(Sizes.Big.HRadius, -Sizes.Big.VRadius)).AddRayDirection('d', Vector2.down),
-          [SensorId.E] = new SensorDef(new(-Sizes.Big.HRadius, Sizes.Big.VRadius)).AddRayDirection('u', Vector2.up),
-          [SensorId.F] = new SensorDef(new(Sizes.Big.HRadius, Sizes.Big.VRadius)).AddRayDirection('u', Vector2.up),
+          [SensorId.A] = new SensorDef(new(-Sizes.Big.HRadius, -Sizes.Big.VRadius)).AddRayDirection('d', Vector2.down).AddRayDirection('u', Vector2.up),
+          [SensorId.B] = new SensorDef(new(Sizes.Big.HRadius, -Sizes.Big.VRadius)).AddRayDirection('d', Vector2.down).AddRayDirection('u', Vector2.up),
+          [SensorId.E] = new SensorDef(new(-Sizes.Big.HRadius, Sizes.Big.VRadius)).AddRayDirection('u', Vector2.up).AddRayDirection('d', Vector2.down),
+          [SensorId.F] = new SensorDef(new(Sizes.Big.HRadius, Sizes.Big.VRadius)).AddRayDirection('u', Vector2.up).AddRayDirection('d', Vector2.down),
         },
         [GroundSide.Right] = new()
         {
-          [SensorId.A] = new SensorDef(new(Sizes.Big.VRadius, -Sizes.Big.HRadius)).AddRayDirection('d', Vector2.right),
-          [SensorId.B] = new SensorDef(new(Sizes.Big.VRadius, Sizes.Big.HRadius)).AddRayDirection('d', Vector2.right),
-          [SensorId.E] = new SensorDef(new(-Sizes.Big.VRadius, -Sizes.Big.HRadius)).AddRayDirection('u', Vector2.left),
-          [SensorId.F] = new SensorDef(new(-Sizes.Big.VRadius, Sizes.Big.HRadius)).AddRayDirection('u', Vector2.left),
+          [SensorId.A] = new SensorDef(new(Sizes.Big.VRadius, -Sizes.Big.HRadius)).AddRayDirection('d', Vector2.right).AddRayDirection('u', Vector2.left),
+          [SensorId.B] = new SensorDef(new(Sizes.Big.VRadius, Sizes.Big.HRadius)).AddRayDirection('d', Vector2.right).AddRayDirection('u', Vector2.left),
+          [SensorId.E] = new SensorDef(new(-Sizes.Big.VRadius, -Sizes.Big.HRadius)).AddRayDirection('u', Vector2.left).AddRayDirection('d', Vector2.right),
+          [SensorId.F] = new SensorDef(new(-Sizes.Big.VRadius, Sizes.Big.HRadius)).AddRayDirection('u', Vector2.left).AddRayDirection('d', Vector2.right),
         },
         [GroundSide.Up] = new()
         {
-          [SensorId.F] = new SensorDef(new(-Sizes.Big.HRadius, -Sizes.Big.VRadius)).AddRayDirection('u', Vector2.down),
-          [SensorId.E] = new SensorDef(new(Sizes.Big.HRadius, -Sizes.Big.VRadius)).AddRayDirection('u', Vector2.down),
-          [SensorId.B] = new SensorDef(new(-Sizes.Big.HRadius, Sizes.Big.VRadius)).AddRayDirection('d', Vector2.up),
-          [SensorId.A] = new SensorDef(new(Sizes.Big.HRadius, Sizes.Big.VRadius)).AddRayDirection('d', Vector2.up),
+          [SensorId.F] = new SensorDef(new(-Sizes.Big.HRadius, -Sizes.Big.VRadius)).AddRayDirection('u', Vector2.down).AddRayDirection('d', Vector2.up),
+          [SensorId.E] = new SensorDef(new(Sizes.Big.HRadius, -Sizes.Big.VRadius)).AddRayDirection('u', Vector2.down).AddRayDirection('d', Vector2.up),
+          [SensorId.B] = new SensorDef(new(-Sizes.Big.HRadius, Sizes.Big.VRadius)).AddRayDirection('d', Vector2.up).AddRayDirection('u', Vector2.down),
+          [SensorId.A] = new SensorDef(new(Sizes.Big.HRadius, Sizes.Big.VRadius)).AddRayDirection('d', Vector2.up).AddRayDirection('u', Vector2.down),
         },
         [GroundSide.Left] = new()
         {
-          [SensorId.F] = new SensorDef(new(Sizes.Big.VRadius, -Sizes.Big.HRadius)).AddRayDirection('u', Vector2.right),
-          [SensorId.E] = new SensorDef(new(Sizes.Big.VRadius, Sizes.Big.HRadius)).AddRayDirection('u', Vector2.right),
-          [SensorId.B] = new SensorDef(new(-Sizes.Big.VRadius, -Sizes.Big.HRadius)).AddRayDirection('d', Vector2.left),
-          [SensorId.A] = new SensorDef(new(-Sizes.Big.VRadius, Sizes.Big.HRadius)).AddRayDirection('d', Vector2.left),
+          [SensorId.F] = new SensorDef(new(Sizes.Big.VRadius, -Sizes.Big.HRadius)).AddRayDirection('u', Vector2.right).AddRayDirection('d', Vector2.left),
+          [SensorId.E] = new SensorDef(new(Sizes.Big.VRadius, Sizes.Big.HRadius)).AddRayDirection('u', Vector2.right).AddRayDirection('d', Vector2.left),
+          [SensorId.B] = new SensorDef(new(-Sizes.Big.VRadius, -Sizes.Big.HRadius)).AddRayDirection('d', Vector2.left).AddRayDirection('u', Vector2.right),
+          [SensorId.A] = new SensorDef(new(-Sizes.Big.VRadius, Sizes.Big.HRadius)).AddRayDirection('d', Vector2.left).AddRayDirection('u', Vector2.right),
         },
       },
     };
