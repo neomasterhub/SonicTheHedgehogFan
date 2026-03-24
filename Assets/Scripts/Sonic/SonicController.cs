@@ -106,8 +106,8 @@ public class SonicController : MonoBehaviour
     GroundLayer,
     _aSensorSettings.SetLengths(ABSensorLength, ReversedABSensorLength).Enable(true),
     _bSensorSettings.SetLengths(ABSensorLength, ReversedABSensorLength).Enable(true),
-    _cSensorSettings.SetLengths(CDSensorLength, ReversedCDSensorLength).Enable(false),
-    _dSensorSettings.SetLengths(CDSensorLength, ReversedCDSensorLength).Enable(false),
+    _cSensorSettings.SetLengths(CDSensorLength, ReversedCDSensorLength).Enable(true),
+    _dSensorSettings.SetLengths(CDSensorLength, ReversedCDSensorLength).Enable(true),
     _eSensorSettings.SetLengths(EFSensorLength, ReversedEFSensorLength).Enable(false),
     _fSensorSettings.SetLengths(EFSensorLength, ReversedEFSensorLength).Enable(false));
 

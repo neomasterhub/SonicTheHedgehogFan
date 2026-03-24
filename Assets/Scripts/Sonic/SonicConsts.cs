@@ -35,8 +35,8 @@ public static class SonicConsts
     {
       [SensorId.A] = Color.limeGreen,
       [SensorId.B] = Color.green,
-      [SensorId.C] = Color.black,
-      [SensorId.D] = Color.black,
+      [SensorId.C] = Color.purple,
+      [SensorId.D] = Color.magenta,
       [SensorId.E] = Color.black,
       [SensorId.F] = Color.black,
     };
