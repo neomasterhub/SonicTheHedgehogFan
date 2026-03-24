@@ -5,7 +5,14 @@ public class Sensor : ISensor
 {
   private IReadOnlyDictionary<char, SensorRay> _rays;
 
-  public bool Enabled { get; set; } = true;
+  public Sensor(Color enabledColor, Color? disabledColor = null, bool enabled = true)
+  {
+    Enabled = enabled;
+    EnabledColor = enabledColor;
+    DisabledColor = disabledColor;
+  }
+
+  public bool Enabled { get; set; }
   public Vector2 Position { get; private set; }
   public Color EnabledColor { get; private set; }
   public Color? DisabledColor { get; private set; }
