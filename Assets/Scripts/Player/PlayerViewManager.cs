@@ -6,7 +6,6 @@ public class PlayerViewManager
 {
   private readonly Animator _animator;
   private readonly InputInfo _inputInfo;
-  private readonly PlayerSpeedManager _playerSpeedManager;
   private readonly PlayerViewRotatorProvider _playerViewRotatorProvider;
   private readonly SpriteRenderer _spriteRenderer;
 
@@ -19,13 +18,11 @@ public class PlayerViewManager
   public PlayerViewManager(
     Animator animator,
     InputInfo inputInfo,
-    PlayerSpeedManager playerSpeedManager,
     PlayerViewRotatorProvider playerViewRotatorProvider,
     SpriteRenderer spriteRenderer)
   {
     _animator = animator;
     _inputInfo = inputInfo;
-    _playerSpeedManager = playerSpeedManager;
     _playerViewRotatorProvider = playerViewRotatorProvider;
     _spriteRenderer = spriteRenderer;
   }
@@ -45,7 +42,7 @@ public class PlayerViewManager
     var animatorParameterSpeed = 0f;
     if (_input.PlayerState.HasFlag(PlayerState.Grounded))
     {
-      _groundedAnimatorParameterSpeed = Mathf.Abs(_playerSpeedManager.SpeedX);
+      _groundedAnimatorParameterSpeed = Mathf.Abs(_input.SpeedX);
       animatorParameterSpeed = _groundedAnimatorParameterSpeed;
     }
     else if (_input.PlayerState.HasFlag(PlayerState.Airborne))
@@ -75,7 +72,7 @@ public class PlayerViewManager
   {
     var rotatorInput = new PlayerViewRotatorInput(
       _input.GroundAngleDeg,
-      _playerSpeedManager.GroundSpeed,
+      _input.GroundSpeed,
       _input.StandingStraightGroundSpeedZone,
       _input.PrevGroundSide,
       _input.PlayerState,
