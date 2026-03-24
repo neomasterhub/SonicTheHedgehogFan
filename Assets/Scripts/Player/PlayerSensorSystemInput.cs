@@ -28,4 +28,21 @@ public readonly struct PlayerSensorSystemInput
     ESettings = eSettings;
     FSettings = fSettings;
   }
+
+  public SensorSettings this[SensorId id]
+  {
+    get
+    {
+      return id switch
+      {
+        SensorId.A => ASettings,
+        SensorId.B => BSettings,
+        SensorId.C => CSettings,
+        SensorId.D => DSettings,
+        SensorId.E => ESettings,
+        SensorId.F => FSettings,
+        _ => throw id.ArgumentOutOfRangeException(),
+      };
+    }
+  }
 }

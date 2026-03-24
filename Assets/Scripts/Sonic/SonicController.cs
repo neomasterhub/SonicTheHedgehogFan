@@ -100,17 +100,17 @@ public class SonicController : MonoBehaviour
   public AudioClip SkiddingAudioClip;
 
   private PlayerSensorSystemInput PlayerSensorSystemInput => new(
+    !_spriteRenderer.flipX,
     transform.position,
     _playerSizeMode,
     _groundSide,
     GroundLayer,
-    ABSensorLength,
-    CDSensorLength,
-    EFSensorLength,
-    ReversedABSensorLength,
-    ReversedCDSensorLength,
-    ReversedEFSensorLength,
-    !_spriteRenderer.flipX);
+    _aSensorSettings.SetLengths(ABSensorLength, ReversedABSensorLength).Enable(true),
+    _bSensorSettings.SetLengths(ABSensorLength, ReversedABSensorLength).Enable(true),
+    _cSensorSettings.SetLengths(CDSensorLength, ReversedCDSensorLength).Enable(false),
+    _dSensorSettings.SetLengths(CDSensorLength, ReversedCDSensorLength).Enable(false),
+    _eSensorSettings.SetLengths(EFSensorLength, ReversedEFSensorLength).Enable(false),
+    _fSensorSettings.SetLengths(EFSensorLength, ReversedEFSensorLength).Enable(false));
 
   private PlayerSpeedInput PlayerSpeedInput => new(
     _playerState,
