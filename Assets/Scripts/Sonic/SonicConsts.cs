@@ -59,8 +59,6 @@ public static class SonicConsts
         {
           [SensorId.A] = new SensorDef(new(-Sizes.Big.HRadius, -Sizes.Big.VRadius), Vector2.down),
           [SensorId.B] = new SensorDef(new(Sizes.Big.HRadius, -Sizes.Big.VRadius), Vector2.down),
-          [SensorId.C] = new SensorDef(new(-Sizes.Big.HRadius, 0), Vector2.left),
-          [SensorId.D] = new SensorDef(new(Sizes.Big.HRadius, 0), Vector2.right),
           [SensorId.E] = new SensorDef(new(-Sizes.Big.HRadius, Sizes.Big.VRadius), Vector2.up),
           [SensorId.F] = new SensorDef(new(Sizes.Big.HRadius, Sizes.Big.VRadius), Vector2.up),
         },
@@ -68,8 +66,6 @@ public static class SonicConsts
         {
           [SensorId.A] = new SensorDef(new(Sizes.Big.VRadius, -Sizes.Big.HRadius), Vector2.right),
           [SensorId.B] = new SensorDef(new(Sizes.Big.VRadius, Sizes.Big.HRadius), Vector2.right),
-          [SensorId.C] = new SensorDef(new(0, -Sizes.Big.HRadius), Vector2.down),
-          [SensorId.D] = new SensorDef(new(0, Sizes.Big.HRadius), Vector2.up),
           [SensorId.E] = new SensorDef(new(-Sizes.Big.VRadius, -Sizes.Big.HRadius), Vector2.left),
           [SensorId.F] = new SensorDef(new(-Sizes.Big.VRadius, Sizes.Big.HRadius), Vector2.left),
         },
@@ -77,8 +73,6 @@ public static class SonicConsts
         {
           [SensorId.F] = new SensorDef(new(-Sizes.Big.HRadius, -Sizes.Big.VRadius), Vector2.down),
           [SensorId.E] = new SensorDef(new(Sizes.Big.HRadius, -Sizes.Big.VRadius), Vector2.down),
-          [SensorId.D] = new SensorDef(new(-Sizes.Big.HRadius, 0), Vector2.left),
-          [SensorId.C] = new SensorDef(new(Sizes.Big.HRadius, 0), Vector2.right),
           [SensorId.B] = new SensorDef(new(-Sizes.Big.HRadius, Sizes.Big.VRadius), Vector2.up),
           [SensorId.A] = new SensorDef(new(Sizes.Big.HRadius, Sizes.Big.VRadius), Vector2.up),
         },
@@ -86,8 +80,6 @@ public static class SonicConsts
         {
           [SensorId.F] = new SensorDef(new(Sizes.Big.VRadius, -Sizes.Big.HRadius), Vector2.right),
           [SensorId.E] = new SensorDef(new(Sizes.Big.VRadius, Sizes.Big.HRadius), Vector2.right),
-          [SensorId.D] = new SensorDef(new(0, -Sizes.Big.HRadius), Vector2.down),
-          [SensorId.C] = new SensorDef(new(0, Sizes.Big.HRadius), Vector2.up),
           [SensorId.B] = new SensorDef(new(-Sizes.Big.VRadius, -Sizes.Big.HRadius), Vector2.left),
           [SensorId.A] = new SensorDef(new(-Sizes.Big.VRadius, Sizes.Big.HRadius), Vector2.left),
         },
