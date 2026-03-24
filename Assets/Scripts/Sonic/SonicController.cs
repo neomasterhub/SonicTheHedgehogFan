@@ -27,6 +27,12 @@ public class SonicController : MonoBehaviour
   private IPlayerViewRotator _pvrWallToAir;
   private PlayerSpeedManager _playerSpeedManager;
   private PlayerViewManager _playerViewManager;
+  private SensorSettings _aSensorSettings;
+  private SensorSettings _bSensorSettings;
+  private SensorSettings _cSensorSettings;
+  private SensorSettings _dSensorSettings;
+  private SensorSettings _eSensorSettings;
+  private SensorSettings _fSensorSettings;
   private Timer _inputUnlockTimer;
   private float _groundAngleDeg;
 
@@ -163,6 +169,40 @@ public class SonicController : MonoBehaviour
     InitSpeed();
     InitView();
     InitAudio();
+  }
+
+  private void InitSensorSettings()
+  {
+    _aSensorSettings = new SensorSettings(
+      ABSensorLength,
+      ReversedABSensorLength,
+      SonicConsts.Sensors.Colors[SensorId.A],
+      SonicConsts.Sensors.Colors[SensorId.A]);
+    _bSensorSettings = new SensorSettings(
+      ABSensorLength,
+      ReversedABSensorLength,
+      SonicConsts.Sensors.Colors[SensorId.B],
+      SonicConsts.Sensors.Colors[SensorId.B]);
+    _cSensorSettings = new SensorSettings(
+      CDSensorLength,
+      ReversedCDSensorLength,
+      SonicConsts.Sensors.Colors[SensorId.C],
+      SonicConsts.Sensors.Colors[SensorId.C]);
+    _dSensorSettings = new SensorSettings(
+      CDSensorLength,
+      ReversedCDSensorLength,
+      SonicConsts.Sensors.Colors[SensorId.D],
+      SonicConsts.Sensors.Colors[SensorId.D]);
+    _eSensorSettings = new SensorSettings(
+      EFSensorLength,
+      ReversedEFSensorLength,
+      SonicConsts.Sensors.Colors[SensorId.E],
+      SonicConsts.Sensors.Colors[SensorId.E]);
+    _fSensorSettings = new SensorSettings(
+      EFSensorLength,
+      ReversedEFSensorLength,
+      SonicConsts.Sensors.Colors[SensorId.F],
+      SonicConsts.Sensors.Colors[SensorId.F]);
   }
 
   private void InitSpeed()
