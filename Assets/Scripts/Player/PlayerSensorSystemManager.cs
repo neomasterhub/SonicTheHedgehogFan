@@ -47,6 +47,12 @@ public class PlayerSensorSystemManager
 
   public void ApplyAB()
   {
+    if (!_input.ASettings.Enabled || !_input.BSettings.Enabled)
+    {
+      _abResult.Reset();
+      return;
+    }
+
     SensorId backId;
     SensorId frontId;
 
