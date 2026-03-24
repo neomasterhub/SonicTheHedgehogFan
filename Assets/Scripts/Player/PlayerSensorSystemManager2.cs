@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerSensorSystemManager2
+public class PlayerSensorSystemManager2<TSizeMode>
+  where TSizeMode : struct
 {
   private readonly Dictionary<SensorId, Sensor> _sensors = new();
 
