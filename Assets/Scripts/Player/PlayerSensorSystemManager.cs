@@ -34,29 +34,6 @@ public class PlayerSensorSystemManager
 
   public void ApplyWallSensors()
   {
-    SensorId topId;
-    SensorId middleId;
-    SensorId bottomId;
-
-    if (_input.HorizontalDirection)
-    {
-      topId = SensorId.F;
-      middleId = SensorId.D;
-      bottomId = SensorId.B;
-    }
-    else
-    {
-      topId = SensorId.E;
-      middleId = SensorId.C;
-      bottomId = SensorId.A;
-    }
-
-    var t = Sensors[topId];
-    var m = Sensors[middleId];
-    var b = Sensors[bottomId];
-    var ms = _input[middleId];
-
-    var mHit = Physics2D.Raycast(m.Begin, m.Direction, ms.Length, _input.GroundLayer);
   }
 
   public bool IsOnGroundEdge()
