@@ -1,22 +1,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sensor<TRayId> : ISensor<TRayId>
-  where TRayId : struct
+public class Sensor : ISensor
 {
-  private readonly Dictionary<TRayId, SensorRay> _rays = new();
+  private readonly Dictionary<char, SensorRay> _rays = new();
 
   public bool Enabled { get; set; }
   public Vector2 Position { get; set; }
   public Color EnabledColor { get; set; }
   public Color? DisabledColor { get; set; }
 
-  public SensorRay GetRay(TRayId id)
+  public SensorRay GetRay(char id)
   {
     return _rays[id];
   }
 
-  public Sensor<TRayId> AddRay(TRayId id, SensorRay ray)
+  public Sensor AddRay(char id, SensorRay ray)
   {
     _rays.Add(id, ray);
     return this;
