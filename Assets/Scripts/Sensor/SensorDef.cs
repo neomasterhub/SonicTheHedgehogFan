@@ -11,8 +11,6 @@ public class SensorDef
   }
 
   public Vector2 Offset { get; private set; }
-  public Color EnabledColor { get; private set; }
-  public Color? DisabledColor { get; private set; }
   public IReadOnlyDictionary<char, SensorRay> Rays => _rays;
 
   public SensorDef AddRay(char id, SensorRay ray)
