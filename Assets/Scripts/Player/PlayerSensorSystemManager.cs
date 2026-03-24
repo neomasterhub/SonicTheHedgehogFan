@@ -11,6 +11,7 @@ public class PlayerSensorSystemManager
 
   private Vector2 _hvRadii;
   private ABResult _abResult;
+  private WallSensorsResult _wallSensorsResult;
   private PlayerSensorSystemInput _input;
 
   public PlayerSensorSystemManager(
@@ -53,6 +54,9 @@ public class PlayerSensorSystemManager
     var t = Sensors[topId];
     var m = Sensors[middleId];
     var b = Sensors[bottomId];
+    var ms = _input[middleId];
+
+    var mHit = Physics2D.Raycast(m.Begin, m.Direction, ms.Length, _input.GroundLayer);
   }
 
   public bool IsOnGroundEdge()

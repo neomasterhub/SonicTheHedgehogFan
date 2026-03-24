@@ -1806,10 +1806,10 @@ MonoBehaviour:
   SkiddingSpeedDeadZone: 0.1
   InputDeadZone: 0.001
   ABSensorLength: 0.1
-  CDSensorLength: 0.1
+  CDSensorLength: 0.5
   EFSensorLength: 0.1
   ReversedABSensorLength: 0.3
-  ReversedCDSensorLength: 0.3
+  ReversedCDSensorLength: 0
   ReversedEFSensorLength: 0.3
   WallDetachPositionOffset: {x: -0.1, y: 0}
   WallToAirSpeedDelta: {x: 0.011, y: 0}
