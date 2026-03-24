@@ -31,26 +31,6 @@ public static class SonicConsts
 
   public static class Sensors
   {
-    public static readonly Dictionary<SensorId, Color> EnabledColors = new()
-    {
-      [SensorId.A] = Color.limeGreen,
-      [SensorId.B] = Color.green,
-      [SensorId.C] = Color.purple,
-      [SensorId.D] = Color.magenta,
-      [SensorId.E] = Color.black,
-      [SensorId.F] = Color.black,
-    };
-
-    public static readonly Dictionary<SensorId, Color> DisabledColors = new()
-    {
-      [SensorId.A] = Color.gray,
-      [SensorId.B] = Color.gray,
-      [SensorId.C] = Color.gray,
-      [SensorId.D] = Color.gray,
-      [SensorId.E] = Color.gray,
-      [SensorId.F] = Color.gray,
-    };
-
     public static readonly Dictionary<SonicSizeMode, Dictionary<GroundSide, Dictionary<SensorId, SensorDef>>> Offsets = new()
     {
       [SonicSizeMode.Big] = new()
