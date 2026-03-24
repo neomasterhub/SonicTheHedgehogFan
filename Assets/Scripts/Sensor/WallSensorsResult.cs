@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public struct WallSensorsResult
 {
   public bool WallDetected;
@@ -7,5 +9,12 @@ public struct WallSensorsResult
   {
     WallDetected = false;
     Distance = float.PositiveInfinity;
+  }
+
+  public void Set(
+    RaycastHit2D hit,
+    float sensorLength)
+  {
+    WallDetected = hit.distance <= sensorLength;
   }
 }
