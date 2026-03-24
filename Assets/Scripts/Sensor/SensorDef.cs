@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SensorDef
 {
-  private readonly Dictionary<char, SensorRay> _rays = new();
+  private readonly Dictionary<char, Vector2> _rayDirections = new();
 
   public SensorDef(Vector2 offset)
   {
@@ -11,11 +11,11 @@ public class SensorDef
   }
 
   public Vector2 Offset { get; private set; }
-  public IReadOnlyDictionary<char, SensorRay> Rays => _rays;
+  public IReadOnlyDictionary<char, Vector2> RayDirections => _rayDirections;
 
-  public SensorDef AddRay(char id, SensorRay ray)
+  public SensorDef AddRayDirection(char id, Vector2 direction)
   {
-    _rays.Add(id, ray);
+    _rayDirections.Add(id, direction);
     return this;
   }
 }
