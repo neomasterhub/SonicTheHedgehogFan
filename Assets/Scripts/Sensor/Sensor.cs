@@ -7,7 +7,7 @@ public class Sensor<TRayId> : ISensor<TRayId>
   private readonly Dictionary<TRayId, SensorRay> _rays = new();
 
   public bool Enabled { get; set; }
-  public Vector2 Offset { get; set; }
+  public Vector2 Position { get; set; }
   public Color EnabledColor { get; set; }
   public Color? DisabledColor { get; set; }
 
