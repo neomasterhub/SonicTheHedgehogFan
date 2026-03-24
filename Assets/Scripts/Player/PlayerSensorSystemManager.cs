@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class PlayerSensorSystemManager
 {
@@ -30,6 +31,30 @@ public class PlayerSensorSystemManager
 
   public Dictionary<SensorId, SensorInfo> Sensors { get; }
   public ABResult ABResult => _abResult;
+
+  public void ApplyWallSensors()
+  {
+    SensorId topId;
+    SensorId middleId;
+    SensorId bottomId;
+
+    if (_input.HorizontalDirection)
+    {
+      topId = SensorId.F;
+      middleId = SensorId.D;
+      bottomId = SensorId.B;
+    }
+    else
+    {
+      topId = SensorId.E;
+      middleId = SensorId.C;
+      bottomId = SensorId.A;
+    }
+
+    var t = Sensors[topId];
+    var m = Sensors[middleId];
+    var b = Sensors[bottomId];
+  }
 
   public bool IsOnGroundEdge()
   {
