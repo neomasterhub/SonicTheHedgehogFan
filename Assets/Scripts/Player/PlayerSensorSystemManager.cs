@@ -38,12 +38,12 @@ public class PlayerSensorSystemManager
       return false;
     }
 
-    var appliedId = _abResult.AppliedSensorId.Value;
+    var appliedSensor = Sensors[_abResult.AppliedSensorId.Value];
 
     return !Physics2D.Raycast(
       _input.Parent,
-      Sensors[appliedId].Direction,
-      _hvRadii.y + _input[appliedId].Length,
+      appliedSensor.Direction,
+      _hvRadii.y + appliedSensor.Length,
       _input.GroundLayer);
   }
 
