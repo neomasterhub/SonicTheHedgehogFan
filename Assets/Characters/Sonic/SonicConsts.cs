@@ -5,6 +5,8 @@ public static class SonicConsts
 {
   public static class Physics
   {
+    public const float InputUnlockTimerSeconds = 0.5f;
+
     public const float AccelerationSpeedSpx = 12;
     public const float DecelerationSpeedSpx = 128;
     public const float FrictionSpeedSpx = 12;
@@ -47,10 +49,5 @@ public static class SonicConsts
       public const float VRadius = VRadiusPx / ConvertValues.PxPerUnit;
       public static Vector2 HVRadii = new(HRadius, VRadius);
     }
-  }
-
-  public static class Times
-  {
-    public const float PostDetachInputUnlockTimerSeconds = 0.5f;
   }
 }
