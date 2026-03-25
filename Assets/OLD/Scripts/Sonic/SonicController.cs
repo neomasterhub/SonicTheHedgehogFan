@@ -24,6 +24,10 @@ public class SonicController : MonoBehaviour
   private PlayerState _prevPlayerState;
   private SonicSizeMode _sizeMode = SonicSizeMode.Big;
 
+  // Components
+  private Animator _animator;
+  private SpriteRenderer _spriteRenderer;
+
   public SonicController()
   {
     // For drawing
@@ -46,9 +50,6 @@ public class SonicController : MonoBehaviour
   private Timer _inputUnlockTimer;
   private float _groundAngleDeg;
 
-  // Components
-  private Animator _animator;
-  private SpriteRenderer _spriteRenderer;
 
   private bool _postDetachFall;
   private bool _postDetachInputLocked;
