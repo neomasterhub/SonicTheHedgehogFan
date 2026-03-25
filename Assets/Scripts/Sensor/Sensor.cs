@@ -22,9 +22,17 @@ public class Sensor : ISensor
     return _rays[id];
   }
 
-  public void Update(Vector2 parentPosition, SensorDef def)
+  public void Update(Vector2 parentPosition, SensorDef def, Dictionary<char, SensorRaySettings> raySettingsDir)
   {
-    _rays = def.Rays;
     Position = parentPosition + def.Offset;
+
+    foreach (var (id, dir) in def.RayDirections)
+    {
+      var ray = _rays[id];
+      var raySettings = raySettingsDir[id];
+      ray.Direction = dir;
+      ray.Length = raySettings.Length();
+      ray.Enabled = raySettings.Enabled();
+    }
   }
 }

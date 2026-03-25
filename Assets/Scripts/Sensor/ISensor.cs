@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public interface ISensor
@@ -7,5 +8,5 @@ public interface ISensor
   Color EnabledColor { get; }
   Color? DisabledColor { get; }
   SensorRay GetRay(char id);
-  void Update(Vector2 parentPosition, SensorDef def);
+  void Update(Vector2 parentPosition, SensorDef def, Dictionary<char, SensorRaySettings> raySettingsDir);
 }
