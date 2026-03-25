@@ -1,7 +1,5 @@
-public class SensorSystemManager
+public class SensorSystem
 {
-  private SensorSystemInput _input;
-
   public SensorGroup BigUpSensorGroup { get; set; }
   public SensorGroup BigDownSensorGroup { get; set; }
   public SensorGroup BigLeftSensorGroup { get; set; }
@@ -12,29 +10,27 @@ public class SensorSystemManager
   public SensorGroup SmallRightSensorGroup { get; set; }
   public SensorGroup CurrentSensorGroup { get; private set; }
 
-  public void Update(SensorSystemInput input)
+  public void SetCurrentSensorGroup(SizeMode sizeMode, GroundSide groundSide)
   {
-    _input = input;
-
-    CurrentSensorGroup = _input.SizeMode switch
+    CurrentSensorGroup = sizeMode switch
     {
-      SizeMode.Big => _input.GroundSide switch
+      SizeMode.Big => groundSide switch
       {
         GroundSide.Up => BigUpSensorGroup,
         GroundSide.Down => BigDownSensorGroup,
         GroundSide.Left => BigLeftSensorGroup,
         GroundSide.Right => BigRightSensorGroup,
-        _ => throw _input.GroundSide.ArgumentOutOfRangeException(),
+        _ => throw groundSide.ArgumentOutOfRangeException(),
       },
-      SizeMode.Small => _input.GroundSide switch
+      SizeMode.Small => groundSide switch
       {
         GroundSide.Up => SmallUpSensorGroup,
         GroundSide.Down => SmallDownSensorGroup,
         GroundSide.Left => SmallLeftSensorGroup,
         GroundSide.Right => SmallRightSensorGroup,
-        _ => throw _input.GroundSide.ArgumentOutOfRangeException(),
+        _ => throw groundSide.ArgumentOutOfRangeException(),
       },
-      _ => throw _input.SizeMode.ArgumentOutOfRangeException(),
+      _ => throw sizeMode.ArgumentOutOfRangeException(),
     };
   }
 }
