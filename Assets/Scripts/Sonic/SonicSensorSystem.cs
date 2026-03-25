@@ -1,4 +1,4 @@
-public class SensorSystem
+public class SonicSensorSystem
 {
   public SensorGroup BigUpSensorGroup { get; set; }
   public SensorGroup BigDownSensorGroup { get; set; }
@@ -10,11 +10,11 @@ public class SensorSystem
   public SensorGroup SmallRightSensorGroup { get; set; }
   public SensorGroup CurrentSensorGroup { get; private set; }
 
-  public void SetCurrentSensorGroup(SizeMode sizeMode, GroundSide groundSide)
+  public void SetCurrentSensorGroup(SonicSizeMode sizeMode, GroundSide groundSide)
   {
     CurrentSensorGroup = sizeMode switch
     {
-      SizeMode.Big => groundSide switch
+      SonicSizeMode.Big => groundSide switch
       {
         GroundSide.Up => BigUpSensorGroup,
         GroundSide.Down => BigDownSensorGroup,
@@ -22,7 +22,7 @@ public class SensorSystem
         GroundSide.Right => BigRightSensorGroup,
         _ => throw groundSide.ArgumentOutOfRangeException(),
       },
-      SizeMode.Small => groundSide switch
+      SonicSizeMode.Small => groundSide switch
       {
         GroundSide.Up => SmallUpSensorGroup,
         GroundSide.Down => SmallDownSensorGroup,
