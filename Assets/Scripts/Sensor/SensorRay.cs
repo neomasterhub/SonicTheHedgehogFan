@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public struct SensorRay
+public class SensorRay
 {
-  public bool Enabled;
-  public float Length;
-  public Vector2 Direction;
+  public bool Enabled { get; set; }
+  public float Length { get; set; }
+  public Vector2 Direction { get; set; }
 }
