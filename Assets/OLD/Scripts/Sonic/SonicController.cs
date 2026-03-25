@@ -18,6 +18,9 @@ public class SonicController : MonoBehaviour
   private readonly TimerManager _timerManager = new();
 
   // State flags
+  private bool _postDetachFall;
+  private bool _postDetachInputLocked;
+  private bool _wallDetachPositionOffset;
   private GroundSide _groundSide = GroundSide.Down;
   private GroundSide _prevGroundSide = GroundSide.Down;
   private PlayerState _playerState;
@@ -28,19 +31,7 @@ public class SonicController : MonoBehaviour
   private Animator _animator;
   private SpriteRenderer _spriteRenderer;
 
-  public SonicController()
-  {
-    // For drawing
-    _sensorSystem.SetCurrentSensorGroup(_sizeMode, _groundSide);
-  }
-
-
-
-
-
-  // OLD:
-
-
+  private float _groundAngleDeg;
   private AudioSource _sfxSkidding;
   private InputInfo _inputInfo;
   private IPlayerViewRotator _pvrGrounded;
@@ -48,12 +39,12 @@ public class SonicController : MonoBehaviour
   private PlayerSpeedManager _playerSpeedManager;
   private PlayerViewManager _playerViewManager;
   private Timer _inputUnlockTimer;
-  private float _groundAngleDeg;
 
-
-  private bool _postDetachFall;
-  private bool _postDetachInputLocked;
-  private bool _wallDetachPositionOffset;
+  public SonicController()
+  {
+    // For drawing
+    _sensorSystem.SetCurrentSensorGroup(_sizeMode, _groundSide);
+  }
 
   [Header("Sensors")]
   public float ABCDUpLength = 0.1f;
