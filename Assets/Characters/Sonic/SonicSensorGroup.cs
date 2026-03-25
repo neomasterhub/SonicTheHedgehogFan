@@ -1,4 +1,4 @@
-public class SensorGroup
+public class SonicSensorGroup
 {
   public UDFSensor A { get; set; }
   public UDFSensor B { get; set; }

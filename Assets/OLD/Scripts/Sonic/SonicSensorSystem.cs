@@ -1,14 +1,14 @@
 public class SonicSensorSystem
 {
-  public SensorGroup BigUpSensorGroup { get; set; }
-  public SensorGroup BigDownSensorGroup { get; set; }
-  public SensorGroup BigLeftSensorGroup { get; set; }
-  public SensorGroup BigRightSensorGroup { get; set; }
-  public SensorGroup SmallUpSensorGroup { get; set; }
-  public SensorGroup SmallDownSensorGroup { get; set; }
-  public SensorGroup SmallLeftSensorGroup { get; set; }
-  public SensorGroup SmallRightSensorGroup { get; set; }
-  public SensorGroup CurrentSensorGroup { get; private set; }
+  public SonicSensorGroup BigUpSensorGroup { get; set; }
+  public SonicSensorGroup BigDownSensorGroup { get; set; }
+  public SonicSensorGroup BigLeftSensorGroup { get; set; }
+  public SonicSensorGroup BigRightSensorGroup { get; set; }
+  public SonicSensorGroup SmallUpSensorGroup { get; set; }
+  public SonicSensorGroup SmallDownSensorGroup { get; set; }
+  public SonicSensorGroup SmallLeftSensorGroup { get; set; }
+  public SonicSensorGroup SmallRightSensorGroup { get; set; }
+  public SonicSensorGroup CurrentSensorGroup { get; private set; }
 
   public void SetCurrentSensorGroup(SonicSizeMode sizeMode, GroundSide groundSide)
   {
