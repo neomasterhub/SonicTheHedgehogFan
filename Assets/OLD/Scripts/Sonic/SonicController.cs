@@ -40,16 +40,36 @@ public class SonicController : MonoBehaviour
   private PlayerViewManager _playerViewManager;
   private Timer _inputUnlockTimer;
 
+  [Header("Sensors")]
+  public float ABCDUpLength = 0.1f;
+  public float ABCDDownLength = 0.3f;
+  public float ABCDFrontLength = 0.5f;
+
   public SonicController()
   {
     // For drawing
     _sensorSystem.SetCurrentSensorGroup(_sizeMode, _groundSide);
   }
 
-  [Header("Sensors")]
-  public float ABCDUpLength = 0.1f;
-  public float ABCDDownLength = 0.3f;
-  public float ABCDFrontLength = 0.5f;
+  private void Awake()
+  {
+    Application.targetFrameRate = Consts.ConvertValues.FramePerSec;
+    Time.fixedDeltaTime = 1f / Consts.ConvertValues.FramePerSec;
+
+    _animator = GetComponent<Animator>();
+    _spriteRenderer = GetComponent<SpriteRenderer>();
+
+    _inputInfo = new InputInfo(
+      () => Input.GetAxis(Consts.InputAxis.Horizontal),
+      () => Input.GetAxis(Consts.InputAxis.Vertical));
+
+    _inputUnlockTimer = new Timer(SonicConsts.Physics.InputUnlockTimerSeconds)
+      .WhenCompleted(() => _postDetachInputLocked = false);
+
+    InitSpeed();
+    InitView();
+    InitAudio();
+  }
 
   [Header("Animations")]
   public float AnimatorParameterSpeedAirborneMin = 0.02f;
