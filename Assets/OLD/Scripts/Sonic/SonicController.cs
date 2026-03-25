@@ -8,7 +8,14 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class SonicController : MonoBehaviour
 {
+  private readonly PlayerViewRotatorProvider _pvrProvider = new();
+  private readonly RelativeGroundInfo _relativeGroundInfo = new();
   private readonly SonicSensorSystem _sensorSystem = new();
+  private readonly SpeedProvider<GravitySpeed> _gravitySpeedProvider = new();
+  private readonly SpeedProvider<float> _slopeFactorSpeedProvider = new();
+  private readonly SpeedProvider<Vector2> _groundToAirSpeedProvider = new();
+  private readonly StringBuilder _info = new();
+  private readonly TimerManager _timerManager = new();
 
   // State flags
   private GroundSide _groundSide = GroundSide.Down;
@@ -29,13 +36,6 @@ public class SonicController : MonoBehaviour
 
   // OLD:
 
-  private readonly PlayerViewRotatorProvider _pvrProvider = new();
-  private readonly RelativeGroundInfo _relativeGroundInfo = new();
-  private readonly SpeedProvider<GravitySpeed> _gravitySpeedProvider = new();
-  private readonly SpeedProvider<float> _slopeFactorSpeedProvider = new();
-  private readonly SpeedProvider<Vector2> _groundToAirSpeedProvider = new();
-  private readonly StringBuilder _info = new();
-  private readonly TimerManager _timerManager = new();
 
   private AudioSource _sfxSkidding;
   private InputInfo _inputInfo;
