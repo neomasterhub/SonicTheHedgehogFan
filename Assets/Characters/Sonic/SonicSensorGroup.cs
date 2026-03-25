@@ -2,10 +2,18 @@ using UnityEngine;
 
 public class SonicSensorGroup
 {
-  public UDFSensor A { get; set; }
-  public UDFSensor B { get; set; }
-  public UDFSensor C { get; set; }
-  public UDFSensor D { get; set; }
+  public SonicSensorGroup(UDFSensor a, UDFSensor b, UDFSensor c, UDFSensor d)
+  {
+    A = a;
+    B = b;
+    C = c;
+    D = d;
+  }
+
+  public UDFSensor A { get; }
+  public UDFSensor B { get; }
+  public UDFSensor C { get; }
+  public UDFSensor D { get; }
 
   public void SetParentPosition(Vector2 parentPosition)
   {

@@ -14,34 +14,31 @@ public class SonicSensorSystem
 
   public SonicSensorSystem()
   {
-    _bigDownSensorGroup = new()
-    {
-      A = new(Color.limeGreen, new(-Sizes.Big.HRadius, -Sizes.Big.VRadius), Vector2.up, Vector2.down, Vector2.left),
-      B = new(Color.limeGreen, new(Sizes.Big.HRadius, -Sizes.Big.VRadius), Vector2.up, Vector2.down, Vector2.right),
-      C = new(Color.green, new(-Sizes.Big.HRadius, Sizes.Big.VRadius), Vector2.up, Vector2.down, Vector2.left),
-      D = new(Color.green, new(Sizes.Big.HRadius, Sizes.Big.VRadius), Vector2.up, Vector2.down, Vector2.right),
-    };
-    _bigRightSensorGroup = new()
-    {
-      A = new(Color.limeGreen, new(Sizes.Big.VRadius, -Sizes.Big.HRadius), Vector2.left, Vector2.right, Vector2.down),
-      B = new(Color.limeGreen, new(Sizes.Big.VRadius, Sizes.Big.HRadius), Vector2.left, Vector2.right, Vector2.up),
-      C = new(Color.green, new(-Sizes.Big.VRadius, -Sizes.Big.HRadius), Vector2.left, Vector2.right, Vector2.down),
-      D = new(Color.green, new(-Sizes.Big.VRadius, Sizes.Big.HRadius), Vector2.left, Vector2.right, Vector2.up),
-    };
-    _bigUpSensorGroup = new()
-    {
-      C = new(Color.limeGreen, new(-Sizes.Big.HRadius, -Sizes.Big.VRadius), Vector2.down, Vector2.up, Vector2.right),
-      D = new(Color.limeGreen, new(Sizes.Big.HRadius, -Sizes.Big.VRadius), Vector2.down, Vector2.up, Vector2.left),
-      A = new(Color.green, new(-Sizes.Big.HRadius, Sizes.Big.VRadius), Vector2.down, Vector2.up, Vector2.right),
-      B = new(Color.green, new(Sizes.Big.HRadius, Sizes.Big.VRadius), Vector2.down, Vector2.up, Vector2.left),
-    };
-    _bigRightSensorGroup = new()
-    {
-      C = new(Color.limeGreen, new(Sizes.Big.VRadius, -Sizes.Big.HRadius), Vector2.right, Vector2.left, Vector2.up),
-      D = new(Color.limeGreen, new(Sizes.Big.VRadius, Sizes.Big.HRadius), Vector2.right, Vector2.left, Vector2.down),
-      A = new(Color.green, new(-Sizes.Big.VRadius, -Sizes.Big.HRadius), Vector2.right, Vector2.left, Vector2.up),
-      B = new(Color.green, new(-Sizes.Big.VRadius, Sizes.Big.HRadius), Vector2.right, Vector2.left, Vector2.down),
-    };
+    var aColor = Color.softGreen;
+    var bColor = Color.green;
+    var cColor = Color.softYellow;
+    var dColor = Color.yellow;
+
+    _bigDownSensorGroup = new(
+      a: new(aColor, new(-Sizes.Big.HRadius, -Sizes.Big.VRadius), Vector2.up, Vector2.down, Vector2.left),
+      b: new(bColor, new(Sizes.Big.HRadius, -Sizes.Big.VRadius), Vector2.up, Vector2.down, Vector2.right),
+      c: new(cColor, new(-Sizes.Big.HRadius, Sizes.Big.VRadius), Vector2.up, Vector2.down, Vector2.left),
+      d: new(dColor, new(Sizes.Big.HRadius, Sizes.Big.VRadius), Vector2.up, Vector2.down, Vector2.right));
+    _bigRightSensorGroup = new(
+      a: new(aColor, new(Sizes.Big.VRadius, -Sizes.Big.HRadius), Vector2.left, Vector2.right, Vector2.down),
+      b: new(bColor, new(Sizes.Big.VRadius, Sizes.Big.HRadius), Vector2.left, Vector2.right, Vector2.up),
+      c: new(cColor, new(-Sizes.Big.VRadius, -Sizes.Big.HRadius), Vector2.left, Vector2.right, Vector2.down),
+      d: new(dColor, new(-Sizes.Big.VRadius, Sizes.Big.HRadius), Vector2.left, Vector2.right, Vector2.up));
+    _bigUpSensorGroup = new(
+      c: new(cColor, new(-Sizes.Big.HRadius, -Sizes.Big.VRadius), Vector2.down, Vector2.up, Vector2.right),
+      d: new(dColor, new(Sizes.Big.HRadius, -Sizes.Big.VRadius), Vector2.down, Vector2.up, Vector2.left),
+      a: new(aColor, new(-Sizes.Big.HRadius, Sizes.Big.VRadius), Vector2.down, Vector2.up, Vector2.right),
+      b: new(bColor, new(Sizes.Big.HRadius, Sizes.Big.VRadius), Vector2.down, Vector2.up, Vector2.left));
+    _bigRightSensorGroup = new(
+      c: new(cColor, new(Sizes.Big.VRadius, -Sizes.Big.HRadius), Vector2.right, Vector2.left, Vector2.up),
+      d: new(dColor, new(Sizes.Big.VRadius, Sizes.Big.HRadius), Vector2.right, Vector2.left, Vector2.down),
+      a: new(aColor, new(-Sizes.Big.VRadius, -Sizes.Big.HRadius), Vector2.right, Vector2.left, Vector2.up),
+      b: new(bColor, new(-Sizes.Big.VRadius, Sizes.Big.HRadius), Vector2.right, Vector2.left, Vector2.down));
   }
 
   public SonicSensorGroup CurrentSensorGroup { get; private set; }
