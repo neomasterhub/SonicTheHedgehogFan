@@ -12,10 +12,10 @@ public class SensorRay
     Direction = direction;
   }
 
-  public bool Enabled { get; set; }
-  public float Length { get; set; }
-  public Color Color { get; set; }
-  public Vector2 Direction { get; set; }
+  public bool Enabled { get; set; } = true;
+  public float Length { get; set; } = 1;
+  public Color Color { get; set; } = Color.red;
+  public Vector2 Direction { get; set; } = Vector2.right;
 
   public void Draw(Vector2 source)
   {
