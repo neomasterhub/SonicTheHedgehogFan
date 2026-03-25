@@ -8,6 +8,9 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class SonicController : MonoBehaviour
 {
+
+  // OLD:
+
   private readonly PlayerViewRotatorProvider _pvrProvider = new();
   private readonly PlayerSensorSystemManager2<SonicSizeMode> _playerSensorSystemManager = new(
     SonicConsts.Sensors.Defs);
