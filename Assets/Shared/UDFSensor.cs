@@ -2,6 +2,24 @@ using UnityEngine;
 
 public class UDFSensor
 {
+  public UDFSensor()
+  {
+  }
+
+  public UDFSensor(
+    Color enabledColor,
+    Vector2 localPosition,
+    Vector2 upRayPosition,
+    Vector2 downRayPosition,
+    Vector2 frontRayPosition)
+  {
+    EnabledColor = enabledColor;
+    LocalPosition = localPosition;
+    UpRay = new(enabledColor, upRayPosition);
+    DownRay = new(enabledColor, downRayPosition);
+    FrontRay = new(enabledColor, frontRayPosition);
+  }
+
   public bool Enabled { get; set; }
   public float Radius { get; set; }
   public Color EnabledColor { get; set; }
