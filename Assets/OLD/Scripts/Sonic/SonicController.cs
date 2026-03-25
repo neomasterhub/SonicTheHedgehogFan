@@ -64,6 +64,11 @@ public class SonicController : MonoBehaviour
   private bool _postDetachInputLocked;
   private bool _wallDetachPositionOffset;
 
+  [Header("Sensors")]
+  public float ABCDUpLength = 0.1f;
+  public float ABCDDownLength = 0.3f;
+  public float ABCDFrontLength = 0.5f;
+
   [Header("Animations")]
   public float AnimatorParameterSpeedAirborneMin = 0.02f;
   public float AnimatorSpeedWalkingMin = 0.5f;
