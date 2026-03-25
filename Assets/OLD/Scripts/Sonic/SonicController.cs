@@ -23,6 +23,10 @@ public class SonicController : MonoBehaviour
     _sensorSystem.SetCurrentSensorGroup(_sizeMode, _groundSide);
   }
 
+
+
+
+
   // OLD:
 
   private readonly PlayerViewRotatorProvider _pvrProvider = new();
@@ -39,12 +43,6 @@ public class SonicController : MonoBehaviour
   private IPlayerViewRotator _pvrWallToAir;
   private PlayerSpeedManager _playerSpeedManager;
   private PlayerViewManager _playerViewManager;
-  private SensorSettings _aSensorSettings;
-  private SensorSettings _bSensorSettings;
-  private SensorSettings _cSensorSettings;
-  private SensorSettings _dSensorSettings;
-  private SensorSettings _eSensorSettings;
-  private SensorSettings _fSensorSettings;
   private Timer _inputUnlockTimer;
   private float _groundAngleDeg;
 
@@ -52,12 +50,6 @@ public class SonicController : MonoBehaviour
   private Animator _animator;
   private SpriteRenderer _spriteRenderer;
 
-  // State flags
-  private GroundSide _groundSide = GroundSide.Down;
-  private GroundSide _prevGroundSide = GroundSide.Down;
-  private PlayerState _playerState;
-  private PlayerState _prevPlayerState;
-  private SizeMode _playerSizeMode = SizeMode.Big;
   private bool _postDetachFall;
   private bool _postDetachInputLocked;
   private bool _wallDetachPositionOffset;
