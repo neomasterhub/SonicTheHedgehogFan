@@ -8,6 +8,20 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class SonicController : MonoBehaviour
 {
+  private readonly SonicSensorSystem _sensorSystem = new();
+
+  // State flags
+  private GroundSide _groundSide = GroundSide.Down;
+  private GroundSide _prevGroundSide = GroundSide.Down;
+  private PlayerState _playerState;
+  private PlayerState _prevPlayerState;
+  private SonicSizeMode _sizeMode = SonicSizeMode.Big;
+
+  public SonicController()
+  {
+    // For drawing
+    _sensorSystem.SetCurrentSensorGroup(_sizeMode, _groundSide);
+  }
 
   // OLD:
 
