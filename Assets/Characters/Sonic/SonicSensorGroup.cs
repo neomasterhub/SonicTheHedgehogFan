@@ -7,12 +7,12 @@ public class SonicSensorGroup
   public UDFSensor C { get; set; }
   public UDFSensor D { get; set; }
 
-  public void SetSensorPositions(Vector2 parentPosition)
+  public void SetParentPosition(Vector2 parentPosition)
   {
-    A.SetPosition(parentPosition);
-    B.SetPosition(parentPosition);
-    C.SetPosition(parentPosition);
-    D.SetPosition(parentPosition);
+    A.SetParentPosition(parentPosition);
+    B.SetParentPosition(parentPosition);
+    C.SetParentPosition(parentPosition);
+    D.SetParentPosition(parentPosition);
   }
 
   public void Draw()
