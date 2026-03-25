@@ -32,4 +32,12 @@ public class PlayerSensorSystemManager2<TSizeMode>
       _sensors[key].Update(_input.ParentPosition, value, _sensorRaySettings[key]);
     }
   }
+
+  public void DrawSensors(float sourceRadius)
+  {
+    foreach (var sensor in _sensors.Values)
+    {
+      sensor.Draw(sourceRadius);
+    }
+  }
 }
