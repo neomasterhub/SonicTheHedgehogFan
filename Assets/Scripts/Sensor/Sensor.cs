@@ -35,4 +35,18 @@ public class Sensor : ISensor
       ray.Enabled = raySettings.Enabled();
     }
   }
+
+  public void Draw(float sourceRadius = 0)
+  {
+    if (Enabled)
+    {
+      Gizmos.color = EnabledColor;
+      Gizmos.DrawSphere(Position, sourceRadius);
+    }
+    else if (DisabledColor.HasValue)
+    {
+      Gizmos.color = DisabledColor.Value;
+      Gizmos.DrawSphere(Position, sourceRadius);
+    }
+  }
 }
