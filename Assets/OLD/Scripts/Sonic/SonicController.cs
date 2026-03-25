@@ -284,6 +284,7 @@ public class SonicController : MonoBehaviour
   {
     UpdateTools();
     ShiftGroundSide();
+    UpdateSensors();
     ApplySensors();
     ProcessEvents();
     ApplyMovement();
@@ -493,5 +494,27 @@ public class SonicController : MonoBehaviour
     }
 
     _groundSide = GroundSide.Down;
+  }
+
+  private void UpdateSensors()
+  {
+    _sensorSystem.SetCurrentSensorGroup(_sizeMode, _groundSide);
+
+    _sensorSystem.CurrentSensorGroup.SetParentPosition(transform.position);
+
+    _sensorSystem.CurrentSensorGroup.A.UpRay.Length = ABCDUpLength;
+    _sensorSystem.CurrentSensorGroup.B.UpRay.Length = ABCDUpLength;
+    _sensorSystem.CurrentSensorGroup.C.UpRay.Length = ABCDUpLength;
+    _sensorSystem.CurrentSensorGroup.D.UpRay.Length = ABCDUpLength;
+
+    _sensorSystem.CurrentSensorGroup.A.DownRay.Length = ABCDDownLength;
+    _sensorSystem.CurrentSensorGroup.B.DownRay.Length = ABCDDownLength;
+    _sensorSystem.CurrentSensorGroup.C.DownRay.Length = ABCDDownLength;
+    _sensorSystem.CurrentSensorGroup.D.DownRay.Length = ABCDDownLength;
+
+    _sensorSystem.CurrentSensorGroup.A.FrontRay.Length = ABCDFrontLength;
+    _sensorSystem.CurrentSensorGroup.B.FrontRay.Length = ABCDFrontLength;
+    _sensorSystem.CurrentSensorGroup.C.FrontRay.Length = ABCDFrontLength;
+    _sensorSystem.CurrentSensorGroup.D.FrontRay.Length = ABCDFrontLength;
   }
 }
