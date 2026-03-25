@@ -22,7 +22,7 @@ public class SensorRay
     if (Enabled)
     {
       Gizmos.color = Color;
-      Gizmos.DrawLine(source, Direction * Length);
+      Gizmos.DrawLine(source, source + (Direction * Length));
     }
   }
 }
