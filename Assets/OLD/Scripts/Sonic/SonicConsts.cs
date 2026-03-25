@@ -44,10 +44,10 @@ public static class SonicConsts
         },
         [GroundSide.Right] = new()
         {
-          [SensorId.A] = new SensorDef(new(Sizes.Big.VRadius, -Sizes.Big.HRadius)).AddRayDirection('d', Vector2.right).AddRayDirection('u', Vector2.left),
-          [SensorId.B] = new SensorDef(new(Sizes.Big.VRadius, Sizes.Big.HRadius)).AddRayDirection('d', Vector2.right).AddRayDirection('u', Vector2.left),
+          [SensorId.A] = new SensorDef(new(Sizes.Big.VRadius, -Sizes.Big.HRadius)) .AddRayDirection('d', Vector2.right).AddRayDirection('u', Vector2.left),
+          [SensorId.B] = new SensorDef(new(Sizes.Big.VRadius, Sizes.Big.HRadius))  .AddRayDirection('d', Vector2.right).AddRayDirection('u', Vector2.left),
           [SensorId.E] = new SensorDef(new(-Sizes.Big.VRadius, -Sizes.Big.HRadius)).AddRayDirection('u', Vector2.left).AddRayDirection('d', Vector2.right),
-          [SensorId.F] = new SensorDef(new(-Sizes.Big.VRadius, Sizes.Big.HRadius)).AddRayDirection('u', Vector2.left).AddRayDirection('d', Vector2.right),
+          [SensorId.F] = new SensorDef(new(-Sizes.Big.VRadius, Sizes.Big.HRadius)) .AddRayDirection('u', Vector2.left).AddRayDirection('d', Vector2.right),
         },
         [GroundSide.Up] = new()
         {
