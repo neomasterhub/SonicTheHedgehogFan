@@ -26,8 +26,6 @@ public class SonicController : MonoBehaviour
   // OLD:
 
   private readonly PlayerViewRotatorProvider _pvrProvider = new();
-  private readonly PlayerSensorSystemManager2<SonicSizeMode> _playerSensorSystemManager = new(
-    SonicConsts.Sensors.Defs);
   private readonly RelativeGroundInfo _relativeGroundInfo = new();
   private readonly SpeedProvider<GravitySpeed> _gravitySpeedProvider = new();
   private readonly SpeedProvider<float> _slopeFactorSpeedProvider = new();
