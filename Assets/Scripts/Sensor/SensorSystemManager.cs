@@ -15,5 +15,26 @@ public class SensorSystemManager
   public void Update(SensorSystemInput input)
   {
     _input = input;
+
+    CurrentSensorGroup = _input.SizeMode switch
+    {
+      SizeMode.Big => _input.GroundSide switch
+      {
+        GroundSide.Up => BigUpSensorGroup,
+        GroundSide.Down => BigDownSensorGroup,
+        GroundSide.Left => BigLeftSensorGroup,
+        GroundSide.Right => BigRightSensorGroup,
+        _ => throw _input.GroundSide.ArgumentOutOfRangeException(),
+      },
+      SizeMode.Small => _input.GroundSide switch
+      {
+        GroundSide.Up => SmallUpSensorGroup,
+        GroundSide.Down => SmallDownSensorGroup,
+        GroundSide.Left => SmallLeftSensorGroup,
+        GroundSide.Right => SmallRightSensorGroup,
+        _ => throw _input.GroundSide.ArgumentOutOfRangeException(),
+      },
+      _ => throw _input.SizeMode.ArgumentOutOfRangeException(),
+    };
   }
 }
