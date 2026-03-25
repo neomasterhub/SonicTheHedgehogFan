@@ -30,6 +30,11 @@ public class UDFSensor
   public SensorRay DownRay { get; set; }
   public SensorRay FrontRay { get; set; }
 
+  public void SetPosition(Vector2 parentPosition)
+  {
+    Position = parentPosition + LocalPosition;
+  }
+
   public void Draw()
   {
     if (Enabled)
