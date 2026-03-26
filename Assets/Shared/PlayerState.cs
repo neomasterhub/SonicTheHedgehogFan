@@ -7,6 +7,5 @@ public enum PlayerState
   Airborne = 1 << 0,
   Grounded = 1 << 1,
   Skidding = 1 << 2,
-  PostDetachFall = 1 << 3,
-  Balancing = 1 << 4,
+  Balancing = 1 << 3,
 }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public struct ABResult
 {
-  public SensorId? AppliedSensorId;
+ // public SensorId? AppliedSensorId;
   public Vector2 Contact;
   public Vector2 Normal;
   public float Distance;
@@ -14,7 +14,7 @@ public struct ABResult
 
   public void Reset()
   {
-    AppliedSensorId = null;
+    //AppliedSensorId = null;
     Contact = Vector2.positiveInfinity;
     Normal = Vector2.zero;
     Distance = float.PositiveInfinity;
@@ -26,14 +26,14 @@ public struct ABResult
   }
 
   public void Set(
-    SensorId appliedSensorId,
+   // SensorId appliedSensorId,
     RaycastHit2D hit,
     Vector2 sensorDirection,
     int sensorDirectionSign,
     float sensorLength,
     bool bothTriggered = false)
   {
-    AppliedSensorId = appliedSensorId;
+  //  AppliedSensorId = appliedSensorId;
     Contact = hit.point;
     Normal = hit.normal;
     Distance = hit.distance;
@@ -46,8 +46,7 @@ public struct ABResult
 
   public readonly void DrawNormal(
     float normalLength = 1,
-    float beginRadius = 0,
-    float endRadius = 0,
+    float sourceRadius = 0,
     Color? color = null)
   {
     var begin = Contact;
@@ -55,7 +54,6 @@ public struct ABResult
 
     Gizmos.color = color ?? Color.yellow;
     Gizmos.DrawLine(begin, end);
-    Gizmos.DrawSphere(begin, beginRadius);
-    Gizmos.DrawSphere(end, endRadius);
+    Gizmos.DrawSphere(begin, sourceRadius);
   }
 }

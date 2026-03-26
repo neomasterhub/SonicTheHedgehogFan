@@ -6,21 +6,32 @@ using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(SpriteRenderer))]
-public class SonicController : MonoBehaviour
+public class SonicControllerOld : MonoBehaviour
 {
   private readonly PlayerViewRotatorProvider _pvrProvider = new();
-  private readonly PlayerSensorSystemManager _playerSensorSystemManager = new(
-    SonicConsts.Sizes.Small.HVRadii,
-    SonicConsts.Sizes.Big.HVRadii,
-    SonicConsts.Sensors.Colors,
-    SonicConsts.Sensors.Offsets);
   private readonly RelativeGroundInfo _relativeGroundInfo = new();
+  private readonly SonicSensorSystem _sensorSystem = new();
   private readonly SpeedProvider<GravitySpeed> _gravitySpeedProvider = new();
   private readonly SpeedProvider<float> _slopeFactorSpeedProvider = new();
   private readonly SpeedProvider<Vector2> _groundToAirSpeedProvider = new();
   private readonly StringBuilder _info = new();
   private readonly TimerManager _timerManager = new();
 
+  // State flags
+  private bool _postDetachFall;
+  private bool _postDetachInputLocked;
+  private bool _wallDetachPositionOffset;
+  private GroundSide _groundSide = GroundSide.Down;
+  private GroundSide _prevGroundSide = GroundSide.Down;
+  private PlayerState _playerState;
+  private PlayerState _prevPlayerState;
+  private SonicSizeMode _sizeMode = SonicSizeMode.Big;
+
+  // Components
+  private Animator _animator;
+  private SpriteRenderer _spriteRenderer;
+
+  private float _groundAngleDeg;
   private AudioSource _sfxSkidding;
   private InputInfo _inputInfo;
   private IPlayerViewRotator _pvrGrounded;
@@ -28,21 +39,37 @@ public class SonicController : MonoBehaviour
   private PlayerSpeedManager _playerSpeedManager;
   private PlayerViewManager _playerViewManager;
   private Timer _inputUnlockTimer;
-  private float _groundAngleDeg;
 
-  // Components
-  private Animator _animator;
-  private SpriteRenderer _spriteRenderer;
+  [Header("Sensors")]
+  public float ABCDUpLength = 0.1f;
+  public float ABCDDownLength = 0.3f;
+  public float ABCDFrontLength = 0.5f;
 
-  // State flags
-  private GroundSide _groundSide = GroundSide.Down;
-  private GroundSide _prevGroundSide = GroundSide.Down;
-  private PlayerState _playerState;
-  private PlayerState _prevPlayerState;
-  private SizeMode _playerSizeMode = SizeMode.Big;
-  private bool _postDetachFall;
-  private bool _postDetachInputLocked;
-  private bool _wallDetachPositionOffset;
+  public SonicControllerOld()
+  {
+    // For drawing
+    //_sensorSystem.SetCurrentSensorGroup(_sizeMode, _groundSide);
+  }
+
+  private void Awake()
+  {
+    Application.targetFrameRate = Consts.ConvertValues.FramePerSec;
+    Time.fixedDeltaTime = 1f / Consts.ConvertValues.FramePerSec;
+
+    _animator = GetComponent<Animator>();
+    _spriteRenderer = GetComponent<SpriteRenderer>();
+
+    _inputInfo = new InputInfo(
+      () => Input.GetAxis(Consts.InputAxis.Horizontal),
+      () => Input.GetAxis(Consts.InputAxis.Vertical));
+
+    _inputUnlockTimer = new Timer(SonicConsts.Physics.InputUnlockTimerSeconds)
+      .WhenCompleted(() => _postDetachInputLocked = false);
+
+    InitSpeed();
+    InitView();
+    InitAudio();
+  }
 
   [Header("Animations")]
   public float AnimatorParameterSpeedAirborneMin = 0.02f;
@@ -65,17 +92,17 @@ public class SonicController : MonoBehaviour
   public float SkiddingSpeedDeadZone = 0.1f;
   public float InputDeadZone = 0.001f;
   public float ABSensorLength = 0.1f;
-  public float CDSensorLength = 0.1f;
+  public float CDSensorLength = 0.5f;
   public float EFSensorLength = 0.1f;
   public float ReversedABSensorLength = 0.3f;
-  public float ReversedCDSensorLength = 0.3f;
+  public float ReversedCDSensorLength = 0;
   public float ReversedEFSensorLength = 0.3f;
   public Vector2 WallDetachPositionOffset = new(-0.1f, 0.0f);
   public Vector2 WallToAirSpeedDelta = new(0.011f, 0.0f);
 
   [Header("Ground")]
   public LayerMask GroundLayer = 8;
-  public float GroundPositionOffset = 0.05f; // ABSensorLength / 2
+  public float GroundPositionOffset = 0.05f;
 
   [Header("Rotators")]
   public bool PVRGroundedEnabled = true;
@@ -85,8 +112,7 @@ public class SonicController : MonoBehaviour
   [Header("UI")]
   public Color GroundNormalColor = Color.white;
   public float GroundNormalLength = 1.5f;
-  public float SensorBeginRadius = 0.03f;
-  public float SensorEndRadius = 0.01f;
+  public float SensorSourceRadius = 0.03f;
 
   [Header("Canvas")]
   public TextMeshProUGUI InfoText;
@@ -94,26 +120,13 @@ public class SonicController : MonoBehaviour
   [Header("Audio")]
   public AudioClip SkiddingAudioClip;
 
-  private PlayerSensorSystemInput PlayerSensorSystemInput => new(
-    transform.position,
-    _playerSizeMode,
-    _groundSide,
-    GroundLayer,
-    ABSensorLength,
-    CDSensorLength,
-    EFSensorLength,
-    ReversedABSensorLength,
-    ReversedCDSensorLength,
-    ReversedEFSensorLength,
-    !_spriteRenderer.flipX);
-
   private PlayerSpeedInput PlayerSpeedInput => new(
     _playerState,
     _prevPlayerState,
 
     // Sensor Result
-    _playerSensorSystemManager.ABResult.Distance,
-    _playerSensorSystemManager.ABResult.AngleRad,
+    1,//_playerSensorSystemManager.ABResult.Distance,
+    1,//_playerSensorSystemManager.ABResult.AngleRad,
 
     // Ground
     TopSpeed,
@@ -130,40 +143,21 @@ public class SonicController : MonoBehaviour
     InputDeadZone,
     SkiddingSpeedDeadZone);
 
-  private PlayerViewInput PlayerViewInput => new(
-    AnimatorParameterSpeedAirborneMin,
-    AnimatorSpeedWalkingMin,
-    AnimatorSpeedWalkingFactor,
-    _playerSpeedManager.SpeedX,
-    TopSpeed,
-    _playerSpeedManager.GroundSpeed,
-    _groundAngleDeg,
-    _relativeGroundInfo.AngleDeg,
-    StandingStraightGroundSpeedZone,
-    _prevGroundSide,
-    _playerState,
-    _prevPlayerState,
-    _playerSensorSystemManager.ABResult.AppliedSensorId);
+  //private PlayerViewInput PlayerViewInput => new(
+  //  AnimatorParameterSpeedAirborneMin,
+  //  AnimatorSpeedWalkingMin,
+  //  AnimatorSpeedWalkingFactor,
+  //  _playerSpeedManager.SpeedX,
+  //  TopSpeed,
+  //  _playerSpeedManager.GroundSpeed,
+  //  _groundAngleDeg,
+  //  _relativeGroundInfo.AngleDeg,
+  //  StandingStraightGroundSpeedZone,
+  //  _prevGroundSide,
+  //  _playerState,
+  //  _prevPlayerState);//_playerSensorSystemManager.ABResult.AppliedSensorId);
 
-  private void Awake()
-  {
-    Application.targetFrameRate = Consts.ConvertValues.FramePerSec;
-    Time.fixedDeltaTime = 1f / Consts.ConvertValues.FramePerSec;
-
-    _animator = GetComponent<Animator>();
-    _spriteRenderer = GetComponent<SpriteRenderer>();
-
-    _inputInfo = new InputInfo(
-      () => Input.GetAxis(Consts.InputAxis.Horizontal),
-      () => Input.GetAxis(Consts.InputAxis.Vertical));
-
-    _inputUnlockTimer = new Timer(SonicConsts.Times.PostDetachInputUnlockTimerSeconds)
-      .WhenCompleted(() => _postDetachInputLocked = false);
-
-    InitSpeed();
-    InitView();
-    InitAudio();
-  }
+  
 
   private void InitSpeed()
   {
@@ -225,6 +219,7 @@ public class SonicController : MonoBehaviour
   {
     UpdateTools();
     ShiftGroundSide();
+    UpdateSensors();
     ApplySensors();
     ProcessEvents();
     ApplyMovement();
@@ -236,8 +231,7 @@ public class SonicController : MonoBehaviour
 
   private void OnDrawGizmos()
   {
-    _playerSensorSystemManager.DrawGroundNormal(GroundNormalLength, SensorBeginRadius, SensorEndRadius, GroundNormalColor);
-    _playerSensorSystemManager.DrawSensors(SensorBeginRadius, SensorEndRadius);
+    _sensorSystem.CurrentSensorGroup.Draw();
   }
 
   private void UpdateTools()
@@ -259,32 +253,36 @@ public class SonicController : MonoBehaviour
 
   private void ApplySensors()
   {
-    _playerSensorSystemManager.Update(PlayerSensorSystemInput);
-    _playerSensorSystemManager.ApplyAB();
-    _relativeGroundInfo.Update(_playerSensorSystemManager.ABResult.AngleDeg);
+    UpdateSensors();
 
-    _prevPlayerState = _playerState;
-    _playerState = _playerSensorSystemManager.ABResult.GroundDetected
-      ? PlayerState.Grounded
-      : PlayerState.Airborne;
+    //_playerSensorSystemManager.Update(PlayerSensorSystemInput);
+    //_playerSensorSystemManager.ApplyAB();
+    //_playerSensorSystemManager.ApplyWallSensors();
+
+    //_relativeGroundInfo.Update(_playerSensorSystemManager.ABResult.AngleDeg);
+
+    //_prevPlayerState = _playerState;
+    //_playerState = _playerSensorSystemManager.ABResult.GroundDetected
+    //  ? PlayerState.Grounded
+    //  : PlayerState.Airborne;
   }
 
   private void ProcessEvents()
   {
-    ProcessEvents_Grounded();
-    ProcessEvents_Airborne();
+    //ProcessEvents_Grounded();
+    //ProcessEvents_Airborne();
 
-    _playerState = _playerState
-      .SetFlag(PlayerState.PostDetachFall, _postDetachFall);
+    //_playerState = _playerState
+    //  .SetFlag(PlayerState.PostDetachFall, _postDetachFall);
 
-    _groundAngleDeg = _relativeGroundInfo.AngleDeg + _groundSide switch
-    {
-      GroundSide.Down => 0,
-      GroundSide.Right => 90,
-      GroundSide.Up => 180,
-      GroundSide.Left => -90,
-      _ => throw _groundSide.ArgumentOutOfRangeException()
-    };
+    //_groundAngleDeg = _relativeGroundInfo.AngleDeg + _groundSide switch
+    //{
+    //  GroundSide.Down => 0,
+    //  GroundSide.Right => 90,
+    //  GroundSide.Up => 180,
+    //  GroundSide.Left => -90,
+    //  _ => throw _groundSide.ArgumentOutOfRangeException()
+    //};
   }
 
   private void ApplyMovement()
@@ -295,7 +293,7 @@ public class SonicController : MonoBehaviour
 
   private void UpdateView()
   {
-    _playerViewManager.Update(PlayerViewInput);
+    //_playerViewManager.Update(PlayerViewInput);
   }
 
   private void UpdatePosition()
@@ -314,9 +312,9 @@ public class SonicController : MonoBehaviour
 
       // Snap to ground with small upward offset.
       // Keeps surface normal aligned with slope.
-      speedY -= (_playerSensorSystemManager.ABResult.Distance
-        * _playerSensorSystemManager.ABResult.SensorDirectionSign)
-        - GroundPositionOffset;
+      //speedY -= (_playerSensorSystemManager.ABResult.Distance
+      //  * _playerSensorSystemManager.ABResult.SensorDirectionSign)
+      //  - GroundPositionOffset;
     }
 
     // Speed X, Y - offsets in units per frame.
@@ -399,29 +397,29 @@ public class SonicController : MonoBehaviour
       return;
     }
 
-    if (_prevPlayerState.HasFlag(PlayerState.Grounded))
-    {
-      if (_playerSpeedManager.GroundSpeed == 0
-        && _groundAngleDeg == 0
-        && _playerSensorSystemManager.IsOnGroundEdge())
-      {
-        _playerState = _playerState.SetFlag(PlayerState.Balancing, true);
-        return;
-      }
+    //if (_prevPlayerState.HasFlag(PlayerState.Grounded))
+    //{
+    //  if (_playerSpeedManager.GroundSpeed == 0
+    //    && _groundAngleDeg == 0
+    //    && _playerSensorSystemManager.IsOnGroundEdge())
+    //  {
+    //    _playerState = _playerState.SetFlag(PlayerState.Balancing, true);
+    //    return;
+    //  }
 
-      if (Mathf.Abs(_playerSpeedManager.GroundSpeed) < DecelerationSpeed
-        && (_groundSide != GroundSide.Down || _relativeGroundInfo.RangeId == GroundRangeId.Steep))
-      {
-        _postDetachFall = true;
-        _postDetachInputLocked = true;
-        _wallDetachPositionOffset = _groundSide is GroundSide.Left or GroundSide.Right;
-        _playerSpeedManager.ResetSpeeds();
+    //  if (Mathf.Abs(_playerSpeedManager.GroundSpeed) < DecelerationSpeed
+    //    && (_groundSide != GroundSide.Down || _relativeGroundInfo.RangeId == GroundRangeId.Steep))
+    //  {
+    //    _postDetachFall = true;
+    //    _postDetachInputLocked = true;
+    //    _wallDetachPositionOffset = _groundSide is GroundSide.Left or GroundSide.Right;
+    //    _playerSpeedManager.ResetSpeeds();
 
-        _groundSide = GroundSide.Down;
+    //    _groundSide = GroundSide.Down;
 
-        return;
-      }
-    }
+    //    return;
+    //  }
+    //}
   }
 
   private void ProcessEvents_Airborne()
@@ -432,5 +430,27 @@ public class SonicController : MonoBehaviour
     }
 
     _groundSide = GroundSide.Down;
+  }
+
+  private void UpdateSensors()
+  {
+    //_sensorSystem.SetCurrentSensorGroup(_sizeMode, _groundSide);
+
+    //_sensorSystem.CurrentSensorGroup.SetParentPosition(transform.position);
+
+    _sensorSystem.CurrentSensorGroup.A.UpRay.Length = ABCDUpLength;
+    _sensorSystem.CurrentSensorGroup.B.UpRay.Length = ABCDUpLength;
+    _sensorSystem.CurrentSensorGroup.C.UpRay.Length = ABCDUpLength;
+    _sensorSystem.CurrentSensorGroup.D.UpRay.Length = ABCDUpLength;
+
+    _sensorSystem.CurrentSensorGroup.A.DownRay.Length = ABCDDownLength;
+    _sensorSystem.CurrentSensorGroup.B.DownRay.Length = ABCDDownLength;
+    _sensorSystem.CurrentSensorGroup.C.DownRay.Length = ABCDDownLength;
+    _sensorSystem.CurrentSensorGroup.D.DownRay.Length = ABCDDownLength;
+
+    _sensorSystem.CurrentSensorGroup.A.FrontRay.Length = ABCDFrontLength;
+    _sensorSystem.CurrentSensorGroup.B.FrontRay.Length = ABCDFrontLength;
+    _sensorSystem.CurrentSensorGroup.C.FrontRay.Length = ABCDFrontLength;
+    _sensorSystem.CurrentSensorGroup.D.FrontRay.Length = ABCDFrontLength;
   }
 }
