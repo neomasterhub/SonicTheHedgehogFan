@@ -62,7 +62,7 @@ public class SonicSensorSystem
     set => CurrentSensorGroup.ParentPosition = value;
   }
 
-  public void UpdateCurrentSensorGroup(
+  public void Update(
     SonicSizeMode sizeMode,
     GroundSide groundSide,
     Vector2 parentPosition)
