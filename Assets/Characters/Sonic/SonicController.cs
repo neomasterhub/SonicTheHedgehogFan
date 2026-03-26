@@ -24,6 +24,6 @@ public class SonicController : MonoBehaviour
 
   private void UpdateSensors()
   {
-    _sensorSystem.Update(_sizeMode, _groundSide, transform.position);
+    _sensorSystem.Update(_sizeMode, _groundSide, transform.position, TopUDFLengths, BottomUDFLengths);
   }
 }

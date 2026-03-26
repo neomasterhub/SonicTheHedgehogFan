@@ -12,8 +12,8 @@ public class SonicSensorSystem
   private readonly SonicSensorGroup _smallLeftSensorGroup;
   private readonly SonicSensorGroup _smallRightSensorGroup;
 
-  private Vector3 _topUDFLengths;
-  private Vector3 _bottomUDFLengths;
+  private Vector3? _topUDFLengths;
+  private Vector3? _bottomUDFLengths;
 
   public SonicSensorSystem(
     SonicSizeMode sizeMode = SonicSizeMode.Big,
@@ -74,8 +74,12 @@ public class SonicSensorSystem
   {
     if (SizeMode != sizeMode || GroundSide != groundSide)
     {
+      _topUDFLengths = null;
+      _bottomUDFLengths = null;
+
       SizeMode = sizeMode;
       GroundSide = groundSide;
+
       SetCurrentSensorGroup();
     }
 
@@ -84,23 +88,15 @@ public class SonicSensorSystem
     if (_bottomUDFLengths != bottomUDFLengths)
     {
       _bottomUDFLengths = bottomUDFLengths;
-      CurrentSensorGroup.A.UpRay.Length = bottomUDFLengths.x;
-      CurrentSensorGroup.A.DownRay.Length = bottomUDFLengths.y;
-      CurrentSensorGroup.A.FrontRay.Length = bottomUDFLengths.z;
-      CurrentSensorGroup.B.UpRay.Length = bottomUDFLengths.x;
-      CurrentSensorGroup.B.DownRay.Length = bottomUDFLengths.y;
-      CurrentSensorGroup.B.FrontRay.Length = bottomUDFLengths.z;
+      UpdateUDFSensorLengths(CurrentSensorGroup.A, bottomUDFLengths);
+      UpdateUDFSensorLengths(CurrentSensorGroup.B, bottomUDFLengths);
     }
 
     if (_topUDFLengths != topUDFLengths)
     {
       _topUDFLengths = topUDFLengths;
-      CurrentSensorGroup.C.UpRay.Length = topUDFLengths.x;
-      CurrentSensorGroup.C.DownRay.Length = topUDFLengths.y;
-      CurrentSensorGroup.C.FrontRay.Length = topUDFLengths.z;
-      CurrentSensorGroup.D.UpRay.Length = topUDFLengths.x;
-      CurrentSensorGroup.D.DownRay.Length = topUDFLengths.y;
-      CurrentSensorGroup.D.FrontRay.Length = topUDFLengths.z;
+      UpdateUDFSensorLengths(CurrentSensorGroup.C, topUDFLengths);
+      UpdateUDFSensorLengths(CurrentSensorGroup.D, topUDFLengths);
     }
   }
 
@@ -126,5 +122,12 @@ public class SonicSensorSystem
       },
       _ => throw SizeMode.ArgumentOutOfRangeException(),
     };
+  }
+
+  private void UpdateUDFSensorLengths(UDFSensor sensor, Vector3 lengths)
+  {
+    sensor.UpRay.Length = lengths.x;
+    sensor.DownRay.Length = lengths.y;
+    sensor.FrontRay.Length = lengths.z;
   }
 }
