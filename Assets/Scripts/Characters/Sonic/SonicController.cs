@@ -9,6 +9,7 @@ public class SonicController : MonoBehaviour
   // Flags
   private GroundSide _groundSide;
   private SonicSizeMode _sizeMode;
+  private bool _postWallDetachInputLock;
 
   [Header("Sensors")]
   public Vector3 TopUDFLengths = new(0.3f, 0.3f, 0.5f);
@@ -28,11 +29,12 @@ public class SonicController : MonoBehaviour
 
   private void FixedUpdate()
   {
-    UpdateSensors();
+    UpdateSystems();
   }
 
-  private void UpdateSensors()
+  private void UpdateSystems()
   {
+    _inputSystem.Update(!_postWallDetachInputLock);
     _sensorSystem.Update(_sizeMode, _groundSide, transform.position, TopUDFLengths, BottomUDFLengths);
   }
 }
