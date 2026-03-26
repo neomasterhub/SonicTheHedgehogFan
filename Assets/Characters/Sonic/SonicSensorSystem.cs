@@ -16,8 +16,6 @@ public class SonicSensorSystem
     SonicSizeMode sizeMode = SonicSizeMode.Big,
     GroundSide groundSide = GroundSide.Down)
   {
-    SetCurrentSensorGroup(sizeMode, groundSide);
-
     var aColor = Color.softGreen;
     var bColor = Color.green;
     var cColor = Color.softYellow;
@@ -43,13 +41,15 @@ public class SonicSensorSystem
       d: new(dColor, new(Sizes.Big.VRadius, Sizes.Big.HRadius), Vector2.right, Vector2.left, Vector2.down),
       a: new(aColor, new(-Sizes.Big.VRadius, -Sizes.Big.HRadius), Vector2.right, Vector2.left, Vector2.up),
       b: new(bColor, new(-Sizes.Big.VRadius, Sizes.Big.HRadius), Vector2.right, Vector2.left, Vector2.down));
+
+    SetCurrentSensorGroup(sizeMode, groundSide);
   }
 
   public SonicSizeMode SizeMode { get; private set; }
   public GroundSide GroundSide { get; private set; }
   public SonicSensorGroup CurrentSensorGroup { get; private set; }
 
-  public void SetCurrentSensorGroup(SonicSizeMode sizeMode, GroundSide groundSide)
+  public void UpdateCurrentSensorGroup(SonicSizeMode sizeMode, GroundSide groundSide)
   {
     if (SizeMode == sizeMode && GroundSide == groundSide)
     {
@@ -59,6 +59,11 @@ public class SonicSensorSystem
     SizeMode = sizeMode;
     GroundSide = groundSide;
 
+    SetCurrentSensorGroup(sizeMode, groundSide);
+  }
+
+  private void SetCurrentSensorGroup(SonicSizeMode sizeMode, GroundSide groundSide)
+  {
     CurrentSensorGroup = sizeMode switch
     {
       SonicSizeMode.Big => groundSide switch
