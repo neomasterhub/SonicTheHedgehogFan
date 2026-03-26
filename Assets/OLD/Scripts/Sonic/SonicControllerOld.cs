@@ -15,7 +15,7 @@ public class SonicControllerOld : MonoBehaviour
   private readonly SpeedProvider<float> _slopeFactorSpeedProvider = new();
   private readonly SpeedProvider<Vector2> _groundToAirSpeedProvider = new();
   private readonly StringBuilder _info = new();
-  private readonly TimerManager _timerManager = new();
+  private readonly TimerSystem _timerManager = new();
 
   // State flags
   private bool _postDetachFall;
@@ -237,7 +237,7 @@ public class SonicControllerOld : MonoBehaviour
   private void UpdateTools()
   {
     _inputInfo.Update(!_postDetachInputLocked);
-    _timerManager.OnUpdate(Time.fixedDeltaTime);
+    _timerManager.Update(Time.fixedDeltaTime);
   }
 
   private void ShiftGroundSide()
@@ -391,7 +391,7 @@ public class SonicControllerOld : MonoBehaviour
 
       if (!_inputUnlockTimer.IsRunning)
       {
-        _timerManager.RunSingle(_inputUnlockTimer);
+        _timerManager.StartIfNotRunning(_inputUnlockTimer);
       }
 
       return;

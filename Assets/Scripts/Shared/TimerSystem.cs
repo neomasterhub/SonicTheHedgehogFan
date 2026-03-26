@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 
-public class TimerManager
+public class TimerSystem
 {
   private readonly List<Timer> _timers = new();
 
-  public void OnUpdate(float deltaTime)
+  public void Update(float deltaTime)
   {
-    for (var i = _timers.Count - 1; i >= 0; i--)
+    for (var i = _timers.Count - 1; i > -1; i--)
     {
       var timer = _timers[i];
 
@@ -19,7 +19,7 @@ public class TimerManager
     }
   }
 
-  public void RunSingle(Timer timer)
+  public void StartIfNotRunning(Timer timer)
   {
     if (_timers.Contains(timer))
     {
@@ -27,6 +27,7 @@ public class TimerManager
     }
 
     _timers.Add(timer);
+
     timer.Start();
   }
 }
