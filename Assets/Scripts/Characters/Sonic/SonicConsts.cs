@@ -1,5 +1,5 @@
 using UnityEngine;
-using static SharedConsts;
+using static SharedConsts.ConvertValues;
 
 public static class SonicConsts
 {
@@ -18,16 +18,16 @@ public static class SonicConsts
     public const float MaxFallSpeedPx = 16;
     public const float SlopeFactorSpx = 32;
 
-    public const float AccelerationSpeed = AccelerationSpeedSpx / ConvertValues.SpxPerUnit;
-    public const float DecelerationSpeed = DecelerationSpeedSpx / ConvertValues.SpxPerUnit;
-    public const float FrictionSpeed = FrictionSpeedSpx / ConvertValues.SpxPerUnit;
-    public const float TopSpeed = TopSpeedPx / ConvertValues.PxPerUnit;
-    public const float AirAccelerationSpeed = AirAccelerationSpeedSpx / ConvertValues.SpxPerUnit;
-    public const float AirTopSpeed = AirTopSpeedPx / ConvertValues.PxPerUnit;
-    public const float GravityDown = GravityDownSpx / ConvertValues.SpxPerUnit;
-    public const float GravityUp = GravityUpSpx / ConvertValues.SpxPerUnit;
-    public const float MaxFallSpeed = MaxFallSpeedPx / ConvertValues.PxPerUnit;
-    public const float SlopeFactor = SlopeFactorSpx / ConvertValues.SpxPerUnit;
+    public const float AccelerationSpeed = AccelerationSpeedSpx / SpxPerUnit;
+    public const float DecelerationSpeed = DecelerationSpeedSpx / SpxPerUnit;
+    public const float FrictionSpeed = FrictionSpeedSpx / SpxPerUnit;
+    public const float TopSpeed = TopSpeedPx / PxPerUnit;
+    public const float AirAccelerationSpeed = AirAccelerationSpeedSpx / SpxPerUnit;
+    public const float AirTopSpeed = AirTopSpeedPx / PxPerUnit;
+    public const float GravityDown = GravityDownSpx / SpxPerUnit;
+    public const float GravityUp = GravityUpSpx / SpxPerUnit;
+    public const float MaxFallSpeed = MaxFallSpeedPx / PxPerUnit;
+    public const float SlopeFactor = SlopeFactorSpx / SpxPerUnit;
   }
 
   public static class Sizes
@@ -36,8 +36,8 @@ public static class SonicConsts
     {
       public const float HRadiusPx = 9;
       public const float VRadiusPx = 19;
-      public const float HRadius = HRadiusPx / ConvertValues.PxPerUnit;
-      public const float VRadius = VRadiusPx / ConvertValues.PxPerUnit;
+      public const float HRadius = HRadiusPx / PxPerUnit;
+      public const float VRadius = VRadiusPx / PxPerUnit;
       public static Vector2 HVRadii = new(HRadius, VRadius);
     }
 
@@ -45,8 +45,8 @@ public static class SonicConsts
     {
       public const float HRadiusPx = 7;
       public const float VRadiusPx = 14;
-      public const float HRadius = HRadiusPx / ConvertValues.PxPerUnit;
-      public const float VRadius = VRadiusPx / ConvertValues.PxPerUnit;
+      public const float HRadius = HRadiusPx / PxPerUnit;
+      public const float VRadius = VRadiusPx / PxPerUnit;
       public static Vector2 HVRadii = new(HRadius, VRadius);
     }
   }
