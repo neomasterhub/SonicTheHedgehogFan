@@ -14,7 +14,7 @@ public class WallToAirPlayerViewRotator : PlayerViewRotatorBase
 
   public override void Rotate(PlayerViewRotatorInput input)
   {
-    if (input.PrevPlayerState.HasFlag(PlayerState.Grounded))
+    if (input.PrevPlayerState.HasFlag(SonicState.Grounded))
     {
       if (input.PrevGroundSide == GroundSide.Left)
       {

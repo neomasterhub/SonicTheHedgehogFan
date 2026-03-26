@@ -1,7 +1,7 @@
 public readonly struct PlayerSpeedInput
 {
-  public readonly PlayerState PlayerState;
-  public readonly PlayerState PrevPlayerState;
+  public readonly SonicState PlayerState;
+  public readonly SonicState PrevPlayerState;
 
   // Sensor Result
   public readonly float DistanceToGround;
@@ -22,7 +22,7 @@ public readonly struct PlayerSpeedInput
   public readonly float InputDeadZone;
   public readonly float SkiddingSpeedDeadZone;
 
-  public PlayerSpeedInput(PlayerState playerState, PlayerState prevPlayerState, float distanceToGround, float groundAngleRad, float topSpeed, float frictionSpeed, float accelerationSpeed, float decelerationSpeed, float airTopSpeed, float airAccelerationSpeed, float maxFallSpeed, float inputDeadZone, float skiddingSpeedDeadZone)
+  public PlayerSpeedInput(SonicState playerState, SonicState prevPlayerState, float distanceToGround, float groundAngleRad, float topSpeed, float frictionSpeed, float accelerationSpeed, float decelerationSpeed, float airTopSpeed, float airAccelerationSpeed, float maxFallSpeed, float inputDeadZone, float skiddingSpeedDeadZone)
   {
     PlayerState = playerState;
     PrevPlayerState = prevPlayerState;

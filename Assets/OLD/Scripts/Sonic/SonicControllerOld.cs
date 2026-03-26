@@ -23,8 +23,8 @@ public class SonicControllerOld : MonoBehaviour
   private bool _wallDetachPositionOffset;
   private GroundSide _groundSide = GroundSide.Down;
   private GroundSide _prevGroundSide = GroundSide.Down;
-  private PlayerState _playerState;
-  private PlayerState _prevPlayerState;
+  private SonicState _playerState;
+  private SonicState _prevPlayerState;
   private SonicSizeMode _sizeMode = SonicSizeMode.Big;
 
   // Components
@@ -187,13 +187,13 @@ public class SonicControllerOld : MonoBehaviour
   {
     _pvrGrounded = new GroundedPlayerViewRotator(
       () => PVRGroundedEnabled
-      && _playerState.HasFlag(PlayerState.Grounded));
+      && _playerState.HasFlag(SonicState.Grounded));
 
     _pvrWallToAir = new WallToAirPlayerViewRotator(
       PVRWallToAirDelta,
       () => PVRWallToAirEnabled
-      && _playerState.HasFlag(PlayerState.Airborne)
-      && _prevPlayerState.HasFlag(PlayerState.Grounded)
+      && _playerState.HasFlag(SonicState.Airborne)
+      && _prevPlayerState.HasFlag(SonicState.Grounded)
       && _prevGroundSide is GroundSide.Left or GroundSide.Right);
 
     _pvrProvider
@@ -288,7 +288,7 @@ public class SonicControllerOld : MonoBehaviour
   private void ApplyMovement()
   {
     _playerSpeedManager.SetSpeed(PlayerSpeedInput);
-    _playerState = _playerState.SetFlag(PlayerState.Skidding, _playerSpeedManager.IsSkidding);
+    _playerState = _playerState.SetFlag(SonicState.Skidding, _playerSpeedManager.IsSkidding);
   }
 
   private void UpdateView()
@@ -301,7 +301,7 @@ public class SonicControllerOld : MonoBehaviour
     var speedX = _playerSpeedManager.SpeedX;
     var speedY = _playerSpeedManager.SpeedY;
 
-    if (_playerState.HasFlag(PlayerState.Grounded))
+    if (_playerState.HasFlag(SonicState.Grounded))
     {
       if (_wallDetachPositionOffset)
       {
@@ -332,7 +332,7 @@ public class SonicControllerOld : MonoBehaviour
 
   private void UpdateAudio()
   {
-    if (_playerState.HasFlag(PlayerState.Skidding))
+    if (_playerState.HasFlag(SonicState.Skidding))
     {
       if (!_sfxSkidding.isPlaying)
       {
@@ -380,7 +380,7 @@ public class SonicControllerOld : MonoBehaviour
 
   private void ProcessEvents_Grounded()
   {
-    if (!_playerState.HasFlag(PlayerState.Grounded))
+    if (!_playerState.HasFlag(SonicState.Grounded))
     {
       return;
     }
@@ -424,7 +424,7 @@ public class SonicControllerOld : MonoBehaviour
 
   private void ProcessEvents_Airborne()
   {
-    if (!_playerState.HasFlag(PlayerState.Airborne))
+    if (!_playerState.HasFlag(SonicState.Airborne))
     {
       return;
     }

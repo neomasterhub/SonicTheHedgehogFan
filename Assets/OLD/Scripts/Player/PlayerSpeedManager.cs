@@ -43,11 +43,11 @@ public class PlayerSpeedManager
 
   public void SetSpeed(PlayerSpeedInput input)
   {
-    if (input.PlayerState.HasFlag(PlayerState.Airborne))
+    if (input.PlayerState.HasFlag(SonicState.Airborne))
     {
       SetSpeed_Airborne(input);
     }
-    else if (input.PlayerState.HasFlag(PlayerState.Grounded))
+    else if (input.PlayerState.HasFlag(SonicState.Grounded))
     {
       SetSpeed_Grounded(input);
     }
@@ -73,7 +73,7 @@ public class PlayerSpeedManager
 
   private void SetSpeed_Airborne_FromGrounded(PlayerSpeedInput input)
   {
-    if (!input.PrevPlayerState.HasFlag(PlayerState.Grounded))
+    if (!input.PrevPlayerState.HasFlag(SonicState.Grounded))
     {
       return;
     }
@@ -145,7 +145,7 @@ public class PlayerSpeedManager
 
   private void SetSpeed_Grounded_FromAirborne(PlayerSpeedInput input)
   {
-    if (input.PrevPlayerState.HasFlag(PlayerState.Airborne))
+    if (input.PrevPlayerState.HasFlag(SonicState.Airborne))
     {
       GroundSpeed = Mathf.Clamp(
         (SpeedX * _groundAngleCos) + (SpeedY * _groundAngleSin),

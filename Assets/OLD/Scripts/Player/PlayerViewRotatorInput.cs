@@ -4,10 +4,10 @@ public readonly struct PlayerViewRotatorInput
   public readonly float GroundSpeed;
   public readonly float StandingStraightGroundSpeedZone;
   public readonly GroundSide PrevGroundSide;
-  public readonly PlayerState PlayerState;
-  public readonly PlayerState PrevPlayerState;
+  public readonly SonicState PlayerState;
+  public readonly SonicState PrevPlayerState;
 
-  public PlayerViewRotatorInput(float groundAngleDeg, float groundSpeed, float standingStraightGroundSpeedZone, GroundSide prevGroundSide, PlayerState playerState, PlayerState prevPlayerState)
+  public PlayerViewRotatorInput(float groundAngleDeg, float groundSpeed, float standingStraightGroundSpeedZone, GroundSide prevGroundSide, SonicState playerState, SonicState prevPlayerState)
   {
     GroundAngleDeg = groundAngleDeg;
     GroundSpeed = groundSpeed;

@@ -1,8 +1,8 @@
 public static class EnumExtensions
 {
-  public static PlayerState SetFlag(
-    this PlayerState source,
-    PlayerState target,
+  public static SonicState SetFlag(
+    this SonicState source,
+    SonicState target,
     bool enabled)
   {
     return enabled
