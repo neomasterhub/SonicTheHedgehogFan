@@ -17,6 +17,9 @@ public class SonicSensorSystem
     GroundSide groundSide = GroundSide.Down,
     Vector2? parentPosition = null)
   {
+    SizeMode = sizeMode;
+    GroundSide = groundSide;
+
     var aColor = Color.softGreen;
     var bColor = Color.green;
     var cColor = Color.softYellow;
@@ -47,47 +50,54 @@ public class SonicSensorSystem
       b: new(bColor, new(-Sizes.Big.VRadius, Sizes.Big.HRadius), Vector2.right, Vector2.left, Vector2.down),
       parentPosition: parentPosition);
 
-    SetCurrentSensorGroup(sizeMode, groundSide);
+    SetCurrentSensorGroup();
   }
 
   public SonicSizeMode SizeMode { get; private set; }
   public GroundSide GroundSide { get; private set; }
   public SonicSensorGroup CurrentSensorGroup { get; private set; }
-
-  public void UpdateCurrentSensorGroup(SonicSizeMode sizeMode, GroundSide groundSide)
+  public Vector2 ParentPosition
   {
-    if (SizeMode == sizeMode && GroundSide == groundSide)
-    {
-      return;
-    }
-
-    SizeMode = sizeMode;
-    GroundSide = groundSide;
-
-    SetCurrentSensorGroup(sizeMode, groundSide);
+    get => CurrentSensorGroup.ParentPosition;
+    set => CurrentSensorGroup.ParentPosition = value;
   }
 
-  private void SetCurrentSensorGroup(SonicSizeMode sizeMode, GroundSide groundSide)
+  public void UpdateCurrentSensorGroup(
+    SonicSizeMode sizeMode,
+    GroundSide groundSide,
+    Vector2 parentPosition)
   {
-    CurrentSensorGroup = sizeMode switch
+    if (SizeMode != sizeMode || GroundSide != groundSide)
     {
-      SonicSizeMode.Big => groundSide switch
+      SizeMode = sizeMode;
+      GroundSide = groundSide;
+      SetCurrentSensorGroup();
+    }
+
+    ParentPosition = parentPosition;
+  }
+
+  private void SetCurrentSensorGroup()
+  {
+    CurrentSensorGroup = SizeMode switch
+    {
+      SonicSizeMode.Big => GroundSide switch
       {
         GroundSide.Up => _bigUpSensorGroup,
         GroundSide.Down => _bigDownSensorGroup,
         GroundSide.Left => _bigLeftSensorGroup,
         GroundSide.Right => _bigRightSensorGroup,
-        _ => throw groundSide.ArgumentOutOfRangeException(),
+        _ => throw GroundSide.ArgumentOutOfRangeException(),
       },
-      SonicSizeMode.Small => groundSide switch
+      SonicSizeMode.Small => GroundSide switch
       {
         GroundSide.Up => _smallUpSensorGroup,
         GroundSide.Down => _smallDownSensorGroup,
         GroundSide.Left => _smallLeftSensorGroup,
         GroundSide.Right => _smallRightSensorGroup,
-        _ => throw groundSide.ArgumentOutOfRangeException(),
+        _ => throw GroundSide.ArgumentOutOfRangeException(),
       },
-      _ => throw sizeMode.ArgumentOutOfRangeException(),
+      _ => throw SizeMode.ArgumentOutOfRangeException(),
     };
   }
 }
