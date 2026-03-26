@@ -5,7 +5,7 @@ using AnimatorStates = SharedConsts.Animator.States;
 public class PlayerViewManager
 {
   private readonly Animator _animator;
-  private readonly InputInfo _inputInfo;
+  private readonly PlayerInputSystem _inputInfo;
   private readonly PlayerViewRotatorProvider _playerViewRotatorProvider;
   private readonly SpriteRenderer _spriteRenderer;
 
@@ -17,7 +17,7 @@ public class PlayerViewManager
 
   public PlayerViewManager(
     Animator animator,
-    InputInfo inputInfo,
+    PlayerInputSystem inputInfo,
     PlayerViewRotatorProvider playerViewRotatorProvider,
     SpriteRenderer spriteRenderer)
   {
