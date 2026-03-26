@@ -1,11 +1,14 @@
 using UnityEngine;
+using static SharedConsts.ConvertValues;
+using static SharedConsts.InputAxis;
 
 public class SonicController : MonoBehaviour
 {
+  private readonly PlayerInputSystem _inputSystem = new(
+    () => Input.GetAxis(Horizontal),
+    () => Input.GetAxis(Vertical));
   private readonly SonicSensorSystem _sensorSystem = new();
   private readonly TimerSystem _timerSystem = new();
-
-  private PlayerInputSystem _inputSystem;
 
   // Flags
   private GroundSide _groundSide;
@@ -23,9 +26,8 @@ public class SonicController : MonoBehaviour
 
   private void Awake()
   {
-    _inputSystem = new(
-      () => Input.GetAxis(SharedConsts.InputAxis.Horizontal),
-      () => Input.GetAxis(SharedConsts.InputAxis.Vertical));
+    Application.targetFrameRate = FramePerSec;
+    Time.fixedDeltaTime = 1f / FramePerSec;
   }
 
   private void FixedUpdate()
@@ -35,8 +37,8 @@ public class SonicController : MonoBehaviour
 
   private void UpdateSystems()
   {
+    _timerSystem.Update(Time.deltaTime);
     _inputSystem.Update(!_postWallDetachInputLock);
     _sensorSystem.Update(_sizeMode, _groundSide, transform.position, TopUDFLengths, BottomUDFLengths);
-    _timerSystem.Update(Time.deltaTime);
   }
 }
