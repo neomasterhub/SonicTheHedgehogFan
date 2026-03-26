@@ -3,6 +3,7 @@ using UnityEngine;
 public class SonicController : MonoBehaviour
 {
   private readonly SonicSensorSystem _sensorSystem = new();
+  private readonly TimerSystem _timerSystem = new();
 
   private PlayerInputSystem _inputSystem;
 
@@ -36,5 +37,6 @@ public class SonicController : MonoBehaviour
   {
     _inputSystem.Update(!_postWallDetachInputLock);
     _sensorSystem.Update(_sizeMode, _groundSide, transform.position, TopUDFLengths, BottomUDFLengths);
+    _timerSystem.Update(Time.deltaTime);
   }
 }
