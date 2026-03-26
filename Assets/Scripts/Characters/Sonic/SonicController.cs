@@ -5,8 +5,8 @@ public class SonicController : MonoBehaviour
   private readonly SonicSensorSystem _sensorSystem = new();
 
   // Flags
-  private SonicSizeMode _sizeMode;
   private GroundSide _groundSide;
+  private SonicSizeMode _sizeMode;
 
   [Header("Sensors")]
   public Vector3 TopUDFLengths = new(0.3f, 0.3f, 0.5f);

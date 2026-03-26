@@ -1,5 +1,5 @@
 using UnityEngine;
-using static SonicConsts;
+using static SonicConsts.Sizes;
 
 public class SonicSensorSystem
 {
@@ -29,28 +29,28 @@ public class SonicSensorSystem
     var dColor = Color.yellow;
 
     _bigDownSensorGroup = new(
-      a: new(aColor, new(-Sizes.Big.HRadius, -Sizes.Big.VRadius), Vector2.up, Vector2.down, Vector2.left),
-      b: new(bColor, new(Sizes.Big.HRadius, -Sizes.Big.VRadius), Vector2.up, Vector2.down, Vector2.right),
-      c: new(cColor, new(-Sizes.Big.HRadius, Sizes.Big.VRadius), Vector2.up, Vector2.down, Vector2.left),
-      d: new(dColor, new(Sizes.Big.HRadius, Sizes.Big.VRadius), Vector2.up, Vector2.down, Vector2.right),
+      a: new(aColor, new(-Big.HRadius, -Big.VRadius), Vector2.up, Vector2.down, Vector2.left),
+      b: new(bColor, new(Big.HRadius, -Big.VRadius), Vector2.up, Vector2.down, Vector2.right),
+      c: new(cColor, new(-Big.HRadius, Big.VRadius), Vector2.up, Vector2.down, Vector2.left),
+      d: new(dColor, new(Big.HRadius, Big.VRadius), Vector2.up, Vector2.down, Vector2.right),
       parentPosition: parentPosition);
     _bigRightSensorGroup = new(
-      a: new(aColor, new(Sizes.Big.VRadius, -Sizes.Big.HRadius), Vector2.left, Vector2.right, Vector2.down),
-      b: new(bColor, new(Sizes.Big.VRadius, Sizes.Big.HRadius), Vector2.left, Vector2.right, Vector2.up),
-      c: new(cColor, new(-Sizes.Big.VRadius, -Sizes.Big.HRadius), Vector2.left, Vector2.right, Vector2.down),
-      d: new(dColor, new(-Sizes.Big.VRadius, Sizes.Big.HRadius), Vector2.left, Vector2.right, Vector2.up),
+      a: new(aColor, new(Big.VRadius, -Big.HRadius), Vector2.left, Vector2.right, Vector2.down),
+      b: new(bColor, new(Big.VRadius, Big.HRadius), Vector2.left, Vector2.right, Vector2.up),
+      c: new(cColor, new(-Big.VRadius, -Big.HRadius), Vector2.left, Vector2.right, Vector2.down),
+      d: new(dColor, new(-Big.VRadius, Big.HRadius), Vector2.left, Vector2.right, Vector2.up),
       parentPosition: parentPosition);
     _bigUpSensorGroup = new(
-      c: new(cColor, new(-Sizes.Big.HRadius, -Sizes.Big.VRadius), Vector2.down, Vector2.up, Vector2.right),
-      d: new(dColor, new(Sizes.Big.HRadius, -Sizes.Big.VRadius), Vector2.down, Vector2.up, Vector2.left),
-      a: new(aColor, new(-Sizes.Big.HRadius, Sizes.Big.VRadius), Vector2.down, Vector2.up, Vector2.right),
-      b: new(bColor, new(Sizes.Big.HRadius, Sizes.Big.VRadius), Vector2.down, Vector2.up, Vector2.left),
+      c: new(cColor, new(-Big.HRadius, -Big.VRadius), Vector2.down, Vector2.up, Vector2.right),
+      d: new(dColor, new(Big.HRadius, -Big.VRadius), Vector2.down, Vector2.up, Vector2.left),
+      a: new(aColor, new(-Big.HRadius, Big.VRadius), Vector2.down, Vector2.up, Vector2.right),
+      b: new(bColor, new(Big.HRadius, Big.VRadius), Vector2.down, Vector2.up, Vector2.left),
       parentPosition: parentPosition);
     _bigLeftSensorGroup = new(
-      c: new(cColor, new(Sizes.Big.VRadius, -Sizes.Big.HRadius), Vector2.right, Vector2.left, Vector2.up),
-      d: new(dColor, new(Sizes.Big.VRadius, Sizes.Big.HRadius), Vector2.right, Vector2.left, Vector2.down),
-      a: new(aColor, new(-Sizes.Big.VRadius, -Sizes.Big.HRadius), Vector2.right, Vector2.left, Vector2.up),
-      b: new(bColor, new(-Sizes.Big.VRadius, Sizes.Big.HRadius), Vector2.right, Vector2.left, Vector2.down),
+      c: new(cColor, new(Big.VRadius, -Big.HRadius), Vector2.right, Vector2.left, Vector2.up),
+      d: new(dColor, new(Big.VRadius, Big.HRadius), Vector2.right, Vector2.left, Vector2.down),
+      a: new(aColor, new(-Big.VRadius, -Big.HRadius), Vector2.right, Vector2.left, Vector2.up),
+      b: new(bColor, new(-Big.VRadius, Big.HRadius), Vector2.right, Vector2.left, Vector2.down),
       parentPosition: parentPosition);
 
     SetCurrentSensorGroup();
@@ -85,18 +85,18 @@ public class SonicSensorSystem
 
     ParentPosition = parentPosition;
 
-    if (_bottomUDFLengths != bottomUDFLengths)
-    {
-      _bottomUDFLengths = bottomUDFLengths;
-      UpdateUDFSensorLengths(CurrentSensorGroup.A, bottomUDFLengths);
-      UpdateUDFSensorLengths(CurrentSensorGroup.B, bottomUDFLengths);
-    }
-
     if (_topUDFLengths != topUDFLengths)
     {
       _topUDFLengths = topUDFLengths;
       UpdateUDFSensorLengths(CurrentSensorGroup.C, topUDFLengths);
       UpdateUDFSensorLengths(CurrentSensorGroup.D, topUDFLengths);
+    }
+
+    if (_bottomUDFLengths != bottomUDFLengths)
+    {
+      _bottomUDFLengths = bottomUDFLengths;
+      UpdateUDFSensorLengths(CurrentSensorGroup.A, bottomUDFLengths);
+      UpdateUDFSensorLengths(CurrentSensorGroup.B, bottomUDFLengths);
     }
   }
 
@@ -124,10 +124,10 @@ public class SonicSensorSystem
     };
   }
 
-  private void UpdateUDFSensorLengths(UDFSensor sensor, Vector3 lengths)
+  private void UpdateUDFSensorLengths(UDFSensor sensor, Vector3 udfLengths)
   {
-    sensor.UpRay.Length = lengths.x;
-    sensor.DownRay.Length = lengths.y;
-    sensor.FrontRay.Length = lengths.z;
+    sensor.UpRay.Length = udfLengths.x;
+    sensor.DownRay.Length = udfLengths.y;
+    sensor.FrontRay.Length = udfLengths.z;
   }
 }

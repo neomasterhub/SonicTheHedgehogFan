@@ -10,8 +10,8 @@ public readonly struct PlayerViewInput
   public readonly float GroundSideAngleDeg;
   public readonly float StandingStraightGroundSpeedZone;
   public readonly GroundSide PrevGroundSide;
-  public readonly PlayerState PlayerState;
-  public readonly PlayerState PrevPlayerState;
+  public readonly SonicState PlayerState;
+  public readonly SonicState PrevPlayerState;
 
   
 }

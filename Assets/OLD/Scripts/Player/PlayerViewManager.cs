@@ -1,6 +1,6 @@
 using UnityEngine;
-using AnimatorParameters = Consts.Animator.Parameters;
-using AnimatorStates = Consts.Animator.States;
+using AnimatorParameters = SharedConsts.Animator.Parameters;
+using AnimatorStates = SharedConsts.Animator.States;
 
 public class PlayerViewManager
 {
@@ -30,8 +30,8 @@ public class PlayerViewManager
   public void Update(PlayerViewInput input)
   {
     _input = input;
-    _isBalancing = _input.PlayerState.HasFlag(PlayerState.Balancing);
-    _isSkidding = _input.PlayerState.HasFlag(PlayerState.Skidding);
+    _isBalancing = _input.PlayerState.HasFlag(SonicState.Balancing);
+    _isSkidding = _input.PlayerState.HasFlag(SonicState.Skidding);
 
     UpdateAnimator();
     RotateSprite();
@@ -40,12 +40,12 @@ public class PlayerViewManager
   private void UpdateAnimator()
   {
     var animatorParameterSpeed = 0f;
-    if (_input.PlayerState.HasFlag(PlayerState.Grounded))
+    if (_input.PlayerState.HasFlag(SonicState.Grounded))
     {
       _groundedAnimatorParameterSpeed = Mathf.Abs(_input.SpeedX);
       animatorParameterSpeed = _groundedAnimatorParameterSpeed;
     }
-    else if (_input.PlayerState.HasFlag(PlayerState.Airborne))
+    else if (_input.PlayerState.HasFlag(SonicState.Airborne))
     {
       animatorParameterSpeed = Mathf.Max(
         _groundedAnimatorParameterSpeed,

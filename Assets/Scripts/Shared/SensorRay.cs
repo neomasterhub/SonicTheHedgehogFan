@@ -17,12 +17,12 @@ public class SensorRay
   public Color Color { get; set; } = Color.red;
   public Vector2 Direction { get; set; } = Vector2.right;
 
-  public void Draw(Vector2 source)
+  public void Draw(Vector2 origin)
   {
     if (Enabled)
     {
       Gizmos.color = Color;
-      Gizmos.DrawLine(source, source + (Direction * Length));
+      Gizmos.DrawLine(origin, origin + (Direction * Length));
     }
   }
 }
