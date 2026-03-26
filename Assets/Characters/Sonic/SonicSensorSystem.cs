@@ -41,10 +41,20 @@ public class SonicSensorSystem
       b: new(bColor, new(-Sizes.Big.VRadius, Sizes.Big.HRadius), Vector2.right, Vector2.left, Vector2.down));
   }
 
+  public SonicSizeMode SizeMode { get; private set; }
+  public GroundSide GroundSide { get; private set; }
   public SonicSensorGroup CurrentSensorGroup { get; private set; }
 
   public void SetCurrentSensorGroup(SonicSizeMode sizeMode, GroundSide groundSide)
   {
+    if (SizeMode == sizeMode && GroundSide == groundSide)
+    {
+      return;
+    }
+
+    SizeMode = sizeMode;
+    GroundSide = groundSide;
+
     CurrentSensorGroup = sizeMode switch
     {
       SonicSizeMode.Big => groundSide switch
