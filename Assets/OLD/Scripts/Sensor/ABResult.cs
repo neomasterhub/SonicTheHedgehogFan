@@ -2,7 +2,7 @@ using UnityEngine;
 
 public struct ABResult
 {
-  public SensorId? AppliedSensorId;
+ // public SensorId? AppliedSensorId;
   public Vector2 Contact;
   public Vector2 Normal;
   public float Distance;
@@ -14,7 +14,7 @@ public struct ABResult
 
   public void Reset()
   {
-    AppliedSensorId = null;
+    //AppliedSensorId = null;
     Contact = Vector2.positiveInfinity;
     Normal = Vector2.zero;
     Distance = float.PositiveInfinity;
@@ -26,14 +26,14 @@ public struct ABResult
   }
 
   public void Set(
-    SensorId appliedSensorId,
+   // SensorId appliedSensorId,
     RaycastHit2D hit,
     Vector2 sensorDirection,
     int sensorDirectionSign,
     float sensorLength,
     bool bothTriggered = false)
   {
-    AppliedSensorId = appliedSensorId;
+  //  AppliedSensorId = appliedSensorId;
     Contact = hit.point;
     Normal = hit.normal;
     Distance = hit.distance;
