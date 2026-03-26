@@ -12,8 +12,12 @@ public class SonicSensorSystem
   private readonly SonicSensorGroup _smallLeftSensorGroup;
   private readonly SonicSensorGroup _smallRightSensorGroup;
 
-  public SonicSensorSystem()
+  public SonicSensorSystem(
+    SonicSizeMode sizeMode = SonicSizeMode.Big,
+    GroundSide groundSide = GroundSide.Down)
   {
+    SetCurrentSensorGroup(sizeMode, groundSide);
+
     var aColor = Color.softGreen;
     var bColor = Color.green;
     var cColor = Color.softYellow;
