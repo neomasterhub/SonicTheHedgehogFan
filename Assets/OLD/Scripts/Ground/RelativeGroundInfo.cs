@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class RelativeGroundInfo
 {
-  private readonly Range _flatRangeDeg = Consts.Physics.GroundAngleRanges.Flat;
-  private readonly Range _slopeRangeDeg = Consts.Physics.GroundAngleRanges.Slope;
+  private readonly Range _flatRangeDeg = SharedConsts.Physics.GroundAngleRanges.Flat;
+  private readonly Range _slopeRangeDeg = SharedConsts.Physics.GroundAngleRanges.Slope;
 
   public float AngleDeg { get; private set; }
   public float AngleRad { get; private set; }

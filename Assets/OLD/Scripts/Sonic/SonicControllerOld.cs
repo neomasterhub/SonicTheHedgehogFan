@@ -53,15 +53,15 @@ public class SonicControllerOld : MonoBehaviour
 
   private void Awake()
   {
-    Application.targetFrameRate = Consts.ConvertValues.FramePerSec;
-    Time.fixedDeltaTime = 1f / Consts.ConvertValues.FramePerSec;
+    Application.targetFrameRate = SharedConsts.ConvertValues.FramePerSec;
+    Time.fixedDeltaTime = 1f / SharedConsts.ConvertValues.FramePerSec;
 
     _animator = GetComponent<Animator>();
     _spriteRenderer = GetComponent<SpriteRenderer>();
 
     _inputInfo = new InputInfo(
-      () => Input.GetAxis(Consts.InputAxis.Horizontal),
-      () => Input.GetAxis(Consts.InputAxis.Vertical));
+      () => Input.GetAxis(SharedConsts.InputAxis.Horizontal),
+      () => Input.GetAxis(SharedConsts.InputAxis.Vertical));
 
     _inputUnlockTimer = new Timer(SonicConsts.Physics.InputUnlockTimerSeconds)
       .WhenCompleted(() => _postDetachInputLocked = false);

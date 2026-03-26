@@ -1,5 +1,5 @@
 using UnityEngine;
-using static Consts;
+using static SharedConsts;
 
 public static class SonicConsts
 {

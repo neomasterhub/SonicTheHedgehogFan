@@ -1,6 +1,6 @@
 using UnityEngine;
-using AnimatorParameters = Consts.Animator.Parameters;
-using AnimatorStates = Consts.Animator.States;
+using AnimatorParameters = SharedConsts.Animator.Parameters;
+using AnimatorStates = SharedConsts.Animator.States;
 
 public class PlayerViewManager
 {

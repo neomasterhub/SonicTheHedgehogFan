@@ -1,4 +1,4 @@
-public static class Consts
+public static class SharedConsts
 {
   public static class ConvertValues
   {
@@ -13,6 +13,15 @@ public static class Consts
     public const string Jump = nameof(Jump);
     public const string Horizontal = nameof(Horizontal);
     public const string Vertical = nameof(Vertical);
+  }
+
+  public static class Physics
+  {
+    public static class GroundAngleRanges
+    {
+      public static readonly Range Flat = new(-23, 23);
+      public static readonly Range Slope = new(-45, 45);
+    }
   }
 
   public static class Animator
@@ -33,15 +42,6 @@ public static class Consts
       public const string Running = nameof(Running);
       public const string Skidding = nameof(Skidding);
       public const string Balancing = nameof(Balancing);
-    }
-  }
-
-  public static class Physics
-  {
-    public static class GroundAngleRanges
-    {
-      public static readonly Range Flat = new(-23, 23);
-      public static readonly Range Slope = new(-45, 45);
     }
   }
 }
