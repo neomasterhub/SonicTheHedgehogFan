@@ -5,7 +5,7 @@ public class PlayerSpeedManager
 {
   private const int _speedDigits = 3;
 
-  private readonly InputInfo _inputInfo;
+  private readonly PlayerInputSystem _inputInfo;
   private readonly SpeedProvider<GravitySpeed> _gravitySpeedProvider = new();
   private readonly SpeedProvider<float> _slopeFactorSpeedProvider;
   private readonly SpeedProvider<Vector2> _groundToAirSpeedProvider;
@@ -14,7 +14,7 @@ public class PlayerSpeedManager
   private float _groundAngleSin;
 
   public PlayerSpeedManager(
-    InputInfo inputInfo,
+    PlayerInputSystem inputInfo,
     SpeedProvider<GravitySpeed> gravitySpeedProvider,
     SpeedProvider<float> slopeFactorSpeedProvider,
     SpeedProvider<Vector2> groundToAirSpeedProvider)

@@ -33,7 +33,7 @@ public class SonicControllerOld : MonoBehaviour
 
   private float _groundAngleDeg;
   private AudioSource _sfxSkidding;
-  private InputInfo _inputInfo;
+  private PlayerInputSystem _inputInfo;
   private IPlayerViewRotator _pvrGrounded;
   private IPlayerViewRotator _pvrWallToAir;
   private PlayerSpeedManager _playerSpeedManager;
@@ -59,7 +59,7 @@ public class SonicControllerOld : MonoBehaviour
     _animator = GetComponent<Animator>();
     _spriteRenderer = GetComponent<SpriteRenderer>();
 
-    _inputInfo = new InputInfo(
+    _inputInfo = new PlayerInputSystem(
       () => Input.GetAxis(SharedConsts.InputAxis.Horizontal),
       () => Input.GetAxis(SharedConsts.InputAxis.Vertical));
 

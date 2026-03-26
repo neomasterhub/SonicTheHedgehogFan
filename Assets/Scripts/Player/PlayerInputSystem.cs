@@ -1,11 +1,11 @@
 using System;
 
-public class InputInfo
+public class PlayerInputSystem
 {
   private readonly Func<float> _xSrc;
   private readonly Func<float> _ySrc;
 
-  public InputInfo(
+  public PlayerInputSystem(
     Func<float> xSrc,
     Func<float> ySrc)
   {

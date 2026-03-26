@@ -4,6 +4,8 @@ public class SonicController : MonoBehaviour
 {
   private readonly SonicSensorSystem _sensorSystem = new();
 
+  private PlayerInputSystem _inputSystem;
+
   // Flags
   private GroundSide _groundSide;
   private SonicSizeMode _sizeMode;
@@ -15,6 +17,13 @@ public class SonicController : MonoBehaviour
   private void OnDrawGizmos()
   {
     _sensorSystem.CurrentSensorGroup.Draw();
+  }
+
+  private void Awake()
+  {
+    _inputSystem = new(
+      () => Input.GetAxis(SharedConsts.InputAxis.Horizontal),
+      () => Input.GetAxis(SharedConsts.InputAxis.Vertical));
   }
 
   private void FixedUpdate()
