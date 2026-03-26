@@ -14,7 +14,8 @@ public class SonicSensorSystem
 
   public SonicSensorSystem(
     SonicSizeMode sizeMode = SonicSizeMode.Big,
-    GroundSide groundSide = GroundSide.Down)
+    GroundSide groundSide = GroundSide.Down,
+    Vector2? parentPosition = null)
   {
     var aColor = Color.softGreen;
     var bColor = Color.green;
