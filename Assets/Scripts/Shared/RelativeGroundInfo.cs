@@ -21,12 +21,12 @@ public class RelativeGroundInfo
     AngleDeg = angleDeg;
     AngleRad = angleDeg * Mathf.Deg2Rad;
 
-    if (!_slopeRangeDeg.Has(AngleDeg))
+    if (!_slopeRangeDeg.Includes(AngleDeg))
     {
       RangeId = GroundRangeId.Steep;
       Side = AngleDeg < 0 ? GroundSide.Left : GroundSide.Right;
     }
-    else if (!_flatRangeDeg.Has(AngleDeg))
+    else if (!_flatRangeDeg.Includes(AngleDeg))
     {
       RangeId = GroundRangeId.Slope;
       Side = GroundSide.Down;
