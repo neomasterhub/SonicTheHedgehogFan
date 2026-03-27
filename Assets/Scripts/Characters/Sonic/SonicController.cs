@@ -47,6 +47,7 @@ public class SonicController : MonoBehaviour
     _groundSide = _relativeGroundInfo.GetAbsoluteSide(_groundSide);
     _sensorSystem.Update(_sizeMode, _groundSide, transform.position, TopUDFLengths, BottomUDFLengths);
     _sensorSystem.DetectGround(!_spriteRenderer.flipX, _groundLayer);
+    _relativeGroundInfo.Update(_sensorSystem.GroundDetectionResult.AngleDeg);
     _prevState = _state;
     _state = _sensorSystem.GroundDetectionResult.Detected ? SonicState.Grounded : SonicState.Airborne;
   }
