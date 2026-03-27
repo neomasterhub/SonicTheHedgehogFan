@@ -37,4 +37,18 @@ public class RelativeGroundInfo
       Side = GroundSide.Down;
     }
   }
+
+  public GroundSide GetAbsoluteSide(GroundSide side)
+  {
+    if (Side == GroundSide.Left)
+    {
+      return Side.GetPrevious();
+    }
+    else if (Side == GroundSide.Right)
+    {
+      return Side.GetNext();
+    }
+
+    return side;
+  }
 }
