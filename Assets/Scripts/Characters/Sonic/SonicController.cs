@@ -2,6 +2,7 @@ using UnityEngine;
 using static SharedConsts.ConvertValues;
 using static SharedConsts.InputAxis;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class SonicController : MonoBehaviour
 {
   private readonly LayerMask _groundLayer = 8;
@@ -10,6 +11,7 @@ public class SonicController : MonoBehaviour
     () => Input.GetAxis(Vertical));
   private readonly SonicSensorSystem _sensorSystem = new();
   private readonly TimerSystem _timerSystem = new();
+  private SpriteRenderer _spriteRenderer;
 
   // Flags
   private GroundSide _groundSide;
@@ -29,6 +31,8 @@ public class SonicController : MonoBehaviour
   {
     Application.targetFrameRate = FramePerSec;
     Time.fixedDeltaTime = 1f / FramePerSec;
+
+    _spriteRenderer = GetComponent<SpriteRenderer>();
   }
 
   private void FixedUpdate()
@@ -36,6 +40,6 @@ public class SonicController : MonoBehaviour
     _timerSystem.Update(Time.deltaTime);
     _inputSystem.Update(!_postWallDetachInputLock);
     _sensorSystem.Update(_sizeMode, _groundSide, transform.position, TopUDFLengths, BottomUDFLengths);
-    _sensorSystem.DetectGround(true, _groundLayer);
+    _sensorSystem.DetectGround(!_spriteRenderer.flipX, _groundLayer);
   }
 }
