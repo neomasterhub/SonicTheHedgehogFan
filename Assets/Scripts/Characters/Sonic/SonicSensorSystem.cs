@@ -136,6 +136,20 @@ public class SonicSensorSystem
       return;
     }
 
+    SensorRay ur1;
+    SensorRay ur2;
+
+    if (horizontalDirection)
+    {
+      ur1 = CurrentSensorGroup.A.UpRay;
+      ur2 = CurrentSensorGroup.B.UpRay;
+    }
+    else
+    {
+      ur1 = CurrentSensorGroup.B.UpRay;
+      ur2 = CurrentSensorGroup.A.UpRay;
+    }
+
     GroundDetectionResult.Reset();
   }
 
