@@ -19,6 +19,18 @@ public class SensorRay
   public Vector2 Origin { get; set; }
   public Vector2 Direction { get; set; } = Vector2.right;
 
+  public RaycastHit2D? Cast(LayerMask layer)
+  {
+    if (!Enabled)
+    {
+      return null;
+    }
+
+    var hit = Physics2D.Raycast(Origin, Direction, Length, layer);
+
+    return hit.collider == null ? null : hit;
+  }
+
   public void Draw()
   {
     if (Enabled)
