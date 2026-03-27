@@ -194,6 +194,12 @@ public class SonicSensorSystem
     GroundDetectionResult.Reset();
   }
 
+  public void Draw()
+  {
+    CurrentSensorGroup.Draw();
+    GroundDetectionResult.DrawNormal();
+  }
+
   private void SetCurrentSensorGroup()
   {
     CurrentSensorGroup = SizeMode switch

@@ -28,4 +28,13 @@ public class GroundDetectionResult
     AngleDeg = Vector2.SignedAngle(-sensorDirection, hit.normal).Round();
     AngleRad = AngleDeg * Mathf.Deg2Rad;
   }
+
+  public void DrawNormal()
+  {
+    if (Detected)
+    {
+      Gizmos.color = Color.white;
+      Gizmos.DrawLine(Contact.Value, Contact.Value + Normal.Value);
+    }
+  }
 }

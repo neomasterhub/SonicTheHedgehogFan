@@ -21,7 +21,7 @@ public class SonicController : MonoBehaviour
 
   private void OnDrawGizmos()
   {
-    _sensorSystem.CurrentSensorGroup.Draw();
+    _sensorSystem.Draw();
   }
 
   private void Awake()
