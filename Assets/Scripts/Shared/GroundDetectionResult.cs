@@ -8,17 +8,12 @@ public class GroundDetectionResult
   public Vector2 Contact { get; private set; }
   public Vector2 Normal { get; private set; }
 
-  public void Update(
-    float distance,
-    float angleDeg,
-    float angleRad,
-    Vector2 contact,
-    Vector2 normal)
+  public void Update(RaycastHit2D hit, Vector2 sensorDirection)
   {
-    Distance = distance;
-    AngleDeg = angleDeg;
-    AngleRad = angleRad;
-    Contact = contact;
-    Normal = normal;
+    Contact = hit.point;
+    Normal = hit.normal;
+    Distance = hit.distance;
+    AngleDeg = Vector2.SignedAngle(-sensorDirection, hit.normal).Round();
+    AngleRad = AngleDeg * Mathf.Deg2Rad;
   }
 }
