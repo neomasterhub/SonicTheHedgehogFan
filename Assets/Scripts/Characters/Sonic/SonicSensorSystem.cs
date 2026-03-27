@@ -135,6 +135,8 @@ public class SonicSensorSystem
 
       return;
     }
+
+    GroundDetectionResult.Reset();
   }
 
   private void SetCurrentSensorGroup()
