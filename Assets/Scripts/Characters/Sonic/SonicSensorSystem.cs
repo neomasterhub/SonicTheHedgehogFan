@@ -167,6 +167,30 @@ public class SonicSensorSystem
       return;
     }
 
+    if (ur1Hit != null)
+    {
+      GroundDetectionResult.Update(ur1Hit.Value, ur1.Direction);
+      return;
+    }
+
+    if (ur2Hit != null)
+    {
+      GroundDetectionResult.Update(ur2Hit.Value, ur2.Direction);
+      return;
+    }
+
+    if (dr1Hit != null)
+    {
+      GroundDetectionResult.Update(dr1Hit.Value, dr1.Direction);
+      return;
+    }
+
+    if (dr2Hit != null)
+    {
+      GroundDetectionResult.Update(dr2Hit.Value, dr2.Direction);
+      return;
+    }
+
     GroundDetectionResult.Reset();
   }
 
