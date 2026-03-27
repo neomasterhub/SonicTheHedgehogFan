@@ -18,6 +18,8 @@ public class SonicController : MonoBehaviour
   private GroundSide _groundSide;
   private GroundSide _prevGroundSide;
   private SonicSizeMode _sizeMode;
+  private SonicState _state;
+  private SonicState _prevState;
   private bool _postWallDetachInputLock;
 
   [Header("Sensors")]
@@ -45,5 +47,7 @@ public class SonicController : MonoBehaviour
     _groundSide = _relativeGroundInfo.GetAbsoluteSide(_groundSide);
     _sensorSystem.Update(_sizeMode, _groundSide, transform.position, TopUDFLengths, BottomUDFLengths);
     _sensorSystem.DetectGround(!_spriteRenderer.flipX, _groundLayer);
+    _prevState = _state;
+    _state = _sensorSystem.GroundDetectionResult.Detected ? SonicState.Grounded : SonicState.Airborne;
   }
 }
