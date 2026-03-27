@@ -64,6 +64,7 @@ public class SonicSensorSystem
     get => CurrentSensorGroup.ParentPosition;
     set => CurrentSensorGroup.ParentPosition = value;
   }
+  public GroundDetectionResult GroundDetectionResult { get; } = new();
 
   public void Update(
     SonicSizeMode sizeMode,
@@ -98,6 +99,105 @@ public class SonicSensorSystem
       UpdateUDFSensorLengths(CurrentSensorGroup.A, bottomUDFLengths);
       UpdateUDFSensorLengths(CurrentSensorGroup.B, bottomUDFLengths);
     }
+  }
+
+  public void DetectGround(
+    bool horizontalDirection,
+    LayerMask groundLayer)
+  {
+    SensorRay dr1;
+    SensorRay dr2;
+
+    if (horizontalDirection)
+    {
+      dr1 = CurrentSensorGroup.A.DownRay;
+      dr2 = CurrentSensorGroup.B.DownRay;
+    }
+    else
+    {
+      dr1 = CurrentSensorGroup.B.DownRay;
+      dr2 = CurrentSensorGroup.A.DownRay;
+    }
+
+    var dr1Hit = dr1.Cast(groundLayer);
+    var dr2Hit = dr2.Cast(groundLayer);
+
+    if (dr1Hit != null && dr2Hit != null)
+    {
+      if (dr1Hit.Value.distance <= dr2Hit.Value.distance)
+      {
+        GroundDetectionResult.Update(dr1Hit.Value, dr1.Direction);
+      }
+      else
+      {
+        GroundDetectionResult.Update(dr2Hit.Value, dr2.Direction);
+      }
+
+      return;
+    }
+
+    SensorRay ur1;
+    SensorRay ur2;
+
+    if (horizontalDirection)
+    {
+      ur1 = CurrentSensorGroup.A.UpRay;
+      ur2 = CurrentSensorGroup.B.UpRay;
+    }
+    else
+    {
+      ur1 = CurrentSensorGroup.B.UpRay;
+      ur2 = CurrentSensorGroup.A.UpRay;
+    }
+
+    var ur1Hit = ur1.Cast(groundLayer);
+    var ur2Hit = ur2.Cast(groundLayer);
+
+    if (ur1Hit != null && ur2Hit != null)
+    {
+      if (ur1Hit.Value.distance >= ur2Hit.Value.distance)
+      {
+        GroundDetectionResult.Update(ur1Hit.Value, ur1.Direction);
+      }
+      else
+      {
+        GroundDetectionResult.Update(ur2Hit.Value, ur2.Direction);
+      }
+
+      return;
+    }
+
+    if (ur1Hit != null)
+    {
+      GroundDetectionResult.Update(ur1Hit.Value, ur1.Direction);
+      return;
+    }
+
+    if (ur2Hit != null)
+    {
+      GroundDetectionResult.Update(ur2Hit.Value, ur2.Direction);
+      return;
+    }
+
+    if (dr1Hit != null)
+    {
+      GroundDetectionResult.Update(dr1Hit.Value, dr1.Direction);
+      return;
+    }
+
+    if (dr2Hit != null)
+    {
+      GroundDetectionResult.Update(dr2Hit.Value, dr2.Direction);
+      return;
+    }
+
+    GroundDetectionResult.Reset();
+  }
+
+  public void Draw()
+  {
+    CurrentSensorGroup.Draw();
+    GroundDetectionResult.DrawNormal();
   }
 
   private void SetCurrentSensorGroup()
