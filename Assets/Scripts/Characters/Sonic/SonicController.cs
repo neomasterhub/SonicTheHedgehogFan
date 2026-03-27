@@ -12,6 +12,7 @@ public class SonicController : MonoBehaviour
   private readonly RelativeGroundInfo _relativeGroundInfo = new();
   private readonly SonicSensorSystem _sensorSystem = new();
   private readonly TimerSystem _timerSystem = new();
+  private float _groundAngleDeg;
   private SpriteRenderer _spriteRenderer;
 
   // Flags
@@ -48,6 +49,7 @@ public class SonicController : MonoBehaviour
     _sensorSystem.Update(_sizeMode, _groundSide, transform.position, TopUDFLengths, BottomUDFLengths);
     _sensorSystem.DetectGround(!_spriteRenderer.flipX, _groundLayer);
     _relativeGroundInfo.Update(_sensorSystem.GroundDetectionResult.AngleDeg);
+    _groundAngleDeg = _groundSide.GetAngle(_relativeGroundInfo.AngleDeg);
     _prevState = _state;
     _state = _sensorSystem.GroundDetectionResult.Detected ? SonicState.Grounded : SonicState.Airborne;
   }
