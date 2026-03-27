@@ -130,7 +130,7 @@ public class SonicSensorSystem
       }
       else
       {
-        GroundDetectionResult.Update(dr1Hit.Value, dr1.Direction);
+        GroundDetectionResult.Update(dr2Hit.Value, dr2.Direction);
       }
 
       return;
