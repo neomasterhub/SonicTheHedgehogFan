@@ -124,6 +124,16 @@ public class SonicSensorSystem
 
     if (dr1Hit != null && dr2Hit != null)
     {
+      if (dr1Hit.Value.distance <= dr2Hit.Value.distance)
+      {
+        GroundDetectionResult.Update(dr1Hit.Value, dr1.Direction);
+      }
+      else
+      {
+        GroundDetectionResult.Update(dr1Hit.Value, dr1.Direction);
+      }
+
+      return;
     }
   }
 
