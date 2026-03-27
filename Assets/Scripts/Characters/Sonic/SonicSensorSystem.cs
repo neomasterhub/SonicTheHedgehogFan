@@ -64,7 +64,7 @@ public class SonicSensorSystem
     get => CurrentSensorGroup.ParentPosition;
     set => CurrentSensorGroup.ParentPosition = value;
   }
-  public GroundDetectionResult GroundDetectionResult { get; private set; }
+  public GroundDetectionResult GroundDetectionResult { get; } = new();
 
   public void Update(
     SonicSizeMode sizeMode,

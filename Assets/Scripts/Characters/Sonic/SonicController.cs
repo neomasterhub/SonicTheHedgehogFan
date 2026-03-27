@@ -32,13 +32,9 @@ public class SonicController : MonoBehaviour
 
   private void FixedUpdate()
   {
-    UpdateSystems();
-  }
-
-  private void UpdateSystems()
-  {
     _timerSystem.Update(Time.deltaTime);
     _inputSystem.Update(!_postWallDetachInputLock);
     _sensorSystem.Update(_sizeMode, _groundSide, transform.position, TopUDFLengths, BottomUDFLengths);
+    _sensorSystem.DetectGround(true, 8);
   }
 }
