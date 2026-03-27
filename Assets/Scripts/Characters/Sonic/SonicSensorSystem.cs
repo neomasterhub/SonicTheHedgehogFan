@@ -65,12 +65,6 @@ public class SonicSensorSystem
     set => CurrentSensorGroup.ParentPosition = value;
   }
 
-  public void DetectGround()
-  {
-    var a = CurrentSensorGroup.A;
-    var b = CurrentSensorGroup.B;
-  }
-
   public void Update(
     SonicSizeMode sizeMode,
     GroundSide groundSide,
@@ -104,6 +98,28 @@ public class SonicSensorSystem
       UpdateUDFSensorLengths(CurrentSensorGroup.A, bottomUDFLengths);
       UpdateUDFSensorLengths(CurrentSensorGroup.B, bottomUDFLengths);
     }
+  }
+
+  public void DetectGround(
+    bool horizontalDirection,
+    LayerMask groundLayer)
+  {
+    SensorRay dr1;
+    SensorRay dr2;
+
+    if (horizontalDirection)
+    {
+      dr1 = CurrentSensorGroup.A.DownRay;
+      dr2 = CurrentSensorGroup.B.DownRay;
+    }
+    else
+    {
+      dr1 = CurrentSensorGroup.B.DownRay;
+      dr2 = CurrentSensorGroup.A.DownRay;
+    }
+
+    var dr1Hit = dr1.Cast(groundLayer);
+    var dr2Hit = dr2.Cast(groundLayer);
   }
 
   private void SetCurrentSensorGroup()
