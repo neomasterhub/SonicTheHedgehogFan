@@ -16,6 +16,7 @@ public class SonicController : MonoBehaviour
 
   // Flags
   private GroundSide _groundSide;
+  private GroundSide _prevGroundSide;
   private SonicSizeMode _sizeMode;
   private bool _postWallDetachInputLock;
 
@@ -40,6 +41,7 @@ public class SonicController : MonoBehaviour
   {
     _timerSystem.Update(Time.deltaTime);
     _inputSystem.Update(!_postWallDetachInputLock);
+    _prevGroundSide = _groundSide;
     _groundSide = _relativeGroundInfo.GetAbsoluteSide(_groundSide);
     _sensorSystem.Update(_sizeMode, _groundSide, transform.position, TopUDFLengths, BottomUDFLengths);
     _sensorSystem.DetectGround(!_spriteRenderer.flipX, _groundLayer);
