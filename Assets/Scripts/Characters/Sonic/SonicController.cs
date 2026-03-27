@@ -9,6 +9,7 @@ public class SonicController : MonoBehaviour
   private readonly PlayerInputSystem _inputSystem = new(
     () => Input.GetAxis(Horizontal),
     () => Input.GetAxis(Vertical));
+  private readonly RelativeGroundInfo _relativeGroundInfo = new();
   private readonly SonicSensorSystem _sensorSystem = new();
   private readonly TimerSystem _timerSystem = new();
   private SpriteRenderer _spriteRenderer;
@@ -39,6 +40,7 @@ public class SonicController : MonoBehaviour
   {
     _timerSystem.Update(Time.deltaTime);
     _inputSystem.Update(!_postWallDetachInputLock);
+    _groundSide = _relativeGroundInfo.GetAbsoluteSide(_groundSide);
     _sensorSystem.Update(_sizeMode, _groundSide, transform.position, TopUDFLengths, BottomUDFLengths);
     _sensorSystem.DetectGround(!_spriteRenderer.flipX, _groundLayer);
   }
