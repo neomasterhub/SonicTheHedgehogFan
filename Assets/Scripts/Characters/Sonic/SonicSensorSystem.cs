@@ -150,6 +150,23 @@ public class SonicSensorSystem
       ur2 = CurrentSensorGroup.A.UpRay;
     }
 
+    var ur1Hit = ur1.Cast(groundLayer);
+    var ur2Hit = ur2.Cast(groundLayer);
+
+    if (ur1Hit != null && ur2Hit != null)
+    {
+      if (ur1Hit.Value.distance >= ur2Hit.Value.distance)
+      {
+        GroundDetectionResult.Update(ur1Hit.Value, ur1.Direction);
+      }
+      else
+      {
+        GroundDetectionResult.Update(ur2Hit.Value, ur2.Direction);
+      }
+
+      return;
+    }
+
     GroundDetectionResult.Reset();
   }
 
