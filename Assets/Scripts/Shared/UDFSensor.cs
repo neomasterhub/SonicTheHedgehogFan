@@ -11,9 +11,10 @@ public class UDFSensor
   {
     EnabledColor = enabledColor;
     LocalPosition = localPosition;
-    UpRay = new(enabledColor, upRayPosition);
-    DownRay = new(enabledColor, downRayPosition);
-    FrontRay = new(enabledColor, frontRayPosition);
+    Position = localPosition;
+    UpRay = new(enabledColor, Position, upRayPosition);
+    DownRay = new(enabledColor, Position, downRayPosition);
+    FrontRay = new(enabledColor, Position, frontRayPosition);
   }
 
   public bool Enabled { get; set; } = true;
@@ -31,15 +32,18 @@ public class UDFSensor
   {
     ParentPosition = parentPosition;
     Position = parentPosition + LocalPosition;
+    UpRay.Origin = Position;
+    DownRay.Origin = Position;
+    FrontRay.Origin = Position;
   }
 
   public void Draw()
   {
     if (Enabled)
     {
-      UpRay.Draw(Position);
-      DownRay.Draw(Position);
-      FrontRay.Draw(Position);
+      UpRay.Draw();
+      DownRay.Draw();
+      FrontRay.Draw();
 
       Gizmos.color = EnabledColor;
       Gizmos.DrawSphere(Position, Radius);
