@@ -64,6 +64,7 @@ public class SonicSensorSystem
     get => CurrentSensorGroup.ParentPosition;
     set => CurrentSensorGroup.ParentPosition = value;
   }
+  public GroundDetectionResult GroundDetectionResult { get; private set; }
 
   public void Update(
     SonicSizeMode sizeMode,
@@ -120,6 +121,10 @@ public class SonicSensorSystem
 
     var dr1Hit = dr1.Cast(groundLayer);
     var dr2Hit = dr2.Cast(groundLayer);
+
+    if (dr1Hit != null && dr2Hit != null)
+    {
+    }
   }
 
   private void SetCurrentSensorGroup()
