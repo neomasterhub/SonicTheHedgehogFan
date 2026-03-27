@@ -4,6 +4,7 @@ using static SharedConsts.InputAxis;
 
 public class SonicController : MonoBehaviour
 {
+  private readonly LayerMask _groundLayer = 8;
   private readonly PlayerInputSystem _inputSystem = new(
     () => Input.GetAxis(Horizontal),
     () => Input.GetAxis(Vertical));
@@ -35,6 +36,6 @@ public class SonicController : MonoBehaviour
     _timerSystem.Update(Time.deltaTime);
     _inputSystem.Update(!_postWallDetachInputLock);
     _sensorSystem.Update(_sizeMode, _groundSide, transform.position, TopUDFLengths, BottomUDFLengths);
-    _sensorSystem.DetectGround(true, 8);
+    _sensorSystem.DetectGround(true, _groundLayer);
   }
 }
