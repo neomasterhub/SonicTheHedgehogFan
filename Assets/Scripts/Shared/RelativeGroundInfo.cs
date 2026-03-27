@@ -1,9 +1,10 @@
 using UnityEngine;
+using static SharedConsts.Physics.GroundAngleRanges;
 
 public class RelativeGroundInfo
 {
-  private readonly Range _flatRangeDeg = SharedConsts.Physics.GroundAngleRanges.Flat;
-  private readonly Range _slopeRangeDeg = SharedConsts.Physics.GroundAngleRanges.Slope;
+  private readonly Range _flatRangeDeg = Flat;
+  private readonly Range _slopeRangeDeg = Slope;
 
   public float AngleDeg { get; private set; }
   public float AngleRad { get; private set; }
@@ -18,14 +19,14 @@ public class RelativeGroundInfo
     }
 
     AngleDeg = angleDeg;
-    AngleRad = AngleDeg * Mathf.Deg2Rad;
+    AngleRad = angleDeg * Mathf.Deg2Rad;
 
-    if (!_slopeRangeDeg.Has(AngleDeg))
+    if (!_slopeRangeDeg.Includes(AngleDeg))
     {
       RangeId = GroundRangeId.Steep;
-      Side = AngleDeg > 0 ? GroundSide.Right : GroundSide.Left;
+      Side = AngleDeg < 0 ? GroundSide.Left : GroundSide.Right;
     }
-    else if (!_flatRangeDeg.Has(AngleDeg))
+    else if (!_flatRangeDeg.Includes(AngleDeg))
     {
       RangeId = GroundRangeId.Slope;
       Side = GroundSide.Down;
@@ -35,5 +36,19 @@ public class RelativeGroundInfo
       RangeId = GroundRangeId.Flat;
       Side = GroundSide.Down;
     }
+  }
+
+  public GroundSide GetAbsoluteSide(GroundSide side)
+  {
+    if (Side == GroundSide.Left)
+    {
+      return Side.GetPrevious();
+    }
+    else if (Side == GroundSide.Right)
+    {
+      return Side.GetNext();
+    }
+
+    return side;
   }
 }
