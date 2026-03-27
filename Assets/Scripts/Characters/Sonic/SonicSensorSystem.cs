@@ -65,6 +65,12 @@ public class SonicSensorSystem
     set => CurrentSensorGroup.ParentPosition = value;
   }
 
+  public void DetectGround()
+  {
+    var a = CurrentSensorGroup.A;
+    var b = CurrentSensorGroup.B;
+  }
+
   public void Update(
     SonicSizeMode sizeMode,
     GroundSide groundSide,
