@@ -66,13 +66,13 @@ public class PlayerSpeedSystem
     GroundSpeed = GroundSpeed.Round(_speedDigits);
   }
 
-  private void SetSpeed_Airborne(PlayerSpeedInput input)
+  private void SetSpeed_Airborne()
   {
     IsSkidding = false;
-    SetSpeed_Airborne_FromGrounded(input);
-    SetSpeed_Airborne_Gravity(input);
-    SetSpeed_Airborne_PreventGroundOvershoot(input);
-    SetSpeed_Airborne_Horizontal(input);
+    SetSpeed_Airborne_FromGrounded();
+    SetSpeed_Airborne_Gravity();
+    SetSpeed_Airborne_PreventGroundOvershoot();
+    SetSpeed_Airborne_Horizontal();
   }
 
   private void SetSpeed_Airborne_FromGrounded()
