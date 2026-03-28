@@ -1,6 +1,7 @@
 using UnityEngine;
 using static SharedConsts.ConvertValues;
 using static SharedConsts.InputAxis;
+using static SonicConsts.Physics;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class SonicController : MonoBehaviour
@@ -9,6 +10,16 @@ public class SonicController : MonoBehaviour
   private readonly PlayerInputSystem _inputSystem = new(
     () => Input.GetAxis(Horizontal),
     () => Input.GetAxis(Vertical));
+  private readonly PlayerSpeedConfig _playerSpeedConfig = new(
+    TopSpeed,
+    FrictionSpeed,
+    AccelerationSpeed,
+    DecelerationSpeed,
+    AirTopSpeed,
+    AirAccelerationSpeed,
+    MaxFallSpeed,
+    0.001f,
+    0.1f);
   private readonly RelativeGroundInfo _relativeGroundInfo = new();
   private readonly SonicSensorSystem _sensorSystem = new();
   private readonly TimerSystem _timerSystem = new();
@@ -44,12 +55,16 @@ public class SonicController : MonoBehaviour
   {
     _timerSystem.Update(Time.deltaTime);
     _inputSystem.Update(!_postWallDetachInputLock);
+
     _prevGroundSide = _groundSide;
     _groundSide = _relativeGroundInfo.GetAbsoluteSide(_groundSide);
+
     _sensorSystem.Update(_sizeMode, _groundSide, transform.position, TopUDFLengths, BottomUDFLengths);
     _sensorSystem.DetectGround(!_spriteRenderer.flipX, _groundLayer);
+
     _relativeGroundInfo.Update(_sensorSystem.GroundDetectionResult.AngleDeg);
     _groundAngleDeg = _groundSide.GetAngle(_relativeGroundInfo.AngleDeg);
+
     _prevState = _state;
     _state = _sensorSystem.GroundDetectionResult.Detected ? SonicState.Grounded : SonicState.Airborne;
   }
