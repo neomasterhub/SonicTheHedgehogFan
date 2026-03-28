@@ -147,14 +147,14 @@ public class PlayerSpeedSystem
     SpeedY = GroundSpeed * _groundAngleSin;
   }
 
-  private void SetSpeed_Grounded_FromAirborne(PlayerSpeedInput input)
+  private void SetSpeed_Grounded_FromAirborne()
   {
-    if (input.PrevPlayerState.HasFlag(SonicState.Airborne))
+    if (!_context.PrevIsGrounded)
     {
       GroundSpeed = Mathf.Clamp(
         (SpeedX * _groundAngleCos) + (SpeedY * _groundAngleSin),
-        -input.TopSpeed,
-        input.TopSpeed);
+        -_config.TopSpeed,
+        _config.TopSpeed);
     }
   }
 
