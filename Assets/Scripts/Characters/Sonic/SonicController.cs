@@ -36,6 +36,8 @@ public class SonicController : MonoBehaviour
   [Header("Physics")]
   public bool GravityEnabled = true;
   public float GroundedPositionOffset = 0.05f;
+  public Vector2 WallToAirSpeedDelta = new(0.011f, 0.0f);
+  public Vector2 WallDetachPositionOffset = new(-0.1f, 0.0f);
 
   public SonicController()
   {
