@@ -13,8 +13,8 @@ public static class SonicConsts
     public const float TopSpeedPx = 6;
     public const float AirAccelerationSpeedSpx = 14;
     public const float AirTopSpeedPx = 6;
-    public const float GravityDownSpx = 56;
-    public const float GravityUpSpx = 16;
+    public const float GravityDownSpeedSpx = 56;
+    public const float GravityUpSpeedSpx = 16;
     public const float MaxFallSpeedPx = 16;
     public const float SlopeFactorSpx = 32;
 
@@ -24,8 +24,8 @@ public static class SonicConsts
     public const float TopSpeed = TopSpeedPx / PxPerUnit;
     public const float AirAccelerationSpeed = AirAccelerationSpeedSpx / SpxPerUnit;
     public const float AirTopSpeed = AirTopSpeedPx / PxPerUnit;
-    public const float GravityDown = GravityDownSpx / SpxPerUnit;
-    public const float GravityUp = GravityUpSpx / SpxPerUnit;
+    public const float GravityDownSpeed = GravityDownSpeedSpx / SpxPerUnit;
+    public const float GravityUpSpeed = GravityUpSpeedSpx / SpxPerUnit;
     public const float MaxFallSpeed = MaxFallSpeedPx / PxPerUnit;
     public const float SlopeFactor = SlopeFactorSpx / SpxPerUnit;
   }
