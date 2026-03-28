@@ -220,15 +220,15 @@ public class PlayerSpeedSystem
     }
   }
 
-  private void SetSpeed_Grounded_Friction(PlayerSpeedInput input)
+  private void SetSpeed_Grounded_Friction()
   {
-    if (Mathf.Abs(GroundSpeed) < input.FrictionSpeed)
+    if (Mathf.Abs(GroundSpeed) < _config.FrictionSpeed)
     {
       GroundSpeed = 0;
       IsSkidding = false;
       return;
     }
 
-    GroundSpeed -= input.FrictionSpeed * Mathf.Sign(GroundSpeed);
+    GroundSpeed -= _config.FrictionSpeed * Mathf.Sign(GroundSpeed);
   }
 }
