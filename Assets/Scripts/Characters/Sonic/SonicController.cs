@@ -35,6 +35,7 @@ public class SonicController : MonoBehaviour
   public Vector3 BottomUDFLengths = new(0.3f, 0.1f, 0.5f);
   [Header("Physics")]
   public bool GravityEnabled = true;
+  public float GroundedPositionOffset = 0.05f;
 
   public SonicController()
   {
