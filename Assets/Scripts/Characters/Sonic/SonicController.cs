@@ -73,6 +73,38 @@ public class SonicController : MonoBehaviour
     _groundAngleDeg = _groundSide.GetAngle(_relativeGroundInfo.AngleDeg);
 
     _prevState = _state;
-    _state = _sensorSystem.GroundDetectionResult.Detected ? SonicState.Grounded : SonicState.Airborne;
+
+    if (_sensorSystem.GroundDetectionResult.Detected)
+    {
+      _state = SonicState.Grounded;
+      _playerSpeedSystem.SetSpeed(PlayerSpeedContext.GetGrounded(
+        _prevState.HasFlag(SonicState.Grounded), _groundAngleDeg, _sensorSystem.GroundDetectionResult.Distance.Value));
+    }
+    else
+    {
+      _state = SonicState.Airborne;
+      _playerSpeedSystem.SetSpeed(PlayerSpeedContext.GetAirborne(
+        _prevState.HasFlag(SonicState.Grounded)));
+    }
+
+    UpdatePosition();
+  }
+
+  private void UpdatePosition()
+  {
+    var speedX = _playerSpeedSystem.SpeedX;
+    var speedY = _playerSpeedSystem.SpeedY;
+
+    // SpeedX, SpeedY - offsets in units per frame.
+    var pos = transform.position + _groundSide switch
+    {
+      GroundSide.Down => new Vector3(speedX, speedY),
+      GroundSide.Right => new Vector3(-speedY, speedX),
+      GroundSide.Up => new Vector3(-speedX, -speedY),
+      GroundSide.Left => new Vector3(speedY, -speedX),
+      _ => throw _groundSide.ArgumentOutOfRangeException(),
+    };
+
+    transform.position = new Vector3(pos.x.Round(2), pos.y.Round(2), transform.position.z);
   }
 }
