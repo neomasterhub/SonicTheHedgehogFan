@@ -6,6 +6,9 @@ using static SonicConsts.Physics;
 [RequireComponent(typeof(SpriteRenderer))]
 public class SonicController : MonoBehaviour
 {
+  private readonly ConditionalValueProvider<GravitySpeed> _gravitySpeedProvider = new();
+  private readonly ConditionalValueProvider<float> _slopeFactorSpeedProvider = new();
+  private readonly ConditionalValueProvider<Vector2> _groundToAirSpeedProvider = new();
   private readonly LayerMask _groundLayer = 8;
   private readonly PlayerInputSystem _inputSystem = new(
     () => Input.GetAxis(Horizontal),
@@ -20,6 +23,7 @@ public class SonicController : MonoBehaviour
     MaxFallSpeed,
     0.001f,
     0.1f);
+  private readonly PlayerSpeedSystem _playerSpeedSystem;
   private readonly RelativeGroundInfo _relativeGroundInfo = new();
   private readonly SonicSensorSystem _sensorSystem = new();
   private readonly TimerSystem _timerSystem = new();
@@ -37,6 +41,11 @@ public class SonicController : MonoBehaviour
   [Header("Sensors")]
   public Vector3 TopUDFLengths = new(0.3f, 0.3f, 0.5f);
   public Vector3 BottomUDFLengths = new(0.3f, 0.1f, 0.5f);
+
+  public SonicController()
+  {
+    _playerSpeedSystem = new(_inputSystem, _playerSpeedConfig, _gravitySpeedProvider, _slopeFactorSpeedProvider, _groundToAirSpeedProvider);
+  }
 
   private void OnDrawGizmos()
   {
