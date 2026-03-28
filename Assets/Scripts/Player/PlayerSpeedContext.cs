@@ -33,4 +33,12 @@ public class PlayerSpeedContext
   public bool PrevIsGrounded { get; private set; }
   public float? GroundAngleRad { get; private set; }
   public float? DistanceToGround { get; private set; }
+
+  public void UpdateGrounded(bool prevIsGrounded, float groundAngleRad, float distanceToGround)
+  {
+    IsGrounded = true;
+    PrevIsGrounded = prevIsGrounded;
+    GroundAngleRad = groundAngleRad;
+    DistanceToGround = distanceToGround;
+  }
 }
