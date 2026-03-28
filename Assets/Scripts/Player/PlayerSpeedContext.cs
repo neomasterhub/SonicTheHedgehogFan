@@ -41,4 +41,12 @@ public class PlayerSpeedContext
     GroundAngleRad = groundAngleRad;
     DistanceToGround = distanceToGround;
   }
+
+  public void UpdateAirborne(bool prevIsGrounded)
+  {
+    IsGrounded = false;
+    PrevIsGrounded = prevIsGrounded;
+    GroundAngleRad = null;
+    DistanceToGround = null;
+  }
 }
