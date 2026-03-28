@@ -107,18 +107,18 @@ public class PlayerSpeedSystem
     }
   }
 
-  private void SetSpeed_Airborne_Horizontal(PlayerSpeedInput input)
+  private void SetSpeed_Airborne_Horizontal()
   {
-    if (Mathf.Abs(_inputSystem.X) < input.InputDeadZone)
+    if (Mathf.Abs(_inputSystem.X) < _config.InputDeadZone)
     {
       return;
     }
 
-    SpeedX += _inputSystem.X * input.AirAccelerationSpeed;
+    SpeedX += _inputSystem.X * _config.AirAccelerationSpeed;
 
-    if (Mathf.Abs(SpeedX) > input.AirTopSpeed)
+    if (Mathf.Abs(SpeedX) > _config.AirTopSpeed)
     {
-      SpeedX = input.AirTopSpeed * Mathf.Sign(SpeedX);
+      SpeedX = _config.AirTopSpeed * Mathf.Sign(SpeedX);
     }
   }
 
