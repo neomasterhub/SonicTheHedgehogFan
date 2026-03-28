@@ -5,19 +5,21 @@ public readonly struct PlayerSpeedContext
   public readonly float? GroundAngleRad;
   public readonly float? DistanceToGround;
 
-  public void SetGrounded(bool prevIsGrounded, float groundAngleRad, float distanceToGround)
+  private PlayerSpeedContext(bool isGrounded, bool prevIsGrounded, float? groundAngleRad, float? distanceToGround)
   {
-    IsGrounded = true;
+    IsGrounded = isGrounded;
     PrevIsGrounded = prevIsGrounded;
     GroundAngleRad = groundAngleRad;
     DistanceToGround = distanceToGround;
   }
 
-  public void SetAirborne(bool prevIsGrounded)
+  public static PlayerSpeedContext GetGrounded(bool prevIsGrounded, float groundAngleRad, float distanceToGround)
   {
-    IsGrounded = false;
-    PrevIsGrounded = prevIsGrounded;
-    GroundAngleRad = null;
-    DistanceToGround = null;
+    return new(true, prevIsGrounded, groundAngleRad, distanceToGround);
+  }
+
+  public static PlayerSpeedContext GetAirborne(bool prevIsGrounded)
+  {
+    return new(false, prevIsGrounded, null, null);
   }
 }
