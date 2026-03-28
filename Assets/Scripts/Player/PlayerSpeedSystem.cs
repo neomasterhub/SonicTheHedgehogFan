@@ -164,30 +164,30 @@ public class PlayerSpeedSystem
     GroundSpeed -= SlopeFactorSpeed;
   }
 
-  private void SetSpeed_Grounded_Forward(PlayerSpeedInput input)
+  private void SetSpeed_Grounded_Forward()
   {
     if (GroundSpeed < 0)
     {
-      if (GroundSpeed < -input.SkiddingSpeedDeadZone)
+      if (GroundSpeed < -_config.SkiddingSpeedDeadZone)
       {
         IsSkidding = true;
       }
 
-      GroundSpeed += input.DecelerationSpeed;
+      GroundSpeed += _config.DecelerationSpeed;
 
       if (GroundSpeed >= 0)
       {
         IsSkidding = false;
-        GroundSpeed = input.DecelerationSpeed;
+        GroundSpeed = _config.DecelerationSpeed;
       }
     }
-    else if (GroundSpeed < input.TopSpeed)
+    else if (GroundSpeed < _config.TopSpeed)
     {
-      GroundSpeed += input.AccelerationSpeed;
+      GroundSpeed += _config.AccelerationSpeed;
 
-      if (GroundSpeed >= input.TopSpeed)
+      if (GroundSpeed >= _config.TopSpeed)
       {
-        GroundSpeed = input.TopSpeed;
+        GroundSpeed = _config.TopSpeed;
       }
     }
   }
