@@ -6,18 +6,18 @@ public class PlayerSpeedSystem
   private const int _speedDigits = 3;
 
   private readonly PlayerInputSystem _inputSystem;
-  private readonly SpeedProvider<GravitySpeed> _gravitySpeedProvider = new();
-  private readonly SpeedProvider<float> _slopeFactorSpeedProvider;
-  private readonly SpeedProvider<Vector2> _groundToAirSpeedProvider;
+  private readonly ConditionalValueProvider<GravitySpeed> _gravitySpeedProvider = new();
+  private readonly ConditionalValueProvider<float> _slopeFactorSpeedProvider;
+  private readonly ConditionalValueProvider<Vector2> _groundToAirSpeedProvider;
 
   private float _groundAngleCos;
   private float _groundAngleSin;
 
   public PlayerSpeedSystem(
     PlayerInputSystem inputSystem,
-    SpeedProvider<GravitySpeed> gravitySpeedProvider,
-    SpeedProvider<float> slopeFactorSpeedProvider,
-    SpeedProvider<Vector2> groundToAirSpeedProvider)
+    ConditionalValueProvider<GravitySpeed> gravitySpeedProvider,
+    ConditionalValueProvider<float> slopeFactorSpeedProvider,
+    ConditionalValueProvider<Vector2> groundToAirSpeedProvider)
   {
     _inputSystem = inputSystem;
     _gravitySpeedProvider = gravitySpeedProvider;
