@@ -21,15 +21,19 @@ public class SonicController : MonoBehaviour
   private readonly SonicSensorSystem _sensorSystem;
   private readonly TimerSystem _timerSystem;
   private float _groundAngleDeg;
+  private float _groundAngleRad;
+  private GroundDetectionResult _lastGroundDetectionResult;
   private SpriteRenderer _spriteRenderer;
 
   // Flags
+  private bool _isGrounded;
+  private bool _prevIsGrounded;
+  private bool _postWallDetachInputLock;
   private GroundSide _groundSide;
   private GroundSide _prevGroundSide;
   private SonicSizeMode _sizeMode;
   private SonicState _state;
   private SonicState _prevState;
-  private bool _postWallDetachInputLock;
 
   [Header("Sensors")]
   public Vector3 TopUDFLengths = new(0.3f, 0.3f, 0.5f);
@@ -70,32 +74,41 @@ public class SonicController : MonoBehaviour
 
   private void FixedUpdate()
   {
+    _prevState = _state;
+    _prevGroundSide = _groundSide;
+
     _timerSystem.Update(Time.deltaTime);
     _inputSystem.Update(!_postWallDetachInputLock);
+    _sensorSystem.Update(_sizeMode, _groundSide, transform.position, TopUDFLengths, BottomUDFLengths);
 
-    _prevGroundSide = _groundSide;
+    _prevIsGrounded = _prevState.HasFlag(SonicState.Grounded);
     _groundSide = _relativeGroundInfo.GetAbsoluteSide(_groundSide);
 
-    _sensorSystem.Update(_sizeMode, _groundSide, transform.position, TopUDFLengths, BottomUDFLengths);
-    _sensorSystem.DetectGround(!_spriteRenderer.flipX, _groundLayer);
+    PlayerSpeedContext playerSpeedContext;
 
-    _relativeGroundInfo.Update(_sensorSystem.GroundDetectionResult.AngleDeg);
-    _groundAngleDeg = _groundSide.GetAngle(_relativeGroundInfo.AngleDeg);
-
-    _prevState = _state;
-
-    if (_sensorSystem.GroundDetectionResult.Detected)
+    var groundDetectionResult = _sensorSystem.DetectGround(!_spriteRenderer.flipX, _groundLayer);
+    if (groundDetectionResult != null)
     {
+      _lastGroundDetectionResult = groundDetectionResult.Value;
+      _isGrounded = true;
+      _relativeGroundInfo.Update(_lastGroundDetectionResult.AngleDeg);
+      _groundAngleDeg = _groundSide.GetAngle(_relativeGroundInfo.AngleDeg);
+      _groundAngleRad = _groundAngleDeg * Mathf.Deg2Rad;
       _state = SonicState.Grounded;
-      _playerSpeedSystem.SetSpeed(PlayerSpeedContext.GetGrounded(
-        _prevState.HasFlag(SonicState.Grounded), _groundAngleDeg, _sensorSystem.GroundDetectionResult.Distance.Value));
+      playerSpeedContext = PlayerSpeedContext.GetGrounded(
+        _prevIsGrounded, _groundAngleRad, _lastGroundDetectionResult.Distance);
     }
     else
     {
+      _relativeGroundInfo.Update(0);
+      _isGrounded = false;
+      _groundAngleDeg = 0;
+      _groundAngleRad = 0;
       _state = SonicState.Airborne;
-      _playerSpeedSystem.SetSpeed(PlayerSpeedContext.GetAirborne(
-        _prevState.HasFlag(SonicState.Grounded)));
+      playerSpeedContext = PlayerSpeedContext.GetAirborne(_prevIsGrounded);
     }
+
+    _playerSpeedSystem.SetSpeed(playerSpeedContext);
 
     UpdatePosition();
   }
@@ -111,12 +124,12 @@ public class SonicController : MonoBehaviour
     var speedX = _playerSpeedSystem.SpeedX;
     var speedY = _playerSpeedSystem.SpeedY;
 
-    if (_state.HasFlag(SonicState.Grounded))
+    if (_isGrounded)
     {
       // Snap to ground with small upward offset.
       // Keeps surface normal aligned with slope.
-      speedY -= (_sensorSystem.GroundDetectionResult.Distance.Value
-        * (int)_sensorSystem.GroundDetectionResult.SensorGroundSide.Value)
+      speedY -= (_lastGroundDetectionResult.Distance
+        * (int)_lastGroundDetectionResult.SensorGroundSide)
         - _groundedPositionUpwardOffset;
     }
 
