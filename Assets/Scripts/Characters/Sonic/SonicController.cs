@@ -6,6 +6,9 @@ using static SonicConsts.Physics;
 [RequireComponent(typeof(SpriteRenderer))]
 public class SonicController : MonoBehaviour
 {
+  private const float _inputDeadZone = 0.001f;
+  private const float _skiddingSpeedDeadZone = 0.1f;
+
   private readonly LayerMask _groundLayer;
   private readonly ConditionalValueProvider<GravitySpeed> _gravitySpeedProvider;
   private readonly ConditionalValueProvider<float> _slopeFactorSpeedProvider;
@@ -38,7 +41,7 @@ public class SonicController : MonoBehaviour
     _slopeFactorSpeedProvider = new();
     _groundToAirSpeedProvider = new();
     _inputSystem = new(() => Input.GetAxis(Horizontal), () => Input.GetAxis(Vertical));
-    _playerSpeedConfig = new(TopSpeed, FrictionSpeed, AccelerationSpeed, DecelerationSpeed, AirTopSpeed, AirAccelerationSpeed, MaxFallSpeed, 0.001f, 0.1f);
+    _playerSpeedConfig = new(TopSpeed, FrictionSpeed, AccelerationSpeed, DecelerationSpeed, AirTopSpeed, AirAccelerationSpeed, MaxFallSpeed, _inputDeadZone, _skiddingSpeedDeadZone);
     _playerSpeedSystem = new(_inputSystem, _playerSpeedConfig, _gravitySpeedProvider, _slopeFactorSpeedProvider, _groundToAirSpeedProvider);
     _relativeGroundInfo = new();
     _sensorSystem = new();
