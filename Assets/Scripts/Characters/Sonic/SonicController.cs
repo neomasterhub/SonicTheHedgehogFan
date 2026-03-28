@@ -6,27 +6,16 @@ using static SonicConsts.Physics;
 [RequireComponent(typeof(SpriteRenderer))]
 public class SonicController : MonoBehaviour
 {
-  private readonly ConditionalValueProvider<GravitySpeed> _gravitySpeedProvider = new();
-  private readonly ConditionalValueProvider<float> _slopeFactorSpeedProvider = new();
-  private readonly ConditionalValueProvider<Vector2> _groundToAirSpeedProvider = new();
-  private readonly LayerMask _groundLayer = 8;
-  private readonly PlayerInputSystem _inputSystem = new(
-    () => Input.GetAxis(Horizontal),
-    () => Input.GetAxis(Vertical));
-  private readonly PlayerSpeedConfig _playerSpeedConfig = new(
-    TopSpeed,
-    FrictionSpeed,
-    AccelerationSpeed,
-    DecelerationSpeed,
-    AirTopSpeed,
-    AirAccelerationSpeed,
-    MaxFallSpeed,
-    0.001f,
-    0.1f);
+  private readonly LayerMask _groundLayer;
+  private readonly ConditionalValueProvider<GravitySpeed> _gravitySpeedProvider;
+  private readonly ConditionalValueProvider<float> _slopeFactorSpeedProvider;
+  private readonly ConditionalValueProvider<Vector2> _groundToAirSpeedProvider;
+  private readonly PlayerInputSystem _inputSystem;
+  private readonly PlayerSpeedConfig _playerSpeedConfig;
   private readonly PlayerSpeedSystem _playerSpeedSystem;
-  private readonly RelativeGroundInfo _relativeGroundInfo = new();
-  private readonly SonicSensorSystem _sensorSystem = new();
-  private readonly TimerSystem _timerSystem = new();
+  private readonly RelativeGroundInfo _relativeGroundInfo;
+  private readonly SonicSensorSystem _sensorSystem;
+  private readonly TimerSystem _timerSystem;
   private float _groundAngleDeg;
   private SpriteRenderer _spriteRenderer;
 
@@ -44,7 +33,16 @@ public class SonicController : MonoBehaviour
 
   public SonicController()
   {
+    _groundLayer = 8;
+    _gravitySpeedProvider = new();
+    _slopeFactorSpeedProvider = new();
+    _groundToAirSpeedProvider = new();
+    _inputSystem = new(() => Input.GetAxis(Horizontal), () => Input.GetAxis(Vertical));
+    _playerSpeedConfig = new(TopSpeed, FrictionSpeed, AccelerationSpeed, DecelerationSpeed, AirTopSpeed, AirAccelerationSpeed, MaxFallSpeed, 0.001f, 0.1f);
     _playerSpeedSystem = new(_inputSystem, _playerSpeedConfig, _gravitySpeedProvider, _slopeFactorSpeedProvider, _groundToAirSpeedProvider);
+    _relativeGroundInfo = new();
+    _sensorSystem = new();
+    _timerSystem = new();
   }
 
   private void OnDrawGizmos()
