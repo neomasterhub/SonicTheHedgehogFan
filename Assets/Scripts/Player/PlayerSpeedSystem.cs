@@ -87,15 +87,15 @@ public class PlayerSpeedSystem
     SpeedY = speed.y;
   }
 
-  private void SetSpeed_Airborne_Gravity(PlayerSpeedInput input)
+  private void SetSpeed_Airborne_Gravity()
   {
     GravitySpeed = _gravitySpeedProvider.FirstTriggeredOrDefault();
 
     SpeedY -= SpeedY > 0 ? GravitySpeed.Up : GravitySpeed.Down;
 
-    if (SpeedY < -input.MaxFallSpeed)
+    if (SpeedY < -_config.MaxFallSpeed)
     {
-      SpeedY = -input.MaxFallSpeed;
+      SpeedY = -_config.MaxFallSpeed;
     }
   }
 
