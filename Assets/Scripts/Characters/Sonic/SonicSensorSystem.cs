@@ -59,7 +59,6 @@ public class SonicSensorSystem
   public SonicSizeMode SizeMode { get; private set; }
   public GroundSide GroundSide { get; private set; }
   public SonicSensorGroup CurrentSensorGroup { get; private set; }
-  public GroundDetectionResult GroundDetectionResult { get; } = new();
   public Vector2 ParentPosition
   {
     get => CurrentSensorGroup.ParentPosition;
@@ -101,7 +100,7 @@ public class SonicSensorSystem
     }
   }
 
-  public void DetectGround(
+  public GroundDetectionResult? DetectGround(
     bool horizontalDirection,
     LayerMask groundLayer)
   {
@@ -126,14 +125,12 @@ public class SonicSensorSystem
     {
       if (dr1Hit.Value.distance <= dr2Hit.Value.distance)
       {
-        GroundDetectionResult.Update(dr1Hit.Value, dr1.Direction);
+        return new(dr1Hit.Value, dr1.Direction);
       }
       else
       {
-        GroundDetectionResult.Update(dr2Hit.Value, dr2.Direction);
+        return new(dr2Hit.Value, dr2.Direction);
       }
-
-      return;
     }
 
     SensorRay ur1;
@@ -157,47 +154,40 @@ public class SonicSensorSystem
     {
       if (ur1Hit.Value.distance >= ur2Hit.Value.distance)
       {
-        GroundDetectionResult.Update(ur1Hit.Value, ur1.Direction, VerticalSide.Below);
+        return new(ur1Hit.Value, ur1.Direction, VerticalSide.Below);
       }
       else
       {
-        GroundDetectionResult.Update(ur2Hit.Value, ur2.Direction, VerticalSide.Below);
+        return new(ur2Hit.Value, ur2.Direction, VerticalSide.Below);
       }
-
-      return;
     }
 
     if (ur1Hit != null)
     {
-      GroundDetectionResult.Update(ur1Hit.Value, ur1.Direction, VerticalSide.Below);
-      return;
+      return new(ur1Hit.Value, ur1.Direction, VerticalSide.Below);
     }
 
     if (ur2Hit != null)
     {
-      GroundDetectionResult.Update(ur2Hit.Value, ur2.Direction, VerticalSide.Below);
-      return;
+      return new(ur2Hit.Value, ur2.Direction, VerticalSide.Below);
     }
 
     if (dr1Hit != null)
     {
-      GroundDetectionResult.Update(dr1Hit.Value, dr1.Direction);
-      return;
+      return new(dr1Hit.Value, dr1.Direction);
     }
 
     if (dr2Hit != null)
     {
-      GroundDetectionResult.Update(dr2Hit.Value, dr2.Direction);
-      return;
+      return new(dr2Hit.Value, dr2.Direction);
     }
 
-    GroundDetectionResult.Reset();
+    return null;
   }
 
   public void Draw()
   {
     CurrentSensorGroup.Draw();
-    GroundDetectionResult.DrawNormal();
   }
 
   private void SetCurrentSensorGroup()
