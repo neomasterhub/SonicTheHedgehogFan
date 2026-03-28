@@ -1,11 +1,11 @@
 using System;
 using UnityEngine;
 
-public class PlayerSpeedManager
+public class PlayerSpeedSystem
 {
   private const int _speedDigits = 3;
 
-  private readonly PlayerInputSystem _inputInfo;
+  private readonly PlayerInputSystem _inputSystem;
   private readonly SpeedProvider<GravitySpeed> _gravitySpeedProvider = new();
   private readonly SpeedProvider<float> _slopeFactorSpeedProvider;
   private readonly SpeedProvider<Vector2> _groundToAirSpeedProvider;
@@ -13,13 +13,13 @@ public class PlayerSpeedManager
   private float _groundAngleCos;
   private float _groundAngleSin;
 
-  public PlayerSpeedManager(
-    PlayerInputSystem inputInfo,
+  public PlayerSpeedSystem(
+    PlayerInputSystem inputSystem,
     SpeedProvider<GravitySpeed> gravitySpeedProvider,
     SpeedProvider<float> slopeFactorSpeedProvider,
     SpeedProvider<Vector2> groundToAirSpeedProvider)
   {
-    _inputInfo = inputInfo;
+    _inputSystem = inputSystem;
     _gravitySpeedProvider = gravitySpeedProvider;
     _slopeFactorSpeedProvider = slopeFactorSpeedProvider;
     _groundToAirSpeedProvider = groundToAirSpeedProvider;
@@ -105,12 +105,12 @@ public class PlayerSpeedManager
 
   private void SetSpeed_Airborne_Horizontal(PlayerSpeedInput input)
   {
-    if (Mathf.Abs(_inputInfo.X) < input.InputDeadZone)
+    if (Mathf.Abs(_inputSystem.X) < input.InputDeadZone)
     {
       return;
     }
 
-    SpeedX += _inputInfo.X * input.AirAccelerationSpeed;
+    SpeedX += _inputSystem.X * input.AirAccelerationSpeed;
 
     if (Mathf.Abs(SpeedX) > input.AirTopSpeed)
     {
@@ -126,11 +126,11 @@ public class PlayerSpeedManager
     SetSpeed_Grounded_FromAirborne(input);
     SetSpeed_Grounded_Slope(input);
 
-    if (_inputInfo.X > 0)
+    if (_inputSystem.X > 0)
     {
       SetSpeed_Grounded_Forward(input);
     }
-    else if (_inputInfo.X < 0)
+    else if (_inputSystem.X < 0)
     {
       SetSpeed_Grounded_Backward(input);
     }
