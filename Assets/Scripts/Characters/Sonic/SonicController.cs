@@ -64,6 +64,8 @@ public class SonicController : MonoBehaviour
     Time.fixedDeltaTime = 1f / FramePerSec;
 
     _spriteRenderer = GetComponent<SpriteRenderer>();
+
+    InitializeSpeedSystemProviders();
   }
 
   private void FixedUpdate()
@@ -96,6 +98,10 @@ public class SonicController : MonoBehaviour
     }
 
     UpdatePosition();
+  }
+
+  private void InitializeSpeedSystemProviders()
+  {
   }
 
   private void UpdatePosition()
