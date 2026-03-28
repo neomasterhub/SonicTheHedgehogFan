@@ -1,4 +1,4 @@
-public class PlayerSpeedConfig
+public readonly struct PlayerSpeedConfig
 {
   public readonly float TopSpeed;
   public readonly float FrictionSpeed;
