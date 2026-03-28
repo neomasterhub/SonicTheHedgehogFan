@@ -5,21 +5,25 @@ public class PlayerSpeedSystem
 {
   private const int _speedDigits = 3;
 
-  private readonly PlayerInputSystem _inputSystem;
   private readonly ConditionalValueProvider<GravitySpeed> _gravitySpeedProvider = new();
   private readonly ConditionalValueProvider<float> _slopeFactorSpeedProvider;
   private readonly ConditionalValueProvider<Vector2> _groundToAirSpeedProvider;
+  private readonly PlayerInputSystem _inputSystem;
+  private readonly PlayerSpeedConfig _config;
 
+  private PlayerSpeedContext _context;
   private float _groundAngleCos;
   private float _groundAngleSin;
 
   public PlayerSpeedSystem(
     PlayerInputSystem inputSystem,
+    PlayerSpeedConfig config,
     ConditionalValueProvider<GravitySpeed> gravitySpeedProvider,
     ConditionalValueProvider<float> slopeFactorSpeedProvider,
     ConditionalValueProvider<Vector2> groundToAirSpeedProvider)
   {
     _inputSystem = inputSystem;
+    _config = config;
     _gravitySpeedProvider = gravitySpeedProvider;
     _slopeFactorSpeedProvider = slopeFactorSpeedProvider;
     _groundToAirSpeedProvider = groundToAirSpeedProvider;
