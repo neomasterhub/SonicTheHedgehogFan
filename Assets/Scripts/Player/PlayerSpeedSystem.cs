@@ -122,25 +122,25 @@ public class PlayerSpeedSystem
     }
   }
 
-  private void SetSpeed_Grounded(PlayerSpeedInput input)
+  private void SetSpeed_Grounded()
   {
-    _groundAngleCos = MathF.Cos(input.GroundAngleRad);
-    _groundAngleSin = MathF.Sin(input.GroundAngleRad);
+    _groundAngleCos = MathF.Cos(_context.GroundAngleRad.Value);
+    _groundAngleSin = MathF.Sin(_context.GroundAngleRad.Value);
 
-    SetSpeed_Grounded_FromAirborne(input);
-    SetSpeed_Grounded_Slope(input);
+    SetSpeed_Grounded_FromAirborne();
+    SetSpeed_Grounded_Slope();
 
     if (_inputSystem.X > 0)
     {
-      SetSpeed_Grounded_Forward(input);
+      SetSpeed_Grounded_Forward();
     }
     else if (_inputSystem.X < 0)
     {
-      SetSpeed_Grounded_Backward(input);
+      SetSpeed_Grounded_Backward();
     }
     else
     {
-      SetSpeed_Grounded_Friction(input);
+      SetSpeed_Grounded_Friction();
     }
 
     SpeedX = GroundSpeed * _groundAngleCos;
