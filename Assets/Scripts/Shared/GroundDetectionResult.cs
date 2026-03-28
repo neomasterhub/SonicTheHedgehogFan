@@ -1,43 +1,21 @@
 using UnityEngine;
 
-public class GroundDetectionResult
+public readonly struct GroundDetectionResult
 {
-  public bool Detected { get; private set; }
-  public float? Distance { get; private set; }
-  public float? AngleDeg { get; private set; }
-  public float? AngleRad { get; private set; }
-  public Vector2? Contact { get; private set; }
-  public Vector2? Normal { get; private set; }
-  public VerticalSide? SensorGroundSide { get; private set; }
+  public readonly float Distance;
+  public readonly float AngleDeg;
+  public readonly float AngleRad;
+  public readonly Vector2 Contact;
+  public readonly Vector2 Normal;
+  public readonly VerticalSide SensorGroundSide;
 
-  public void Reset()
+  public GroundDetectionResult(RaycastHit2D hit, Vector2 sensorDirection, VerticalSide sensorGroundSide = VerticalSide.Above)
   {
-    Detected = false;
-    Distance = null;
-    AngleDeg = null;
-    AngleRad = null;
-    Contact = null;
-    Normal = null;
-    SensorGroundSide = null;
-  }
-
-  public void Update(RaycastHit2D hit, Vector2 sensorDirection, VerticalSide sensorGroundSide = VerticalSide.Above)
-  {
-    Detected = true;
     Contact = hit.point;
     Normal = hit.normal;
     Distance = hit.distance;
     AngleDeg = Vector2.SignedAngle(-sensorDirection, hit.normal).Round();
     AngleRad = AngleDeg * Mathf.Deg2Rad;
     SensorGroundSide = sensorGroundSide;
-  }
-
-  public void DrawNormal()
-  {
-    if (Detected)
-    {
-      Gizmos.color = Color.white;
-      Gizmos.DrawLine(Contact.Value, Contact.Value + Normal.Value);
-    }
   }
 }
