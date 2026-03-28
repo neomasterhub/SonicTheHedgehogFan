@@ -102,6 +102,8 @@ public class SonicController : MonoBehaviour
 
   private void InitializeSpeedSystemProviders()
   {
+    _gravitySpeedProvider
+      .When(() => GravityEnabled && _groundSide == GroundSide.Down, () => new(GravityUpSpeed, GravityDownSpeed));
   }
 
   private void UpdatePosition()
