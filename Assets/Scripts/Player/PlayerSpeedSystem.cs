@@ -158,7 +158,7 @@ public class PlayerSpeedSystem
     }
   }
 
-  private void SetSpeed_Grounded_Slope(PlayerSpeedInput input)
+  private void SetSpeed_Grounded_Slope()
   {
     SlopeFactorSpeed = _slopeFactorSpeedProvider.FirstTriggeredOrDefault();
     GroundSpeed -= SlopeFactorSpeed;
