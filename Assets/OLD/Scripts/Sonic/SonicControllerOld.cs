@@ -85,8 +85,8 @@ public class SonicControllerOld : MonoBehaviour
   public float AirTopSpeed = SonicConsts.Physics.AirTopSpeed;
   public float AirAccelerationSpeed = SonicConsts.Physics.AirAccelerationSpeed;
   public float MaxFallSpeed = SonicConsts.Physics.MaxFallSpeed;
-  public float GravityUpSpeed = SonicConsts.Physics.GravityUp;
-  public float GravityDownSpeed = SonicConsts.Physics.GravityDown;
+  public float GravityUpSpeed = SonicConsts.Physics.GravityUpSpeed;
+  public float GravityDownSpeed = SonicConsts.Physics.GravityDownSpeed;
   public float SlopeFactor = SonicConsts.Physics.SlopeFactor;
   public float StandingStraightGroundSpeedZone = SonicConsts.Physics.FrictionSpeed;
   public float SkiddingSpeedDeadZone = 0.1f;

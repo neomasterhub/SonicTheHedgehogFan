@@ -59,12 +59,12 @@ public class SonicSensorSystem
   public SonicSizeMode SizeMode { get; private set; }
   public GroundSide GroundSide { get; private set; }
   public SonicSensorGroup CurrentSensorGroup { get; private set; }
+  public GroundDetectionResult GroundDetectionResult { get; } = new();
   public Vector2 ParentPosition
   {
     get => CurrentSensorGroup.ParentPosition;
     set => CurrentSensorGroup.ParentPosition = value;
   }
-  public GroundDetectionResult GroundDetectionResult { get; } = new();
 
   public void Update(
     SonicSizeMode sizeMode,
@@ -157,11 +157,11 @@ public class SonicSensorSystem
     {
       if (ur1Hit.Value.distance >= ur2Hit.Value.distance)
       {
-        GroundDetectionResult.Update(ur1Hit.Value, ur1.Direction);
+        GroundDetectionResult.Update(ur1Hit.Value, ur1.Direction, VerticalSide.Below);
       }
       else
       {
-        GroundDetectionResult.Update(ur2Hit.Value, ur2.Direction);
+        GroundDetectionResult.Update(ur2Hit.Value, ur2.Direction, VerticalSide.Below);
       }
 
       return;
@@ -169,13 +169,13 @@ public class SonicSensorSystem
 
     if (ur1Hit != null)
     {
-      GroundDetectionResult.Update(ur1Hit.Value, ur1.Direction);
+      GroundDetectionResult.Update(ur1Hit.Value, ur1.Direction, VerticalSide.Below);
       return;
     }
 
     if (ur2Hit != null)
     {
-      GroundDetectionResult.Update(ur2Hit.Value, ur2.Direction);
+      GroundDetectionResult.Update(ur2Hit.Value, ur2.Direction, VerticalSide.Below);
       return;
     }
 
