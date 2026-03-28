@@ -59,12 +59,12 @@ public class SonicSensorSystem
   public SonicSizeMode SizeMode { get; private set; }
   public GroundSide GroundSide { get; private set; }
   public SonicSensorGroup CurrentSensorGroup { get; private set; }
+  public GroundDetectionResult GroundDetectionResult { get; } = new();
   public Vector2 ParentPosition
   {
     get => CurrentSensorGroup.ParentPosition;
     set => CurrentSensorGroup.ParentPosition = value;
   }
-  public GroundDetectionResult GroundDetectionResult { get; } = new();
 
   public void Update(
     SonicSizeMode sizeMode,
