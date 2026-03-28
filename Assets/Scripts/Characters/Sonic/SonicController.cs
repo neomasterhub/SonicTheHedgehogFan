@@ -6,7 +6,7 @@ using static SonicConsts.Physics;
 [RequireComponent(typeof(SpriteRenderer))]
 public class SonicController : MonoBehaviour
 {
-  private const float _groundedPositionOffset = 0.05f;
+  private const float _groundedPositionUpwardOffset = 0.05f;
   private const float _inputDeadZone = 0.001f;
   private const float _skiddingSpeedDeadZone = 0.1f;
 
@@ -117,7 +117,7 @@ public class SonicController : MonoBehaviour
       // Keeps surface normal aligned with slope.
       speedY -= (_sensorSystem.GroundDetectionResult.Distance.Value
         * (int)_sensorSystem.GroundDetectionResult.SensorGroundSide.Value)
-        - _groundedPositionOffset;
+        - _groundedPositionUpwardOffset;
     }
 
     // SpeedX, SpeedY - offsets in units per frame.
