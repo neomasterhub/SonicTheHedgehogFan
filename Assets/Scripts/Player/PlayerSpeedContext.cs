@@ -1,9 +1,9 @@
-public class PlayerSpeedContext
+public readonly struct PlayerSpeedContext
 {
-  public bool IsGrounded { get; private set; }
-  public bool PrevIsGrounded { get; private set; }
-  public float? GroundAngleRad { get; private set; }
-  public float? DistanceToGround { get; private set; }
+  public readonly bool IsGrounded;
+  public readonly bool PrevIsGrounded;
+  public readonly float? GroundAngleRad;
+  public readonly float? DistanceToGround;
 
   public void SetGrounded(bool prevIsGrounded, float groundAngleRad, float distanceToGround)
   {
