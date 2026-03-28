@@ -36,6 +36,13 @@ public class PlayerSpeedSystem
   public float SlopeFactorSpeed { get; private set; }
   public GravitySpeed GravitySpeed { get; private set; }
 
+  private void RoundSpeeds()
+  {
+    SpeedX = SpeedX.Round(_speedDigits);
+    SpeedY = SpeedY.Round(_speedDigits);
+    GroundSpeed = GroundSpeed.Round(_speedDigits);
+  }
+
   public void ResetSpeeds()
   {
     SpeedX = 0;
@@ -45,25 +52,20 @@ public class PlayerSpeedSystem
     _groundAngleSin = 0;
   }
 
-  public void SetSpeed(PlayerSpeedInput input)
+  public void SetSpeed(PlayerSpeedContext context)
   {
-    if (input.PlayerState.HasFlag(SonicState.Airborne))
+    _context = context;
+
+    if (_context.IsGrounded)
     {
-      SetSpeed_Airborne(input);
+      SetSpeed_Grounded();
     }
-    else if (input.PlayerState.HasFlag(SonicState.Grounded))
+    else
     {
-      SetSpeed_Grounded(input);
+      SetSpeed_Airborne();
     }
 
     RoundSpeeds();
-  }
-
-  private void RoundSpeeds()
-  {
-    SpeedX = SpeedX.Round(_speedDigits);
-    SpeedY = SpeedY.Round(_speedDigits);
-    GroundSpeed = GroundSpeed.Round(_speedDigits);
   }
 
   private void SetSpeed_Airborne()
