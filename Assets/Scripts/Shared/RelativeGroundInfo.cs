@@ -11,15 +11,10 @@ public class RelativeGroundInfo
   public GroundSide Side { get; private set; }
   public GroundRangeId RangeId { get; private set; }
 
-  public void Update(float? angleDeg)
+  public void Update(float angleDeg)
   {
-    if (angleDeg == null)
-    {
-      return;
-    }
-
-    AngleDeg = angleDeg.Value;
-    AngleRad = AngleDeg * Mathf.Deg2Rad;
+    AngleDeg = angleDeg;
+    AngleRad = angleDeg * Mathf.Deg2Rad;
 
     if (!_slopeRangeDeg.Includes(AngleDeg))
     {
