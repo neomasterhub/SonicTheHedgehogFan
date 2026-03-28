@@ -8,6 +8,7 @@ public class GroundDetectionResult
   public float? AngleRad { get; private set; }
   public Vector2? Contact { get; private set; }
   public Vector2? Normal { get; private set; }
+  public VerticalSide? SensorGroundSide { get; private set; }
 
   public void Reset()
   {
@@ -17,9 +18,10 @@ public class GroundDetectionResult
     AngleRad = null;
     Contact = null;
     Normal = null;
+    SensorGroundSide = null;
   }
 
-  public void Update(RaycastHit2D hit, Vector2 sensorDirection)
+  public void Update(RaycastHit2D hit, Vector2 sensorDirection, VerticalSide sensorGroundSide = VerticalSide.Above)
   {
     Detected = true;
     Contact = hit.point;
@@ -27,6 +29,7 @@ public class GroundDetectionResult
     Distance = hit.distance;
     AngleDeg = Vector2.SignedAngle(-sensorDirection, hit.normal).Round();
     AngleRad = AngleDeg * Mathf.Deg2Rad;
+    SensorGroundSide = sensorGroundSide;
   }
 
   public void DrawNormal()

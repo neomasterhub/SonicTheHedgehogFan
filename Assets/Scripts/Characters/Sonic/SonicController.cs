@@ -6,6 +6,7 @@ using static SonicConsts.Physics;
 [RequireComponent(typeof(SpriteRenderer))]
 public class SonicController : MonoBehaviour
 {
+  private const float _groundedPositionOffset = 0.05f;
   private const float _inputDeadZone = 0.001f;
   private const float _skiddingSpeedDeadZone = 0.1f;
 
@@ -35,7 +36,6 @@ public class SonicController : MonoBehaviour
   public Vector3 BottomUDFLengths = new(0.3f, 0.1f, 0.5f);
   [Header("Physics")]
   public bool GravityEnabled = true;
-  public float GroundedPositionOffset = 0.05f;
   public Vector2 WallToAirSpeedDelta = new(0.011f, 0.0f);
   public Vector2 WallDetachPositionOffset = new(-0.1f, 0.0f);
 
@@ -108,6 +108,15 @@ public class SonicController : MonoBehaviour
   {
     var speedX = _playerSpeedSystem.SpeedX;
     var speedY = _playerSpeedSystem.SpeedY;
+
+    if (_state.HasFlag(SonicState.Grounded))
+    {
+      // Snap to ground with small upward offset.
+      // Keeps surface normal aligned with slope.
+      speedY -= (_sensorSystem.GroundDetectionResult.Distance.Value
+        * (int)_sensorSystem.GroundDetectionResult.SensorGroundSide.Value)
+        - _groundedPositionOffset;
+    }
 
     // SpeedX, SpeedY - offsets in units per frame.
     var pos = transform.position + _groundSide switch
