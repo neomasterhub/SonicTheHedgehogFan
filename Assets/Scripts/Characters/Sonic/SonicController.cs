@@ -1,4 +1,5 @@
 using System.Text;
+using TMPro;
 using UnityEngine;
 
 /// <summary>
@@ -42,4 +43,6 @@ public partial class SonicController : MonoBehaviour
   public bool GravityEnabled = true;
   public Vector2 WallToAirSpeedDelta = new(0.011f, 0.0f);
   public Vector2 WallDetachPositionOffset = new(-0.1f, 0.0f);
+  [Header("Canvas")]
+  public TextMeshProUGUI InfoText;
 }
