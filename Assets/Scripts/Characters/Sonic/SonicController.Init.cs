@@ -1,5 +1,6 @@
 using UnityEngine;
 using static SharedConsts.ConvertValues;
+using static SharedConsts.InputAxis;
 using static SonicConsts.Physics;
 
 /// <summary>
@@ -7,6 +8,23 @@ using static SonicConsts.Physics;
 /// </summary>
 public partial class SonicController
 {
+  public SonicController()
+  {
+    _groundLayer = 8;
+
+    _gravitySpeedProvider = new();
+    _groundToAirSpeedProvider = new();
+    _slopeFactorSpeedProvider = new();
+
+    _relativeGroundInfo = new();
+    _sensorSystem = new();
+    _timerSystem = new();
+
+    _inputSystem = new(() => Input.GetAxis(Horizontal), () => Input.GetAxis(Vertical));
+    _speedConfig = new(TopSpeed, FrictionSpeed, AccelerationSpeed, DecelerationSpeed, AirTopSpeed, AirAccelerationSpeed, MaxFallSpeed, _inputDeadZone, _skiddingSpeedDeadZone);
+    _speedSystem = new(_inputSystem, _speedConfig, _gravitySpeedProvider, _slopeFactorSpeedProvider, _groundToAirSpeedProvider);
+  }
+
   private void Awake()
   {
     InitializeEngine();
