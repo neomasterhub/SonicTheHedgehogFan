@@ -9,10 +9,14 @@ public partial class SonicController
 {
   private void Awake()
   {
+    InitializeEngine();
+    InitializeSpeedSystemProviders();
+  }
+
+  private void InitializeEngine()
+  {
     Application.targetFrameRate = FramePerSec;
     Time.fixedDeltaTime = 1f / FramePerSec;
-
-    InitializeSpeedSystemProviders();
   }
 
   private void InitializeSpeedSystemProviders()
