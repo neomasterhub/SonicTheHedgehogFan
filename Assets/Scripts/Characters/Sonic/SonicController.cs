@@ -21,33 +21,17 @@ public class SonicController : MonoBehaviour
   private readonly SonicSensorSystem _sensorSystem;
   private readonly TimerSystem _timerSystem;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-  private float _groundAngleDeg;
-  private float _groundAngleRad;
-  private GroundDetectionResult _lastGroundDetectionResult;
-  private SpriteRenderer _spriteRenderer;
-
-  // Flags
   private bool _isGrounded;
   private bool _prevIsGrounded;
   private bool _postWallDetachInputLock;
+  private float _groundAngleDeg;
+  private float _groundAngleRad;
   private GroundSide _groundSide;
-  private GroundSide _prevGroundSide;
+  private GroundDetectionResult _lastGroundDetectionResult;
   private SonicSizeMode _sizeMode;
   private SonicState _state;
   private SonicState _prevState;
+  private SpriteRenderer _spriteRenderer;
 
   [Header("Sensors")]
   public Vector3 TopUDFLengths = new(0.3f, 0.3f, 0.5f);
