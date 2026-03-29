@@ -17,6 +17,7 @@ public partial class SonicController
   {
     Application.targetFrameRate = FramePerSec;
     Time.fixedDeltaTime = 1f / FramePerSec;
+    QualitySettings.vSyncCount = 0;
   }
 
   private void InitializeSpeedSystemProviders()
