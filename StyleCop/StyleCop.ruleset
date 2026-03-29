@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<RuleSet Name="StyleCop.Analyzers rules with default action" Description="StyleCop.Analyzers with default action. Rules with IsEnabledByDefault = false are disabled." ToolsVersion="17.0">
+<RuleSet Name="StyleCop.Analyzers rules with default action" Description="StyleCop.Analyzers with default action. Rules with IsEnabledByDefault = false are disabled." ToolsVersion="18.0">
   <Rules AnalyzerId="Microsoft.CodeAnalysis.NetAnalyzers" RuleNamespace="Microsoft.CodeAnalysis.NetAnalyzers">
     <Rule Id="CA2211" Action="None" />
   </Rules>
@@ -72,7 +72,7 @@
     <Rule Id="SA1511" Action="Warning" />
     <Rule Id="SA1512" Action="Warning" />
     <Rule Id="SA1513" Action="Warning" />
-    <Rule Id="SA1514" Action="Warning" />
+    <Rule Id="SA1514" Action="None" />
     <Rule Id="SA1515" Action="Warning" />
     <Rule Id="SA1516" Action="None" />
     <Rule Id="SA1517" Action="Warning" />
@@ -184,6 +184,7 @@
     <Rule Id="SA1202" Action="None" />
     <Rule Id="SA1309" Action="None" />
     <Rule Id="SA1401" Action="None" />
+    <Rule Id="SA1514" Action="None" />
     <Rule Id="SA1516" Action="None" />
     <Rule Id="SA1600" Action="None" />
     <Rule Id="SA1602" Action="None" />
