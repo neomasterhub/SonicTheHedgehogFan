@@ -1,10 +1,10 @@
 using UnityEngine;
-using static SharedConsts.ConvertValues;
-using static SharedConsts.InputAxis;
-using static SonicConsts.Physics;
 
+/// <summary>
+/// Data.
+/// </summary>
 [RequireComponent(typeof(SpriteRenderer))]
-public class SonicController : MonoBehaviour
+public partial class SonicController : MonoBehaviour
 {
   private const float _groundedPositionUpwardOffset = 0.05f;
   private const float _inputDeadZone = 0.001f;
