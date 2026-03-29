@@ -84,38 +84,7 @@ public class SonicController : MonoBehaviour
     _inputSystem.Update(!_postWallDetachInputLock);
     _sensorSystem.Update(_sizeMode, _groundSide, transform.position, TopUDFLengths, BottomUDFLengths);
 
-    PlayerSpeedContext speedContext;
-
-    var groundDetectionResult = _sensorSystem.DetectGround(!_spriteRenderer.flipX, _groundLayer);
-    if (groundDetectionResult != null)
-    {
-      _lastGroundDetectionResult = groundDetectionResult.Value;
-
-      _isGrounded = true;
-      _state = SonicState.Grounded;
-
-      _relativeGroundInfo.Update(_lastGroundDetectionResult.AngleDeg);
-      _groundAngleDeg = _groundSide.GetAngle(_relativeGroundInfo.AngleDeg);
-      _groundAngleRad = _groundAngleDeg * Mathf.Deg2Rad;
-      _groundSide = _relativeGroundInfo.GetAbsoluteSide(_groundSide);
-
-      speedContext = PlayerSpeedContext.GetGrounded(_prevIsGrounded, _groundAngleRad, _lastGroundDetectionResult.Distance);
-    }
-    else
-    {
-      _isGrounded = false;
-      _state = SonicState.Airborne;
-
-      _relativeGroundInfo.Update(0);
-      _groundAngleDeg = 0;
-      _groundAngleRad = 0;
-      _groundSide = GroundSide.Down;
-
-      speedContext = PlayerSpeedContext.GetAirborne(_prevIsGrounded);
-    }
-
-    _speedSystem.SetSpeed(speedContext);
-
+    InitializeState();
     UpdatePosition();
   }
 
@@ -138,6 +107,47 @@ public class SonicController : MonoBehaviour
 
     _gravitySpeedProvider.DefaultProvider = () => defaultGravitySpeed;
     _groundToAirSpeedProvider.DefaultProvider = () => new(_speedSystem.SpeedX, _speedSystem.SpeedY);
+  }
+
+  private void InitializeState()
+  {
+    var groundDetectionResult = _sensorSystem.DetectGround(!_spriteRenderer.flipX, _groundLayer);
+
+    if (groundDetectionResult != null)
+    {
+      _lastGroundDetectionResult = groundDetectionResult.Value;
+      InitializeState_Grounded();
+    }
+    else
+    {
+      InitializeState_Airborne();
+    }
+  }
+
+  private void InitializeState_Airborne()
+  {
+    _isGrounded = false;
+    _state = SonicState.Airborne;
+
+    _relativeGroundInfo.Update(0);
+    _groundAngleDeg = 0;
+    _groundAngleRad = 0;
+    _groundSide = GroundSide.Down;
+
+    _speedSystem.SetSpeed(PlayerSpeedContext.GetAirborne(_prevIsGrounded));
+  }
+
+  private void InitializeState_Grounded()
+  {
+    _isGrounded = true;
+    _state = SonicState.Grounded;
+
+    _relativeGroundInfo.Update(_lastGroundDetectionResult.AngleDeg);
+    _groundAngleDeg = _groundSide.GetAngle(_relativeGroundInfo.AngleDeg);
+    _groundAngleRad = _groundAngleDeg * Mathf.Deg2Rad;
+    _groundSide = _relativeGroundInfo.GetAbsoluteSide(_groundSide);
+
+    _speedSystem.SetSpeed(PlayerSpeedContext.GetGrounded(_prevIsGrounded, _groundAngleRad, _lastGroundDetectionResult.Distance));
   }
 
   private void UpdatePosition()
