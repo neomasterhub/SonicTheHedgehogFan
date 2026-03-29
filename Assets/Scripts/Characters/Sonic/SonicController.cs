@@ -10,7 +10,6 @@ public class SonicController : MonoBehaviour
   private const float _inputDeadZone = 0.001f;
   private const float _skiddingSpeedDeadZone = 0.1f;
 
-  private readonly GravitySpeed _gravitySpeed;
   private readonly LayerMask _groundLayer;
   private readonly ConditionalValueProvider<GravitySpeed> _gravitySpeedProvider;
   private readonly ConditionalValueProvider<float> _slopeFactorSpeedProvider;
@@ -46,7 +45,6 @@ public class SonicController : MonoBehaviour
 
   public SonicController()
   {
-    _gravitySpeed = new(GravityUpSpeed, GravityDownSpeed);
     _groundLayer = 8;
     _gravitySpeedProvider = new();
     _slopeFactorSpeedProvider = new();
@@ -117,8 +115,10 @@ public class SonicController : MonoBehaviour
 
   private void InitializeSpeedSystemProviders()
   {
+    var gravitySpeed = new GravitySpeed(GravityUpSpeed, GravityDownSpeed);
+
     _gravitySpeedProvider
-      .When(() => GravityEnabled && _groundSide == GroundSide.Down, () => _gravitySpeed);
+      .When(() => GravityEnabled && _groundSide == GroundSide.Down, () => gravitySpeed);
   }
 
   private void UpdatePosition()
