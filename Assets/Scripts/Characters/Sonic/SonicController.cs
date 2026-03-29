@@ -54,7 +54,7 @@ public class SonicController : MonoBehaviour
     _sensorSystem = new();
     _timerSystem = new();
 
-    _inputSystem = new(() => Input.GetAxis(Horizontal), () => Input.GetAxis(Vertical));
+    _inputSystem = new(() => 1, () => Input.GetAxis(Vertical));
     _speedConfig = new(TopSpeed, FrictionSpeed, AccelerationSpeed, DecelerationSpeed, AirTopSpeed, AirAccelerationSpeed, MaxFallSpeed, _inputDeadZone, _skiddingSpeedDeadZone);
     _speedSystem = new(_inputSystem, _speedConfig, _gravitySpeedProvider, _slopeFactorSpeedProvider, _groundToAirSpeedProvider);
   }
@@ -79,12 +79,20 @@ public class SonicController : MonoBehaviour
     _prevState = _state;
     _prevGroundSide = _groundSide;
     _prevIsGrounded = _isGrounded;
-
+    _groundSide = _relativeGroundInfo.Side switch
+    {
+      GroundSide.Left => _groundSide.GetPrevious(),
+      GroundSide.Right => _groundSide.GetNext(),
+      _ => _groundSide
+    };
+    
     _timerSystem.Update(Time.deltaTime);
     _inputSystem.Update(!_postWallDetachInputLock);
     _sensorSystem.Update(_sizeMode, _groundSide, transform.position, TopUDFLengths, BottomUDFLengths);
 
     InitializeState();
+
+    
     UpdatePosition();
   }
 
@@ -98,8 +106,8 @@ public class SonicController : MonoBehaviour
 
     _slopeFactorSpeedProvider
       .When(() => _groundSide == GroundSide.Down, () => SlopeFactor * Mathf.Sin(_relativeGroundInfo.AngleRad))
-      .When(() => _groundSide == GroundSide.Left, () => _relativeGroundInfo.AngleRad <= 0 ? SlopeFactor : SlopeFactor * Mathf.Cos(_relativeGroundInfo.AngleRad))
-      .When(() => _groundSide == GroundSide.Right, () => _relativeGroundInfo.AngleRad >= 0 ? SlopeFactor : SlopeFactor * Mathf.Cos(_relativeGroundInfo.AngleRad));
+      .When(() => _groundSide == GroundSide.Left, () => 0)
+      .When(() => _groundSide == GroundSide.Right, () => 0);
 
     _groundToAirSpeedProvider
       .When(() => _prevGroundSide == GroundSide.Right, () => WallToAirSpeedDelta + new Vector2(-_speedSystem.SpeedY, _speedSystem.SpeedX))
@@ -122,6 +130,7 @@ public class SonicController : MonoBehaviour
     {
       InitializeState_Airborne();
     }
+
   }
 
   private void InitializeState_Airborne()
@@ -129,10 +138,15 @@ public class SonicController : MonoBehaviour
     _isGrounded = false;
     _state = SonicState.Airborne;
 
-    _relativeGroundInfo.Update(0);
-    _groundAngleDeg = 0;
-    _groundAngleRad = 0;
-    _groundSide = GroundSide.Down;
+    _groundAngleDeg = _relativeGroundInfo.AngleDeg + _groundSide switch
+    {
+      GroundSide.Down => 0,
+      GroundSide.Right => 90,
+      GroundSide.Up => 180,
+      GroundSide.Left => -90,
+      _ => throw _groundSide.ArgumentOutOfRangeException()
+    };
+    _groundAngleRad = _groundAngleDeg * Mathf.Deg2Rad;
 
     _speedSystem.SetSpeed(PlayerSpeedContext.GetAirborne(_prevIsGrounded));
   }
@@ -143,11 +157,18 @@ public class SonicController : MonoBehaviour
     _state = SonicState.Grounded;
 
     _relativeGroundInfo.Update(_lastGroundDetectionResult.AngleDeg);
-    _groundAngleDeg = _groundSide.GetAngle(_relativeGroundInfo.AngleDeg);
-    _groundAngleRad = _groundAngleDeg * Mathf.Deg2Rad;
-    _groundSide = _relativeGroundInfo.GetAbsoluteSide(_groundSide);
 
-    _speedSystem.SetSpeed(PlayerSpeedContext.GetGrounded(_prevIsGrounded, _groundAngleRad, _lastGroundDetectionResult.Distance));
+    _groundAngleDeg = _relativeGroundInfo.AngleDeg + _groundSide switch
+    {
+      GroundSide.Down => 0,
+      GroundSide.Right => 90,
+      GroundSide.Up => 180,
+      GroundSide.Left => -90,
+      _ => throw _groundSide.ArgumentOutOfRangeException()
+    };
+    _groundAngleRad = _groundAngleDeg * Mathf.Deg2Rad;
+
+    _speedSystem.SetSpeed(PlayerSpeedContext.GetGrounded(_prevIsGrounded, _relativeGroundInfo.AngleRad, _lastGroundDetectionResult.Distance));
   }
 
   private void UpdatePosition()
@@ -175,5 +196,7 @@ public class SonicController : MonoBehaviour
     };
 
     transform.position = new Vector3(pos.x.Round(2), pos.y.Round(2), transform.position.z);
+
+    Debug.Log(_groundSide);
   }
 }
