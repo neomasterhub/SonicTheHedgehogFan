@@ -16,6 +16,7 @@ public partial class SonicController
     _groundToAirSpeedProvider = new();
     _slopeFactorSpeedProvider = new();
 
+    _info = new();
     _relativeGroundInfo = new();
     _sensorSystem = new();
     _timerSystem = new();
