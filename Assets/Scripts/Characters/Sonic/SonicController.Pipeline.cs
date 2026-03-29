@@ -42,6 +42,8 @@ public partial class SonicController
 
   private void AnalyzeEnvironment_Airborn()
   {
+    _isGrounded = false;
+    _state = SonicState.Airborne;
   }
 
   private void UpdatePosition()
