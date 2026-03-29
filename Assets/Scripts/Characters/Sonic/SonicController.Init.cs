@@ -10,6 +10,7 @@ public partial class SonicController
   private void Awake()
   {
     InitializeEngine();
+    InitializeComponents();
     InitializeSpeedSystemProviders();
   }
 
@@ -18,6 +19,11 @@ public partial class SonicController
     Application.targetFrameRate = FramePerSec;
     Time.fixedDeltaTime = 1f / FramePerSec;
     QualitySettings.vSyncCount = 0;
+  }
+
+  private void InitializeComponents()
+  {
+    _spriteRenderer = GetComponent<SpriteRenderer>();
   }
 
   private void InitializeSpeedSystemProviders()
