@@ -8,6 +8,7 @@ public partial class SonicController
   private void FixedUpdate()
   {
     AnalyzeEnvironment();
+    UpdatePosition();
     Output();
   }
 
@@ -38,5 +39,32 @@ public partial class SonicController
 
   private void AnalyzeEnvironment_Airborn()
   {
+  }
+
+  private void UpdatePosition()
+  {
+    var speedX = _speedSystem.SpeedX;
+    var speedY = _speedSystem.SpeedY;
+
+    if (_isGrounded)
+    {
+      // Snap to ground with small upward offset.
+      // Keeps surface normal aligned with slope.
+      speedY -= (_lastGroundDetectionResult.Distance
+        * (int)_lastGroundDetectionResult.SensorGroundSide)
+        - _groundedPositionUpwardOffset;
+    }
+
+    // SpeedX, SpeedY - offsets in units per frame.
+    var pos = transform.position + _groundSide switch
+    {
+      GroundSide.Down => new Vector3(speedX, speedY),
+      GroundSide.Right => new Vector3(-speedY, speedX),
+      GroundSide.Up => new Vector3(-speedX, -speedY),
+      GroundSide.Left => new Vector3(speedY, -speedX),
+      _ => throw _groundSide.ArgumentOutOfRangeException(),
+    };
+
+    transform.position = new Vector3(pos.x.Round(2), pos.y.Round(2), transform.position.z);
   }
 }
