@@ -25,7 +25,6 @@ public partial class SonicController : MonoBehaviour
   private bool _prevIsGrounded;
   private bool _postWallDetachInputLock;
   private float _groundAngleDeg;
-  private float _groundAngleRad;
   private GroundSide _groundSide;
   private GroundSide _prevGroundSide;
   private GroundDetectionResult _lastGroundDetectionResult;
