@@ -26,6 +26,8 @@ public partial class SonicController
     if (groundDetectionResult != null)
     {
       _lastGroundDetectionResult = groundDetectionResult.Value;
+      _relativeGroundInfo.Update(_lastGroundDetectionResult.AngleDeg);
+
       AnalyzeEnvironment_Grounded();
     }
     else
