@@ -10,16 +10,30 @@ public class SonicController : MonoBehaviour
   private const float _inputDeadZone = 0.001f;
   private const float _skiddingSpeedDeadZone = 0.1f;
 
-  private readonly LayerMask _groundLayer;
-  private readonly ConditionalValueProvider<GravitySpeed> _gravitySpeedProvider;
   private readonly ConditionalValueProvider<float> _slopeFactorSpeedProvider;
   private readonly ConditionalValueProvider<Vector2> _groundToAirSpeedProvider;
+  private readonly ConditionalValueProvider<GravitySpeed> _gravitySpeedProvider;
+  private readonly LayerMask _groundLayer;
   private readonly PlayerInputSystem _inputSystem;
-  private readonly PlayerSpeedConfig _playerSpeedConfig;
-  private readonly PlayerSpeedSystem _playerSpeedSystem;
+  private readonly PlayerSpeedConfig _speedConfig;
+  private readonly PlayerSpeedSystem _speedSystem;
   private readonly RelativeGroundInfo _relativeGroundInfo;
   private readonly SonicSensorSystem _sensorSystem;
   private readonly TimerSystem _timerSystem;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   private float _groundAngleDeg;
   private float _groundAngleRad;
   private GroundDetectionResult _lastGroundDetectionResult;
@@ -50,8 +64,8 @@ public class SonicController : MonoBehaviour
     _slopeFactorSpeedProvider = new();
     _groundToAirSpeedProvider = new();
     _inputSystem = new(() => Input.GetAxis(Horizontal), () => Input.GetAxis(Vertical));
-    _playerSpeedConfig = new(TopSpeed, FrictionSpeed, AccelerationSpeed, DecelerationSpeed, AirTopSpeed, AirAccelerationSpeed, MaxFallSpeed, _inputDeadZone, _skiddingSpeedDeadZone);
-    _playerSpeedSystem = new(_inputSystem, _playerSpeedConfig, _gravitySpeedProvider, _slopeFactorSpeedProvider, _groundToAirSpeedProvider);
+    _speedConfig = new(TopSpeed, FrictionSpeed, AccelerationSpeed, DecelerationSpeed, AirTopSpeed, AirAccelerationSpeed, MaxFallSpeed, _inputDeadZone, _skiddingSpeedDeadZone);
+    _speedSystem = new(_inputSystem, _speedConfig, _gravitySpeedProvider, _slopeFactorSpeedProvider, _groundToAirSpeedProvider);
     _relativeGroundInfo = new();
     _sensorSystem = new();
     _timerSystem = new();
@@ -108,7 +122,7 @@ public class SonicController : MonoBehaviour
       playerSpeedContext = PlayerSpeedContext.GetAirborne(_prevIsGrounded);
     }
 
-    _playerSpeedSystem.SetSpeed(playerSpeedContext);
+    _speedSystem.SetSpeed(playerSpeedContext);
 
     UpdatePosition();
   }
@@ -123,8 +137,8 @@ public class SonicController : MonoBehaviour
 
   private void UpdatePosition()
   {
-    var speedX = _playerSpeedSystem.SpeedX;
-    var speedY = _playerSpeedSystem.SpeedY;
+    var speedX = _speedSystem.SpeedX;
+    var speedY = _speedSystem.SpeedY;
 
     if (_isGrounded)
     {
