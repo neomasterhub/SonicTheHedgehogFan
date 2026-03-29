@@ -76,40 +76,43 @@ public class SonicController : MonoBehaviour
   private void FixedUpdate()
   {
     _prevState = _state;
-    _prevGroundSide = _groundSide;
+    _prevIsGrounded = _isGrounded;
 
     _timerSystem.Update(Time.deltaTime);
     _inputSystem.Update(!_postWallDetachInputLock);
     _sensorSystem.Update(_sizeMode, _groundSide, transform.position, TopUDFLengths, BottomUDFLengths);
 
-    _prevIsGrounded = _prevState.HasFlag(SonicState.Grounded);
-    _groundSide = _relativeGroundInfo.GetAbsoluteSide(_groundSide);
-
-    PlayerSpeedContext playerSpeedContext;
+    PlayerSpeedContext speedContext;
 
     var groundDetectionResult = _sensorSystem.DetectGround(!_spriteRenderer.flipX, _groundLayer);
     if (groundDetectionResult != null)
     {
       _lastGroundDetectionResult = groundDetectionResult.Value;
+
       _isGrounded = true;
+      _state = SonicState.Grounded;
+
       _relativeGroundInfo.Update(_lastGroundDetectionResult.AngleDeg);
       _groundAngleDeg = _groundSide.GetAngle(_relativeGroundInfo.AngleDeg);
       _groundAngleRad = _groundAngleDeg * Mathf.Deg2Rad;
-      _state = SonicState.Grounded;
-      playerSpeedContext = PlayerSpeedContext.GetGrounded(
-        _prevIsGrounded, _groundAngleRad, _lastGroundDetectionResult.Distance);
+      _groundSide = _relativeGroundInfo.GetAbsoluteSide(_groundSide);
+
+      speedContext = PlayerSpeedContext.GetGrounded(_prevIsGrounded, _groundAngleRad, _lastGroundDetectionResult.Distance);
     }
     else
     {
-      _relativeGroundInfo.Update(0);
       _isGrounded = false;
+      _state = SonicState.Airborne;
+
+      _relativeGroundInfo.Update(0);
       _groundAngleDeg = 0;
       _groundAngleRad = 0;
-      _state = SonicState.Airborne;
-      playerSpeedContext = PlayerSpeedContext.GetAirborne(_prevIsGrounded);
+      _groundSide = GroundSide.Down;
+
+      speedContext = PlayerSpeedContext.GetAirborne(_prevIsGrounded);
     }
 
-    _speedSystem.SetSpeed(playerSpeedContext);
+    _speedSystem.SetSpeed(speedContext);
 
     UpdatePosition();
   }
