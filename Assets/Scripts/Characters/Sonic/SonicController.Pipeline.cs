@@ -25,6 +25,7 @@ public partial class SonicController
     var groundDetectionResult = _sensorSystem.DetectGround(!_spriteRenderer.flipX, _groundLayer);
     if (groundDetectionResult != null)
     {
+      _lastGroundDetectionResult = groundDetectionResult.Value;
       AnalyzeEnvironment_Grounded();
     }
     else
@@ -35,6 +36,8 @@ public partial class SonicController
 
   private void AnalyzeEnvironment_Grounded()
   {
+    _isGrounded = true;
+    _state = SonicState.Grounded;
   }
 
   private void AnalyzeEnvironment_Airborn()
