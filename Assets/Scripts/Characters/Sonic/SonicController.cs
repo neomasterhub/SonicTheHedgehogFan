@@ -27,6 +27,7 @@ public class SonicController : MonoBehaviour
   private float _groundAngleDeg;
   private float _groundAngleRad;
   private GroundSide _groundSide;
+  private GroundSide _prevGroundSide;
   private GroundDetectionResult _lastGroundDetectionResult;
   private SonicSizeMode _sizeMode;
   private SonicState _state;
@@ -76,6 +77,7 @@ public class SonicController : MonoBehaviour
   private void FixedUpdate()
   {
     _prevState = _state;
+    _prevGroundSide = _groundSide;
     _prevIsGrounded = _isGrounded;
 
     _timerSystem.Update(Time.deltaTime);
@@ -120,9 +122,22 @@ public class SonicController : MonoBehaviour
   private void InitializeSpeedSystemProviders()
   {
     var gravitySpeed = new GravitySpeed(GravityUpSpeed, GravityDownSpeed);
+    var defaultGravitySpeed = new GravitySpeed(0, 0);
 
     _gravitySpeedProvider
       .When(() => GravityEnabled && _groundSide == GroundSide.Down, () => gravitySpeed);
+
+    _slopeFactorSpeedProvider
+      .When(() => _groundSide == GroundSide.Down, () => SlopeFactor * Mathf.Sin(_relativeGroundInfo.AngleRad))
+      .When(() => _groundSide == GroundSide.Left, () => _relativeGroundInfo.AngleRad <= 0 ? SlopeFactor : SlopeFactor * Mathf.Cos(_relativeGroundInfo.AngleRad))
+      .When(() => _groundSide == GroundSide.Right, () => _relativeGroundInfo.AngleRad >= 0 ? SlopeFactor : SlopeFactor * Mathf.Cos(_relativeGroundInfo.AngleRad));
+
+    _groundToAirSpeedProvider
+      .When(() => _prevGroundSide == GroundSide.Right, () => WallToAirSpeedDelta + new Vector2(-_speedSystem.SpeedY, _speedSystem.SpeedX))
+      .When(() => _prevGroundSide == GroundSide.Left, () => WallToAirSpeedDelta + new Vector2(_speedSystem.SpeedY, -_speedSystem.SpeedX));
+
+    _gravitySpeedProvider.DefaultProvider = () => defaultGravitySpeed;
+    _groundToAirSpeedProvider.DefaultProvider = () => new(_speedSystem.SpeedX, _speedSystem.SpeedY);
   }
 
   private void UpdatePosition()
