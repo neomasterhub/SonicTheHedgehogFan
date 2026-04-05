@@ -54,7 +54,7 @@ public class RelativeGroundInfo
       GroundSide.Down => 0,
       GroundSide.Right => 90,
       GroundSide.Up => 180,
-      GroundSide.Left => 270,
+      GroundSide.Left => -90,
       _ => throw currentAbsoluteSide.ArgumentOutOfRangeException()
     };
   }
