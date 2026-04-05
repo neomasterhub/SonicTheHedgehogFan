@@ -7,15 +7,18 @@ using AnimatorStates = SharedConsts.Animator.States;
 public class SonicViewSystem
 {
   private readonly PlayerInputSystem _inputSystem;
+  private readonly PlayerViewRotatorProvider<SonicViewRotatorContext> _rotatorProvider;
 
   private float _groundedAnimatorParameterSpeed;
   private Animator _animator;
   private SonicViewContext _context;
   private SpriteRenderer _spriteRenderer;
+  private IPlayerViewRotator<SonicViewRotatorContext> _rotator;
 
-  public SonicViewSystem(PlayerInputSystem inputSystem)
+  public SonicViewSystem(PlayerInputSystem inputSystem, PlayerViewRotatorProvider<SonicViewRotatorContext> rotatorProvider)
   {
     _inputSystem = inputSystem;
+    _rotatorProvider = rotatorProvider;
   }
 
   public void SetComponents(Animator animator, SpriteRenderer spriteRenderer)
@@ -61,6 +64,23 @@ public class SonicViewSystem
 
   private void RotateSprite()
   {
+    var nextRotator = _rotatorProvider.FirstTriggered();
+    if (nextRotator != null)
+    {
+      _rotator = nextRotator;
+    }
+
+    if (_rotator != null)
+    {
+      _rotator.Rotate(new SonicViewRotatorContext(
+        _context.IsGrounded,
+        _context.GroundSpeed,
+        _context.GroundAngleDeg,
+        _context.PrevGroundSide));
+
+      _spriteRenderer.transform.localRotation = Quaternion.Euler(_rotator.Rotation);
+    }
+
     if (_context.IsSkidding)
     {
       return;

@@ -12,6 +12,7 @@ public partial class SonicController : MonoBehaviour
   private const float _groundedPositionUpwardOffset = 0.05f;
   private const float _inputDeadZone = 0.001f;
   private const float _skiddingSpeedDeadZone = 0.1f;
+  private const float _rotWallToAirDelta = 3;
 
   private readonly ConditionalValueProvider<float> _slopeFactorSpeedProvider;
   private readonly ConditionalValueProvider<Vector2> _groundToAirSpeedProvider;
@@ -21,6 +22,7 @@ public partial class SonicController : MonoBehaviour
   private readonly PlayerInputSystem _inputSystem;
   private readonly PlayerSpeedConfig _speedConfig;
   private readonly PlayerSpeedSystem _speedSystem;
+  private readonly PlayerViewRotatorProvider<SonicViewRotatorContext> _viewRotatorProvider;
   private readonly RelativeGroundInfo _relativeGroundInfo;
   private readonly SonicSensorSystem _sensorSystem;
   private readonly SonicViewSystem _viewSystem;
@@ -48,6 +50,9 @@ public partial class SonicController : MonoBehaviour
   public bool GravityEnabled = true;
   public Vector2 WallToAirSpeedDelta = new(0.011f, 0.0f);
   public Vector2 WallDetachPositionOffset = new(-0.1f, 0.0f);
+  [Header("Rotators")]
+  public bool GroundedViewRotatorEnabled = true;
+  public bool WallToAirViewRotatorEnabled = true;
   [Header("Canvas")]
   public TextMeshProUGUI InfoText;
 }

@@ -1,10 +1,11 @@
 using System;
 
-public class WallToAirPlayerViewRotator : PlayerViewRotatorBase
+public class WallToAirSonicViewRotator
+  : PlayerViewRotatorBase<SonicViewRotatorContext>
 {
   private float _z;
 
-  public WallToAirPlayerViewRotator(float delta, Func<bool> condition)
+  public WallToAirSonicViewRotator(float delta, Func<bool> condition)
     : base("Wall-to-Air", condition)
   {
     Delta = delta;
@@ -12,21 +13,21 @@ public class WallToAirPlayerViewRotator : PlayerViewRotatorBase
 
   public float Delta { get; set; }
 
-  public override void Rotate(PlayerViewRotatorInput input)
+  public override void Rotate(SonicViewRotatorContext context)
   {
-    if (input.PrevPlayerState.HasFlag(SonicState.Grounded))
+    if (context.IsGrounded)
     {
-      if (input.PrevGroundSide == GroundSide.Left)
+      if (context.PrevGroundSide == GroundSide.Left)
       {
         _z = -90;
       }
-      else if (input.PrevGroundSide == GroundSide.Right)
+      else if (context.PrevGroundSide == GroundSide.Right)
       {
         _z = 90;
       }
       else
       {
-        throw input.PrevPlayerState.ArgumentOutOfRangeException();
+        throw context.PrevGroundSide.ArgumentOutOfRangeException();
       }
     }
 
