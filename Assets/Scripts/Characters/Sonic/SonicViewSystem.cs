@@ -28,6 +28,7 @@ public class SonicViewSystem
   {
     _context = context;
     UpdateAnimator();
+    RotateSprite();
   }
 
   private void UpdateAnimator()
@@ -55,6 +56,23 @@ public class SonicViewSystem
       _animator.speed = Mathf.Max(
         SpeedWalkingMin,
         animatorParameterSpeed / TopSpeed * SpeedWalkingFactor);
+    }
+  }
+
+  private void RotateSprite()
+  {
+    if (_context.IsSkidding)
+    {
+      return;
+    }
+
+    if (_inputSystem.X > 0)
+    {
+      _spriteRenderer.flipX = false;
+    }
+    else if (_inputSystem.X < 0)
+    {
+      _spriteRenderer.flipX = true;
     }
   }
 }
