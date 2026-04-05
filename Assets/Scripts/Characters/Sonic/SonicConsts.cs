@@ -50,4 +50,14 @@ public static class SonicConsts
       public static Vector2 HVRadii = new(HRadius, VRadius);
     }
   }
+
+  public static class View
+  {
+    public static class Animator
+    {
+      public const float SpeedAirborneMin = 0.02f;
+      public const float SpeedWalkingMin = 0.5f;
+      public const float SpeedWalkingFactor = 3.0f;
+    }
+  }
 }
