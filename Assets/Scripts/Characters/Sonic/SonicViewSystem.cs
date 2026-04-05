@@ -1,6 +1,4 @@
-using UnityEditor.Animations;
 using UnityEngine;
-using UnityEngine.Windows;
 
 public class SonicViewSystem
 {
@@ -9,6 +7,7 @@ public class SonicViewSystem
   private readonly SpriteRenderer _spriteRenderer;
 
   private SonicViewContext _context;
+  private float _groundedAnimatorParameterSpeed;
 
   public SonicViewSystem(Animator animator, PlayerInputSystem inputSystem, SpriteRenderer spriteRenderer)
   {
@@ -20,6 +19,7 @@ public class SonicViewSystem
   public void Update(SonicViewContext context)
   {
     _context = context;
+    UpdateAnimator();
   }
 
   private void UpdateAnimator()
