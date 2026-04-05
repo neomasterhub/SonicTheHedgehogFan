@@ -1,4 +1,8 @@
 using UnityEngine;
+using static SonicConsts.Physics;
+using static SonicConsts.View;
+using AnimatorParameters = SharedConsts.Animator.Parameters;
+using AnimatorStates = SharedConsts.Animator.States;
 
 public class SonicViewSystem
 {
@@ -24,32 +28,29 @@ public class SonicViewSystem
 
   private void UpdateAnimator()
   {
-    var animatorParameterSpeed = 0f;
-    if (_input.PlayerState.HasFlag(SonicState.Grounded))
+    float animatorParameterSpeed;
+    if (_context.IsGrounded)
     {
-      _groundedAnimatorParameterSpeed = Mathf.Abs(_input.SpeedX);
+      _groundedAnimatorParameterSpeed = Mathf.Abs(_context.SpeedX);
       animatorParameterSpeed = _groundedAnimatorParameterSpeed;
     }
-    else if (_input.PlayerState.HasFlag(SonicState.Airborne))
+    else
     {
       animatorParameterSpeed = Mathf.Max(
         _groundedAnimatorParameterSpeed,
-        _input.AnimatorParameterSpeedAirborneMin);
+        SpeedAirborneMin);
     }
 
+    _animator.speed = 1;
     _animator.SetFloat(AnimatorParameters.Speed, animatorParameterSpeed);
-    _animator.SetBool(AnimatorParameters.Balancing, _isBalancing);
-    _animator.SetBool(AnimatorParameters.Skidding, _isSkidding);
+    _animator.SetBool(AnimatorParameters.Balancing, _context.IsBalancing);
+    _animator.SetBool(AnimatorParameters.Skidding, _context.IsSkidding);
 
     if (_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimatorStates.Walking))
     {
       _animator.speed = Mathf.Max(
-        _input.AnimatorSpeedWalkingMin,
-        animatorParameterSpeed / _input.TopSpeed * _input.AnimatorSpeedWalkingFactor);
-    }
-    else
-    {
-      _animator.speed = 1;
+        SpeedWalkingMin,
+        animatorParameterSpeed / TopSpeed * SpeedWalkingFactor);
     }
   }
 }
