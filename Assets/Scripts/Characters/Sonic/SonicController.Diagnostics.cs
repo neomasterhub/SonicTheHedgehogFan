@@ -17,6 +17,14 @@ public partial class SonicController
 
     _info.AppendLine();
 
+    _info.AddParLine("Ground Side", _groundSide);
+    _info.AddParLine("Ground Rel Angle", _relativeGroundInfo.AngleDeg, " °");
+    _info.AddParLine("Ground Abs Angle", _groundAngleDeg, " °");
+    _info.AddParLine("Slope Speed", _speedSystem.SlopeFactorSpeed, 4);
+    _info.AddParLine("Ground Speed", _speedSystem.GroundSpeed, 4);
+
+    _info.AppendLine();
+
     _info.AddParLine("Speed X", _speedSystem.SpeedX, 4);
     _info.AddParLine("Speed Y", _speedSystem.SpeedY, 4);
 
