@@ -54,6 +54,10 @@ public partial class SonicController
     _speedContext = PlayerSpeedContext.GetAirborne(_prevIsGrounded);
   }
 
+  private void ApplyEffects()
+  {
+  }
+
   private void UpdatePosition()
   {
     _speedSystem.SetSpeed(_speedContext);
