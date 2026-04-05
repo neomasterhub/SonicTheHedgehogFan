@@ -7,4 +7,15 @@ public readonly struct SonicViewContext
   public readonly SonicState State;
   public readonly SonicState PrevState;
   public readonly GroundSide PrevGroundSide;
+
+  public SonicViewContext(bool isGrounded, bool isSkidding, bool isBalancing, float speedX, SonicState state, SonicState prevState, GroundSide prevGroundSide)
+  {
+    IsGrounded = isGrounded;
+    IsSkidding = isSkidding;
+    IsBalancing = isBalancing;
+    SpeedX = speedX;
+    State = state;
+    PrevState = prevState;
+    PrevGroundSide = prevGroundSide;
+  }
 }
