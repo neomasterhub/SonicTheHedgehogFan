@@ -6,17 +6,21 @@ using AnimatorStates = SharedConsts.Animator.States;
 
 public class SonicViewSystem
 {
-  private readonly Animator _animator;
   private readonly PlayerInputSystem _inputSystem;
-  private readonly SpriteRenderer _spriteRenderer;
 
-  private SonicViewContext _context;
   private float _groundedAnimatorParameterSpeed;
+  private Animator _animator;
+  private SonicViewContext _context;
+  private SpriteRenderer _spriteRenderer;
 
-  public SonicViewSystem(Animator animator, PlayerInputSystem inputSystem, SpriteRenderer spriteRenderer)
+  public SonicViewSystem(PlayerInputSystem inputSystem)
+  {
+    _inputSystem = inputSystem;
+  }
+
+  public void SetComponents(Animator animator, SpriteRenderer spriteRenderer)
   {
     _animator = animator;
-    _inputSystem = inputSystem;
     _spriteRenderer = spriteRenderer;
   }
 
