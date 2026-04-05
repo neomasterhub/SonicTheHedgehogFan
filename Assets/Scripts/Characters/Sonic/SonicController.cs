@@ -5,6 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Data.
 /// </summary>
+[RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(SpriteRenderer))]
 public partial class SonicController : MonoBehaviour
 {
@@ -22,12 +23,14 @@ public partial class SonicController : MonoBehaviour
   private readonly PlayerSpeedSystem _speedSystem;
   private readonly RelativeGroundInfo _relativeGroundInfo;
   private readonly SonicSensorSystem _sensorSystem;
+  private readonly SonicViewSystem _viewSystem;
   private readonly TimerSystem _timerSystem;
 
   private bool _isGrounded;
   private bool _prevIsGrounded;
   private bool _postWallDetachInputLock;
   private float _groundAngleDeg;
+  private Animator _animator;
   private GroundSide _groundSide;
   private GroundSide _prevGroundSide;
   private GroundDetectionResult _lastGroundDetectionResult;
@@ -35,6 +38,7 @@ public partial class SonicController : MonoBehaviour
   private SonicSizeMode _sizeMode;
   private SonicState _state;
   private SonicState _prevState;
+  private SonicViewContext _viewContext;
   private SpriteRenderer _spriteRenderer;
 
   [Header("Sensors")]

@@ -24,6 +24,7 @@ public partial class SonicController
     _inputSystem = new(() => Input.GetAxis(Horizontal), () => Input.GetAxis(Vertical));
     _speedConfig = new(TopSpeed, FrictionSpeed, AccelerationSpeed, DecelerationSpeed, AirTopSpeed, AirAccelerationSpeed, MaxFallSpeed, _inputDeadZone, _skiddingSpeedDeadZone);
     _speedSystem = new(_inputSystem, _speedConfig, _gravitySpeedProvider, _slopeFactorSpeedProvider, _groundToAirSpeedProvider);
+    _viewSystem = new(_inputSystem);
   }
 
   private void Awake()
@@ -42,7 +43,9 @@ public partial class SonicController
 
   private void InitializeComponents()
   {
+    _animator = GetComponent<Animator>();
     _spriteRenderer = GetComponent<SpriteRenderer>();
+    _viewSystem.SetComponents(_animator, _spriteRenderer);
   }
 
   private void InitializeSpeedSystemProviders()

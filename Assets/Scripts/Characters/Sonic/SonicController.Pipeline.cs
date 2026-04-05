@@ -10,6 +10,7 @@ public partial class SonicController
     AnalyzeEnvironment();
     ApplyEffects();
     ApplyMovement();
+    UpdateView();
     UpdatePosition();
     Output();
   }
@@ -65,6 +66,12 @@ public partial class SonicController
       : PlayerSpeedContext.GetAirborne(_prevIsGrounded);
     _speedSystem.SetSpeed(_speedContext);
     _state = _state.SetFlag(SonicState.Skidding, _speedSystem.IsSkidding);
+  }
+
+  private void UpdateView()
+  {
+    _viewContext = new(_isGrounded, _speedSystem.IsSkidding, false, _speedSystem.SpeedX, _prevGroundSide);
+    _viewSystem.Update(_viewContext);
   }
 
   private void UpdatePosition()
