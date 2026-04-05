@@ -51,10 +51,10 @@ public class RelativeGroundInfo
   {
     return AngleDeg + currentAbsoluteSide switch
     {
-      GroundSide.Down => 0f,
-      GroundSide.Right => 90f,
-      GroundSide.Up => 180f,
-      GroundSide.Left => 270f,
+      GroundSide.Down => 0,
+      GroundSide.Right => 90,
+      GroundSide.Up => 180,
+      GroundSide.Left => 270,
       _ => throw currentAbsoluteSide.ArgumentOutOfRangeException()
     };
   }
