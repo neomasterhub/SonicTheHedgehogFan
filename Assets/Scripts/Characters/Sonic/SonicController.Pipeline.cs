@@ -70,7 +70,8 @@ public partial class SonicController
 
   private void UpdateView()
   {
-    _viewContext = new(_isGrounded, false, false, _speedSystem.SpeedX, _prevGroundSide);
+    _viewContext = new(_speedSystem.SpeedX, _state, _prevState, _prevGroundSide);
+    _viewSystem.Update(_viewContext);
   }
 
   private void UpdatePosition()
