@@ -23,6 +23,7 @@ public partial class SonicController : MonoBehaviour
   private readonly PlayerSpeedSystem _speedSystem;
   private readonly RelativeGroundInfo _relativeGroundInfo;
   private readonly SonicSensorSystem _sensorSystem;
+  private readonly SonicViewSystem _viewSystem;
   private readonly TimerSystem _timerSystem;
 
   private bool _isGrounded;
@@ -37,6 +38,7 @@ public partial class SonicController : MonoBehaviour
   private SonicSizeMode _sizeMode;
   private SonicState _state;
   private SonicState _prevState;
+  private SonicViewContext _viewContext;
   private SpriteRenderer _spriteRenderer;
 
   [Header("Sensors")]
