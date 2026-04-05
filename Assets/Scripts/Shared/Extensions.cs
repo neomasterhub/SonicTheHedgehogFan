@@ -7,7 +7,7 @@ public static class Extensions
       GroundSide.Down => 0,
       GroundSide.Right => 90,
       GroundSide.Up => 180,
-      GroundSide.Left => -90,
+      GroundSide.Left => 270,
       _ => throw side.ArgumentOutOfRangeException()
     };
   }
