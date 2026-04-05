@@ -101,7 +101,7 @@ public class PlayerSpeedSystem
 
   private void SetSpeed_Airborne_PreventGroundOvershoot()
   {
-    if (SpeedY < 0)
+    if (SpeedY < 0 && _context.DistanceToGround != null)
     {
       SpeedY = -Mathf.Min(Mathf.Abs(SpeedY), _context.DistanceToGround.Value);
     }
