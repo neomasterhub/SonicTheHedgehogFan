@@ -46,4 +46,16 @@ public class RelativeGroundInfo
 
     return currentAbsoluteSide;
   }
+
+  public float GetAbsoluteAngleDeg(GroundSide currentAbsoluteSide)
+  {
+    return AngleDeg + currentAbsoluteSide switch
+    {
+      GroundSide.Down => 0f,
+      GroundSide.Right => 90f,
+      GroundSide.Up => 180f,
+      GroundSide.Left => 270f,
+      _ => throw currentAbsoluteSide.ArgumentOutOfRangeException()
+    };
+  }
 }
