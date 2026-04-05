@@ -20,6 +20,7 @@ public partial class SonicController
     _relativeGroundInfo = new();
     _sensorSystem = new();
     _timerSystem = new();
+    _viewRotatorProvider = new();
 
     _inputSystem = new(() => Input.GetAxis(Horizontal), () => Input.GetAxis(Vertical));
     _speedConfig = new(TopSpeed, FrictionSpeed, AccelerationSpeed, DecelerationSpeed, AirTopSpeed, AirAccelerationSpeed, MaxFallSpeed, _inputDeadZone, _skiddingSpeedDeadZone);
@@ -31,6 +32,7 @@ public partial class SonicController
   {
     InitializeEngine();
     InitializeComponents();
+    InitializeViewSystem();
     InitializeSpeedSystemProviders();
   }
 
@@ -45,7 +47,28 @@ public partial class SonicController
   {
     _animator = GetComponent<Animator>();
     _spriteRenderer = GetComponent<SpriteRenderer>();
+  }
+
+  private void InitializeViewSystem()
+  {
     _viewSystem.SetComponents(_animator, _spriteRenderer);
+
+    var rotGrounded = new GroundedSonicViewRotator(
+      () => GroundedViewRotatorEnabled
+      && _isGrounded);
+
+    var rotWallToAir = new WallToAirSonicViewRotator(
+      _rotWallToAirDelta,
+      () => WallToAirViewRotatorEnabled
+      && !_isGrounded
+      && _prevIsGrounded
+      && _prevGroundSide is GroundSide.Left or GroundSide.Right);
+
+    _viewRotatorProvider
+      .Add(rotGrounded)
+      .Add(rotWallToAir);
+
+    _viewRotatorProvider.Default = rotGrounded;
   }
 
   private void InitializeSpeedSystemProviders()
