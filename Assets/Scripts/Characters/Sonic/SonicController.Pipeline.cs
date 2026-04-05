@@ -8,6 +8,8 @@ public partial class SonicController
   private void FixedUpdate()
   {
     AnalyzeEnvironment();
+    ApplyEffects();
+    ApplyMovement();
     UpdatePosition();
     Output();
   }
@@ -42,7 +44,6 @@ public partial class SonicController
     _state = SonicState.Grounded;
     _groundSide = _relativeGroundInfo.GetAbsoluteSide(_groundSide);
     _groundAngleDeg = _relativeGroundInfo.GetAbsoluteAngleDeg(_groundSide);
-    _speedContext = PlayerSpeedContext.GetGrounded(_prevIsGrounded, _relativeGroundInfo.AngleRad, _lastGroundDetectionResult.Distance);
   }
 
   private void AnalyzeEnvironment_Airborn()
@@ -51,16 +52,23 @@ public partial class SonicController
     _state = SonicState.Airborne;
     _groundSide = GroundSide.Down;
     _groundAngleDeg = 0;
-    _speedContext = PlayerSpeedContext.GetAirborne(_prevIsGrounded);
   }
 
   private void ApplyEffects()
   {
   }
 
+  private void ApplyMovement()
+  {
+    _speedContext = _isGrounded
+      ? PlayerSpeedContext.GetGrounded(_prevIsGrounded, _relativeGroundInfo.AngleRad, _lastGroundDetectionResult.Distance)
+      : PlayerSpeedContext.GetAirborne(_prevIsGrounded);
+    _speedSystem.SetSpeed(_speedContext);
+    _state = _state.SetFlag(SonicState.Skidding, _speedSystem.IsSkidding);
+  }
+
   private void UpdatePosition()
   {
-    _speedSystem.SetSpeed(_speedContext);
     var speedX = _speedSystem.SpeedX;
     var speedY = _speedSystem.SpeedY;
 
