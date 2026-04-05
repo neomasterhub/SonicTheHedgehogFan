@@ -1,10 +1,11 @@
 using System;
 using UnityEngine;
 
-public interface IPlayerViewRotator
+public interface IPlayerViewRotator<TContext>
+  where TContext : struct
 {
+  string DisplayName { get; }
   Vector3 Rotation { get; }
   Func<bool> Condition { get; }
-  string DisplayName { get; }
-  void Rotate(PlayerViewRotatorInput input);
+  void Rotate(TContext context);
 }
