@@ -7,15 +7,17 @@ using AnimatorStates = SharedConsts.Animator.States;
 public class SonicViewSystem
 {
   private readonly PlayerInputSystem _inputSystem;
+  private readonly PlayerViewRotatorProvider<SonicViewRotatorContext> _rotatorProvider;
 
   private float _groundedAnimatorParameterSpeed;
   private Animator _animator;
   private SonicViewContext _context;
   private SpriteRenderer _spriteRenderer;
 
-  public SonicViewSystem(PlayerInputSystem inputSystem)
+  public SonicViewSystem(PlayerInputSystem inputSystem, PlayerViewRotatorProvider<SonicViewRotatorContext> rotatorProvider)
   {
     _inputSystem = inputSystem;
+    _rotatorProvider = rotatorProvider;
   }
 
   public void SetComponents(Animator animator, SpriteRenderer spriteRenderer)
