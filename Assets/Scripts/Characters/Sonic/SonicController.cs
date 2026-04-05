@@ -5,6 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Data.
 /// </summary>
+[RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(SpriteRenderer))]
 public partial class SonicController : MonoBehaviour
 {
@@ -28,6 +29,7 @@ public partial class SonicController : MonoBehaviour
   private bool _prevIsGrounded;
   private bool _postWallDetachInputLock;
   private float _groundAngleDeg;
+  private Animator _animator;
   private GroundSide _groundSide;
   private GroundSide _prevGroundSide;
   private GroundDetectionResult _lastGroundDetectionResult;

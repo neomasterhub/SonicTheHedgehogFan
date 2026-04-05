@@ -42,6 +42,7 @@ public partial class SonicController
 
   private void InitializeComponents()
   {
+    _animator = GetComponent<Animator>();
     _spriteRenderer = GetComponent<SpriteRenderer>();
   }
 
