@@ -189,7 +189,7 @@ public class SonicControllerOld : MonoBehaviour
       () => PVRGroundedEnabled
       && _playerState.HasFlag(SonicState.Grounded));
 
-    _pvrWallToAir = new WallToAirPlayerViewRotator(
+    _pvrWallToAir = new WallToAirSonicViewRotator(
       PVRWallToAirDelta,
       () => PVRWallToAirEnabled
       && _playerState.HasFlag(SonicState.Airborne)
