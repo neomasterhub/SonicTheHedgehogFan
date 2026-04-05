@@ -47,7 +47,6 @@ public partial class SonicController
 
   private void InitializeSpeedSystemProviders()
   {
-    var defaultGravitySpeed = new GravitySpeed(0, 0);
     var gravitySpeed = new GravitySpeed(GravityUpSpeed, GravityDownSpeed);
 
     _gravitySpeedProvider
@@ -62,7 +61,7 @@ public partial class SonicController
       .When(() => _prevGroundSide == GroundSide.Left, () => WallToAirSpeedDelta + new Vector2(_speedSystem.SpeedY, -_speedSystem.SpeedX))
       .When(() => _prevGroundSide == GroundSide.Right, () => WallToAirSpeedDelta + new Vector2(-_speedSystem.SpeedY, _speedSystem.SpeedX));
 
-    _gravitySpeedProvider.DefaultProvider = () => defaultGravitySpeed;
+    _gravitySpeedProvider.DefaultProvider = () => GravitySpeed.Zero;
     _groundToAirSpeedProvider.DefaultProvider = () => new(_speedSystem.SpeedX, _speedSystem.SpeedY);
   }
 }
