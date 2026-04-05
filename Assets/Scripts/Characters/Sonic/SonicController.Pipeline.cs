@@ -42,6 +42,7 @@ public partial class SonicController
     _state = SonicState.Grounded;
     _groundSide = _relativeGroundInfo.GetAbsoluteSide(_groundSide);
     _groundAngleDeg = _relativeGroundInfo.GetAbsoluteAngleDeg(_groundSide);
+    _speedContext = PlayerSpeedContext.GetGrounded(_prevIsGrounded, _relativeGroundInfo.AngleRad, _lastGroundDetectionResult.Distance);
   }
 
   private void AnalyzeEnvironment_Airborn()
@@ -50,6 +51,7 @@ public partial class SonicController
     _state = SonicState.Airborne;
     _groundSide = GroundSide.Down;
     _groundAngleDeg = 0;
+    _speedContext = PlayerSpeedContext.GetAirborne(_prevIsGrounded);
   }
 
   private void UpdatePosition()

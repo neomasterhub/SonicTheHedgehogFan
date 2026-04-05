@@ -31,6 +31,7 @@ public partial class SonicController : MonoBehaviour
   private GroundSide _groundSide;
   private GroundSide _prevGroundSide;
   private GroundDetectionResult _lastGroundDetectionResult;
+  private PlayerSpeedContext _speedContext;
   private SonicSizeMode _sizeMode;
   private SonicState _state;
   private SonicState _prevState;
