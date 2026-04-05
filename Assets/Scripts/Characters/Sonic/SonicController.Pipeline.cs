@@ -40,12 +40,14 @@ public partial class SonicController
   {
     _isGrounded = true;
     _state = SonicState.Grounded;
+    _groundSide = _relativeGroundInfo.GetAbsoluteSide(_groundSide);
   }
 
   private void AnalyzeEnvironment_Airborn()
   {
     _isGrounded = false;
     _state = SonicState.Airborne;
+    _groundSide = GroundSide.Down;
   }
 
   private void UpdatePosition()
