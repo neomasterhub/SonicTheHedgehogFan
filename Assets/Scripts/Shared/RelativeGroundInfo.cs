@@ -37,11 +37,11 @@ public class RelativeGroundInfo
   {
     if (Side == GroundSide.Left)
     {
-      return Side.GetPrevious();
+      return currentAbsoluteSide.GetPrevious();
     }
     else if (Side == GroundSide.Right)
     {
-      return Side.GetNext();
+      return currentAbsoluteSide.GetNext();
     }
 
     return currentAbsoluteSide;
