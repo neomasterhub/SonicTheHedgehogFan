@@ -56,6 +56,7 @@ public partial class SonicController
 
   private void UpdatePosition()
   {
+    _speedSystem.SetSpeed(_speedContext);
     var speedX = _speedSystem.SpeedX;
     var speedY = _speedSystem.SpeedY;
 
