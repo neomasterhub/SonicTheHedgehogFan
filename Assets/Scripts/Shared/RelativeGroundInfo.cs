@@ -33,7 +33,7 @@ public class RelativeGroundInfo
     }
   }
 
-  public GroundSide GetAbsoluteSide(GroundSide side)
+  public GroundSide GetAbsoluteSide(GroundSide currentAbsoluteSide)
   {
     if (Side == GroundSide.Left)
     {
@@ -44,6 +44,6 @@ public class RelativeGroundInfo
       return Side.GetNext();
     }
 
-    return side;
+    return currentAbsoluteSide;
   }
 }
