@@ -33,7 +33,7 @@ public class RelativeGroundInfo
     }
   }
 
-  public GroundSide GetAbsoluteSide(GroundSide side)
+  public GroundSide GetAbsoluteSide(GroundSide currentAbsoluteSide)
   {
     if (Side == GroundSide.Left)
     {
@@ -44,6 +44,18 @@ public class RelativeGroundInfo
       return Side.GetNext();
     }
 
-    return side;
+    return currentAbsoluteSide;
+  }
+
+  public float GetAbsoluteAngleDeg(GroundSide currentAbsoluteSide)
+  {
+    return AngleDeg + currentAbsoluteSide switch
+    {
+      GroundSide.Down => 0,
+      GroundSide.Right => 90,
+      GroundSide.Up => 180,
+      GroundSide.Left => 270,
+      _ => throw currentAbsoluteSide.ArgumentOutOfRangeException()
+    };
   }
 }

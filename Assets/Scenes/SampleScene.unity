@@ -1938,6 +1938,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5b54a59d2f3b1b4186726cf78d31a5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SonicController
+  TopUDFLengths: {x: 0.3, y: 0.3, z: 0.5}
+  BottomUDFLengths: {x: 0.3, y: 0.1, z: 0.5}
+  GravityEnabled: 1
+  WallToAirSpeedDelta: {x: 0.011, y: 0}
+  WallDetachPositionOffset: {x: -0.1, y: 0}
+  InfoText: {fileID: 1892464623}
 --- !u!1 &915818884
 GameObject:
   m_ObjectHideFlags: 0
