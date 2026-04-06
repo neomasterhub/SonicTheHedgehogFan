@@ -32,9 +32,7 @@ public partial class SonicController : MonoBehaviour
   private bool _isGrounded;
   private bool _prevIsGrounded;
   private bool _postWallDetachInputLock;
-  private float _groundAngleDeg;
   private Animator _animator;
-  private GroundSide _groundSide;
   private GroundSide _prevGroundSide;
   private GroundDetectionResult _lastGroundDetectionResult;
   private PlayerSpeedContext _speedContext;
