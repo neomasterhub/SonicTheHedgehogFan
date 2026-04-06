@@ -16,8 +16,8 @@ public partial class SonicController
     _groundToAirSpeedProvider = new();
     _slopeFactorSpeedProvider = new();
 
+    _groundInfoSystem = new();
     _info = new();
-    _relativeGroundInfo = new();
     _sensorSystem = new();
     _timerSystem = new();
     _viewRotatorProvider = new();
@@ -62,7 +62,7 @@ public partial class SonicController
       () => WallToAirViewRotatorEnabled
       && !_isGrounded
       && _prevIsGrounded
-      && _prevGroundSide is GroundSide.Left or GroundSide.Right);
+      && _groundInfoSystem.Previous.Side is GroundSide.Left or GroundSide.Right);
 
     _viewRotatorProvider
       .Add(rotGrounded)
@@ -76,16 +76,16 @@ public partial class SonicController
     var gravitySpeed = new GravitySpeed(GravityUpSpeed, GravityDownSpeed);
 
     _gravitySpeedProvider
-      .When(() => GravityEnabled && _groundSide == GroundSide.Down, () => gravitySpeed);
+      .When(() => GravityEnabled && _groundInfoSystem.Current.Side == GroundSide.Down, () => gravitySpeed);
 
     _slopeFactorSpeedProvider
-      .When(() => _groundSide == GroundSide.Down, () => SlopeFactor * Mathf.Sin(_relativeGroundInfo.AngleRad))
-      .When(() => _groundSide == GroundSide.Left, () => _relativeGroundInfo.AngleDeg <= 0 ? SlopeFactor : SlopeFactor * Mathf.Cos(_relativeGroundInfo.AngleRad))
-      .When(() => _groundSide == GroundSide.Right, () => _relativeGroundInfo.AngleDeg >= 0 ? SlopeFactor : SlopeFactor * Mathf.Cos(_relativeGroundInfo.AngleRad));
+      .When(() => _groundInfoSystem.Current.Side == GroundSide.Down, () => SlopeFactor * Mathf.Sin(_groundInfoSystem.Current.AngleRad))
+      .When(() => _groundInfoSystem.Current.Side == GroundSide.Left, () => _groundInfoSystem.Current.AngleDeg <= 0 ? SlopeFactor : SlopeFactor * Mathf.Cos(_groundInfoSystem.Current.AngleRad))
+      .When(() => _groundInfoSystem.Current.Side == GroundSide.Right, () => _groundInfoSystem.Current.AngleDeg >= 0 ? SlopeFactor : SlopeFactor * Mathf.Cos(_groundInfoSystem.Current.AngleRad));
 
     _groundToAirSpeedProvider
-      .When(() => _prevGroundSide == GroundSide.Left, () => WallToAirSpeedDelta + new Vector2(_speedSystem.SpeedY, -_speedSystem.SpeedX))
-      .When(() => _prevGroundSide == GroundSide.Right, () => WallToAirSpeedDelta + new Vector2(-_speedSystem.SpeedY, _speedSystem.SpeedX));
+      .When(() => _groundInfoSystem.Previous.Side == GroundSide.Left, () => WallToAirSpeedDelta + new Vector2(_speedSystem.SpeedY, -_speedSystem.SpeedX))
+      .When(() => _groundInfoSystem.Previous.Side == GroundSide.Right, () => WallToAirSpeedDelta + new Vector2(-_speedSystem.SpeedY, _speedSystem.SpeedX));
 
     _gravitySpeedProvider.DefaultProvider = () => GravitySpeed.Zero;
     _groundToAirSpeedProvider.DefaultProvider = () => new(_speedSystem.SpeedX, _speedSystem.SpeedY);

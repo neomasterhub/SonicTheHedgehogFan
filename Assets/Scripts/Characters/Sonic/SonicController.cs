@@ -17,13 +17,13 @@ public partial class SonicController : MonoBehaviour
   private readonly ConditionalValueProvider<float> _slopeFactorSpeedProvider;
   private readonly ConditionalValueProvider<Vector2> _groundToAirSpeedProvider;
   private readonly ConditionalValueProvider<GravitySpeed> _gravitySpeedProvider;
+  private readonly GroundInfoSystem _groundInfoSystem;
   private readonly StringBuilder _info;
   private readonly LayerMask _groundLayer;
   private readonly PlayerInputSystem _inputSystem;
   private readonly PlayerSpeedConfig _speedConfig;
   private readonly PlayerSpeedSystem _speedSystem;
   private readonly PlayerViewRotatorProvider<SonicViewRotatorContext> _viewRotatorProvider;
-  private readonly RelativeGroundInfo _relativeGroundInfo;
   private readonly SonicSensorSystem _sensorSystem;
   private readonly SonicViewSystem _viewSystem;
   private readonly TimerSystem _timerSystem;
@@ -31,10 +31,7 @@ public partial class SonicController : MonoBehaviour
   private bool _isGrounded;
   private bool _prevIsGrounded;
   private bool _postWallDetachInputLock;
-  private float _groundAngleDeg;
   private Animator _animator;
-  private GroundSide _groundSide;
-  private GroundSide _prevGroundSide;
   private GroundDetectionResult _lastGroundDetectionResult;
   private PlayerSpeedContext _speedContext;
   private SonicSizeMode _sizeMode;

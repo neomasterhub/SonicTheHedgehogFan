@@ -18,19 +18,16 @@ public partial class SonicController
   private void AnalyzeEnvironment()
   {
     _prevState = _state;
-    _prevGroundSide = _groundSide;
     _prevIsGrounded = _isGrounded;
 
     _timerSystem.Update(Time.deltaTime);
     _inputSystem.Update(!_postWallDetachInputLock);
-    _sensorSystem.Update(_sizeMode, _groundSide, transform.position, TopUDFLengths, BottomUDFLengths);
+    _sensorSystem.Update(_sizeMode, _groundInfoSystem.Current.Side, transform.position, TopUDFLengths, BottomUDFLengths);
 
     var groundDetectionResult = _sensorSystem.DetectGround(!_spriteRenderer.flipX, _groundLayer);
     if (groundDetectionResult != null)
     {
       _lastGroundDetectionResult = groundDetectionResult.Value;
-      _relativeGroundInfo.Update(_lastGroundDetectionResult.AngleDeg);
-
       AnalyzeEnvironment_Grounded();
     }
     else
@@ -43,16 +40,14 @@ public partial class SonicController
   {
     _isGrounded = true;
     _state = SonicState.Grounded;
-    _groundSide = _relativeGroundInfo.GetAbsoluteSide(_groundSide);
-    _groundAngleDeg = _relativeGroundInfo.GetAbsoluteAngleDeg(_groundSide);
+    _groundInfoSystem.Update(_lastGroundDetectionResult.AngleDeg);
   }
 
   private void AnalyzeEnvironment_Airborn()
   {
     _isGrounded = false;
     _state = SonicState.Airborne;
-    _groundSide = GroundSide.Down;
-    _groundAngleDeg = 0;
+    _groundInfoSystem.Reset();
   }
 
   private void ApplyEffects()
@@ -62,7 +57,7 @@ public partial class SonicController
   private void ApplyMovement()
   {
     _speedContext = _isGrounded
-      ? PlayerSpeedContext.GetGrounded(_prevIsGrounded, _relativeGroundInfo.AngleRad, _lastGroundDetectionResult.Distance)
+      ? PlayerSpeedContext.GetGrounded(_prevIsGrounded, _groundInfoSystem.Current.SideAngleRad, _lastGroundDetectionResult.Distance)
       : PlayerSpeedContext.GetAirborne(_prevIsGrounded);
     _speedSystem.SetSpeed(_speedContext);
     _state = _state.SetFlag(SonicState.Skidding, _speedSystem.IsSkidding);
@@ -70,7 +65,7 @@ public partial class SonicController
 
   private void UpdateView()
   {
-    _viewContext = new(_isGrounded, _speedSystem.IsSkidding, false, _speedSystem.SpeedX, _speedSystem.GroundSpeed, _groundAngleDeg, _prevGroundSide);
+    _viewContext = new(_isGrounded, _speedSystem.IsSkidding, false, _speedSystem.SpeedX, _speedSystem.GroundSpeed, _groundInfoSystem.Current.AngleDeg, _groundInfoSystem.Previous.Side);
     _viewSystem.Update(_viewContext);
   }
 
@@ -89,13 +84,13 @@ public partial class SonicController
     }
 
     // SpeedX, SpeedY - offsets in units per frame.
-    var pos = transform.position + _groundSide switch
+    var pos = transform.position + _groundInfoSystem.Current.Side switch
     {
       GroundSide.Down => new Vector3(speedX, speedY),
       GroundSide.Right => new Vector3(-speedY, speedX),
       GroundSide.Up => new Vector3(-speedX, -speedY),
       GroundSide.Left => new Vector3(speedY, -speedX),
-      _ => throw _groundSide.ArgumentOutOfRangeException(),
+      _ => throw _groundInfoSystem.Current.Side.ArgumentOutOfRangeException(),
     };
 
     transform.position = new Vector3(pos.x.Round(2), pos.y.Round(2), transform.position.z);
