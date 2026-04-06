@@ -1,5 +1,17 @@
 public static class GroundSideExtensions
 {
+  public static float GetCcwAngleDeg(this GroundSide side)
+  {
+    return side switch
+    {
+      GroundSide.Down => 0,
+      GroundSide.Right => 90,
+      GroundSide.Up => 180,
+      GroundSide.Left => 270,
+      _ => throw side.ArgumentOutOfRangeException()
+    };
+  }
+
   public static GroundSide GetPrevious(this GroundSide side)
   {
     return side switch
