@@ -1,7 +1,7 @@
 using UnityEngine;
 using static SharedConsts.Physics.GroundAngleRanges;
 
-public class GroundInfo
+public class GroundInfoSystem
 {
   private readonly Range _slopeRangeDeg = Slope;
 
