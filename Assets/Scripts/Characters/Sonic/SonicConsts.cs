@@ -55,7 +55,7 @@ public static class SonicConsts
   {
     public const float SpeedAirborneMin = 0.02f;
     public const float SpeedWalkingMin = 0.5f;
-    public const float SpeedWalkingFactor = 3.0f;
-    public const float SpeedStandingStraightMax = Physics.FrictionSpeed;
+    public const float SpeedWalkingFactor = 3;
+    public const float AngleDegStandingStraightMax = 38;
   }
 }
