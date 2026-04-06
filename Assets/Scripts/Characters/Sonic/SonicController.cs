@@ -17,6 +17,7 @@ public partial class SonicController : MonoBehaviour
   private readonly ConditionalValueProvider<float> _slopeFactorSpeedProvider;
   private readonly ConditionalValueProvider<Vector2> _groundToAirSpeedProvider;
   private readonly ConditionalValueProvider<GravitySpeed> _gravitySpeedProvider;
+  private readonly GroundInfo _groundInfo;
   private readonly StringBuilder _info;
   private readonly LayerMask _groundLayer;
   private readonly PlayerInputSystem _inputSystem;
