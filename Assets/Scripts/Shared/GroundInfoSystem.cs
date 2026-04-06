@@ -5,40 +5,43 @@ public class GroundInfoSystem
 {
   private readonly Range _slopeRangeDeg = Slope;
 
-  public float AngleDeg { get; private set; }
-  public float AngleRad { get; private set; }
-  public GroundSide Side { get; private set; }
-  public float SideAngleDeg { get; private set; }
-  public float SideAngleRad { get; private set; }
+  public GroundInfo Previous { get; private set; }
+  public GroundInfo Current { get; private set; }
 
   public void Reset()
   {
-    Side = GroundSide.Down;
-    SideAngleDeg = 0;
-    SideAngleRad = 0;
-    AngleDeg = 0;
-    AngleRad = 0;
+    Previous = Current;
+    Current = GroundInfo.Default;
   }
 
-  public void Update(float sideNormalAngleDeg)
+  public void Update(float sideNormalAngleDeg, float? sideNormalAngleRad = null)
   {
+    Previous = Current;
+
+    var side = Current.Side;
+
     if (!_slopeRangeDeg.Includes(sideNormalAngleDeg))
     {
       if (sideNormalAngleDeg < 0)
       {
         sideNormalAngleDeg += 90;
-        Side = Side.GetPrevious();
+        side = side.GetPrevious();
       }
       else
       {
         sideNormalAngleDeg -= 90;
-        Side = Side.GetNext();
+        side = side.GetNext();
       }
     }
 
-    SideAngleDeg = sideNormalAngleDeg;
-    SideAngleRad = sideNormalAngleDeg * Mathf.Deg2Rad;
-    AngleDeg = SideAngleDeg + Side.GetCcwAngleDeg();
-    AngleRad = AngleDeg * Mathf.Deg2Rad;
+    var angleDeg = sideNormalAngleDeg + side.GetCcwAngleDeg();
+    var angleRad = angleDeg * Mathf.Deg2Rad;
+
+    Current = new(
+      sideNormalAngleDeg,
+      sideNormalAngleRad ?? sideNormalAngleDeg * Mathf.Deg2Rad,
+      side,
+      angleDeg,
+      angleRad);
   }
 }
