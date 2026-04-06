@@ -40,16 +40,14 @@ public partial class SonicController
   {
     _isGrounded = true;
     _state = SonicState.Grounded;
-    _groundSide = _relativeGroundInfo.GetAbsoluteSide(_groundSide);
-    _groundAngleDeg = _relativeGroundInfo.GetAbsoluteAngleDeg(_groundSide);
+    _groundInfoSystem.Update(_lastGroundDetectionResult.AngleDeg, _lastGroundDetectionResult.AngleRad);
   }
 
   private void AnalyzeEnvironment_Airborn()
   {
     _isGrounded = false;
     _state = SonicState.Airborne;
-    _groundSide = GroundSide.Down;
-    _groundAngleDeg = 0;
+    _groundInfoSystem.Reset();
   }
 
   private void ApplyEffects()
