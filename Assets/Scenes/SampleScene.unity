@@ -2081,7 +2081,6 @@ GameObject:
   - component: {fileID: 710850500}
   - component: {fileID: 710850499}
   - component: {fileID: 710850502}
-  - component: {fileID: 710850503}
   - component: {fileID: 710850504}
   - component: {fileID: 710850505}
   m_Layer: 0
@@ -2187,26 +2186,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &710850503
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 710850496}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5b15c981b4f0f84386f27d8b7de5c54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SonicController
-  TopUDFLengths: {x: 0.3, y: 0.3, z: 0.5}
-  BottomUDFLengths: {x: 0.3, y: 0.1, z: 0.5}
-  GravityEnabled: 1
-  WallToAirSpeedDelta: {x: 0.011, y: 0}
-  WallDetachPositionOffset: {x: -0.1, y: 0}
-  GroundedViewRotatorEnabled: 1
-  WallToAirViewRotatorEnabled: 1
-  InfoText: {fileID: 0}
 --- !u!82 &710850504
 AudioSource:
   m_ObjectHideFlags: 0
