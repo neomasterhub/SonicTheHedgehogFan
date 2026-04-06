@@ -14,7 +14,7 @@ public class GroundInfoSystem
     Current = GroundInfo.Default;
   }
 
-  public void Update(float sideNormalAngleDeg, float? sideNormalAngleRad = null)
+  public void Update(float sideNormalAngleDeg)
   {
     Previous = Current;
 
@@ -35,13 +35,12 @@ public class GroundInfoSystem
     }
 
     var angleDeg = sideNormalAngleDeg + side.GetCcwAngleDeg();
-    var angleRad = angleDeg * Mathf.Deg2Rad;
 
     Current = new(
-      sideNormalAngleDeg,
-      sideNormalAngleRad ?? sideNormalAngleDeg * Mathf.Deg2Rad,
-      side,
       angleDeg,
-      angleRad);
+      angleDeg * Mathf.Deg2Rad,
+      side,
+      sideNormalAngleDeg,
+      sideNormalAngleDeg * Mathf.Deg2Rad);
   }
 }

@@ -40,7 +40,7 @@ public partial class SonicController
   {
     _isGrounded = true;
     _state = SonicState.Grounded;
-    _groundInfoSystem.Update(_lastGroundDetectionResult.AngleDeg, _lastGroundDetectionResult.AngleRad);
+    _groundInfoSystem.Update(_lastGroundDetectionResult.AngleDeg);
   }
 
   private void AnalyzeEnvironment_Airborn()
