@@ -11,6 +11,15 @@ public class GroundInfo
   public float SideAngleDeg { get; private set; }
   public float SideAngleRad { get; private set; }
 
+  public void Reset()
+  {
+    Side = GroundSide.Down;
+    SideAngleDeg = 0;
+    SideAngleRad = 0;
+    AngleDeg = 0;
+    AngleRad = 0;
+  }
+
   public void Update(float sideNormalAngleDeg)
   {
     if (!_slopeRangeDeg.Includes(sideNormalAngleDeg))
