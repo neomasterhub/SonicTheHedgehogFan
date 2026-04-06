@@ -12,11 +12,6 @@ public partial class SonicController
   {
     _info.Clear();
 
-    _info.AddParLine("Prev State", _prevState);
-    _info.AddParLine("Curr State", _state);
-
-    _info.AppendLine();
-
     _info.AddParLine("Ground Side", _groundInfoSystem.Current.Side);
     _info.AddParLine("Ground Rel Angle", _groundInfoSystem.Current.SideAngleDeg, " °");
     _info.AddParLine("Ground Abs Angle", _groundInfoSystem.Current.AngleDeg, " °");
