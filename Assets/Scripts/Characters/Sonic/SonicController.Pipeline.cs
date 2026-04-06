@@ -84,13 +84,13 @@ public partial class SonicController
     }
 
     // SpeedX, SpeedY - offsets in units per frame.
-    var pos = transform.position + _groundSide switch
+    var pos = transform.position + _groundInfoSystem.Current.Side switch
     {
       GroundSide.Down => new Vector3(speedX, speedY),
       GroundSide.Right => new Vector3(-speedY, speedX),
       GroundSide.Up => new Vector3(-speedX, -speedY),
       GroundSide.Left => new Vector3(speedY, -speedX),
-      _ => throw _groundSide.ArgumentOutOfRangeException(),
+      _ => throw _groundInfoSystem.Current.Side.ArgumentOutOfRangeException(),
     };
 
     transform.position = new Vector3(pos.x.Round(2), pos.y.Round(2), transform.position.z);
