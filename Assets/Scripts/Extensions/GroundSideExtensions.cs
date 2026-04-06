@@ -1,5 +1,17 @@
 public static class GroundSideExtensions
 {
+  public static char GetFirstChar(this GroundSide side)
+  {
+    return side switch
+    {
+      GroundSide.Down => 'D',
+      GroundSide.Right => 'R',
+      GroundSide.Up => 'U',
+      GroundSide.Left => 'L',
+      _ => throw side.ArgumentOutOfRangeException()
+    };
+  }
+
   public static float GetCcwAngleDeg(this GroundSide side)
   {
     return side switch
