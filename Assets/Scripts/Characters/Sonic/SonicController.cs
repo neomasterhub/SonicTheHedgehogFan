@@ -40,9 +40,6 @@ public partial class SonicController : MonoBehaviour
   private SonicViewContext _viewContext;
   private SpriteRenderer _spriteRenderer;
 
-  [Header("Sensors")]
-  public Vector3 TopUDFLengths = new(0.3f, 0.3f, 0.5f);
-  public Vector3 BottomUDFLengths = new(0.3f, 0.1f, 0.5f);
   [Header("Physics")]
   public bool GravityEnabled = true;
   [Header("Rotators")]
