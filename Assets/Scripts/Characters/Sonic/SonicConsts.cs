@@ -28,6 +28,9 @@ public static class SonicConsts
     public const float GravityUpSpeed = GravityUpSpeedSpx / SpxPerUnit;
     public const float MaxFallSpeed = MaxFallSpeedPx / PxPerUnit;
     public const float SlopeFactor = SlopeFactorSpx / SpxPerUnit;
+
+    public static readonly Vector2 WallToAirSpeedDelta = new(0.011f, 0);
+    public static readonly Vector2 WallDetachPositionOffset = new(-0.1f, 0);
   }
 
   public static class Sizes

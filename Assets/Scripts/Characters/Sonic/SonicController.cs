@@ -45,8 +45,6 @@ public partial class SonicController : MonoBehaviour
   public Vector3 BottomUDFLengths = new(0.3f, 0.1f, 0.5f);
   [Header("Physics")]
   public bool GravityEnabled = true;
-  public Vector2 WallToAirSpeedDelta = new(0.011f, 0.0f);
-  public Vector2 WallDetachPositionOffset = new(-0.1f, 0.0f);
   [Header("Rotators")]
   public bool GroundedViewRotatorEnabled = true;
   public bool WallToAirViewRotatorEnabled = true;
