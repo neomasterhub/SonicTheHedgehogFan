@@ -40,11 +40,8 @@ public partial class SonicController : MonoBehaviour
   private SonicViewContext _viewContext;
   private SpriteRenderer _spriteRenderer;
 
-  [Header("Physics")]
   public bool GravityEnabled = true;
-  [Header("Rotators")]
   public bool GroundedViewRotatorEnabled = true;
   public bool WallToAirViewRotatorEnabled = true;
-  [Header("Canvas")]
   public TextMeshProUGUI InfoText;
 }
