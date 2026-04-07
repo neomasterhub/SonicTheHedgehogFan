@@ -11,7 +11,6 @@ public partial class SonicController : MonoBehaviour
 {
   private const float _groundedPositionUpwardOffset = 0.05f;
   private const float _inputDeadZone = 0.001f;
-  private const float MaxSkiddingSpeed = 0.1f;
   private const float _rotWallToAirDelta = 3;
 
   private readonly ConditionalValueProvider<float> _slopeFactorSpeedProvider;
