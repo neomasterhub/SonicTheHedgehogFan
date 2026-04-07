@@ -9,6 +9,4 @@ public readonly struct PlayerSpeedConfig
   public readonly float AirTopSpeed;
   public readonly float AirAccelerationSpeed;
   public readonly float MaxFallSpeed;
-
-  public readonly float InputDeadZone;
 }
