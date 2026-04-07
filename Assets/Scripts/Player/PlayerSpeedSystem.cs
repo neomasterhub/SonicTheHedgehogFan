@@ -168,7 +168,7 @@ public class PlayerSpeedSystem
   {
     if (GroundSpeed < 0)
     {
-      if (GroundSpeed < -_config.SkiddingSpeedDeadZone)
+      if (GroundSpeed < -_config.MaxSkiddingSpeed)
       {
         IsSkidding = true;
       }
@@ -196,7 +196,7 @@ public class PlayerSpeedSystem
   {
     if (GroundSpeed > 0)
     {
-      if (GroundSpeed > _config.SkiddingSpeedDeadZone)
+      if (GroundSpeed > _config.MaxSkiddingSpeed)
       {
         IsSkidding = true;
       }
