@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using static SharedConsts.Input;
 
 public class PlayerSpeedSystem
 {
@@ -109,7 +110,7 @@ public class PlayerSpeedSystem
 
   private void SetSpeed_Airborne_Horizontal()
   {
-    if (Mathf.Abs(_inputSystem.X) < _config.InputDeadZone)
+    if (Mathf.Abs(_inputSystem.X) < InputDeadZone)
     {
       return;
     }

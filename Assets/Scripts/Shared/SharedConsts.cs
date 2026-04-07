@@ -1,7 +1,5 @@
 public static class SharedConsts
 {
-  public const float InputDeadZone = 0.001f;
-
   public static class ConvertValues
   {
     public const int FramePerSec = 60;
@@ -10,11 +8,16 @@ public static class SharedConsts
     public const int SpxPerUnit = SpxPerPx * PxPerUnit;
   }
 
-  public static class InputAxis
+  public static class Input
   {
-    public const string Jump = nameof(Jump);
-    public const string Horizontal = nameof(Horizontal);
-    public const string Vertical = nameof(Vertical);
+    public const float InputDeadZone = 0.001f;
+
+    public static class Axis
+    {
+      public const string Jump = nameof(Jump);
+      public const string Horizontal = nameof(Horizontal);
+      public const string Vertical = nameof(Vertical);
+    }
   }
 
   public static class Physics

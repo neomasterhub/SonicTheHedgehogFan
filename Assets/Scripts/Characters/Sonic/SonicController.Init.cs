@@ -1,6 +1,6 @@
 using UnityEngine;
 using static SharedConsts.ConvertValues;
-using static SharedConsts.InputAxis;
+using static SharedConsts.Input.Axis;
 using static SonicConsts.Physics;
 
 /// <summary>
