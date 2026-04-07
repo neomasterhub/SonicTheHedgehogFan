@@ -103,7 +103,7 @@ public class PlayerSpeedSystem
   {
     if (SpeedY < 0 && _context.DistanceToGround != null)
     {
-      SpeedY = -Mathf.Min(Mathf.Abs(SpeedY), _context.DistanceToGround.Value);
+      SpeedY = Mathf.Max(SpeedY, -_context.DistanceToGround.Value);
     }
   }
 
