@@ -19,6 +19,6 @@ public readonly struct GroundInfo
 
   public override string ToString()
   {
-    return $"{AngleDeg,3:0;-0;0} {Side.GetFirstChar()} {SideAngleDeg,3:0;-0;0}";
+    return $"{AngleDeg,4:0;-0;0} {Side.GetFirstChar()} {SideAngleDeg,4:0;-0;0}";
   }
 }
