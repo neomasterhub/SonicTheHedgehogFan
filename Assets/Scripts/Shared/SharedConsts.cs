@@ -1,5 +1,7 @@
 public static class SharedConsts
 {
+  public const float InputDeadZone = 0.001f;
+
   public static class ConvertValues
   {
     public const int FramePerSec = 60;
