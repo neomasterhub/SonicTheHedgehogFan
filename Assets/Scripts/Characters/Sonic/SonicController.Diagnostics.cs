@@ -12,21 +12,10 @@ public partial class SonicController
   {
     _info.Clear();
 
-    _info.AddParLine("Prev State", _prevState);
-    _info.AddParLine("Curr State", _state);
-
-    _info.AppendLine();
-
-    _info.AddParLine("Ground Side", _groundInfoSystem.Current.Side);
-    _info.AddParLine("Ground Rel Angle", _groundInfoSystem.Current.SideAngleDeg, " °");
-    _info.AddParLine("Ground Abs Angle", _groundInfoSystem.Current.AngleDeg, " °");
-    _info.AddParLine("Slope Speed", _speedSystem.SlopeFactorSpeed, 4);
-    _info.AddParLine("Ground Speed", _speedSystem.GroundSpeed, 4);
-
-    _info.AppendLine();
-
-    _info.AddParLine("Speed X", _speedSystem.SpeedX, 4);
-    _info.AddParLine("Speed Y", _speedSystem.SpeedY, 4);
+    _info.AppendLine($"GP {_groundInfoSystem.Previous}");
+    _info.AppendLine($"GC {_groundInfoSystem.Current}");
+    _info.AppendLine($"GS {_speedSystem.SlopeFactorSpeed * 10000,5:0;-0;0} {_speedSystem.GroundSpeed * 10000,5:0;-0;0}");
+    _info.AppendLine($"SP {_speedSystem.SpeedX * 10000,5:0;-0;0} {_speedSystem.SpeedY * 10000,5:0;-0;0}");
 
     InfoText.SetText(_info);
   }
