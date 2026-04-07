@@ -1,4 +1,5 @@
 using UnityEngine;
+using static SonicConsts.Physics;
 
 /// <summary>
 /// Pipeline.
