@@ -16,4 +16,9 @@ public readonly struct GroundInfo
     SideAngleDeg = sideAngleDeg;
     SideAngleRad = sideAngleRad;
   }
+
+  public override string ToString()
+  {
+    return $"{AngleDeg,3:0;-0;0} {Side.GetFirstChar()} {SideAngleDeg,3:0;-0;0}";
+  }
 }
