@@ -2,6 +2,7 @@ using UnityEngine;
 using static SharedConsts.ConvertValues;
 using static SharedConsts.Input.Axis;
 using static SonicConsts.Physics;
+using static SonicConsts.View;
 
 /// <summary>
 /// Initializations.
@@ -58,7 +59,7 @@ public partial class SonicController
       && _isGrounded);
 
     var rotWallToAir = new WallToAirSonicViewRotator(
-      _rotWallToAirDelta,
+      AngleDegViewRotatorWallToAirDelta,
       () => WallToAirViewRotatorEnabled
       && !_isGrounded
       && _prevIsGrounded

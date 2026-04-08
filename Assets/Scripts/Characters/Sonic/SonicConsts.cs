@@ -63,5 +63,6 @@ public static class SonicConsts
     public const float SpeedWalkingMin = 0.5f;
     public const float SpeedWalkingFactor = 3;
     public const float AngleDegStandingStraightMax = 38;
+    public const float AngleDegViewRotatorWallToAirDelta = 3;
   }
 }

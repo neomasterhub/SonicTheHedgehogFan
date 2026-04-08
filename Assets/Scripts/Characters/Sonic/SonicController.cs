@@ -9,8 +9,6 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public partial class SonicController : MonoBehaviour
 {
-  private const float _rotWallToAirDelta = 3;
-
   private readonly ConditionalValueProvider<float> _slopeFactorSpeedProvider;
   private readonly ConditionalValueProvider<Vector2> _groundToAirSpeedProvider;
   private readonly ConditionalValueProvider<GravitySpeed> _gravitySpeedProvider;
