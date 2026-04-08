@@ -97,15 +97,15 @@ public partial class SonicController
     return _postWallDetachInputLock ? Vector2.zero : new(Input.GetAxis(Horizontal), Input.GetAxis(Vertical));
   }
 
-  private ButtonInput GetButtonInput()
+  private PlayerInput GetPlayerInput()
   {
-    return ButtonInput.None
-      .SetFlag(ButtonInput.Start, Input.GetKey(KeyCode.KeypadEnter))
-      .SetFlag(ButtonInput.A, Input.GetKey(KeyCode.Keypad1))
-      .SetFlag(ButtonInput.B, Input.GetKey(KeyCode.Keypad2))
-      .SetFlag(ButtonInput.C, Input.GetKey(KeyCode.Keypad3))
-      .SetFlag(ButtonInput.X, Input.GetKey(KeyCode.Keypad4))
-      .SetFlag(ButtonInput.Y, Input.GetKey(KeyCode.Keypad5))
-      .SetFlag(ButtonInput.Z, Input.GetKey(KeyCode.Keypad6));
+    return PlayerInput.None
+      .SetFlag(PlayerInput.Start, Input.GetKey(KeyCode.KeypadEnter))
+      .SetFlag(PlayerInput.A, Input.GetKey(KeyCode.Keypad1))
+      .SetFlag(PlayerInput.B, Input.GetKey(KeyCode.Keypad2))
+      .SetFlag(PlayerInput.C, Input.GetKey(KeyCode.Keypad3))
+      .SetFlag(PlayerInput.X, Input.GetKey(KeyCode.Keypad4))
+      .SetFlag(PlayerInput.Y, Input.GetKey(KeyCode.Keypad5))
+      .SetFlag(PlayerInput.Z, Input.GetKey(KeyCode.Keypad6));
   }
 }

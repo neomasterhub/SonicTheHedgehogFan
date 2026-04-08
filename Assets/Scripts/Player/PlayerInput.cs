@@ -1,7 +1,7 @@
 using System;
 
 [Flags]
-public enum ButtonInput
+public enum PlayerInput
 {
   None = 0,
   Start = 1,

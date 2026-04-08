@@ -9,7 +9,7 @@ public partial class SonicController
 {
   // TODO: remove after input history impl.
   public GameObject InfoPanel;
-  private ButtonInput _prev;
+  private PlayerInput _prev;
 
   private void FixedUpdate()
   {
@@ -20,7 +20,7 @@ public partial class SonicController
     UpdatePosition();
     Output();
 
-    if (_inputSystem.ButtonInput.HasFlag(ButtonInput.C) && !_prev.HasFlag(ButtonInput.C))
+    if (_inputSystem.ButtonInput.HasFlag(PlayerInput.C) && !_prev.HasFlag(PlayerInput.C))
     {
       InfoPanel.SetActive(!InfoPanel.activeSelf);
     }

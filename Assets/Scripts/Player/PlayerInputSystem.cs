@@ -6,13 +6,13 @@ public class PlayerInputSystem
   private readonly int _inputHistoryLimit;
   private readonly InputState[] _inputHistory;
   private readonly Func<Vector2> _dPadInputSrc;
-  private readonly Func<ButtonInput> _buttonInputSrc;
+  private readonly Func<PlayerInput> _buttonInputSrc;
 
   private int _inputHistoryIndex = 0;
 
   public PlayerInputSystem(
     Func<Vector2> dPadSrc,
-    Func<ButtonInput> buttonInputSrc,
+    Func<PlayerInput> buttonInputSrc,
     int inputHistoryLimit = 10)
   {
     _dPadInputSrc = dPadSrc;
@@ -23,7 +23,7 @@ public class PlayerInputSystem
   }
 
   public Vector2 DPadInput { get; private set; } = default;
-  public ButtonInput ButtonInput { get; private set; }
+  public PlayerInput ButtonInput { get; private set; }
 
   public void Update()
   {
