@@ -9,6 +9,7 @@ public partial class SonicController
 {
   private void FixedUpdate()
   {
+    BeginFrame();
     AnalyzeEnvironment();
     ApplyEffects();
     ApplyMovement();
@@ -17,12 +18,15 @@ public partial class SonicController
     Output();
   }
 
-  private void AnalyzeEnvironment()
+  private void BeginFrame()
   {
     _prevState = _state;
     _prevIsGrounded = _isGrounded;
-
     _timerSystem.Update(Time.deltaTime);
+  }
+
+  private void AnalyzeEnvironment()
+  {
     _inputSystem.Update();
     _sensorSystem.Update(_sizeMode, _groundInfoSystem.Current.Side, transform.position, TopUDFLengths, BottomUDFLengths);
 
