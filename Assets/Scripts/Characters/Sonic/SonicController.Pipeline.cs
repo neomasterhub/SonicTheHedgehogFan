@@ -7,6 +7,10 @@ using static SonicConsts.Physics;
 /// </summary>
 public partial class SonicController
 {
+  // TODO: remove after input history impl.
+  public GameObject InfoPanel;
+  private ButtonInput _prev;
+
   private void FixedUpdate()
   {
     AnalyzeEnvironment();
@@ -15,6 +19,13 @@ public partial class SonicController
     UpdateView();
     UpdatePosition();
     Output();
+
+    if (_inputSystem.ButtonInput.HasFlag(ButtonInput.C) && !_prev.HasFlag(ButtonInput.C))
+    {
+      InfoPanel.SetActive(!InfoPanel.activeSelf);
+    }
+
+    _prev = _inputSystem.ButtonInput;
   }
 
   private void AnalyzeEnvironment()
