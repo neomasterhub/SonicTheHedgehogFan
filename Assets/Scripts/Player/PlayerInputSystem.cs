@@ -6,6 +6,8 @@ public class PlayerInputSystem
   private readonly Func<Vector2> _dPadInputSrc;
   private readonly Func<PlayerInput> _inputSrc;
 
+  private PlayerInput _prevInput;
+
   public PlayerInputSystem(
     Func<Vector2> dPadSrc,
     Func<PlayerInput> inputSrc)
@@ -20,6 +22,13 @@ public class PlayerInputSystem
   public void Update()
   {
     DPadInput = _dPadInputSrc();
+
+    _prevInput = Input;
     Input = _inputSrc();
+  }
+
+  public bool IsPressed(PlayerInput input)
+  {
+    return Input.HasFlag(input) && !_prevInput.HasFlag(input);
   }
 }

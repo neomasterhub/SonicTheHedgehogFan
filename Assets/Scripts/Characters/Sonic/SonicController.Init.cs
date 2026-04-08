@@ -23,7 +23,7 @@ public partial class SonicController
     _timerSystem = new();
     _viewRotatorProvider = new();
 
-    _inputSystem = new(GetDPadInput, GetButtonInput);
+    _inputSystem = new(GetDPadInput, GetPlayerInput);
     _speedConfig = new(TopSpeed, FrictionSpeed, MaxSkiddingSpeed, AccelerationSpeed, DecelerationSpeed, AirTopSpeed, AirAccelerationSpeed, MaxFallSpeed);
     _speedSystem = new(_inputSystem, _speedConfig, _gravitySpeedProvider, _slopeFactorSpeedProvider, _groundToAirSpeedProvider);
     _viewSystem = new(_inputSystem, _viewRotatorProvider);

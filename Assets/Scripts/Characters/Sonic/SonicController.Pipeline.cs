@@ -20,12 +20,10 @@ public partial class SonicController
     UpdatePosition();
     Output();
 
-    if (_inputSystem.Input.HasFlag(PlayerInput.C) && !_prev.HasFlag(PlayerInput.C))
+    if (_inputSystem.IsPressed(PlayerInput.C))
     {
       InfoPanel.SetActive(!InfoPanel.activeSelf);
     }
-
-    _prev = _inputSystem.Input;
   }
 
   private void AnalyzeEnvironment()
