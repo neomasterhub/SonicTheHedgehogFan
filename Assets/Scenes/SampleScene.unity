@@ -2323,8 +2323,7 @@ MonoBehaviour:
   GravityEnabled: 1
   GroundedViewRotatorEnabled: 1
   WallToAirViewRotatorEnabled: 1
-  InfoText: {fileID: 1892464623}
-  InfoPanel: {fileID: 1391926816}
+  Canvas: {fileID: 1049324918}
 --- !u!1 &915818884
 GameObject:
   m_ObjectHideFlags: 0
@@ -2803,7 +2802,7 @@ GameObject:
   - component: {fileID: 1892464624}
   - component: {fileID: 1892464623}
   m_Layer: 5
-  m_Name: Info
+  m_Name: Info Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
