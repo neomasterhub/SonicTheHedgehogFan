@@ -37,6 +37,7 @@ public class PlayerSpeedSystem
   public float GroundSpeed { get; private set; }
   public float SlopeFactorSpeed { get; private set; }
   public int ZeroGroundSpeedProgress { get; private set; }
+  public bool IsZeroGroundSpeedProgressReached { get; private set; }
   public GravitySpeed GravitySpeed { get; private set; }
 
   private void RoundSpeeds()
@@ -152,10 +153,12 @@ public class PlayerSpeedSystem
     if (GroundSpeed == 0)
     {
       ZeroGroundSpeedProgress = Mathf.Min(ZeroGroundSpeedProgress + 1, _zeroGroundSpeedProgressMax);
+      IsZeroGroundSpeedProgressReached = ZeroGroundSpeedProgress == _zeroGroundSpeedProgressMax;
     }
     else
     {
       ZeroGroundSpeedProgress = 0;
+      IsZeroGroundSpeedProgressReached = false;
     }
   }
 
