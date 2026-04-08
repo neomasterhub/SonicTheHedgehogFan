@@ -1,39 +1,38 @@
 using System;
+using UnityEngine;
 
 public class PlayerInputSystem
 {
-  private readonly Func<float> _xSrc;
-  private readonly Func<float> _ySrc;
+  private readonly int _inputHistoryLimit;
+  private readonly InputState[] _inputHistory;
+  private readonly Func<Vector2> _dPadInputSrc;
+  private readonly Func<ButtonInput> _buttonInputSrc;
+
+  private int _inputHistoryIndex = 0;
 
   public PlayerInputSystem(
-    Func<float> xSrc,
-    Func<float> ySrc)
+    Func<Vector2> dPadSrc,
+    Func<ButtonInput> buttonInputSrc,
+    int inputHistoryLimit = 10)
   {
-    _xSrc = xSrc;
-    _ySrc = ySrc;
+    _dPadInputSrc = dPadSrc;
+    _buttonInputSrc = buttonInputSrc;
+
+    _inputHistoryLimit = inputHistoryLimit;
+    _inputHistory = new InputState[inputHistoryLimit];
   }
 
-  public bool Enabled { get; set; } = true;
-  public float X { get; private set; }
-  public float Y { get; private set; }
-  public float XDirection { get; private set; }
-  public float YDirection { get; private set; }
+  public Vector2 DPadInput { get; private set; } = default;
+  public ButtonInput ButtonInput { get; private set; }
 
-  public void Update(bool enabled = true)
+  public void Update()
   {
-    Enabled = enabled;
+    DPadInput = _dPadInputSrc();
+    ButtonInput = _buttonInputSrc();
 
-    if (Enabled)
-    {
-      X = _xSrc();
-      Y = _ySrc();
-      XDirection = Math.Sign(X);
-      YDirection = Math.Sign(Y);
-    }
-    else
-    {
-      X = 0;
-      Y = 0;
-    }
+    Debug.Log($"ButtonInput: {ButtonInput}");
+
+    _inputHistory[_inputHistoryIndex] = new(DPadInput, ButtonInput);
+    _inputHistoryIndex = (_inputHistoryIndex + 1) % _inputHistoryLimit;
   }
 }

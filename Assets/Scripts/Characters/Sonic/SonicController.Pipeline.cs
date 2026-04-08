@@ -7,6 +7,10 @@ using static SonicConsts.Physics;
 /// </summary>
 public partial class SonicController
 {
+  // TODO: remove after input history impl.
+  public GameObject InfoPanel;
+  private ButtonInput _prev;
+
   private void FixedUpdate()
   {
     AnalyzeEnvironment();
@@ -15,6 +19,13 @@ public partial class SonicController
     UpdateView();
     UpdatePosition();
     Output();
+
+    if (_inputSystem.ButtonInput.HasFlag(ButtonInput.C) && !_prev.HasFlag(ButtonInput.C))
+    {
+      InfoPanel.SetActive(!InfoPanel.activeSelf);
+    }
+
+    _prev = _inputSystem.ButtonInput;
   }
 
   private void AnalyzeEnvironment()
@@ -23,7 +34,7 @@ public partial class SonicController
     _prevIsGrounded = _isGrounded;
 
     _timerSystem.Update(Time.deltaTime);
-    _inputSystem.Update(!_postWallDetachInputLock);
+    _inputSystem.Update();
     _sensorSystem.Update(_sizeMode, _groundInfoSystem.Current.Side, transform.position, TopUDFLengths, BottomUDFLengths);
 
     var groundDetectionResult = _sensorSystem.DetectGround(!_spriteRenderer.flipX, _groundLayer);
