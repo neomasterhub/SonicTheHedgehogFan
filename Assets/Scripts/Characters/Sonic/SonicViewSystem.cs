@@ -50,9 +50,10 @@ public class SonicViewSystem
     }
 
     _animator.speed = 1;
-    _animator.SetFloat(AnimatorParameters.Speed, animatorParameterSpeed);
     _animator.SetBool(AnimatorParameters.Balancing, _context.IsBalancing);
     _animator.SetBool(AnimatorParameters.Skidding, _context.IsSkidding);
+    _animator.SetBool(AnimatorParameters.Idle, _context.IsZeroGroundSpeedProgressReached);
+    _animator.SetFloat(AnimatorParameters.Speed, animatorParameterSpeed);
 
     if (_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimatorStates.Walking))
     {
