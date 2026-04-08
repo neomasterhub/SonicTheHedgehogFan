@@ -1,35 +1,19 @@
 using System;
+using UnityEngine;
 
 public class PlayerInputSystem
 {
-  private readonly Func<float> _xSrc;
-  private readonly Func<float> _ySrc;
+  private readonly Func<Vector2> _dPadSrc;
 
-  public PlayerInputSystem(
-    Func<float> xSrc,
-    Func<float> ySrc)
+  public PlayerInputSystem(Func<Vector2> dPadSrc)
   {
-    _xSrc = xSrc;
-    _ySrc = ySrc;
+    _dPadSrc = dPadSrc;
   }
 
-  public bool Enabled { get; set; } = true;
-  public float X { get; private set; }
-  public float Y { get; private set; }
+  public Vector2 DPad { get; private set; }
 
-  public void Update(bool enabled = true)
+  public void Update()
   {
-    Enabled = enabled;
-
-    if (Enabled)
-    {
-      X = _xSrc();
-      Y = _ySrc();
-    }
-    else
-    {
-      X = 0;
-      Y = 0;
-    }
+    DPad = _dPadSrc();
   }
 }

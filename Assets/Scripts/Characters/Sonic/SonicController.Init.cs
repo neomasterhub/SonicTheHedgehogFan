@@ -23,7 +23,7 @@ public partial class SonicController
     _timerSystem = new();
     _viewRotatorProvider = new();
 
-    _inputSystem = new(() => Input.GetAxis(Horizontal), () => Input.GetAxis(Vertical));
+    _inputSystem = new(() => _postWallDetachInputLock ? Vector2.zero : new(Input.GetAxis(Horizontal), Input.GetAxis(Vertical)));
     _speedConfig = new(TopSpeed, FrictionSpeed, MaxSkiddingSpeed, AccelerationSpeed, DecelerationSpeed, AirTopSpeed, AirAccelerationSpeed, MaxFallSpeed);
     _speedSystem = new(_inputSystem, _speedConfig, _gravitySpeedProvider, _slopeFactorSpeedProvider, _groundToAirSpeedProvider);
     _viewSystem = new(_inputSystem, _viewRotatorProvider);
