@@ -4,7 +4,8 @@ using static SharedConsts.Input;
 
 public class PlayerSpeedSystem
 {
-  private const int _speedDigits = 3;
+  private const int _speedRoundingDigits = 3;
+  private const int _zeroGroundSpeedProgressMax = 3;
 
   private readonly ConditionalValueProvider<GravitySpeed> _gravitySpeedProvider = new();
   private readonly ConditionalValueProvider<float> _slopeFactorSpeedProvider;
@@ -12,9 +13,9 @@ public class PlayerSpeedSystem
   private readonly PlayerInputSystem _inputSystem;
   private readonly PlayerSpeedConfig _config;
 
-  private PlayerSpeedContext _context;
   private float _groundAngleCos;
   private float _groundAngleSin;
+  private PlayerSpeedContext _context;
 
   public PlayerSpeedSystem(
     PlayerInputSystem inputSystem,
@@ -35,13 +36,15 @@ public class PlayerSpeedSystem
   public float SpeedY { get; private set; }
   public float GroundSpeed { get; private set; }
   public float SlopeFactorSpeed { get; private set; }
+  public int ZeroGroundSpeedProgress { get; private set; }
+  public bool IsZeroGroundSpeedProgressReached { get; private set; }
   public GravitySpeed GravitySpeed { get; private set; }
 
   private void RoundSpeeds()
   {
-    SpeedX = SpeedX.Round(_speedDigits);
-    SpeedY = SpeedY.Round(_speedDigits);
-    GroundSpeed = GroundSpeed.Round(_speedDigits);
+    SpeedX = SpeedX.Round(_speedRoundingDigits);
+    SpeedY = SpeedY.Round(_speedRoundingDigits);
+    GroundSpeed = GroundSpeed.Round(_speedRoundingDigits);
   }
 
   public void ResetSpeeds()
@@ -146,6 +149,17 @@ public class PlayerSpeedSystem
 
     SpeedX = GroundSpeed * _groundAngleCos;
     SpeedY = GroundSpeed * _groundAngleSin;
+
+    if (GroundSpeed == 0)
+    {
+      ZeroGroundSpeedProgress = Mathf.Min(ZeroGroundSpeedProgress + 1, _zeroGroundSpeedProgressMax);
+      IsZeroGroundSpeedProgressReached = ZeroGroundSpeedProgress == _zeroGroundSpeedProgressMax;
+    }
+    else
+    {
+      ZeroGroundSpeedProgress = 0;
+      IsZeroGroundSpeedProgressReached = false;
+    }
   }
 
   private void SetSpeed_Grounded_FromAirborne()

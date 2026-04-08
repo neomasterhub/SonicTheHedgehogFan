@@ -50,9 +50,10 @@ public class SonicViewSystem
     }
 
     _animator.speed = 1;
-    _animator.SetFloat(AnimatorParameters.Speed, animatorParameterSpeed);
     _animator.SetBool(AnimatorParameters.Balancing, _context.IsBalancing);
     _animator.SetBool(AnimatorParameters.Skidding, _context.IsSkidding);
+    _animator.SetBool(AnimatorParameters.Idle, _context.IsZeroGroundSpeedProgressReached);
+    _animator.SetFloat(AnimatorParameters.Speed, animatorParameterSpeed);
 
     if (_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimatorStates.Walking))
     {
@@ -72,13 +73,7 @@ public class SonicViewSystem
 
     if (_rotator != null)
     {
-      _rotator.Rotate(new SonicViewRotatorContext(
-        _context.IsGrounded,
-        _context.GroundSpeed,
-        _context.GroundAngleDeg,
-        _context.GroundSide,
-        _context.PrevGroundSide));
-
+      _rotator.Rotate(SonicViewRotatorContext.FromViewContext(_context));
       _spriteRenderer.transform.localRotation = Quaternion.Euler(_rotator.Rotation);
     }
 
