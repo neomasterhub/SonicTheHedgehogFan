@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using static SharedConsts.ConvertValues;
 using static SharedConsts.Input.Axis;
@@ -48,6 +49,8 @@ public partial class SonicController
   {
     _animator = GetComponent<Animator>();
     _spriteRenderer = GetComponent<SpriteRenderer>();
+    _infoPanel = Canvas.transform.Find("Info Panel").gameObject;
+    _infoText = _infoPanel.transform.Find("Info Text").GetComponent<TextMeshProUGUI>();
   }
 
   private void InitializeViewSystem()
