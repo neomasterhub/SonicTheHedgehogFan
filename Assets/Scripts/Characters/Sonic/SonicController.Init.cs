@@ -101,6 +101,10 @@ public partial class SonicController
   {
     return PlayerInput.None
       .SetFlag(PlayerInput.Start, Input.GetKey(KeyCode.KeypadEnter))
+      .SetFlag(PlayerInput.Left, Input.GetKey(KeyCode.LeftArrow))
+      .SetFlag(PlayerInput.Right, Input.GetKey(KeyCode.RightArrow))
+      .SetFlag(PlayerInput.Up, Input.GetKey(KeyCode.UpArrow))
+      .SetFlag(PlayerInput.Down, Input.GetKey(KeyCode.DownArrow))
       .SetFlag(PlayerInput.A, Input.GetKey(KeyCode.Keypad1))
       .SetFlag(PlayerInput.B, Input.GetKey(KeyCode.Keypad2))
       .SetFlag(PlayerInput.C, Input.GetKey(KeyCode.Keypad3))
