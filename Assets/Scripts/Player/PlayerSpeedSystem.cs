@@ -12,9 +12,9 @@ public class PlayerSpeedSystem
   private readonly PlayerInputSystem _inputSystem;
   private readonly PlayerSpeedConfig _config;
 
-  private PlayerSpeedContext _context;
   private float _groundAngleCos;
   private float _groundAngleSin;
+  private PlayerSpeedContext _context;
 
   public PlayerSpeedSystem(
     PlayerInputSystem inputSystem,
