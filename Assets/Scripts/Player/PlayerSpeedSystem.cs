@@ -4,7 +4,7 @@ using static SharedConsts.Input;
 
 public class PlayerSpeedSystem
 {
-  private const int _speedDigits = 3;
+  private const int _speedRoundingDigits = 3;
 
   private readonly ConditionalValueProvider<GravitySpeed> _gravitySpeedProvider = new();
   private readonly ConditionalValueProvider<float> _slopeFactorSpeedProvider;
@@ -40,9 +40,9 @@ public class PlayerSpeedSystem
 
   private void RoundSpeeds()
   {
-    SpeedX = SpeedX.Round(_speedDigits);
-    SpeedY = SpeedY.Round(_speedDigits);
-    GroundSpeed = GroundSpeed.Round(_speedDigits);
+    SpeedX = SpeedX.Round(_speedRoundingDigits);
+    SpeedY = SpeedY.Round(_speedRoundingDigits);
+    GroundSpeed = GroundSpeed.Round(_speedRoundingDigits);
   }
 
   public void ResetSpeeds()
