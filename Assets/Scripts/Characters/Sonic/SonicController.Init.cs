@@ -59,7 +59,7 @@ public partial class SonicController
       && _isGrounded);
 
     var rotWallToAir = new WallToAirSonicViewRotator(
-      AngleDegViewRotatorWallToAirDelta,
+      WallToAirViewRotatorAngleDegDelta,
       () => WallToAirViewRotatorEnabled
       && !_isGrounded
       && _prevIsGrounded

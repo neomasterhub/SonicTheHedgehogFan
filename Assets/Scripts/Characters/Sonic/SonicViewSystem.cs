@@ -46,7 +46,7 @@ public class SonicViewSystem
     {
       animatorParameterSpeed = Mathf.Max(
         _groundedAnimatorParameterSpeed,
-        SpeedAirborneMin);
+        AirborneSpeedMin);
     }
 
     _animator.speed = 1;
@@ -57,8 +57,8 @@ public class SonicViewSystem
     if (_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimatorStates.Walking))
     {
       _animator.speed = Mathf.Max(
-        SpeedWalkingMin,
-        animatorParameterSpeed / TopSpeed * SpeedWalkingFactor);
+        WalkingSpeedMin,
+        animatorParameterSpeed / TopSpeed * WalkingSpeedFactor);
     }
   }
 

@@ -59,10 +59,10 @@ public static class SonicConsts
 
   public static class View
   {
-    public const float SpeedAirborneMin = 0.02f;
-    public const float SpeedWalkingMin = 0.5f;
-    public const float SpeedWalkingFactor = 3;
-    public const float AngleDegStandingStraightMax = 38;
-    public const float AngleDegViewRotatorWallToAirDelta = 3;
+    public const float AirborneSpeedMin = 0.02f;
+    public const float WalkingSpeedMin = 0.5f;
+    public const float WalkingSpeedFactor = 3;
+    public const float StandingStraightAngleDegMax = 38;
+    public const float WallToAirViewRotatorAngleDegDelta = 3;
   }
 }
