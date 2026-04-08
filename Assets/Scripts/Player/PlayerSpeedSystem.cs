@@ -134,11 +134,11 @@ public class PlayerSpeedSystem
     SetSpeed_Grounded_FromAirborne();
     SetSpeed_Grounded_Slope();
 
-    if (_inputSystem.DPad.x > 0)
+    if (_inputSystem.DPad.x > InputDeadZone)
     {
       SetSpeed_Grounded_Forward();
     }
-    else if (_inputSystem.DPad.x < 0)
+    else if (_inputSystem.DPad.x < -InputDeadZone)
     {
       SetSpeed_Grounded_Backward();
     }
