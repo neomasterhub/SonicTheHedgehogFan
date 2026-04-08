@@ -1,17 +1,25 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerInputSystem
 {
+  private readonly int _inputHistoryLimit;
+  private readonly InputState[] _inputHistory;
   private readonly Func<Vector2> _dPadSrc;
   private readonly Func<ButtonInput> _buttonInputSrc;
-  private readonly List<InputState> _inputHistory = new();
 
-  public PlayerInputSystem(Func<Vector2> dPadSrc, Func<ButtonInput> buttonInputSrc)
+  private int _inputHistoryIndex = 0;
+
+  public PlayerInputSystem(
+    Func<Vector2> dPadSrc,
+    Func<ButtonInput> buttonInputSrc,
+    int inputHistoryLimit = 10)
   {
     _dPadSrc = dPadSrc;
     _buttonInputSrc = buttonInputSrc;
+
+    _inputHistoryLimit = inputHistoryLimit;
+    _inputHistory = new InputState[inputHistoryLimit];
   }
 
   public Vector2 DPad { get; private set; }
@@ -21,6 +29,8 @@ public class PlayerInputSystem
   {
     DPad = _dPadSrc();
     ButtonInput = _buttonInputSrc();
-    _inputHistory.Add(new(DPad, ButtonInput));
+
+    _inputHistory[_inputHistoryIndex] = new(DPad, ButtonInput);
+    _inputHistoryIndex = (_inputHistoryIndex + 1) % _inputHistoryLimit;
   }
 }
