@@ -16,8 +16,6 @@ public class PlayerInputSystem
   public bool Enabled { get; set; } = true;
   public float X { get; private set; }
   public float Y { get; private set; }
-  public float XDirection { get; private set; }
-  public float YDirection { get; private set; }
 
   public void Update(bool enabled = true)
   {
@@ -27,8 +25,6 @@ public class PlayerInputSystem
     {
       X = _xSrc();
       Y = _ySrc();
-      XDirection = Math.Sign(X);
-      YDirection = Math.Sign(Y);
     }
     else
     {
