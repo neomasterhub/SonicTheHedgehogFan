@@ -5,6 +5,7 @@ using static SharedConsts.Input;
 public class PlayerSpeedSystem
 {
   private const int _speedRoundingDigits = 3;
+  private const int _zeroGroundSpeedProgressThreshold = 3;
 
   private readonly ConditionalValueProvider<GravitySpeed> _gravitySpeedProvider = new();
   private readonly ConditionalValueProvider<float> _slopeFactorSpeedProvider;
@@ -35,6 +36,7 @@ public class PlayerSpeedSystem
   public float SpeedY { get; private set; }
   public float GroundSpeed { get; private set; }
   public float SlopeFactorSpeed { get; private set; }
+  public int ZeroGroundSpeedProgress { get; private set; }
   public GravitySpeed GravitySpeed { get; private set; }
 
   private void RoundSpeeds()
@@ -146,6 +148,15 @@ public class PlayerSpeedSystem
 
     SpeedX = GroundSpeed * _groundAngleCos;
     SpeedY = GroundSpeed * _groundAngleSin;
+
+    if (GroundSpeed == 0)
+    {
+      ZeroGroundSpeedProgress = Mathf.Min(ZeroGroundSpeedProgress + 1, _zeroGroundSpeedProgressThreshold);
+    }
+    else
+    {
+      ZeroGroundSpeedProgress = 0;
+    }
   }
 
   private void SetSpeed_Grounded_FromAirborne()
