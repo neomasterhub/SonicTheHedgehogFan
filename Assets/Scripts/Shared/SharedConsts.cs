@@ -35,6 +35,7 @@ public static class SharedConsts
   {
     public static class Parameters
     {
+      public const string Idle = nameof(Idle);
       public const string Speed = nameof(Speed);
       public const string Skidding = nameof(Skidding);
       public const string Balancing = nameof(Balancing);
