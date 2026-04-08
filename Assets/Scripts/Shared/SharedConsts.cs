@@ -22,6 +22,8 @@ public static class SharedConsts
 
   public static class Physics
   {
+    public const float GroundedPositionUpwardOffset = 0.05f;
+
     public static class GroundAngleRanges
     {
       public static readonly Range Flat = new(-23, 23);

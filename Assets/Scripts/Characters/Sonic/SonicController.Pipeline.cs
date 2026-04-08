@@ -81,7 +81,7 @@ public partial class SonicController
       // Keeps surface normal aligned with slope.
       speedY -= (_lastGroundDetectionResult.Distance
         * (int)_lastGroundDetectionResult.SensorGroundSide)
-        - _groundedPositionUpwardOffset;
+        - GroundedPositionUpwardOffset;
     }
 
     // SpeedX, SpeedY - offsets in units per frame.
