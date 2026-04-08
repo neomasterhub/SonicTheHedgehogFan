@@ -2324,7 +2324,7 @@ MonoBehaviour:
   GroundedViewRotatorEnabled: 1
   WallToAirViewRotatorEnabled: 1
   InfoText: {fileID: 1892464623}
-  InfoPanel: {fileID: 0}
+  InfoPanel: {fileID: 1391926816}
 --- !u!1 &915818884
 GameObject:
   m_ObjectHideFlags: 0
@@ -2857,7 +2857,7 @@ MonoBehaviour:
     SP -0000 -0000'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 80788c3403104b940a534d2bbae44f3a, type: 2}
-  m_sharedMaterial: {fileID: -8720214404411888593, guid: 80788c3403104b940a534d2bbae44f3a, type: 2}
+  m_sharedMaterial: {fileID: -5477974177161770089, guid: 80788c3403104b940a534d2bbae44f3a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
