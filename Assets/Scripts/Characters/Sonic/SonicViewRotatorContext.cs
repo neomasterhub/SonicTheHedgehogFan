@@ -16,4 +16,15 @@ public readonly struct SonicViewRotatorContext
     GroundSide = groundSide;
     PrevGroundSide = prevGroundSide;
   }
+
+  public static SonicViewRotatorContext FromViewContext(SonicViewContext viewContext)
+  {
+    return new SonicViewRotatorContext(
+      viewContext.IsGrounded,
+      viewContext.GroundSpeed,
+      viewContext.GroundAngleDeg,
+      viewContext.ZeroGroundSpeedProgress,
+      viewContext.GroundSide,
+      viewContext.PrevGroundSide);
+  }
 }

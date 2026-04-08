@@ -72,13 +72,7 @@ public class SonicViewSystem
 
     if (_rotator != null)
     {
-      _rotator.Rotate(new SonicViewRotatorContext(
-        _context.IsGrounded,
-        _context.GroundSpeed,
-        _context.GroundAngleDeg,
-        _context.GroundSide,
-        _context.PrevGroundSide));
-
+      _rotator.Rotate(SonicViewRotatorContext.FromViewContext(_context));
       _spriteRenderer.transform.localRotation = Quaternion.Euler(_rotator.Rotation);
     }
 
