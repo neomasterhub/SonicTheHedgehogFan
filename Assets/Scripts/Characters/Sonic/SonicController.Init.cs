@@ -1,7 +1,8 @@
 using UnityEngine;
 using static SharedConsts.ConvertValues;
-using static SharedConsts.InputAxis;
+using static SharedConsts.Input.Axis;
 using static SonicConsts.Physics;
+using static SonicConsts.View;
 
 /// <summary>
 /// Initializations.
@@ -23,7 +24,7 @@ public partial class SonicController
     _viewRotatorProvider = new();
 
     _inputSystem = new(() => Input.GetAxis(Horizontal), () => Input.GetAxis(Vertical));
-    _speedConfig = new(TopSpeed, FrictionSpeed, AccelerationSpeed, DecelerationSpeed, AirTopSpeed, AirAccelerationSpeed, MaxFallSpeed, _inputDeadZone, _skiddingSpeedDeadZone);
+    _speedConfig = new(TopSpeed, FrictionSpeed, MaxSkiddingSpeed, AccelerationSpeed, DecelerationSpeed, AirTopSpeed, AirAccelerationSpeed, MaxFallSpeed);
     _speedSystem = new(_inputSystem, _speedConfig, _gravitySpeedProvider, _slopeFactorSpeedProvider, _groundToAirSpeedProvider);
     _viewSystem = new(_inputSystem, _viewRotatorProvider);
   }
@@ -58,7 +59,7 @@ public partial class SonicController
       && _isGrounded);
 
     var rotWallToAir = new WallToAirSonicViewRotator(
-      _rotWallToAirDelta,
+      WallToAirViewRotatorAngleDegDelta,
       () => WallToAirViewRotatorEnabled
       && !_isGrounded
       && _prevIsGrounded

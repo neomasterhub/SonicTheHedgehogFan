@@ -6,6 +6,7 @@ public static class SonicConsts
   public static class Physics
   {
     public const float InputUnlockTimerSeconds = 0.5f;
+    public const float MaxSkiddingSpeed = 0.1f;
 
     public const float AccelerationSpeedSpx = 12;
     public const float DecelerationSpeedSpx = 128;
@@ -28,6 +29,11 @@ public static class SonicConsts
     public const float GravityUpSpeed = GravityUpSpeedSpx / SpxPerUnit;
     public const float MaxFallSpeed = MaxFallSpeedPx / PxPerUnit;
     public const float SlopeFactor = SlopeFactorSpx / SpxPerUnit;
+
+    public static readonly Vector3 TopUDFLengths = new(0.3f, 0.3f, 0.5f);
+    public static readonly Vector3 BottomUDFLengths = new(0.3f, 0.1f, 0.5f);
+    public static readonly Vector2 WallToAirSpeedDelta = new(0.011f, 0);
+    public static readonly Vector2 WallDetachPositionOffset = new(-0.1f, 0);
   }
 
   public static class Sizes
@@ -53,9 +59,10 @@ public static class SonicConsts
 
   public static class View
   {
-    public const float SpeedAirborneMin = 0.02f;
-    public const float SpeedWalkingMin = 0.5f;
-    public const float SpeedWalkingFactor = 3;
-    public const float AngleDegStandingStraightMax = 38;
+    public const float AirborneSpeedMin = 0.02f;
+    public const float WalkingSpeedMin = 0.5f;
+    public const float WalkingSpeedFactor = 3;
+    public const float StandingStraightAngleDegMax = 38;
+    public const float WallToAirViewRotatorAngleDegDelta = 3;
   }
 }
