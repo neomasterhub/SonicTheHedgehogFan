@@ -23,13 +23,10 @@ public partial class SonicController
     _timerSystem = new();
     _viewRotatorProvider = new();
 
+    _inputSystem = new(GetDPadInput, GetButtonInput);
     _speedConfig = new(TopSpeed, FrictionSpeed, MaxSkiddingSpeed, AccelerationSpeed, DecelerationSpeed, AirTopSpeed, AirAccelerationSpeed, MaxFallSpeed);
     _speedSystem = new(_inputSystem, _speedConfig, _gravitySpeedProvider, _slopeFactorSpeedProvider, _groundToAirSpeedProvider);
     _viewSystem = new(_inputSystem, _viewRotatorProvider);
-
-    _inputSystem = new(
-      () => _postWallDetachInputLock ? Vector2.zero : new(Input.GetAxis(Horizontal), Input.GetAxis(Vertical)),
-      GetButtonInput);
   }
 
   private void Awake()
@@ -93,6 +90,11 @@ public partial class SonicController
 
     _gravitySpeedProvider.DefaultProvider = () => GravitySpeed.Zero;
     _groundToAirSpeedProvider.DefaultProvider = () => new(_speedSystem.SpeedX, _speedSystem.SpeedY);
+  }
+
+  private Vector2 GetDPadInput()
+  {
+    return _postWallDetachInputLock ? Vector2.zero : new(Input.GetAxis(Horizontal), Input.GetAxis(Vertical));
   }
 
   private ButtonInput GetButtonInput()

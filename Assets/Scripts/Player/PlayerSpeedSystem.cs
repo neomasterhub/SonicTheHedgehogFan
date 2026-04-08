@@ -113,12 +113,12 @@ public class PlayerSpeedSystem
 
   private void SetSpeed_Airborne_Horizontal()
   {
-    if (Mathf.Abs(_inputSystem.DPad.x) < InputDeadZone)
+    if (Mathf.Abs(_inputSystem.DPadInput.x) < InputDeadZone)
     {
       return;
     }
 
-    SpeedX += _inputSystem.DPad.x * _config.AirAccelerationSpeed;
+    SpeedX += _inputSystem.DPadInput.x * _config.AirAccelerationSpeed;
 
     if (Mathf.Abs(SpeedX) > _config.AirTopSpeed)
     {
@@ -134,11 +134,11 @@ public class PlayerSpeedSystem
     SetSpeed_Grounded_FromAirborne();
     SetSpeed_Grounded_Slope();
 
-    if (_inputSystem.DPad.x > InputDeadZone)
+    if (_inputSystem.DPadInput.x > InputDeadZone)
     {
       SetSpeed_Grounded_Forward();
     }
-    else if (_inputSystem.DPad.x < -InputDeadZone)
+    else if (_inputSystem.DPadInput.x < -InputDeadZone)
     {
       SetSpeed_Grounded_Backward();
     }

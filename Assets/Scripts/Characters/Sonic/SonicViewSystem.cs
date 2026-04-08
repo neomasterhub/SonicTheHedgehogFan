@@ -82,11 +82,11 @@ public class SonicViewSystem
       return;
     }
 
-    if (_inputSystem.DPad.x > 0)
+    if (_inputSystem.DPadInput.x > 0)
     {
       _spriteRenderer.flipX = false;
     }
-    else if (_inputSystem.DPad.x < 0)
+    else if (_inputSystem.DPadInput.x < 0)
     {
       _spriteRenderer.flipX = true;
     }
