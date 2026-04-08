@@ -30,6 +30,7 @@ public class PlayerSpeedSystem
     _groundToAirSpeedProvider = groundToAirSpeedProvider;
   }
 
+  public bool IsIdle { get; private set; }
   public bool IsSkidding { get; private set; }
   public float SpeedX { get; private set; }
   public float SpeedY { get; private set; }
