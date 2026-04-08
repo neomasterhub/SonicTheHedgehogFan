@@ -10,6 +10,7 @@ public partial class SonicController
   private void FixedUpdate()
   {
     BeginFrame();
+    UpdateInput();
     AnalyzeEnvironment();
     ApplyEffects();
     ApplyMovement();
@@ -25,9 +26,13 @@ public partial class SonicController
     _timerSystem.Update(Time.deltaTime);
   }
 
-  private void AnalyzeEnvironment()
+  private void UpdateInput()
   {
     _inputSystem.Update();
+  }
+
+  private void AnalyzeEnvironment()
+  {
     _sensorSystem.Update(_sizeMode, _groundInfoSystem.Current.Side, transform.position, TopUDFLengths, BottomUDFLengths);
 
     var groundDetectionResult = _sensorSystem.DetectGround(!_spriteRenderer.flipX, _groundLayer);
