@@ -11,6 +11,8 @@ public class PlayerInputSystem
     _inputSrc = inputSrc;
   }
 
+  public float X { get; private set; }
+  public float Y { get; private set; }
   public PlayerInput Held { get; private set; }
   public PlayerInput Pressed { get; private set; }
   public PlayerInput Released { get; private set; }
@@ -18,8 +20,40 @@ public class PlayerInputSystem
   public void Update()
   {
     _prev = Held;
+
     Held = _inputSrc();
     Pressed = Held & ~_prev;
     Released = _prev & ~Held;
+
+    SetDPad();
+  }
+
+  private void SetDPad()
+  {
+    X = 0;
+    Y = 0;
+
+    var upHeld = Held.HasAny(PlayerInput.Up);
+    var downHeld = Held.HasAny(PlayerInput.Down);
+    var leftHeld = Held.HasAny(PlayerInput.Left);
+    var rightHeld = Held.HasAny(PlayerInput.Right);
+
+    if (leftHeld && !rightHeld)
+    {
+      X = -1;
+    }
+    else if (!leftHeld && rightHeld)
+    {
+      X = 1;
+    }
+
+    if (upHeld && !downHeld)
+    {
+      Y = 1;
+    }
+    else if (!upHeld && downHeld)
+    {
+      Y = -1;
+    }
   }
 }
