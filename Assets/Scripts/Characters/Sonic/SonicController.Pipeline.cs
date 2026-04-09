@@ -29,6 +29,13 @@ public partial class SonicController
   private void UpdateInput()
   {
     _inputSystem.Update();
+
+    var pressed = _inputSystem.Pressed;
+
+    if (pressed.HasAny(PlayerInput.X))
+    {
+      _infoPanel.SetActive(!_infoPanel.activeSelf);
+    }
   }
 
   private void AnalyzeEnvironment()
