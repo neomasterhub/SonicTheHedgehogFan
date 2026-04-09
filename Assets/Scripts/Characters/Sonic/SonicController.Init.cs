@@ -1,7 +1,6 @@
 using TMPro;
 using UnityEngine;
 using static SharedConsts.ConvertValues;
-using static SharedConsts.Input.Axis;
 using static SonicConsts.Physics;
 using static SonicConsts.View;
 
@@ -24,7 +23,7 @@ public partial class SonicController
     _timerSystem = new();
     _viewRotatorProvider = new();
 
-    _inputSystem = new(GetDPadInput, GetPlayerInput);
+    _inputSystem = new(GetPlayerInput);
     _speedConfig = new(TopSpeed, FrictionSpeed, MaxSkiddingSpeed, AccelerationSpeed, DecelerationSpeed, AirTopSpeed, AirAccelerationSpeed, MaxFallSpeed);
     _speedSystem = new(_inputSystem, _speedConfig, _gravitySpeedProvider, _slopeFactorSpeedProvider, _groundToAirSpeedProvider);
     _viewSystem = new(_inputSystem, _viewRotatorProvider);
@@ -93,11 +92,6 @@ public partial class SonicController
 
     _gravitySpeedProvider.DefaultProvider = () => GravitySpeed.Zero;
     _groundToAirSpeedProvider.DefaultProvider = () => new(_speedSystem.SpeedX, _speedSystem.SpeedY);
-  }
-
-  private Vector2 GetDPadInput()
-  {
-    return _postWallDetachInputLock ? Vector2.zero : new(Input.GetAxis(Horizontal), Input.GetAxis(Vertical));
   }
 
   private PlayerInput GetPlayerInput()
