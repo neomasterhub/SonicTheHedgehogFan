@@ -11,13 +11,6 @@ public static class SharedConsts
   public static class Input
   {
     public const float InputDeadZone = 0.001f;
-
-    public static class Axis
-    {
-      public const string Jump = nameof(Jump);
-      public const string Horizontal = nameof(Horizontal);
-      public const string Vertical = nameof(Vertical);
-    }
   }
 
   public static class Physics
