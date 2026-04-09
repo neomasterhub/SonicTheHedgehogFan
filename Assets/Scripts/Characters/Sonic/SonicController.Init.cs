@@ -1,6 +1,6 @@
+using TMPro;
 using UnityEngine;
 using static SharedConsts.ConvertValues;
-using static SharedConsts.Input.Axis;
 using static SonicConsts.Physics;
 using static SonicConsts.View;
 
@@ -23,7 +23,7 @@ public partial class SonicController
     _timerSystem = new();
     _viewRotatorProvider = new();
 
-    _inputSystem = new(GetDPadInput, GetButtonInput);
+    _inputSystem = new(GetPlayerInput);
     _speedConfig = new(TopSpeed, FrictionSpeed, MaxSkiddingSpeed, AccelerationSpeed, DecelerationSpeed, AirTopSpeed, AirAccelerationSpeed, MaxFallSpeed);
     _speedSystem = new(_inputSystem, _speedConfig, _gravitySpeedProvider, _slopeFactorSpeedProvider, _groundToAirSpeedProvider);
     _viewSystem = new(_inputSystem, _viewRotatorProvider);
@@ -48,6 +48,8 @@ public partial class SonicController
   {
     _animator = GetComponent<Animator>();
     _spriteRenderer = GetComponent<SpriteRenderer>();
+    _infoPanel = Canvas.transform.Find("Info Panel").gameObject;
+    _infoText = _infoPanel.transform.Find("Info Text").GetComponent<TextMeshProUGUI>();
   }
 
   private void InitializeViewSystem()
@@ -92,20 +94,19 @@ public partial class SonicController
     _groundToAirSpeedProvider.DefaultProvider = () => new(_speedSystem.SpeedX, _speedSystem.SpeedY);
   }
 
-  private Vector2 GetDPadInput()
+  private PlayerInput GetPlayerInput()
   {
-    return _postWallDetachInputLock ? Vector2.zero : new(Input.GetAxis(Horizontal), Input.GetAxis(Vertical));
-  }
-
-  private ButtonInput GetButtonInput()
-  {
-    return ButtonInput.None
-      .SetFlag(ButtonInput.Start, Input.GetKey(KeyCode.KeypadEnter))
-      .SetFlag(ButtonInput.A, Input.GetKey(KeyCode.Keypad1))
-      .SetFlag(ButtonInput.B, Input.GetKey(KeyCode.Keypad2))
-      .SetFlag(ButtonInput.C, Input.GetKey(KeyCode.Keypad3))
-      .SetFlag(ButtonInput.X, Input.GetKey(KeyCode.Keypad4))
-      .SetFlag(ButtonInput.Y, Input.GetKey(KeyCode.Keypad5))
-      .SetFlag(ButtonInput.Z, Input.GetKey(KeyCode.Keypad6));
+    return PlayerInput.None
+      .SetFlag(PlayerInput.Start, Input.GetKey(KeyCode.KeypadEnter))
+      .SetFlag(PlayerInput.Left, Input.GetKey(KeyCode.LeftArrow))
+      .SetFlag(PlayerInput.Right, Input.GetKey(KeyCode.RightArrow))
+      .SetFlag(PlayerInput.Up, Input.GetKey(KeyCode.UpArrow))
+      .SetFlag(PlayerInput.Down, Input.GetKey(KeyCode.DownArrow))
+      .SetFlag(PlayerInput.A, Input.GetKey(KeyCode.Keypad1))
+      .SetFlag(PlayerInput.B, Input.GetKey(KeyCode.Keypad2))
+      .SetFlag(PlayerInput.C, Input.GetKey(KeyCode.Keypad3))
+      .SetFlag(PlayerInput.X, Input.GetKey(KeyCode.Keypad4))
+      .SetFlag(PlayerInput.Y, Input.GetKey(KeyCode.Keypad5))
+      .SetFlag(PlayerInput.Z, Input.GetKey(KeyCode.Keypad6));
   }
 }

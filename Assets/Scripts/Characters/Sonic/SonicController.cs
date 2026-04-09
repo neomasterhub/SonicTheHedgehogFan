@@ -27,6 +27,7 @@ public partial class SonicController : MonoBehaviour
   private bool _prevIsGrounded;
   private bool _postWallDetachInputLock;
   private Animator _animator;
+  private GameObject _infoPanel;
   private GroundDetectionResult _lastGroundDetectionResult;
   private PlayerSpeedContext _speedContext;
   private SonicSizeMode _sizeMode;
@@ -34,9 +35,10 @@ public partial class SonicController : MonoBehaviour
   private SonicState _prevState;
   private SonicViewContext _viewContext;
   private SpriteRenderer _spriteRenderer;
+  private TextMeshProUGUI _infoText;
 
   public bool GravityEnabled = true;
   public bool GroundedViewRotatorEnabled = true;
   public bool WallToAirViewRotatorEnabled = true;
-  public TextMeshProUGUI InfoText;
+  public Canvas Canvas;
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using static SharedConsts.Input;
 using static SonicConsts.Physics;
 using static SonicConsts.View;
 using AnimatorParameters = SharedConsts.Animator.Parameters;
@@ -82,11 +83,11 @@ public class SonicViewSystem
       return;
     }
 
-    if (_inputSystem.DPadInput.x > 0)
+    if (_inputSystem.X > InputDeadZone)
     {
       _spriteRenderer.flipX = false;
     }
-    else if (_inputSystem.DPadInput.x < 0)
+    else if (_inputSystem.X < -InputDeadZone)
     {
       _spriteRenderer.flipX = true;
     }

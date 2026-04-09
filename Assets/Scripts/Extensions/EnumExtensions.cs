@@ -1,6 +1,16 @@
 public static class EnumExtensions
 {
-  public static ButtonInput SetFlag(this ButtonInput source, ButtonInput target, bool enabled)
+  public static bool HasAll(this PlayerInput source, PlayerInput target)
+  {
+    return (source & target) == target;
+  }
+
+  public static bool HasAny(this PlayerInput source, PlayerInput target)
+  {
+    return (source & target) != 0;
+  }
+
+  public static PlayerInput SetFlag(this PlayerInput source, PlayerInput target, bool enabled)
   {
     return enabled ? source | target : source & ~target;
   }

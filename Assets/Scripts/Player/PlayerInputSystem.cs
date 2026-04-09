@@ -1,38 +1,59 @@
 using System;
-using UnityEngine;
 
 public class PlayerInputSystem
 {
-  private readonly int _inputHistoryLimit;
-  private readonly InputState[] _inputHistory;
-  private readonly Func<Vector2> _dPadInputSrc;
-  private readonly Func<ButtonInput> _buttonInputSrc;
+  private readonly Func<PlayerInput> _inputSrc;
 
-  private int _inputHistoryIndex = 0;
+  private PlayerInput _prev;
 
-  public PlayerInputSystem(
-    Func<Vector2> dPadSrc,
-    Func<ButtonInput> buttonInputSrc,
-    int inputHistoryLimit = 10)
+  public PlayerInputSystem(Func<PlayerInput> inputSrc)
   {
-    _dPadInputSrc = dPadSrc;
-    _buttonInputSrc = buttonInputSrc;
-
-    _inputHistoryLimit = inputHistoryLimit;
-    _inputHistory = new InputState[inputHistoryLimit];
+    _inputSrc = inputSrc;
   }
 
-  public Vector2 DPadInput { get; private set; } = default;
-  public ButtonInput ButtonInput { get; private set; }
+  public float X { get; private set; }
+  public float Y { get; private set; }
+  public PlayerInput Held { get; private set; }
+  public PlayerInput Pressed { get; private set; }
+  public PlayerInput Released { get; private set; }
 
   public void Update()
   {
-    DPadInput = _dPadInputSrc();
-    ButtonInput = _buttonInputSrc();
+    _prev = Held;
 
-    Debug.Log($"ButtonInput: {ButtonInput}");
+    Held = _inputSrc();
+    Pressed = Held & ~_prev;
+    Released = _prev & ~Held;
 
-    _inputHistory[_inputHistoryIndex] = new(DPadInput, ButtonInput);
-    _inputHistoryIndex = (_inputHistoryIndex + 1) % _inputHistoryLimit;
+    SetDPad();
+  }
+
+  private void SetDPad()
+  {
+    X = 0;
+    Y = 0;
+
+    var upHeld = Held.HasAny(PlayerInput.Up);
+    var downHeld = Held.HasAny(PlayerInput.Down);
+    var leftHeld = Held.HasAny(PlayerInput.Left);
+    var rightHeld = Held.HasAny(PlayerInput.Right);
+
+    if (leftHeld && !rightHeld)
+    {
+      X = -1;
+    }
+    else if (!leftHeld && rightHeld)
+    {
+      X = 1;
+    }
+
+    if (upHeld && !downHeld)
+    {
+      Y = 1;
+    }
+    else if (!upHeld && downHeld)
+    {
+      Y = -1;
+    }
   }
 }
