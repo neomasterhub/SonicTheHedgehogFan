@@ -4,23 +4,20 @@ public class PlayerInputSystem
 {
   private readonly Func<PlayerInput> _inputSrc;
 
-  private PlayerInput _prevInput;
+  private PlayerInput _previous;
 
   public PlayerInputSystem(Func<PlayerInput> inputSrc)
   {
     _inputSrc = inputSrc;
   }
 
-  public PlayerInput Input { get; private set; }
+  public PlayerInput Current { get; private set; }
+  public PlayerInput Pressed { get; private set; }
 
   public void Update()
   {
-    _prevInput = Input;
-    Input = _inputSrc();
-  }
-
-  public bool IsPressed(PlayerInput input)
-  {
-    return Input.HasFlag(input) && !_prevInput.HasFlag(input);
+    _previous = Current;
+    Current = _inputSrc();
+    Pressed = Current & ~_previous;
   }
 }
