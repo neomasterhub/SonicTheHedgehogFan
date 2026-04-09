@@ -78,7 +78,7 @@ public partial class SonicController
       ? PlayerSpeedContext.GetGrounded(_prevIsGrounded, _groundInfoSystem.Current.SideAngleRad, _lastGroundDetectionResult.Distance)
       : PlayerSpeedContext.GetAirborne(_prevIsGrounded);
     _speedSystem.SetSpeed(_speedContext);
-    _state = _state.SetFlag(SonicState.Skidding, _speedSystem.IsSkidding);
+    _state = _state.Set(SonicState.Skidding, _speedSystem.IsSkidding);
   }
 
   private void UpdateView()

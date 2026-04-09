@@ -97,16 +97,16 @@ public partial class SonicController
   private PlayerInput GetPlayerInput()
   {
     return PlayerInput.None
-      .SetFlag(PlayerInput.Start, Input.GetKey(KeyCode.KeypadEnter))
-      .SetFlag(PlayerInput.Left, Input.GetKey(KeyCode.LeftArrow))
-      .SetFlag(PlayerInput.Right, Input.GetKey(KeyCode.RightArrow))
-      .SetFlag(PlayerInput.Up, Input.GetKey(KeyCode.UpArrow))
-      .SetFlag(PlayerInput.Down, Input.GetKey(KeyCode.DownArrow))
-      .SetFlag(PlayerInput.A, Input.GetKey(KeyCode.Keypad1))
-      .SetFlag(PlayerInput.B, Input.GetKey(KeyCode.Keypad2))
-      .SetFlag(PlayerInput.C, Input.GetKey(KeyCode.Keypad3))
-      .SetFlag(PlayerInput.X, Input.GetKey(KeyCode.Keypad4))
-      .SetFlag(PlayerInput.Y, Input.GetKey(KeyCode.Keypad5))
-      .SetFlag(PlayerInput.Z, Input.GetKey(KeyCode.Keypad6));
+      .Set(PlayerInput.Start, Input.GetKey(KeyCode.KeypadEnter))
+      .Set(PlayerInput.Left, Input.GetKey(KeyCode.LeftArrow))
+      .Set(PlayerInput.Right, Input.GetKey(KeyCode.RightArrow))
+      .Set(PlayerInput.Up, Input.GetKey(KeyCode.UpArrow))
+      .Set(PlayerInput.Down, Input.GetKey(KeyCode.DownArrow))
+      .Set(PlayerInput.A, Input.GetKey(KeyCode.Keypad1))
+      .Set(PlayerInput.B, Input.GetKey(KeyCode.Keypad2))
+      .Set(PlayerInput.C, Input.GetKey(KeyCode.Keypad3))
+      .Set(PlayerInput.X, Input.GetKey(KeyCode.Keypad4))
+      .Set(PlayerInput.Y, Input.GetKey(KeyCode.Keypad5))
+      .Set(PlayerInput.Z, Input.GetKey(KeyCode.Keypad6));
   }
 }
