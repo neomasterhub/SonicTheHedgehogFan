@@ -15,20 +15,13 @@ public class WallToAirSonicViewRotator
 
   public override void Rotate(SonicViewRotatorContext context)
   {
-    if (context.IsGrounded)
+    if (context.PrevGroundSide == GroundSide.Left)
     {
-      if (context.PrevGroundSide == GroundSide.Left)
-      {
-        _z = -90;
-      }
-      else if (context.PrevGroundSide == GroundSide.Right)
-      {
-        _z = 90;
-      }
-      else
-      {
-        throw context.PrevGroundSide.ArgumentOutOfRangeException();
-      }
+      _z = -90;
+    }
+    else if (context.PrevGroundSide == GroundSide.Right)
+    {
+      _z = 90;
     }
 
     if (_z > 0)
