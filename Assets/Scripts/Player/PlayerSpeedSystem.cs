@@ -5,7 +5,7 @@ using static SharedConsts.Input;
 public class PlayerSpeedSystem
 {
   private const int _speedRoundingDigits = 3;
-  private const int _zeroGroundSpeedProgressMax = 3;
+  private const int _zeroGroundSpeedProgressMax = 5;
 
   private readonly ConditionalValueProvider<GravitySpeed> _gravitySpeedProvider = new();
   private readonly ConditionalValueProvider<float> _slopeFactorSpeedProvider;
@@ -150,7 +150,7 @@ public class PlayerSpeedSystem
     SpeedX = GroundSpeed * _groundAngleCos;
     SpeedY = GroundSpeed * _groundAngleSin;
 
-    if (GroundSpeed == 0)
+    if (Mathf.Abs(GroundSpeed) < _config.FrictionSpeed)
     {
       ZeroGroundSpeedProgress = Mathf.Min(ZeroGroundSpeedProgress + 1, _zeroGroundSpeedProgressMax);
       IsZeroGroundSpeedProgressReached = ZeroGroundSpeedProgress == _zeroGroundSpeedProgressMax;
