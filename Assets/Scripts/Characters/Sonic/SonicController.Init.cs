@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using static SharedConsts.ConvertValues;
 using static SonicConsts.Physics;
@@ -35,6 +36,7 @@ public partial class SonicController
     InitializeComponents();
     InitializeViewSystem();
     InitializeSpeedSystemProviders();
+    InitializeSounds();
   }
 
   private void InitializeEngine()
@@ -92,6 +94,17 @@ public partial class SonicController
 
     _gravitySpeedProvider.DefaultProvider = () => GravitySpeed.Zero;
     _groundToAirSpeedProvider.DefaultProvider = () => new(_speedSystem.SpeedX, _speedSystem.SpeedY);
+  }
+
+  private void InitializeSounds()
+  {
+    var skidding = this.AddComponent<AudioSource>();
+    skidding.clip = SkiddingAudioClip;
+
+    _sounds = new Sound[]
+    {
+      new(skidding, () => _speedSystem.IsSkidding && !skidding.isPlaying, () => !_speedSystem.IsSkidding),
+    };
   }
 
   private PlayerInput GetPlayerInput()

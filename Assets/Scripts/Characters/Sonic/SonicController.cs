@@ -41,5 +41,6 @@ public partial class SonicController : MonoBehaviour
   public bool GravityEnabled = true;
   public bool GroundedViewRotatorEnabled = true;
   public bool WallToAirViewRotatorEnabled = true;
+  public AudioClip SkiddingAudioClip;
   public Canvas Canvas;
 }
