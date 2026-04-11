@@ -34,11 +34,13 @@ public partial class SonicController : MonoBehaviour
   private SonicState _state;
   private SonicState _prevState;
   private SonicViewContext _viewContext;
+  private Sound[] _sounds;
   private SpriteRenderer _spriteRenderer;
   private TextMeshProUGUI _infoText;
 
   public bool GravityEnabled = true;
   public bool GroundedViewRotatorEnabled = true;
   public bool WallToAirViewRotatorEnabled = true;
+  public AudioClip SkiddingAudioClip;
   public Canvas Canvas;
 }

@@ -16,6 +16,7 @@ public partial class SonicController
     ApplyMovement();
     UpdateView();
     UpdatePosition();
+    UpdateSounds();
     Output();
   }
 
@@ -112,5 +113,14 @@ public partial class SonicController
     };
 
     transform.position = new Vector3(pos.x.Round(2), pos.y.Round(2), transform.position.z);
+  }
+
+  private void UpdateSounds()
+  {
+    for (var i = 0; i < _sounds.Length; i++)
+    {
+      _sounds[i].Stop();
+      _sounds[i].Play();
+    }
   }
 }
