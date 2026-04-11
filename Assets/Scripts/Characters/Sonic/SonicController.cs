@@ -34,6 +34,7 @@ public partial class SonicController : MonoBehaviour
   private SonicState _state;
   private SonicState _prevState;
   private SonicViewContext _viewContext;
+  private Sound[] _sounds;
   private SpriteRenderer _spriteRenderer;
   private TextMeshProUGUI _infoText;
 
