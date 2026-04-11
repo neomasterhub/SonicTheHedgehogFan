@@ -103,7 +103,7 @@ public partial class SonicController
 
     _sounds = new Sound[]
     {
-      new(skidding, () => _speedSystem.IsSkidding && !skidding.isPlaying, () => !_speedSystem.IsSkidding),
+      new(skidding, () => _speedSystem.IsSkidding && !skidding.isPlaying, () => !_speedSystem.IsSkidding && !skidding.isPlaying),
     };
   }
 
