@@ -86,6 +86,8 @@ public class SonicSensorSystem
       GroundSide = groundSide;
 
       SetCurrentSensorGroup();
+
+      CurrentSensorGroup.O.Enabled = sizeMode == SonicSizeMode.Big;
     }
 
     ParentPosition = parentPosition;
