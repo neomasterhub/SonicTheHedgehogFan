@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using static Helpers.Math;
 using static SonicConsts.View;
 
 public class GroundedSonicViewRotator
@@ -12,7 +13,7 @@ public class GroundedSonicViewRotator
 
   public override void Rotate(SonicViewRotatorContext context)
   {
-    Rotation = Helpers.Vector3(z:
+    Rotation = Vector3(z:
       Mathf.Abs(context.GroundAngleDeg) <= StandingStraightAngleDegMax
       ? 0 : context.GroundAngleDeg);
   }
