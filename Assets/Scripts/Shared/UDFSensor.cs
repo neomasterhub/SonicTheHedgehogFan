@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class UDFSensor
+public class UDFSensor : SensorBase, ISensor
 {
   public UDFSensor(
     Color enabledColor,
@@ -17,13 +17,6 @@ public class UDFSensor
     FrontRay = new(enabledColor, Position, frontRayPosition);
   }
 
-  public bool Enabled { get; set; } = true;
-  public float Radius { get; set; } = 0.03f;
-  public Color EnabledColor { get; set; } = Color.red;
-  public Color? DisabledColor { get; set; } = Color.darkRed;
-  public Vector2 Position { get; private set; }
-  public Vector2 LocalPosition { get; private set; }
-  public Vector2 ParentPosition { get; private set; }
   public SensorRay UpRay { get; }
   public SensorRay DownRay { get; }
   public SensorRay FrontRay { get; }
