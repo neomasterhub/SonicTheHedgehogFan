@@ -108,7 +108,7 @@ public class SonicSensorSystem
     if (_bottomUDFLengths != bottomUDFLengths)
     {
       _bottomUDFLengths = bottomUDFLengths;
-      CurrentSensorGroup.O.Ray.Length = topUDFLengths.y + Big.VRadius;
+      CurrentSensorGroup.O.Ray.Length = bottomUDFLengths.y + Big.VRadius;
       UpdateUDFSensorLengths(CurrentSensorGroup.A, bottomUDFLengths);
       UpdateUDFSensorLengths(CurrentSensorGroup.B, bottomUDFLengths);
     }
