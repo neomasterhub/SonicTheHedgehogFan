@@ -100,7 +100,7 @@ public partial class SonicController
       // Snap to ground with small upward offset.
       // Keeps surface normal aligned with slope.
       speedY -= (_lastGroundDetectionResult.Distance
-        * (int)_lastGroundDetectionResult.SensorGroundSide)
+        * (int)_lastGroundDetectionResult.SensorGroundRelation)
         - GroundedPositionUpwardOffset;
     }
 
