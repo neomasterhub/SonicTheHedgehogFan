@@ -8,13 +8,13 @@ public readonly struct GroundDetectionResult
   public readonly Vector2 Contact;
   public readonly Vector2 Normal;
   public readonly VerticalRelation SensorGroundRelation;
-  public readonly bool? BalancingSide;
+  public readonly bool IsBalancing;
 
   public GroundDetectionResult(
     RaycastHit2D hit,
     Vector2 sensorDirection,
     VerticalRelation sensorGroundRelation = VerticalRelation.Above,
-    bool? balancingSide = null)
+    bool isBalancing = false)
   {
     Contact = hit.point;
     Normal = hit.normal;
@@ -22,6 +22,6 @@ public readonly struct GroundDetectionResult
     AngleDeg = Vector2.SignedAngle(-sensorDirection, hit.normal).Round();
     AngleRad = AngleDeg * Mathf.Deg2Rad;
     SensorGroundRelation = sensorGroundRelation;
-    BalancingSide = balancingSide;
+    IsBalancing = isBalancing;
   }
 }
