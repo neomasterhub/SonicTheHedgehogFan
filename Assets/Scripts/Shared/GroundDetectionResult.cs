@@ -8,13 +8,13 @@ public readonly struct GroundDetectionResult
   public readonly Vector2 Contact;
   public readonly Vector2 Normal;
   public readonly VerticalRelation SensorGroundRelation;
-  public readonly HorizontalDirection BalancingSide;
+  public readonly bool? BalancingSide;
 
   public GroundDetectionResult(
     RaycastHit2D hit,
     Vector2 sensorDirection,
     VerticalRelation sensorGroundRelation = VerticalRelation.Above,
-    HorizontalDirection balancingSide = HorizontalDirection.None)
+    bool? balancingSide = null)
   {
     Contact = hit.point;
     Normal = hit.normal;
