@@ -72,8 +72,6 @@ public partial class SonicController
     _viewRotatorProvider
       .Add(rotGrounded)
       .Add(rotWallToAir);
-
-    _viewRotatorProvider.DefaultRotator = rotGrounded;
   }
 
   private void InitializeSpeedSystemProviders()

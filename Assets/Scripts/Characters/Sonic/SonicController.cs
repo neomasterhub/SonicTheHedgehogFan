@@ -24,8 +24,10 @@ public partial class SonicController : MonoBehaviour
   private readonly TimerSystem _timerSystem;
 
   private bool _isGrounded;
+  private bool _isBalancing;
   private bool _prevIsGrounded;
   private bool _postWallDetachInputLock;
+  private bool _triggeredGroundSensorSide;
   private Animator _animator;
   private GameObject _infoPanel;
   private GroundDetectionResult _lastGroundDetectionResult;

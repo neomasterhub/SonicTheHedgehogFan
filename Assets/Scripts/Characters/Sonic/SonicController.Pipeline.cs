@@ -41,7 +41,7 @@ public partial class SonicController
 
   private void AnalyzeEnvironment()
   {
-    _sensorSystem.Update(_sizeMode, _groundInfoSystem.Current.Side, transform.position, TopUDFLengths, BottomUDFLengths);
+    _sensorSystem.Update(_sizeMode, _groundInfoSystem.Current.Side, transform.position, OLength, TopUDFLengths, BottomUDFLengths, true, false, true);
 
     var groundDetectionResult = _sensorSystem.DetectGround(!_spriteRenderer.flipX, _groundLayer);
     if (groundDetectionResult != null)
@@ -58,15 +58,19 @@ public partial class SonicController
   private void AnalyzeEnvironment_Grounded()
   {
     _isGrounded = true;
-    _state = SonicState.Grounded;
+    _isBalancing = _lastGroundDetectionResult.IsBalancing;
+    _triggeredGroundSensorSide = _lastGroundDetectionResult.SourceSensorSide;
     _groundInfoSystem.Update(_lastGroundDetectionResult.AngleDeg);
+    _state = SonicState.Grounded.Set(SonicState.Balancing, _isBalancing);
   }
 
   private void AnalyzeEnvironment_Airborn()
   {
     _isGrounded = false;
-    _state = SonicState.Airborne;
+    _isBalancing = false;
+    _triggeredGroundSensorSide = false;
     _groundInfoSystem.Reset();
+    _state = SonicState.Airborne;
   }
 
   private void ApplyEffects()
@@ -84,7 +88,7 @@ public partial class SonicController
 
   private void UpdateView()
   {
-    _viewContext = new(_isGrounded, _speedSystem.IsSkidding, false, _speedSystem.IsZeroGroundSpeedProgressReached, _speedSystem.SpeedX, _speedSystem.GroundSpeed, _groundInfoSystem.Current.AngleDeg, _groundInfoSystem.Current.Side, _groundInfoSystem.Previous.Side);
+    _viewContext = new(_isGrounded, _speedSystem.IsSkidding, _isBalancing, _speedSystem.IsZeroGroundSpeedProgressReached, _triggeredGroundSensorSide, _speedSystem.SpeedX, _speedSystem.GroundSpeed, _groundInfoSystem.Current.AngleDeg, _groundInfoSystem.Current.Side, _groundInfoSystem.Previous.Side);
     _viewSystem.Update(_viewContext);
   }
 
@@ -98,7 +102,7 @@ public partial class SonicController
       // Snap to ground with small upward offset.
       // Keeps surface normal aligned with slope.
       speedY -= (_lastGroundDetectionResult.Distance
-        * (int)_lastGroundDetectionResult.SensorGroundSide)
+        * (int)_lastGroundDetectionResult.SensorGroundRelation)
         - GroundedPositionUpwardOffset;
     }
 

@@ -9,12 +9,14 @@ public class SonicSensorGroup
     UDFSensor b,
     UDFSensor c,
     UDFSensor d,
+    Sensor o,
     Vector2? parentPosition = null)
   {
     A = a;
     B = b;
     C = c;
     D = d;
+    O = o;
     ParentPosition = parentPosition ?? Vector2.zero;
   }
 
@@ -22,6 +24,8 @@ public class SonicSensorGroup
   public UDFSensor B { get; }
   public UDFSensor C { get; }
   public UDFSensor D { get; }
+  public Sensor O { get; }
+
   public Vector2 ParentPosition
   {
     get => _parentPosition;
@@ -34,6 +38,7 @@ public class SonicSensorGroup
         B.SetParentPosition(value);
         C.SetParentPosition(value);
         D.SetParentPosition(value);
+        O.SetParentPosition(value);
       }
     }
   }
@@ -44,5 +49,6 @@ public class SonicSensorGroup
     B.Draw();
     C.Draw();
     D.Draw();
+    O.Draw();
   }
 }

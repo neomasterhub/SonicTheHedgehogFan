@@ -83,6 +83,12 @@ public class SonicViewSystem
       return;
     }
 
+    if (_context.IsBalancing)
+    {
+      _spriteRenderer.flipX = _context.TriggeredGroundSensorSide.Value;
+      return;
+    }
+
     if (_inputSystem.X > InputDeadZone)
     {
       _spriteRenderer.flipX = false;

@@ -12,6 +12,7 @@ public class SonicSensorSystem
   private readonly SonicSensorGroup _smallLeftSensorGroup;
   private readonly SonicSensorGroup _smallRightSensorGroup;
 
+  private float? _oLength;
   private Vector3? _topUDFLengths;
   private Vector3? _bottomUDFLengths;
 
@@ -27,30 +28,35 @@ public class SonicSensorSystem
     var bColor = Color.green;
     var cColor = Color.softYellow;
     var dColor = Color.yellow;
+    var oColor = Color.white;
 
     _bigDownSensorGroup = new(
       a: new(aColor, new(-Big.HRadius, -Big.VRadius), Vector2.up, Vector2.down, Vector2.left),
       b: new(bColor, new(Big.HRadius, -Big.VRadius), Vector2.up, Vector2.down, Vector2.right),
       c: new(cColor, new(-Big.HRadius, Big.VRadius), Vector2.up, Vector2.down, Vector2.left),
       d: new(dColor, new(Big.HRadius, Big.VRadius), Vector2.up, Vector2.down, Vector2.right),
+      o: new(oColor, Vector2.zero, Vector2.down),
       parentPosition: parentPosition);
     _bigRightSensorGroup = new(
       a: new(aColor, new(Big.VRadius, -Big.HRadius), Vector2.left, Vector2.right, Vector2.down),
       b: new(bColor, new(Big.VRadius, Big.HRadius), Vector2.left, Vector2.right, Vector2.up),
       c: new(cColor, new(-Big.VRadius, -Big.HRadius), Vector2.left, Vector2.right, Vector2.down),
       d: new(dColor, new(-Big.VRadius, Big.HRadius), Vector2.left, Vector2.right, Vector2.up),
+      o: new(oColor, Vector2.zero, Vector2.right),
       parentPosition: parentPosition);
     _bigUpSensorGroup = new(
       c: new(cColor, new(-Big.HRadius, -Big.VRadius), Vector2.down, Vector2.up, Vector2.right),
       d: new(dColor, new(Big.HRadius, -Big.VRadius), Vector2.down, Vector2.up, Vector2.left),
       a: new(aColor, new(-Big.HRadius, Big.VRadius), Vector2.down, Vector2.up, Vector2.right),
       b: new(bColor, new(Big.HRadius, Big.VRadius), Vector2.down, Vector2.up, Vector2.left),
+      o: new(oColor, Vector2.zero, Vector2.up),
       parentPosition: parentPosition);
     _bigLeftSensorGroup = new(
       c: new(cColor, new(Big.VRadius, -Big.HRadius), Vector2.right, Vector2.left, Vector2.up),
       d: new(dColor, new(Big.VRadius, Big.HRadius), Vector2.right, Vector2.left, Vector2.down),
       a: new(aColor, new(-Big.VRadius, -Big.HRadius), Vector2.right, Vector2.left, Vector2.up),
       b: new(bColor, new(-Big.VRadius, Big.HRadius), Vector2.right, Vector2.left, Vector2.down),
+      o: new(oColor, Vector2.zero, Vector2.left),
       parentPosition: parentPosition);
 
     SetCurrentSensorGroup();
@@ -69,8 +75,12 @@ public class SonicSensorSystem
     SonicSizeMode sizeMode,
     GroundSide groundSide,
     Vector2 parentPosition,
+    float oLength,
     Vector3 topUDFLengths,
-    Vector3 bottomUDFLengths)
+    Vector3 bottomUDFLengths,
+    bool oEnabled,
+    bool topEnabled,
+    bool bottomEnabled)
   {
     if (SizeMode != sizeMode || GroundSide != groundSide)
     {
@@ -84,6 +94,18 @@ public class SonicSensorSystem
     }
 
     ParentPosition = parentPosition;
+
+    CurrentSensorGroup.O.Enabled = oEnabled;
+    CurrentSensorGroup.C.Enabled = topEnabled;
+    CurrentSensorGroup.D.Enabled = topEnabled;
+    CurrentSensorGroup.A.Enabled = bottomEnabled;
+    CurrentSensorGroup.B.Enabled = bottomEnabled;
+
+    if (_oLength != oLength)
+    {
+      _oLength = oLength;
+      CurrentSensorGroup.O.Ray.Length = oLength;
+    }
 
     if (_topUDFLengths != topUDFLengths)
     {
@@ -125,11 +147,11 @@ public class SonicSensorSystem
     {
       if (dr1Hit.Value.distance <= dr2Hit.Value.distance)
       {
-        return new(dr1Hit.Value, dr1.Direction);
+        return new(!horizontalDirection, dr1Hit.Value, dr1.Direction);
       }
       else
       {
-        return new(dr2Hit.Value, dr2.Direction);
+        return new(horizontalDirection, dr2Hit.Value, dr2.Direction);
       }
     }
 
@@ -154,32 +176,32 @@ public class SonicSensorSystem
     {
       if (ur1Hit.Value.distance >= ur2Hit.Value.distance)
       {
-        return new(ur1Hit.Value, ur1.Direction, VerticalSide.Below);
+        return new(!horizontalDirection, ur1Hit.Value, ur1.Direction, VerticalRelation.Below);
       }
       else
       {
-        return new(ur2Hit.Value, ur2.Direction, VerticalSide.Below);
+        return new(horizontalDirection, ur2Hit.Value, ur2.Direction, VerticalRelation.Below);
       }
     }
 
     if (ur1Hit != null)
     {
-      return new(ur1Hit.Value, ur1.Direction, VerticalSide.Below);
+      return new(!horizontalDirection, ur1Hit.Value, ur1.Direction, VerticalRelation.Below, IsBalancing(groundLayer));
     }
 
     if (ur2Hit != null)
     {
-      return new(ur2Hit.Value, ur2.Direction, VerticalSide.Below);
+      return new(horizontalDirection, ur2Hit.Value, ur2.Direction, VerticalRelation.Below, IsBalancing(groundLayer));
     }
 
     if (dr1Hit != null)
     {
-      return new(dr1Hit.Value, dr1.Direction);
+      return new(!horizontalDirection, dr1Hit.Value, dr1.Direction, VerticalRelation.Above, IsBalancing(groundLayer));
     }
 
     if (dr2Hit != null)
     {
-      return new(dr2Hit.Value, dr2.Direction);
+      return new(horizontalDirection, dr2Hit.Value, dr2.Direction, VerticalRelation.Above, IsBalancing(groundLayer));
     }
 
     return null;
@@ -219,5 +241,11 @@ public class SonicSensorSystem
     sensor.UpRay.Length = udfLengths.x;
     sensor.DownRay.Length = udfLengths.y;
     sensor.FrontRay.Length = udfLengths.z;
+  }
+
+  private bool IsBalancing(LayerMask groundLayer)
+  {
+    return CurrentSensorGroup.O.Enabled
+      && !CurrentSensorGroup.O.Ray.Cast(groundLayer).HasValue;
   }
 }
