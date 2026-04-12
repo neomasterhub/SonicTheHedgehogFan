@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class UDFSensor : SensorBase, ISensor
+public class UDFSensor : SensorBase
 {
   public UDFSensor(
     Color enabledColor,
@@ -21,30 +21,26 @@ public class UDFSensor : SensorBase, ISensor
   public SensorRay DownRay { get; }
   public SensorRay FrontRay { get; }
 
-  public void SetParentPosition(Vector2 parentPosition)
+  public override void SetParentPosition(Vector2 parentPosition)
   {
-    ParentPosition = parentPosition;
-    Position = parentPosition + LocalPosition;
+    base.SetParentPosition(parentPosition);
     UpRay.Origin = Position;
     DownRay.Origin = Position;
     FrontRay.Origin = Position;
   }
 
-  public void Draw()
+  public override void Draw()
   {
     if (Enabled)
     {
       UpRay.Draw();
       DownRay.Draw();
       FrontRay.Draw();
-
-      Gizmos.color = EnabledColor;
-      Gizmos.DrawSphere(Position, Radius);
+      DrawEnabled();
     }
-    else if (DisabledColor.HasValue)
+    else
     {
-      Gizmos.color = DisabledColor.Value;
-      Gizmos.DrawSphere(Position, Radius);
+      DrawDisabled();
     }
   }
 }
