@@ -12,7 +12,8 @@ public class GroundedSonicViewRotator
 
   public override void Rotate(SonicViewRotatorContext context)
   {
-    var z = Mathf.Abs(context.GroundAngleDeg) <= StandingStraightAngleDegMax ? 0 : context.GroundAngleDeg;
-    Rotation = new(0, 0, z);
+    Rotation = Helpers.Vector3(z:
+      Mathf.Abs(context.GroundAngleDeg) <= StandingStraightAngleDegMax
+      ? 0 : context.GroundAngleDeg);
   }
 }
