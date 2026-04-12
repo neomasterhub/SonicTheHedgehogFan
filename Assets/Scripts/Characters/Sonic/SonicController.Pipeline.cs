@@ -41,7 +41,7 @@ public partial class SonicController
 
   private void AnalyzeEnvironment()
   {
-    _sensorSystem.Update(_sizeMode, _groundInfoSystem.Current.Side, transform.position, TopUDFLengths, BottomUDFLengths, false, true);
+    _sensorSystem.Update(_sizeMode, _groundInfoSystem.Current.Side, transform.position, OLength, TopUDFLengths, BottomUDFLengths, true, false, true);
 
     var groundDetectionResult = _sensorSystem.DetectGround(!_spriteRenderer.flipX, _groundLayer);
     if (groundDetectionResult != null)
