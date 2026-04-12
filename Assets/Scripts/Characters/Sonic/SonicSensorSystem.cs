@@ -147,11 +147,11 @@ public class SonicSensorSystem
     {
       if (dr1Hit.Value.distance <= dr2Hit.Value.distance)
       {
-        return new(dr1Hit.Value, dr1.Direction);
+        return new(!horizontalDirection, dr1Hit.Value, dr1.Direction);
       }
       else
       {
-        return new(dr2Hit.Value, dr2.Direction);
+        return new(horizontalDirection, dr2Hit.Value, dr2.Direction);
       }
     }
 
@@ -176,32 +176,32 @@ public class SonicSensorSystem
     {
       if (ur1Hit.Value.distance >= ur2Hit.Value.distance)
       {
-        return new(ur1Hit.Value, ur1.Direction, VerticalRelation.Below);
+        return new(!horizontalDirection, ur1Hit.Value, ur1.Direction, VerticalRelation.Below);
       }
       else
       {
-        return new(ur2Hit.Value, ur2.Direction, VerticalRelation.Below);
+        return new(horizontalDirection, ur2Hit.Value, ur2.Direction, VerticalRelation.Below);
       }
     }
 
     if (ur1Hit != null)
     {
-      return new(ur1Hit.Value, ur1.Direction, VerticalRelation.Below, IsBalancing(groundLayer));
+      return new(!horizontalDirection, ur1Hit.Value, ur1.Direction, VerticalRelation.Below, IsBalancing(groundLayer));
     }
 
     if (ur2Hit != null)
     {
-      return new(ur2Hit.Value, ur2.Direction, VerticalRelation.Below, IsBalancing(groundLayer));
+      return new(horizontalDirection, ur2Hit.Value, ur2.Direction, VerticalRelation.Below, IsBalancing(groundLayer));
     }
 
     if (dr1Hit != null)
     {
-      return new(dr1Hit.Value, dr1.Direction, VerticalRelation.Above, IsBalancing(groundLayer));
+      return new(!horizontalDirection, dr1Hit.Value, dr1.Direction, VerticalRelation.Above, IsBalancing(groundLayer));
     }
 
     if (dr2Hit != null)
     {
-      return new(dr2Hit.Value, dr2.Direction, VerticalRelation.Above, IsBalancing(groundLayer));
+      return new(horizontalDirection, dr2Hit.Value, dr2.Direction, VerticalRelation.Above, IsBalancing(groundLayer));
     }
 
     return null;
