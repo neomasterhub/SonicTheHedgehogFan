@@ -58,15 +58,17 @@ public partial class SonicController
   private void AnalyzeEnvironment_Grounded()
   {
     _isGrounded = true;
-    _state = SonicState.Grounded;
+    _isBalancing = _lastGroundDetectionResult.IsBalancing;
     _groundInfoSystem.Update(_lastGroundDetectionResult.AngleDeg);
+    _state = SonicState.Grounded.Set(SonicState.Balancing, _isBalancing);
   }
 
   private void AnalyzeEnvironment_Airborn()
   {
     _isGrounded = false;
-    _state = SonicState.Airborne;
+    _isBalancing = false;
     _groundInfoSystem.Reset();
+    _state = SonicState.Airborne;
   }
 
   private void ApplyEffects()
@@ -84,7 +86,7 @@ public partial class SonicController
 
   private void UpdateView()
   {
-    _viewContext = new(_isGrounded, _speedSystem.IsSkidding, false, _speedSystem.IsZeroGroundSpeedProgressReached, _speedSystem.SpeedX, _speedSystem.GroundSpeed, _groundInfoSystem.Current.AngleDeg, _groundInfoSystem.Current.Side, _groundInfoSystem.Previous.Side);
+    _viewContext = new(_isGrounded, _speedSystem.IsSkidding, _isBalancing, _speedSystem.IsZeroGroundSpeedProgressReached, _speedSystem.SpeedX, _speedSystem.GroundSpeed, _groundInfoSystem.Current.AngleDeg, _groundInfoSystem.Current.Side, _groundInfoSystem.Previous.Side);
     _viewSystem.Update(_viewContext);
   }
 
