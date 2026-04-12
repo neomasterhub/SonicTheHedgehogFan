@@ -122,6 +122,12 @@ public class SonicSensorSystem
     }
   }
 
+  public bool IsBalancing(LayerMask groundLayer)
+  {
+    return CurrentSensorGroup.O.Enabled
+      && CurrentSensorGroup.O.Ray.Cast(groundLayer).HasValue;
+  }
+
   public GroundDetectionResult? DetectGround(
     bool horizontalDirection,
     LayerMask groundLayer)
