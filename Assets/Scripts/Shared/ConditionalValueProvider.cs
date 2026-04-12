@@ -1,21 +1,29 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 public class ConditionalValueProvider<TValue>
 {
-  private readonly List<(Func<bool> condition, Func<TValue> provider)> _rules = new();
+  private readonly List<ConditionalValue<TValue>> _rules = new();
 
   public Func<TValue> DefaultProvider { get; set; } = () => default;
 
   public ConditionalValueProvider<TValue> When(Func<bool> condition, Func<TValue> provider)
   {
-    _rules.Add((condition, provider));
+    _rules.Add(new(condition, provider));
     return this;
   }
 
   public TValue FirstTriggeredOrDefault()
   {
-    return (_rules.FirstOrDefault(x => x.condition()).provider ?? DefaultProvider)();
+    for (var i = 0; i < _rules.Count; i++)
+    {
+      var rule = _rules[i];
+      if (rule.Condition())
+      {
+        return rule.Provider();
+      }
+    }
+
+    return DefaultProvider();
   }
 }
