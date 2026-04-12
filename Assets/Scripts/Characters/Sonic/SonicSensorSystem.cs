@@ -75,7 +75,9 @@ public class SonicSensorSystem
     GroundSide groundSide,
     Vector2 parentPosition,
     Vector3 topUDFLengths,
-    Vector3 bottomUDFLengths)
+    Vector3 bottomUDFLengths,
+    bool topEnabled,
+    bool bottomEnabled)
   {
     if (SizeMode != sizeMode || GroundSide != groundSide)
     {
@@ -86,11 +88,15 @@ public class SonicSensorSystem
       GroundSide = groundSide;
 
       SetCurrentSensorGroup();
-
-      CurrentSensorGroup.O.Enabled = sizeMode == SonicSizeMode.Big;
     }
 
     ParentPosition = parentPosition;
+
+    CurrentSensorGroup.C.Enabled = topEnabled;
+    CurrentSensorGroup.D.Enabled = topEnabled;
+    CurrentSensorGroup.A.Enabled = bottomEnabled;
+    CurrentSensorGroup.B.Enabled = bottomEnabled;
+    CurrentSensorGroup.O.Enabled = bottomEnabled;
 
     if (_topUDFLengths != topUDFLengths)
     {
