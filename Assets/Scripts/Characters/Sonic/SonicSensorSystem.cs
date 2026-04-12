@@ -122,12 +122,6 @@ public class SonicSensorSystem
     }
   }
 
-  public bool IsBalancing(LayerMask groundLayer)
-  {
-    return CurrentSensorGroup.O.Enabled
-      && CurrentSensorGroup.O.Ray.Cast(groundLayer).HasValue;
-  }
-
   public GroundDetectionResult? DetectGround(
     bool horizontalDirection,
     LayerMask groundLayer)
@@ -192,22 +186,22 @@ public class SonicSensorSystem
 
     if (ur1Hit != null)
     {
-      return new(ur1Hit.Value, ur1.Direction, VerticalSide.Below);
+      return new(ur1Hit.Value, ur1.Direction, VerticalSide.Below, IsBalancing(groundLayer));
     }
 
     if (ur2Hit != null)
     {
-      return new(ur2Hit.Value, ur2.Direction, VerticalSide.Below);
+      return new(ur2Hit.Value, ur2.Direction, VerticalSide.Below, IsBalancing(groundLayer));
     }
 
     if (dr1Hit != null)
     {
-      return new(dr1Hit.Value, dr1.Direction);
+      return new(dr1Hit.Value, dr1.Direction, VerticalSide.Above, IsBalancing(groundLayer));
     }
 
     if (dr2Hit != null)
     {
-      return new(dr2Hit.Value, dr2.Direction);
+      return new(dr2Hit.Value, dr2.Direction, VerticalSide.Above, IsBalancing(groundLayer));
     }
 
     return null;
@@ -247,5 +241,11 @@ public class SonicSensorSystem
     sensor.UpRay.Length = udfLengths.x;
     sensor.DownRay.Length = udfLengths.y;
     sensor.FrontRay.Length = udfLengths.z;
+  }
+
+  private bool IsBalancing(LayerMask groundLayer)
+  {
+    return CurrentSensorGroup.O.Enabled
+      && CurrentSensorGroup.O.Ray.Cast(groundLayer).HasValue;
   }
 }
