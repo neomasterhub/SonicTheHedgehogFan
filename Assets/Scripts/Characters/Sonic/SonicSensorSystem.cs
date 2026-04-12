@@ -12,6 +12,7 @@ public class SonicSensorSystem
   private readonly SonicSensorGroup _smallLeftSensorGroup;
   private readonly SonicSensorGroup _smallRightSensorGroup;
 
+  private float? _oLength;
   private Vector3? _topUDFLengths;
   private Vector3? _bottomUDFLengths;
 
@@ -74,8 +75,10 @@ public class SonicSensorSystem
     SonicSizeMode sizeMode,
     GroundSide groundSide,
     Vector2 parentPosition,
+    float oLength,
     Vector3 topUDFLengths,
     Vector3 bottomUDFLengths,
+    bool oEnabled,
     bool topEnabled,
     bool bottomEnabled)
   {
@@ -92,11 +95,17 @@ public class SonicSensorSystem
 
     ParentPosition = parentPosition;
 
+    CurrentSensorGroup.O.Enabled = oEnabled;
     CurrentSensorGroup.C.Enabled = topEnabled;
     CurrentSensorGroup.D.Enabled = topEnabled;
     CurrentSensorGroup.A.Enabled = bottomEnabled;
     CurrentSensorGroup.B.Enabled = bottomEnabled;
-    CurrentSensorGroup.O.Enabled = bottomEnabled;
+
+    if (_oLength != oLength)
+    {
+      _oLength = oLength;
+      CurrentSensorGroup.O.Ray.Length = oLength;
+    }
 
     if (_topUDFLengths != topUDFLengths)
     {
@@ -108,7 +117,6 @@ public class SonicSensorSystem
     if (_bottomUDFLengths != bottomUDFLengths)
     {
       _bottomUDFLengths = bottomUDFLengths;
-      CurrentSensorGroup.O.Ray.Length = bottomUDFLengths.y + Big.VRadius;
       UpdateUDFSensorLengths(CurrentSensorGroup.A, bottomUDFLengths);
       UpdateUDFSensorLengths(CurrentSensorGroup.B, bottomUDFLengths);
     }
