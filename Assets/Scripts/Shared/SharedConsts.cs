@@ -10,7 +10,7 @@ public static class SharedConsts
 
   public static class Input
   {
-    public const int PressedHistoryCapacity = 5;
+    public const int PressedHistoryCapacity = 10;
     public const float InputDeadZone = 0.001f;
   }
 

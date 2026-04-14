@@ -21,6 +21,24 @@ public class PlayerInputSystem
   public PlayerInput Pressed { get; private set; }
   public PlayerInput Released { get; private set; }
 
+  public string GetPressedHistory()
+  {
+    var history = new char[PressedHistoryCapacity];
+    var j = 0;
+
+    for (var i = 0; i < _pressedHistory.Right.Length; i++, j++)
+    {
+      history[j] = _pressedHistory.Right[i].ToChar();
+    }
+
+    for (var i = 0; i < _pressedHistory.Left.Length; i++, j++)
+    {
+      history[j] = _pressedHistory.Left[i].ToChar();
+    }
+
+    return new string(history);
+  }
+
   public void Update()
   {
     _prev = Held;

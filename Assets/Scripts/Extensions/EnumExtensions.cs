@@ -1,5 +1,25 @@
 public static class EnumExtensions
 {
+  public static char ToChar(this PlayerInput input)
+  {
+    return input switch
+    {
+      PlayerInput.None => ' ',
+      PlayerInput.Start => '*',
+      PlayerInput.Up => '↑',
+      PlayerInput.Down => '↓',
+      PlayerInput.Left => '←',
+      PlayerInput.Right => '→',
+      PlayerInput.A => 'A',
+      PlayerInput.B => 'B',
+      PlayerInput.C => 'C',
+      PlayerInput.X => 'x',
+      PlayerInput.Y => 'y',
+      PlayerInput.Z => 'z',
+      _ => '?'
+    };
+  }
+
   public static bool HasAll(this PlayerInput source, PlayerInput target)
   {
     return (source & target) == target;
