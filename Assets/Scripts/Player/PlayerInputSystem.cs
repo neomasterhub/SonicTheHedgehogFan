@@ -39,6 +39,11 @@ public class PlayerInputSystem
     return new string(history);
   }
 
+  public bool CheckLastPressed(PlayerInput[] input)
+  {
+    return _pressedHistory.EndsWith(input);
+  }
+
   public void Update()
   {
     _prev = Held;
