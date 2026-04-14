@@ -1,14 +1,18 @@
 using System;
+using Neomaster.RingBuffer;
+using static SharedConsts.Input;
 
 public class PlayerInputSystem
 {
   private readonly Func<PlayerInput> _inputSrc;
+  private readonly RingBuffer<PlayerInput> _pressedHistory;
 
   private PlayerInput _prev;
 
   public PlayerInputSystem(Func<PlayerInput> inputSrc)
   {
     _inputSrc = inputSrc;
+    _pressedHistory = new(PressedHistoryCapacity);
   }
 
   public float X { get; private set; }
@@ -24,6 +28,11 @@ public class PlayerInputSystem
     Held = _inputSrc();
     Pressed = Held & ~_prev;
     Released = _prev & ~Held;
+
+    if (Pressed != PlayerInput.None)
+    {
+      _pressedHistory.Push(Pressed);
+    }
 
     SetDPad();
   }
