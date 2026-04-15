@@ -1,3 +1,5 @@
+using static PlayerInput;
+
 public static class SharedConsts
 {
   public static class ConvertValues
@@ -45,5 +47,10 @@ public static class SharedConsts
       public const string Skidding = nameof(Skidding);
       public const string Balancing = nameof(Balancing);
     }
+  }
+
+  public static class SecretCodes
+  {
+    public static readonly PlayerInput[] ToggleDebugMode = new PlayerInput[] { Y, Y, B };
   }
 }
