@@ -1,5 +1,6 @@
 using UnityEngine;
 using static SharedConsts.Physics;
+using static SharedConsts.SecretCodes;
 using static SonicConsts.Physics;
 
 /// <summary>
@@ -32,8 +33,12 @@ public partial class SonicController
     _inputSystem.Update();
 
     var pressed = _inputSystem.Pressed;
+    if (pressed == PlayerInput.None)
+    {
+      return;
+    }
 
-    if (pressed.HasAny(PlayerInput.X))
+    if (_inputSystem.CheckLastPressed(ToggleDebugMode))
     {
       _infoPanel.SetActive(!_infoPanel.activeSelf);
     }

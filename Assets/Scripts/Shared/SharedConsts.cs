@@ -1,3 +1,5 @@
+using static PlayerInput;
+
 public static class SharedConsts
 {
   public static class ConvertValues
@@ -10,6 +12,7 @@ public static class SharedConsts
 
   public static class Input
   {
+    public const int PressedHistoryCapacity = 10;
     public const float InputDeadZone = 0.001f;
   }
 
@@ -44,5 +47,10 @@ public static class SharedConsts
       public const string Skidding = nameof(Skidding);
       public const string Balancing = nameof(Balancing);
     }
+  }
+
+  public static class SecretCodes
+  {
+    public static readonly PlayerInput[] ToggleDebugMode = new PlayerInput[] { Y, Y, B };
   }
 }
