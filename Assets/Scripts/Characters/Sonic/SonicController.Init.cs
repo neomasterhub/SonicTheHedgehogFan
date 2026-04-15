@@ -52,6 +52,9 @@ public partial class SonicController
     _spriteRenderer = GetComponent<SpriteRenderer>();
     _infoPanel = Canvas.transform.Find("Info Panel").gameObject;
     _infoText = _infoPanel.transform.Find("Info Text").GetComponent<TextMeshProUGUI>();
+#if UNITY_EDITOR
+    _infoPanel.SetActive(true);
+#endif
   }
 
   private void InitializeViewSystem()

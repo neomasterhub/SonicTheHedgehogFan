@@ -14,7 +14,8 @@ public class SonicViewSystem
   private Animator _animator;
   private SonicViewContext _context;
   private SpriteRenderer _spriteRenderer;
-  private IPlayerViewRotator<SonicViewRotatorContext> _rotator;
+
+  public IPlayerViewRotator<SonicViewRotatorContext> Rotator { get; private set; }
 
   public SonicViewSystem(PlayerInputSystem inputSystem, PlayerViewRotatorProvider<SonicViewRotatorContext> rotatorProvider)
   {
@@ -69,13 +70,13 @@ public class SonicViewSystem
     var nextRotator = _rotatorProvider.FirstTriggered();
     if (nextRotator != null)
     {
-      _rotator = nextRotator;
+      Rotator = nextRotator;
     }
 
-    if (_rotator != null)
+    if (Rotator != null)
     {
-      _rotator.Rotate(SonicViewRotatorContext.FromViewContext(_context));
-      _spriteRenderer.transform.localRotation = Quaternion.Euler(_rotator.Rotation);
+      Rotator.Rotate(SonicViewRotatorContext.FromViewContext(_context));
+      _spriteRenderer.transform.localRotation = Quaternion.Euler(Rotator.Rotation);
     }
 
     if (_context.IsSkidding)
