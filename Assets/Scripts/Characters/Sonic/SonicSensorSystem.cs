@@ -69,42 +69,37 @@ public class SonicSensorSystem
     set => CurrentSensorGroup.ParentPosition = value;
   }
 
-  public void Update(
-    SonicSizeMode sizeMode,
-    GroundSide groundSide,
-    Vector2 parentPosition,
-    SonicSensorChecks sensorChecks,
-    SonicSensorRayLengths sensorRayLengths)
+  public void Update(SonicSensorContext context)
   {
-    if (SizeMode != sizeMode || GroundSide != groundSide)
+    if (SizeMode != context.SizeMode || GroundSide != context.GroundSide)
     {
       _sensorRayLengths = null;
 
-      SizeMode = sizeMode;
-      GroundSide = groundSide;
+      SizeMode = context.SizeMode;
+      GroundSide = context.GroundSide;
 
       SetCurrentSensorGroup();
     }
 
-    ParentPosition = parentPosition;
+    ParentPosition = context.ParentPosition;
 
     var sensorGroup = CurrentSensorGroup;
 
-    sensorGroup.O.Enabled = sensorChecks.Balancing;
-    sensorGroup.C.UpRay.Enabled = sensorChecks.Ceiling;
-    sensorGroup.D.UpRay.Enabled = sensorChecks.Ceiling;
-    sensorGroup.A.DownRay.Enabled = sensorChecks.Ground;
-    sensorGroup.B.DownRay.Enabled = sensorChecks.Ground;
+    sensorGroup.O.Enabled = context.SensorChecks.Balancing;
+    sensorGroup.C.UpRay.Enabled = context.SensorChecks.Ceiling;
+    sensorGroup.D.UpRay.Enabled = context.SensorChecks.Ceiling;
+    sensorGroup.A.DownRay.Enabled = context.SensorChecks.Ground;
+    sensorGroup.B.DownRay.Enabled = context.SensorChecks.Ground;
 
-    if (_sensorRayLengths != sensorRayLengths)
+    if (_sensorRayLengths != context.SensorRayLengths)
     {
-      _sensorRayLengths = sensorRayLengths;
+      _sensorRayLengths = context.SensorRayLengths;
 
-      sensorGroup.O.Ray.Length = sensorRayLengths.O;
-      UpdateUDFSensorRayLengths(sensorGroup.C, sensorRayLengths.TopUDF);
-      UpdateUDFSensorRayLengths(sensorGroup.D, sensorRayLengths.TopUDF);
-      UpdateUDFSensorRayLengths(sensorGroup.A, sensorRayLengths.BottomUDF);
-      UpdateUDFSensorRayLengths(sensorGroup.B, sensorRayLengths.BottomUDF);
+      sensorGroup.O.Ray.Length = context.SensorRayLengths.O;
+      UpdateUDFSensorRayLengths(sensorGroup.C, context.SensorRayLengths.TopUDF);
+      UpdateUDFSensorRayLengths(sensorGroup.D, context.SensorRayLengths.TopUDF);
+      UpdateUDFSensorRayLengths(sensorGroup.A, context.SensorRayLengths.BottomUDF);
+      UpdateUDFSensorRayLengths(sensorGroup.B, context.SensorRayLengths.BottomUDF);
     }
   }
 
