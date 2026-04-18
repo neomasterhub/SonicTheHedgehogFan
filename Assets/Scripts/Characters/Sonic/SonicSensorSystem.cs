@@ -82,19 +82,8 @@ public class SonicSensorSystem
       SetCurrentSensorGroup();
     }
 
-    _parentPosition = context.ParentPosition;
-    _o.SetParentPosition(_parentPosition);
-    _a.SetParentPosition(_parentPosition);
-    _b.SetParentPosition(_parentPosition);
-    _c.SetParentPosition(_parentPosition);
-    _d.SetParentPosition(_parentPosition);
-
-    _o.Enabled = context.SensorFlags.CheckBalancing;
-    _c.UpRay.Enabled = context.SensorFlags.CheckCeiling;
-    _d.UpRay.Enabled = context.SensorFlags.CheckCeiling;
-    _a.DownRay.Enabled = context.SensorFlags.CheckGround;
-    _b.DownRay.Enabled = context.SensorFlags.CheckGround;
-
+    SetParentPosition(context.ParentPosition);
+    UpdateSensorActiveStates(context.SensorFlags);
     UpdateSensorRayLengths(context.SensorRayLengths);
   }
 
@@ -220,6 +209,25 @@ public class SonicSensorSystem
     _b = currentSensorGroup.B;
     _c = currentSensorGroup.C;
     _d = currentSensorGroup.D;
+  }
+
+  public void SetParentPosition(Vector2 parentPosition)
+  {
+    _parentPosition = parentPosition;
+    _o.SetParentPosition(parentPosition);
+    _a.SetParentPosition(parentPosition);
+    _b.SetParentPosition(parentPosition);
+    _c.SetParentPosition(parentPosition);
+    _d.SetParentPosition(parentPosition);
+  }
+
+  public void UpdateSensorActiveStates(SonicSensorFlags flags)
+  {
+    _o.Enabled = flags.CheckBalancing;
+    _c.UpRay.Enabled = flags.CheckCeiling;
+    _d.UpRay.Enabled = flags.CheckCeiling;
+    _a.DownRay.Enabled = flags.CheckGround;
+    _b.DownRay.Enabled = flags.CheckGround;
   }
 
   private void UpdateSensorRayLengths(SonicSensorRayLengths lengths)
