@@ -12,6 +12,7 @@ public partial class SonicController
   {
     _info.Clear();
 
+    _info.AppendLine($"INS {GetInputState()}");
     _info.AppendLine($"INH {_inputSystem.GetPressedHistory()}");
     _info.AppendLine($"GP {_groundInfoSystem.Previous}");
     _info.AppendLine($"GC {_groundInfoSystem.Current}");
@@ -20,5 +21,20 @@ public partial class SonicController
     _info.AppendLine($"RT {_viewSystem.Rotator,11}");
 
     _infoText.SetText(_info);
+  }
+
+  private string GetInputState()
+  {
+    if (_isFallingOffWall)
+    {
+      return "OFF";
+    }
+
+    if (_inputUnlockTimer.IsRunning)
+    {
+      return $"OFF {_inputUnlockTimer.RemainingSeconds:0.0000}";
+    }
+
+    return "ON";
   }
 }
