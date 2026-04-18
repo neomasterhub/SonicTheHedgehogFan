@@ -232,7 +232,6 @@ public class SonicSensorSystem
 
   private bool IsBalancing(LayerMask groundLayer)
   {
-    return CurrentSensorGroup.O.Enabled
-      && !CurrentSensorGroup.O.Ray.Cast(groundLayer).HasValue;
+    return _o.Enabled && !_o.Ray.Cast(groundLayer).HasValue;
   }
 }
