@@ -73,10 +73,8 @@ public class SonicSensorSystem
     SonicSizeMode sizeMode,
     GroundSide groundSide,
     Vector2 parentPosition,
-    SonicSensorRayLengths sensorRayLengths,
-    bool oEnabled,
-    bool topEnabled,
-    bool bottomEnabled)
+    SonicSensorChecks sensorChecks,
+    SonicSensorRayLengths sensorRayLengths)
   {
     if (SizeMode != sizeMode || GroundSide != groundSide)
     {
@@ -91,6 +89,12 @@ public class SonicSensorSystem
     ParentPosition = parentPosition;
 
     var sensorGroup = CurrentSensorGroup;
+
+    sensorGroup.O.Enabled = sensorChecks.Balancing;
+    sensorGroup.C.UpRay.Enabled = sensorChecks.Ceiling;
+    sensorGroup.D.UpRay.Enabled = sensorChecks.Ceiling;
+    sensorGroup.A.DownRay.Enabled = sensorChecks.Ground;
+    sensorGroup.B.DownRay.Enabled = sensorChecks.Ground;
 
     if (_sensorRayLengths != sensorRayLengths)
     {
