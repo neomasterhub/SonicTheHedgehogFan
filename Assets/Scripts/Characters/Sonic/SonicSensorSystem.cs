@@ -12,9 +12,7 @@ public class SonicSensorSystem
   private readonly SonicSensorGroup _smallLeftSensorGroup;
   private readonly SonicSensorGroup _smallRightSensorGroup;
 
-  private float? _oLength;
-  private Vector3? _topUDFLengths;
-  private Vector3? _bottomUDFLengths;
+  private SonicSensorRayLengths? _sensorRayLengths;
 
   public SonicSensorSystem(
     SonicSizeMode sizeMode = SonicSizeMode.Big,
@@ -84,8 +82,7 @@ public class SonicSensorSystem
   {
     if (SizeMode != sizeMode || GroundSide != groundSide)
     {
-      _topUDFLengths = null;
-      _bottomUDFLengths = null;
+      _sensorRayLengths = null;
 
       SizeMode = sizeMode;
       GroundSide = groundSide;
