@@ -38,6 +38,7 @@ public partial class SonicController
     InitializeViewSystem();
     InitializeSpeedSystemProviders();
     InitializeSounds();
+    InitializeTimers();
   }
 
   private void InitializeEngine()
@@ -95,8 +96,8 @@ public partial class SonicController
       .When(() => _groundInfoSystem.Current.Side == GroundSide.Right, () => new Vector2(_speedSystem.SpeedY, -_speedSystem.SpeedX));
 
     _groundToAirSpeedProvider
-      .When(() => _groundInfoSystem.Previous.Side == GroundSide.Left, () => WallToAirSpeedDelta + new Vector2(_speedSystem.SpeedY, -_speedSystem.SpeedX))
-      .When(() => _groundInfoSystem.Previous.Side == GroundSide.Right, () => WallToAirSpeedDelta + new Vector2(-_speedSystem.SpeedY, _speedSystem.SpeedX));
+      .When(() => _groundInfoSystem.Previous.Side == GroundSide.Left, () => _isFallingOffWall ? default : WallToAirSpeedDelta + new Vector2(_speedSystem.SpeedY, -_speedSystem.SpeedX))
+      .When(() => _groundInfoSystem.Previous.Side == GroundSide.Right, () => _isFallingOffWall ? default : WallToAirSpeedDelta + new Vector2(-_speedSystem.SpeedY, _speedSystem.SpeedX));
 
     _gravitySpeedProvider.DefaultProvider = () => GravitySpeed.Zero;
     _airToGroundSpeedProvider.DefaultProvider = () => new(_speedSystem.SpeedX, _speedSystem.SpeedY);
@@ -114,8 +115,19 @@ public partial class SonicController
     };
   }
 
+  private void InitializeTimers()
+  {
+    _inputUnlockTimer = new Timer(InputUnlockTimerSeconds)
+      .WhenCompleted(() => _postWallDetachInputLock = false);
+  }
+
   private PlayerInput GetPlayerInput()
   {
+    if (_postWallDetachInputLock)
+    {
+      return PlayerInput.None;
+    }
+
     return PlayerInput.None
       .Set(PlayerInput.Start, Input.GetKey(KeyCode.KeypadEnter))
       .Set(PlayerInput.Left, Input.GetKey(KeyCode.LeftArrow))

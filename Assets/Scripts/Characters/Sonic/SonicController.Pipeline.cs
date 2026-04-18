@@ -80,6 +80,32 @@ public partial class SonicController
 
   private void ApplyEffects()
   {
+    ApplyEffects_Grounded();
+  }
+
+  private void ApplyEffects_Grounded()
+  {
+    if (!_isGrounded)
+    {
+      return;
+    }
+
+    if (_isFallingOffWall)
+    {
+      _isFallingOffWall = false;
+      _timerSystem.StartIfNotRunning(_inputUnlockTimer);
+      return;
+    }
+
+    if (_groundInfoSystem.Current.Side is GroundSide.Left or GroundSide.Right
+      && Mathf.Abs(_speedSystem.GroundSpeed) < DecelerationSpeed)
+    {
+      _isFallingOffWall = true;
+      _postWallDetachInputLock = true;
+      _postWallDetachPositionOffset = true;
+      AnalyzeEnvironment_Airborn();
+      return;
+    }
   }
 
   private void ApplyMovement()
@@ -109,6 +135,15 @@ public partial class SonicController
       speedY -= (_lastGroundDetectionResult.Distance
         * (int)_lastGroundDetectionResult.SensorGroundRelation)
         - GroundedPositionUpwardOffset;
+    }
+    else
+    {
+      if (_postWallDetachPositionOffset)
+      {
+        _postWallDetachPositionOffset = false;
+        speedX = WallDetachPositionOffset.x;
+        speedY = WallDetachPositionOffset.y;
+      }
     }
 
     // SpeedX, SpeedY - offsets in units per frame.

@@ -7,4 +7,5 @@ public enum SonicState
   Grounded = 1 << 1,
   Skidding = 1 << 2,
   Balancing = 1 << 3,
+  FallingOffWall = 1 << 4,
 }

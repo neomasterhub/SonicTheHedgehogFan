@@ -26,8 +26,10 @@ public partial class SonicController : MonoBehaviour
 
   private bool _isGrounded;
   private bool _isBalancing;
+  private bool _isFallingOffWall;
   private bool _prevIsGrounded;
   private bool _postWallDetachInputLock;
+  private bool _postWallDetachPositionOffset;
   private bool _triggeredGroundSensorSide;
   private Animator _animator;
   private GameObject _infoPanel;
@@ -40,6 +42,7 @@ public partial class SonicController : MonoBehaviour
   private Sound[] _sounds;
   private SpriteRenderer _spriteRenderer;
   private TextMeshProUGUI _infoText;
+  private Timer _inputUnlockTimer;
 
   public bool GravityEnabled = true;
   public bool GroundedViewRotatorEnabled = true;
