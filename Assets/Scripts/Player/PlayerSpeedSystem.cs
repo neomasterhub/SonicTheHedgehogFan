@@ -7,9 +7,10 @@ public class PlayerSpeedSystem
   private const int _speedRoundingDigits = 3;
   private const int _zeroGroundSpeedProgressMax = 5;
 
-  private readonly ConditionalValueProvider<GravitySpeed> _gravitySpeedProvider = new();
   private readonly ConditionalValueProvider<float> _slopeFactorSpeedProvider;
+  private readonly ConditionalValueProvider<Vector2> _airToGroundSpeedProvider;
   private readonly ConditionalValueProvider<Vector2> _groundToAirSpeedProvider;
+  private readonly ConditionalValueProvider<GravitySpeed> _gravitySpeedProvider;
   private readonly PlayerInputSystem _inputSystem;
   private readonly PlayerSpeedConfig _config;
 
@@ -20,15 +21,17 @@ public class PlayerSpeedSystem
   public PlayerSpeedSystem(
     PlayerInputSystem inputSystem,
     PlayerSpeedConfig config,
-    ConditionalValueProvider<GravitySpeed> gravitySpeedProvider,
     ConditionalValueProvider<float> slopeFactorSpeedProvider,
-    ConditionalValueProvider<Vector2> groundToAirSpeedProvider)
+    ConditionalValueProvider<Vector2> airToGroundSpeedProvider,
+    ConditionalValueProvider<Vector2> groundToAirSpeedProvider,
+    ConditionalValueProvider<GravitySpeed> gravitySpeedProvider)
   {
     _inputSystem = inputSystem;
     _config = config;
-    _gravitySpeedProvider = gravitySpeedProvider;
     _slopeFactorSpeedProvider = slopeFactorSpeedProvider;
+    _airToGroundSpeedProvider = airToGroundSpeedProvider;
     _groundToAirSpeedProvider = groundToAirSpeedProvider;
+    _gravitySpeedProvider = gravitySpeedProvider;
   }
 
   public bool IsSkidding { get; private set; }
@@ -166,6 +169,10 @@ public class PlayerSpeedSystem
   {
     if (!_context.PrevIsGrounded)
     {
+      var speed = _airToGroundSpeedProvider.FirstTriggeredOrDefault();
+      SpeedX = speed.x;
+      SpeedY = speed.y;
+
       GroundSpeed = Mathf.Clamp(
         (SpeedX * _groundAngleCos) + (SpeedY * _groundAngleSin),
         -_config.TopSpeed,
