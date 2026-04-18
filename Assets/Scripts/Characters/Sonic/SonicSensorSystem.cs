@@ -201,7 +201,7 @@ public class SonicSensorSystem
 
   private void SetCurrentSensorGroup()
   {
-    CurrentSensorGroup = SizeMode switch
+    var currentSensorGroup = SizeMode switch
     {
       SonicSizeMode.Big => GroundSide switch
       {
@@ -221,6 +221,12 @@ public class SonicSensorSystem
       },
       _ => throw SizeMode.ArgumentOutOfRangeException(),
     };
+
+    _o = currentSensorGroup.O;
+    _a = currentSensorGroup.A;
+    _b = currentSensorGroup.B;
+    _c = currentSensorGroup.C;
+    _d = currentSensorGroup.D;
   }
 
   private void UpdateUDFSensorRayLengths(UDFSensor sensor, Vector3 udfLengths)
