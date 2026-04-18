@@ -102,6 +102,7 @@ public partial class SonicController
     {
       _isFallingOffWall = true;
       _postWallDetachInputLock = true;
+      _postWallDetachPositionOffset = true;
       AnalyzeEnvironment_Airborn();
       return;
     }
@@ -134,6 +135,15 @@ public partial class SonicController
       speedY -= (_lastGroundDetectionResult.Distance
         * (int)_lastGroundDetectionResult.SensorGroundRelation)
         - GroundedPositionUpwardOffset;
+    }
+    else
+    {
+      if (_postWallDetachPositionOffset)
+      {
+        _postWallDetachPositionOffset = false;
+        speedX = WallDetachPositionOffset.x;
+        speedY = WallDetachPositionOffset.y;
+      }
     }
 
     // SpeedX, SpeedY - offsets in units per frame.
