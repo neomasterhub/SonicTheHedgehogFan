@@ -196,7 +196,11 @@ public class SonicSensorSystem
 
   public void Draw()
   {
-    CurrentSensorGroup.Draw();
+    _o.Draw();
+    _a.Draw();
+    _b.Draw();
+    _c.Draw();
+    _d.Draw();
   }
 
   private void SetCurrentSensorGroup()
