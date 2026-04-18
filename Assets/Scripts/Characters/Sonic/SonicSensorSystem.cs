@@ -118,13 +118,13 @@ public class SonicSensorSystem
 
     if (horizontalDirection)
     {
-      dr1 = CurrentSensorGroup.A.DownRay;
-      dr2 = CurrentSensorGroup.B.DownRay;
+      dr1 = _a.DownRay;
+      dr2 = _b.DownRay;
     }
     else
     {
-      dr1 = CurrentSensorGroup.B.DownRay;
-      dr2 = CurrentSensorGroup.A.DownRay;
+      dr1 = _b.DownRay;
+      dr2 = _a.DownRay;
     }
 
     var dr1Hit = dr1.Cast(groundLayer);
@@ -147,13 +147,13 @@ public class SonicSensorSystem
 
     if (horizontalDirection)
     {
-      ur1 = CurrentSensorGroup.A.UpRay;
-      ur2 = CurrentSensorGroup.B.UpRay;
+      ur1 = _a.UpRay;
+      ur2 = _b.UpRay;
     }
     else
     {
-      ur1 = CurrentSensorGroup.B.UpRay;
-      ur2 = CurrentSensorGroup.A.UpRay;
+      ur1 = _b.UpRay;
+      ur2 = _a.UpRay;
     }
 
     var ur1Hit = ur1.Cast(groundLayer);
