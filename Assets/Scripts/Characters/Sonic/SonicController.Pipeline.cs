@@ -80,6 +80,31 @@ public partial class SonicController
 
   private void ApplyEffects()
   {
+    ApplyEffects_Grounded();
+  }
+
+  private void ApplyEffects_Grounded()
+  {
+    if (!_isGrounded)
+    {
+      return;
+    }
+
+    if (_isFallingOffWall)
+    {
+      _isFallingOffWall = false;
+      _timerSystem.StartIfNotRunning(_inputUnlockTimer);
+      return;
+    }
+
+    if (_groundInfoSystem.Current.Side is GroundSide.Left or GroundSide.Right
+      && Mathf.Abs(_speedSystem.GroundSpeed) < DecelerationSpeed)
+    {
+      _isFallingOffWall = true;
+      _postWallDetachInputLock = true;
+      AnalyzeEnvironment_Airborn();
+      return;
+    }
   }
 
   private void ApplyMovement()
