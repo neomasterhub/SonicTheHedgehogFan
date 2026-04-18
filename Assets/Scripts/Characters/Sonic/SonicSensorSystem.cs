@@ -87,25 +87,28 @@ public class SonicSensorSystem
       SetCurrentSensorGroup();
     }
 
-    ParentPosition = context.ParentPosition;
+    _parentPosition = context.ParentPosition;
+    _o.SetParentPosition(_parentPosition);
+    _a.SetParentPosition(_parentPosition);
+    _b.SetParentPosition(_parentPosition);
+    _c.SetParentPosition(_parentPosition);
+    _d.SetParentPosition(_parentPosition);
 
-    var sensorGroup = CurrentSensorGroup;
-
-    sensorGroup.O.Enabled = context.SensorFlags.CheckBalancing;
-    sensorGroup.C.UpRay.Enabled = context.SensorFlags.CheckCeiling;
-    sensorGroup.D.UpRay.Enabled = context.SensorFlags.CheckCeiling;
-    sensorGroup.A.DownRay.Enabled = context.SensorFlags.CheckGround;
-    sensorGroup.B.DownRay.Enabled = context.SensorFlags.CheckGround;
+    _o.Enabled = context.SensorFlags.CheckBalancing;
+    _c.UpRay.Enabled = context.SensorFlags.CheckCeiling;
+    _d.UpRay.Enabled = context.SensorFlags.CheckCeiling;
+    _a.DownRay.Enabled = context.SensorFlags.CheckGround;
+    _b.DownRay.Enabled = context.SensorFlags.CheckGround;
 
     if (_sensorRayLengths != context.SensorRayLengths)
     {
       _sensorRayLengths = context.SensorRayLengths;
 
-      sensorGroup.O.Ray.Length = context.SensorRayLengths.O;
-      UpdateUDFSensorRayLengths(sensorGroup.C, context.SensorRayLengths.TopUDF);
-      UpdateUDFSensorRayLengths(sensorGroup.D, context.SensorRayLengths.TopUDF);
-      UpdateUDFSensorRayLengths(sensorGroup.A, context.SensorRayLengths.BottomUDF);
-      UpdateUDFSensorRayLengths(sensorGroup.B, context.SensorRayLengths.BottomUDF);
+      _o.Ray.Length = context.SensorRayLengths.O;
+      UpdateUDFSensorRayLengths(_c, context.SensorRayLengths.TopUDF);
+      UpdateUDFSensorRayLengths(_d, context.SensorRayLengths.TopUDF);
+      UpdateUDFSensorRayLengths(_a, context.SensorRayLengths.BottomUDF);
+      UpdateUDFSensorRayLengths(_b, context.SensorRayLengths.BottomUDF);
     }
   }
 
