@@ -123,6 +123,11 @@ public partial class SonicController
 
   private PlayerInput GetPlayerInput()
   {
+    if (_postWallDetachInputLock)
+    {
+      return PlayerInput.None;
+    }
+
     return PlayerInput.None
       .Set(PlayerInput.Start, Input.GetKey(KeyCode.KeypadEnter))
       .Set(PlayerInput.Left, Input.GetKey(KeyCode.LeftArrow))
