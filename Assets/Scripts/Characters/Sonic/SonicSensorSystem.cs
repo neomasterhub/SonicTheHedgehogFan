@@ -95,16 +95,7 @@ public class SonicSensorSystem
     _a.DownRay.Enabled = context.SensorFlags.CheckGround;
     _b.DownRay.Enabled = context.SensorFlags.CheckGround;
 
-    if (_sensorRayLengths != context.SensorRayLengths)
-    {
-      _sensorRayLengths = context.SensorRayLengths;
-
-      _o.Ray.Length = context.SensorRayLengths.O;
-      UpdateUDFSensorRayLengths(_c, context.SensorRayLengths.TopUDF);
-      UpdateUDFSensorRayLengths(_d, context.SensorRayLengths.TopUDF);
-      UpdateUDFSensorRayLengths(_a, context.SensorRayLengths.BottomUDF);
-      UpdateUDFSensorRayLengths(_b, context.SensorRayLengths.BottomUDF);
-    }
+    UpdateSensorRayLengths(context.SensorRayLengths);
   }
 
   public GroundDetectionResult? DetectGround(
@@ -229,6 +220,20 @@ public class SonicSensorSystem
     _b = currentSensorGroup.B;
     _c = currentSensorGroup.C;
     _d = currentSensorGroup.D;
+  }
+
+  private void UpdateSensorRayLengths(SonicSensorRayLengths lengths)
+  {
+    if (_sensorRayLengths != lengths)
+    {
+      _sensorRayLengths = lengths;
+
+      _o.Ray.Length = lengths.O;
+      UpdateUDFSensorRayLengths(_c, lengths.TopUDF);
+      UpdateUDFSensorRayLengths(_d, lengths.TopUDF);
+      UpdateUDFSensorRayLengths(_a, lengths.BottomUDF);
+      UpdateUDFSensorRayLengths(_b, lengths.BottomUDF);
+    }
   }
 
   private void UpdateUDFSensorRayLengths(UDFSensor sensor, Vector3 udfLengths)
