@@ -14,6 +14,7 @@ public partial class SonicController
   {
     _groundLayer = 8;
 
+    _airToGroundSpeedProvider = new();
     _gravitySpeedProvider = new();
     _groundToAirSpeedProvider = new();
     _slopeFactorSpeedProvider = new();
@@ -26,7 +27,7 @@ public partial class SonicController
 
     _inputSystem = new(GetPlayerInput);
     _speedConfig = new(TopSpeed, FrictionSpeed, MaxSkiddingSpeed, AccelerationSpeed, DecelerationSpeed, AirTopSpeed, AirAccelerationSpeed, MaxFallSpeed);
-    _speedSystem = new(_inputSystem, _speedConfig, _gravitySpeedProvider, _slopeFactorSpeedProvider, _groundToAirSpeedProvider);
+    _speedSystem = new(_inputSystem, _speedConfig, _slopeFactorSpeedProvider, _airToGroundSpeedProvider, _groundToAirSpeedProvider, _gravitySpeedProvider);
     _viewSystem = new(_inputSystem, _viewRotatorProvider);
   }
 
@@ -89,11 +90,16 @@ public partial class SonicController
       .When(() => _groundInfoSystem.Current.Side == GroundSide.Left, () => _groundInfoSystem.Current.AngleDeg <= 0 ? SlopeFactor : SlopeFactor * Mathf.Cos(_groundInfoSystem.Current.AngleRad))
       .When(() => _groundInfoSystem.Current.Side == GroundSide.Right, () => _groundInfoSystem.Current.AngleDeg >= 0 ? SlopeFactor : SlopeFactor * Mathf.Cos(_groundInfoSystem.Current.AngleRad));
 
+    _airToGroundSpeedProvider
+      .When(() => _groundInfoSystem.Current.Side == GroundSide.Left, () => new Vector2(-_speedSystem.SpeedY, _speedSystem.SpeedX))
+      .When(() => _groundInfoSystem.Current.Side == GroundSide.Right, () => new Vector2(_speedSystem.SpeedY, -_speedSystem.SpeedX));
+
     _groundToAirSpeedProvider
       .When(() => _groundInfoSystem.Previous.Side == GroundSide.Left, () => WallToAirSpeedDelta + new Vector2(_speedSystem.SpeedY, -_speedSystem.SpeedX))
       .When(() => _groundInfoSystem.Previous.Side == GroundSide.Right, () => WallToAirSpeedDelta + new Vector2(-_speedSystem.SpeedY, _speedSystem.SpeedX));
 
     _gravitySpeedProvider.DefaultProvider = () => GravitySpeed.Zero;
+    _airToGroundSpeedProvider.DefaultProvider = () => new(_speedSystem.SpeedX, _speedSystem.SpeedY);
     _groundToAirSpeedProvider.DefaultProvider = () => new(_speedSystem.SpeedX, _speedSystem.SpeedY);
   }
 
