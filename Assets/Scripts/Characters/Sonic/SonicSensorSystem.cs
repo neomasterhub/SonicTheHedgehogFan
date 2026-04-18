@@ -73,9 +73,7 @@ public class SonicSensorSystem
     SonicSizeMode sizeMode,
     GroundSide groundSide,
     Vector2 parentPosition,
-    float oLength,
-    Vector3 topUDFLengths,
-    Vector3 bottomUDFLengths,
+    SonicSensorRayLengths sensorRayLengths,
     bool oEnabled,
     bool topEnabled,
     bool bottomEnabled)
@@ -92,30 +90,17 @@ public class SonicSensorSystem
 
     ParentPosition = parentPosition;
 
-    CurrentSensorGroup.O.Enabled = oEnabled;
-    CurrentSensorGroup.C.Enabled = topEnabled;
-    CurrentSensorGroup.D.Enabled = topEnabled;
-    CurrentSensorGroup.A.Enabled = bottomEnabled;
-    CurrentSensorGroup.B.Enabled = bottomEnabled;
+    var sensorGroup = CurrentSensorGroup;
 
-    if (_oLength != oLength)
+    if (_sensorRayLengths != sensorRayLengths)
     {
-      _oLength = oLength;
-      CurrentSensorGroup.O.Ray.Length = oLength;
-    }
+      _sensorRayLengths = sensorRayLengths;
 
-    if (_topUDFLengths != topUDFLengths)
-    {
-      _topUDFLengths = topUDFLengths;
-      UpdateUDFSensorLengths(CurrentSensorGroup.C, topUDFLengths);
-      UpdateUDFSensorLengths(CurrentSensorGroup.D, topUDFLengths);
-    }
-
-    if (_bottomUDFLengths != bottomUDFLengths)
-    {
-      _bottomUDFLengths = bottomUDFLengths;
-      UpdateUDFSensorLengths(CurrentSensorGroup.A, bottomUDFLengths);
-      UpdateUDFSensorLengths(CurrentSensorGroup.B, bottomUDFLengths);
+      sensorGroup.O.Ray.Length = sensorRayLengths.O;
+      UpdateUDFSensorRayLengths(sensorGroup.C, sensorRayLengths.TopUDF);
+      UpdateUDFSensorRayLengths(sensorGroup.D, sensorRayLengths.TopUDF);
+      UpdateUDFSensorRayLengths(sensorGroup.A, sensorRayLengths.BottomUDF);
+      UpdateUDFSensorRayLengths(sensorGroup.B, sensorRayLengths.BottomUDF);
     }
   }
 
@@ -233,7 +218,7 @@ public class SonicSensorSystem
     };
   }
 
-  private void UpdateUDFSensorLengths(UDFSensor sensor, Vector3 udfLengths)
+  private void UpdateUDFSensorRayLengths(UDFSensor sensor, Vector3 udfLengths)
   {
     sensor.UpRay.Length = udfLengths.x;
     sensor.DownRay.Length = udfLengths.y;
