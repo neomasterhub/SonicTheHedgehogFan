@@ -38,6 +38,7 @@ public partial class SonicController
     InitializeViewSystem();
     InitializeSpeedSystemProviders();
     InitializeSounds();
+    InitializeTimers();
   }
 
   private void InitializeEngine()
@@ -112,6 +113,12 @@ public partial class SonicController
     {
       new(skidding, () => _speedSystem.IsSkidding && !skidding.isPlaying, () => !_speedSystem.IsSkidding && !skidding.isPlaying),
     };
+  }
+
+  private void InitializeTimers()
+  {
+    _inputUnlockTimer = new Timer(InputUnlockTimerSeconds)
+      .WhenCompleted(() => _postWallDetachInputLock = false);
   }
 
   private PlayerInput GetPlayerInput()

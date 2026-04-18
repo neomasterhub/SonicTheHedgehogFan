@@ -41,6 +41,7 @@ public partial class SonicController : MonoBehaviour
   private Sound[] _sounds;
   private SpriteRenderer _spriteRenderer;
   private TextMeshProUGUI _infoText;
+  private Timer _inputUnlockTimer;
 
   public bool GravityEnabled = true;
   public bool GroundedViewRotatorEnabled = true;
