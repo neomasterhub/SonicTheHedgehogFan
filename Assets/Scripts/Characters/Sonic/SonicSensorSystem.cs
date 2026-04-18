@@ -85,11 +85,11 @@ public class SonicSensorSystem
 
     var sensorGroup = CurrentSensorGroup;
 
-    sensorGroup.O.Enabled = context.SensorChecks.Balancing;
-    sensorGroup.C.UpRay.Enabled = context.SensorChecks.Ceiling;
-    sensorGroup.D.UpRay.Enabled = context.SensorChecks.Ceiling;
-    sensorGroup.A.DownRay.Enabled = context.SensorChecks.Ground;
-    sensorGroup.B.DownRay.Enabled = context.SensorChecks.Ground;
+    sensorGroup.O.Enabled = context.SensorFlags.CheckBalancing;
+    sensorGroup.C.UpRay.Enabled = context.SensorFlags.CheckCeiling;
+    sensorGroup.D.UpRay.Enabled = context.SensorFlags.CheckCeiling;
+    sensorGroup.A.DownRay.Enabled = context.SensorFlags.CheckGround;
+    sensorGroup.B.DownRay.Enabled = context.SensorFlags.CheckGround;
 
     if (_sensorRayLengths != context.SensorRayLengths)
     {
