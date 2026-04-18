@@ -12,6 +12,12 @@ public class SonicSensorSystem
   private readonly SonicSensorGroup _smallLeftSensorGroup;
   private readonly SonicSensorGroup _smallRightSensorGroup;
 
+  private Sensor _o;
+  private UDFSensor _a;
+  private UDFSensor _b;
+  private UDFSensor _c;
+  private UDFSensor _d;
+  private Vector2 _parentPosition;
   private SonicSensorRayLengths? _sensorRayLengths;
 
   public SonicSensorSystem(
