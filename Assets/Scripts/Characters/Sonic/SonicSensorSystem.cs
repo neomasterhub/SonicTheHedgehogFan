@@ -12,6 +12,12 @@ public class SonicSensorSystem
   private readonly SonicSensorGroup _smallLeftSensorGroup;
   private readonly SonicSensorGroup _smallRightSensorGroup;
 
+  private Sensor _o;
+  private UDFSensor _a;
+  private UDFSensor _b;
+  private UDFSensor _c;
+  private UDFSensor _d;
+  private Vector2 _parentPosition;
   private SonicSensorRayLengths? _sensorRayLengths;
 
   public SonicSensorSystem(
@@ -62,12 +68,7 @@ public class SonicSensorSystem
 
   public SonicSizeMode SizeMode { get; private set; }
   public GroundSide GroundSide { get; private set; }
-  public SonicSensorGroup CurrentSensorGroup { get; private set; }
-  public Vector2 ParentPosition
-  {
-    get => CurrentSensorGroup.ParentPosition;
-    set => CurrentSensorGroup.ParentPosition = value;
-  }
+  public Vector2 ParentPosition => _parentPosition;
 
   public void Update(SonicSensorContext context)
   {
@@ -81,26 +82,9 @@ public class SonicSensorSystem
       SetCurrentSensorGroup();
     }
 
-    ParentPosition = context.ParentPosition;
-
-    var sensorGroup = CurrentSensorGroup;
-
-    sensorGroup.O.Enabled = context.SensorFlags.CheckBalancing;
-    sensorGroup.C.UpRay.Enabled = context.SensorFlags.CheckCeiling;
-    sensorGroup.D.UpRay.Enabled = context.SensorFlags.CheckCeiling;
-    sensorGroup.A.DownRay.Enabled = context.SensorFlags.CheckGround;
-    sensorGroup.B.DownRay.Enabled = context.SensorFlags.CheckGround;
-
-    if (_sensorRayLengths != context.SensorRayLengths)
-    {
-      _sensorRayLengths = context.SensorRayLengths;
-
-      sensorGroup.O.Ray.Length = context.SensorRayLengths.O;
-      UpdateUDFSensorRayLengths(sensorGroup.C, context.SensorRayLengths.TopUDF);
-      UpdateUDFSensorRayLengths(sensorGroup.D, context.SensorRayLengths.TopUDF);
-      UpdateUDFSensorRayLengths(sensorGroup.A, context.SensorRayLengths.BottomUDF);
-      UpdateUDFSensorRayLengths(sensorGroup.B, context.SensorRayLengths.BottomUDF);
-    }
+    SetParentPosition(context.ParentPosition);
+    UpdateSensorActiveStates(context.SensorFlags);
+    UpdateSensorRayLengths(context.SensorRayLengths);
   }
 
   public GroundDetectionResult? DetectGround(
@@ -112,13 +96,13 @@ public class SonicSensorSystem
 
     if (horizontalDirection)
     {
-      dr1 = CurrentSensorGroup.A.DownRay;
-      dr2 = CurrentSensorGroup.B.DownRay;
+      dr1 = _a.DownRay;
+      dr2 = _b.DownRay;
     }
     else
     {
-      dr1 = CurrentSensorGroup.B.DownRay;
-      dr2 = CurrentSensorGroup.A.DownRay;
+      dr1 = _b.DownRay;
+      dr2 = _a.DownRay;
     }
 
     var dr1Hit = dr1.Cast(groundLayer);
@@ -141,13 +125,13 @@ public class SonicSensorSystem
 
     if (horizontalDirection)
     {
-      ur1 = CurrentSensorGroup.A.UpRay;
-      ur2 = CurrentSensorGroup.B.UpRay;
+      ur1 = _a.UpRay;
+      ur2 = _b.UpRay;
     }
     else
     {
-      ur1 = CurrentSensorGroup.B.UpRay;
-      ur2 = CurrentSensorGroup.A.UpRay;
+      ur1 = _b.UpRay;
+      ur2 = _a.UpRay;
     }
 
     var ur1Hit = ur1.Cast(groundLayer);
@@ -190,12 +174,16 @@ public class SonicSensorSystem
 
   public void Draw()
   {
-    CurrentSensorGroup.Draw();
+    _o.Draw();
+    _a.Draw();
+    _b.Draw();
+    _c.Draw();
+    _d.Draw();
   }
 
   private void SetCurrentSensorGroup()
   {
-    CurrentSensorGroup = SizeMode switch
+    var currentSensorGroup = SizeMode switch
     {
       SonicSizeMode.Big => GroundSide switch
       {
@@ -215,6 +203,51 @@ public class SonicSensorSystem
       },
       _ => throw SizeMode.ArgumentOutOfRangeException(),
     };
+
+    _o = currentSensorGroup.O;
+    _a = currentSensorGroup.A;
+    _b = currentSensorGroup.B;
+    _c = currentSensorGroup.C;
+    _d = currentSensorGroup.D;
+  }
+
+  public void SetParentPosition(Vector2 parentPosition)
+  {
+    _parentPosition = parentPosition;
+    _o.SetParentPosition(parentPosition);
+    _a.SetParentPosition(parentPosition);
+    _b.SetParentPosition(parentPosition);
+    _c.SetParentPosition(parentPosition);
+    _d.SetParentPosition(parentPosition);
+  }
+
+  public void UpdateSensorActiveStates(SonicSensorFlags flags)
+  {
+    _o.Enabled = flags.CheckBalancing;
+
+    _c.UpRay.Enabled = flags.CheckCeiling;
+    _c.DownRay.Enabled = flags.CheckCeiling;
+    _d.UpRay.Enabled = flags.CheckCeiling;
+    _d.DownRay.Enabled = flags.CheckCeiling;
+
+    _a.UpRay.Enabled = flags.CheckGround;
+    _a.DownRay.Enabled = flags.CheckGround;
+    _b.UpRay.Enabled = flags.CheckGround;
+    _b.DownRay.Enabled = flags.CheckGround;
+  }
+
+  private void UpdateSensorRayLengths(SonicSensorRayLengths lengths)
+  {
+    if (_sensorRayLengths != lengths)
+    {
+      _sensorRayLengths = lengths;
+
+      _o.Ray.Length = lengths.O;
+      UpdateUDFSensorRayLengths(_c, lengths.TopUDF);
+      UpdateUDFSensorRayLengths(_d, lengths.TopUDF);
+      UpdateUDFSensorRayLengths(_a, lengths.BottomUDF);
+      UpdateUDFSensorRayLengths(_b, lengths.BottomUDF);
+    }
   }
 
   private void UpdateUDFSensorRayLengths(UDFSensor sensor, Vector3 udfLengths)
@@ -226,7 +259,6 @@ public class SonicSensorSystem
 
   private bool IsBalancing(LayerMask groundLayer)
   {
-    return CurrentSensorGroup.O.Enabled
-      && !CurrentSensorGroup.O.Ray.Cast(groundLayer).HasValue;
+    return _o.Enabled && !_o.Ray.Cast(groundLayer).HasValue;
   }
 }

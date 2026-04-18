@@ -5,7 +5,7 @@ public partial class SonicController
 {
   private void OnDrawGizmos()
   {
-    _sensorSystem.CurrentSensorGroup.Draw();
+    _sensorSystem.Draw();
   }
 
   public void Output()
