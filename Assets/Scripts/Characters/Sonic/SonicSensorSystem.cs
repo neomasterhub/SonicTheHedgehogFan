@@ -224,9 +224,15 @@ public class SonicSensorSystem
   public void UpdateSensorActiveStates(SonicSensorFlags flags)
   {
     _o.Enabled = flags.CheckBalancing;
+
     _c.UpRay.Enabled = flags.CheckCeiling;
+    _c.DownRay.Enabled = flags.CheckCeiling;
     _d.UpRay.Enabled = flags.CheckCeiling;
+    _d.DownRay.Enabled = flags.CheckCeiling;
+
+    _a.UpRay.Enabled = flags.CheckGround;
     _a.DownRay.Enabled = flags.CheckGround;
+    _b.UpRay.Enabled = flags.CheckGround;
     _b.DownRay.Enabled = flags.CheckGround;
   }
 
