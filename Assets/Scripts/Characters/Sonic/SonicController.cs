@@ -26,7 +26,7 @@ public partial class SonicController : MonoBehaviour
 
   private bool _isGrounded;
   private bool _isBalancing;
-  private bool _isPostWallDetached;
+  private bool _isFallingOffWall;
   private bool _prevIsGrounded;
   private bool _postWallDetachInputLock;
   private bool _triggeredGroundSensorSide;
