@@ -34,21 +34,23 @@ public partial class SonicController
     _inputSystem.Update();
 
     var pressed = _inputSystem.Pressed;
-    if (pressed == PlayerInput.None)
+    if (pressed != PlayerInput.None)
     {
-      return;
-    }
-
-    if (_inputSystem.CheckLastPressed(ToggleDebugMode))
-    {
-      _infoPanel.SetActive(!_infoPanel.activeSelf);
-    }
-
-    if (_isGrounded && _speedSystem.GroundSpeed == 0)
-    {
-      if (pressed.HasAny(PlayerInput.Down))
+      if (_inputSystem.CheckLastPressed(ToggleDebugMode))
       {
-        _isCurlingUp = true;
+        _infoPanel.SetActive(!_infoPanel.activeSelf);
+      }
+    }
+
+    var held = _inputSystem.Held;
+    if (held != PlayerInput.None)
+    {
+      if (_isGrounded && _speedSystem.GroundSpeed == 0)
+      {
+        if (pressed.HasAny(PlayerInput.Down))
+        {
+          _isCurlingUp = true;
+        }
       }
     }
   }
