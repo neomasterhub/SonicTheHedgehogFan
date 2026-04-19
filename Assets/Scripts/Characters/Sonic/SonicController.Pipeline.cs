@@ -48,7 +48,7 @@ public partial class SonicController
 
   private void AnalyzeEnvironment()
   {
-    _sensorSystem.Update(new(_sizeMode, _groundInfoSystem.Current.Side, transform.position, new(true, false, _isGrounded), new(OLength, TopUDFLengths, BottomUDFLengths)));
+    _sensorSystem.Update(new(_sizeMode, _groundInfoSystem.Current.Side, transform.position, GetSensorFlags(), new(OLength, TopUDFLengths, BottomUDFLengths)));
 
     _leftWallDetectionResult = _sensorSystem.DetectLeftWall(_groundLayer);
     _rightWallDetectionResult = _sensorSystem.DetectRightWall(_groundLayer);
@@ -218,5 +218,10 @@ public partial class SonicController
       _sounds[i].Stop();
       _sounds[i].Play();
     }
+  }
+
+  private SonicSensorFlags GetSensorFlags()
+  {
+    return new(true, false, _isGrounded && !_isCurlingUp);
   }
 }
