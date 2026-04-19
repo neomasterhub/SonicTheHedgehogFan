@@ -111,7 +111,7 @@ public partial class SonicController
         return;
       }
 
-      if (_inputSystem.Held == PlayerInput.Down)
+      if (_inputSystem.Held.HasAny(PlayerInput.Down))
       {
         _sizeMode = SonicSizeMode.Small;
         _isCurlingUp = true;
