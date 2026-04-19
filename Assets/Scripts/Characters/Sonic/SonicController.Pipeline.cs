@@ -24,6 +24,7 @@ public partial class SonicController
   private void BeginFrame()
   {
     _prevState = _state;
+    _prevSizeMode = _sizeMode;
     _prevIsGrounded = _isGrounded;
     _timerSystem.Update(Time.deltaTime);
     _isCurlingUp = false;

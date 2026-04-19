@@ -39,6 +39,7 @@ public partial class SonicController : MonoBehaviour
   private WallDetectionResult? _rightWallDetectionResult;
   private PlayerSpeedContext _speedContext;
   private SonicSizeMode _sizeMode;
+  private SonicSizeMode _prevSizeMode;
   private SonicState _state;
   private SonicState _prevState;
   private SonicViewContext _viewContext;
