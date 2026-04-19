@@ -261,4 +261,25 @@ public class SonicSensorSystem
   {
     return _o.Enabled && !_o.Ray.Cast(groundLayer).HasValue;
   }
+
+  private RaycastHit2D? GetClosestWallHit(
+    SensorRay topRay,
+    SensorRay bottomRay,
+    LayerMask groundLayer)
+  {
+    var topHit = topRay.Cast(groundLayer);
+    var bottomHit = bottomRay.Cast(groundLayer);
+
+    if (topHit == null)
+    {
+      return bottomHit;
+    }
+
+    if (bottomHit == null)
+    {
+      return topHit;
+    }
+
+    return topHit.Value.distance <= bottomHit.Value.distance ? topHit : bottomHit;
+  }
 }
