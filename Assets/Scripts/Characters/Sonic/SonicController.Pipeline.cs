@@ -75,7 +75,7 @@ public partial class SonicController
     _isBalancing = false;
     _triggeredGroundSensorSide = false;
     _groundInfoSystem.Reset();
-    _state = SonicState.Airborne;
+    _state = SonicState.Airborne.Set(SonicState.FallingOffWall, _isFallingOffWall);
   }
 
   private void ApplyEffects()
