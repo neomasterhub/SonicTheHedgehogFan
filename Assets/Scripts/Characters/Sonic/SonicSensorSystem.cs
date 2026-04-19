@@ -87,9 +87,7 @@ public class SonicSensorSystem
     UpdateSensorRayLengths(context.SensorRayLengths);
   }
 
-  public GroundDetectionResult? DetectGround(
-    bool horizontalDirection,
-    LayerMask groundLayer)
+  public GroundDetectionResult? DetectGround(bool horizontalDirection, LayerMask groundLayer)
   {
     SensorRay dr1;
     SensorRay dr2;
@@ -262,10 +260,7 @@ public class SonicSensorSystem
     return _o.Enabled && !_o.Ray.Cast(groundLayer).HasValue;
   }
 
-  private RaycastHit2D? GetClosestWallHit(
-    SensorRay topRay,
-    SensorRay bottomRay,
-    LayerMask groundLayer)
+  private RaycastHit2D? GetClosestWallHit(SensorRay topRay, SensorRay bottomRay, LayerMask groundLayer)
   {
     var topHit = topRay.Cast(groundLayer);
     var bottomHit = bottomRay.Cast(groundLayer);
