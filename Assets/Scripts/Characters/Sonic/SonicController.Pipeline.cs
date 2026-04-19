@@ -97,9 +97,10 @@ public partial class SonicController
       return;
     }
 
-    if (_speedSystem.GroundSpeed == 0 && !_isBalancing)
+    if (_speedSystem.GroundSpeed == 0
+      && !_isBalancing)
     {
-      if (_inputSystem.Held.HasAny(PlayerInput.Down))
+      if (_inputSystem.Held == PlayerInput.Down)
       {
         _isCurlingUp = true;
         return;
