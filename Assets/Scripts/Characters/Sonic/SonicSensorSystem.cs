@@ -249,31 +249,31 @@ public class SonicSensorSystem
     out SonicSensorGroup left)
   {
     down = new(
-      a: new(_aColor, new(-Big.HRadius, -Big.VRadius), Vector2.up, Vector2.down, Vector2.left),
-      b: new(_bColor, new(Big.HRadius, -Big.VRadius), Vector2.up, Vector2.down, Vector2.right),
-      c: new(_cColor, new(-Big.HRadius, Big.VRadius), Vector2.up, Vector2.down, Vector2.left),
-      d: new(_dColor, new(Big.HRadius, Big.VRadius), Vector2.up, Vector2.down, Vector2.right),
+      a: new(_aColor, new(-hRadius, -vRadius), Vector2.up, Vector2.down, Vector2.left),
+      b: new(_bColor, new(hRadius, -vRadius), Vector2.up, Vector2.down, Vector2.right),
+      c: new(_cColor, new(-hRadius, vRadius), Vector2.up, Vector2.down, Vector2.left),
+      d: new(_dColor, new(hRadius, vRadius), Vector2.up, Vector2.down, Vector2.right),
       o: new(_oColor, Vector2.zero, Vector2.down),
       parentPosition: parentPosition);
     right = new(
-      a: new(_aColor, new(Big.VRadius, -Big.HRadius), Vector2.left, Vector2.right, Vector2.down),
-      b: new(_bColor, new(Big.VRadius, Big.HRadius), Vector2.left, Vector2.right, Vector2.up),
-      c: new(_cColor, new(-Big.VRadius, -Big.HRadius), Vector2.left, Vector2.right, Vector2.down),
-      d: new(_dColor, new(-Big.VRadius, Big.HRadius), Vector2.left, Vector2.right, Vector2.up),
+      a: new(_aColor, new(vRadius, -hRadius), Vector2.left, Vector2.right, Vector2.down),
+      b: new(_bColor, new(vRadius, hRadius), Vector2.left, Vector2.right, Vector2.up),
+      c: new(_cColor, new(-vRadius, -hRadius), Vector2.left, Vector2.right, Vector2.down),
+      d: new(_dColor, new(-vRadius, hRadius), Vector2.left, Vector2.right, Vector2.up),
       o: new(_oColor, Vector2.zero, Vector2.right),
       parentPosition: parentPosition);
     up = new(
-      c: new(_cColor, new(-Big.HRadius, -Big.VRadius), Vector2.down, Vector2.up, Vector2.right),
-      d: new(_dColor, new(Big.HRadius, -Big.VRadius), Vector2.down, Vector2.up, Vector2.left),
-      a: new(_aColor, new(-Big.HRadius, Big.VRadius), Vector2.down, Vector2.up, Vector2.right),
-      b: new(_bColor, new(Big.HRadius, Big.VRadius), Vector2.down, Vector2.up, Vector2.left),
+      c: new(_cColor, new(-hRadius, -vRadius), Vector2.down, Vector2.up, Vector2.right),
+      d: new(_dColor, new(hRadius, -vRadius), Vector2.down, Vector2.up, Vector2.left),
+      a: new(_aColor, new(-hRadius, vRadius), Vector2.down, Vector2.up, Vector2.right),
+      b: new(_bColor, new(hRadius, vRadius), Vector2.down, Vector2.up, Vector2.left),
       o: new(_oColor, Vector2.zero, Vector2.up),
       parentPosition: parentPosition);
     left = new(
-      c: new(_cColor, new(Big.VRadius, -Big.HRadius), Vector2.right, Vector2.left, Vector2.up),
-      d: new(_dColor, new(Big.VRadius, Big.HRadius), Vector2.right, Vector2.left, Vector2.down),
-      a: new(_aColor, new(-Big.VRadius, -Big.HRadius), Vector2.right, Vector2.left, Vector2.up),
-      b: new(_bColor, new(-Big.VRadius, Big.HRadius), Vector2.right, Vector2.left, Vector2.down),
+      c: new(_cColor, new(vRadius, -hRadius), Vector2.right, Vector2.left, Vector2.up),
+      d: new(_dColor, new(vRadius, hRadius), Vector2.right, Vector2.left, Vector2.down),
+      a: new(_aColor, new(-vRadius, -hRadius), Vector2.right, Vector2.left, Vector2.up),
+      b: new(_bColor, new(-vRadius, hRadius), Vector2.right, Vector2.left, Vector2.down),
       o: new(_oColor, Vector2.zero, Vector2.left),
       parentPosition: parentPosition);
   }
