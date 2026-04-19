@@ -83,6 +83,7 @@ public class PlayerSpeedSystem
     SetSpeed_Airborne_Gravity();
     SetSpeed_Airborne_PreventGroundOvershoot();
     SetSpeed_Airborne_Horizontal();
+    SetSpeed_Airborne_PreventWallOvershoot();
   }
 
   private void SetSpeed_Airborne_FromGrounded()
@@ -127,6 +128,17 @@ public class PlayerSpeedSystem
     if (Mathf.Abs(SpeedX) > _config.AirTopSpeed)
     {
       SpeedX = _config.AirTopSpeed * Mathf.Sign(SpeedX);
+    }
+  }
+
+  private void SetSpeed_Airborne_PreventWallOvershoot()
+  {
+    if ((_context.DistanceToLeftWall != null
+      && SpeedX <= -_context.DistanceToLeftWall + PositionBackwardOffset)
+      || (_context.DistanceToRightWall != null
+      && SpeedX >= _context.DistanceToRightWall - PositionBackwardOffset))
+    {
+      SpeedX = 0;
     }
   }
 
