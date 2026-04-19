@@ -34,6 +34,8 @@ public partial class SonicController : MonoBehaviour
   private Animator _animator;
   private GameObject _infoPanel;
   private GroundDetectionResult _lastGroundDetectionResult;
+  private WallDetectionResult? _leftWallDetectionResult;
+  private WallDetectionResult? _rightWallDetectionResult;
   private PlayerSpeedContext _speedContext;
   private SonicSizeMode _sizeMode;
   private SonicState _state;
