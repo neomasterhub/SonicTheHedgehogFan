@@ -39,6 +39,8 @@ public static class SonicConsts
 
   public static class Sizes
   {
+    public const float VRadiusDelta = Big.VRadius - Small.VRadius;
+
     public static class Big
     {
       public const float HRadiusPx = 9;
