@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using static SonicConsts.Sizes;
 
@@ -263,6 +264,50 @@ public class SonicSensorSystem
     sensor.UpRay.Length = udfLengths.x;
     sensor.DownRay.Length = udfLengths.y;
     sensor.FrontRay.Length = udfLengths.z;
+  }
+
+  private void SetSensorGroups(
+    float hRadius,
+    float vRadius,
+    Vector2 parentPosition,
+    Color aColor,
+    Color bColor,
+    Color cColor,
+    Color dColor,
+    Color oColor,
+    out SonicSensorGroup down,
+    out SonicSensorGroup right,
+    out SonicSensorGroup up,
+    out SonicSensorGroup left)
+  {
+    down = new(
+      a: new(aColor, new(-Big.HRadius, -Big.VRadius), Vector2.up, Vector2.down, Vector2.left),
+      b: new(bColor, new(Big.HRadius, -Big.VRadius), Vector2.up, Vector2.down, Vector2.right),
+      c: new(cColor, new(-Big.HRadius, Big.VRadius), Vector2.up, Vector2.down, Vector2.left),
+      d: new(dColor, new(Big.HRadius, Big.VRadius), Vector2.up, Vector2.down, Vector2.right),
+      o: new(oColor, Vector2.zero, Vector2.down),
+      parentPosition: parentPosition);
+    right = new(
+      a: new(aColor, new(Big.VRadius, -Big.HRadius), Vector2.left, Vector2.right, Vector2.down),
+      b: new(bColor, new(Big.VRadius, Big.HRadius), Vector2.left, Vector2.right, Vector2.up),
+      c: new(cColor, new(-Big.VRadius, -Big.HRadius), Vector2.left, Vector2.right, Vector2.down),
+      d: new(dColor, new(-Big.VRadius, Big.HRadius), Vector2.left, Vector2.right, Vector2.up),
+      o: new(oColor, Vector2.zero, Vector2.right),
+      parentPosition: parentPosition);
+    up = new(
+      c: new(cColor, new(-Big.HRadius, -Big.VRadius), Vector2.down, Vector2.up, Vector2.right),
+      d: new(dColor, new(Big.HRadius, -Big.VRadius), Vector2.down, Vector2.up, Vector2.left),
+      a: new(aColor, new(-Big.HRadius, Big.VRadius), Vector2.down, Vector2.up, Vector2.right),
+      b: new(bColor, new(Big.HRadius, Big.VRadius), Vector2.down, Vector2.up, Vector2.left),
+      o: new(oColor, Vector2.zero, Vector2.up),
+      parentPosition: parentPosition);
+    left = new(
+      c: new(cColor, new(Big.VRadius, -Big.HRadius), Vector2.right, Vector2.left, Vector2.up),
+      d: new(dColor, new(Big.VRadius, Big.HRadius), Vector2.right, Vector2.left, Vector2.down),
+      a: new(aColor, new(-Big.VRadius, -Big.HRadius), Vector2.right, Vector2.left, Vector2.up),
+      b: new(bColor, new(-Big.VRadius, Big.HRadius), Vector2.right, Vector2.left, Vector2.down),
+      o: new(oColor, Vector2.zero, Vector2.left),
+      parentPosition: parentPosition);
   }
 
   private bool IsBalancing(LayerMask groundLayer)
