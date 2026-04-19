@@ -102,6 +102,7 @@ public partial class SonicController
 
     // Curling up
     if (_speedSystem.GroundSpeed == 0
+      && _groundInfoSystem.Current.Side == GroundSide.Down
       && !_isBalancing)
     {
       if (_inputSystem.Held == PlayerInput.Down)
