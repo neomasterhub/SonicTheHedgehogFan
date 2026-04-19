@@ -48,7 +48,7 @@ public partial class SonicController
 
   private void AnalyzeEnvironment()
   {
-    _sensorSystem.Update(new(_sizeMode, _groundInfoSystem.Current.Side, transform.position, GetSensorFlags(), new(OLength, TopUDFLengths, BottomUDFLengths)));
+    _sensorSystem.Update(new(_sizeMode, _groundInfoSystem.Current.Side, transform.position, GetSensorFlags(), _sensorRayLengths));
 
     _leftWallDetectionResult = _sensorSystem.DetectLeftWall(_groundLayer);
     _rightWallDetectionResult = _sensorSystem.DetectRightWall(_groundLayer);

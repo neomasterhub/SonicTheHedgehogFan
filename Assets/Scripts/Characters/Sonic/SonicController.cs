@@ -20,6 +20,7 @@ public partial class SonicController : MonoBehaviour
   private readonly PlayerSpeedConfig _speedConfig;
   private readonly PlayerSpeedSystem _speedSystem;
   private readonly PlayerViewRotatorProvider<SonicViewRotatorContext> _viewRotatorProvider;
+  private readonly SonicSensorRayLengths _sensorRayLengths;
   private readonly SonicSensorSystem _sensorSystem;
   private readonly SonicViewSystem _viewSystem;
   private readonly TimerSystem _timerSystem;

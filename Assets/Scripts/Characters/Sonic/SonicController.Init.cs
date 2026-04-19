@@ -26,6 +26,7 @@ public partial class SonicController
     _viewRotatorProvider = new();
 
     _inputSystem = new(GetPlayerInput);
+    _sensorRayLengths = new(OLength, TopUDFLengths, BottomUDFLengths);
     _speedConfig = new(TopSpeed, FrictionSpeed, MaxSkiddingSpeed, AccelerationSpeed, DecelerationSpeed, AirTopSpeed, AirAccelerationSpeed, MaxFallSpeed);
     _speedSystem = new(_inputSystem, _speedConfig, _slopeFactorSpeedProvider, _airToGroundSpeedProvider, _groundToAirSpeedProvider, _gravitySpeedProvider);
     _viewSystem = new(_inputSystem, _viewRotatorProvider);
