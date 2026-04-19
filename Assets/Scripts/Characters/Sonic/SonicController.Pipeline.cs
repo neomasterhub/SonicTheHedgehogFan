@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 using static SharedConsts.Physics;
 using static SharedConsts.SecretCodes;
@@ -34,25 +35,14 @@ public partial class SonicController
   {
     _inputSystem.Update();
 
-    var pressed = _inputSystem.Pressed;
-    if (pressed != PlayerInput.None)
+    if (_inputSystem.Pressed == PlayerInput.None)
     {
-      if (_inputSystem.CheckLastPressed(ToggleDebugMode))
-      {
-        _infoPanel.SetActive(!_infoPanel.activeSelf);
-      }
+      return;
     }
 
-    var held = _inputSystem.Held;
-    if (held != PlayerInput.None)
+    if (_inputSystem.CheckLastPressed(ToggleDebugMode))
     {
-      if (_isGrounded && !_isBalancing && _speedSystem.GroundSpeed == 0)
-      {
-        if (held.HasAny(PlayerInput.Down))
-        {
-          _isCurlingUp = true;
-        }
-      }
+      _infoPanel.SetActive(!_infoPanel.activeSelf);
     }
   }
 
@@ -105,6 +95,15 @@ public partial class SonicController
     if (!_isGrounded)
     {
       return;
+    }
+
+    if (_speedSystem.GroundSpeed == 0 && !_isBalancing)
+    {
+      if (_inputSystem.Held.HasAny(PlayerInput.Down))
+      {
+        _isCurlingUp = true;
+        return;
+      }
     }
 
     if (_isFallingOffWall)
