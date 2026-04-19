@@ -119,15 +119,15 @@ public partial class SonicController
         _prevIsGrounded,
         _groundInfoSystem.Current.SideAngleRad,
         _lastGroundDetectionResult.Distance,
-        _leftWallDetectionResult?.Distance,
-        _rightWallDetectionResult?.Distance);
+        _leftWallDetectionResult?.AngleDeg == 0 ? _leftWallDetectionResult.Value.Distance : null,
+        _rightWallDetectionResult?.AngleDeg == 0 ? _rightWallDetectionResult.Value.Distance : null);
     }
     else
     {
       _speedContext = PlayerSpeedContext.GetAirborne(
         _prevIsGrounded,
-        _leftWallDetectionResult?.AngleDeg == 0 ? _leftWallDetectionResult.Value.Distance : null,
-        _rightWallDetectionResult?.AngleDeg == 0 ? _rightWallDetectionResult.Value.Distance : null);
+        _leftWallDetectionResult?.Distance,
+        _rightWallDetectionResult?.Distance);
     }
 
     _speedSystem.SetSpeed(_speedContext);
