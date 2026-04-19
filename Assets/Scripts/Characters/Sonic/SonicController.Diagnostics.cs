@@ -12,6 +12,7 @@ public partial class SonicController
   {
     _info.Clear();
 
+    _info.AppendLine($"LOC {(_isGrounded ? "Ground" : "Air")}");
     _info.AppendLine($"INS {GetInputState()}");
     _info.AppendLine($"INH {_inputSystem.GetPressedHistory()}");
     _info.AppendLine($"GP {_groundInfoSystem.Previous}");
