@@ -29,8 +29,6 @@ public partial class SonicController
     _prevState = _state;
     _prevSizeMode = _sizeMode;
     _prevIsGrounded = _isGrounded;
-
-    _isCurlingUp = false;
   }
 
   private void UpdateInput()
@@ -106,6 +104,13 @@ public partial class SonicController
       && _groundInfoSystem.Current.Side == GroundSide.Down
       && !_isBalancing)
     {
+      if (_inputSystem.Released == PlayerInput.Down)
+      {
+        _sizeMode = SonicSizeMode.Big;
+        _isCurlingUp = false;
+        return;
+      }
+
       if (_inputSystem.Held == PlayerInput.Down)
       {
         _sizeMode = SonicSizeMode.Small;
