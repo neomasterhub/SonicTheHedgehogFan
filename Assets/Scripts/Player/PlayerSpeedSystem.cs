@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using static SharedConsts.Input;
+using static SharedConsts.Physics;
 
 public class PlayerSpeedSystem
 {
@@ -150,6 +151,8 @@ public class PlayerSpeedSystem
       SetSpeed_Grounded_Friction();
     }
 
+    SetSpeed_Grounded_PreventWallOvershoot();
+
     SpeedX = GroundSpeed * _groundAngleCos;
     SpeedY = GroundSpeed * _groundAngleSin;
 
@@ -252,5 +255,16 @@ public class PlayerSpeedSystem
     }
 
     GroundSpeed -= _config.FrictionSpeed * Mathf.Sign(GroundSpeed);
+  }
+
+  private void SetSpeed_Grounded_PreventWallOvershoot()
+  {
+    if ((_context.DistanceToLeftWall != null
+      && GroundSpeed <= -_context.DistanceToLeftWall + PositionBackwardOffset)
+      || (_context.DistanceToRightWall != null
+      && GroundSpeed >= _context.DistanceToRightWall - PositionBackwardOffset))
+    {
+      GroundSpeed = 0;
+    }
   }
 }

@@ -48,6 +48,9 @@ public partial class SonicController
   {
     _sensorSystem.Update(new(_sizeMode, _groundInfoSystem.Current.Side, transform.position, new(true, false, _isGrounded), new(OLength, TopUDFLengths, BottomUDFLengths)));
 
+    _leftWallDetectionResult = _sensorSystem.DetectLeftWall(_groundLayer);
+    _rightWallDetectionResult = _sensorSystem.DetectRightWall(_groundLayer);
+
     var groundDetectionResult = _sensorSystem.DetectGround(!_spriteRenderer.flipX, _groundLayer);
     if (groundDetectionResult != null)
     {
@@ -110,9 +113,23 @@ public partial class SonicController
 
   private void ApplyMovement()
   {
-    _speedContext = _isGrounded
-      ? PlayerSpeedContext.GetGrounded(_prevIsGrounded, _groundInfoSystem.Current.SideAngleRad, _lastGroundDetectionResult.Distance)
-      : PlayerSpeedContext.GetAirborne(_prevIsGrounded);
+    if (_isGrounded)
+    {
+      _speedContext = PlayerSpeedContext.GetGrounded(
+        _prevIsGrounded,
+        _groundInfoSystem.Current.SideAngleRad,
+        _lastGroundDetectionResult.Distance,
+        _leftWallDetectionResult?.AngleDeg == 0 ? _leftWallDetectionResult.Value.Distance : null,
+        _rightWallDetectionResult?.AngleDeg == 0 ? _rightWallDetectionResult.Value.Distance : null);
+    }
+    else
+    {
+      _speedContext = PlayerSpeedContext.GetAirborne(
+        _prevIsGrounded,
+        _leftWallDetectionResult?.Distance,
+        _rightWallDetectionResult?.Distance);
+    }
+
     _speedSystem.SetSpeed(_speedContext);
     _state = _state.Set(SonicState.Skidding, _speedSystem.IsSkidding);
   }

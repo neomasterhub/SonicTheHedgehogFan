@@ -18,6 +18,7 @@ public static class SharedConsts
 
   public static class Physics
   {
+    public const float PositionBackwardOffset = 0.01f;
     public const float GroundedPositionUpwardOffset = 0.05f;
 
     public static class GroundAngleRanges
