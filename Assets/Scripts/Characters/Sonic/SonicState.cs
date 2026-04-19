@@ -8,4 +8,5 @@ public enum SonicState
   Skidding = 1 << 2,
   Balancing = 1 << 3,
   FallingOffWall = 1 << 4,
+  CurlingUp = 1 << 5,
 }
