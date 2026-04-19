@@ -259,21 +259,15 @@ public class PlayerSpeedSystem
 
   private void SetSpeed_Grounded_PreventWallOvershoot()
   {
-    if (GroundSpeed < 0)
-    {
-      if (_context.DistanceToLeftWall != null
+    if (_context.DistanceToLeftWall != null
         && GroundSpeed <= -_context.DistanceToLeftWall)
-      {
-        GroundSpeed = -_context.DistanceToLeftWall.Value + PositionBackwardOffset;
-      }
-    }
-    else
     {
-      if (_context.DistanceToRightWall != null
-          && GroundSpeed >= _context.DistanceToRightWall)
-      {
-        GroundSpeed = _context.DistanceToRightWall.Value - PositionBackwardOffset;
-      }
+      GroundSpeed = -_context.DistanceToLeftWall.Value + PositionBackwardOffset;
+    }
+    else if (_context.DistanceToRightWall != null
+      && GroundSpeed >= _context.DistanceToRightWall)
+    {
+      GroundSpeed = _context.DistanceToRightWall.Value - PositionBackwardOffset;
     }
   }
 }
