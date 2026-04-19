@@ -52,7 +52,7 @@ public static class SonicConsts
 
     public static class Small
     {
-      public const float HRadiusPx = 7;
+      public const float HRadiusPx = 9;
       public const float VRadiusPx = 14;
       public const float HRadius = HRadiusPx / PxPerUnit;
       public const float VRadius = VRadiusPx / PxPerUnit;
