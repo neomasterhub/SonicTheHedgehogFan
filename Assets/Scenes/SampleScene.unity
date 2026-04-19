@@ -2587,7 +2587,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 145, y: 142}
+  m_SizeDelta: {x: 145, y: 160}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1391926818
 MonoBehaviour:
@@ -2848,8 +2848,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "INS OFF 0.5000\nINH \u2190\u2192\u2191\u2193ABCxyz\nGP -000 S -000\nGC
-    -000 S -000\nGS -0000 -0000\nSP -0000 -0000\nRT Wall-to-Air"
+  m_text: "LOC Ground\nINS OFF 0.5000\nINH \u2190\u2192\u2191\u2193ABCxyz\nGP -000
+    S -000\nGC -000 S -000\nGS -0000 -0000\nSP -0000 -0000\nRT Wall-to-Air"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 80788c3403104b940a534d2bbae44f3a, type: 2}
   m_sharedMaterial: {fileID: -5477974177161770089, guid: 80788c3403104b940a534d2bbae44f3a, type: 2}
