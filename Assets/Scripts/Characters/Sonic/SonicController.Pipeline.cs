@@ -1,4 +1,3 @@
-using UnityEditor;
 using UnityEngine;
 using static SharedConsts.Physics;
 using static SharedConsts.SecretCodes;
@@ -73,7 +72,8 @@ public partial class SonicController
     _groundInfoSystem.Update(_lastGroundDetectionResult.AngleDeg);
     _state = SonicState.Grounded
       .Set(SonicState.Balancing, _isBalancing)
-      .Set(SonicState.CurlingUp, _isCurlingUp);
+      .Set(SonicState.CurlingUp, _isCurlingUp)
+      .Set(SonicState.FallingOffWall, _isFallingOffWall);
   }
 
   private void AnalyzeEnvironment_Airborn()
@@ -82,7 +82,8 @@ public partial class SonicController
     _isBalancing = false;
     _triggeredGroundSensorSide = false;
     _groundInfoSystem.Reset();
-    _state = SonicState.Airborne.Set(SonicState.FallingOffWall, _isFallingOffWall);
+    _state = SonicState.Airborne
+      .Set(SonicState.FallingOffWall, _isFallingOffWall);
   }
 
   private void ApplyEffects()
