@@ -170,6 +170,16 @@ public class SonicSensorSystem
     return null;
   }
 
+  public WallDetectionResult? DetectLeftWall(LayerMask groundLayer)
+  {
+    return DetectWall(_c.FrontRay, _a.FrontRay, groundLayer);
+  }
+
+  public WallDetectionResult? DetectRightWall(LayerMask groundLayer)
+  {
+    return DetectWall(_d.FrontRay, _b.FrontRay, groundLayer);
+  }
+
   public void Draw()
   {
     _o.Draw();
@@ -276,5 +286,16 @@ public class SonicSensorSystem
     }
 
     return topHit.Value.distance <= bottomHit.Value.distance ? topHit : bottomHit;
+  }
+
+  private WallDetectionResult? DetectWall(SensorRay topRay, SensorRay bottomRay, LayerMask groundLayer)
+  {
+    var hit = GetClosestWallHit(topRay, bottomRay, groundLayer);
+    if (hit == null)
+    {
+      return null;
+    }
+
+    return new(hit.Value.distance, Vector2.SignedAngle(-topRay.Direction, hit.Value.normal));
   }
 }
