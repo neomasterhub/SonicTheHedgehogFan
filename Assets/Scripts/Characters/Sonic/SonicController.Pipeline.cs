@@ -2,6 +2,7 @@ using UnityEngine;
 using static SharedConsts.Physics;
 using static SharedConsts.SecretCodes;
 using static SonicConsts.Physics;
+using static SonicConsts.Sizes;
 
 /// <summary>
 /// Pipeline.
@@ -183,6 +184,13 @@ public partial class SonicController
         speedX = WallDetachPositionOffset.x;
         speedY = WallDetachPositionOffset.y;
       }
+    }
+
+    if (_sizeMode != _prevSizeMode)
+    {
+      speedY = _sizeMode == SonicSizeMode.Small
+        ? speedY - VRadiusDelta
+        : speedY + VRadiusDelta;
     }
 
     // SpeedX, SpeedY - offsets in units per frame.
