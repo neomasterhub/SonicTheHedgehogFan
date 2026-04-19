@@ -98,6 +98,7 @@ public partial class SonicController
       return;
     }
 
+    // Curling up
     if (_speedSystem.GroundSpeed == 0
       && !_isBalancing)
     {
@@ -108,6 +109,7 @@ public partial class SonicController
       }
     }
 
+    // Start input unlock timer
     if (_isFallingOffWall)
     {
       _isFallingOffWall = false;
@@ -115,6 +117,7 @@ public partial class SonicController
       return;
     }
 
+    // Wall detach
     if (_groundInfoSystem.Current.Side is GroundSide.Left or GroundSide.Right
       && Mathf.Abs(_speedSystem.GroundSpeed) < DecelerationSpeed)
     {
