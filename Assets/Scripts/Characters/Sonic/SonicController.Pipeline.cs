@@ -23,10 +23,12 @@ public partial class SonicController
 
   private void BeginFrame()
   {
+    _timerSystem.Update(Time.deltaTime);
+
     _prevState = _state;
     _prevSizeMode = _sizeMode;
     _prevIsGrounded = _isGrounded;
-    _timerSystem.Update(Time.deltaTime);
+
     _isCurlingUp = false;
   }
 
@@ -104,6 +106,7 @@ public partial class SonicController
     {
       if (_inputSystem.Held == PlayerInput.Down)
       {
+        _sizeMode = SonicSizeMode.Small;
         _isCurlingUp = true;
         return;
       }
