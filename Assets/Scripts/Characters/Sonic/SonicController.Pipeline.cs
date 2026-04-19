@@ -47,7 +47,7 @@ public partial class SonicController
     {
       if (_isGrounded && _speedSystem.GroundSpeed == 0)
       {
-        if (pressed.HasAny(PlayerInput.Down))
+        if (held.HasAny(PlayerInput.Down))
         {
           _isCurlingUp = true;
         }
