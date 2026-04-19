@@ -45,7 +45,7 @@ public partial class SonicController
     var held = _inputSystem.Held;
     if (held != PlayerInput.None)
     {
-      if (_isGrounded && _speedSystem.GroundSpeed == 0)
+      if (_isGrounded && !_isBalancing && _speedSystem.GroundSpeed == 0)
       {
         if (held.HasAny(PlayerInput.Down))
         {
