@@ -26,6 +26,7 @@ public partial class SonicController
     _prevState = _state;
     _prevIsGrounded = _isGrounded;
     _timerSystem.Update(Time.deltaTime);
+    _isCurlingUp = false;
   }
 
   private void UpdateInput()
@@ -41,6 +42,14 @@ public partial class SonicController
     if (_inputSystem.CheckLastPressed(ToggleDebugMode))
     {
       _infoPanel.SetActive(!_infoPanel.activeSelf);
+    }
+
+    if (_isGrounded && _speedSystem.GroundSpeed == 0)
+    {
+      if (pressed.HasAny(PlayerInput.Down))
+      {
+        _isCurlingUp = true;
+      }
     }
   }
 
@@ -69,7 +78,9 @@ public partial class SonicController
     _isBalancing = _lastGroundDetectionResult.IsBalancing;
     _triggeredGroundSensorSide = _lastGroundDetectionResult.SourceSensorSide;
     _groundInfoSystem.Update(_lastGroundDetectionResult.AngleDeg);
-    _state = SonicState.Grounded.Set(SonicState.Balancing, _isBalancing);
+    _state = SonicState.Grounded
+      .Set(SonicState.Balancing, _isBalancing)
+      .Set(SonicState.CurlingUp, _isCurlingUp);
   }
 
   private void AnalyzeEnvironment_Airborn()
