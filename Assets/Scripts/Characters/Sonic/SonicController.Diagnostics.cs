@@ -19,6 +19,8 @@ public partial class SonicController
     _info.AppendLine($"GC {_groundInfoSystem.Current}");
     _info.AppendLine($"GS {_speedSystem.SlopeFactorSpeed * 10000,5:0;-0;0} {_speedSystem.GroundSpeed * 10000,5:0;-0;0}");
     _info.AppendLine($"SP {_speedSystem.SpeedX * 10000,5:0;-0;0} {_speedSystem.SpeedY * 10000,5:0;-0;0}");
+    _info.AppendLine($"WL {GetWallInfo(_leftWallDetectionResult)}");
+    _info.AppendLine($"WR {GetWallInfo(_rightWallDetectionResult)}");
     _info.AppendLine($"RT {_viewSystem.Rotator,11}");
 
     _infoText.SetText(_info);
@@ -37,5 +39,15 @@ public partial class SonicController
     }
 
     return "ON";
+  }
+
+  private string GetWallInfo(WallDetectionResult? wall)
+  {
+    if (wall == null)
+    {
+      return string.Empty;
+    }
+
+    return $"{wall.Value.AngleDeg,5:0;-0;0} {wall.Value.Distance * 10000,5:0}";
   }
 }
