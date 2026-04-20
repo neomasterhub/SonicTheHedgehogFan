@@ -20,12 +20,14 @@ public partial class SonicController : MonoBehaviour
   private readonly PlayerSpeedConfig _speedConfig;
   private readonly PlayerSpeedSystem _speedSystem;
   private readonly PlayerViewRotatorProvider<SonicViewRotatorContext> _viewRotatorProvider;
+  private readonly SonicSensorRayLengths _sensorRayLengths;
   private readonly SonicSensorSystem _sensorSystem;
   private readonly SonicViewSystem _viewSystem;
   private readonly TimerSystem _timerSystem;
 
   private bool _isGrounded;
   private bool _isBalancing;
+  private bool _isCurlingUp;
   private bool _isFallingOffWall;
   private bool _prevIsGrounded;
   private bool _postWallDetachInputLock;
@@ -38,6 +40,7 @@ public partial class SonicController : MonoBehaviour
   private WallDetectionResult? _rightWallDetectionResult;
   private PlayerSpeedContext _speedContext;
   private SonicSizeMode _sizeMode;
+  private SonicSizeMode _prevSizeMode;
   private SonicState _state;
   private SonicState _prevState;
   private SonicViewContext _viewContext;

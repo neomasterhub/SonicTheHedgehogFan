@@ -3,6 +3,12 @@ using static SonicConsts.Sizes;
 
 public class SonicSensorSystem
 {
+  private static readonly Color _aColor = Color.softGreen;
+  private static readonly Color _bColor = Color.green;
+  private static readonly Color _cColor = Color.softYellow;
+  private static readonly Color _dColor = Color.yellow;
+  private static readonly Color _oColor = Color.white;
+
   private readonly SonicSensorGroup _bigUpSensorGroup;
   private readonly SonicSensorGroup _bigDownSensorGroup;
   private readonly SonicSensorGroup _bigLeftSensorGroup;
@@ -28,40 +34,8 @@ public class SonicSensorSystem
     SizeMode = sizeMode;
     GroundSide = groundSide;
 
-    var aColor = Color.softGreen;
-    var bColor = Color.green;
-    var cColor = Color.softYellow;
-    var dColor = Color.yellow;
-    var oColor = Color.white;
-
-    _bigDownSensorGroup = new(
-      a: new(aColor, new(-Big.HRadius, -Big.VRadius), Vector2.up, Vector2.down, Vector2.left),
-      b: new(bColor, new(Big.HRadius, -Big.VRadius), Vector2.up, Vector2.down, Vector2.right),
-      c: new(cColor, new(-Big.HRadius, Big.VRadius), Vector2.up, Vector2.down, Vector2.left),
-      d: new(dColor, new(Big.HRadius, Big.VRadius), Vector2.up, Vector2.down, Vector2.right),
-      o: new(oColor, Vector2.zero, Vector2.down),
-      parentPosition: parentPosition);
-    _bigRightSensorGroup = new(
-      a: new(aColor, new(Big.VRadius, -Big.HRadius), Vector2.left, Vector2.right, Vector2.down),
-      b: new(bColor, new(Big.VRadius, Big.HRadius), Vector2.left, Vector2.right, Vector2.up),
-      c: new(cColor, new(-Big.VRadius, -Big.HRadius), Vector2.left, Vector2.right, Vector2.down),
-      d: new(dColor, new(-Big.VRadius, Big.HRadius), Vector2.left, Vector2.right, Vector2.up),
-      o: new(oColor, Vector2.zero, Vector2.right),
-      parentPosition: parentPosition);
-    _bigUpSensorGroup = new(
-      c: new(cColor, new(-Big.HRadius, -Big.VRadius), Vector2.down, Vector2.up, Vector2.right),
-      d: new(dColor, new(Big.HRadius, -Big.VRadius), Vector2.down, Vector2.up, Vector2.left),
-      a: new(aColor, new(-Big.HRadius, Big.VRadius), Vector2.down, Vector2.up, Vector2.right),
-      b: new(bColor, new(Big.HRadius, Big.VRadius), Vector2.down, Vector2.up, Vector2.left),
-      o: new(oColor, Vector2.zero, Vector2.up),
-      parentPosition: parentPosition);
-    _bigLeftSensorGroup = new(
-      c: new(cColor, new(Big.VRadius, -Big.HRadius), Vector2.right, Vector2.left, Vector2.up),
-      d: new(dColor, new(Big.VRadius, Big.HRadius), Vector2.right, Vector2.left, Vector2.down),
-      a: new(aColor, new(-Big.VRadius, -Big.HRadius), Vector2.right, Vector2.left, Vector2.up),
-      b: new(bColor, new(-Big.VRadius, Big.HRadius), Vector2.right, Vector2.left, Vector2.down),
-      o: new(oColor, Vector2.zero, Vector2.left),
-      parentPosition: parentPosition);
+    SetSensorGroups(Big.HRadius, Big.VRadius, parentPosition, out _bigDownSensorGroup, out _bigRightSensorGroup, out _bigUpSensorGroup, out _bigLeftSensorGroup);
+    SetSensorGroups(Small.HRadius, Small.VRadius, parentPosition, out _smallDownSensorGroup, out _smallRightSensorGroup, out _smallUpSensorGroup, out _smallLeftSensorGroup);
 
     SetCurrentSensorGroup();
   }
@@ -263,6 +237,45 @@ public class SonicSensorSystem
     sensor.UpRay.Length = udfLengths.x;
     sensor.DownRay.Length = udfLengths.y;
     sensor.FrontRay.Length = udfLengths.z;
+  }
+
+  private void SetSensorGroups(
+    float hRadius,
+    float vRadius,
+    Vector2? parentPosition,
+    out SonicSensorGroup down,
+    out SonicSensorGroup right,
+    out SonicSensorGroup up,
+    out SonicSensorGroup left)
+  {
+    down = new(
+      a: new(_aColor, new(-hRadius, -vRadius), Vector2.up, Vector2.down, Vector2.left),
+      b: new(_bColor, new(hRadius, -vRadius), Vector2.up, Vector2.down, Vector2.right),
+      c: new(_cColor, new(-hRadius, vRadius), Vector2.up, Vector2.down, Vector2.left),
+      d: new(_dColor, new(hRadius, vRadius), Vector2.up, Vector2.down, Vector2.right),
+      o: new(_oColor, Vector2.zero, Vector2.down),
+      parentPosition: parentPosition);
+    right = new(
+      a: new(_aColor, new(vRadius, -hRadius), Vector2.left, Vector2.right, Vector2.down),
+      b: new(_bColor, new(vRadius, hRadius), Vector2.left, Vector2.right, Vector2.up),
+      c: new(_cColor, new(-vRadius, -hRadius), Vector2.left, Vector2.right, Vector2.down),
+      d: new(_dColor, new(-vRadius, hRadius), Vector2.left, Vector2.right, Vector2.up),
+      o: new(_oColor, Vector2.zero, Vector2.right),
+      parentPosition: parentPosition);
+    up = new(
+      c: new(_cColor, new(-hRadius, -vRadius), Vector2.down, Vector2.up, Vector2.right),
+      d: new(_dColor, new(hRadius, -vRadius), Vector2.down, Vector2.up, Vector2.left),
+      a: new(_aColor, new(-hRadius, vRadius), Vector2.down, Vector2.up, Vector2.right),
+      b: new(_bColor, new(hRadius, vRadius), Vector2.down, Vector2.up, Vector2.left),
+      o: new(_oColor, Vector2.zero, Vector2.up),
+      parentPosition: parentPosition);
+    left = new(
+      c: new(_cColor, new(vRadius, -hRadius), Vector2.right, Vector2.left, Vector2.up),
+      d: new(_dColor, new(vRadius, hRadius), Vector2.right, Vector2.left, Vector2.down),
+      a: new(_aColor, new(-vRadius, -hRadius), Vector2.right, Vector2.left, Vector2.up),
+      b: new(_bColor, new(-vRadius, hRadius), Vector2.right, Vector2.left, Vector2.down),
+      o: new(_oColor, Vector2.zero, Vector2.left),
+      parentPosition: parentPosition);
   }
 
   private bool IsBalancing(LayerMask groundLayer)

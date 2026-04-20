@@ -2,6 +2,7 @@ using UnityEngine;
 using static SharedConsts.Physics;
 using static SharedConsts.SecretCodes;
 using static SonicConsts.Physics;
+using static SonicConsts.Sizes;
 
 /// <summary>
 /// Pipeline.
@@ -23,17 +24,18 @@ public partial class SonicController
 
   private void BeginFrame()
   {
-    _prevState = _state;
-    _prevIsGrounded = _isGrounded;
     _timerSystem.Update(Time.deltaTime);
+
+    _prevState = _state;
+    _prevSizeMode = _sizeMode;
+    _prevIsGrounded = _isGrounded;
   }
 
   private void UpdateInput()
   {
     _inputSystem.Update();
 
-    var pressed = _inputSystem.Pressed;
-    if (pressed == PlayerInput.None)
+    if (_inputSystem.Pressed == PlayerInput.None)
     {
       return;
     }
@@ -46,7 +48,7 @@ public partial class SonicController
 
   private void AnalyzeEnvironment()
   {
-    _sensorSystem.Update(new(_sizeMode, _groundInfoSystem.Current.Side, transform.position, new(true, false, _isGrounded), new(OLength, TopUDFLengths, BottomUDFLengths)));
+    _sensorSystem.Update(new(_sizeMode, _groundInfoSystem.Current.Side, transform.position, GetSensorFlags(), _sensorRayLengths));
 
     _leftWallDetectionResult = _sensorSystem.DetectLeftWall(_groundLayer);
     _rightWallDetectionResult = _sensorSystem.DetectRightWall(_groundLayer);
@@ -69,7 +71,10 @@ public partial class SonicController
     _isBalancing = _lastGroundDetectionResult.IsBalancing;
     _triggeredGroundSensorSide = _lastGroundDetectionResult.SourceSensorSide;
     _groundInfoSystem.Update(_lastGroundDetectionResult.AngleDeg);
-    _state = SonicState.Grounded.Set(SonicState.Balancing, _isBalancing);
+    _state = SonicState.Grounded
+      .Set(SonicState.Balancing, _isBalancing)
+      .Set(SonicState.CurlingUp, _isCurlingUp)
+      .Set(SonicState.FallingOffWall, _isFallingOffWall);
   }
 
   private void AnalyzeEnvironment_Airborn()
@@ -78,7 +83,8 @@ public partial class SonicController
     _isBalancing = false;
     _triggeredGroundSensorSide = false;
     _groundInfoSystem.Reset();
-    _state = SonicState.Airborne.Set(SonicState.FallingOffWall, _isFallingOffWall);
+    _state = SonicState.Airborne
+      .Set(SonicState.FallingOffWall, _isFallingOffWall);
   }
 
   private void ApplyEffects()
@@ -93,6 +99,35 @@ public partial class SonicController
       return;
     }
 
+    // Curling up
+    if (_speedSystem.GroundSpeed == 0
+      && _groundInfoSystem.Current.Side == GroundSide.Down
+      && !_isBalancing)
+    {
+      if (_inputSystem.Released == PlayerInput.Down)
+      {
+        _sizeMode = SonicSizeMode.Big;
+        _isCurlingUp = false;
+        return;
+      }
+
+      if (_inputSystem.Held.HasAny(PlayerInput.Down))
+      {
+        _sizeMode = SonicSizeMode.Small;
+        _isCurlingUp = true;
+        return;
+      }
+    }
+
+    // Exit standing state
+    if (_isCurlingUp)
+    {
+      _sizeMode = SonicSizeMode.Big;
+      _isCurlingUp = false;
+      return;
+    }
+
+    // Start input unlock timer
     if (_isFallingOffWall)
     {
       _isFallingOffWall = false;
@@ -100,6 +135,7 @@ public partial class SonicController
       return;
     }
 
+    // Wall detach
     if (_groundInfoSystem.Current.Side is GroundSide.Left or GroundSide.Right
       && Mathf.Abs(_speedSystem.GroundSpeed) < DecelerationSpeed)
     {
@@ -136,7 +172,7 @@ public partial class SonicController
 
   private void UpdateView()
   {
-    _viewContext = new(_isGrounded, _speedSystem.IsSkidding, _isBalancing, _speedSystem.IsZeroGroundSpeedProgressReached, _triggeredGroundSensorSide, _speedSystem.SpeedX, _speedSystem.GroundSpeed, _groundInfoSystem.Current.AngleDeg, _groundInfoSystem.Current.Side, _groundInfoSystem.Previous.Side);
+    _viewContext = new(_isGrounded, _speedSystem.IsSkidding, _isBalancing, _isCurlingUp, _speedSystem.IsZeroGroundSpeedProgressReached, _triggeredGroundSensorSide, _speedSystem.SpeedX, _speedSystem.GroundSpeed, _groundInfoSystem.Current.AngleDeg, _groundInfoSystem.Current.Side, _groundInfoSystem.Previous.Side);
     _viewSystem.Update(_viewContext);
   }
 
@@ -163,6 +199,13 @@ public partial class SonicController
       }
     }
 
+    if (_sizeMode != _prevSizeMode)
+    {
+      speedY = _sizeMode == SonicSizeMode.Small
+        ? speedY - VRadiusDelta
+        : speedY + VRadiusDelta;
+    }
+
     // SpeedX, SpeedY - offsets in units per frame.
     var pos = transform.position + _groundInfoSystem.Current.Side switch
     {
@@ -183,5 +226,10 @@ public partial class SonicController
       _sounds[i].Stop();
       _sounds[i].Play();
     }
+  }
+
+  private SonicSensorFlags GetSensorFlags()
+  {
+    return new(true, false, _isGrounded && !_isCurlingUp);
   }
 }
