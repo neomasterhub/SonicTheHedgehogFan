@@ -43,19 +43,15 @@ public static class SonicConsts
 
     public static class Big
     {
-      public const float HRadiusPx = 9;
-      public const float VRadiusPx = 19;
-      public const float HRadius = HRadiusPx / PxPerUnit;
-      public const float VRadius = VRadiusPx / PxPerUnit;
+      public const float HRadius = 0.23f;
+      public const float VRadius = 0.44f;
       public static Vector2 HVRadii = new(HRadius, VRadius);
     }
 
     public static class Small
     {
-      public const float HRadiusPx = 9;
-      public const float VRadiusPx = 14;
-      public const float HRadius = HRadiusPx / PxPerUnit;
-      public const float VRadius = VRadiusPx / PxPerUnit;
+      public const float HRadius = 0.23f;
+      public const float VRadius = 0.28f;
       public static Vector2 HVRadii = new(HRadius, VRadius);
     }
   }
