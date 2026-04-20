@@ -9,7 +9,7 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public partial class SonicController
   : MonoBehaviour,
-  ILookVerticalDirection
+  ILookVerticalDirectionProvider
 {
   private readonly ConditionalValueProvider<float> _slopeFactorSpeedProvider;
   private readonly ConditionalValueProvider<Vector2> _airToGroundSpeedProvider;

@@ -1,4 +1,4 @@
-public interface ILookVerticalDirection
+public interface ILookVerticalDirectionProvider
 {
   VerticalDirection LookVerticalDirection { get; }
 }
