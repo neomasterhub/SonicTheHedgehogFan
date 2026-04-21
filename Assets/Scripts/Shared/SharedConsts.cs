@@ -37,6 +37,7 @@ public static class SharedConsts
       public const string Skidding = nameof(Skidding);
       public const string Balancing = nameof(Balancing);
       public const string CurlingUp = nameof(CurlingUp);
+      public const string LookingUp = nameof(LookingUp);
     }
 
     public static class States
@@ -49,6 +50,7 @@ public static class SharedConsts
       public const string Skidding = nameof(Skidding);
       public const string Balancing = nameof(Balancing);
       public const string CurlingUp = nameof(CurlingUp);
+      public const string LookingUp = nameof(LookingUp);
     }
   }
 

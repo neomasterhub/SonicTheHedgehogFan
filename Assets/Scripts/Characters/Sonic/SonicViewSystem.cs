@@ -55,6 +55,7 @@ public class SonicViewSystem
     _animator.SetBool(AnimatorParameters.Idle, _context.IsZeroGroundSpeedProgressReached);
     _animator.SetBool(AnimatorParameters.Balancing, _context.IsBalancing);
     _animator.SetBool(AnimatorParameters.CurlingUp, _context.IsCurlingUp);
+    _animator.SetBool(AnimatorParameters.LookingUp, _context.IsLookingUp);
     _animator.SetBool(AnimatorParameters.Skidding, _context.IsSkidding);
     _animator.SetFloat(AnimatorParameters.Speed, animatorParameterSpeed);
 
