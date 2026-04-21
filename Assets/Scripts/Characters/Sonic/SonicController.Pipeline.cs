@@ -133,13 +133,9 @@ public partial class SonicController
     }
 
     // Exit standing state
-    if (_isCurlingUp)
-    {
-      _sizeMode = SonicSizeMode.Big;
-      _isCurlingUp = false;
-      _isLookingUp = false;
-      return;
-    }
+    _sizeMode = SonicSizeMode.Big;
+    _isCurlingUp = false;
+    _isLookingUp = false;
 
     // Start input unlock timer
     if (_isFallingOffWall)
