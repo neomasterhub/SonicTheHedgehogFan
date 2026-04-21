@@ -5,7 +5,8 @@ using UnityEngine;
 public class CameraLookVertical : MonoBehaviour
 {
   private const float _delay = 2;
-  private const float _yLimit = 0.45f;
+  private const float _yMax = 0.45f;
+  private const float _yMin = -0.5f;
   private const float _yStep = 0.01f;
 
   private float _delayTimer;
@@ -27,9 +28,9 @@ public class CameraLookVertical : MonoBehaviour
     var yCurrent = _camPos.Composition.ScreenPosition.y;
     var yTarget = direction switch
     {
-      VerticalDirection.Up => _yLimit,
+      VerticalDirection.Up => _yMax,
       VerticalDirection.None => 0,
-      VerticalDirection.Down => -_yLimit,
+      VerticalDirection.Down => _yMin,
       _ => throw direction.ArgumentOutOfRangeException(),
     };
 
