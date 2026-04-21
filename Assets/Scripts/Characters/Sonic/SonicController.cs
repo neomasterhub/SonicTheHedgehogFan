@@ -7,7 +7,9 @@ using UnityEngine;
 /// </summary>
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(SpriteRenderer))]
-public partial class SonicController : MonoBehaviour
+public partial class SonicController
+  : MonoBehaviour,
+  ILookVerticalDirectionProvider
 {
   private readonly ConditionalValueProvider<float> _slopeFactorSpeedProvider;
   private readonly ConditionalValueProvider<Vector2> _airToGroundSpeedProvider;
@@ -54,4 +56,17 @@ public partial class SonicController : MonoBehaviour
   public bool WallToAirViewRotatorEnabled = true;
   public AudioClip SkiddingAudioClip;
   public Canvas Canvas;
+
+  public VerticalDirection LookVerticalDirection
+  {
+    get
+    {
+      if (_isCurlingUp)
+      {
+        return VerticalDirection.Down;
+      }
+
+      return VerticalDirection.None;
+    }
+  }
 }
