@@ -4,9 +4,12 @@ using UnityEngine;
 [RequireComponent(typeof(CinemachinePositionComposer))]
 public class CameraLookVertical : MonoBehaviour
 {
+  private const float _delay = 2;
   private const float _yLimit = 0.45f;
   private const float _yStep = 0.01f;
 
+  private float _delayTimer;
+  private VerticalDirection _prevDirection;
   private CinemachinePositionComposer _camPos;
   private ILookVerticalDirectionProvider _directionProvider;
 
@@ -31,6 +34,43 @@ public class CameraLookVertical : MonoBehaviour
     };
 
     if (yCurrent == yTarget)
+    {
+      return;
+    }
+
+    if (yCurrent == 0)
+    {
+      if (_prevDirection == VerticalDirection.None)
+      {
+        if (direction == VerticalDirection.None)
+        {
+          _delayTimer = 0;
+        }
+        else
+        {
+          _delayTimer = _delay;
+        }
+      }
+      else
+      {
+        if (direction == VerticalDirection.None)
+        {
+          _delayTimer = 0;
+        }
+        else if (direction == _prevDirection)
+        {
+          _delayTimer -= Time.fixedDeltaTime;
+        }
+        else
+        {
+          _delayTimer = _delay;
+        }
+      }
+    }
+
+    _prevDirection = direction;
+
+    if (_delayTimer > 0)
     {
       return;
     }
