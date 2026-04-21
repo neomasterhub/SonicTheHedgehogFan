@@ -9,6 +9,8 @@ public class CameraLookVertical : MonoBehaviour
   private const float _yMin = -0.5f;
   private const float _yStep = 0.01f;
 
+  private float _yTarget;
+  private float _yCurrent;
   private float _delayTimer;
   private VerticalDirection _prevDirection;
   private CinemachinePositionComposer _camPos;
@@ -25,8 +27,8 @@ public class CameraLookVertical : MonoBehaviour
   private void FixedUpdate()
   {
     var direction = _directionProvider.LookVerticalDirection;
-    var yCurrent = _camPos.Composition.ScreenPosition.y;
-    var yTarget = direction switch
+    _yCurrent = _camPos.Composition.ScreenPosition.y;
+    _yTarget = direction switch
     {
       VerticalDirection.Up => _yMax,
       VerticalDirection.None => 0,
@@ -34,12 +36,12 @@ public class CameraLookVertical : MonoBehaviour
       _ => throw direction.ArgumentOutOfRangeException(),
     };
 
-    if (yCurrent == yTarget)
+    if (_yCurrent == _yTarget)
     {
       return;
     }
 
-    if (yCurrent == 0)
+    if (_yCurrent == 0)
     {
       if (_prevDirection == VerticalDirection.None)
       {
@@ -76,6 +78,6 @@ public class CameraLookVertical : MonoBehaviour
       return;
     }
 
-    _camPos.Composition.ScreenPosition = new(0, Mathf.MoveTowards(yCurrent, yTarget, _yStep));
+    _camPos.Composition.ScreenPosition = new(0, Mathf.MoveTowards(_yCurrent, _yTarget, _yStep));
   }
 }
