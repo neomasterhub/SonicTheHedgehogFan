@@ -30,6 +30,7 @@ public partial class SonicController
   private bool _isGrounded;
   private bool _isBalancing;
   private bool _isCurlingUp;
+  private bool _isLookingUp;
   private bool _isFallingOffWall;
   private bool _prevIsGrounded;
   private bool _postWallDetachInputLock;
@@ -64,6 +65,11 @@ public partial class SonicController
       if (_isCurlingUp)
       {
         return VerticalDirection.Down;
+      }
+
+      if (_isLookingUp)
+      {
+        return VerticalDirection.Up;
       }
 
       return VerticalDirection.None;
