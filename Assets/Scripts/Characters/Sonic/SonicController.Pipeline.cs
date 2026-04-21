@@ -74,6 +74,7 @@ public partial class SonicController
     _state = SonicState.Grounded
       .Set(SonicState.Balancing, _isBalancing)
       .Set(SonicState.CurlingUp, _isCurlingUp)
+      .Set(SonicState.LookingUp, _isLookingUp)
       .Set(SonicState.FallingOffWall, _isFallingOffWall);
   }
 
@@ -99,7 +100,7 @@ public partial class SonicController
       return;
     }
 
-    // Curling up
+    // Curling up / Looking up
     if (_speedSystem.GroundSpeed == 0
       && _groundInfoSystem.Current.Side == GroundSide.Down
       && !_isBalancing)
@@ -117,6 +118,18 @@ public partial class SonicController
         _isCurlingUp = true;
         return;
       }
+
+      if (_inputSystem.Released == PlayerInput.Up)
+      {
+        _isLookingUp = false;
+        return;
+      }
+
+      if (_inputSystem.Held.HasAny(PlayerInput.Up))
+      {
+        _isLookingUp = true;
+        return;
+      }
     }
 
     // Exit standing state
@@ -124,6 +137,7 @@ public partial class SonicController
     {
       _sizeMode = SonicSizeMode.Big;
       _isCurlingUp = false;
+      _isLookingUp = false;
       return;
     }
 
