@@ -36,11 +36,6 @@ public class CameraLookVertical : MonoBehaviour
       _ => throw direction.ArgumentOutOfRangeException(),
     };
 
-    if (_yCurrent == _yTarget)
-    {
-      return;
-    }
-
     if (_yCurrent == 0)
     {
       if (_prevDirection == VerticalDirection.None)
@@ -73,11 +68,9 @@ public class CameraLookVertical : MonoBehaviour
 
     _prevDirection = direction;
 
-    if (_delayTimer > 0)
+    if (_delayTimer <= 0)
     {
-      return;
+      _camPos.Composition.ScreenPosition = new(0, Mathf.MoveTowards(_yCurrent, _yTarget, _yStep));
     }
-
-    _camPos.Composition.ScreenPosition = new(0, Mathf.MoveTowards(_yCurrent, _yTarget, _yStep));
   }
 }
