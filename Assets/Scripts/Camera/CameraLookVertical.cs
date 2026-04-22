@@ -24,7 +24,7 @@ public class CameraLookVertical : MonoBehaviour
     _directionProvider = DirectionProvider.GetComponent<ILookVerticalDirectionProvider>();
   }
 
-  private void FixedUpdate()
+  private void LateUpdate()
   {
     var direction = _directionProvider.LookVerticalDirection;
     _yCurrent = _camPos.Composition.ScreenPosition.y;
@@ -62,7 +62,7 @@ public class CameraLookVertical : MonoBehaviour
         }
         else if (direction == _prevDirection)
         {
-          _delayTimer -= Time.fixedDeltaTime;
+          _delayTimer -= Time.deltaTime;
         }
         else
         {
