@@ -110,9 +110,7 @@ public partial class SonicController
   {
     return PipelineStepBuilder.Create()
       .WithDisplayName("Static/Exit")
-      .WithCondition(() =>
-        _isDownGrounded
-        && _speedSystem.GroundSpeed != 0)
+      .WithCondition(() => _isDownGroundedMoving)
       .WithAction(() =>
       {
         if (_isCurlingUp)
