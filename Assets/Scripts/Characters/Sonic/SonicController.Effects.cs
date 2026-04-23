@@ -76,7 +76,7 @@ public partial class SonicController
     {
       // Rolling
       if (!_isBalancing
-        && _inputSystem.Held.HasAny(PlayerInput.Down))
+        && _inputSystem.Pressed.HasAny(PlayerInput.Down))
       {
         _isRolling = true;
         _sizeMode = SonicSizeMode.Small;
