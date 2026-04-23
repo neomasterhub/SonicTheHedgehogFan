@@ -40,7 +40,7 @@ public partial class SonicController
   private PipelineStep CreateEffect_CurlingUp_Exit()
   {
     return PipelineStepBuilder.Create()
-      .WithDisplayName("Curling Up/Exit")
+      .WithDisplayName("Curling up/Exit")
       .WithCondition(() =>
         _isDownGrounded
         && _speedSystem.GroundSpeed == 0
@@ -59,7 +59,7 @@ public partial class SonicController
   private PipelineStep CreateEffect_CurlingUp_Enter()
   {
     return PipelineStepBuilder.Create()
-      .WithDisplayName("Curling Up/Enter")
+      .WithDisplayName("Curling up/Enter")
       .WithCondition(() =>
         _isDownGrounded
         && _speedSystem.GroundSpeed == 0
@@ -78,7 +78,7 @@ public partial class SonicController
   private PipelineStep CreateEffect_LookingUp_Exit()
   {
     return PipelineStepBuilder.Create()
-      .WithDisplayName("Looking Up/Exit")
+      .WithDisplayName("Looking up/Exit")
       .WithCondition(() =>
         _isDownGrounded
         && _speedSystem.GroundSpeed == 0
@@ -96,7 +96,7 @@ public partial class SonicController
   private PipelineStep CreateEffect_LookingUp_Enter()
   {
     return PipelineStepBuilder.Create()
-      .WithDisplayName("Looking Up/Enter")
+      .WithDisplayName("Looking up/Enter")
       .WithCondition(() =>
         _isDownGrounded
         && _speedSystem.GroundSpeed == 0
