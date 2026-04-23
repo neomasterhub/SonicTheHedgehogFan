@@ -12,6 +12,7 @@ public partial class SonicController
     _effects.AddStep(CreateEffect_LookingUp_Enter());
     _effects.AddStep(CreateEffect_Static_Exit());
     _effects.AddStep(CreateEffect_StartInputUnlockTimer());
+    _effects.AddStep(CreateEffect_Rolling_Enter());
   }
 
   private PipelineStep CreateEffect_Rolling_Exit()
@@ -139,6 +140,24 @@ public partial class SonicController
       {
         _isFallingOffWall = false;
         _timerSystem.StartIfNotRunning(_inputUnlockTimer);
+
+        return PipelineStepResult.Break;
+      })
+      .Build();
+  }
+
+  private PipelineStep CreateEffect_Rolling_Enter()
+  {
+    return PipelineStepBuilder.Create()
+      .WithDisplayName("Rolling/Enter")
+      .WithCondition(() =>
+        _isDownGrounded
+        && !_isBalancing
+        && _inputSystem.Pressed.HasAny(PlayerInput.Down))
+      .WithAction(() =>
+      {
+        _isRolling = true;
+        _sizeMode = SonicSizeMode.Small;
 
         return PipelineStepResult.Break;
       })
