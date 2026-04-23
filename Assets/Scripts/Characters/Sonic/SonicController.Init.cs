@@ -31,6 +31,8 @@ public partial class SonicController
     _speedConfig = new(TopSpeed, FrictionSpeed, MaxSkiddingSpeed, AccelerationSpeed, DecelerationSpeed, AirTopSpeed, AirAccelerationSpeed, MaxFallSpeed);
     _speedSystem = new(_inputSystem, _speedConfig, _slopeFactorSpeedProvider, _airToGroundSpeedProvider, _groundToAirSpeedProvider, _gravitySpeedProvider);
     _viewSystem = new(_inputSystem, _viewRotatorProvider);
+
+    SetEffectPipeline();
   }
 
   private void Awake()
