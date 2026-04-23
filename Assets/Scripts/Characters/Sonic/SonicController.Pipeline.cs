@@ -161,12 +161,13 @@ public partial class SonicController
   {
     if (_isGrounded)
     {
+      var isDownGrounded = _groundInfoSystem.Current.Side == GroundSide.Down;
       _speedContext = PlayerSpeedContext.GetGrounded(
         _prevIsGrounded,
         _groundInfoSystem.Current.SideAngleRad,
         _lastGroundDetectionResult.Distance,
-        _leftWallDetectionResult?.AngleDeg == 0 ? _leftWallDetectionResult.Value.Distance : null,
-        _rightWallDetectionResult?.AngleDeg == 0 ? _rightWallDetectionResult.Value.Distance : null);
+        isDownGrounded && _leftWallDetectionResult?.AngleDeg == 0 ? _leftWallDetectionResult.Value.Distance : null,
+        isDownGrounded && _rightWallDetectionResult?.AngleDeg == 0 ? _rightWallDetectionResult.Value.Distance : null);
     }
     else
     {
