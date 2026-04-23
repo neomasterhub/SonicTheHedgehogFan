@@ -5,7 +5,12 @@ public partial class SonicController
 {
   public SonicController()
   {
-    var eExitRolling = PipelineStepBuilder.Create()
+    _effects.AddStep(CreateStep_ExitRolling());
+  }
+
+  private PipelineStep CreateStep_ExitRolling()
+  {
+    return PipelineStepBuilder.Create()
       .WithDisplayName("Exit Rolling")
       .WithCondition(() =>
         _isDownGrounded
@@ -19,7 +24,5 @@ public partial class SonicController
         return PipelineStepResult.Continue;
       })
       .Build();
-
-    _effects.AddStep(eExitRolling);
   }
 }
