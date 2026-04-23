@@ -28,6 +28,7 @@ public partial class SonicController
   private readonly TimerSystem _timerSystem;
 
   private bool _isGrounded;
+  private bool _isDownGrounded;
   private bool _isBalancing;
   private bool _isCurlingUp;
   private bool _isLookingUp;
