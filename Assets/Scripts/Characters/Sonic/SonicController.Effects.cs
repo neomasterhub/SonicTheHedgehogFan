@@ -1,3 +1,6 @@
+using UnityEngine;
+using static SonicConsts.Physics;
+
 /// <summary>
 /// Effects.
 /// </summary>
@@ -13,6 +16,7 @@ public partial class SonicController
     _effects.AddStep(CreateEffect_Static_Exit());
     _effects.AddStep(CreateEffect_StartInputUnlockTimer());
     _effects.AddStep(CreateEffect_Rolling_Enter());
+    _effects.AddStep(CreateEffect_WallDetach());
   }
 
   private PipelineStep CreateEffect_Rolling_Exit()
@@ -158,6 +162,26 @@ public partial class SonicController
       {
         _isRolling = true;
         _sizeMode = SonicSizeMode.Small;
+
+        return PipelineStepResult.Break;
+      })
+      .Build();
+  }
+
+  private PipelineStep CreateEffect_WallDetach()
+  {
+    return PipelineStepBuilder.Create()
+      .WithDisplayName("Wall detach")
+      .WithCondition(() =>
+        _isGrounded
+        && !_isDownGrounded
+        && Mathf.Abs(_speedSystem.GroundSpeed) < DecelerationSpeed)
+      .WithAction(() =>
+      {
+        _isFallingOffWall = true;
+        _postWallDetachInputLock = true;
+        _postWallDetachPositionOffset = true;
+        AnalyzeEnvironment_Airborn();
 
         return PipelineStepResult.Break;
       })
