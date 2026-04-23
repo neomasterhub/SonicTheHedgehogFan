@@ -5,6 +5,7 @@ public readonly struct SonicViewContext
   public readonly bool IsBalancing;
   public readonly bool IsCurlingUp;
   public readonly bool IsLookingUp;
+  public readonly bool IsRolling;
   public readonly bool IsZeroGroundSpeedProgressReached;
   public readonly bool? TriggeredGroundSensorSide;
   public readonly float SpeedX;
@@ -13,13 +14,14 @@ public readonly struct SonicViewContext
   public readonly GroundSide GroundSide;
   public readonly GroundSide PrevGroundSide;
 
-  public SonicViewContext(bool isGrounded, bool isSkidding, bool isBalancing, bool isCurlingUp, bool isLookingUp, bool isZeroGroundSpeedProgressReached, bool? triggeredGroundSensorSide, float speedX, float groundSpeed, float groundAngleDeg, GroundSide groundSide, GroundSide prevGroundSide)
+  public SonicViewContext(bool isGrounded, bool isSkidding, bool isBalancing, bool isCurlingUp, bool isLookingUp, bool isRolling, bool isZeroGroundSpeedProgressReached, bool? triggeredGroundSensorSide, float speedX, float groundSpeed, float groundAngleDeg, GroundSide groundSide, GroundSide prevGroundSide)
   {
     IsGrounded = isGrounded;
     IsSkidding = isSkidding;
     IsBalancing = isBalancing;
     IsCurlingUp = isCurlingUp;
     IsLookingUp = isLookingUp;
+    IsRolling = isRolling;
     IsZeroGroundSpeedProgressReached = isZeroGroundSpeedProgressReached;
     TriggeredGroundSensorSide = triggeredGroundSensorSide;
     SpeedX = speedX;
