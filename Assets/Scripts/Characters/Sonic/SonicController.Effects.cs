@@ -148,7 +148,7 @@ public partial class SonicController
     return PipelineStepBuilder.Create()
       .WithDisplayName("Rolling/Enter")
       .WithCondition(() =>
-        _isDownGrounded
+        _isDownGroundedMoving
         && !_isBalancing
         && _inputSystem.Pressed.HasAny(PlayerInput.Down))
       .WithAction(() =>
