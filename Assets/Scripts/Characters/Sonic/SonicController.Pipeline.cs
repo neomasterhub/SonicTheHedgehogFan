@@ -105,41 +105,7 @@ public partial class SonicController
     if (_speedSystem.GroundSpeed == 0
       && isDownGrounded)
     {
-      if (_isRolling)
-      {
-        _isRolling = false;
-        _sizeMode = SonicSizeMode.Big;
-      }
-
-      if (!_isBalancing)
-      {
-        // Curling up / Looking up
-        if (_inputSystem.Released == PlayerInput.Down)
-        {
-          _sizeMode = SonicSizeMode.Big;
-          _isCurlingUp = false;
-          return;
-        }
-
-        if (_inputSystem.Held.HasAny(PlayerInput.Down))
-        {
-          _sizeMode = SonicSizeMode.Small;
-          _isCurlingUp = true;
-          return;
-        }
-
-        if (_inputSystem.Released == PlayerInput.Up)
-        {
-          _isLookingUp = false;
-          return;
-        }
-
-        if (_inputSystem.Held.HasAny(PlayerInput.Up))
-        {
-          _isLookingUp = true;
-          return;
-        }
-      }
+      
     }
 
     ApplyEffects_Grounded_ExitStandingState();
