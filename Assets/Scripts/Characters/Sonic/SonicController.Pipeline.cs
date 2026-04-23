@@ -137,6 +137,14 @@ public partial class SonicController
     _isCurlingUp = false;
     _isLookingUp = false;
 
+    // Rolling
+    if (_inputSystem.Held.HasAny(PlayerInput.Down))
+    {
+      _isRolling = true;
+      _sizeMode = SonicSizeMode.Small;
+      return;
+    }
+
     // Start input unlock timer
     if (_isFallingOffWall)
     {
