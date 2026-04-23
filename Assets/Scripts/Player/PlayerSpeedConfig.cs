@@ -10,7 +10,10 @@ public readonly struct PlayerSpeedConfig
   public readonly float AirAccelerationSpeed;
   public readonly float MaxFallSpeed;
 
-  public PlayerSpeedConfig(float topSpeed, float frictionSpeed, float maxSkiddingSpeed, float accelerationSpeed, float decelerationSpeed, float airTopSpeed, float airAccelerationSpeed, float maxFallSpeed)
+  public readonly float RollFrictionSpeed;
+  public readonly float RollDecelerationSpeed;
+
+  public PlayerSpeedConfig(float topSpeed, float frictionSpeed, float maxSkiddingSpeed, float accelerationSpeed, float decelerationSpeed, float airTopSpeed, float airAccelerationSpeed, float maxFallSpeed, float rollFrictionSpeed, float rollDecelerationSpeed)
   {
     TopSpeed = topSpeed;
     FrictionSpeed = frictionSpeed;
@@ -20,5 +23,7 @@ public readonly struct PlayerSpeedConfig
     AirTopSpeed = airTopSpeed;
     AirAccelerationSpeed = airAccelerationSpeed;
     MaxFallSpeed = maxFallSpeed;
+    RollFrictionSpeed = rollFrictionSpeed;
+    RollDecelerationSpeed = rollDecelerationSpeed;
   }
 }
