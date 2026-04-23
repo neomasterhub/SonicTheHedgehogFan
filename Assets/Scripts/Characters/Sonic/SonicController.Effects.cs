@@ -11,6 +11,7 @@ public partial class SonicController
     _effects.AddStep(CreateEffect_LookingUp_Exit());
     _effects.AddStep(CreateEffect_LookingUp_Enter());
     _effects.AddStep(CreateEffect_Static_Exit());
+    _effects.AddStep(CreateEffect_StartInputUnlockTimer());
   }
 
   private PipelineStep CreateEffect_Rolling_Exit()
@@ -123,6 +124,23 @@ public partial class SonicController
         _isLookingUp = false;
 
         return PipelineStepResult.Continue;
+      })
+      .Build();
+  }
+
+  private PipelineStep CreateEffect_StartInputUnlockTimer()
+  {
+    return PipelineStepBuilder.Create()
+      .WithDisplayName("Start input unlock timer")
+      .WithCondition(() =>
+        _isGrounded
+        && _isFallingOffWall)
+      .WithAction(() =>
+      {
+        _isFallingOffWall = false;
+        _timerSystem.StartIfNotRunning(_inputUnlockTimer);
+
+        return PipelineStepResult.Break;
       })
       .Build();
   }
