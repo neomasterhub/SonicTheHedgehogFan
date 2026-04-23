@@ -103,6 +103,12 @@ public partial class SonicController
     if (_speedSystem.GroundSpeed == 0
       && _groundInfoSystem.Current.Side == GroundSide.Down)
     {
+      if (_isRolling)
+      {
+        _isRolling = false;
+        _sizeMode = SonicSizeMode.Big;
+      }
+
       if (!_isBalancing)
       {
         // Curling up / Looking up
