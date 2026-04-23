@@ -2532,7 +2532,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2233803765968004545, guid: 88cdd643388d11841816991c45793fee, type: 3}
       propertyPath: m_Points.Array.data[9].x
-      value: 3
+      value: 3.25
       objectReference: {fileID: 0}
     - target: {fileID: 2233803765968004545, guid: 88cdd643388d11841816991c45793fee, type: 3}
       propertyPath: m_Points.Array.data[9].y
