@@ -92,16 +92,14 @@ public partial class SonicController
 
   private void ApplyEffects()
   {
-    ApplyEffects_Grounded();
+    if (_isGrounded)
+    {
+      ApplyEffects_Grounded();
+    }
   }
 
   private void ApplyEffects_Grounded()
   {
-    if (!_isGrounded)
-    {
-      return;
-    }
-
     var isDownGrounded = _groundInfoSystem.Current.Side == GroundSide.Down;
 
     if (_speedSystem.GroundSpeed == 0
