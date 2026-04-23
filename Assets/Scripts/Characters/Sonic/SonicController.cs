@@ -31,6 +31,7 @@ public partial class SonicController
   private bool _isBalancing;
   private bool _isCurlingUp;
   private bool _isLookingUp;
+  private bool _isRolling;
   private bool _isFallingOffWall;
   private bool _prevIsGrounded;
   private bool _postWallDetachInputLock;

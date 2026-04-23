@@ -9,5 +9,6 @@ public enum SonicState
   Balancing = 1 << 3,
   CurlingUp = 1 << 4,
   LookingUp = 1 << 5,
-  FallingOffWall = 1 << 6,
+  Rolling = 1 << 6,
+  FallingOffWall = 1 << 7,
 }
