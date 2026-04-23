@@ -236,7 +236,7 @@ public class PlayerSpeedSystem
     }
     else if (GroundSpeed < _config.TopSpeed)
     {
-      GroundSpeed += _config.AccelerationSpeed;
+      GroundSpeed += _accSpeed;
 
       if (GroundSpeed >= _config.TopSpeed)
       {
@@ -264,7 +264,7 @@ public class PlayerSpeedSystem
     }
     else if (GroundSpeed > -_config.TopSpeed)
     {
-      GroundSpeed -= _config.AccelerationSpeed;
+      GroundSpeed -= _accSpeed;
 
       if (GroundSpeed <= -_config.TopSpeed)
       {
