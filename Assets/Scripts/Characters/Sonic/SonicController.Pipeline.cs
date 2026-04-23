@@ -90,6 +90,11 @@ public partial class SonicController
       .Set(SonicState.FallingOffWall, _isFallingOffWall);
   }
 
+  private void ApplyEffects()
+  {
+    _effects.Run();
+  }
+
   private void ApplyMovement()
   {
     if (_isGrounded)
