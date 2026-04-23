@@ -132,10 +132,7 @@ public partial class SonicController
       }
     }
 
-    // Exit standing state
-    _sizeMode = SonicSizeMode.Big;
-    _isCurlingUp = false;
-    _isLookingUp = false;
+    ApplyEffects_Grounded_ExitStandingState();
 
     // Rolling
     if (_inputSystem.Held.HasAny(PlayerInput.Down))
@@ -163,6 +160,17 @@ public partial class SonicController
       AnalyzeEnvironment_Airborn();
       return;
     }
+  }
+
+  private void ApplyEffects_Grounded_ExitStandingState()
+  {
+    if (_isCurlingUp)
+    {
+      _sizeMode = SonicSizeMode.Big;
+    }
+
+    _isCurlingUp = false;
+    _isLookingUp = false;
   }
 
   private void ApplyMovement()
