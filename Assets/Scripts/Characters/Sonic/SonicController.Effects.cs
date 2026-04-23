@@ -3,6 +3,11 @@
 /// </summary>
 public partial class SonicController
 {
+  private void ApplyEffects_Grounded_Moving()
+  {
+    ApplyEffects_Grounded_Moving_ExitStatic();
+  }
+
   private void ApplyEffects_Grounded_Moving_ExitStatic()
   {
     if (_isCurlingUp)
