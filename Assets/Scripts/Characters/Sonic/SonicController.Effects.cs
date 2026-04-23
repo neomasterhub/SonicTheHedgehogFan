@@ -80,20 +80,18 @@ public partial class SonicController
       return;
     }
 
-    if (_isDownGrounded)
+    // Rolling
+    if (_isDownGrounded
+      && !_isBalancing
+      && _inputSystem.Pressed.HasAny(PlayerInput.Down))
     {
-      // Rolling
-      if (!_isBalancing
-        && _inputSystem.Pressed.HasAny(PlayerInput.Down))
-      {
-        _isRolling = true;
-        _sizeMode = SonicSizeMode.Small;
-        return;
-      }
+      _isRolling = true;
+      _sizeMode = SonicSizeMode.Small;
+      return;
     }
 
     // Wall detach
-    if (_groundInfoSystem.Current.Side is GroundSide.Left or GroundSide.Right
+    if (!_isDownGrounded
       && Mathf.Abs(_speedSystem.GroundSpeed) < DecelerationSpeed)
     {
       _isFallingOffWall = true;
