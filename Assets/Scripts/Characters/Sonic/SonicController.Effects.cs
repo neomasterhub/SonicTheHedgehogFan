@@ -72,6 +72,14 @@ public partial class SonicController
   {
     ApplyEffects_Grounded_Moving_ExitStatic();
 
+    // Start input unlock timer
+    if (_isFallingOffWall)
+    {
+      _isFallingOffWall = false;
+      _timerSystem.StartIfNotRunning(_inputUnlockTimer);
+      return;
+    }
+
     if (_isDownGrounded)
     {
       // Rolling
@@ -82,14 +90,6 @@ public partial class SonicController
         _sizeMode = SonicSizeMode.Small;
         return;
       }
-    }
-
-    // Start input unlock timer
-    if (_isFallingOffWall)
-    {
-      _isFallingOffWall = false;
-      _timerSystem.StartIfNotRunning(_inputUnlockTimer);
-      return;
     }
 
     // Wall detach
