@@ -24,8 +24,7 @@ public partial class SonicController
     return PipelineStepBuilder.Create()
       .WithDisplayName("Rolling/Exit")
       .WithCondition(() =>
-        _isDownGrounded
-        && _speedSystem.GroundSpeed == 0
+        _isDownGroundedStatic
         && _isRolling)
       .WithAction(() =>
       {
@@ -42,9 +41,8 @@ public partial class SonicController
     return PipelineStepBuilder.Create()
       .WithDisplayName("Curling up/Exit")
       .WithCondition(() =>
-        _isDownGrounded
-        && _speedSystem.GroundSpeed == 0
-        && !_isBalancing
+        _isDownGroundedStatic
+        && _isCurlingUp
         && _inputSystem.Released == PlayerInput.Down)
       .WithAction(() =>
       {
@@ -61,8 +59,7 @@ public partial class SonicController
     return PipelineStepBuilder.Create()
       .WithDisplayName("Curling up/Enter")
       .WithCondition(() =>
-        _isDownGrounded
-        && _speedSystem.GroundSpeed == 0
+        _isDownGroundedStatic
         && !_isBalancing
         && _inputSystem.Held.HasAny(PlayerInput.Down))
       .WithAction(() =>
@@ -80,9 +77,8 @@ public partial class SonicController
     return PipelineStepBuilder.Create()
       .WithDisplayName("Looking up/Exit")
       .WithCondition(() =>
-        _isDownGrounded
-        && _speedSystem.GroundSpeed == 0
-        && !_isBalancing
+        _isDownGroundedStatic
+        && _isLookingUp
         && _inputSystem.Released == PlayerInput.Up)
       .WithAction(() =>
       {
@@ -98,8 +94,7 @@ public partial class SonicController
     return PipelineStepBuilder.Create()
       .WithDisplayName("Looking up/Enter")
       .WithCondition(() =>
-        _isDownGrounded
-        && _speedSystem.GroundSpeed == 0
+        _isDownGroundedStatic
         && !_isBalancing
         && _inputSystem.Held.HasAny(PlayerInput.Up))
       .WithAction(() =>
@@ -115,9 +110,7 @@ public partial class SonicController
   {
     return PipelineStepBuilder.Create()
       .WithDisplayName("Static/Exit")
-      .WithCondition(() =>
-        _isDownGrounded
-        && _speedSystem.GroundSpeed != 0)
+      .WithCondition(() => _isDownGroundedMoving)
       .WithAction(() =>
       {
         if (_isCurlingUp)
@@ -155,7 +148,7 @@ public partial class SonicController
     return PipelineStepBuilder.Create()
       .WithDisplayName("Rolling/Enter")
       .WithCondition(() =>
-        _isDownGrounded
+        _isDownGroundedMoving
         && !_isBalancing
         && _inputSystem.Pressed.HasAny(PlayerInput.Down))
       .WithAction(() =>
