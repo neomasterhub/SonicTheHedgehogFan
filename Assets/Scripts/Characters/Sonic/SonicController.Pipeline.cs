@@ -100,35 +100,37 @@ public partial class SonicController
       return;
     }
 
-    // Curling up / Looking up
     if (_speedSystem.GroundSpeed == 0
-      && _groundInfoSystem.Current.Side == GroundSide.Down
-      && !_isBalancing)
+      && _groundInfoSystem.Current.Side == GroundSide.Down)
     {
-      if (_inputSystem.Released == PlayerInput.Down)
+      if (!_isBalancing)
       {
-        _sizeMode = SonicSizeMode.Big;
-        _isCurlingUp = false;
-        return;
-      }
+        // Curling up / Looking up
+        if (_inputSystem.Released == PlayerInput.Down)
+        {
+          _sizeMode = SonicSizeMode.Big;
+          _isCurlingUp = false;
+          return;
+        }
 
-      if (_inputSystem.Held.HasAny(PlayerInput.Down))
-      {
-        _sizeMode = SonicSizeMode.Small;
-        _isCurlingUp = true;
-        return;
-      }
+        if (_inputSystem.Held.HasAny(PlayerInput.Down))
+        {
+          _sizeMode = SonicSizeMode.Small;
+          _isCurlingUp = true;
+          return;
+        }
 
-      if (_inputSystem.Released == PlayerInput.Up)
-      {
-        _isLookingUp = false;
-        return;
-      }
+        if (_inputSystem.Released == PlayerInput.Up)
+        {
+          _isLookingUp = false;
+          return;
+        }
 
-      if (_inputSystem.Held.HasAny(PlayerInput.Up))
-      {
-        _isLookingUp = true;
-        return;
+        if (_inputSystem.Held.HasAny(PlayerInput.Up))
+        {
+          _isLookingUp = true;
+          return;
+        }
       }
     }
 
