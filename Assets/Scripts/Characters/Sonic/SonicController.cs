@@ -29,7 +29,6 @@ public partial class SonicController
   private readonly TimerSystem _timerSystem;
 
   private bool _isGrounded;
-  private bool _isDownGrounded;
   private bool _isBalancing;
   private bool _isCurlingUp;
   private bool _isLookingUp;
@@ -39,6 +38,7 @@ public partial class SonicController
   private bool _postWallDetachInputLock;
   private bool _postWallDetachPositionOffset;
   private bool _triggeredGroundSensorSide;
+  private bool _isDownGrounded;
   private Animator _animator;
   private GameObject _infoPanel;
   private GroundDetectionResult _lastGroundDetectionResult;
