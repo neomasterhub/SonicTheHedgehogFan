@@ -135,7 +135,8 @@ public partial class SonicController
     ApplyEffects_Grounded_ExitStandingState();
 
     // Rolling
-    if (_inputSystem.Held.HasAny(PlayerInput.Down))
+    if (!_isBalancing
+      && _inputSystem.Held.HasAny(PlayerInput.Down))
     {
       _isRolling = true;
       _sizeMode = SonicSizeMode.Small;
