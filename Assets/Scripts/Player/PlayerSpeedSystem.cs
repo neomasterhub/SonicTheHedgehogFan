@@ -226,12 +226,12 @@ public class PlayerSpeedSystem
         IsSkidding = true;
       }
 
-      GroundSpeed += _config.DecelerationSpeed;
+      GroundSpeed += _decSpeed;
 
       if (GroundSpeed >= 0)
       {
         IsSkidding = false;
-        GroundSpeed = _config.DecelerationSpeed;
+        GroundSpeed = _decSpeed;
       }
     }
     else if (GroundSpeed < _config.TopSpeed)
@@ -254,12 +254,12 @@ public class PlayerSpeedSystem
         IsSkidding = true;
       }
 
-      GroundSpeed -= _config.DecelerationSpeed;
+      GroundSpeed -= _decSpeed;
 
       if (GroundSpeed <= 0)
       {
         IsSkidding = false;
-        GroundSpeed = -_config.DecelerationSpeed;
+        GroundSpeed = -_decSpeed;
       }
     }
     else if (GroundSpeed > -_config.TopSpeed)
