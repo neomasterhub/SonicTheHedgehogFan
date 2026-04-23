@@ -100,8 +100,10 @@ public partial class SonicController
       return;
     }
 
+    var isDownGrounded = _groundInfoSystem.Current.Side == GroundSide.Down;
+
     if (_speedSystem.GroundSpeed == 0
-      && _groundInfoSystem.Current.Side == GroundSide.Down)
+      && isDownGrounded)
     {
       if (_isRolling)
       {
@@ -142,13 +144,16 @@ public partial class SonicController
 
     ApplyEffects_Grounded_ExitStandingState();
 
-    // Rolling
-    if (!_isBalancing
-      && _inputSystem.Held.HasAny(PlayerInput.Down))
+    if (isDownGrounded)
     {
-      _isRolling = true;
-      _sizeMode = SonicSizeMode.Small;
-      return;
+      // Rolling
+      if (!_isBalancing
+        && _inputSystem.Held.HasAny(PlayerInput.Down))
+      {
+        _isRolling = true;
+        _sizeMode = SonicSizeMode.Small;
+        return;
+      }
     }
 
     // Start input unlock timer
