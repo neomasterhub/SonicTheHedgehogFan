@@ -184,7 +184,7 @@ public class PlayerSpeedSystem
     SpeedX = GroundSpeed * _groundAngleCos;
     SpeedY = GroundSpeed * _groundAngleSin;
 
-    if (Mathf.Abs(GroundSpeed) < _config.FrictionSpeed)
+    if (Mathf.Abs(GroundSpeed) < _frictionSpeed)
     {
       ZeroGroundSpeedProgress = Mathf.Min(ZeroGroundSpeedProgress + 1, _zeroGroundSpeedProgressMax);
       IsZeroGroundSpeedProgressReached = ZeroGroundSpeedProgress == _zeroGroundSpeedProgressMax;
@@ -275,14 +275,14 @@ public class PlayerSpeedSystem
 
   private void SetSpeed_Grounded_Friction()
   {
-    if (Mathf.Abs(GroundSpeed) < _config.FrictionSpeed)
+    if (Mathf.Abs(GroundSpeed) < _frictionSpeed)
     {
       GroundSpeed = 0;
       IsSkidding = false;
       return;
     }
 
-    GroundSpeed -= _config.FrictionSpeed * Mathf.Sign(GroundSpeed);
+    GroundSpeed -= _frictionSpeed * Mathf.Sign(GroundSpeed);
   }
 
   private void SetSpeed_Grounded_PreventWallOvershoot()
