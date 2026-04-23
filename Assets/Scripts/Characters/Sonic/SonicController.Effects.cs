@@ -10,6 +10,7 @@ public partial class SonicController
     _effects.AddStep(CreateEffect_CurlingUp_Enter());
     _effects.AddStep(CreateEffect_LookingUp_Exit());
     _effects.AddStep(CreateEffect_LookingUp_Enter());
+    _effects.AddStep(CreateEffect_Static_Exit());
   }
 
   private PipelineStep CreateEffect_Rolling_Exit()
@@ -100,6 +101,28 @@ public partial class SonicController
         _isLookingUp = true;
 
         return PipelineStepResult.Break;
+      })
+      .Build();
+  }
+
+  private PipelineStep CreateEffect_Static_Exit()
+  {
+    return PipelineStepBuilder.Create()
+      .WithDisplayName("Static/Exit")
+      .WithCondition(() =>
+        _isDownGrounded
+        && _speedSystem.GroundSpeed != 0)
+      .WithAction(() =>
+      {
+        if (_isCurlingUp)
+        {
+          _sizeMode = SonicSizeMode.Big;
+        }
+
+        _isCurlingUp = false;
+        _isLookingUp = false;
+
+        return PipelineStepResult.Continue;
       })
       .Build();
   }
