@@ -15,6 +15,9 @@ public class PlayerSpeedSystem
   private readonly PlayerInputSystem _inputSystem;
   private readonly PlayerSpeedConfig _config;
 
+  private float _accSpeed;
+  private float _decSpeed;
+  private float _frictionSpeed;
   private float _groundAngleCos;
   private float _groundAngleSin;
   private PlayerSpeedContext _context;
@@ -63,6 +66,19 @@ public class PlayerSpeedSystem
   public void SetSpeed(PlayerSpeedContext context)
   {
     _context = context;
+
+    if (_context.IsRolling)
+    {
+      _accSpeed = 0;
+      _decSpeed = _config.RollDecelerationSpeed;
+      _frictionSpeed = _config.RollFrictionSpeed;
+    }
+    else
+    {
+      _accSpeed = _config.AccelerationSpeed;
+      _decSpeed = _config.DecelerationSpeed;
+      _frictionSpeed = _config.FrictionSpeed;
+    }
 
     if (_context.IsGrounded)
     {
