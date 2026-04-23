@@ -39,6 +39,8 @@ public partial class SonicController
   private bool _postWallDetachPositionOffset;
   private bool _triggeredGroundSensorSide;
   private bool _isDownGrounded;
+  private bool _isDownGroundedStatic;
+  private bool _isDownGroundedMoving;
   private Animator _animator;
   private GameObject _infoPanel;
   private GroundDetectionResult _lastGroundDetectionResult;
