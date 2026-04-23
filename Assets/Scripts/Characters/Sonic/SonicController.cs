@@ -22,15 +22,18 @@ public partial class SonicController
   private readonly PlayerSpeedConfig _speedConfig;
   private readonly PlayerSpeedSystem _speedSystem;
   private readonly PlayerViewRotatorProvider<SonicViewRotatorContext> _viewRotatorProvider;
+  private readonly Pipeline _effects;
   private readonly SonicSensorRayLengths _sensorRayLengths;
   private readonly SonicSensorSystem _sensorSystem;
   private readonly SonicViewSystem _viewSystem;
   private readonly TimerSystem _timerSystem;
 
   private bool _isGrounded;
+  private bool _isDownGrounded;
   private bool _isBalancing;
   private bool _isCurlingUp;
   private bool _isLookingUp;
+  private bool _isRolling;
   private bool _isFallingOffWall;
   private bool _prevIsGrounded;
   private bool _postWallDetachInputLock;

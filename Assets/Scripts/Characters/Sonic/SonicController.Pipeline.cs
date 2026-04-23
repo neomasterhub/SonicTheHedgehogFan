@@ -71,6 +71,7 @@ public partial class SonicController
     _isBalancing = _lastGroundDetectionResult.IsBalancing;
     _triggeredGroundSensorSide = _lastGroundDetectionResult.SourceSensorSide;
     _groundInfoSystem.Update(_lastGroundDetectionResult.AngleDeg);
+    _isDownGrounded = _groundInfoSystem.Current.Side == GroundSide.Down;
     _state = SonicState.Grounded
       .Set(SonicState.Balancing, _isBalancing)
       .Set(SonicState.CurlingUp, _isCurlingUp)
@@ -84,77 +85,14 @@ public partial class SonicController
     _isBalancing = false;
     _triggeredGroundSensorSide = false;
     _groundInfoSystem.Reset();
+    _isDownGrounded = false;
     _state = SonicState.Airborne
       .Set(SonicState.FallingOffWall, _isFallingOffWall);
   }
 
   private void ApplyEffects()
   {
-    ApplyEffects_Grounded();
-  }
-
-  private void ApplyEffects_Grounded()
-  {
-    if (!_isGrounded)
-    {
-      return;
-    }
-
-    // Curling up / Looking up
-    if (_speedSystem.GroundSpeed == 0
-      && _groundInfoSystem.Current.Side == GroundSide.Down
-      && !_isBalancing)
-    {
-      if (_inputSystem.Released == PlayerInput.Down)
-      {
-        _sizeMode = SonicSizeMode.Big;
-        _isCurlingUp = false;
-        return;
-      }
-
-      if (_inputSystem.Held.HasAny(PlayerInput.Down))
-      {
-        _sizeMode = SonicSizeMode.Small;
-        _isCurlingUp = true;
-        return;
-      }
-
-      if (_inputSystem.Released == PlayerInput.Up)
-      {
-        _isLookingUp = false;
-        return;
-      }
-
-      if (_inputSystem.Held.HasAny(PlayerInput.Up))
-      {
-        _isLookingUp = true;
-        return;
-      }
-    }
-
-    // Exit standing state
-    _sizeMode = SonicSizeMode.Big;
-    _isCurlingUp = false;
-    _isLookingUp = false;
-
-    // Start input unlock timer
-    if (_isFallingOffWall)
-    {
-      _isFallingOffWall = false;
-      _timerSystem.StartIfNotRunning(_inputUnlockTimer);
-      return;
-    }
-
-    // Wall detach
-    if (_groundInfoSystem.Current.Side is GroundSide.Left or GroundSide.Right
-      && Mathf.Abs(_speedSystem.GroundSpeed) < DecelerationSpeed)
-    {
-      _isFallingOffWall = true;
-      _postWallDetachInputLock = true;
-      _postWallDetachPositionOffset = true;
-      AnalyzeEnvironment_Airborn();
-      return;
-    }
+    _effects.Run();
   }
 
   private void ApplyMovement()
@@ -183,7 +121,7 @@ public partial class SonicController
 
   private void UpdateView()
   {
-    _viewContext = new(_isGrounded, _speedSystem.IsSkidding, _isBalancing, _isCurlingUp, _isLookingUp, _speedSystem.IsZeroGroundSpeedProgressReached, _triggeredGroundSensorSide, _speedSystem.SpeedX, _speedSystem.GroundSpeed, _groundInfoSystem.Current.AngleDeg, _groundInfoSystem.Current.Side, _groundInfoSystem.Previous.Side);
+    _viewContext = new(_isGrounded, _speedSystem.IsSkidding, _isBalancing, _isCurlingUp, _isLookingUp, _isRolling, _speedSystem.IsZeroGroundSpeedProgressReached, _triggeredGroundSensorSide, _speedSystem.SpeedX, _speedSystem.GroundSpeed, _groundInfoSystem.Current.AngleDeg, _groundInfoSystem.Current.Side, _groundInfoSystem.Previous.Side);
     _viewSystem.Update(_viewContext);
   }
 
