@@ -80,6 +80,7 @@ public partial class SonicController
       .Set(SonicState.Balancing, _isBalancing)
       .Set(SonicState.CurlingUp, _isCurlingUp)
       .Set(SonicState.LookingUp, _isLookingUp)
+      .Set(SonicState.Rolling, _isRolling)
       .Set(SonicState.FallingOffWall, _isFallingOffWall);
   }
 
@@ -95,6 +96,7 @@ public partial class SonicController
     _isDownGroundedMoving = false;
 
     _state = SonicState.Airborne
+      .Set(SonicState.Rolling, _isRolling)
       .Set(SonicState.FallingOffWall, _isFallingOffWall);
   }
 
