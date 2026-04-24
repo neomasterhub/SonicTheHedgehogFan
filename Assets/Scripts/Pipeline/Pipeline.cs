@@ -1,8 +1,16 @@
 using System.Collections.Generic;
+using Neomaster.RingBuffer;
 
 public class Pipeline
 {
-  private readonly List<PipelineStep> _steps = new();
+  private readonly List<PipelineStep> _steps;
+  private readonly RingBuffer<string> _history;
+
+  public Pipeline(int historyCapacity = 3)
+  {
+    _steps = new();
+    _history = new(historyCapacity);
+  }
 
   public Pipeline AddStep(PipelineStep step)
   {
@@ -20,6 +28,8 @@ public class Pipeline
       {
         continue;
       }
+
+      _history.Push(step.DisplayName);
 
       if (step.Action() == PipelineStepResult.Break)
       {
