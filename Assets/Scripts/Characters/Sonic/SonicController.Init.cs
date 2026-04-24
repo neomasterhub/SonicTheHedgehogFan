@@ -125,6 +125,23 @@ public partial class SonicController
       .WhenCompleted(() => _postWallDetachInputLock = false);
   }
 
+  private float GetSlopeFactor()
+  {
+    if (!_isRolling)
+    {
+      return SlopeFactor;
+    }
+
+    if (Mathf.Sign(_speedSystem.GroundSpeed) == Mathf.Sign(_groundInfoSystem.Current.SideAngleDeg))
+    {
+      return RollUphillSlopeFactor;
+    }
+    else
+    {
+      return RollDownhillSlopeFactor;
+    }
+  }
+
   private PlayerInput GetPlayerInput()
   {
     if (_postWallDetachInputLock)
