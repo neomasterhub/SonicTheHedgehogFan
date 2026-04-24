@@ -103,6 +103,20 @@ public class SonicViewSystem
       return;
     }
 
+    if (_context.IsRolling)
+    {
+      if (_context.SpeedX > 0)
+      {
+        _spriteRenderer.flipX = false;
+      }
+      else if (_context.SpeedX < 0)
+      {
+        _spriteRenderer.flipX = true;
+      }
+
+      return;
+    }
+
     if (_inputSystem.X > 0)
     {
       _spriteRenderer.flipX = false;
