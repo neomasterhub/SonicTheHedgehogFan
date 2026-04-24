@@ -28,6 +28,7 @@ public partial class SonicController
 
     _prevState = _state;
     _prevSizeMode = _sizeMode;
+    _prevIsRolling = _isRolling;
     _prevIsGrounded = _isGrounded;
   }
 
