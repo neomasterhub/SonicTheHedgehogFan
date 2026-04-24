@@ -61,6 +61,7 @@ public partial class SonicController
   public bool GravityEnabled = true;
   public bool GroundedViewRotatorEnabled = true;
   public bool WallToAirViewRotatorEnabled = true;
+  public AudioClip RollingAudioClip;
   public AudioClip SkiddingAudioClip;
   public Canvas Canvas;
 
