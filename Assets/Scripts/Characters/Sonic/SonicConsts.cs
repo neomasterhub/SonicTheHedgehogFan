@@ -20,6 +20,8 @@ public static class SonicConsts
     public const float SlopeFactorSpx = 32;
     public const float RollDecelerationSpeedSpx = 32;
     public const float RollFrictionSpeedSpx = 6;
+    public const float RollUphillSlopeFactorSpx = 20;
+    public const float RollDownhillSlopeFactorSpx = 80;
 
     public const float AccelerationSpeed = AccelerationSpeedSpx / SpxPerUnit;
     public const float DecelerationSpeed = DecelerationSpeedSpx / SpxPerUnit;
@@ -33,6 +35,8 @@ public static class SonicConsts
     public const float SlopeFactor = SlopeFactorSpx / SpxPerUnit;
     public const float RollDecelerationSpeed = RollDecelerationSpeedSpx / SpxPerUnit;
     public const float RollFrictionSpeed = RollFrictionSpeedSpx / SpxPerUnit;
+    public const float RollUphillSlopeFactor = RollUphillSlopeFactorSpx / SpxPerUnit;
+    public const float RollDownhillSlopeFactor = RollDownhillSlopeFactorSpx / SpxPerUnit;
 
     public const float OLength = Sizes.Big.VRadius + 0.4f;
     public static readonly Vector3 TopUDFLengths = new(0.3f, 0.3f, 0.5f);
