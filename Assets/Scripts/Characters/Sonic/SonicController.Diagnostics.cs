@@ -10,18 +10,23 @@ public partial class SonicController
 
   public void Output()
   {
-    _info.Clear();
-
-    _info.AppendLine($"LOC {(_isGrounded ? "Ground" : "Air")}");
-    _info.AppendLine($"INS {GetInputState()}");
-    _info.AppendLine($"INH {_inputSystem.GetPressedHistory()}");
-    _info.AppendLine($"GP {_groundInfoSystem.Previous}");
-    _info.AppendLine($"GC {_groundInfoSystem.Current}");
-    _info.AppendLine($"GS {_speedSystem.SlopeFactorSpeed * 10000,5:0;-0;0} {_speedSystem.GroundSpeed * 10000,5:0;-0;0}");
-    _info.AppendLine($"SP {_speedSystem.SpeedX * 10000,5:0;-0;0} {_speedSystem.SpeedY * 10000,5:0;-0;0}");
-    _info.AppendLine($"WL {GetWallInfo(_leftWallDetectionResult)}");
-    _info.AppendLine($"WR {GetWallInfo(_rightWallDetectionResult)}");
-    _info.AppendLine($"RT {_viewSystem.Rotator}");
+    _info
+      .Clear()
+      .AppendLine($"ENV {(_isGrounded ? "Ground" : "Air")}")
+      .AppendLine()
+      .AppendLine($"INP {GetInputState()}")
+      .AppendLine($"INH {_inputSystem.GetPressedHistory()}")
+      .AppendLine()
+      .AppendLine($"GP {_groundInfoSystem.Previous}")
+      .AppendLine($"GC {_groundInfoSystem.Current}")
+      .AppendLine($"GS {_speedSystem.SlopeSpeed * 10000,5:0;-0;0} {_speedSystem.GroundSpeed * 10000,5:0;-0;0}")
+      .AppendLine($"SP {_speedSystem.SpeedX * 10000,5:0;-0;0} {_speedSystem.SpeedY * 10000,5:0;-0;0}")
+      .AppendLine($"SLF {_slopeFactor * 10000,5:0}")
+      .AppendLine()
+      .AppendLine($"RT {_viewSystem.Rotator}")
+      .AppendLine($"WL {GetWallInfo(_leftWallDetectionResult)}")
+      .AppendLine($"WR {GetWallInfo(_rightWallDetectionResult)}")
+      ;
 
     _infoText.SetText(_info);
   }

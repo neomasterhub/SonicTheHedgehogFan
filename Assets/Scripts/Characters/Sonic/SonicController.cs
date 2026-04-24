@@ -11,7 +11,7 @@ public partial class SonicController
   : MonoBehaviour,
   ILookVerticalDirectionProvider
 {
-  private readonly ConditionalValueProvider<float> _slopeFactorSpeedProvider;
+  private readonly ConditionalValueProvider<float> _slopeSpeedProvider;
   private readonly ConditionalValueProvider<Vector2> _airToGroundSpeedProvider;
   private readonly ConditionalValueProvider<Vector2> _groundToAirSpeedProvider;
   private readonly ConditionalValueProvider<GravitySpeed> _gravitySpeedProvider;
@@ -41,6 +41,7 @@ public partial class SonicController
   private bool _isDownGrounded;
   private bool _isDownGroundedStatic;
   private bool _isDownGroundedMoving;
+  private float _slopeFactor;
   private Animator _animator;
   private GameObject _infoPanel;
   private GroundDetectionResult _lastGroundDetectionResult;
