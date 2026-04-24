@@ -227,7 +227,7 @@ public class PlayerSpeedSystem
   {
     if (GroundSpeed < 0)
     {
-      if (GroundSpeed < -_config.MaxSkiddingSpeed)
+      if (!_context.IsRolling && GroundSpeed < -_config.MaxSkiddingSpeed)
       {
         IsSkidding = true;
       }
@@ -255,7 +255,7 @@ public class PlayerSpeedSystem
   {
     if (GroundSpeed > 0)
     {
-      if (GroundSpeed > _config.MaxSkiddingSpeed)
+      if (!_context.IsRolling && GroundSpeed > _config.MaxSkiddingSpeed)
       {
         IsSkidding = true;
       }
