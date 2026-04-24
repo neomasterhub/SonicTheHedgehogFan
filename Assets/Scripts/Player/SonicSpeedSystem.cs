@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using static SharedConsts.Physics;
 
-public class PlayerSpeedSystem
+public class SonicSpeedSystem
 {
   private const int _speedRoundingDigits = 3;
   private const int _zeroGroundSpeedProgressMax = 5;
@@ -12,7 +12,7 @@ public class PlayerSpeedSystem
   private readonly ConditionalValueProvider<Vector2> _groundToAirSpeedProvider;
   private readonly ConditionalValueProvider<GravitySpeed> _gravitySpeedProvider;
   private readonly PlayerInputSystem _inputSystem;
-  private readonly PlayerSpeedConfig _config;
+  private readonly SonicSpeedConfig _config;
 
   private bool _friction;
   private float _accSpeed;
@@ -20,11 +20,11 @@ public class PlayerSpeedSystem
   private float _frictionSpeed;
   private float _groundAngleCos;
   private float _groundAngleSin;
-  private PlayerSpeedContext _context;
+  private SonicSpeedContext _context;
 
-  public PlayerSpeedSystem(
+  public SonicSpeedSystem(
     PlayerInputSystem inputSystem,
-    PlayerSpeedConfig config,
+    SonicSpeedConfig config,
     ConditionalValueProvider<float> slopeSpeedProvider,
     ConditionalValueProvider<Vector2> airToGroundSpeedProvider,
     ConditionalValueProvider<Vector2> groundToAirSpeedProvider,
@@ -63,7 +63,7 @@ public class PlayerSpeedSystem
     _groundAngleSin = 0;
   }
 
-  public void SetSpeed(PlayerSpeedContext context)
+  public void SetSpeed(SonicSpeedContext context)
   {
     _context = context;
 

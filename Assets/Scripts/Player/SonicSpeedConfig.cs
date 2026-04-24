@@ -1,4 +1,4 @@
-public readonly struct PlayerSpeedConfig
+public readonly struct SonicSpeedConfig
 {
   public readonly float TopSpeed;
   public readonly float FrictionSpeed;
@@ -13,7 +13,7 @@ public readonly struct PlayerSpeedConfig
   public readonly float RollFrictionSpeed;
   public readonly float RollDecelerationSpeed;
 
-  public PlayerSpeedConfig(float topSpeed, float frictionSpeed, float maxSkiddingSpeed, float accelerationSpeed, float decelerationSpeed, float airTopSpeed, float airAccelerationSpeed, float maxFallSpeed, float rollFrictionSpeed, float rollDecelerationSpeed)
+  public SonicSpeedConfig(float topSpeed, float frictionSpeed, float maxSkiddingSpeed, float accelerationSpeed, float decelerationSpeed, float airTopSpeed, float airAccelerationSpeed, float maxFallSpeed, float rollFrictionSpeed, float rollDecelerationSpeed)
   {
     TopSpeed = topSpeed;
     FrictionSpeed = frictionSpeed;

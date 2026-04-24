@@ -16,16 +16,16 @@ public partial class SonicController
   private readonly ConditionalValueProvider<Vector2> _groundToAirSpeedProvider;
   private readonly ConditionalValueProvider<GravitySpeed> _gravitySpeedProvider;
   private readonly GroundInfoSystem _groundInfoSystem;
-  private readonly StringBuilder _info;
   private readonly LayerMask _groundLayer;
   private readonly PlayerInputSystem _inputSystem;
-  private readonly PlayerSpeedConfig _speedConfig;
-  private readonly PlayerSpeedSystem _speedSystem;
   private readonly PlayerViewRotatorProvider<SonicViewRotatorContext> _viewRotatorProvider;
   private readonly Pipeline _effects;
   private readonly SonicSensorRayLengths _sensorRayLengths;
   private readonly SonicSensorSystem _sensorSystem;
+  private readonly SonicSpeedConfig _speedConfig;
+  private readonly SonicSpeedSystem _speedSystem;
   private readonly SonicViewSystem _viewSystem;
+  private readonly StringBuilder _info;
   private readonly TimerSystem _timerSystem;
 
   private bool _isGrounded;
@@ -47,7 +47,7 @@ public partial class SonicController
   private GroundDetectionResult _lastGroundDetectionResult;
   private WallDetectionResult? _leftWallDetectionResult;
   private WallDetectionResult? _rightWallDetectionResult;
-  private PlayerSpeedContext _speedContext;
+  private SonicSpeedContext _speedContext;
   private SonicSizeMode _sizeMode;
   private SonicSizeMode _prevSizeMode;
   private SonicState _state;
