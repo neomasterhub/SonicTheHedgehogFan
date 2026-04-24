@@ -17,7 +17,7 @@ public partial class SonicController
     _airToGroundSpeedProvider = new();
     _gravitySpeedProvider = new();
     _groundToAirSpeedProvider = new();
-    _slopeFactorSpeedProvider = new();
+    _slopeSpeedProvider = new();
 
     _effects = new();
     _groundInfoSystem = new();
@@ -29,7 +29,7 @@ public partial class SonicController
     _inputSystem = new(GetPlayerInput);
     _sensorRayLengths = new(OLength, TopUDFLengths, BottomUDFLengths);
     _speedConfig = new(TopSpeed, FrictionSpeed, MaxSkiddingSpeed, AccelerationSpeed, DecelerationSpeed, AirTopSpeed, AirAccelerationSpeed, MaxFallSpeed, RollFrictionSpeed, RollDecelerationSpeed);
-    _speedSystem = new(_inputSystem, _speedConfig, _slopeFactorSpeedProvider, _airToGroundSpeedProvider, _groundToAirSpeedProvider, _gravitySpeedProvider);
+    _speedSystem = new(_inputSystem, _speedConfig, _slopeSpeedProvider, _airToGroundSpeedProvider, _groundToAirSpeedProvider, _gravitySpeedProvider);
     _viewSystem = new(_inputSystem, _viewRotatorProvider);
 
     SetEffectPipeline();
@@ -90,7 +90,7 @@ public partial class SonicController
     _gravitySpeedProvider
       .When(() => GravityEnabled && _groundInfoSystem.Current.Side == GroundSide.Down, () => gravitySpeed);
 
-    _slopeFactorSpeedProvider
+    _slopeSpeedProvider
       .When(() => _groundInfoSystem.Current.Side == GroundSide.Down, () => SlopeFactor * Mathf.Sin(_groundInfoSystem.Current.AngleRad))
       .When(() => _groundInfoSystem.Current.Side == GroundSide.Left, () => _groundInfoSystem.Current.AngleDeg <= 0 ? SlopeFactor : SlopeFactor * Mathf.Cos(_groundInfoSystem.Current.AngleRad))
       .When(() => _groundInfoSystem.Current.Side == GroundSide.Right, () => _groundInfoSystem.Current.AngleDeg >= 0 ? SlopeFactor : SlopeFactor * Mathf.Cos(_groundInfoSystem.Current.AngleRad));

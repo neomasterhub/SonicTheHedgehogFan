@@ -8,7 +8,7 @@ public class PlayerSpeedSystem
   private const int _speedRoundingDigits = 3;
   private const int _zeroGroundSpeedProgressMax = 5;
 
-  private readonly ConditionalValueProvider<float> _slopeFactorSpeedProvider;
+  private readonly ConditionalValueProvider<float> _slopeSpeedProvider;
   private readonly ConditionalValueProvider<Vector2> _airToGroundSpeedProvider;
   private readonly ConditionalValueProvider<Vector2> _groundToAirSpeedProvider;
   private readonly ConditionalValueProvider<GravitySpeed> _gravitySpeedProvider;
@@ -26,14 +26,14 @@ public class PlayerSpeedSystem
   public PlayerSpeedSystem(
     PlayerInputSystem inputSystem,
     PlayerSpeedConfig config,
-    ConditionalValueProvider<float> slopeFactorSpeedProvider,
+    ConditionalValueProvider<float> slopeSpeedProvider,
     ConditionalValueProvider<Vector2> airToGroundSpeedProvider,
     ConditionalValueProvider<Vector2> groundToAirSpeedProvider,
     ConditionalValueProvider<GravitySpeed> gravitySpeedProvider)
   {
     _inputSystem = inputSystem;
     _config = config;
-    _slopeFactorSpeedProvider = slopeFactorSpeedProvider;
+    _slopeSpeedProvider = slopeSpeedProvider;
     _airToGroundSpeedProvider = airToGroundSpeedProvider;
     _groundToAirSpeedProvider = groundToAirSpeedProvider;
     _gravitySpeedProvider = gravitySpeedProvider;
@@ -43,7 +43,7 @@ public class PlayerSpeedSystem
   public float SpeedX { get; private set; }
   public float SpeedY { get; private set; }
   public float GroundSpeed { get; private set; }
-  public float SlopeFactorSpeed { get; private set; }
+  public float SlopeSpeed { get; private set; }
   public int ZeroGroundSpeedProgress { get; private set; }
   public bool IsZeroGroundSpeedProgressReached { get; private set; }
   public GravitySpeed GravitySpeed { get; private set; }
@@ -219,8 +219,8 @@ public class PlayerSpeedSystem
 
   private void SetSpeed_Grounded_Slope()
   {
-    SlopeFactorSpeed = _slopeFactorSpeedProvider.FirstTriggeredOrDefault();
-    GroundSpeed -= SlopeFactorSpeed;
+    SlopeSpeed = _slopeSpeedProvider.FirstTriggeredOrDefault();
+    GroundSpeed -= SlopeSpeed;
   }
 
   private void SetSpeed_Grounded_Forward()
