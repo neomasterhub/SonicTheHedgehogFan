@@ -91,9 +91,9 @@ public partial class SonicController
       .When(() => GravityEnabled && _groundInfoSystem.Current.Side == GroundSide.Down, () => gravitySpeed);
 
     _slopeSpeedProvider
-      .When(() => _groundInfoSystem.Current.Side == GroundSide.Down, () => SlopeFactor * Mathf.Sin(_groundInfoSystem.Current.AngleRad))
-      .When(() => _groundInfoSystem.Current.Side == GroundSide.Left, () => _groundInfoSystem.Current.AngleDeg <= 0 ? SlopeFactor : SlopeFactor * Mathf.Cos(_groundInfoSystem.Current.AngleRad))
-      .When(() => _groundInfoSystem.Current.Side == GroundSide.Right, () => _groundInfoSystem.Current.AngleDeg >= 0 ? SlopeFactor : SlopeFactor * Mathf.Cos(_groundInfoSystem.Current.AngleRad));
+      .When(() => _groundInfoSystem.Current.Side == GroundSide.Down, () => GetSlopeFactor() * Mathf.Sin(_groundInfoSystem.Current.AngleRad))
+      .When(() => _groundInfoSystem.Current.Side == GroundSide.Left, () => _groundInfoSystem.Current.AngleDeg <= 0 ? GetSlopeFactor() : GetSlopeFactor() * Mathf.Cos(_groundInfoSystem.Current.AngleRad))
+      .When(() => _groundInfoSystem.Current.Side == GroundSide.Right, () => _groundInfoSystem.Current.AngleDeg >= 0 ? GetSlopeFactor() : GetSlopeFactor() * Mathf.Cos(_groundInfoSystem.Current.AngleRad));
 
     _airToGroundSpeedProvider
       .When(() => _groundInfoSystem.Current.Side == GroundSide.Left, () => new Vector2(-_speedSystem.SpeedY, _speedSystem.SpeedX))
