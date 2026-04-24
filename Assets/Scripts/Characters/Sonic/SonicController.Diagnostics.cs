@@ -19,6 +19,7 @@ public partial class SonicController
     _info.AppendLine($"GC {_groundInfoSystem.Current}");
     _info.AppendLine($"GS {_speedSystem.SlopeSpeed * 10000,5:0;-0;0} {_speedSystem.GroundSpeed * 10000,5:0;-0;0}");
     _info.AppendLine($"SP {_speedSystem.SpeedX * 10000,5:0;-0;0} {_speedSystem.SpeedY * 10000,5:0;-0;0}");
+    _info.AppendLine($"SL {_slopeFactor * 10000,5:0}");
     _info.AppendLine($"WL {GetWallInfo(_leftWallDetectionResult)}");
     _info.AppendLine($"WR {GetWallInfo(_rightWallDetectionResult)}");
     _info.AppendLine($"RT {_viewSystem.Rotator}");
