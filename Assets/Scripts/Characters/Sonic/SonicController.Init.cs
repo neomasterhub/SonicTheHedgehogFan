@@ -118,8 +118,13 @@ public partial class SonicController
 
     _sounds = new Sound[]
     {
-      new(rolling, () => _isRolling && !_prevIsRolling, () => !_isRolling && !rolling.isPlaying),
-      new(skidding, () => _speedSystem.IsSkidding && !skidding.isPlaying, () => !_speedSystem.IsSkidding && !skidding.isPlaying),
+      new(rolling,
+        () => _isDownGroundedMoving && _isRolling && !_prevIsRolling,
+        () => !_isRolling && !rolling.isPlaying),
+
+      new(skidding,
+        () => _speedSystem.IsSkidding && !skidding.isPlaying,
+        () => !_speedSystem.IsSkidding && !skidding.isPlaying),
     };
   }
 
