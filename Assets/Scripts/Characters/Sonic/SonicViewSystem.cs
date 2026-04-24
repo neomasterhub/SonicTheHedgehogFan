@@ -60,11 +60,22 @@ public class SonicViewSystem
     _animator.SetBool(AnimatorParameters.Skidding, _context.IsSkidding);
     _animator.SetFloat(AnimatorParameters.Speed, animatorParameterSpeed);
 
-    if (_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimatorStates.Walking))
+    var animatorState = _animator.GetCurrentAnimatorStateInfo(0);
+
+    if (animatorState.IsName(AnimatorStates.Walking))
     {
       _animator.speed = Mathf.Max(
         WalkingSpeedMin,
         animatorParameterSpeed / TopSpeed * WalkingSpeedFactor);
+
+      return;
+    }
+
+    if (animatorState.IsName(AnimatorStates.Rolling))
+    {
+      _animator.speed = Mathf.Max(
+        RollingSpeedMin,
+        animatorParameterSpeed / TopSpeed * RollingSpeedFactor);
     }
   }
 
