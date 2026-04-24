@@ -110,11 +110,15 @@ public partial class SonicController
 
   private void InitializeSounds()
   {
+    var rolling = this.AddComponent<AudioSource>();
+    rolling.clip = RollingAudioClip;
+
     var skidding = this.AddComponent<AudioSource>();
     skidding.clip = SkiddingAudioClip;
 
     _sounds = new Sound[]
     {
+      new(rolling, () => _isRolling && !_prevIsRolling, () => !_isRolling && !rolling.isPlaying),
       new(skidding, () => _speedSystem.IsSkidding && !skidding.isPlaying, () => !_speedSystem.IsSkidding && !skidding.isPlaying),
     };
   }
