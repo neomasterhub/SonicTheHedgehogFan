@@ -15,6 +15,10 @@ public class PlayerSpeedSystem
   private readonly PlayerInputSystem _inputSystem;
   private readonly PlayerSpeedConfig _config;
 
+  private bool _friction;
+  private float _accSpeed;
+  private float _decSpeed;
+  private float _frictionSpeed;
   private float _groundAngleCos;
   private float _groundAngleSin;
   private PlayerSpeedContext _context;
@@ -63,6 +67,23 @@ public class PlayerSpeedSystem
   public void SetSpeed(PlayerSpeedContext context)
   {
     _context = context;
+
+    if (_context.IsRolling)
+    {
+      _accSpeed = 0;
+      _decSpeed = _config.RollDecelerationSpeed;
+
+      _friction = true;
+      _frictionSpeed = _config.RollFrictionSpeed;
+    }
+    else
+    {
+      _accSpeed = _config.AccelerationSpeed;
+      _decSpeed = _config.DecelerationSpeed;
+
+      _friction = _inputSystem.X == 0;
+      _frictionSpeed = _config.FrictionSpeed;
+    }
 
     if (_context.IsGrounded)
     {
@@ -158,7 +179,8 @@ public class PlayerSpeedSystem
     {
       SetSpeed_Grounded_Backward();
     }
-    else
+
+    if (_friction)
     {
       SetSpeed_Grounded_Friction();
     }
@@ -168,7 +190,7 @@ public class PlayerSpeedSystem
     SpeedX = GroundSpeed * _groundAngleCos;
     SpeedY = GroundSpeed * _groundAngleSin;
 
-    if (Mathf.Abs(GroundSpeed) < _config.FrictionSpeed)
+    if (Mathf.Abs(GroundSpeed) < _frictionSpeed)
     {
       ZeroGroundSpeedProgress = Mathf.Min(ZeroGroundSpeedProgress + 1, _zeroGroundSpeedProgressMax);
       IsZeroGroundSpeedProgressReached = ZeroGroundSpeedProgress == _zeroGroundSpeedProgressMax;
@@ -210,17 +232,17 @@ public class PlayerSpeedSystem
         IsSkidding = true;
       }
 
-      GroundSpeed += _config.DecelerationSpeed;
+      GroundSpeed += _decSpeed;
 
       if (GroundSpeed >= 0)
       {
         IsSkidding = false;
-        GroundSpeed = _config.DecelerationSpeed;
+        GroundSpeed = _decSpeed;
       }
     }
     else if (GroundSpeed < _config.TopSpeed)
     {
-      GroundSpeed += _config.AccelerationSpeed;
+      GroundSpeed += _accSpeed;
 
       if (GroundSpeed >= _config.TopSpeed)
       {
@@ -238,17 +260,17 @@ public class PlayerSpeedSystem
         IsSkidding = true;
       }
 
-      GroundSpeed -= _config.DecelerationSpeed;
+      GroundSpeed -= _decSpeed;
 
       if (GroundSpeed <= 0)
       {
         IsSkidding = false;
-        GroundSpeed = -_config.DecelerationSpeed;
+        GroundSpeed = -_decSpeed;
       }
     }
     else if (GroundSpeed > -_config.TopSpeed)
     {
-      GroundSpeed -= _config.AccelerationSpeed;
+      GroundSpeed -= _accSpeed;
 
       if (GroundSpeed <= -_config.TopSpeed)
       {
@@ -259,14 +281,14 @@ public class PlayerSpeedSystem
 
   private void SetSpeed_Grounded_Friction()
   {
-    if (Mathf.Abs(GroundSpeed) < _config.FrictionSpeed)
+    if (Mathf.Abs(GroundSpeed) < _frictionSpeed)
     {
       GroundSpeed = 0;
       IsSkidding = false;
       return;
     }
 
-    GroundSpeed -= _config.FrictionSpeed * Mathf.Sign(GroundSpeed);
+    GroundSpeed -= _frictionSpeed * Mathf.Sign(GroundSpeed);
   }
 
   private void SetSpeed_Grounded_PreventWallOvershoot()
