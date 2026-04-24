@@ -150,6 +150,7 @@ public partial class SonicController
       .WithCondition(() =>
         _isDownGroundedMoving
         && !_isBalancing
+        && !_inputSystem.Held.HasAny(PlayerInput.Left | PlayerInput.Right)
         && _inputSystem.Pressed.HasAny(PlayerInput.Down))
       .WithAction(() =>
       {
