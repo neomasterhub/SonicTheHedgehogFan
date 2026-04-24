@@ -20,6 +20,7 @@ public partial class SonicController
     _slopeSpeedProvider = new();
 
     _effects = new();
+    _effectHistory = new();
     _groundInfoSystem = new();
     _info = new();
     _sensorSystem = new();
@@ -56,9 +57,15 @@ public partial class SonicController
   {
     _animator = GetComponent<Animator>();
     _spriteRenderer = GetComponent<SpriteRenderer>();
+
+    _effectHistoryPanel = Canvas.transform.Find("Effect History Panel").gameObject;
+    _effectHistoryText = _effectHistoryPanel.transform.Find("Text").GetComponent<TextMeshProUGUI>();
+
     _infoPanel = Canvas.transform.Find("Info Panel").gameObject;
-    _infoText = _infoPanel.transform.Find("Info Text").GetComponent<TextMeshProUGUI>();
+    _infoText = _infoPanel.transform.Find("Text").GetComponent<TextMeshProUGUI>();
+
 #if UNITY_EDITOR
+    _effectHistoryPanel.SetActive(true);
     _infoPanel.SetActive(true);
 #endif
   }
