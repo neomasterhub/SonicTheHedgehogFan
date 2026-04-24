@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text;
 using Neomaster.RingBuffer;
 
 public class Pipeline
@@ -36,5 +37,22 @@ public class Pipeline
         return;
       }
     }
+  }
+
+  public string GetHistoryString()
+  {
+    var history = new StringBuilder();
+
+    for (var i = _history.Left.Length - 1; i > -1; i--)
+    {
+      history.AppendLine(_history.Left[i]);
+    }
+
+    for (var i = _history.Right.Length - 1; i > -1; i--)
+    {
+      history.AppendLine(_history.Right[i]);
+    }
+
+    return history.ToString();
   }
 }
