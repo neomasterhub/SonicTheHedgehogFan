@@ -71,6 +71,7 @@ public partial class SonicController
     _isBalancing = _lastGroundDetectionResult.IsBalancing;
     _triggeredGroundSensorSide = _lastGroundDetectionResult.SourceSensorSide;
     _groundInfoSystem.Update(_lastGroundDetectionResult.AngleDeg);
+    _slopeFactor = GetSlopeFactor();
 
     _isDownGrounded = _groundInfoSystem.Current.Side == GroundSide.Down;
     _isDownGroundedStatic = _isDownGrounded && _speedSystem.GroundSpeed == 0;
@@ -90,6 +91,7 @@ public partial class SonicController
     _isBalancing = false;
     _triggeredGroundSensorSide = false;
     _groundInfoSystem.Reset();
+    _slopeFactor = 0;
 
     _isDownGrounded = false;
     _isDownGroundedStatic = false;
@@ -186,6 +188,23 @@ public partial class SonicController
     {
       _sounds[i].Stop();
       _sounds[i].Play();
+    }
+  }
+
+  private float GetSlopeFactor()
+  {
+    if (!_isRolling)
+    {
+      return SlopeFactor;
+    }
+
+    if (Mathf.Sign(_speedSystem.GroundSpeed) == Mathf.Sign(_groundInfoSystem.Current.SideAngleDeg))
+    {
+      return RollUphillSlopeFactor;
+    }
+    else
+    {
+      return RollDownhillSlopeFactor;
     }
   }
 
