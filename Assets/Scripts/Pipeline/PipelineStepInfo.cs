@@ -15,6 +15,11 @@ public struct PipelineStepInfo
 
   public override readonly string ToString()
   {
+    if (AppliedCount == 0)
+    {
+      return string.Empty;
+    }
+
     return AppliedCountOp == PipelineStepAppliedCountOp.Equal
       ? $"{Result.ToShortString()} {AppliedCount} {DisplayName}"
       : $"{Result.ToShortString()} >{AppliedCount} {DisplayName}";
