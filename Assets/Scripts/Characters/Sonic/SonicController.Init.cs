@@ -14,15 +14,16 @@ public partial class SonicController
   {
     _groundLayer = 8;
 
+    _diagnosticsText = new();
+    _effectHistoryText = new();
+
     _airToGroundSpeedProvider = new();
     _gravitySpeedProvider = new();
     _groundToAirSpeedProvider = new();
     _slopeSpeedProvider = new();
 
     _effects = new();
-    _effectHistory = new();
     _groundInfoSystem = new();
-    _info = new();
     _sensorSystem = new();
     _timerSystem = new();
     _viewRotatorProvider = new();
@@ -59,14 +60,14 @@ public partial class SonicController
     _spriteRenderer = GetComponent<SpriteRenderer>();
 
     _effectHistoryPanel = Canvas.transform.Find("Effect History Panel").gameObject;
-    _effectHistoryText = _effectHistoryPanel.transform.Find("Text").GetComponent<TextMeshProUGUI>();
+    _effectHistoryTextMesh = _effectHistoryPanel.transform.Find("Text").GetComponent<TextMeshProUGUI>();
 
-    _infoPanel = Canvas.transform.Find("Info Panel").gameObject;
-    _infoText = _infoPanel.transform.Find("Text").GetComponent<TextMeshProUGUI>();
+    _diagnosticsPanel = Canvas.transform.Find("Diagnostics Panel").gameObject;
+    _diagnosticsTextMesh = _diagnosticsPanel.transform.Find("Text").GetComponent<TextMeshProUGUI>();
 
 #if UNITY_EDITOR
     _effectHistoryPanel.SetActive(true);
-    _infoPanel.SetActive(true);
+    _diagnosticsPanel.SetActive(true);
 #endif
   }
 

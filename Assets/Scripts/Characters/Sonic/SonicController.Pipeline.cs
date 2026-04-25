@@ -19,7 +19,7 @@ public partial class SonicController
     UpdateView();
     UpdatePosition();
     UpdateSounds();
-    Output();
+    UpdateDebugInfo();
   }
 
   private void BeginFrame()
@@ -43,7 +43,7 @@ public partial class SonicController
 
     if (_inputSystem.CheckLastPressed(ToggleDebugMode))
     {
-      _infoPanel.SetActive(!_infoPanel.activeSelf);
+      _diagnosticsPanel.SetActive(!_diagnosticsPanel.activeSelf);
     }
   }
 

@@ -1,5 +1,5 @@
 /// <summary>
-/// Diagnostics.
+/// Debug.
 /// </summary>
 public partial class SonicController
 {
@@ -8,28 +8,28 @@ public partial class SonicController
     _sensorSystem.Draw();
   }
 
-  public void Output()
+  public void UpdateDebugInfo()
   {
-    Output_Info();
-    Output_EffectHistory();
+    UpdateDebugInfo_Diagnostics();
+    UpdateDebugInfo_EffectHistory();
   }
 
-  public void Output_EffectHistory()
+  public void UpdateDebugInfo_EffectHistory()
   {
-    _effectHistory.Clear();
+    _effectHistoryText.Clear();
 
     var effectHistory = _effects.GetAppliedHistory();
     for (var i = 0; i < effectHistory.Length; i++)
     {
-      _effectHistory.AppendLine(effectHistory[i].ToEffectString());
+      _effectHistoryText.AppendLine(effectHistory[i].ToEffectString());
     }
 
-    _effectHistoryText.SetText(_effectHistory);
+    _effectHistoryTextMesh.SetText(_effectHistoryText);
   }
 
-  public void Output_Info()
+  public void UpdateDebugInfo_Diagnostics()
   {
-    _infoText.SetText(_info
+    _diagnosticsText
       .Clear()
       .AppendLine($"ENV {(_isGrounded ? "Ground" : "Air")}")
       .AppendLine()
@@ -44,7 +44,10 @@ public partial class SonicController
       .AppendLine()
       .AppendLine($"RT {_viewSystem.Rotator}")
       .AppendLine($"WL {GetWallInfo(_leftWallDetectionResult)}")
-      .AppendLine($"WR {GetWallInfo(_rightWallDetectionResult)}"));
+      .AppendLine($"WR {GetWallInfo(_rightWallDetectionResult)}")
+      ;
+
+    _diagnosticsTextMesh.SetText(_diagnosticsText);
   }
 
   private string GetInputState()
