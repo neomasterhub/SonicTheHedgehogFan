@@ -10,6 +10,12 @@ public partial class SonicController
 
   public void Output()
   {
+    Output_Info();
+    Output_EffectHistory();
+  }
+
+  public void Output_EffectHistory()
+  {
     _effectHistory.Clear();
 
     var effectHistory = _effects.GetAppliedHistory();
@@ -19,8 +25,11 @@ public partial class SonicController
     }
 
     _effectHistoryText.SetText(_effectHistory);
+  }
 
-    _info
+  public void Output_Info()
+  {
+    _infoText.SetText(_info
       .Clear()
       .AppendLine($"ENV {(_isGrounded ? "Ground" : "Air")}")
       .AppendLine()
@@ -35,10 +44,7 @@ public partial class SonicController
       .AppendLine()
       .AppendLine($"RT {_viewSystem.Rotator}")
       .AppendLine($"WL {GetWallInfo(_leftWallDetectionResult)}")
-      .AppendLine($"WR {GetWallInfo(_rightWallDetectionResult)}")
-      ;
-
-    _infoText.SetText(_info);
+      .AppendLine($"WR {GetWallInfo(_rightWallDetectionResult)}"));
   }
 
   private string GetInputState()
