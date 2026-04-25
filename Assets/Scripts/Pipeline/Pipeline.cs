@@ -4,7 +4,7 @@ using Neomaster.RingBuffer;
 public class Pipeline
 {
   private readonly List<PipelineStep> _steps;
-  private readonly RingBuffer<string> _prevHistory;
+  private readonly RingBuffer<PipelineStepInfo> _prevHistory;
 
   public Pipeline(int prevHistoryCapacity = 5)
   {
