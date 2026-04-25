@@ -40,13 +40,8 @@ public class Pipeline
 
       if (writeAppliedHistory)
       {
-        if (step.DisplayName != _lastApplied.DisplayName
-          && result != _lastApplied.Result)
-        {
-          _prevAppliedHistory.Push(_lastApplied);
-          _lastApplied = new(step.DisplayName, result);
-        }
-        else
+        if (step.DisplayName == _lastApplied.DisplayName
+          && result == _lastApplied.Result)
         {
           if (_lastApplied.AppliedCount + 1 > _lastAppliedCountMax)
           {
@@ -56,6 +51,11 @@ public class Pipeline
           {
             _lastApplied.AppliedCount++;
           }
+        }
+        else
+        {
+          _prevAppliedHistory.Push(_lastApplied);
+          _lastApplied = new(step.DisplayName, result);
         }
       }
 
