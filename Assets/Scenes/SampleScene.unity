@@ -2666,17 +2666,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Effect History
-
-    2
-
-    3
-
-    4
-
-    5
-
-    6'
+  m_text: Effect History
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 80788c3403104b940a534d2bbae44f3a, type: 2}
   m_sharedMaterial: {fileID: -5477974177161770089, guid: 80788c3403104b940a534d2bbae44f3a, type: 2}
@@ -2989,7 +2979,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 145, y: 0}
-  m_SizeDelta: {x: 295, y: 124}
+  m_SizeDelta: {x: 295, y: 68}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1821154570
 MonoBehaviour:
