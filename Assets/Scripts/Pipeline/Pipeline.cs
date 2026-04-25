@@ -43,11 +43,7 @@ public class Pipeline
         if (step.DisplayName != _lastApplied.DisplayName
           && result != _lastApplied.Result)
         {
-          if (_lastApplied.AppliedCount > 0)
-          {
-            _prevAppliedHistory.Push(_lastApplied);
-          }
-
+          _prevAppliedHistory.Push(_lastApplied);
           _lastApplied = new(step.DisplayName, result);
         }
         else
