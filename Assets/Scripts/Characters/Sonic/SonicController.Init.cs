@@ -119,7 +119,7 @@ public partial class SonicController
   {
     var rolling = this.AddComponent<AudioSource>();
     rolling.clip = RollingAudioClip;
-    rolling.volume = 0.4f;
+    rolling.volume = 0.3f;
 
     var skidding = this.AddComponent<AudioSource>();
     skidding.clip = SkiddingAudioClip;
