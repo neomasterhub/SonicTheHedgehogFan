@@ -12,16 +12,4 @@ public struct PipelineStepInfo
     Result = result;
     AppliedCountOp = PipelineStepAppliedCountOp.Equal;
   }
-
-  public override readonly string ToString()
-  {
-    if (AppliedCount == 0)
-    {
-      return string.Empty;
-    }
-
-    return AppliedCountOp == PipelineStepAppliedCountOp.Equal
-      ? $"{DisplayName,-24} {Result.ToShortString()} {AppliedCount}"
-      : $"{DisplayName,-24} {Result.ToShortString()} {AppliedCount}+";
-  }
 }
