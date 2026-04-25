@@ -4,12 +4,12 @@ using Neomaster.RingBuffer;
 public class Pipeline
 {
   private readonly List<PipelineStep> _steps;
-  private readonly RingBuffer<string> _history;
+  private readonly RingBuffer<string> _prevHistory;
 
-  public Pipeline(int historyCapacity = 3)
+  public Pipeline(int prevHistoryCapacity = 5)
   {
     _steps = new();
-    _history = new(historyCapacity);
+    _prevHistory = new(prevHistoryCapacity);
   }
 
   public Pipeline AddStep(PipelineStep step)
@@ -29,30 +29,10 @@ public class Pipeline
         continue;
       }
 
-      _history.Push(step.DisplayName);
-
       if (step.Action() == PipelineStepResult.Break)
       {
         return;
       }
     }
-  }
-
-  public string[] GetHistory()
-  {
-    var history = new string[_history.Capacity];
-    var j = 0;
-
-    for (var i = 0; i < _history.Right.Length; i++, j++)
-    {
-      history[j] = _history.Right[i];
-    }
-
-    for (var i = 0; i < _history.Left.Length; i++, j++)
-    {
-      history[j] = _history.Left[i];
-    }
-
-    return history;
   }
 }
