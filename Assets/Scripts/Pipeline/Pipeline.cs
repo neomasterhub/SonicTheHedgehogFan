@@ -22,7 +22,7 @@ public class Pipeline
     return this;
   }
 
-  public void Run()
+  public void Run(bool writeAppliedHistory = true)
   {
     for (var i = 0; i < _steps.Count; i++)
     {
@@ -35,25 +35,28 @@ public class Pipeline
 
       var result = step.Action();
 
-      if (step.DisplayName != _lastApplied.DisplayName
-        && result != _lastApplied.Result)
+      if (writeAppliedHistory)
       {
-        if (_lastApplied.AppliedCount > 0)
+        if (step.DisplayName != _lastApplied.DisplayName
+          && result != _lastApplied.Result)
         {
-          _prevAppliedHistory.Push(_lastApplied);
-        }
+          if (_lastApplied.AppliedCount > 0)
+          {
+            _prevAppliedHistory.Push(_lastApplied);
+          }
 
-        _lastApplied = new(step.DisplayName, result);
-      }
-      else
-      {
-        if (_lastApplied.AppliedCount + 1 > _lastAppliedCountMax)
-        {
-          _lastApplied.AppliedCountOp = PipelineStepAppliedCountOp.GreaterThan;
+          _lastApplied = new(step.DisplayName, result);
         }
         else
         {
-          _lastApplied.AppliedCount++;
+          if (_lastApplied.AppliedCount + 1 > _lastAppliedCountMax)
+          {
+            _lastApplied.AppliedCountOp = PipelineStepAppliedCountOp.GreaterThan;
+          }
+          else
+          {
+            _lastApplied.AppliedCount++;
+          }
         }
       }
 
