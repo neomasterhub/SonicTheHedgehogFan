@@ -10,17 +10,8 @@ public partial class SonicController
 
   public void Output()
   {
-    Output_Info();
-    Output_EffectHistory();
-  }
-
-  public void Output_EffectHistory()
-  {
     _effectHistoryText.SetText(_effects.GetAppliedHistoryString());
-  }
 
-  public void Output_Info()
-  {
     _info
       .Clear()
       .AppendLine($"ENV {(_isGrounded ? "Ground" : "Air")}")
