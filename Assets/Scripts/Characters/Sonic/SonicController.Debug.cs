@@ -10,6 +10,9 @@ public partial class SonicController
 
   public void UpdateDebugInfo()
   {
+    _diagnosticsPanel.SetActive(_showDebugInfo);
+    _effectHistoryPanel.SetActive(_showDebugInfo);
+
     if (!_showDebugInfo)
     {
       return;
