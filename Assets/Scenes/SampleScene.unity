@@ -2760,7 +2760,7 @@ GameObject:
   - component: {fileID: 1391926819}
   - component: {fileID: 1391926818}
   m_Layer: 5
-  m_Name: Info Panel
+  m_Name: Diagnostics Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
