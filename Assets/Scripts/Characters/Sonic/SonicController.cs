@@ -25,7 +25,8 @@ public partial class SonicController
   private readonly SonicSpeedConfig _speedConfig;
   private readonly SonicSpeedSystem _speedSystem;
   private readonly SonicViewSystem _viewSystem;
-  private readonly StringBuilder _info;
+  private readonly StringBuilder _diagnosticsText;
+  private readonly StringBuilder _effectHistoryText;
   private readonly TimerSystem _timerSystem;
 
   private bool _isGrounded;
@@ -42,9 +43,11 @@ public partial class SonicController
   private bool _isDownGrounded;
   private bool _isDownGroundedStatic;
   private bool _isDownGroundedMoving;
+  private bool _showDebugInfo;
   private float _slopeFactor;
   private Animator _animator;
-  private GameObject _infoPanel;
+  private GameObject _diagnosticsPanel;
+  private GameObject _effectHistoryPanel;
   private GroundDetectionResult _lastGroundDetectionResult;
   private WallDetectionResult? _leftWallDetectionResult;
   private WallDetectionResult? _rightWallDetectionResult;
@@ -56,7 +59,8 @@ public partial class SonicController
   private SonicViewContext _viewContext;
   private Sound[] _sounds;
   private SpriteRenderer _spriteRenderer;
-  private TextMeshProUGUI _infoText;
+  private TextMeshProUGUI _diagnosticsTextMesh;
+  private TextMeshProUGUI _effectHistoryTextMesh;
   private Timer _inputUnlockTimer;
 
   public bool GravityEnabled = true;

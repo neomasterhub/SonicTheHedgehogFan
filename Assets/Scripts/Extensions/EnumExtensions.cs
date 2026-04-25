@@ -1,5 +1,15 @@
 public static class EnumExtensions
 {
+  public static string ToShortString(this PipelineStepResult result)
+  {
+    return result switch
+    {
+      PipelineStepResult.Break => "BR",
+      PipelineStepResult.Continue => "CN",
+      _ => throw result.ArgumentOutOfRangeException(),
+    };
+  }
+
   public static char ToChar(this PlayerInput input)
   {
     return input switch

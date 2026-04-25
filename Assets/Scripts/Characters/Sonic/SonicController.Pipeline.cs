@@ -19,7 +19,7 @@ public partial class SonicController
     UpdateView();
     UpdatePosition();
     UpdateSounds();
-    Output();
+    UpdateDebugInfo();
   }
 
   private void BeginFrame()
@@ -43,7 +43,7 @@ public partial class SonicController
 
     if (_inputSystem.CheckLastPressed(ToggleDebugMode))
     {
-      _infoPanel.SetActive(!_infoPanel.activeSelf);
+      _showDebugInfo = !_showDebugInfo;
     }
   }
 
@@ -105,7 +105,7 @@ public partial class SonicController
 
   private void ApplyEffects()
   {
-    _effects.Run();
+    _effects.Run(_showDebugInfo);
   }
 
   private void ApplyMovement()
