@@ -70,17 +70,17 @@ public class Pipeline
   {
     _appliedHistory.Clear();
 
-    for (var i = 0; i < _prevAppliedHistory.Right.Length; i++)
-    {
-      _appliedHistory.AppendLine(_prevAppliedHistory.Right[i].ToString());
-    }
+    _appliedHistory.AppendLine(_lastApplied.ToString());
 
-    for (var i = 0; i < _prevAppliedHistory.Left.Length; i++)
+    for (var i = _prevAppliedHistory.Left.Length - 1; i > -1; i--)
     {
       _appliedHistory.AppendLine(_prevAppliedHistory.Left[i].ToString());
     }
 
-    _appliedHistory.AppendLine(_lastApplied.ToString());
+    for (var i = _prevAppliedHistory.Right.Length - 1; i > -1; i--)
+    {
+      _appliedHistory.AppendLine(_prevAppliedHistory.Right[i].ToString());
+    }
 
     return _appliedHistory.ToString();
   }
