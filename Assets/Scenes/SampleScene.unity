@@ -2861,10 +2861,10 @@ MonoBehaviour:
     ScreenPosition: {x: 0, y: 0}
     DeadZone:
       Enabled: 1
-      Size: {x: 0.04, y: 0.4}
+      Size: {x: 0, y: 0.3}
     HardLimits:
       Enabled: 1
-      Size: {x: 0.1, y: 0.5}
+      Size: {x: 0.07, y: 0.3}
       Offset: {x: 0, y: 0}
   CenterOnActivate: 1
   TargetOffset: {x: 0, y: 0, z: 0}
