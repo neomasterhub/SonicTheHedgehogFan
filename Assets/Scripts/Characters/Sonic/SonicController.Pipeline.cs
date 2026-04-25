@@ -43,7 +43,7 @@ public partial class SonicController
 
     if (_inputSystem.CheckLastPressed(ToggleDebugMode))
     {
-      _diagnosticsPanel.SetActive(!_diagnosticsPanel.activeSelf);
+      _showDebugInfo = !_showDebugInfo;
     }
   }
 

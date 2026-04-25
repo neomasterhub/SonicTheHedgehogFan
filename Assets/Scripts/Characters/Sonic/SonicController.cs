@@ -43,6 +43,7 @@ public partial class SonicController
   private bool _isDownGrounded;
   private bool _isDownGroundedStatic;
   private bool _isDownGroundedMoving;
+  private bool _showDebugInfo;
   private float _slopeFactor;
   private Animator _animator;
   private GameObject _diagnosticsPanel;
