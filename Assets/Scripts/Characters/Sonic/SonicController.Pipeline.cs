@@ -105,7 +105,7 @@ public partial class SonicController
 
   private void ApplyEffects()
   {
-    _effects.Run();
+    _effects.Run(_showDebugInfo);
   }
 
   private void ApplyMovement()
