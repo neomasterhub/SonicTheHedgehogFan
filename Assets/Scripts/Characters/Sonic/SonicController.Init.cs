@@ -20,7 +20,6 @@ public partial class SonicController
     _slopeSpeedProvider = new();
 
     _effects = new();
-    _effectHistory = new();
     _groundInfoSystem = new();
     _info = new();
     _sensorSystem = new();

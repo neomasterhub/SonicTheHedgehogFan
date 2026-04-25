@@ -16,8 +16,7 @@ public partial class SonicController
 
   public void Output_EffectHistory()
   {
-    _effectHistory.Clear();
-    _effectHistoryText.SetText(_effectHistory);
+    _effectHistoryText.SetText(_effects.GetAppliedHistoryString());
   }
 
   public void Output_Info()

@@ -25,7 +25,6 @@ public partial class SonicController
   private readonly SonicSpeedConfig _speedConfig;
   private readonly SonicSpeedSystem _speedSystem;
   private readonly SonicViewSystem _viewSystem;
-  private readonly StringBuilder _effectHistory;
   private readonly StringBuilder _info;
   private readonly TimerSystem _timerSystem;
 
