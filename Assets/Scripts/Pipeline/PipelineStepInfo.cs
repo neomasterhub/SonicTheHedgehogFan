@@ -21,7 +21,7 @@ public struct PipelineStepInfo
     }
 
     return AppliedCountOp == PipelineStepAppliedCountOp.Equal
-      ? $"{Result.ToShortString()} {AppliedCount} {DisplayName}"
-      : $"{Result.ToShortString()} >{AppliedCount} {DisplayName}";
+      ? $" {AppliedCount,2} {Result.ToShortString()} {DisplayName}"
+      : $">{AppliedCount,2} {Result.ToShortString()} {DisplayName}";
   }
 }
