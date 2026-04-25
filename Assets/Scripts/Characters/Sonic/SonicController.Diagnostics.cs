@@ -10,7 +10,15 @@ public partial class SonicController
 
   public void Output()
   {
-    _effectHistoryText.SetText(_effects.GetAppliedHistoryString());
+    _effectHistory.Clear();
+
+    var effectHistory = _effects.GetAppliedHistory();
+    for (var i = 0; i < effectHistory.Length; i++)
+    {
+      _effectHistory.AppendLine(effectHistory[i].ToEffectString());
+    }
+
+    _effectHistoryText.SetText(_effectHistory);
 
     _info
       .Clear()
