@@ -66,8 +66,7 @@ public partial class SonicController
     _diagnosticsTextMesh = _diagnosticsPanel.transform.Find("Text").GetComponent<TextMeshProUGUI>();
 
 #if UNITY_EDITOR
-    _effectHistoryPanel.SetActive(true);
-    _diagnosticsPanel.SetActive(true);
+    _showDebugInfo = true;
 #endif
   }
 
