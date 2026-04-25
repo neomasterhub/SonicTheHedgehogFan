@@ -1,12 +1,11 @@
 using System.Collections.Generic;
-using System.Text;
 using Neomaster.RingBuffer;
 
 public class Pipeline
 {
   private readonly int _lastAppliedCountMax;
   private readonly List<PipelineStep> _steps;
-  private readonly StringBuilder _appliedHistory;
+  private readonly PipelineStepInfo[] _appliedHistory;
   private readonly RingBuffer<PipelineStepInfo> _prevAppliedHistory;
 
   private PipelineStepInfo _lastApplied;
@@ -14,7 +13,7 @@ public class Pipeline
   public Pipeline(int prevAppliedHistoryCapacity = 2, int lastAppliedCountMax = 3)
   {
     _steps = new();
-    _appliedHistory = new();
+    _appliedHistory = new PipelineStepInfo[prevAppliedHistoryCapacity + 1];
     _prevAppliedHistory = new(prevAppliedHistoryCapacity);
     _lastAppliedCountMax = lastAppliedCountMax;
   }
@@ -66,22 +65,21 @@ public class Pipeline
     }
   }
 
-  public string GetAppliedHistoryString()
+  public PipelineStepInfo[] GetAppliedHistory()
   {
-    _appliedHistory.Clear();
+    _appliedHistory[0] = _lastApplied;
+    var j = 1;
 
-    _appliedHistory.AppendLine(_lastApplied.ToString());
-
-    for (var i = _prevAppliedHistory.Left.Length - 1; i > -1; i--)
+    for (var i = _prevAppliedHistory.Left.Length - 1; i > -1; i--, j++)
     {
-      _appliedHistory.AppendLine(_prevAppliedHistory.Left[i].ToString());
+      _appliedHistory[j] = _prevAppliedHistory.Left[i];
     }
 
-    for (var i = _prevAppliedHistory.Right.Length - 1; i > -1; i--)
+    for (var i = _prevAppliedHistory.Right.Length - 1; i > -1; i--, j++)
     {
-      _appliedHistory.AppendLine(_prevAppliedHistory.Right[i].ToString());
+      _appliedHistory[j] = _prevAppliedHistory.Right[i];
     }
 
-    return _appliedHistory.ToString();
+    return _appliedHistory;
   }
 }
