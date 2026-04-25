@@ -2666,7 +2666,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Effect History
+  m_text: 'Effect History
+
+    Curling up/Enter         BR 3+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 80788c3403104b940a534d2bbae44f3a, type: 2}
   m_sharedMaterial: {fileID: -5477974177161770089, guid: 80788c3403104b940a534d2bbae44f3a, type: 2}
@@ -2976,10 +2978,10 @@ RectTransform:
   - {fileID: 1153428018}
   m_Father: {fileID: 1049324919}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 145, y: 0}
-  m_SizeDelta: {x: 295, y: 68}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 68}
+  m_SizeDelta: {x: 284, y: 68}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1821154570
 MonoBehaviour:
