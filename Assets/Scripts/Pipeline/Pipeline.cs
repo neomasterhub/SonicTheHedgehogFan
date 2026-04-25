@@ -3,13 +3,17 @@ using Neomaster.RingBuffer;
 
 public class Pipeline
 {
+  private readonly int _lastAppliedCountMax;
   private readonly List<PipelineStep> _steps;
-  private readonly RingBuffer<PipelineStepInfo> _prevHistory;
+  private readonly RingBuffer<PipelineStepInfo> _prevAppliedHistory;
 
-  public Pipeline(int prevHistoryCapacity = 5)
+  private PipelineStepInfo _lastApplied;
+
+  public Pipeline(int prevAppliedHistoryCapacity = 5, int lastAppliedCountMax = 10)
   {
     _steps = new();
-    _prevHistory = new(prevHistoryCapacity);
+    _prevAppliedHistory = new(prevAppliedHistoryCapacity);
+    _lastAppliedCountMax = lastAppliedCountMax;
   }
 
   public Pipeline AddStep(PipelineStep step)
@@ -29,7 +33,31 @@ public class Pipeline
         continue;
       }
 
-      if (step.Action() == PipelineStepResult.Break)
+      var result = step.Action();
+
+      if (step.DisplayName != _lastApplied.DisplayName
+        && result != _lastApplied.Result)
+      {
+        if (_lastApplied.AppliedCount > 0)
+        {
+          _prevAppliedHistory.Push(_lastApplied);
+        }
+
+        _lastApplied = new(step.DisplayName, result);
+      }
+      else
+      {
+        if (_lastApplied.AppliedCount + 1 > _lastAppliedCountMax)
+        {
+          _lastApplied.AppliedCountOp = PipelineStepAppliedCountOp.GreaterThan;
+        }
+        else
+        {
+          _lastApplied.AppliedCount++;
+        }
+      }
+
+      if (result == PipelineStepResult.Break)
       {
         return;
       }
