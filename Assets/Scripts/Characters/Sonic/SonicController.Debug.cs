@@ -10,6 +10,11 @@ public partial class SonicController
 
   public void UpdateDebugInfo()
   {
+    if (!_showDebugInfo)
+    {
+      return;
+    }
+
     UpdateDebugInfo_Diagnostics();
     UpdateDebugInfo_EffectHistory();
   }
