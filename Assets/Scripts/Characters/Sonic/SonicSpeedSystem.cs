@@ -18,7 +18,7 @@ public class SonicSpeedSystem
   private float _accSpeed;
   private float _decSpeed;
   private float _frictionSpeed;
-  private float _turnaroundSpeed;
+  private float _reverseStartSpeed;
   private float _groundAngleCos;
   private float _groundAngleSin;
   private SonicSpeedContext _context;
@@ -68,7 +68,7 @@ public class SonicSpeedSystem
   {
     _context = context;
 
-    _turnaroundSpeed = _config.DecelerationSpeed;
+    _reverseStartSpeed = _config.DecelerationSpeed;
 
     if (_context.IsRolling)
     {
@@ -240,17 +240,21 @@ public class SonicSpeedSystem
       {
         _friction = false;
         IsSkidding = false;
-        GroundSpeed = _turnaroundSpeed;
+        GroundSpeed = _reverseStartSpeed;
       }
     }
-    else if (GroundSpeed < _config.TopSpeed)
+    else
     {
       IsSkidding = false;
-      GroundSpeed += _accSpeed;
 
-      if (GroundSpeed >= _config.TopSpeed)
+      if (GroundSpeed < _config.TopSpeed)
       {
-        GroundSpeed = _config.TopSpeed;
+        GroundSpeed += _accSpeed;
+
+        if (GroundSpeed >= _config.TopSpeed)
+        {
+          GroundSpeed = _config.TopSpeed;
+        }
       }
     }
   }
@@ -270,17 +274,21 @@ public class SonicSpeedSystem
       {
         _friction = false;
         IsSkidding = false;
-        GroundSpeed = -_turnaroundSpeed;
+        GroundSpeed = -_reverseStartSpeed;
       }
     }
-    else if (GroundSpeed > -_config.TopSpeed)
+    else
     {
       IsSkidding = false;
-      GroundSpeed -= _accSpeed;
 
-      if (GroundSpeed <= -_config.TopSpeed)
+      if (GroundSpeed > -_config.TopSpeed)
       {
-        GroundSpeed = -_config.TopSpeed;
+        GroundSpeed -= _accSpeed;
+
+        if (GroundSpeed <= -_config.TopSpeed)
+        {
+          GroundSpeed = -_config.TopSpeed;
+        }
       }
     }
   }
