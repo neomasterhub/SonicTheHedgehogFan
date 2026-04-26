@@ -1,4 +1,3 @@
-using UnityEngine;
 using static SonicConsts.Physics;
 
 /// <summary>
@@ -169,7 +168,7 @@ public partial class SonicController
       .WithCondition(() =>
         _isGrounded
         && !_isDownGrounded
-        && Mathf.Abs(_speedSystem.GroundSpeed) < DecelerationSpeed)
+        && _absGroundSpeed < DecelerationSpeed)
       .WithAction(() =>
       {
         _isFallingOffWall = true;

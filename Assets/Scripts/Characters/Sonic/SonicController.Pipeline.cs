@@ -74,6 +74,7 @@ public partial class SonicController
     _groundInfoSystem.Update(_lastGroundDetectionResult.AngleDeg);
     _slopeFactor = GetSlopeFactor();
 
+    _absGroundSpeed = Mathf.Abs(_speedSystem.GroundSpeed);
     _isDownGrounded = _groundInfoSystem.Current.Side == GroundSide.Down;
     _isDownGroundedStatic = _isDownGrounded && _speedSystem.GroundSpeed == 0;
     _isDownGroundedMoving = _isDownGrounded && _speedSystem.GroundSpeed != 0;
@@ -94,6 +95,7 @@ public partial class SonicController
     _groundInfoSystem.Reset();
     _slopeFactor = 0;
 
+    _absGroundSpeed = 0;
     _isDownGrounded = false;
     _isDownGroundedStatic = false;
     _isDownGroundedMoving = false;
