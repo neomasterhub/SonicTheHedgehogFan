@@ -25,6 +25,7 @@ public partial class SonicController
       .WithDisplayName("Jump")
       .WithCondition(() =>
         _isDownGrounded
+        && !_isJumping
         && _inputSystem.Pressed.HasAny(PlayerInput.C))
       .WithAction(() =>
       {
