@@ -15,6 +15,7 @@ public class SonicSpeedSystem
   private readonly SonicSpeedConfig _config;
 
   private bool _friction;
+  private bool _xDirectionChanged;
   private float _accSpeed;
   private float _decSpeed;
   private float _frictionSpeed;
@@ -238,6 +239,7 @@ public class SonicSpeedSystem
 
       if (GroundSpeed >= 0)
       {
+        _xDirectionChanged = true;
         IsSkidding = false;
         GroundSpeed = _turnaroundSpeed;
       }
@@ -266,6 +268,7 @@ public class SonicSpeedSystem
 
       if (GroundSpeed <= 0)
       {
+        _xDirectionChanged = true;
         IsSkidding = false;
         GroundSpeed = -_turnaroundSpeed;
       }
