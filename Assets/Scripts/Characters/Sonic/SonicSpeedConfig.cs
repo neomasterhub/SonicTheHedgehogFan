@@ -2,7 +2,7 @@ public readonly struct SonicSpeedConfig
 {
   public readonly float TopSpeed;
   public readonly float FrictionSpeed;
-  public readonly float MaxSkiddingSpeed;
+  public readonly float MinSkiddingSpeed;
   public readonly float AccelerationSpeed;
   public readonly float DecelerationSpeed;
 
@@ -17,7 +17,7 @@ public readonly struct SonicSpeedConfig
   {
     TopSpeed = topSpeed;
     FrictionSpeed = frictionSpeed;
-    MaxSkiddingSpeed = maxSkiddingSpeed;
+    MinSkiddingSpeed = maxSkiddingSpeed;
     AccelerationSpeed = accelerationSpeed;
     DecelerationSpeed = decelerationSpeed;
     AirTopSpeed = airTopSpeed;

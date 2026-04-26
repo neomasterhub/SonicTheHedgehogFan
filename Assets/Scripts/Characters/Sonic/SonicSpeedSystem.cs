@@ -226,7 +226,7 @@ public class SonicSpeedSystem
   {
     if (GroundSpeed < 0)
     {
-      if (!_context.IsRolling && GroundSpeed < -_config.MaxSkiddingSpeed)
+      if (!_context.IsRolling && GroundSpeed < -_config.MinSkiddingSpeed)
       {
         IsSkidding = true;
       }
@@ -254,7 +254,7 @@ public class SonicSpeedSystem
   {
     if (GroundSpeed > 0)
     {
-      if (!_context.IsRolling && GroundSpeed > _config.MaxSkiddingSpeed)
+      if (!_context.IsRolling && GroundSpeed > _config.MinSkiddingSpeed)
       {
         IsSkidding = true;
       }

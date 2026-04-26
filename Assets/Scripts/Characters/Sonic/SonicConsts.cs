@@ -6,7 +6,7 @@ public static class SonicConsts
   public static class Physics
   {
     public const float InputUnlockTimerSeconds = 0.5f;
-    public const float MaxSkiddingSpeed = 0.1f;
+    public const float MinSkiddingSpeed = 0.1f;
 
     public const float AccelerationSpeedSpx = 12;
     public const float DecelerationSpeedSpx = 128;
