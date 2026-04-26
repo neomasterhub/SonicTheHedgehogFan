@@ -245,6 +245,7 @@ public class SonicSpeedSystem
     }
     else if (GroundSpeed < _config.TopSpeed)
     {
+      IsSkidding = false;
       GroundSpeed += _accSpeed;
 
       if (GroundSpeed >= _config.TopSpeed)
@@ -274,6 +275,7 @@ public class SonicSpeedSystem
     }
     else if (GroundSpeed > -_config.TopSpeed)
     {
+      IsSkidding = false;
       GroundSpeed -= _accSpeed;
 
       if (GroundSpeed <= -_config.TopSpeed)
