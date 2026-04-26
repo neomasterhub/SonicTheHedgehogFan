@@ -30,6 +30,8 @@ public partial class SonicController
       .WithAction(() =>
       {
         _isJumping = true;
+        _isRolling = true;
+        _sizeMode = SonicSizeMode.Small;
 
         return PipelineStepResult.Break;
       })
