@@ -8,7 +8,7 @@ public partial class SonicController
   private void SetEffectPipeline()
   {
     _effects.AddStep(CreateEffect_Jumping_Exit());
-    _effects.AddStep(CreateEffect_Jump());
+    _effects.AddStep(CreateEffect_Jumping_Enter());
     _effects.AddStep(CreateEffect_Rolling_Exit());
     _effects.AddStep(CreateEffect_CurlingUp_Exit());
     _effects.AddStep(CreateEffect_CurlingUp_Enter());
@@ -36,12 +36,12 @@ public partial class SonicController
       .Build();
   }
 
-  private PipelineStep CreateEffect_Jump()
+  private PipelineStep CreateEffect_Jumping_Enter()
   {
     return PipelineStepBuilder.Create()
-      .WithDisplayName("Jump")
+      .WithDisplayName("Jumping/Enter")
       .WithCondition(() =>
-        _isDownGrounded
+        _isGrounded
         && !_isJumping
         && _inputSystem.Pressed.HasAny(PlayerInput.C))
       .WithAction(() =>
