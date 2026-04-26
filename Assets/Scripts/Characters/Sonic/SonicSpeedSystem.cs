@@ -14,7 +14,6 @@ public class SonicSpeedSystem
   private readonly PlayerInputSystem _inputSystem;
   private readonly SonicSpeedConfig _config;
 
-  private bool _friction;
   private float _accSpeed;
   private float _decSpeed;
   private float _frictionSpeed;
@@ -71,16 +70,12 @@ public class SonicSpeedSystem
     {
       _accSpeed = 0;
       _decSpeed = _config.RollDecelerationSpeed;
-
-      _friction = true;
       _frictionSpeed = _config.RollFrictionSpeed;
     }
     else
     {
       _accSpeed = _config.AccelerationSpeed;
       _decSpeed = _config.DecelerationSpeed;
-
-      _friction = _inputSystem.X == 0;
       _frictionSpeed = _config.FrictionSpeed;
     }
 
@@ -178,8 +173,7 @@ public class SonicSpeedSystem
     {
       SetSpeed_Grounded_Backward();
     }
-
-    if (_friction)
+    else
     {
       SetSpeed_Grounded_Friction();
     }
