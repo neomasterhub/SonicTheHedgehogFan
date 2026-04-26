@@ -1,4 +1,3 @@
-using UnityEngine;
 using static SonicConsts.Physics;
 
 /// <summary>
@@ -148,7 +147,8 @@ public partial class SonicController
     return PipelineStepBuilder.Create()
       .WithDisplayName("Rolling/Enter")
       .WithCondition(() =>
-        _isDownGroundedMoving
+        _isDownGrounded
+        && _absGroundSpeed >= DecelerationSpeed
         && !_isBalancing
         && !_inputSystem.Held.HasAny(PlayerInput.Left | PlayerInput.Right)
         && _inputSystem.Pressed.HasAny(PlayerInput.Down))
@@ -169,7 +169,7 @@ public partial class SonicController
       .WithCondition(() =>
         _isGrounded
         && !_isDownGrounded
-        && Mathf.Abs(_speedSystem.GroundSpeed) < DecelerationSpeed)
+        && _absGroundSpeed < DecelerationSpeed)
       .WithAction(() =>
       {
         _isFallingOffWall = true;

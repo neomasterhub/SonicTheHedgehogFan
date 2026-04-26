@@ -45,6 +45,7 @@ public partial class SonicController
   private bool _isDownGroundedMoving;
   private bool _showDebugInfo;
   private float _slopeFactor;
+  private float _absGroundSpeed;
   private Animator _animator;
   private GameObject _diagnosticsPanel;
   private GameObject _effectHistoryPanel;
