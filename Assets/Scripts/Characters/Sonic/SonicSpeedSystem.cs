@@ -72,7 +72,7 @@ public class SonicSpeedSystem
     if (_context.IsRolling)
     {
       _accSpeed = 0;
-      _decSpeed = _config.RollDecelerationSpeed + _config.RollFrictionSpeed;
+      _decSpeed = _config.RollDecelerationSpeed;
       _frictionSpeed = _config.RollFrictionSpeed;
     }
     else
