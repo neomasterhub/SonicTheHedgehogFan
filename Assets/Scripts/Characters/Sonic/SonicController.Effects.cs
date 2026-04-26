@@ -7,6 +7,7 @@ public partial class SonicController
 {
   private void SetEffectPipeline()
   {
+    _effects.AddStep(CreateEffect_Jumping_Exit());
     _effects.AddStep(CreateEffect_Jump());
     _effects.AddStep(CreateEffect_Rolling_Exit());
     _effects.AddStep(CreateEffect_CurlingUp_Exit());
@@ -17,6 +18,22 @@ public partial class SonicController
     _effects.AddStep(CreateEffect_StartInputUnlockTimer());
     _effects.AddStep(CreateEffect_Rolling_Enter());
     _effects.AddStep(CreateEffect_WallDetach());
+  }
+
+  private PipelineStep CreateEffect_Jumping_Exit()
+  {
+    return PipelineStepBuilder.Create()
+      .WithDisplayName("Jumping/Exit")
+      .WithCondition(() =>
+        !_isGrounded
+        && _speedSystem.SpeedY <= 0)
+      .WithAction(() =>
+      {
+        _isJumping = false;
+
+        return PipelineStepResult.Continue;
+      })
+      .Build();
   }
 
   private PipelineStep CreateEffect_Jump()
