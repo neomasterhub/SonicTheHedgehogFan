@@ -30,7 +30,7 @@ public partial class SonicController
 
     _inputSystem = new(GetPlayerInput);
     _sensorRayLengths = new(OLength, TopUDFLengths, BottomUDFLengths);
-    _speedConfig = new(TopSpeed, FrictionSpeed, MinSkiddingSpeed, AccelerationSpeed, DecelerationSpeed, AirTopSpeed, AirAccelerationSpeed, MaxFallSpeed, RollFrictionSpeed, RollDecelerationSpeed);
+    _speedConfig = new(TopSpeed, FrictionSpeed, MinSkiddingSpeed, AccelerationSpeed, DecelerationSpeed, AirTopSpeed, AirAccelerationSpeed, MaxFallSpeed, RollFrictionSpeed, RollDecelerationSpeed, JumpingSpeed);
     _speedSystem = new(_inputSystem, _speedConfig, _slopeSpeedProvider, _airToGroundSpeedProvider, _groundToAirSpeedProvider, _gravitySpeedProvider);
     _viewSystem = new(_inputSystem, _viewRotatorProvider);
 
@@ -117,6 +117,9 @@ public partial class SonicController
 
   private void InitializeSounds()
   {
+    var jump = this.AddComponent<AudioSource>();
+    jump.clip = JumpAudioClip;
+
     var rolling = this.AddComponent<AudioSource>();
     rolling.clip = RollingAudioClip;
     rolling.volume = 0.3f;
@@ -126,8 +129,12 @@ public partial class SonicController
 
     _sounds = new Sound[]
     {
+      new(jump,
+        () => _isGrounded && _isJumping,
+        () => !_isJumping && !jump.isPlaying),
+
       new(rolling,
-        () => _isDownGroundedMoving && _isRolling && !_prevIsRolling,
+        () => _isDownGroundedMoving && !_isJumping && _isRolling && !_prevIsRolling,
         () => !_isRolling && !rolling.isPlaying),
 
       new(skidding,

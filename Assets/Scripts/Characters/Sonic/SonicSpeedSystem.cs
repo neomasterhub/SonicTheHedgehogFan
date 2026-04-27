@@ -171,6 +171,13 @@ public class SonicSpeedSystem
     _groundAngleSin = MathF.Sin(_context.GroundAngleRad.Value);
 
     SetSpeed_Grounded_FromAirborne();
+
+    if (_context.IsJumping)
+    {
+      SetSpeed_Grounded_Jump();
+      return;
+    }
+
     SetSpeed_Grounded_Slope();
 
     if (_inputSystem.X > 0)
@@ -217,6 +224,12 @@ public class SonicSpeedSystem
         -_config.TopSpeed,
         _config.TopSpeed);
     }
+  }
+
+  private void SetSpeed_Grounded_Jump()
+  {
+    SpeedX -= _config.JumpingSpeed * _groundAngleSin;
+    SpeedY += _config.JumpingSpeed * _groundAngleCos;
   }
 
   private void SetSpeed_Grounded_Slope()

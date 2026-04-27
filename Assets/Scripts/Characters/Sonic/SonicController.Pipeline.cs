@@ -117,6 +117,7 @@ public partial class SonicController
       var isDownGrounded = _groundInfoSystem.Current.Side == GroundSide.Down;
       _speedContext = SonicSpeedContext.GetGrounded(
         _isRolling,
+        _isJumping,
         _prevIsGrounded,
         _groundInfoSystem.Current.SideAngleRad,
         _lastGroundDetectionResult.Distance,
@@ -127,6 +128,7 @@ public partial class SonicController
     {
       _speedContext = SonicSpeedContext.GetAirborne(
         _isRolling,
+        _isJumping,
         _prevIsGrounded,
         _leftWallDetectionResult?.Distance,
         _rightWallDetectionResult?.Distance);

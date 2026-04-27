@@ -35,6 +35,7 @@ public partial class SonicController
   private bool _isLookingUp;
   private bool _isRolling;
   private bool _isFallingOffWall;
+  private bool _isJumping;
   private bool _prevIsGrounded;
   private bool _prevIsRolling;
   private bool _postWallDetachInputLock;
@@ -67,6 +68,7 @@ public partial class SonicController
   public bool GravityEnabled = true;
   public bool GroundedViewRotatorEnabled = true;
   public bool WallToAirViewRotatorEnabled = true;
+  public AudioClip JumpAudioClip;
   public AudioClip RollingAudioClip;
   public AudioClip SkiddingAudioClip;
   public Canvas Canvas;
