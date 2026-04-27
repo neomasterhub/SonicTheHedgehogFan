@@ -22,7 +22,7 @@ public static class SonicConsts
     public const float RollFrictionSpeedSpx = 6;
     public const float RollUphillSlopeFactorSpx = 20;
     public const float RollDownhillSlopeFactorSpx = 80;
-    public const float JumpingSpeedPx = 6.5f;
+    public const float JumpingSpeedPx = 3.8f;
 
     public const float AccelerationSpeed = AccelerationSpeedSpx / SpxPerUnit;
     public const float DecelerationSpeed = DecelerationSpeedSpx / SpxPerUnit;
