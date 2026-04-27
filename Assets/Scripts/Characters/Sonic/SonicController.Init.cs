@@ -117,6 +117,9 @@ public partial class SonicController
 
   private void InitializeSounds()
   {
+    var jump = this.AddComponent<AudioSource>();
+    jump.clip = JumpAudioClip;
+
     var rolling = this.AddComponent<AudioSource>();
     rolling.clip = RollingAudioClip;
     rolling.volume = 0.3f;
@@ -126,8 +129,12 @@ public partial class SonicController
 
     _sounds = new Sound[]
     {
+      new(jump,
+        () => _isGrounded && _isJumping,
+        () => !_isJumping && !jump.isPlaying),
+
       new(rolling,
-        () => _isDownGroundedMoving && _isRolling && !_prevIsRolling,
+        () => _isDownGroundedMoving && !_isJumping && _isRolling && !_prevIsRolling,
         () => !_isRolling && !rolling.isPlaying),
 
       new(skidding,
