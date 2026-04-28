@@ -121,6 +121,13 @@ public class SonicSpeedSystem
 
   private void SetSpeed_Airborne_Gravity()
   {
+    if (_context.IsJumping
+      && SpeedY > _config.JumpCutoffSpeed
+      && _inputSystem.Released.HasAny(PlayerInput.C))
+    {
+      SpeedY = _config.JumpCutoffSpeed;
+    }
+
     GravitySpeed = _gravitySpeedProvider.FirstTriggeredOrDefault();
 
     SpeedY -= SpeedY > 0 ? GravitySpeed.Up : GravitySpeed.Down;
