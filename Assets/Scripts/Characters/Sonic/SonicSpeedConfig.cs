@@ -13,9 +13,9 @@ public readonly struct SonicSpeedConfig
   public readonly float RollFrictionSpeed;
   public readonly float RollDecelerationSpeed;
 
-  public readonly float JumpingSpeed;
+  public readonly float JumpSpeed;
 
-  public SonicSpeedConfig(float topSpeed, float frictionSpeed, float minSkiddingSpeed, float accelerationSpeed, float decelerationSpeed, float airTopSpeed, float airAccelerationSpeed, float maxFallSpeed, float rollFrictionSpeed, float rollDecelerationSpeed, float jumpingSpeed)
+  public SonicSpeedConfig(float topSpeed, float frictionSpeed, float minSkiddingSpeed, float accelerationSpeed, float decelerationSpeed, float airTopSpeed, float airAccelerationSpeed, float maxFallSpeed, float rollFrictionSpeed, float rollDecelerationSpeed, float jumpSpeed)
   {
     TopSpeed = topSpeed;
     FrictionSpeed = frictionSpeed;
@@ -27,6 +27,6 @@ public readonly struct SonicSpeedConfig
     MaxFallSpeed = maxFallSpeed;
     RollFrictionSpeed = rollFrictionSpeed;
     RollDecelerationSpeed = rollDecelerationSpeed;
-    JumpingSpeed = jumpingSpeed;
+    JumpSpeed = jumpSpeed;
   }
 }

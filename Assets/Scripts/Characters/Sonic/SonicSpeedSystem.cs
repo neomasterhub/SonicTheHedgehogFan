@@ -228,8 +228,8 @@ public class SonicSpeedSystem
 
   private void SetSpeed_Grounded_Jump()
   {
-    SpeedX -= _config.JumpingSpeed * _groundAngleSin;
-    SpeedY += _config.JumpingSpeed * _groundAngleCos;
+    SpeedX -= _config.JumpSpeed * _groundAngleSin;
+    SpeedY += _config.JumpSpeed * _groundAngleCos;
   }
 
   private void SetSpeed_Grounded_Slope()
