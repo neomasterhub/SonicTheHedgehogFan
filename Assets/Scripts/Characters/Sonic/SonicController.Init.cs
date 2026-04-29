@@ -3,7 +3,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static SharedConsts.ConvertValues;
 using static SonicConsts.Physics;
-using static SonicConsts.View;
 
 /// <summary>
 /// Initializations.
@@ -92,7 +91,7 @@ public partial class SonicController
     var gravitySpeed = new GravitySpeed(GravityUpSpeed, GravityDownSpeed);
 
     _gravitySpeedProvider
-      .When(() => GravityEnabled && _groundInfoSystem.Current.Side == GroundSide.Down, () => gravitySpeed);
+      .When(() => _groundInfoSystem.Current.Side == GroundSide.Down, () => gravitySpeed);
 
     _slopeSpeedProvider
       .When(() => _groundInfoSystem.Current.Side == GroundSide.Down, () => _slopeFactor * Mathf.Sin(_groundInfoSystem.Current.AngleRad))
