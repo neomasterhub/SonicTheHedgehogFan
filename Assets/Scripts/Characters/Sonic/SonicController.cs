@@ -67,9 +67,17 @@ public partial class SonicController
   private Timer _inputUnlockTimer;
 
   [SerializeField] private Canvas _canvas;
-  [SerializeField] private AudioClip _jumpAudioClip;
-  [SerializeField] private AudioClip _rollAudioClip;
-  [SerializeField] private AudioClip _skidAudioClip;
+
+  [Header("Audio")]
+  [SerializeField]
+  [InspectorLabel("Jump")]
+  private AudioClip _jumpAudioClip;
+  [SerializeField]
+  [InspectorLabel("Roll")]
+  private AudioClip _rollAudioClip;
+  [SerializeField]
+  [InspectorLabel("Skid")]
+  private AudioClip _skidAudioClip;
 
   public VerticalDirection LookVerticalDirection
   {
