@@ -2379,6 +2379,7 @@ MonoBehaviour:
   GravityEnabled: 1
   GroundedViewRotatorEnabled: 1
   WallToAirViewRotatorEnabled: 1
+  JumpAudioClip: {fileID: 8300000, guid: a01963b9359f7d14ca3c26c46fbb16e4, type: 3}
   RollingAudioClip: {fileID: 8300000, guid: 9e7565537048c9b4f91f055796014713, type: 3}
   SkiddingAudioClip: {fileID: 8300000, guid: 9b89e2710e6c85545ba780692ee316f8, type: 3}
   Canvas: {fileID: 1049324918}
