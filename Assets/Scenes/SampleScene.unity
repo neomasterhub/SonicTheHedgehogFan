@@ -1438,6 +1438,16 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+  - first: {x: 18, y: 23, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 40
+      m_TileSpriteIndex: 40
+      m_TileMatrixIndex: 2
+      m_TileColorIndex: 31
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
   - first: {x: 43, y: 23, z: 0}
     second:
       serializedVersion: 2
@@ -1448,7 +1458,27 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+  - first: {x: 18, y: 24, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 40
+      m_TileSpriteIndex: 40
+      m_TileMatrixIndex: 2
+      m_TileColorIndex: 31
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
   - first: {x: 43, y: 24, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 40
+      m_TileSpriteIndex: 40
+      m_TileMatrixIndex: 2
+      m_TileColorIndex: 31
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: 18, y: 25, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 40
@@ -1489,6 +1519,36 @@ Tilemap:
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
   - first: {x: 46, y: 25, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 40
+      m_TileSpriteIndex: 40
+      m_TileMatrixIndex: 2
+      m_TileColorIndex: 31
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: 18, y: 26, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 40
+      m_TileSpriteIndex: 40
+      m_TileMatrixIndex: 2
+      m_TileColorIndex: 31
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: 18, y: 27, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 40
+      m_TileSpriteIndex: 40
+      m_TileMatrixIndex: 2
+      m_TileColorIndex: 31
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: 18, y: 28, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 40
@@ -1580,7 +1640,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 27ee59f559e1f7b4e8ad1551b4693091, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 4ccf070c626379948aba1dd73d88e39e, type: 2}
-  - m_RefCount: 104
+  - m_RefCount: 110
     m_Data: {fileID: 11400000, guid: a5432b7886b0e9646bb1f3e30da47fc0, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 51a95f58f9569bc4abc466da38785534, type: 2}
@@ -1665,7 +1725,7 @@ Tilemap:
     m_Data: {fileID: -352188332, guid: e0ea3ede9b32cfc4695c7b4257c7f275, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -2112933694, guid: e0ea3ede9b32cfc4695c7b4257c7f275, type: 3}
-  - m_RefCount: 104
+  - m_RefCount: 110
     m_Data: {fileID: 1928353128, guid: e0ea3ede9b32cfc4695c7b4257c7f275, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -250151606, guid: e0ea3ede9b32cfc4695c7b4257c7f275, type: 3}
@@ -1706,7 +1766,7 @@ Tilemap:
       e31: 0
       e32: 0
       e33: 4.5908e-41
-  - m_RefCount: 128
+  - m_RefCount: 134
     m_Data:
       e00: 1
       e01: 0
@@ -1787,13 +1847,13 @@ Tilemap:
     m_Data: {r: 2.6293085e+25, g: 2.6293085e+25, b: 2.6293085e+25, a: 2.6293085e+25}
   - m_RefCount: 0
     m_Data: {r: 2.6293085e+25, g: 2.6293085e+25, b: 2.6293085e+25, a: 2.6293085e+25}
-  - m_RefCount: 128
+  - m_RefCount: 134
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: -18, y: -2, z: 0}
-  m_Size: {x: 107, y: 30, z: 1}
+  m_Size: {x: 107, y: 31, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -1850,7 +1910,7 @@ EdgeCollider2D:
   m_Offset: {x: 9, y: 9.5}
   m_EdgeRadius: 0
   m_Points:
-  - {x: 0.5, y: 1.0009403}
+  - {x: 0.5, y: 5}
   - {x: 0.5, y: 0}
   - {x: 23.738396, y: 0}
   - {x: 23.984554, y: 0.08015919}
@@ -1980,7 +2040,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 3
+  orthographic size: 2.8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
