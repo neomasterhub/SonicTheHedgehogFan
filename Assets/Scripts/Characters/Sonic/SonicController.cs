@@ -1,4 +1,3 @@
-#pragma warning disable SA1134
 using System.Text;
 using TMPro;
 using UnityEngine;
@@ -66,7 +65,8 @@ public partial class SonicController
   private TextMeshProUGUI _effectHistoryTextMesh;
   private Timer _inputUnlockTimer;
 
-  [SerializeField] private Canvas _canvas;
+  [SerializeField]
+  private Canvas _canvas;
 
   [Header("Audio")]
   [SerializeField]
