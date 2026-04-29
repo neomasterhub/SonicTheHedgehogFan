@@ -65,12 +65,16 @@ public partial class SonicController
   private TextMeshProUGUI _effectHistoryTextMesh;
   private Timer _inputUnlockTimer;
 
+  [SerializeField]
+  private AudioClip _jumpAudioClip;
+  [SerializeField]
+  private AudioClip _rollAudioClip;
+  [SerializeField]
+  private AudioClip _skidAudioClip;
+
   public bool GravityEnabled = true;
   public bool GroundedViewRotatorEnabled = true;
   public bool WallToAirViewRotatorEnabled = true;
-  public AudioClip JumpAudioClip;
-  public AudioClip RollingAudioClip;
-  public AudioClip SkiddingAudioClip;
   public Canvas Canvas;
 
   public VerticalDirection LookVerticalDirection

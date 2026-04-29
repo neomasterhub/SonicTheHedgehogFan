@@ -118,14 +118,14 @@ public partial class SonicController
   private void InitializeSounds()
   {
     var jump = this.AddComponent<AudioSource>();
-    jump.clip = JumpAudioClip;
+    jump.clip = _jumpAudioClip;
 
-    var rolling = this.AddComponent<AudioSource>();
-    rolling.clip = RollingAudioClip;
-    rolling.volume = 0.3f;
+    var roll = this.AddComponent<AudioSource>();
+    roll.clip = _rollAudioClip;
+    roll.volume = 0.3f;
 
-    var skidding = this.AddComponent<AudioSource>();
-    skidding.clip = SkiddingAudioClip;
+    var skid = this.AddComponent<AudioSource>();
+    skid.clip = _skidAudioClip;
 
     _sounds = new Sound[]
     {
@@ -133,13 +133,13 @@ public partial class SonicController
         () => _isGrounded && _isJumping,
         () => !_isJumping && !jump.isPlaying),
 
-      new(rolling,
+      new(roll,
         () => _isDownGroundedMoving && !_isJumping && _isRolling && !_prevIsRolling,
-        () => !_isRolling && !rolling.isPlaying),
+        () => !_isRolling && !roll.isPlaying),
 
-      new(skidding,
-        () => _speedSystem.IsSkidding && !skidding.isPlaying,
-        () => !_speedSystem.IsSkidding && !skidding.isPlaying),
+      new(skid,
+        () => _speedSystem.IsSkidding && !skid.isPlaying,
+        () => !_speedSystem.IsSkidding && !skid.isPlaying),
     };
   }
 
