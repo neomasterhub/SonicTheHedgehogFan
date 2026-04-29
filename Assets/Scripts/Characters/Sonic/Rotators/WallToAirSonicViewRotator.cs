@@ -1,17 +1,17 @@
 using System;
+using static SonicConsts.View;
 
 public class WallToAirSonicViewRotator
   : PlayerViewRotatorBase<SonicViewRotatorContext>
 {
+  private const float _delta = WallToAirViewRotatorAngleDegDelta;
+
   private float _z;
 
-  public WallToAirSonicViewRotator(float delta, Func<bool> condition)
+  public WallToAirSonicViewRotator(Func<bool> condition)
     : base("Wall-to-Air", condition)
   {
-    Delta = delta;
   }
-
-  public float Delta { get; set; }
 
   public override void Rotate(SonicViewRotatorContext context)
   {
@@ -26,11 +26,11 @@ public class WallToAirSonicViewRotator
 
     if (_z > 0)
     {
-      _z = Math.Max(0, _z - Delta).Round();
+      _z = Math.Max(0, _z - _delta).Round();
     }
     else if (_z < 0)
     {
-      _z = Math.Min(0, _z + Delta).Round();
+      _z = Math.Min(0, _z + _delta).Round();
     }
 
     Rotation = new(0, 0, _z);
