@@ -8,7 +8,7 @@ public partial class SonicController
     _sensorSystem.Draw();
   }
 
-  public void UpdateDebugInfo()
+  private void UpdateDebugInfo()
   {
     _groundNormal.enabled = _showDebugInfo;
     _diagnosticsPanel.SetActive(_showDebugInfo);
@@ -35,7 +35,7 @@ public partial class SonicController
     _groundNormal.SetPosition(1, _lastGroundDetectionResult.Contact + _lastGroundDetectionResult.Normal);
   }
 
-  public void UpdateDebugInfo_EffectHistory()
+  private void UpdateDebugInfo_EffectHistory()
   {
     _effectHistoryText.Clear();
 
@@ -48,7 +48,7 @@ public partial class SonicController
     _effectHistoryTextMesh.SetText(_effectHistoryText);
   }
 
-  public void UpdateDebugInfo_Diagnostics()
+  private void UpdateDebugInfo_Diagnostics()
   {
     _diagnosticsText
       .Clear()
