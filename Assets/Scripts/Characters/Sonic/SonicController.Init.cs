@@ -59,10 +59,10 @@ public partial class SonicController
     _animator = GetComponent<Animator>();
     _spriteRenderer = GetComponent<SpriteRenderer>();
 
-    _effectHistoryPanel = Canvas.transform.Find("Effect History Panel").gameObject;
+    _effectHistoryPanel = _canvas.transform.Find("Effect History Panel").gameObject;
     _effectHistoryTextMesh = _effectHistoryPanel.transform.Find("Text").GetComponent<TextMeshProUGUI>();
 
-    _diagnosticsPanel = Canvas.transform.Find("Diagnostics Panel").gameObject;
+    _diagnosticsPanel = _canvas.transform.Find("Diagnostics Panel").gameObject;
     _diagnosticsTextMesh = _diagnosticsPanel.transform.Find("Text").GetComponent<TextMeshProUGUI>();
 
 #if UNITY_EDITOR

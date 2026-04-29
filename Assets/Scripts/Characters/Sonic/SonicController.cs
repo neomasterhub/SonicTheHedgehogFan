@@ -1,3 +1,4 @@
+#pragma warning disable SA1134
 using System.Text;
 using TMPro;
 using UnityEngine;
@@ -65,17 +66,10 @@ public partial class SonicController
   private TextMeshProUGUI _effectHistoryTextMesh;
   private Timer _inputUnlockTimer;
 
-  [SerializeField]
-  private AudioClip _jumpAudioClip;
-  [SerializeField]
-  private AudioClip _rollAudioClip;
-  [SerializeField]
-  private AudioClip _skidAudioClip;
-
-  public bool GravityEnabled = true;
-  public bool GroundedViewRotatorEnabled = true;
-  public bool WallToAirViewRotatorEnabled = true;
-  public Canvas Canvas;
+  [SerializeField] private Canvas _canvas;
+  [SerializeField] private AudioClip _jumpAudioClip;
+  [SerializeField] private AudioClip _rollAudioClip;
+  [SerializeField] private AudioClip _skidAudioClip;
 
   public VerticalDirection LookVerticalDirection
   {
