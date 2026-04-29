@@ -51,6 +51,9 @@ public partial class SonicController
     Application.targetFrameRate = FramePerSec;
     Time.fixedDeltaTime = 1f / FramePerSec;
     QualitySettings.vSyncCount = 0;
+#if UNITY_EDITOR
+    _showDebugInfo = true;
+#endif
   }
 
   private void InitializeComponents()
@@ -64,9 +67,13 @@ public partial class SonicController
     _diagnosticsPanel = _canvas.transform.Find("Diagnostics Panel").gameObject;
     _diagnosticsTextMesh = _diagnosticsPanel.transform.Find("Text").GetComponent<TextMeshProUGUI>();
 
-#if UNITY_EDITOR
-    _showDebugInfo = true;
-#endif
+    _groundNormal = this.AddComponent<LineRenderer>();
+    _groundNormal.material = new(Shader.Find("Sprites/Default"));
+    _groundNormal.startColor = Color.white;
+    _groundNormal.endColor = Color.white;
+    _groundNormal.startWidth = 0.03f;
+    _groundNormal.endWidth = 0.03f;
+    _groundNormal.positionCount = 2;
   }
 
   private void InitializeViewSystem()
