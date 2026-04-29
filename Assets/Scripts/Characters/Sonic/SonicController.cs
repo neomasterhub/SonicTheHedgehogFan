@@ -50,6 +50,7 @@ public partial class SonicController
   private Animator _animator;
   private GameObject _diagnosticsPanel;
   private GameObject _effectHistoryPanel;
+  private LineRenderer _groundNormal;
   private GroundDetectionResult _lastGroundDetectionResult;
   private WallDetectionResult? _leftWallDetectionResult;
   private WallDetectionResult? _rightWallDetectionResult;

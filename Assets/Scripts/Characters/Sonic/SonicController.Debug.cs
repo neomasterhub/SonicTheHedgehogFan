@@ -10,6 +10,7 @@ public partial class SonicController
 
   public void UpdateDebugInfo()
   {
+    _groundNormal.enabled = _showDebugInfo;
     _diagnosticsPanel.SetActive(_showDebugInfo);
     _effectHistoryPanel.SetActive(_showDebugInfo);
 
@@ -18,8 +19,20 @@ public partial class SonicController
       return;
     }
 
+    UpdateGroundNormal();
     UpdateDebugInfo_Diagnostics();
     UpdateDebugInfo_EffectHistory();
+  }
+
+  private void UpdateGroundNormal()
+  {
+    if (!_isGrounded)
+    {
+      return;
+    }
+
+    _groundNormal.SetPosition(0, _lastGroundDetectionResult.Contact);
+    _groundNormal.SetPosition(1, _lastGroundDetectionResult.Contact + _lastGroundDetectionResult.Normal);
   }
 
   public void UpdateDebugInfo_EffectHistory()
