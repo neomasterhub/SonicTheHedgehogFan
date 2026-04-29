@@ -74,14 +74,11 @@ public partial class SonicController
   {
     _viewSystem.SetComponents(_animator, _spriteRenderer);
 
-    var rotGrounded = new GroundedSonicViewRotator(
-      () => GroundedViewRotatorEnabled
-      && _isGrounded);
+    var rotGrounded = new GroundedSonicViewRotator(() =>
+      _isGrounded);
 
-    var rotWallToAir = new WallToAirSonicViewRotator(
-      WallToAirViewRotatorAngleDegDelta,
-      () => WallToAirViewRotatorEnabled
-      && !_isGrounded
+    var rotWallToAir = new WallToAirSonicViewRotator(() =>
+      !_isGrounded
       && _prevIsGrounded
       && _groundInfoSystem.Previous.Side is GroundSide.Left or GroundSide.Right);
 
