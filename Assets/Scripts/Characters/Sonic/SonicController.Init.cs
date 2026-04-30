@@ -67,13 +67,7 @@ public partial class SonicController
     _diagnosticsPanel = _canvas.transform.Find("Diagnostics Panel").gameObject;
     _diagnosticsTextMesh = _diagnosticsPanel.transform.Find("Text").GetComponent<TextMeshProUGUI>();
 
-    _groundNormal = this.AddComponent<LineRenderer>();
-    _groundNormal.material = new(Shader.Find("Sprites/Default"));
-    _groundNormal.startColor = Color.white;
-    _groundNormal.endColor = Color.white;
-    _groundNormal.startWidth = 0.03f;
-    _groundNormal.endWidth = 0.03f;
-    _groundNormal.positionCount = 2;
+    InitializeGroundNormal();
   }
 
   private void InitializeViewSystem()
@@ -150,6 +144,18 @@ public partial class SonicController
   {
     _inputUnlockTimer = new Timer(InputUnlockTimerSeconds)
       .WhenCompleted(() => _postWallDetachInputLock = false);
+  }
+
+  private void InitializeGroundNormal()
+  {
+    _groundNormal = this.AddComponent<LineRenderer>();
+    _groundNormal.material = new(Shader.Find("Sprites/Default"));
+    _groundNormal.startColor = Color.white;
+    _groundNormal.endColor = Color.white;
+    _groundNormal.startWidth = 0.03f;
+    _groundNormal.endWidth = 0.03f;
+    _groundNormal.positionCount = 2;
+    _groundNormal.sortingOrder = 2;
   }
 
   private PlayerInput GetPlayerInput()
