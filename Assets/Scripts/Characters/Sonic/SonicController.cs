@@ -20,9 +20,9 @@ public partial class SonicController
   private readonly PlayerInputSystem _inputSystem;
   private readonly PlayerViewRotatorProvider<SonicViewRotatorContext> _viewRotatorProvider;
   private readonly Pipeline _effects;
+  private readonly SonicConfigs _configs;
   private readonly SonicSensorRayLengths _sensorRayLengths;
   private readonly SonicSensorSystem _sensorSystem;
-  private readonly SonicSpeedConfig _speedConfig;
   private readonly SonicSpeedSystem _speedSystem;
   private readonly SonicViewSystem _viewSystem;
   private readonly StringBuilder _diagnosticsText;

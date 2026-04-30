@@ -27,6 +27,7 @@ public partial class SonicController
     _timerSystem = new();
     _viewRotatorProvider = new();
 
+    _configs = new(_physicsMode);
     _inputSystem = new(GetPlayerInput);
     _sensorRayLengths = new(OLength, TopUDFLengths, BottomUDFLengths);
     _speedSystem = new(_inputSystem, _slopeSpeedProvider, _airToGroundSpeedProvider, _groundToAirSpeedProvider, _gravitySpeedProvider);
