@@ -43,11 +43,11 @@ public class SonicSpeedSystem
   public bool IsSkidding { get; private set; }
   public float SpeedX { get; private set; }
   public float SpeedY { get; private set; }
-  public float GroundSpeed { get; private set; }
   public float SlopeSpeed { get; private set; }
+  public float GroundSpeed { get; private set; }
+  public float GravitySpeed { get; private set; }
   public int ZeroGroundSpeedProgress { get; private set; }
   public bool IsZeroGroundSpeedProgressReached { get; private set; }
-  public GravitySpeed GravitySpeed { get; private set; }
 
   private void RoundSpeeds()
   {
@@ -135,9 +135,10 @@ public class SonicSpeedSystem
       SpeedY = _config.JumpCutoffSpeed;
     }
 
-    GravitySpeed = _gravitySpeedProvider.FirstTriggeredOrDefault();
+    var gravitySpeeds = _gravitySpeedProvider.FirstTriggeredOrDefault();
+    GravitySpeed = SpeedY > 0 ? gravitySpeeds.Up : gravitySpeeds.Down;
 
-    SpeedY -= SpeedY > 0 ? GravitySpeed.Up : GravitySpeed.Down;
+    SpeedY -= GravitySpeed;
 
     if (SpeedY < -_config.MaxFallSpeed)
     {
@@ -184,6 +185,7 @@ public class SonicSpeedSystem
     _groundAngleCos = MathF.Cos(_context.GroundAngleRad.Value);
     _groundAngleSin = MathF.Sin(_context.GroundAngleRad.Value);
 
+    GravitySpeed = 0;
     SetSpeed_Grounded_FromAirborne();
 
     if (_context.IsJumping)
