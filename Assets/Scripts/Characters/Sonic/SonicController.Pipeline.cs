@@ -213,7 +213,10 @@ public partial class SonicController
 
   private SonicSensorFlags GetSensorFlags()
   {
-    return new(true, false, _isGrounded && !_isCurlingUp);
+    return new(
+      _isGrounded || _speedSystem.SpeedY <= 0,
+      _isGrounded || _speedSystem.SpeedY >= 0,
+      _isGrounded);
   }
 
   private GroundDetectionResult? DetectGround()
