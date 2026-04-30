@@ -13,7 +13,6 @@ public partial class SonicController
   {
     BeginFrame();
     UpdateInput();
-    UpdateConfigs();
     AnalyzeEnvironment();
     ApplyEffects();
     ApplyMovement();
@@ -25,6 +24,7 @@ public partial class SonicController
 
   private void BeginFrame()
   {
+    _configs.Update(_physicsMode);
     _timerSystem.Update(Time.deltaTime);
 
     _prevState = _state;
@@ -47,11 +47,6 @@ public partial class SonicController
     {
       _showDebugInfo = !_showDebugInfo;
     }
-  }
-
-  private void UpdateConfigs()
-  {
-    _configs.Update(_physicsMode);
   }
 
   private void AnalyzeEnvironment()
@@ -77,7 +72,7 @@ public partial class SonicController
     _isBalancing = _lastGroundDetectionResult.IsBalancing;
     _triggeredGroundSensorSide = _lastGroundDetectionResult.SourceSensorSide;
     _groundInfoSystem.Update(_lastGroundDetectionResult.AngleDeg);
-    _slopeFactor = GetSlopeFactor();
+    _slopeFactor = GetSlopeFactor(_configs.PhysicsModeConfig);
 
     _absGroundSpeed = Mathf.Abs(_speedSystem.GroundSpeed);
     _isDownGrounded = _groundInfoSystem.Current.Side == GroundSide.Down;
