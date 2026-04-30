@@ -23,8 +23,9 @@ public partial class SonicController
     return PipelineStepBuilder.Create()
       .WithDisplayName("Jumping/Exit")
       .WithCondition(() =>
-        (_isGrounded && !_prevIsGrounded)
-        || (!_isGrounded && _speedSystem.SpeedY <= 0))
+        _isJumping
+        && ((_isGrounded && !_prevIsGrounded) // double jump
+        || (!_isGrounded && _speedSystem.SpeedY <= 0)))
       .WithAction(() =>
       {
         _isJumping = false;
