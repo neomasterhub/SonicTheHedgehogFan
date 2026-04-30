@@ -68,7 +68,22 @@ public class SonicSpeedSystem
     _context = context;
 
     SetConfig();
+    SetStateVars();
 
+    if (_context.IsGrounded)
+    {
+      SetSpeed_Grounded();
+    }
+    else
+    {
+      SetSpeed_Airborne();
+    }
+
+    RoundSpeeds();
+  }
+
+  private void SetStateVars()
+  {
     _reverseStartSpeed = _config.DecelerationSpeed;
 
     if (_context.IsRolling)
@@ -87,17 +102,6 @@ public class SonicSpeedSystem
       _friction = _inputSystem.X == 0;
       _frictionSpeed = _config.FrictionSpeed;
     }
-
-    if (_context.IsGrounded)
-    {
-      SetSpeed_Grounded();
-    }
-    else
-    {
-      SetSpeed_Airborne();
-    }
-
-    RoundSpeeds();
   }
 
   private void SetConfig()
