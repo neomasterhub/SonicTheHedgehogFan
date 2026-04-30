@@ -16,7 +16,7 @@ public static class SonicConsts
     public static readonly SonicPhysicsModeConfig NormalConfig = new(
       Normal.AccelerationSpeedSpx / SpxPerUnit,
       Normal.DecelerationSpeedSpx / SpxPerUnit,
-      Normal.MinSkiddingSpeedSpx / SpxPerUnit,
+      Normal.MinSkiddingSpeedPx / PxPerUnit,
       Normal.FrictionSpeedSpx / SpxPerUnit,
       Normal.TopSpeedPx / PxPerUnit,
       Normal.AirAccelerationSpeedSpx / SpxPerUnit,
@@ -36,7 +36,7 @@ public static class SonicConsts
     {
       public const float AccelerationSpeedSpx = 12;
       public const float DecelerationSpeedSpx = 128;
-      public const float MinSkiddingSpeedSpx = 100;
+      public const float MinSkiddingSpeedPx = 4;
       public const float FrictionSpeedSpx = 12;
       public const float TopSpeedPx = 6;
       public const float AirAccelerationSpeedSpx = 14;
