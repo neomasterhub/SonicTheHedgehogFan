@@ -90,7 +90,7 @@ public partial class SonicController
   private void InitializeSpeedSystemProviders()
   {
     _gravitySpeedProvider
-      .When(() => _groundInfoSystem.Current.Side == GroundSide.Down, () => _gravitySpeed);
+      .When(() => _groundInfoSystem.Current.Side == GroundSide.Down, () => _configs.PhysicsModeConfig.GravitySpeed);
 
     _slopeSpeedProvider
       .When(() => _groundInfoSystem.Current.Side == GroundSide.Down, () => _slopeFactor * Mathf.Sin(_groundInfoSystem.Current.AngleRad))

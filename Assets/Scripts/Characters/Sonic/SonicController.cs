@@ -50,7 +50,6 @@ public partial class SonicController
   private Animator _animator;
   private GameObject _diagnosticsPanel;
   private GameObject _effectHistoryPanel;
-  private GravitySpeed _gravitySpeed;
   private GroundDetectionResult _lastGroundDetectionResult;
   private LineRenderer _groundNormal;
   private PhysicsMode _physicsMode;

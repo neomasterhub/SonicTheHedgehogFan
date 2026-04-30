@@ -9,8 +9,7 @@ public class SonicPhysicsModeConfig
     TopSpeed = topSpeed;
     AirAccelerationSpeed = airAccelerationSpeed;
     AirTopSpeed = airTopSpeed;
-    GravityDownSpeed = gravityDownSpeed;
-    GravityUpSpeed = gravityUpSpeed;
+    GravitySpeed = new(gravityUpSpeed, gravityDownSpeed);
     MaxFallSpeed = maxFallSpeed;
     SlopeFactor = slopeFactor;
     RollDecelerationSpeed = rollDecelerationSpeed;
@@ -28,8 +27,6 @@ public class SonicPhysicsModeConfig
   public float TopSpeed { get; }
   public float AirAccelerationSpeed { get; }
   public float AirTopSpeed { get; }
-  public float GravityDownSpeed { get; }
-  public float GravityUpSpeed { get; }
   public float MaxFallSpeed { get; }
   public float SlopeFactor { get; }
   public float RollDecelerationSpeed { get; }
@@ -38,4 +35,5 @@ public class SonicPhysicsModeConfig
   public float RollDownhillSlopeFactor { get; }
   public float JumpSpeed { get; }
   public float JumpCutoffSpeed { get; }
+  public GravitySpeed GravitySpeed { get; }
 }

@@ -1,5 +1,4 @@
 using UnityEngine;
-using static SonicConsts.Physics;
 using static SonicConsts.View;
 using AnimatorParameters = SharedConsts.Animator.Parameters;
 using AnimatorStates = SharedConsts.Animator.States;
