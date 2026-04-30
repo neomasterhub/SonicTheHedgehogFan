@@ -5,48 +5,53 @@ public static class SonicConsts
 {
   public static class Physics
   {
-    public const float InputUnlockTimerSeconds = 0.5f;
     public const float MinSkiddingSpeed = 0.1f;
-
-    public const float AccelerationSpeedSpx = 12;
-    public const float DecelerationSpeedSpx = 128;
-    public const float FrictionSpeedSpx = 12;
-    public const float TopSpeedPx = 6;
-    public const float AirAccelerationSpeedSpx = 14;
-    public const float AirTopSpeedPx = 6;
-    public const float GravityDownSpeedSpx = 56;
-    public const float GravityUpSpeedSpx = 16;
-    public const float MaxFallSpeedPx = 16;
-    public const float SlopeFactorSpx = 32;
-    public const float RollDecelerationSpeedSpx = 32;
-    public const float RollFrictionSpeedSpx = 6;
-    public const float RollUphillSlopeFactorSpx = 20;
-    public const float RollDownhillSlopeFactorSpx = 80;
-    public const float JumpSpeedPx = 3.8f;
-    public const float JumpCutoffSpeedPx = 2;
-
-    public const float AccelerationSpeed = AccelerationSpeedSpx / SpxPerUnit;
-    public const float DecelerationSpeed = DecelerationSpeedSpx / SpxPerUnit;
-    public const float FrictionSpeed = FrictionSpeedSpx / SpxPerUnit;
-    public const float TopSpeed = TopSpeedPx / PxPerUnit;
-    public const float AirAccelerationSpeed = AirAccelerationSpeedSpx / SpxPerUnit;
-    public const float AirTopSpeed = AirTopSpeedPx / PxPerUnit;
-    public const float GravityDownSpeed = GravityDownSpeedSpx / SpxPerUnit;
-    public const float GravityUpSpeed = GravityUpSpeedSpx / SpxPerUnit;
-    public const float MaxFallSpeed = MaxFallSpeedPx / PxPerUnit;
-    public const float SlopeFactor = SlopeFactorSpx / SpxPerUnit;
-    public const float RollDecelerationSpeed = RollDecelerationSpeedSpx / SpxPerUnit;
-    public const float RollFrictionSpeed = RollFrictionSpeedSpx / SpxPerUnit;
-    public const float RollUphillSlopeFactor = RollUphillSlopeFactorSpx / SpxPerUnit;
-    public const float RollDownhillSlopeFactor = RollDownhillSlopeFactorSpx / SpxPerUnit;
-    public const float JumpSpeed = JumpSpeedPx / PxPerUnit;
-    public const float JumpCutoffSpeed = JumpCutoffSpeedPx / PxPerUnit;
-
+    public const float InputUnlockTimerSeconds = 0.5f;
     public const float OLength = Sizes.Big.VRadius + 0.4f;
     public static readonly Vector3 TopUDFLengths = new(0.3f, 0.3f, 0.5f);
     public static readonly Vector3 BottomUDFLengths = new(0.3f, 0.1f, 0.5f);
     public static readonly Vector2 WallToAirSpeedDelta = new(0.011f, 0);
     public static readonly Vector2 WallDetachPositionOffset = new(-0.1f, 0);
+
+    public static readonly SonicPhysicsModeConfig NormalConfig = new(
+      Normal.AccelerationSpeedSpx / SpxPerUnit,
+      Normal.DecelerationSpeedSpx / SpxPerUnit,
+      Normal.MinSkiddingSpeedPx / PxPerUnit,
+      Normal.FrictionSpeedSpx / SpxPerUnit,
+      Normal.TopSpeedPx / PxPerUnit,
+      Normal.AirAccelerationSpeedSpx / SpxPerUnit,
+      Normal.AirTopSpeedPx / PxPerUnit,
+      Normal.GravityDownSpeedSpx / SpxPerUnit,
+      Normal.GravityUpSpeedSpx / SpxPerUnit,
+      Normal.MaxFallSpeedPx / PxPerUnit,
+      Normal.SlopeFactorSpx / SpxPerUnit,
+      Normal.RollDecelerationSpeedSpx / SpxPerUnit,
+      Normal.RollFrictionSpeedSpx / SpxPerUnit,
+      Normal.RollUphillSlopeFactorSpx / SpxPerUnit,
+      Normal.RollDownhillSlopeFactorSpx / SpxPerUnit,
+      Normal.JumpSpeedPx / PxPerUnit,
+      Normal.JumpCutoffSpeedPx / PxPerUnit);
+
+    private static class Normal
+    {
+      public const float AccelerationSpeedSpx = 12;
+      public const float DecelerationSpeedSpx = 128;
+      public const float MinSkiddingSpeedPx = 4;
+      public const float FrictionSpeedSpx = 12;
+      public const float TopSpeedPx = 6;
+      public const float AirAccelerationSpeedSpx = 14;
+      public const float AirTopSpeedPx = 6;
+      public const float GravityDownSpeedSpx = 56;
+      public const float GravityUpSpeedSpx = 16;
+      public const float MaxFallSpeedPx = 16;
+      public const float SlopeFactorSpx = 32;
+      public const float RollDecelerationSpeedSpx = 32;
+      public const float RollFrictionSpeedSpx = 6;
+      public const float RollUphillSlopeFactorSpx = 20;
+      public const float RollDownhillSlopeFactorSpx = 80;
+      public const float JumpSpeedPx = 3.8f;
+      public const float JumpCutoffSpeedPx = 2;
+    }
   }
 
   public static class Sizes

@@ -24,12 +24,14 @@ public partial class SonicController
 
   private void BeginFrame()
   {
+    _configs.Update(_physicsMode);
     _timerSystem.Update(Time.deltaTime);
 
     _prevState = _state;
     _prevSizeMode = _sizeMode;
     _prevIsRolling = _isRolling;
     _prevIsGrounded = _isGrounded;
+    _prevPhysicsMode = _physicsMode;
   }
 
   private void UpdateInput()
@@ -70,7 +72,7 @@ public partial class SonicController
     _isBalancing = _lastGroundDetectionResult.IsBalancing;
     _triggeredGroundSensorSide = _lastGroundDetectionResult.SourceSensorSide;
     _groundInfoSystem.Update(_lastGroundDetectionResult.AngleDeg);
-    _slopeFactor = GetSlopeFactor();
+    _slopeFactor = GetSlopeFactor(_configs.PhysicsModeConfig);
 
     _absGroundSpeed = Mathf.Abs(_speedSystem.GroundSpeed);
     _isDownGrounded = _groundInfoSystem.Current.Side == GroundSide.Down;
@@ -194,20 +196,20 @@ public partial class SonicController
     }
   }
 
-  private float GetSlopeFactor()
+  private float GetSlopeFactor(SonicPhysicsModeConfig config)
   {
     if (!_isRolling)
     {
-      return SlopeFactor;
+      return config.SlopeFactor;
     }
 
     if (Mathf.Sign(_speedSystem.GroundSpeed) == Mathf.Sign(_groundInfoSystem.Current.SideAngleDeg))
     {
-      return RollUphillSlopeFactor;
+      return config.RollUphillSlopeFactor;
     }
     else
     {
-      return RollDownhillSlopeFactor;
+      return config.RollDownhillSlopeFactor;
     }
   }
 

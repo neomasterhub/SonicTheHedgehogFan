@@ -1,5 +1,3 @@
-using static SonicConsts.Physics;
-
 /// <summary>
 /// Effects.
 /// </summary>
@@ -185,7 +183,7 @@ public partial class SonicController
       .WithDisplayName("Rolling/Enter")
       .WithCondition(() =>
         _isDownGrounded
-        && _absGroundSpeed >= DecelerationSpeed
+        && _absGroundSpeed >= _configs.PhysicsModeConfig.DecelerationSpeed
         && !_isBalancing
         && !_inputSystem.Held.HasAny(PlayerInput.Left | PlayerInput.Right)
         && _inputSystem.Pressed.HasAny(PlayerInput.Down))
@@ -206,7 +204,7 @@ public partial class SonicController
       .WithCondition(() =>
         _isGrounded
         && !_isDownGrounded
-        && _absGroundSpeed < DecelerationSpeed)
+        && _absGroundSpeed < _configs.PhysicsModeConfig.DecelerationSpeed)
       .WithAction(() =>
       {
         _isFallingOffWall = true;

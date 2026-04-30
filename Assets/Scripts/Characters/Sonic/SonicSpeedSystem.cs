@@ -7,12 +7,12 @@ public class SonicSpeedSystem
   private const int _speedRoundingDigits = 3;
   private const int _zeroGroundSpeedProgressMax = 5;
 
+  private readonly SonicConfigs _configs;
+  private readonly PlayerInputSystem _inputSystem;
   private readonly ConditionalValueProvider<float> _slopeSpeedProvider;
   private readonly ConditionalValueProvider<Vector2> _airToGroundSpeedProvider;
   private readonly ConditionalValueProvider<Vector2> _groundToAirSpeedProvider;
   private readonly ConditionalValueProvider<GravitySpeed> _gravitySpeedProvider;
-  private readonly PlayerInputSystem _inputSystem;
-  private readonly SonicSpeedConfig _config;
 
   private bool _friction;
   private float _accSpeed;
@@ -22,17 +22,18 @@ public class SonicSpeedSystem
   private float _groundAngleCos;
   private float _groundAngleSin;
   private SonicSpeedContext _context;
+  private SonicPhysicsModeConfig _config;
 
   public SonicSpeedSystem(
+    SonicConfigs configs,
     PlayerInputSystem inputSystem,
-    SonicSpeedConfig config,
     ConditionalValueProvider<float> slopeSpeedProvider,
     ConditionalValueProvider<Vector2> airToGroundSpeedProvider,
     ConditionalValueProvider<Vector2> groundToAirSpeedProvider,
     ConditionalValueProvider<GravitySpeed> gravitySpeedProvider)
   {
+    _configs = configs;
     _inputSystem = inputSystem;
-    _config = config;
     _slopeSpeedProvider = slopeSpeedProvider;
     _airToGroundSpeedProvider = airToGroundSpeedProvider;
     _groundToAirSpeedProvider = groundToAirSpeedProvider;
@@ -68,6 +69,23 @@ public class SonicSpeedSystem
   {
     _context = context;
 
+    SetStateData();
+
+    if (_context.IsGrounded)
+    {
+      SetSpeed_Grounded();
+    }
+    else
+    {
+      SetSpeed_Airborne();
+    }
+
+    RoundSpeeds();
+  }
+
+  private void SetStateData()
+  {
+    _config = _configs.PhysicsModeConfig;
     _reverseStartSpeed = _config.DecelerationSpeed;
 
     if (_context.IsRolling)
@@ -86,17 +104,6 @@ public class SonicSpeedSystem
       _friction = _inputSystem.X == 0;
       _frictionSpeed = _config.FrictionSpeed;
     }
-
-    if (_context.IsGrounded)
-    {
-      SetSpeed_Grounded();
-    }
-    else
-    {
-      SetSpeed_Airborne();
-    }
-
-    RoundSpeeds();
   }
 
   private void SetSpeed_Airborne()

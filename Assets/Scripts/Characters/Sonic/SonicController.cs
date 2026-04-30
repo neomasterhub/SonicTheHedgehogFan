@@ -20,9 +20,9 @@ public partial class SonicController
   private readonly PlayerInputSystem _inputSystem;
   private readonly PlayerViewRotatorProvider<SonicViewRotatorContext> _viewRotatorProvider;
   private readonly Pipeline _effects;
+  private readonly SonicConfigs _configs;
   private readonly SonicSensorRayLengths _sensorRayLengths;
   private readonly SonicSensorSystem _sensorSystem;
-  private readonly SonicSpeedConfig _speedConfig;
   private readonly SonicSpeedSystem _speedSystem;
   private readonly SonicViewSystem _viewSystem;
   private readonly StringBuilder _diagnosticsText;
@@ -50,10 +50,10 @@ public partial class SonicController
   private Animator _animator;
   private GameObject _diagnosticsPanel;
   private GameObject _effectHistoryPanel;
-  private LineRenderer _groundNormal;
   private GroundDetectionResult _lastGroundDetectionResult;
-  private WallDetectionResult? _leftWallDetectionResult;
-  private WallDetectionResult? _rightWallDetectionResult;
+  private LineRenderer _groundNormal;
+  private PhysicsMode _physicsMode;
+  private PhysicsMode _prevPhysicsMode;
   private SonicSpeedContext _speedContext;
   private SonicSizeMode _sizeMode;
   private SonicSizeMode _prevSizeMode;
@@ -65,6 +65,8 @@ public partial class SonicController
   private TextMeshProUGUI _diagnosticsTextMesh;
   private TextMeshProUGUI _effectHistoryTextMesh;
   private Timer _inputUnlockTimer;
+  private WallDetectionResult? _leftWallDetectionResult;
+  private WallDetectionResult? _rightWallDetectionResult;
 
   [SerializeField]
   private Canvas _canvas;

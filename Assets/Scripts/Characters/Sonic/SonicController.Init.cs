@@ -27,11 +27,11 @@ public partial class SonicController
     _timerSystem = new();
     _viewRotatorProvider = new();
 
+    _configs = new(_physicsMode);
     _inputSystem = new(GetPlayerInput);
     _sensorRayLengths = new(OLength, TopUDFLengths, BottomUDFLengths);
-    _speedConfig = new(TopSpeed, FrictionSpeed, MinSkiddingSpeed, AccelerationSpeed, DecelerationSpeed, AirTopSpeed, AirAccelerationSpeed, MaxFallSpeed, RollFrictionSpeed, RollDecelerationSpeed, JumpSpeed, JumpCutoffSpeed);
-    _speedSystem = new(_inputSystem, _speedConfig, _slopeSpeedProvider, _airToGroundSpeedProvider, _groundToAirSpeedProvider, _gravitySpeedProvider);
-    _viewSystem = new(_inputSystem, _viewRotatorProvider);
+    _speedSystem = new(_configs, _inputSystem, _slopeSpeedProvider, _airToGroundSpeedProvider, _groundToAirSpeedProvider, _gravitySpeedProvider);
+    _viewSystem = new(_configs, _inputSystem, _viewRotatorProvider);
 
     SetEffectPipeline();
   }
@@ -89,10 +89,8 @@ public partial class SonicController
 
   private void InitializeSpeedSystemProviders()
   {
-    var gravitySpeed = new GravitySpeed(GravityUpSpeed, GravityDownSpeed);
-
     _gravitySpeedProvider
-      .When(() => _groundInfoSystem.Current.Side == GroundSide.Down, () => gravitySpeed);
+      .When(() => _groundInfoSystem.Current.Side == GroundSide.Down, () => _configs.PhysicsModeConfig.GravitySpeed);
 
     _slopeSpeedProvider
       .When(() => _groundInfoSystem.Current.Side == GroundSide.Down, () => _slopeFactor * Mathf.Sin(_groundInfoSystem.Current.AngleRad))
