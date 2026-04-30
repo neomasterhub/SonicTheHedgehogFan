@@ -23,8 +23,9 @@ public partial class SonicController
     return PipelineStepBuilder.Create()
       .WithDisplayName("Jumping/Exit")
       .WithCondition(() =>
-        !_isGrounded
-        && _speedSystem.SpeedY <= 0)
+        _isJumping
+        && ((_isGrounded && !_prevIsGrounded) // double jump
+        || (!_isGrounded && _speedSystem.SpeedY <= 0)))
       .WithAction(() =>
       {
         _isJumping = false;
@@ -39,8 +40,8 @@ public partial class SonicController
     return PipelineStepBuilder.Create()
       .WithDisplayName("Jumping/Enter")
       .WithCondition(() =>
-        _isGrounded
-        && !_isJumping
+        !_isJumping
+        && _isGrounded
         && _inputSystem.Pressed.HasAny(PlayerInput.C))
       .WithAction(() =>
       {
@@ -75,8 +76,7 @@ public partial class SonicController
     return PipelineStepBuilder.Create()
       .WithDisplayName("Curling up/Exit")
       .WithCondition(() =>
-        _isDownGroundedStatic
-        && _isCurlingUp
+        _isCurlingUp
         && _inputSystem.Released == PlayerInput.Down)
       .WithAction(() =>
       {
@@ -111,8 +111,7 @@ public partial class SonicController
     return PipelineStepBuilder.Create()
       .WithDisplayName("Looking up/Exit")
       .WithCondition(() =>
-        _isDownGroundedStatic
-        && _isLookingUp
+        _isLookingUp
         && _inputSystem.Released == PlayerInput.Up)
       .WithAction(() =>
       {
@@ -165,8 +164,8 @@ public partial class SonicController
     return PipelineStepBuilder.Create()
       .WithDisplayName("Start input unlock timer")
       .WithCondition(() =>
-        _isGrounded
-        && _isFallingOffWall)
+        _isFallingOffWall
+        && _isGrounded)
       .WithAction(() =>
       {
         _isFallingOffWall = false;
