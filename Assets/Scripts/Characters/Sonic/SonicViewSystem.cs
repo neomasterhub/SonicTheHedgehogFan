@@ -6,6 +6,7 @@ using AnimatorStates = SharedConsts.Animator.States;
 
 public class SonicViewSystem
 {
+  private readonly SonicConfigs _configs;
   private readonly PlayerInputSystem _inputSystem;
   private readonly PlayerViewRotatorProvider<SonicViewRotatorContext> _rotatorProvider;
 
@@ -14,8 +15,9 @@ public class SonicViewSystem
   private SonicViewContext _context;
   private SpriteRenderer _spriteRenderer;
 
-  public SonicViewSystem(PlayerInputSystem inputSystem, PlayerViewRotatorProvider<SonicViewRotatorContext> rotatorProvider)
+  public SonicViewSystem(SonicConfigs configs, PlayerInputSystem inputSystem, PlayerViewRotatorProvider<SonicViewRotatorContext> rotatorProvider)
   {
+    _configs = configs;
     _inputSystem = inputSystem;
     _rotatorProvider = rotatorProvider;
   }
@@ -65,7 +67,7 @@ public class SonicViewSystem
     {
       _animator.speed = Mathf.Max(
         WalkingSpeedMin,
-        animatorParameterSpeed / TopSpeed * WalkingSpeedFactor);
+        animatorParameterSpeed / _configs.PhysicsModeConfig.TopSpeed * WalkingSpeedFactor);
 
       return;
     }
@@ -74,7 +76,7 @@ public class SonicViewSystem
     {
       _animator.speed = Mathf.Max(
         RollingSpeedMin,
-        animatorParameterSpeed / TopSpeed * RollingSpeedFactor);
+        animatorParameterSpeed / _configs.PhysicsModeConfig.TopSpeed * RollingSpeedFactor);
     }
   }
 

@@ -31,7 +31,7 @@ public partial class SonicController
     _inputSystem = new(GetPlayerInput);
     _sensorRayLengths = new(OLength, TopUDFLengths, BottomUDFLengths);
     _speedSystem = new(_configs, _inputSystem, _slopeSpeedProvider, _airToGroundSpeedProvider, _groundToAirSpeedProvider, _gravitySpeedProvider);
-    _viewSystem = new(_inputSystem, _viewRotatorProvider);
+    _viewSystem = new(_configs, _inputSystem, _viewRotatorProvider);
 
     SetEffectPipeline();
   }
