@@ -5,25 +5,22 @@ public static class SonicConsts
 {
   public static class Physics
   {
-    public const float InputUnlockTimerSeconds = 0.5f;
-    public const float MinSkiddingSpeed = 0.1f;
-
-    public const float AccelerationSpeedSpx = 12;
-    public const float DecelerationSpeedSpx = 128;
-    public const float FrictionSpeedSpx = 12;
-    public const float TopSpeedPx = 6;
-    public const float AirAccelerationSpeedSpx = 14;
-    public const float AirTopSpeedPx = 6;
-    public const float GravityDownSpeedSpx = 56;
-    public const float GravityUpSpeedSpx = 16;
-    public const float MaxFallSpeedPx = 16;
-    public const float SlopeFactorSpx = 32;
-    public const float RollDecelerationSpeedSpx = 32;
-    public const float RollFrictionSpeedSpx = 6;
-    public const float RollUphillSlopeFactorSpx = 20;
-    public const float RollDownhillSlopeFactorSpx = 80;
-    public const float JumpSpeedPx = 3.8f;
-    public const float JumpCutoffSpeedPx = 2;
+    private const float AccelerationSpeedSpx = 12;
+    private const float DecelerationSpeedSpx = 128;
+    private const float FrictionSpeedSpx = 12;
+    private const float TopSpeedPx = 6;
+    private const float AirAccelerationSpeedSpx = 14;
+    private const float AirTopSpeedPx = 6;
+    private const float GravityDownSpeedSpx = 56;
+    private const float GravityUpSpeedSpx = 16;
+    private const float MaxFallSpeedPx = 16;
+    private const float SlopeFactorSpx = 32;
+    private const float RollDecelerationSpeedSpx = 32;
+    private const float RollFrictionSpeedSpx = 6;
+    private const float RollUphillSlopeFactorSpx = 20;
+    private const float RollDownhillSlopeFactorSpx = 80;
+    private const float JumpSpeedPx = 3.8f;
+    private const float JumpCutoffSpeedPx = 2;
 
     public const float AccelerationSpeed = AccelerationSpeedSpx / SpxPerUnit;
     public const float DecelerationSpeed = DecelerationSpeedSpx / SpxPerUnit;
@@ -42,6 +39,8 @@ public static class SonicConsts
     public const float JumpSpeed = JumpSpeedPx / PxPerUnit;
     public const float JumpCutoffSpeed = JumpCutoffSpeedPx / PxPerUnit;
 
+    public const float MinSkiddingSpeed = 0.1f;
+    public const float InputUnlockTimerSeconds = 0.5f;
     public const float OLength = Sizes.Big.VRadius + 0.4f;
     public static readonly Vector3 TopUDFLengths = new(0.3f, 0.3f, 0.5f);
     public static readonly Vector3 BottomUDFLengths = new(0.3f, 0.1f, 0.5f);
