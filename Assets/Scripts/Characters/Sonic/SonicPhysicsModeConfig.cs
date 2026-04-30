@@ -2,6 +2,7 @@ public readonly struct SonicPhysicsModeConfig
 {
   public readonly float AccelerationSpeed;
   public readonly float DecelerationSpeed;
+  public readonly float MinSkiddingSpeed;
   public readonly float FrictionSpeed;
   public readonly float TopSpeed;
   public readonly float AirAccelerationSpeed;
@@ -17,10 +18,11 @@ public readonly struct SonicPhysicsModeConfig
   public readonly float JumpSpeed;
   public readonly float JumpCutoffSpeed;
 
-  public SonicPhysicsModeConfig(float accelerationSpeed, float decelerationSpeed, float frictionSpeed, float topSpeed, float airAccelerationSpeed, float airTopSpeed, float gravityDownSpeed, float gravityUpSpeed, float maxFallSpeed, float slopeFactor, float rollDecelerationSpeed, float rollFrictionSpeed, float rollUphillSlopeFactor, float rollDownhillSlopeFactor, float jumpSpeed, float jumpCutoffSpeed)
+  public SonicPhysicsModeConfig(float accelerationSpeed, float decelerationSpeed, float minSkiddingSpeed, float frictionSpeed, float topSpeed, float airAccelerationSpeed, float airTopSpeed, float gravityDownSpeed, float gravityUpSpeed, float maxFallSpeed, float slopeFactor, float rollDecelerationSpeed, float rollFrictionSpeed, float rollUphillSlopeFactor, float rollDownhillSlopeFactor, float jumpSpeed, float jumpCutoffSpeed)
   {
     AccelerationSpeed = accelerationSpeed;
     DecelerationSpeed = decelerationSpeed;
+    MinSkiddingSpeed = minSkiddingSpeed;
     FrictionSpeed = frictionSpeed;
     TopSpeed = topSpeed;
     AirAccelerationSpeed = airAccelerationSpeed;
