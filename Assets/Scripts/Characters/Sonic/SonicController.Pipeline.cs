@@ -13,6 +13,7 @@ public partial class SonicController
   {
     BeginFrame();
     UpdateInput();
+    UpdateConfigs();
     AnalyzeEnvironment();
     ApplyEffects();
     ApplyMovement();
@@ -46,6 +47,11 @@ public partial class SonicController
     {
       _showDebugInfo = !_showDebugInfo;
     }
+  }
+
+  private void UpdateConfigs()
+  {
+    _configs.Update(_physicsMode);
   }
 
   private void AnalyzeEnvironment()
@@ -195,20 +201,20 @@ public partial class SonicController
     }
   }
 
-  private float GetSlopeFactor()
+  private float GetSlopeFactor(SonicPhysicsModeConfig config)
   {
     if (!_isRolling)
     {
-      return SlopeFactor;
+      return config.SlopeFactor;
     }
 
     if (Mathf.Sign(_speedSystem.GroundSpeed) == Mathf.Sign(_groundInfoSystem.Current.SideAngleDeg))
     {
-      return RollUphillSlopeFactor;
+      return config.RollUphillSlopeFactor;
     }
     else
     {
-      return RollDownhillSlopeFactor;
+      return config.RollDownhillSlopeFactor;
     }
   }
 
