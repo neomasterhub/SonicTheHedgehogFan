@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using static SharedConsts.Physics;
+using static SonicConsts.Physics;
 
 public class SonicSpeedSystem
 {
@@ -12,7 +13,6 @@ public class SonicSpeedSystem
   private readonly ConditionalValueProvider<Vector2> _groundToAirSpeedProvider;
   private readonly ConditionalValueProvider<GravitySpeed> _gravitySpeedProvider;
   private readonly PlayerInputSystem _inputSystem;
-  private readonly SonicPhysicsModeConfig _config;
 
   private bool _friction;
   private float _accSpeed;
@@ -22,6 +22,7 @@ public class SonicSpeedSystem
   private float _groundAngleCos;
   private float _groundAngleSin;
   private SonicSpeedContext _context;
+  private SonicPhysicsModeConfig _config;
 
   public SonicSpeedSystem(
     PlayerInputSystem inputSystem,
@@ -66,6 +67,8 @@ public class SonicSpeedSystem
   {
     _context = context;
 
+    SetConfig();
+
     _reverseStartSpeed = _config.DecelerationSpeed;
 
     if (_context.IsRolling)
@@ -95,6 +98,15 @@ public class SonicSpeedSystem
     }
 
     RoundSpeeds();
+  }
+
+  private void SetConfig()
+  {
+    _config = _context.PhysicsMode switch
+    {
+      PhysicsMode.Normal => NormalConfig,
+      _ => throw _context.PhysicsMode.ArgumentOutOfRangeException(),
+    };
   }
 
   private void SetSpeed_Airborne()
