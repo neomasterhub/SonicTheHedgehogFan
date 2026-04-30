@@ -29,8 +29,7 @@ public partial class SonicController
 
     _inputSystem = new(GetPlayerInput);
     _sensorRayLengths = new(OLength, TopUDFLengths, BottomUDFLengths);
-    _speedConfig = new(TopSpeed, FrictionSpeed, MinSkiddingSpeed, AccelerationSpeed, DecelerationSpeed, AirTopSpeed, AirAccelerationSpeed, MaxFallSpeed, RollFrictionSpeed, RollDecelerationSpeed, JumpSpeed, JumpCutoffSpeed);
-    _speedSystem = new(_inputSystem, _speedConfig, _slopeSpeedProvider, _airToGroundSpeedProvider, _groundToAirSpeedProvider, _gravitySpeedProvider);
+    _speedSystem = new(_inputSystem, _slopeSpeedProvider, _airToGroundSpeedProvider, _groundToAirSpeedProvider, _gravitySpeedProvider);
     _viewSystem = new(_inputSystem, _viewRotatorProvider);
 
     SetEffectPipeline();

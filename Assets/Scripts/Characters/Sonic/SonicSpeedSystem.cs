@@ -12,7 +12,7 @@ public class SonicSpeedSystem
   private readonly ConditionalValueProvider<Vector2> _groundToAirSpeedProvider;
   private readonly ConditionalValueProvider<GravitySpeed> _gravitySpeedProvider;
   private readonly PlayerInputSystem _inputSystem;
-  private readonly SonicSpeedConfig _config;
+  private readonly SonicPhysicsModeConfig _config;
 
   private bool _friction;
   private float _accSpeed;
@@ -25,14 +25,12 @@ public class SonicSpeedSystem
 
   public SonicSpeedSystem(
     PlayerInputSystem inputSystem,
-    SonicSpeedConfig config,
     ConditionalValueProvider<float> slopeSpeedProvider,
     ConditionalValueProvider<Vector2> airToGroundSpeedProvider,
     ConditionalValueProvider<Vector2> groundToAirSpeedProvider,
     ConditionalValueProvider<GravitySpeed> gravitySpeedProvider)
   {
     _inputSystem = inputSystem;
-    _config = config;
     _slopeSpeedProvider = slopeSpeedProvider;
     _airToGroundSpeedProvider = airToGroundSpeedProvider;
     _groundToAirSpeedProvider = groundToAirSpeedProvider;
