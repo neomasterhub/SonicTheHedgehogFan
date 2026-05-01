@@ -10,6 +10,11 @@ public static class SharedConsts
     public const int SpxPerUnit = SpxPerPx * PxPerUnit;
   }
 
+  public static class UI
+  {
+    public const float DebugScale = 10000;
+  }
+
   public static class Input
   {
     public const int PressedHistoryCapacity = 10;

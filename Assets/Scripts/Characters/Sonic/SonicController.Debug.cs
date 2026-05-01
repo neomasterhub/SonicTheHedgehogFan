@@ -1,3 +1,5 @@
+using static SharedConsts.UI;
+
 /// <summary>
 /// Debug.
 /// </summary>
@@ -53,16 +55,15 @@ public partial class SonicController
     _diagnosticsText
       .Clear()
       .AppendLine($"ENV {(_isGrounded ? "Ground" : "Air")}")
-      .AppendLine()
       .AppendLine($"INP {GetInputState()}")
       .AppendLine($"INH {_inputSystem.GetPressedHistory()}")
-      .AppendLine()
-      .AppendLine($"GP {_groundInfoSystem.Previous}")
-      .AppendLine($"GC {_groundInfoSystem.Current}")
-      .AppendLine($"GS {_speedSystem.SlopeSpeed * 10000,5:0;-0;0} {_speedSystem.GroundSpeed * 10000,5:0;-0;0}")
-      .AppendLine($"SP {_speedSystem.SpeedX * 10000,5:0;-0;0} {_speedSystem.SpeedY * 10000,5:0;-0;0}")
-      .AppendLine($"SLF {_slopeFactor * 10000,4:0}")
-      .AppendLine()
+      .AppendLine($"GR1 {_groundInfoSystem.Previous}")
+      .AppendLine($"GR2 {_groundInfoSystem.Current}")
+      .AppendLine($"GRV {_speedSystem.GravitySpeed * DebugScale:0}")
+      .AppendLine($"SLF {_slopeFactor * DebugScale:0}")
+      .AppendLine($"SLS {_speedSystem.SlopeSpeed * DebugScale:0;-0;0}")
+      .AppendLine($"GRS {_speedSystem.GroundSpeed * DebugScale:0;-0;0}")
+      .AppendLine($"SP {_speedSystem.SpeedX * DebugScale:0;-0;0} {_speedSystem.SpeedY * DebugScale:0;-0;0}")
       .AppendLine($"RT {_viewSystem.Rotator}")
       .AppendLine($"WL {GetWallInfo(_leftWallDetectionResult)}")
       .AppendLine($"WR {GetWallInfo(_rightWallDetectionResult)}")
@@ -75,15 +76,15 @@ public partial class SonicController
   {
     if (_isFallingOffWall)
     {
-      return "OFF";
+      return "off";
     }
 
     if (_inputUnlockTimer.IsRunning)
     {
-      return $"OFF {_inputUnlockTimer.RemainingSeconds:0.0000}";
+      return $"off {_inputUnlockTimer.RemainingSeconds:0.0000}";
     }
 
-    return "ON";
+    return "on";
   }
 
   private string GetWallInfo(WallDetectionResult? wall)
@@ -93,6 +94,6 @@ public partial class SonicController
       return string.Empty;
     }
 
-    return $"{wall.Value.AngleDeg,5:0;-0;0} {wall.Value.Distance * 10000,5:0}";
+    return $"{wall.Value.AngleDeg:0;-0;0}° {wall.Value.Distance * DebugScale:0}";
   }
 }
