@@ -216,7 +216,7 @@ public partial class SonicController
     {
       if (sideAngle == 0)
       {
-        return 0;
+        return config.RollUphillSlopeFactor;
       }
 
       return Mathf.Sign(_speedSystem.GroundSpeed) == Mathf.Sign(sideAngle)
@@ -224,7 +224,14 @@ public partial class SonicController
         : config.RollDownhillSlopeFactor;
     }
 
-    return -1;
+    if (sideAngle == 0)
+    {
+      return config.RollUphillSlopeFactor;
+    }
+
+    return Mathf.Sign(_speedSystem.GroundSpeed) == Mathf.Sign(sideAngle)
+      ? config.RollDownhillSlopeFactor
+      : config.RollUphillSlopeFactor;
   }
 
   private SonicSensorFlags GetSensorFlags()
