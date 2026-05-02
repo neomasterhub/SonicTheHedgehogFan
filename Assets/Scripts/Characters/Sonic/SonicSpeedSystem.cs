@@ -109,6 +109,8 @@ public class SonicSpeedSystem
   private void SetSpeed_Airborne()
   {
     IsSkidding = false;
+    SlopeSpeed = 0;
+
     SetSpeed_Airborne_FromGrounded();
     SetSpeed_Airborne_Gravity();
     SetSpeed_Airborne_PreventGroundOvershoot();
