@@ -42,6 +42,7 @@ public partial class SonicController
       .WithCondition(() =>
         !_isJumping
         && _isGrounded
+        && !(_isCurlingUp || _isLookingUp)
         && _inputSystem.Pressed.HasAny(PlayerInput.C))
       .WithAction(() =>
       {
