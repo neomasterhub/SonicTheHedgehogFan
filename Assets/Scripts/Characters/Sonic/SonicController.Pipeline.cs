@@ -198,6 +198,11 @@ public partial class SonicController
 
   private float GetSlopeFactor(SonicPhysicsModeConfig config)
   {
+    if (_groundInfoSystem.Current.Side == GroundSide.Up)
+    {
+      return 0;
+    }
+
     if (!_isRolling)
     {
       return config.SlopeFactor;
