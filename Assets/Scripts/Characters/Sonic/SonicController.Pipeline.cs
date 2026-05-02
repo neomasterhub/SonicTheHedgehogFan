@@ -198,19 +198,35 @@ public partial class SonicController
 
   private float GetSlopeFactor(SonicPhysicsModeConfig config)
   {
+    var side = _groundInfoSystem.Current.Side;
+
+    if (side == GroundSide.Up)
+    {
+      return 0;
+    }
+
     if (!_isRolling)
     {
       return config.SlopeFactor;
     }
 
-    if (Mathf.Sign(_speedSystem.GroundSpeed) == Mathf.Sign(_groundInfoSystem.Current.SideAngleDeg))
+    var sideAngle = _groundInfoSystem.Current.SideAngleDeg;
+
+    if (sideAngle == 0)
     {
       return config.RollUphillSlopeFactor;
     }
-    else
+
+    if (side == GroundSide.Down)
     {
-      return config.RollDownhillSlopeFactor;
+      return Mathf.Sign(_speedSystem.GroundSpeed) == Mathf.Sign(sideAngle)
+        ? config.RollUphillSlopeFactor
+        : config.RollDownhillSlopeFactor;
     }
+
+    return Mathf.Sign(_speedSystem.GroundSpeed) == Mathf.Sign(sideAngle)
+      ? config.RollDownhillSlopeFactor
+      : config.RollUphillSlopeFactor;
   }
 
   private SonicSensorFlags GetSensorFlags()
