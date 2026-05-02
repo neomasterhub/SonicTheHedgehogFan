@@ -203,7 +203,7 @@ public partial class SonicController
       .WithCondition(() =>
         _isGrounded
         && !_isDownGrounded
-        && _absGroundSpeed < _configs.PhysicsModeConfig.DecelerationSpeed)
+        && _absGroundSpeed < _speedSystem.MinWallSpeed)
       .WithAction(() =>
       {
         _isFallingOffWall = true;
