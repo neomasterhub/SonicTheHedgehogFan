@@ -212,21 +212,16 @@ public partial class SonicController
 
     var sideAngle = _groundInfoSystem.Current.SideAngleDeg;
 
-    if (side == GroundSide.Down)
-    {
-      if (sideAngle == 0)
-      {
-        return config.RollUphillSlopeFactor;
-      }
-
-      return Mathf.Sign(_speedSystem.GroundSpeed) == Mathf.Sign(sideAngle)
-        ? config.RollUphillSlopeFactor
-        : config.RollDownhillSlopeFactor;
-    }
-
     if (sideAngle == 0)
     {
       return config.RollUphillSlopeFactor;
+    }
+
+    if (side == GroundSide.Down)
+    {
+      return Mathf.Sign(_speedSystem.GroundSpeed) == Mathf.Sign(sideAngle)
+        ? config.RollUphillSlopeFactor
+        : config.RollDownhillSlopeFactor;
     }
 
     return Mathf.Sign(_speedSystem.GroundSpeed) == Mathf.Sign(sideAngle)
