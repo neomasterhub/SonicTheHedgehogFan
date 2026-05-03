@@ -98,8 +98,8 @@ public class SonicSpeedSystem
       _friction = true;
       _frictionSpeed = _config.RollFrictionSpeed;
 
-      MinWallSpeed = _config.MinWallSpeed;
-      MinCeilingSpeed = _config.MinCeilingSpeed;
+      MinWallSpeed = _config.RollMinWallSpeed;
+      MinCeilingSpeed = _config.RollMinCeilingSpeed;
     }
     else
     {
@@ -109,8 +109,8 @@ public class SonicSpeedSystem
       _friction = _inputSystem.X == 0;
       _frictionSpeed = _config.FrictionSpeed;
 
-      MinWallSpeed = _config.RollMinWallSpeed;
-      MinCeilingSpeed = _config.RollMinCeilingSpeed;
+      MinWallSpeed = _config.MinWallSpeed;
+      MinCeilingSpeed = _config.MinCeilingSpeed;
     }
   }
 

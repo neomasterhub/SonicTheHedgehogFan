@@ -223,12 +223,10 @@ public partial class SonicController
       .WithDisplayName("Ceiling detach")
       .WithCondition(() =>
         _isUpGrounded
-        && _absGroundSpeed < _speedSystem.MinCeilingSpeed)
+        && (_absGroundSpeed < _speedSystem.MinCeilingSpeed
+        || (!_isRolling && !_inputSystem.Held.HasAny(PlayerInput.Left | PlayerInput.Right))))
       .WithAction(() =>
       {
-        _isFallingOffWall = true;
-        _postWallDetachInputLock = true;
-        _postWallDetachPositionOffset = true;
         AnalyzeEnvironment_Airborn();
 
         return PipelineStepResult.Break;

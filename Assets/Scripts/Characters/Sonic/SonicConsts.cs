@@ -19,7 +19,7 @@ public static class SonicConsts
       Normal.MinSkiddingSpeedPx / PxPerUnit,
       Normal.FrictionSpeedSpx / SpxPerUnit,
       Normal.MinWallSpeedSpx / SpxPerUnit,
-      Normal.MinCeilingSpeedSpx / SpxPerUnit,
+      Normal.MinCeilingSpeedPx / PxPerUnit,
       Normal.TopSpeedPx / PxPerUnit,
       Normal.AirAccelerationSpeedSpx / SpxPerUnit,
       Normal.AirTopSpeedPx / PxPerUnit,
@@ -43,7 +43,7 @@ public static class SonicConsts
       public const float MinSkiddingSpeedPx = 4;
       public const float FrictionSpeedSpx = 12;
       public const float MinWallSpeedSpx = 128;
-      public const float MinCeilingSpeedSpx = 256;
+      public const float MinCeilingSpeedPx = 2.5f;
       public const float TopSpeedPx = 6;
       public const float AirAccelerationSpeedSpx = 14;
       public const float AirTopSpeedPx = 6;
@@ -56,7 +56,7 @@ public static class SonicConsts
       public const float RollUphillSlopeFactorSpx = 20;
       public const float RollDownhillSlopeFactorSpx = 80;
       public const float RollMinWallSpeedSpx = 32;
-      public const float RollMinCeilingSpeedSpx = 64;
+      public const float RollMinCeilingSpeedSpx = 128;
       public const float JumpSpeedPx = 3.8f;
       public const float JumpCutoffSpeedPx = 2;
     }
