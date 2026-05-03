@@ -88,6 +88,7 @@ public static class SonicConsts
     public const float WalkingSpeedMin = 0.5f;
     public const float WalkingSpeedFactor = 3;
     public const float StandingStraightAngleDegMax = 38;
-    public const float WallToAirViewRotatorAngleDegDelta = 3;
+    public const float WallToAirAngleDegDelta = 3;
+    public const float CeilingToAirAngleDegDelta = 6;
   }
 }
