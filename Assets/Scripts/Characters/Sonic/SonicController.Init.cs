@@ -167,17 +167,19 @@ public partial class SonicController
 
   private PlayerInput GetPlayerInput()
   {
-    if (_postWallDetachDpadLock)
+    var input = PlayerInput.None;
+
+    if (!_postWallDetachDpadLock)
     {
-      return PlayerInput.None;
+      input = input
+        .Set(PlayerInput.Up, Input.GetKey(KeyCode.UpArrow))
+        .Set(PlayerInput.Down, Input.GetKey(KeyCode.DownArrow))
+        .Set(PlayerInput.Left, Input.GetKey(KeyCode.LeftArrow))
+        .Set(PlayerInput.Right, Input.GetKey(KeyCode.RightArrow));
     }
 
-    return PlayerInput.None
+    return input
       .Set(PlayerInput.Start, Input.GetKey(KeyCode.KeypadEnter))
-      .Set(PlayerInput.Left, Input.GetKey(KeyCode.LeftArrow))
-      .Set(PlayerInput.Right, Input.GetKey(KeyCode.RightArrow))
-      .Set(PlayerInput.Up, Input.GetKey(KeyCode.UpArrow))
-      .Set(PlayerInput.Down, Input.GetKey(KeyCode.DownArrow))
       .Set(PlayerInput.A, Input.GetKey(KeyCode.Keypad1))
       .Set(PlayerInput.B, Input.GetKey(KeyCode.Keypad2))
       .Set(PlayerInput.C, Input.GetKey(KeyCode.Keypad3))
