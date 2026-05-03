@@ -13,7 +13,7 @@ public partial class SonicController
     _effects.AddStep(CreateEffect_LookingUp_Exit());
     _effects.AddStep(CreateEffect_LookingUp_Enter());
     _effects.AddStep(CreateEffect_Static_Exit());
-    _effects.AddStep(CreateEffect_StartInputUnlockTimer());
+    _effects.AddStep(CreateEffect_StartDpadUnlockTimer());
     _effects.AddStep(CreateEffect_Rolling_Enter());
     _effects.AddStep(CreateEffect_WallDetach());
     _effects.AddStep(CreateEffect_CeilingDetach());
@@ -161,17 +161,17 @@ public partial class SonicController
       .Build();
   }
 
-  private PipelineStep CreateEffect_StartInputUnlockTimer()
+  private PipelineStep CreateEffect_StartDpadUnlockTimer()
   {
     return PipelineStepBuilder.Create()
-      .WithDisplayName("Start input unlock timer")
+      .WithDisplayName("Start D-pad unlock timer")
       .WithCondition(() =>
         _isFallingOffWall
         && _isGrounded)
       .WithAction(() =>
       {
         _isFallingOffWall = false;
-        _timerSystem.StartIfNotRunning(_inputUnlockTimer);
+        _timerSystem.StartIfNotRunning(_dpadUnlockTimer);
 
         return PipelineStepResult.Break;
       })
@@ -208,7 +208,7 @@ public partial class SonicController
       .WithAction(() =>
       {
         _isFallingOffWall = true;
-        _postWallDetachInputLock = true;
+        _postWallDetachDpadLock = true;
         _postWallDetachPositionOffset = true;
         AnalyzeEnvironment_Airborn();
 
