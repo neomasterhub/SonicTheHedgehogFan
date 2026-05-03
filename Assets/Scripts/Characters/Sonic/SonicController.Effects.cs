@@ -224,12 +224,9 @@ public partial class SonicController
       .WithCondition(() =>
         _isUpGrounded
         && (_absGroundSpeed < _speedSystem.MinCeilingSpeed
-        || !_inputSystem.Held.HasAny(PlayerInput.Left | PlayerInput.Right)))
+        || (!_isRolling && !_inputSystem.Held.HasAny(PlayerInput.Left | PlayerInput.Right))))
       .WithAction(() =>
       {
-        _isFallingOffWall = true;
-        _postWallDetachInputLock = true;
-        _postWallDetachPositionOffset = true;
         AnalyzeEnvironment_Airborn();
 
         return PipelineStepResult.Break;
