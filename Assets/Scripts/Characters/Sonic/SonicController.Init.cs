@@ -149,8 +149,8 @@ public partial class SonicController
 
   private void InitializeTimers()
   {
-    _inputUnlockTimer = new Timer(InputUnlockTimerSeconds)
-      .WhenCompleted(() => _postWallDetachInputLock = false);
+    _dpadUnlockTimer = new Timer(DpadUnlockTimerSeconds)
+      .WhenCompleted(() => _postWallDetachDpadLock = false);
   }
 
   private void InitializeGroundNormal()
@@ -167,7 +167,7 @@ public partial class SonicController
 
   private PlayerInput GetPlayerInput()
   {
-    if (_postWallDetachInputLock)
+    if (_postWallDetachDpadLock)
     {
       return PlayerInput.None;
     }

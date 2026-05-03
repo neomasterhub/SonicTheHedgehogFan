@@ -79,9 +79,9 @@ public partial class SonicController
       return "off";
     }
 
-    if (_inputUnlockTimer.IsRunning)
+    if (_dpadUnlockTimer.IsRunning)
     {
-      return $"off {_inputUnlockTimer.RemainingSeconds:0.0000}";
+      return $"off {_dpadUnlockTimer.RemainingSeconds:0.0000}";
     }
 
     return "on";

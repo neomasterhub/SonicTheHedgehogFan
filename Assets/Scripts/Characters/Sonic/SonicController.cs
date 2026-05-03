@@ -38,7 +38,7 @@ public partial class SonicController
   private bool _isJumping;
   private bool _prevIsGrounded;
   private bool _prevIsRolling;
-  private bool _postWallDetachInputLock;
+  private bool _postWallDetachDpadLock;
   private bool _postWallDetachPositionOffset;
   private bool _triggeredGroundSensorSide;
   private bool _isDownGrounded;
@@ -66,7 +66,7 @@ public partial class SonicController
   private SpriteRenderer _spriteRenderer;
   private TextMeshProUGUI _diagnosticsTextMesh;
   private TextMeshProUGUI _effectHistoryTextMesh;
-  private Timer _inputUnlockTimer;
+  private Timer _dpadUnlockTimer;
   private WallDetectionResult? _leftWallDetectionResult;
   private WallDetectionResult? _rightWallDetectionResult;
 

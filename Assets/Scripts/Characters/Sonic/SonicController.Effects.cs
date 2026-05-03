@@ -171,7 +171,7 @@ public partial class SonicController
       .WithAction(() =>
       {
         _isFallingOffWall = false;
-        _timerSystem.StartIfNotRunning(_inputUnlockTimer);
+        _timerSystem.StartIfNotRunning(_dpadUnlockTimer);
 
         return PipelineStepResult.Break;
       })
@@ -208,7 +208,7 @@ public partial class SonicController
       .WithAction(() =>
       {
         _isFallingOffWall = true;
-        _postWallDetachInputLock = true;
+        _postWallDetachDpadLock = true;
         _postWallDetachPositionOffset = true;
         AnalyzeEnvironment_Airborn();
 
