@@ -82,9 +82,15 @@ public partial class SonicController
       && _prevIsGrounded
       && _groundInfoSystem.Previous.Side is GroundSide.Left or GroundSide.Right);
 
+    var rotCeilingToAir = new CeilingToAirSonicViewRotator(() =>
+      !_isGrounded
+      && _prevIsGrounded
+      && _groundInfoSystem.Previous.Side == GroundSide.Up);
+
     _viewRotatorProvider
       .Add(rotGrounded)
-      .Add(rotWallToAir);
+      .Add(rotWallToAir)
+      .Add(rotCeilingToAir);
   }
 
   private void InitializeSpeedSystemProviders()
