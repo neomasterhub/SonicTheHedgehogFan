@@ -5,7 +5,6 @@ public static class SonicConsts
 {
   public static class Physics
   {
-    public const float MinSkiddingSpeed = 0.1f;
     public const float InputUnlockTimerSeconds = 0.5f;
     public const float OLength = Sizes.Big.VRadius + 0.4f;
     public static readonly Vector3 TopUDFLengths = new(0.3f, 0.3f, 0.5f);
