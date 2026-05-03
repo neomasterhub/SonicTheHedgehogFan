@@ -79,11 +79,13 @@ public partial class SonicController
 
     var rotWallToAir = new WallToAirSonicViewRotator(() =>
       !_isGrounded
+      && !_isRolling
       && _prevIsGrounded
       && _groundInfoSystem.Previous.Side is GroundSide.Left or GroundSide.Right);
 
     var rotCeilingToAir = new CeilingToAirSonicViewRotator(() =>
       !_isGrounded
+      && !_isRolling
       && _prevIsGrounded
       && _groundInfoSystem.Previous.Side == GroundSide.Up);
 
