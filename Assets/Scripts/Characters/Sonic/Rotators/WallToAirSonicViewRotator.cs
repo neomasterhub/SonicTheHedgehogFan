@@ -9,7 +9,7 @@ public class WallToAirSonicViewRotator
   private float _z;
 
   public WallToAirSonicViewRotator(Func<bool> condition)
-    : base("Wall→Air", condition)
+    : base("Wall-Air", condition)
   {
   }
 
