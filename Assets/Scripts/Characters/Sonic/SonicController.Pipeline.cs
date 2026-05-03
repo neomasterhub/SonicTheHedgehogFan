@@ -78,6 +78,8 @@ public partial class SonicController
     _isDownGrounded = _groundInfoSystem.Current.Side == GroundSide.Down;
     _isDownGroundedStatic = _isDownGrounded && _speedSystem.GroundSpeed == 0;
     _isDownGroundedMoving = _isDownGrounded && _speedSystem.GroundSpeed != 0;
+    _isUpGrounded = _groundInfoSystem.Current.Side == GroundSide.Up;
+    _isWallGrounded = _groundInfoSystem.Current.Side is GroundSide.Left or GroundSide.Right;
 
     _state = SonicState.Grounded
       .Set(SonicState.Balancing, _isBalancing)
@@ -99,6 +101,8 @@ public partial class SonicController
     _isDownGrounded = false;
     _isDownGroundedStatic = false;
     _isDownGroundedMoving = false;
+    _isUpGrounded = false;
+    _isWallGrounded = false;
 
     _state = SonicState.Airborne
       .Set(SonicState.Rolling, _isRolling)
