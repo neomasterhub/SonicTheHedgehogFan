@@ -55,7 +55,7 @@ public partial class SonicController
     _diagnosticsText
       .Clear()
       .AppendLine($"ENV {(_isGrounded ? "Ground" : "Air")}")
-      .AppendLine($"INP {GetInputState()}")
+      .AppendLine($"DPD {GetDpadState()}")
       .AppendLine($"INH {_inputSystem.GetPressedHistory()}")
       .AppendLine($"GR1 {_groundInfoSystem.Previous}")
       .AppendLine($"GR2 {_groundInfoSystem.Current}")
@@ -72,7 +72,7 @@ public partial class SonicController
     _diagnosticsTextMesh.SetText(_diagnosticsText);
   }
 
-  private string GetInputState()
+  private string GetDpadState()
   {
     if (_isFallingOffWall)
     {
