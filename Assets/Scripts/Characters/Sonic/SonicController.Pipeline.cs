@@ -217,16 +217,23 @@ public partial class SonicController
       return config.RollUphillSlopeFactor;
     }
 
-    if (side == GroundSide.Down)
+    if (side == GroundSide.Left)
     {
-      return Mathf.Sign(_speedSystem.GroundSpeed) == Mathf.Sign(sideAngle)
+      return _speedSystem.GroundSpeed < 0
+        ? config.RollUphillSlopeFactor
+        : config.RollDownhillSlopeFactor;
+    }
+
+    if (side == GroundSide.Right)
+    {
+      return _speedSystem.GroundSpeed > 0
         ? config.RollUphillSlopeFactor
         : config.RollDownhillSlopeFactor;
     }
 
     return Mathf.Sign(_speedSystem.GroundSpeed) == Mathf.Sign(sideAngle)
-      ? config.RollDownhillSlopeFactor
-      : config.RollUphillSlopeFactor;
+      ? config.RollUphillSlopeFactor
+      : config.RollDownhillSlopeFactor;
   }
 
   private SonicSensorFlags GetSensorFlags()
