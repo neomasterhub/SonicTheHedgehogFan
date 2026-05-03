@@ -9,7 +9,7 @@ public class CeilingToAirSonicViewRotator
   private float _z;
 
   public CeilingToAirSonicViewRotator(Func<bool> condition)
-    : base("Ceiling-to-Air", condition)
+    : base("Ceiling→Air", condition)
   {
   }
 
