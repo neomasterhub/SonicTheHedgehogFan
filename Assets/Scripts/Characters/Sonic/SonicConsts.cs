@@ -56,7 +56,7 @@ public static class SonicConsts
       public const float RollUphillSlopeFactorSpx = 20;
       public const float RollDownhillSlopeFactorSpx = 80;
       public const float RollMinWallSpeedSpx = 32;
-      public const float RollMinCeilingSpeedSpx = 64;
+      public const float RollMinCeilingSpeedSpx = 128;
       public const float JumpSpeedPx = 3.8f;
       public const float JumpCutoffSpeedPx = 2;
     }
