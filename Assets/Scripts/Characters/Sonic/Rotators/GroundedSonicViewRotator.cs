@@ -15,6 +15,7 @@ public class GroundedSonicViewRotator
   {
     Rotation = Vector3(z:
       context.IsRolling || Mathf.Abs(context.GroundAngleDeg) <= StandingStraightAngleDegMax
-      ? 0 : context.GroundAngleDeg);
+      ? 0
+      : context.GroundAngleDeg);
   }
 }

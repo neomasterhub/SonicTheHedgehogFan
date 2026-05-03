@@ -1,27 +1,23 @@
 using System;
 using static SonicConsts.View;
 
-public class WallToAirSonicViewRotator
+public class CeilingToAirSonicViewRotator
   : PlayerViewRotatorBase<SonicViewRotatorContext>
 {
-  private const float _delta = WallToAirAngleDegDelta;
+  private const float _delta = CeilingToAirAngleDegDelta;
 
   private float _z;
 
-  public WallToAirSonicViewRotator(Func<bool> condition)
-    : base("Wall-to-Air", condition)
+  public CeilingToAirSonicViewRotator(Func<bool> condition)
+    : base("Ceiling-to-Air", condition)
   {
   }
 
   public override void Rotate(SonicViewRotatorContext context)
   {
-    if (context.PrevGroundSide == GroundSide.Left)
+    if (context.PrevGroundSide == GroundSide.Up)
     {
-      _z = -90;
-    }
-    else if (context.PrevGroundSide == GroundSide.Right)
-    {
-      _z = 90;
+      _z = context.HorizontalDirection ? 180 : -180;
     }
 
     if (_z > 0)

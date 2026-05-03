@@ -5,7 +5,6 @@ public static class SonicConsts
 {
   public static class Physics
   {
-    public const float MinSkiddingSpeed = 0.1f;
     public const float InputUnlockTimerSeconds = 0.5f;
     public const float OLength = Sizes.Big.VRadius + 0.4f;
     public static readonly Vector3 TopUDFLengths = new(0.3f, 0.3f, 0.5f);
@@ -89,6 +88,7 @@ public static class SonicConsts
     public const float WalkingSpeedMin = 0.5f;
     public const float WalkingSpeedFactor = 3;
     public const float StandingStraightAngleDegMax = 38;
-    public const float WallToAirViewRotatorAngleDegDelta = 3;
+    public const float WallToAirAngleDegDelta = 3;
+    public const float CeilingToAirAngleDegDelta = 6;
   }
 }
