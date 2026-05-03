@@ -47,6 +47,7 @@ public class SonicSpeedSystem
   public float GroundSpeed { get; private set; }
   public float GravitySpeed { get; private set; }
   public float MinWallSpeed { get; private set; }
+  public float MinCeilingSpeed { get; private set; }
   public int ZeroGroundSpeedProgress { get; private set; }
   public bool IsZeroGroundSpeedProgressReached { get; private set; }
 
@@ -98,6 +99,7 @@ public class SonicSpeedSystem
       _frictionSpeed = _config.RollFrictionSpeed;
 
       MinWallSpeed = _config.MinWallSpeed;
+      MinCeilingSpeed = _config.MinCeilingSpeed;
     }
     else
     {
@@ -108,6 +110,7 @@ public class SonicSpeedSystem
       _frictionSpeed = _config.FrictionSpeed;
 
       MinWallSpeed = _config.RollMinWallSpeed;
+      MinCeilingSpeed = _config.RollMinCeilingSpeed;
     }
   }
 

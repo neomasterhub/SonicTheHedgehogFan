@@ -16,6 +16,7 @@ public partial class SonicController
     _effects.AddStep(CreateEffect_StartInputUnlockTimer());
     _effects.AddStep(CreateEffect_Rolling_Enter());
     _effects.AddStep(CreateEffect_WallDetach());
+    _effects.AddStep(CreateEffect_CeilingDetach());
   }
 
   private PipelineStep CreateEffect_Jumping_Exit()
@@ -202,9 +203,27 @@ public partial class SonicController
     return PipelineStepBuilder.Create()
       .WithDisplayName("Wall detach")
       .WithCondition(() =>
-        _isGrounded
-        && !_isDownGrounded
+        _isWallGrounded
         && _absGroundSpeed < _speedSystem.MinWallSpeed)
+      .WithAction(() =>
+      {
+        _isFallingOffWall = true;
+        _postWallDetachInputLock = true;
+        _postWallDetachPositionOffset = true;
+        AnalyzeEnvironment_Airborn();
+
+        return PipelineStepResult.Break;
+      })
+      .Build();
+  }
+
+  private PipelineStep CreateEffect_CeilingDetach()
+  {
+    return PipelineStepBuilder.Create()
+      .WithDisplayName("Ceiling detach")
+      .WithCondition(() =>
+        _isUpGrounded
+        && _absGroundSpeed < _speedSystem.MinCeilingSpeed)
       .WithAction(() =>
       {
         _isFallingOffWall = true;
