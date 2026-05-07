@@ -13,6 +13,7 @@ public static class SharedConsts
   public static class UI
   {
     public const float DebugScale = 10000;
+    public const int PlayerOrderInLayer = 1;
   }
 
   public static class Input
