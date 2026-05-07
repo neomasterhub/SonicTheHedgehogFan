@@ -202,7 +202,7 @@ public partial class SonicController
     }
   }
 
-  public void UpdateSizes(SonicSizeMode sizeMode)
+  private void SetSizes(SonicSizeMode sizeMode)
   {
     _sizeMode = sizeMode;
     _boxCollider.size = sizeMode == SonicSizeMode.Big ? Big.BoxColliderSize : Small.BoxColliderSize;
