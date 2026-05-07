@@ -10,7 +10,8 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public partial class SonicController
   : MonoBehaviour,
-  ILookVerticalDirectionProvider
+  ILookVerticalDirectionProvider,
+  IRingCollector
 {
   private readonly ConditionalValueProvider<float> _slopeSpeedProvider;
   private readonly ConditionalValueProvider<Vector2> _airToGroundSpeedProvider;
@@ -89,6 +90,7 @@ public partial class SonicController
   [InspectorLabel("Ring")]
   private AudioClip _ringAudioClip;
 
+  public ICollector Rings { get; }
   public VerticalDirection LookVerticalDirection
   {
     get

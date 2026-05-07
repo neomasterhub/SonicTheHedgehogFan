@@ -33,6 +33,8 @@ public partial class SonicController
     _speedSystem = new(_configs, _inputSystem, _slopeSpeedProvider, _airToGroundSpeedProvider, _groundToAirSpeedProvider, _gravitySpeedProvider);
     _viewSystem = new(_configs, _inputSystem, _viewRotatorProvider);
 
+    Rings = new Collector();
+
     SetEffectPipeline();
   }
 
