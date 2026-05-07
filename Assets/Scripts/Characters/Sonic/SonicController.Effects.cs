@@ -49,7 +49,7 @@ public partial class SonicController
       {
         _isJumping = true;
         _isRolling = true;
-        _sizeMode = SonicSizeMode.Small;
+        UpdateSizes(SonicSizeMode.Small);
 
         return PipelineStepResult.Break;
       })
@@ -66,7 +66,7 @@ public partial class SonicController
       .WithAction(() =>
       {
         _isRolling = false;
-        _sizeMode = SonicSizeMode.Big;
+        UpdateSizes(SonicSizeMode.Big);
 
         return PipelineStepResult.Continue;
       })
@@ -82,7 +82,7 @@ public partial class SonicController
         && _inputSystem.Released == PlayerInput.Down)
       .WithAction(() =>
       {
-        _sizeMode = SonicSizeMode.Big;
+        UpdateSizes(SonicSizeMode.Big);
         _isCurlingUp = false;
 
         return PipelineStepResult.Break;
@@ -100,7 +100,7 @@ public partial class SonicController
         && _inputSystem.Held.HasAny(PlayerInput.Down))
       .WithAction(() =>
       {
-        _sizeMode = SonicSizeMode.Small;
+        UpdateSizes(SonicSizeMode.Small);
         _isCurlingUp = true;
 
         return PipelineStepResult.Break;
@@ -150,7 +150,7 @@ public partial class SonicController
       {
         if (_isCurlingUp)
         {
-          _sizeMode = SonicSizeMode.Big;
+          UpdateSizes(SonicSizeMode.Big);
         }
 
         _isCurlingUp = false;
@@ -191,7 +191,7 @@ public partial class SonicController
       .WithAction(() =>
       {
         _isRolling = true;
-        _sizeMode = SonicSizeMode.Small;
+        UpdateSizes(SonicSizeMode.Small);
 
         return PipelineStepResult.Break;
       })
