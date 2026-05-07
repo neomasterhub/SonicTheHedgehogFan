@@ -1,4 +1,4 @@
 public interface IRingCollector
 {
-  Collector Rings { get; }
+  ICollector Rings { get; }
 }
