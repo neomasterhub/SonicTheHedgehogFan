@@ -166,8 +166,10 @@ public partial class SonicController
       if (_postWallDetachPositionOffset)
       {
         _postWallDetachPositionOffset = false;
-        speedX = WallDetachPositionOffset.x;
         speedY = WallDetachPositionOffset.y;
+        speedX = _groundInfoSystem.Previous.Side == GroundSide.Left
+          ? -WallDetachPositionOffset.x
+          : WallDetachPositionOffset.x;
       }
     }
 
