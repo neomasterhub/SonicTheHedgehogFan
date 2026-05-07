@@ -85,6 +85,9 @@ public partial class SonicController
   [SerializeField]
   [InspectorLabel("Skid")]
   private AudioClip _skidAudioClip;
+  [SerializeField]
+  [InspectorLabel("Ring")]
+  private AudioClip _ringAudioClip;
 
   public VerticalDirection LookVerticalDirection
   {

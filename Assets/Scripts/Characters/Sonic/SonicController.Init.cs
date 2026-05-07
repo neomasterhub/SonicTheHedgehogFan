@@ -132,6 +132,9 @@ public partial class SonicController
     var skid = this.AddComponent<AudioSource>();
     skid.clip = _skidAudioClip;
 
+    var ring = this.AddComponent<AudioSource>();
+    ring.clip = _ringAudioClip;
+
     _sounds = new Sound[]
     {
       new(jump,
@@ -145,6 +148,10 @@ public partial class SonicController
       new(skid,
         () => _speedSystem.IsSkidding && !skid.isPlaying,
         () => !_speedSystem.IsSkidding && !skid.isPlaying),
+
+      new(ring,
+        () => !ring.isPlaying,
+        () => !ring.isPlaying),
     };
   }
 
