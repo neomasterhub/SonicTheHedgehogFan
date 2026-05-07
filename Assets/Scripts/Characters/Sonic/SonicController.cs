@@ -42,6 +42,7 @@ public partial class SonicController
   private bool _prevIsRolling;
   private bool _postWallDetachDpadLock;
   private bool _postWallDetachPositionOffset;
+  private bool _ringCollected;
   private bool _triggeredGroundSensorSide;
   private bool _isDownGrounded;
   private bool _isDownGroundedStatic;

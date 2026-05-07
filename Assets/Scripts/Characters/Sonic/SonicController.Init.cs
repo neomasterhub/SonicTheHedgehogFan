@@ -33,7 +33,8 @@ public partial class SonicController
     _speedSystem = new(_configs, _inputSystem, _slopeSpeedProvider, _airToGroundSpeedProvider, _groundToAirSpeedProvider, _gravitySpeedProvider);
     _viewSystem = new(_configs, _inputSystem, _viewRotatorProvider);
 
-    Rings = new Collector();
+    Rings = new Collector()
+      .WhenAdded(() => _ringCollected = true);
 
     SetEffectPipeline();
   }
@@ -152,8 +153,8 @@ public partial class SonicController
         () => !_speedSystem.IsSkidding && !skid.isPlaying),
 
       new(ring,
-        () => !ring.isPlaying,
-        () => !ring.isPlaying),
+        () => _ringCollected,
+        () => _ringCollected && ring.isPlaying),
     };
   }
 

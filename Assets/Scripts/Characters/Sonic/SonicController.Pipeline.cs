@@ -200,6 +200,8 @@ public partial class SonicController
       _sounds[i].Stop();
       _sounds[i].Play();
     }
+
+    _ringCollected = false;
   }
 
   private void SetSizes(SonicSizeMode sizeMode)
