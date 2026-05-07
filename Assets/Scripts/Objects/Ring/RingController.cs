@@ -7,6 +7,8 @@ using AnimatorParameters = SharedConsts.Animator.Parameters;
 [RequireComponent(typeof(SpriteRenderer))]
 public class RingController : MonoBehaviour
 {
+  private const int _sparkleOrderInLayer = PlayerOrderInLayer + 1;
+
   private bool _collected;
   private Animator _animator;
   private BoxCollider2D _collider;
@@ -33,7 +35,7 @@ public class RingController : MonoBehaviour
     {
       _collected = true;
       _animator.SetTrigger(AnimatorParameters.Collected);
-      _spriteRenderer.sortingOrder = PlayerOrderInLayer + 1;
+      _spriteRenderer.sortingOrder = _sparkleOrderInLayer;
     }
   }
 }
