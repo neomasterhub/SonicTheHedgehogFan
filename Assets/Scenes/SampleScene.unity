@@ -2555,7 +2555,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 2.8
+  orthographic size: 3
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2858,7 +2858,7 @@ MonoBehaviour:
   _jumpAudioClip: {fileID: 8300000, guid: a01963b9359f7d14ca3c26c46fbb16e4, type: 3}
   _rollAudioClip: {fileID: 8300000, guid: 9e7565537048c9b4f91f055796014713, type: 3}
   _skidAudioClip: {fileID: 8300000, guid: 9b89e2710e6c85545ba780692ee316f8, type: 3}
-  _ringAudioClip: {fileID: 0}
+  _ringAudioClip: {fileID: 8300000, guid: c8efd8eb513a86c49a8d0d36ec53197d, type: 3}
 --- !u!61 &710850506
 BoxCollider2D:
   m_ObjectHideFlags: 0
