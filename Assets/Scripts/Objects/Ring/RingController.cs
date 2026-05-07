@@ -1,6 +1,6 @@
 using UnityEngine;
-using static SharedConsts.Animator.Parameters;
 using static SharedConsts.UI;
+using AnimatorParameters = SharedConsts.Animator.Parameters;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(BoxCollider2D))]
@@ -32,7 +32,7 @@ public class RingController : MonoBehaviour
     if (_collider.bounds.Intersects(_playerCollider.bounds))
     {
       _collected = true;
-      _animator.SetTrigger(Collected);
+      _animator.SetTrigger(AnimatorParameters.Collected);
       _spriteRenderer.sortingOrder = PlayerOrderInLayer + 1;
     }
   }
