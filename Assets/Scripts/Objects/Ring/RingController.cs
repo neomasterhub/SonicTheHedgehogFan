@@ -11,17 +11,21 @@ public class RingController : MonoBehaviour
 
   private bool _collected;
   private Animator _animator;
+  private ICollector _playerRings;
   private BoxCollider2D _collider;
+  private BoxCollider2D _playerCollider;
   private SpriteRenderer _spriteRenderer;
 
   [SerializeField]
-  private BoxCollider2D _playerCollider;
+  private GameObject _player;
 
   private void Awake()
   {
     _animator = GetComponent<Animator>();
     _collider = GetComponent<BoxCollider2D>();
     _spriteRenderer = GetComponent<SpriteRenderer>();
+    _playerCollider = _player.GetComponent<BoxCollider2D>();
+    _playerRings = _player.GetComponent<IRingCollector>().Rings;
   }
 
   private void FixedUpdate()
@@ -34,6 +38,7 @@ public class RingController : MonoBehaviour
     if (_collider.bounds.Intersects(_playerCollider.bounds))
     {
       _collected = true;
+      _playerRings.Add();
       _animator.SetTrigger(AnimatorParameters.Collected);
       _spriteRenderer.sortingOrder = _sparkleOrderInLayer;
     }
