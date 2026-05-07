@@ -1,4 +1,5 @@
 using UnityEngine;
+using static SharedConsts.Animator.Parameters;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(BoxCollider2D))]
@@ -27,7 +28,7 @@ public class RingController : MonoBehaviour
     if (_collider.bounds.Intersects(_playerCollider.bounds))
     {
       _collected = true;
-      _animator.SetTrigger("Collected");
+      _animator.SetTrigger(Collected);
     }
   }
 }
