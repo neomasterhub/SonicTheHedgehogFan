@@ -59,7 +59,7 @@ public partial class SonicController
   private void InitializeComponents()
   {
     _animator = GetComponent<Animator>();
-    _collider = GetComponent<BoxCollider2D>();
+    _boxCollider = GetComponent<BoxCollider2D>();
     _spriteRenderer = GetComponent<SpriteRenderer>();
 
     _effectHistoryPanel = _canvas.transform.Find("Effect History Panel").gameObject;

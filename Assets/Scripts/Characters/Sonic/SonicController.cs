@@ -51,7 +51,7 @@ public partial class SonicController
   private float _slopeFactor;
   private float _absGroundSpeed;
   private Animator _animator;
-  private BoxCollider2D _collider;
+  private BoxCollider2D _boxCollider;
   private GameObject _diagnosticsPanel;
   private GameObject _effectHistoryPanel;
   private GroundDetectionResult _lastGroundDetectionResult;

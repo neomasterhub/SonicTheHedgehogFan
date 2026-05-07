@@ -202,6 +202,12 @@ public partial class SonicController
     }
   }
 
+  public void UpdateSizes(SonicSizeMode sizeMode)
+  {
+    _sizeMode = sizeMode;
+    _boxCollider.size = sizeMode == SonicSizeMode.Big ? Big.BoxColliderSize : Small.BoxColliderSize;
+  }
+
   private float GetSlopeFactor(SonicPhysicsModeConfig config)
   {
     var side = _groundInfoSystem.Current.Side;
