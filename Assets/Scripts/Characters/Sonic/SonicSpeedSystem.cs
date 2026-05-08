@@ -4,7 +4,6 @@ using static SharedConsts.Physics;
 
 public class SonicSpeedSystem
 {
-  private const int _speedRoundingDigits = 3;
   private const int _zeroGroundSpeedProgressMax = 5;
 
   private readonly SonicConfigs _configs;
@@ -53,9 +52,9 @@ public class SonicSpeedSystem
 
   private void RoundSpeeds()
   {
-    SpeedX = SpeedX.Round(_speedRoundingDigits);
-    SpeedY = SpeedY.Round(_speedRoundingDigits);
-    GroundSpeed = GroundSpeed.Round(_speedRoundingDigits);
+    SpeedX = SpeedX.Round(SpeedRoundingDigits);
+    SpeedY = SpeedY.Round(SpeedRoundingDigits);
+    GroundSpeed = GroundSpeed.Round(SpeedRoundingDigits);
   }
 
   public void ResetSpeeds()
