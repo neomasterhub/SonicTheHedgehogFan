@@ -5,16 +5,16 @@ public class UDFSensor : SensorBase
   public UDFSensor(
     Color enabledColor,
     Vector2 localPosition,
-    Vector2 upRayPosition,
-    Vector2 downRayPosition,
-    Vector2 frontRayPosition)
+    Vector2 upRayDirection,
+    Vector2 downRayDirection,
+    Vector2 frontRayDirection)
   {
     EnabledColor = enabledColor;
     LocalPosition = localPosition;
     Position = localPosition;
-    UpRay = new(enabledColor, Position, upRayPosition);
-    DownRay = new(enabledColor, Position, downRayPosition);
-    FrontRay = new(enabledColor, Position, frontRayPosition);
+    UpRay = new(enabledColor, Position, upRayDirection);
+    DownRay = new(enabledColor, Position, downRayDirection);
+    FrontRay = new(enabledColor, Position, frontRayDirection);
   }
 
   public SensorRay UpRay { get; }
