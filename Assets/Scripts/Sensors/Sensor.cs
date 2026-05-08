@@ -5,12 +5,12 @@ public class Sensor : SensorBase
   public Sensor(
     Color enabledColor,
     Vector2 localPosition,
-    Vector2 rayPosition)
+    Vector2 rayDirection)
   {
     EnabledColor = enabledColor;
     LocalPosition = localPosition;
     Position = localPosition;
-    Ray = new(enabledColor, Position, rayPosition);
+    Ray = new(enabledColor, Position, rayDirection);
   }
 
   public SensorRay Ray { get; }

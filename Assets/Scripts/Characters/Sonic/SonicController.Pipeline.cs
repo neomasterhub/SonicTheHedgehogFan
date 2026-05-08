@@ -52,8 +52,8 @@ public partial class SonicController
   private void AnalyzeEnvironment()
   {
     var groundDetectionResult = DetectGround();
-    _leftWallDetectionResult = _sensorSystem.DetectLeftWall(_groundLayer);
-    _rightWallDetectionResult = _sensorSystem.DetectRightWall(_groundLayer);
+    _leftWallDetectionResult = _sensorSystem.DetectLeftWall(GroundLayer);
+    _rightWallDetectionResult = _sensorSystem.DetectRightWall(GroundLayer);
 
     if (groundDetectionResult != null)
     {
@@ -262,13 +262,13 @@ public partial class SonicController
   {
     var sensorFlags = GetSensorFlags();
     _sensorSystem.Update(new(_sizeMode, _groundInfoSystem.Current.Side, transform.position, sensorFlags, _sensorRayLengths));
-    var result = _sensorSystem.DetectGround(!_spriteRenderer.flipX, _groundLayer);
+    var result = _sensorSystem.DetectGround(!_spriteRenderer.flipX, GroundLayer);
 
     if (result != null && result.Value.Distance == 0)
     {
       transform.position += new Vector3(0, GroundedPositionUpwardOffset);
       _sensorSystem.Update(new(_sizeMode, _groundInfoSystem.Current.Side, transform.position, sensorFlags, _sensorRayLengths));
-      result = _sensorSystem.DetectGround(!_spriteRenderer.flipX, _groundLayer);
+      result = _sensorSystem.DetectGround(!_spriteRenderer.flipX, GroundLayer);
     }
 
     return result;
