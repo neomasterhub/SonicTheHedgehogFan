@@ -13,6 +13,7 @@ public static class SharedConsts
   public static class UI
   {
     public const float DebugScale = 10000;
+    public const int PlayerOrderInLayer = 1;
   }
 
   public static class Input
@@ -43,6 +44,7 @@ public static class SharedConsts
       public const string CurlingUp = nameof(CurlingUp);
       public const string LookingUp = nameof(LookingUp);
       public const string Rolling = nameof(Rolling);
+      public const string Collected = nameof(Collected);
     }
 
     public static class States

@@ -6,10 +6,12 @@ using UnityEngine;
 /// Data.
 /// </summary>
 [RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(SpriteRenderer))]
 public partial class SonicController
   : MonoBehaviour,
-  ILookVerticalDirectionProvider
+  ILookVerticalDirectionProvider,
+  IRingCollector
 {
   private readonly ConditionalValueProvider<float> _slopeSpeedProvider;
   private readonly ConditionalValueProvider<Vector2> _airToGroundSpeedProvider;
@@ -40,6 +42,7 @@ public partial class SonicController
   private bool _prevIsRolling;
   private bool _postWallDetachDpadLock;
   private bool _postWallDetachPositionOffset;
+  private bool _ringCollected;
   private bool _triggeredGroundSensorSide;
   private bool _isDownGrounded;
   private bool _isDownGroundedStatic;
@@ -50,6 +53,7 @@ public partial class SonicController
   private float _slopeFactor;
   private float _absGroundSpeed;
   private Animator _animator;
+  private BoxCollider2D _boxCollider;
   private GameObject _diagnosticsPanel;
   private GameObject _effectHistoryPanel;
   private GroundDetectionResult _lastGroundDetectionResult;
@@ -83,7 +87,11 @@ public partial class SonicController
   [SerializeField]
   [InspectorLabel("Skid")]
   private AudioClip _skidAudioClip;
+  [SerializeField]
+  [InspectorLabel("Ring")]
+  private AudioClip _ringAudioClip;
 
+  public ICollector Rings { get; }
   public VerticalDirection LookVerticalDirection
   {
     get

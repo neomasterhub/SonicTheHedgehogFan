@@ -33,6 +33,9 @@ public partial class SonicController
     _speedSystem = new(_configs, _inputSystem, _slopeSpeedProvider, _airToGroundSpeedProvider, _groundToAirSpeedProvider, _gravitySpeedProvider);
     _viewSystem = new(_configs, _inputSystem, _viewRotatorProvider);
 
+    Rings = new Collector()
+      .WhenAdded(() => _ringCollected = true);
+
     SetEffectPipeline();
   }
 
@@ -59,6 +62,7 @@ public partial class SonicController
   private void InitializeComponents()
   {
     _animator = GetComponent<Animator>();
+    _boxCollider = GetComponent<BoxCollider2D>();
     _spriteRenderer = GetComponent<SpriteRenderer>();
 
     _effectHistoryPanel = _canvas.transform.Find("Effect History Panel").gameObject;
@@ -131,6 +135,9 @@ public partial class SonicController
     var skid = this.AddComponent<AudioSource>();
     skid.clip = _skidAudioClip;
 
+    var ring = this.AddComponent<AudioSource>();
+    ring.clip = _ringAudioClip;
+
     _sounds = new Sound[]
     {
       new(jump,
@@ -144,6 +151,10 @@ public partial class SonicController
       new(skid,
         () => _speedSystem.IsSkidding && !skid.isPlaying,
         () => !_speedSystem.IsSkidding && !skid.isPlaying),
+
+      new(ring,
+        () => _ringCollected,
+        () => _ringCollected && ring.isPlaying),
     };
   }
 

@@ -69,14 +69,16 @@ public static class SonicConsts
     {
       public const float HRadius = 0.23f;
       public const float VRadius = 0.44f;
-      public static Vector2 HVRadii = new(HRadius, VRadius);
+      public static readonly Vector2 HVRadii = new(HRadius, VRadius);
+      public static readonly Vector2 BoxColliderSize = new(0.5f, 0.975f);
     }
 
     public static class Small
     {
       public const float HRadius = 0.23f;
       public const float VRadius = 0.28f;
-      public static Vector2 HVRadii = new(HRadius, VRadius);
+      public static readonly Vector2 HVRadii = new(HRadius, VRadius);
+      public static readonly Vector2 BoxColliderSize = new(0.5f, 0.65f);
     }
   }
 
