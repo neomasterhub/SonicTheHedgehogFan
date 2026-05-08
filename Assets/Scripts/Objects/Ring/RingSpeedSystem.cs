@@ -37,16 +37,20 @@ public class RingSpeedSystem
 
   private void SetSpeed_Grounded()
   {
-    var speed = Mathf.Sqrt((SpeedX * SpeedX) + (SpeedY * SpeedY));
+    var speed = new Vector2(SpeedX, SpeedY);
 
-    if (speed < _physicsModeConfig.MinBouncingSpeed)
+    if (speed.magnitude < _physicsModeConfig.MinBouncingSpeed)
     {
+      SpeedX = 0;
       SpeedY = 0;
+
       return;
     }
 
-    var bounceSpeed = speed * _physicsModeConfig.BounceFactor;
-    SpeedX = -bounceSpeed * Mathf.Sin(_context.GroundAngleRad.Value);
-    SpeedY = bounceSpeed * Mathf.Cos(_context.GroundAngleRad.Value);
+    var reflected = Vector2.Reflect(speed, _context.Normal)
+      * _physicsModeConfig.BounceFactor;
+
+    SpeedX = reflected.x;
+    SpeedY = reflected.y;
   }
 }

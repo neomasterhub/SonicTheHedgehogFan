@@ -1,21 +1,23 @@
+using UnityEngine;
+
 public readonly struct RingSpeedContext
 {
   public readonly bool IsGrounded;
-  public readonly float? GroundAngleRad;
+  public readonly Vector2 Normal;
 
-  private RingSpeedContext(bool isGrounded, float? groundAngleRad)
+  private RingSpeedContext(bool isGrounded, Vector2 normal)
   {
     IsGrounded = isGrounded;
-    GroundAngleRad = groundAngleRad;
+    Normal = normal;
   }
 
-  public static RingSpeedContext GetGrounded(float groundAngleRad)
+  public static RingSpeedContext GetGrounded(Vector2 normal)
   {
-    return new(true, groundAngleRad);
+    return new(true, normal);
   }
 
-  public static RingSpeedContext GetAirborn()
+  public static RingSpeedContext GetAirborne()
   {
-    return new(false, null);
+    return new(false, default);
   }
 }

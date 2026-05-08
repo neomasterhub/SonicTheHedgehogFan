@@ -81,8 +81,8 @@ public class RingController : MonoBehaviour
     var ground = _sensorSystem.DetectGround(GroundLayer);
 
     _speedSystem.SetSpeed(ground == null
-      ? RingSpeedContext.GetAirborn()
-      : RingSpeedContext.GetGrounded(ground.Value.AngleRad));
+      ? RingSpeedContext.GetAirborne()
+      : RingSpeedContext.GetGrounded(ground.Value.Normal));
 
     transform.position += new Vector3(_speedSystem.SpeedX, _speedSystem.SpeedY);
   }
