@@ -10,14 +10,16 @@ public class RingController : MonoBehaviour
 {
   private const int _sparkleOrderInLayer = PlayerOrderInLayer + 1;
 
+  private readonly RingConfigs _configs;
   private readonly RingSpeedSystem _speedSystem;
   private readonly RingSensorSystem _sensorSystem;
 
   private bool _collected;
   private Animator _animator;
-  private ICollector _playerRings;
   private BoxCollider2D _collider;
   private BoxCollider2D _playerCollider;
+  private ICollector _playerRings;
+  private PhysicsMode _physicsMode;
   private SpriteRenderer _spriteRenderer;
 
   [SerializeField]
@@ -25,7 +27,8 @@ public class RingController : MonoBehaviour
 
   public RingController()
   {
-    _speedSystem = new();
+    _configs = new(_physicsMode);
+    _speedSystem = new(_configs);
     _sensorSystem = new();
   }
 
@@ -72,6 +75,7 @@ public class RingController : MonoBehaviour
 
   private void ApplyMovement()
   {
+    _configs.Update(_physicsMode);
     _sensorSystem.Update(transform.position);
     _speedSystem.SetSpeed(_sensorSystem.DetectGround(GroundLayer));
     transform.position += new Vector3(_speedSystem.SpeedX, _speedSystem.SpeedY);

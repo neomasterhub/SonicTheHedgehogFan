@@ -1,5 +1,14 @@
+using UnityEngine;
+
 public class RingSpeedSystem
 {
+  private readonly RingConfigs _configs;
+
+  public RingSpeedSystem(RingConfigs configs)
+  {
+    _configs = configs;
+  }
+
   public float SpeedX { get; private set; }
   public float SpeedY { get; private set; }
 
@@ -7,10 +16,10 @@ public class RingSpeedSystem
   {
     if (groundDetected)
     {
-      SpeedY = 0.05f;
+      SpeedY = Mathf.Abs(SpeedY) * _configs.PhysicsModeConfig.BounceFactor;
       return;
     }
 
-    SpeedY -= 0.002f;
+    SpeedY -= _configs.PhysicsModeConfig.GravitySpeed;
   }
 }
