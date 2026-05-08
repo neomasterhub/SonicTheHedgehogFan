@@ -42,8 +42,13 @@ public class RingController : MonoBehaviour
 
   private void FixedUpdate()
   {
-    _sensorSystem.Update(transform.position);
+    if (_collected)
+    {
+      return;
+    }
+
     CollectByPlayer();
+    ApplyMovement();
   }
 
   private void CollectByPlayer()
@@ -60,5 +65,10 @@ public class RingController : MonoBehaviour
       _animator.SetTrigger(AnimatorParameters.Collected);
       _spriteRenderer.sortingOrder = _sparkleOrderInLayer;
     }
+  }
+
+  private void ApplyMovement()
+  {
+    _sensorSystem.Update(transform.position);
   }
 }
