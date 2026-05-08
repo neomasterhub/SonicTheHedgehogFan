@@ -15,6 +15,7 @@ public class RingController : MonoBehaviour
   private readonly RingSensorSystem _sensorSystem;
 
   private bool _collected;
+  private bool _gravityEnabled;
   private bool _isGrounded;
   private Animator _animator;
   private BoxCollider2D _collider;
@@ -57,6 +58,12 @@ public class RingController : MonoBehaviour
     }
 
     CollectByPlayer();
+
+    if (!_gravityEnabled)
+    {
+      return;
+    }
+
     AnalyzeEnvironment();
     ApplyMovement();
     UpdatePosition();
