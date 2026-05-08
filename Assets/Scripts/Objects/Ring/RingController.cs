@@ -55,6 +55,7 @@ public class RingController : MonoBehaviour
 
     CollectByPlayer();
     ApplyMovement();
+    UpdatePosition();
   }
 
   private void CollectByPlayer()
@@ -83,7 +84,10 @@ public class RingController : MonoBehaviour
     _speedSystem.SetSpeed(ground == null
       ? RingSpeedContext.GetAirborne()
       : RingSpeedContext.GetGrounded(ground.Value.Normal));
+  }
 
+  private void UpdatePosition()
+  {
     transform.position += new Vector3(_speedSystem.SpeedX, _speedSystem.SpeedY);
   }
 }
