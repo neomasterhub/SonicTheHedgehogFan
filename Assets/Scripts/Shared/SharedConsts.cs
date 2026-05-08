@@ -1,3 +1,4 @@
+using UnityEngine;
 using static PlayerInput;
 
 public static class SharedConsts
@@ -25,6 +26,7 @@ public static class SharedConsts
   {
     public const float PositionBackwardOffset = 0.02f;
     public const float GroundedPositionUpwardOffset = 0.05f;
+    public static readonly LayerMask GroundLayer = 1 << 3;
 
     public static class GroundAngleRanges
     {

@@ -1,4 +1,5 @@
 using UnityEngine;
+using static SharedConsts.Physics;
 
 public class RingSensorSystem
 {
@@ -17,9 +18,9 @@ public class RingSensorSystem
     _o.SetParentPosition(parentPosition);
   }
 
-  public bool DetectGround(LayerMask groundLayer)
+  public bool DetectGround()
   {
-    return _o.Ray.Cast(groundLayer) != null;
+    return _o.Ray.Cast(GroundLayer).HasValue;
   }
 
   public void Draw()
