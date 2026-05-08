@@ -210,7 +210,7 @@ public partial class SonicController
         _isFallingOffWall = true;
         _postWallDetachDpadLock = true;
         _postWallDetachPositionOffset = true;
-        AnalyzeEnvironment_Airborn();
+        AnalyzeEnvironment_Airborne();
 
         return PipelineStepResult.Break;
       })
@@ -227,7 +227,7 @@ public partial class SonicController
         || (!_isRolling && !_inputSystem.Held.HasAny(PlayerInput.Left | PlayerInput.Right))))
       .WithAction(() =>
       {
-        AnalyzeEnvironment_Airborn();
+        AnalyzeEnvironment_Airborne();
 
         return PipelineStepResult.Break;
       })
