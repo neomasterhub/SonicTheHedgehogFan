@@ -4,6 +4,9 @@ public class RingSpeedSystem
 {
   private readonly RingConfigs _configs;
 
+  private RingSpeedContext _context;
+  private RingPhysicsModeConfig _physicsModeConfig;
+
   public RingSpeedSystem(RingConfigs configs)
   {
     _configs = configs;
@@ -14,25 +17,36 @@ public class RingSpeedSystem
 
   public void SetSpeed(RingSpeedContext context)
   {
-    var physicsModeConfig = _configs.PhysicsModeConfig;
+    _context = context;
+    _physicsModeConfig = _configs.PhysicsModeConfig;
 
     if (context.IsGrounded)
     {
-      var speed = Mathf.Sqrt((SpeedX * SpeedX) + (SpeedY * SpeedY));
+      SetSpeed_Grounded();
+    }
+    else
+    {
+      SetSpeed_Airborne();
+    }
+  }
 
-      if (speed < physicsModeConfig.MinBouncingSpeed)
-      {
-        SpeedY = 0;
-        return;
-      }
+  private void SetSpeed_Airborne()
+  {
+    SpeedY -= _physicsModeConfig.GravitySpeed;
+  }
 
-      var bounceSpeed = speed * physicsModeConfig.BounceFactor;
-      SpeedX = -bounceSpeed * Mathf.Sin(context.GroundAngleRad.Value);
-      SpeedY = bounceSpeed * Mathf.Cos(context.GroundAngleRad.Value);
+  private void SetSpeed_Grounded()
+  {
+    var speed = Mathf.Sqrt((SpeedX * SpeedX) + (SpeedY * SpeedY));
 
+    if (speed < _physicsModeConfig.MinBouncingSpeed)
+    {
+      SpeedY = 0;
       return;
     }
 
-    SpeedY -= physicsModeConfig.GravitySpeed;
+    var bounceSpeed = speed * _physicsModeConfig.BounceFactor;
+    SpeedX = -bounceSpeed * Mathf.Sin(_context.GroundAngleRad.Value);
+    SpeedY = bounceSpeed * Mathf.Cos(_context.GroundAngleRad.Value);
   }
 }
