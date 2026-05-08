@@ -9,6 +9,8 @@ public class RingController : MonoBehaviour
 {
   private const int _sparkleOrderInLayer = PlayerOrderInLayer + 1;
 
+  private readonly RingSensorSystem _sensorSystem;
+
   private bool _collected;
   private Animator _animator;
   private ICollector _playerRings;
@@ -18,6 +20,16 @@ public class RingController : MonoBehaviour
 
   [SerializeField]
   private GameObject _player;
+
+  public RingController()
+  {
+    _sensorSystem = new();
+  }
+
+  private void OnDrawGizmos()
+  {
+    _sensorSystem.Draw();
+  }
 
   private void Awake()
   {
@@ -30,6 +42,7 @@ public class RingController : MonoBehaviour
 
   private void FixedUpdate()
   {
+    _sensorSystem.Update(transform.position);
     CollectByPlayer();
   }
 
