@@ -12,18 +12,22 @@ public class RingSensorSystem
     _o.Ray.Length = _rayLength;
   }
 
+  public void Draw()
+  {
+    _o.Draw();
+  }
+
   public void Update(Vector2 parentPosition)
   {
     _o.SetParentPosition(parentPosition);
   }
 
-  public bool DetectGround(LayerMask groundLayer)
+  public GroundDetectionResult? DetectGround(LayerMask groundLayer)
   {
-    return _o.Ray.Cast(groundLayer).HasValue;
-  }
+    var hit = _o.Ray.Cast(groundLayer);
 
-  public void Draw()
-  {
-    _o.Draw();
+    return hit.HasValue
+      ? new(false, hit.Value, _o.Ray.Direction)
+      : null;
   }
 }
