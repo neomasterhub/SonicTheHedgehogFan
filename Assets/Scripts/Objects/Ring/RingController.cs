@@ -30,6 +30,11 @@ public class RingController : MonoBehaviour
 
   private void FixedUpdate()
   {
+    CollectByPlayer();
+  }
+
+  private void CollectByPlayer()
+  {
     if (_collected)
     {
       return;
