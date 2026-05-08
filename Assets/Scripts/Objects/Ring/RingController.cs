@@ -9,6 +9,7 @@ public class RingController : MonoBehaviour
 {
   private const int _sparkleOrderInLayer = PlayerOrderInLayer + 1;
 
+  private readonly RingSpeedSystem _speedSystem;
   private readonly RingSensorSystem _sensorSystem;
 
   private bool _collected;
@@ -23,6 +24,7 @@ public class RingController : MonoBehaviour
 
   public RingController()
   {
+    _speedSystem = new();
     _sensorSystem = new();
   }
 
