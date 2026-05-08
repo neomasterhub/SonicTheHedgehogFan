@@ -1,8 +1,7 @@
 public static class RingConsts
 {
-  private static class Normal
+  public static class Physics
   {
-    public const float GravitySpeed = 0.002f;
-    public const float BounceFactor = 0.9f;
+    public static readonly RingPhysicsModeConfig NormalConfig = new(0.002f, 0.9f);
   }
 }
