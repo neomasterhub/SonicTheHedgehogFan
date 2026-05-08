@@ -14,12 +14,22 @@ public class RingSpeedSystem
 
   public void SetSpeed(bool groundDetected)
   {
+    var physicsModeConfig = _configs.PhysicsModeConfig;
+
     if (groundDetected)
     {
-      SpeedY = Mathf.Abs(SpeedY) * _configs.PhysicsModeConfig.BounceFactor;
+      var speedYAbs = Mathf.Abs(SpeedY);
+
+      if (speedYAbs < physicsModeConfig.MinBouncingSpeed)
+      {
+        SpeedY = 0;
+        return;
+      }
+
+      SpeedY = speedYAbs * physicsModeConfig.BounceFactor;
       return;
     }
 
-    SpeedY -= _configs.PhysicsModeConfig.GravitySpeed;
+    SpeedY -= physicsModeConfig.GravitySpeed;
   }
 }
