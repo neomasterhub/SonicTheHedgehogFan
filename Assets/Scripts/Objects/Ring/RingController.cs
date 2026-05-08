@@ -1,4 +1,5 @@
 using UnityEngine;
+using static SharedConsts.Physics;
 using static SharedConsts.UI;
 using AnimatorParameters = SharedConsts.Animator.Parameters;
 
@@ -72,7 +73,7 @@ public class RingController : MonoBehaviour
   private void ApplyMovement()
   {
     _sensorSystem.Update(transform.position);
-    _speedSystem.SetSpeed(_sensorSystem.DetectGround());
+    _speedSystem.SetSpeed(_sensorSystem.DetectGround(GroundLayer));
     transform.position += new Vector3(_speedSystem.SpeedX, _speedSystem.SpeedY);
   }
 }

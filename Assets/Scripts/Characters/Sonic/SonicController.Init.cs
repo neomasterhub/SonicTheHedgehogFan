@@ -11,8 +11,6 @@ public partial class SonicController
 {
   public SonicController()
   {
-    _groundLayer = 8;
-
     _diagnosticsText = new();
     _effectHistoryText = new();
 

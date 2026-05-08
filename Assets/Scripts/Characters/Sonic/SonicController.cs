@@ -18,7 +18,6 @@ public partial class SonicController
   private readonly ConditionalValueProvider<Vector2> _groundToAirSpeedProvider;
   private readonly ConditionalValueProvider<GravitySpeed> _gravitySpeedProvider;
   private readonly GroundInfoSystem _groundInfoSystem;
-  private readonly LayerMask _groundLayer;
   private readonly PlayerInputSystem _inputSystem;
   private readonly PlayerViewRotatorProvider<SonicViewRotatorContext> _viewRotatorProvider;
   private readonly Pipeline _effects;
