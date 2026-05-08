@@ -104,15 +104,15 @@ public partial class SonicController
 
     _slopeSpeedProvider
       .When(() => _groundInfoSystem.Current.Side == GroundSide.Down, () => _slopeFactor * Mathf.Sin(_groundInfoSystem.Current.AngleRad))
-      .When(() => _groundInfoSystem.Current.Side == GroundSide.Left, () => _groundInfoSystem.Current.AngleDeg <= 0 ? _slopeFactor : _slopeFactor * Mathf.Cos(_groundInfoSystem.Current.AngleRad))
-      .When(() => _groundInfoSystem.Current.Side == GroundSide.Right, () => _groundInfoSystem.Current.AngleDeg >= 0 ? _slopeFactor : _slopeFactor * Mathf.Cos(_groundInfoSystem.Current.AngleRad));
+      .When(() => _groundInfoSystem.Current.Side == GroundSide.Left, () => _groundInfoSystem.Current.SideAngleDeg <= 0 ? -_slopeFactor : -_slopeFactor * Mathf.Cos(_groundInfoSystem.Current.SideAngleRad))
+      .When(() => _groundInfoSystem.Current.Side == GroundSide.Right, () => _groundInfoSystem.Current.SideAngleDeg >= 0 ? _slopeFactor : _slopeFactor * Mathf.Cos(_groundInfoSystem.Current.SideAngleRad));
 
     _airToGroundSpeedProvider
       .When(() => _groundInfoSystem.Current.Side == GroundSide.Left, () => new Vector2(-_speedSystem.SpeedY, _speedSystem.SpeedX))
       .When(() => _groundInfoSystem.Current.Side == GroundSide.Right, () => new Vector2(_speedSystem.SpeedY, -_speedSystem.SpeedX));
 
     _groundToAirSpeedProvider
-      .When(() => _groundInfoSystem.Previous.Side == GroundSide.Left, () => _isFallingOffWall ? default : WallToAirSpeedDelta + new Vector2(_speedSystem.SpeedY, -_speedSystem.SpeedX))
+      .When(() => _groundInfoSystem.Previous.Side == GroundSide.Left, () => _isFallingOffWall ? default : -WallToAirSpeedDelta + new Vector2(_speedSystem.SpeedY, -_speedSystem.SpeedX))
       .When(() => _groundInfoSystem.Previous.Side == GroundSide.Right, () => _isFallingOffWall ? default : WallToAirSpeedDelta + new Vector2(-_speedSystem.SpeedY, _speedSystem.SpeedX))
       .When(() => _groundInfoSystem.Previous.Side == GroundSide.Up, () => new Vector2(-_speedSystem.SpeedX, _isJumping ? Mathf.Min(0, -_speedSystem.SpeedY) : 0));
 
