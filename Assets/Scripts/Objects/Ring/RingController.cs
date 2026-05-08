@@ -72,5 +72,7 @@ public class RingController : MonoBehaviour
   private void ApplyMovement()
   {
     _sensorSystem.Update(transform.position);
+    _speedSystem.SetSpeed(_sensorSystem.DetectGround());
+    transform.position += new Vector3(_speedSystem.SpeedX, _speedSystem.SpeedY);
   }
 }
