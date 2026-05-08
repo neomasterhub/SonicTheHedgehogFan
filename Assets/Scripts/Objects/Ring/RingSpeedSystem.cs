@@ -12,21 +12,24 @@ public class RingSpeedSystem
   public float SpeedX { get; private set; }
   public float SpeedY { get; private set; }
 
-  public void SetSpeed(bool groundDetected)
+  public void SetSpeed(RingSpeedContext context)
   {
     var physicsModeConfig = _configs.PhysicsModeConfig;
 
-    if (groundDetected)
+    if (context.IsGrounded)
     {
-      var speedYAbs = Mathf.Abs(SpeedY);
+      var speed = Mathf.Sqrt((SpeedX * SpeedX) + (SpeedY * SpeedY));
 
-      if (speedYAbs < physicsModeConfig.MinBouncingSpeed)
+      if (speed < physicsModeConfig.MinBouncingSpeed)
       {
         SpeedY = 0;
         return;
       }
 
-      SpeedY = speedYAbs * physicsModeConfig.BounceFactor;
+      var bounceSpeed = speed * physicsModeConfig.BounceFactor;
+      SpeedX = -bounceSpeed * Mathf.Sin(context.GroundAngleRad.Value);
+      SpeedY = bounceSpeed * Mathf.Cos(context.GroundAngleRad.Value);
+
       return;
     }
 
