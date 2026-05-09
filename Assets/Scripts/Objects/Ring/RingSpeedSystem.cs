@@ -1,4 +1,5 @@
 using UnityEngine;
+using static SharedConsts.Physics;
 
 public class RingSpeedSystem
 {
@@ -15,6 +16,12 @@ public class RingSpeedSystem
   public float SpeedX { get; private set; }
   public float SpeedY { get; private set; }
 
+  private void RoundSpeeds()
+  {
+    SpeedX = SpeedX.Round(SpeedRoundingDigits);
+    SpeedY = SpeedY.Round(SpeedRoundingDigits);
+  }
+
   public void SetSpeed(RingSpeedContext context)
   {
     _context = context;
@@ -28,6 +35,8 @@ public class RingSpeedSystem
     {
       SetSpeed_Airborne();
     }
+
+    RoundSpeeds();
   }
 
   private void SetSpeed_Airborne()
@@ -37,6 +46,10 @@ public class RingSpeedSystem
 
   private void SetSpeed_Grounded()
   {
-    SpeedY = 0;
+    var speed = Vector2.Reflect(new(SpeedX, SpeedY), _context.Normal)
+      * _physicsModeConfig.BounceFactor;
+
+    SpeedX = speed.x;
+    SpeedY = speed.y;
   }
 }

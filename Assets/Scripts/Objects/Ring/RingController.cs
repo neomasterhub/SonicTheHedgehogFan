@@ -15,11 +15,15 @@ public class RingController : MonoBehaviour
   private readonly RingSensorSystem _sensorSystem;
 
   private bool _collected;
+  private bool _gravityEnabled;
+  private bool _isGrounded;
   private Animator _animator;
   private BoxCollider2D _collider;
   private BoxCollider2D _playerCollider;
+  private GroundDetectionResult _lastGroundDetectionResult;
   private ICollector _playerRings;
   private PhysicsMode _physicsMode;
+  private RingSpeedContext _speedContext;
   private SpriteRenderer _spriteRenderer;
 
   [SerializeField]
@@ -54,7 +58,15 @@ public class RingController : MonoBehaviour
     }
 
     CollectByPlayer();
+
+    if (!_gravityEnabled)
+    {
+      return;
+    }
+
+    AnalyzeEnvironment();
     ApplyMovement();
+    UpdatePosition();
   }
 
   private void CollectByPlayer()
@@ -73,17 +85,52 @@ public class RingController : MonoBehaviour
     }
   }
 
-  private void ApplyMovement()
+  private void AnalyzeEnvironment()
   {
     _configs.Update(_physicsMode);
-
     _sensorSystem.Update(transform.position);
+
     var ground = _sensorSystem.DetectGround(GroundLayer);
 
-    _speedSystem.SetSpeed(ground == null
-      ? RingSpeedContext.GetAirborne()
-      : RingSpeedContext.GetGrounded(ground.Value.Normal));
+    if (ground != null)
+    {
+      _lastGroundDetectionResult = ground.Value;
+      AnalyzeEnvironment_Grounded();
+    }
+    else
+    {
+      AnalyzeEnvironment_Airborne();
+    }
+  }
 
-    transform.position += new Vector3(_speedSystem.SpeedX, _speedSystem.SpeedY);
+  private void AnalyzeEnvironment_Airborne()
+  {
+    _isGrounded = false;
+    _speedContext = RingSpeedContext.GetAirborne();
+  }
+
+  private void AnalyzeEnvironment_Grounded()
+  {
+    _isGrounded = true;
+    _speedContext = RingSpeedContext.GetGrounded(_lastGroundDetectionResult.Normal);
+  }
+
+  private void ApplyMovement()
+  {
+    _speedSystem.SetSpeed(_speedContext);
+  }
+
+  private void UpdatePosition()
+  {
+    var speedY = _speedSystem.SpeedY;
+
+    if (_isGrounded)
+    {
+      speedY -= (_lastGroundDetectionResult.Distance
+        * (int)_lastGroundDetectionResult.SensorGroundRelation)
+        - GroundedPositionUpwardOffset;
+    }
+
+    transform.position += new Vector3(_speedSystem.SpeedX, speedY);
   }
 }

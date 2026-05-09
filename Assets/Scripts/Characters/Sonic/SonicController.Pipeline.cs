@@ -62,7 +62,7 @@ public partial class SonicController
     }
     else
     {
-      AnalyzeEnvironment_Airborn();
+      AnalyzeEnvironment_Airborne();
     }
   }
 
@@ -89,7 +89,7 @@ public partial class SonicController
       .Set(SonicState.FallingOffWall, _isFallingOffWall);
   }
 
-  private void AnalyzeEnvironment_Airborn()
+  private void AnalyzeEnvironment_Airborne()
   {
     _isGrounded = false;
     _isBalancing = false;
