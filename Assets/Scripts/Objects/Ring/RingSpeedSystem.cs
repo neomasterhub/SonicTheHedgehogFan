@@ -46,6 +46,11 @@ public class RingSpeedSystem
 
   private void SetSpeed_Grounded()
   {
+    if (SpeedX == 0 && SpeedY == 0)
+    {
+      return;
+    }
+
     var speed = Vector2.Reflect(new(SpeedX, SpeedY), _context.Normal)
       * _physicsModeConfig.BounceFactor;
 
