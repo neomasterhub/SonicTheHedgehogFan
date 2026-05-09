@@ -15,19 +15,21 @@ public class RingController : MonoBehaviour
   private readonly RingSensorSystem _sensorSystem;
 
   private bool _collected;
-  private bool _gravityEnabled;
   private bool _isGrounded;
   private Animator _animator;
   private BoxCollider2D _collider;
   private BoxCollider2D _playerCollider;
   private GroundDetectionResult _lastGroundDetectionResult;
   private ICollector _playerRings;
-  private PhysicsMode _physicsMode;
   private RingSpeedContext _speedContext;
   private SpriteRenderer _spriteRenderer;
 
   [SerializeField]
+  private bool _gravityEnabled;
+  [SerializeField]
   private GameObject _player;
+  [SerializeField]
+  private PhysicsMode _physicsMode;
 
   public RingController()
   {
