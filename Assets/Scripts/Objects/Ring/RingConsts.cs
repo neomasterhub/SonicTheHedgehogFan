@@ -1,5 +1,12 @@
+using static SharedConsts.UI;
+
 public static class RingConsts
 {
+  public static class UI
+  {
+    public const int SparkleOrderInLayer = PlayerOrderInLayer + 1;
+  }
+
   public static class Physics
   {
     public const float SensorY = 0.075f;
