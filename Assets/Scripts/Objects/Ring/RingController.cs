@@ -1,6 +1,6 @@
 using UnityEngine;
+using static RingConsts.UI;
 using static SharedConsts.Physics;
-using static SharedConsts.UI;
 using AnimatorParameters = SharedConsts.Animator.Parameters;
 
 [RequireComponent(typeof(Animator))]
@@ -8,8 +8,6 @@ using AnimatorParameters = SharedConsts.Animator.Parameters;
 [RequireComponent(typeof(SpriteRenderer))]
 public class RingController : MonoBehaviour
 {
-  private const int _sparkleOrderInLayer = PlayerOrderInLayer + 1;
-
   private readonly RingConfigs _configs;
   private readonly RingSpeedSystem _speedSystem;
   private readonly RingSensorSystem _sensorSystem;
@@ -83,7 +81,7 @@ public class RingController : MonoBehaviour
       _collected = true;
       _playerRings.Add();
       _animator.SetTrigger(AnimatorParameters.Collected);
-      _spriteRenderer.sortingOrder = _sparkleOrderInLayer;
+      _spriteRenderer.sortingOrder = SparkleOrderInLayer;
     }
   }
 
