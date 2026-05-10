@@ -22,12 +22,10 @@ public class RingSpeedSystem
     SpeedY = SpeedY.Round(SpeedRoundingDigits);
   }
 
-  public void SetSpeed(RingSpeedContext context, float speedX, float speedY)
+  public void Initialize(float speedX, float speedY)
   {
     SpeedX = speedX;
     SpeedY = speedY;
-
-    SetSpeed(context);
   }
 
   public void SetSpeed(RingSpeedContext context)
