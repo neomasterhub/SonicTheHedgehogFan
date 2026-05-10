@@ -14,6 +14,8 @@ public partial class RingController : MonoBehaviour
 
   private void Awake()
   {
+    _speedSystem.Initialize(_initialSpeed.x, _initialSpeed.y);
+
     _animator = GetComponent<Animator>();
     _collider = GetComponent<BoxCollider2D>();
     _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -28,7 +30,6 @@ public partial class RingController : MonoBehaviour
   public void Initialize(
     GameObject player,
     PhysicsMode physicsMode = PhysicsMode.Normal,
-    Vector3? position = null,
     float speedX = 0,
     float speedY = 0)
   {
@@ -39,8 +40,6 @@ public partial class RingController : MonoBehaviour
     _speedSystem.Initialize(speedX, speedY);
 
     _physicsMode = physicsMode;
-
-    transform.position = position ?? _player.transform.position;
 
     _initialized = true;
   }

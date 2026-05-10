@@ -30,4 +30,6 @@ public partial class RingController : MonoBehaviour
   private GameObject _player;
   [SerializeField]
   private PhysicsMode _physicsMode;
+  [SerializeField]
+  private Vector2 _initialSpeed;
 }
