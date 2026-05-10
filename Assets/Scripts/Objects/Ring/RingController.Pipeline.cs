@@ -8,14 +8,14 @@ public partial class RingController : MonoBehaviour
 {
   private void FixedUpdate()
   {
-    if (!_initialized || _isCollected)
+    if (!_initialized)
     {
       return;
     }
 
     ApplyEffects();
 
-    if (!_gravityEnabled)
+    if (_isCollected || !_gravityEnabled)
     {
       return;
     }
