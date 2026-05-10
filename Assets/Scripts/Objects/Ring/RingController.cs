@@ -8,6 +8,7 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public partial class RingController : MonoBehaviour
 {
+  private readonly Pipeline _effects;
   private readonly RingConfigs _configs;
   private readonly RingSpeedSystem _speedSystem;
   private readonly RingSensorSystem _sensorSystem;
@@ -26,6 +27,8 @@ public partial class RingController : MonoBehaviour
   private bool _initialized;
   [SerializeField]
   private bool _gravityEnabled;
+  [SerializeField]
+  private float _lifetime;
   [SerializeField]
   private GameObject _player;
   [SerializeField]

@@ -7,9 +7,14 @@ public partial class RingController : MonoBehaviour
 {
   public RingController()
   {
+    _lifetime = float.PositiveInfinity;
+
     _configs = new(_physicsMode);
     _speedSystem = new(_configs);
     _sensorSystem = new();
+
+    _effects = new();
+    SetEffectPipeline();
   }
 
   private void Awake()
@@ -30,6 +35,7 @@ public partial class RingController : MonoBehaviour
   public void Initialize(
     GameObject player,
     PhysicsMode physicsMode = PhysicsMode.Normal,
+    float lifetime = float.PositiveInfinity,
     float speedX = 0,
     float speedY = 0)
   {
@@ -37,9 +43,10 @@ public partial class RingController : MonoBehaviour
     _playerCollider = _player.GetComponent<BoxCollider2D>();
     _playerRings = _player.GetComponent<IRingCollector>().Rings;
 
-    _speedSystem.Initialize(speedX, speedY);
-
     _physicsMode = physicsMode;
+    _lifetime = lifetime;
+
+    _speedSystem.Initialize(speedX, speedY);
 
     _initialized = true;
   }

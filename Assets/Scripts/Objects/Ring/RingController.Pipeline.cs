@@ -1,7 +1,5 @@
 using UnityEngine;
-using static RingConsts.UI;
 using static SharedConsts.Physics;
-using AnimatorParameters = SharedConsts.Animator.Parameters;
 
 /// <summary>
 /// Pipeline.
@@ -10,14 +8,15 @@ public partial class RingController : MonoBehaviour
 {
   private void FixedUpdate()
   {
-    if (!_initialized || _isCollected)
+    if (!_initialized)
     {
       return;
     }
 
-    CollectByPlayer();
+    BeginFrame();
+    ApplyEffects();
 
-    if (!_gravityEnabled)
+    if (_isCollected || !_gravityEnabled)
     {
       return;
     }
@@ -27,20 +26,14 @@ public partial class RingController : MonoBehaviour
     UpdatePosition();
   }
 
-  private void CollectByPlayer()
+  private void BeginFrame()
   {
-    if (_player == null)
-    {
-      return;
-    }
+    _lifetime -= Time.fixedDeltaTime;
+  }
 
-    if (_collider.bounds.Intersects(_playerCollider.bounds))
-    {
-      _isCollected = true;
-      _playerRings.Add();
-      _animator.SetTrigger(AnimatorParameters.Collected);
-      _spriteRenderer.sortingOrder = SparkleOrderInLayer;
-    }
+  private void ApplyEffects()
+  {
+    _effects.Run(false);
   }
 
   private void AnalyzeEnvironment()

@@ -307,7 +307,7 @@ public partial class SonicController
 
       Instantiate(_ringPrefab, transform.position + Vector3.right, Quaternion.identity)
         .GetComponent<RingController>()
-        .Initialize(transform.gameObject, _physicsMode, speedX, speedY);
+        .Initialize(transform.gameObject, _physicsMode, LostLifetime, speedX, speedY);
     }
 
     Rings.Clear();
