@@ -10,7 +10,7 @@ public partial class RingController : MonoBehaviour
 {
   private void FixedUpdate()
   {
-    if (_collected)
+    if (_isCollected)
     {
       return;
     }
@@ -36,7 +36,7 @@ public partial class RingController : MonoBehaviour
 
     if (_collider.bounds.Intersects(_playerCollider.bounds))
     {
-      _collected = true;
+      _isCollected = true;
       _playerRings.Add();
       _animator.SetTrigger(AnimatorParameters.Collected);
       _spriteRenderer.sortingOrder = SparkleOrderInLayer;

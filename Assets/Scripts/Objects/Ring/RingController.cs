@@ -12,8 +12,8 @@ public partial class RingController : MonoBehaviour
   private readonly RingSpeedSystem _speedSystem;
   private readonly RingSensorSystem _sensorSystem;
 
-  private bool _collected;
   private bool _isGrounded;
+  private bool _isCollected;
   private Animator _animator;
   private BoxCollider2D _collider;
   private BoxCollider2D _playerCollider;
