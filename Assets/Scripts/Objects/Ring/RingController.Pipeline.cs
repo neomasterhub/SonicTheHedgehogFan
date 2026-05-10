@@ -13,6 +13,7 @@ public partial class RingController : MonoBehaviour
       return;
     }
 
+    BeginFrame();
     ApplyEffects();
 
     if (_isCollected || !_gravityEnabled)
@@ -23,6 +24,11 @@ public partial class RingController : MonoBehaviour
     AnalyzeEnvironment();
     ApplyMovement();
     UpdatePosition();
+  }
+
+  private void BeginFrame()
+  {
+    _lifetime -= Time.fixedDeltaTime;
   }
 
   private void ApplyEffects()
