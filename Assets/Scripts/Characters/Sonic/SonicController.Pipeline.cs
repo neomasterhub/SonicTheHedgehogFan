@@ -1,4 +1,5 @@
 using UnityEngine;
+using static RingConsts.Physics;
 using static SharedConsts.Physics;
 using static SharedConsts.SecretCodes;
 using static SonicConsts.Physics;
@@ -281,32 +282,27 @@ public partial class SonicController
 
   private void LoseRings()
   {
-    var ringCount = 0;
-    var angle = 101.25f;
-    var angleStep = 22.5f;
-    var ringFlip = false;
-    var speed = 4;
+    var flip = false;
+    var speed = LostPortion1Speed;
+    var angleRad = LostInitialAngleRad;
 
-    for (var i = 0; i < 32; i++)
+    for (var i = 1; i <= Mathf.Min(Rings.Count, MaxLostNumber); i++)
     {
-      var angleRad = angle * Mathf.Deg2Rad;
-      var speedX = speed * Mathf.Cos(angleRad) / SharedConsts.ConvertValues.PxPerUnit;
-      var speedY = speed * Mathf.Sin(angleRad) / SharedConsts.ConvertValues.PxPerUnit;
+      var speedX = speed * Mathf.Cos(angleRad);
+      var speedY = speed * Mathf.Sin(angleRad);
 
-      if (ringFlip)
+      if (flip)
       {
         speedX *= -1;
-        angle += angleStep;
+        angleRad += LostAngleStepRad;
       }
 
-      ringFlip = !ringFlip;
-      ringCount++;
+      flip = !flip;
 
-      if (ringCount == 16)
+      if (i == MaxLostNumber / 2)
       {
-        ringCount = 0;
-        angle = 101.25f;
-        speed = 2;
+        angleRad = LostInitialAngleRad;
+        speed = LostPortion2Speed;
       }
 
       Instantiate(_ringPrefab, transform.position + Vector3.right, Quaternion.identity)
