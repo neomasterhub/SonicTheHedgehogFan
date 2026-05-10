@@ -28,6 +28,8 @@ public partial class RingController : MonoBehaviour
   [SerializeField]
   private bool _gravityEnabled;
   [SerializeField]
+  private float _lifetime;
+  [SerializeField]
   private GameObject _player;
   [SerializeField]
   private PhysicsMode _physicsMode;

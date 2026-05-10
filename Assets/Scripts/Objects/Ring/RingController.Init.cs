@@ -7,6 +7,8 @@ public partial class RingController : MonoBehaviour
 {
   public RingController()
   {
+    _lifetime = float.PositiveInfinity;
+
     _configs = new(_physicsMode);
     _speedSystem = new(_configs);
     _sensorSystem = new();
