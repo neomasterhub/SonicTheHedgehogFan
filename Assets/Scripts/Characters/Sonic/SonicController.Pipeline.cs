@@ -281,9 +281,11 @@ public partial class SonicController
 
   private void LoseRings()
   {
-    var ring = Instantiate(
-      _ringPrefab,
-      transform.position + new Vector3(0.4f, 0.4f),
-      Quaternion.identity);
+    for (var i = 0; i < 16; i++)
+    {
+      Instantiate(_ringPrefab, transform.position + Vector3.right, Quaternion.identity)
+        .GetComponent<RingController>()
+        .Initialize(transform.gameObject, _physicsMode, Random.Range(-0.05f, 0.05f), Random.Range(0.05f, 0.2f));
+    }
   }
 }
