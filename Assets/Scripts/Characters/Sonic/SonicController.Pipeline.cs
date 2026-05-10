@@ -47,6 +47,11 @@ public partial class SonicController
     {
       _showDebugInfo = !_showDebugInfo;
     }
+
+    if (_inputSystem.Pressed.HasAny(PlayerInput.B))
+    {
+      LoseRings();
+    }
   }
 
   private void AnalyzeEnvironment()
