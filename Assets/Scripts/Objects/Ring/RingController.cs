@@ -23,6 +23,8 @@ public partial class RingController : MonoBehaviour
   private SpriteRenderer _spriteRenderer;
 
   [SerializeField]
+  private bool _initialized;
+  [SerializeField]
   private bool _gravityEnabled;
   [SerializeField]
   private GameObject _player;

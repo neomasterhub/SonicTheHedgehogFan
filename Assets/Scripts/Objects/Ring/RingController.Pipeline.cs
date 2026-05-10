@@ -10,7 +10,7 @@ public partial class RingController : MonoBehaviour
 {
   private void FixedUpdate()
   {
-    if (_isCollected)
+    if (!_initialized || _isCollected)
     {
       return;
     }
