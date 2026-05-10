@@ -24,4 +24,11 @@ public partial class RingController : MonoBehaviour
       _playerRings = _player.GetComponent<IRingCollector>().Rings;
     }
   }
+
+  public void Initialize(GameObject player)
+  {
+    _player = player;
+    _playerCollider = _player.GetComponent<BoxCollider2D>();
+    _playerRings = _player.GetComponent<IRingCollector>().Rings;
+  }
 }
