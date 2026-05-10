@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aca7f2e2017b01143bf64657ae6b3bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RingController
-  _initialized: 0
+  _initialized: 1
   _gravityEnabled: 0
   _player: {fileID: 710850496}
   _physicsMode: 0
@@ -2942,7 +2942,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aca7f2e2017b01143bf64657ae6b3bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RingController
-  _initialized: 0
+  _initialized: 1
   _gravityEnabled: 0
   _player: {fileID: 710850496}
   _physicsMode: 0
@@ -3200,7 +3200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aca7f2e2017b01143bf64657ae6b3bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RingController
-  _initialized: 0
+  _initialized: 1
   _gravityEnabled: 0
   _player: {fileID: 710850496}
   _physicsMode: 0
@@ -3742,7 +3742,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aca7f2e2017b01143bf64657ae6b3bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RingController
-  _initialized: 0
+  _initialized: 1
   _gravityEnabled: 0
   _player: {fileID: 710850496}
   _physicsMode: 0
@@ -4476,6 +4476,14 @@ PrefabInstance:
     - target: {fileID: 636313242361185411, guid: e75974286517f944dac2e72436689482, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3937169843856006646, guid: e75974286517f944dac2e72436689482, type: 3}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 710850496}
+    - target: {fileID: 3937169843856006646, guid: e75974286517f944dac2e72436689482, type: 3}
+      propertyPath: _initialized
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5601778466645593367, guid: e75974286517f944dac2e72436689482, type: 3}
       propertyPath: m_Name
