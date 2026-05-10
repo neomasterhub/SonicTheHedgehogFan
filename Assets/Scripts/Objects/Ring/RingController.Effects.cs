@@ -8,7 +8,23 @@ public partial class RingController
 {
   private void SetEffectPipeline()
   {
+    _effects.AddStep(CreateEffect_Destroy());
     _effects.AddStep(CreateEffect_CollectByPlayer());
+  }
+
+  private PipelineStep CreateEffect_Destroy()
+  {
+    return PipelineStepBuilder.Create()
+      .WithDisplayName("Destroy")
+      .WithCondition(() =>
+        _lifetime <= 0)
+      .WithAction(() =>
+      {
+        Destroy(transform.gameObject);
+
+        return PipelineStepResult.Break;
+      })
+      .Build();
   }
 
   private PipelineStep CreateEffect_CollectByPlayer()
@@ -20,6 +36,7 @@ public partial class RingController
         && _collider.bounds.Intersects(_playerCollider.bounds))
       .WithAction(() =>
       {
+        _lifetime = 1;
         _isCollected = true;
         _playerRings.Add();
         _animator.SetTrigger(AnimatorParameters.Collected);
