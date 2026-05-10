@@ -16,10 +16,16 @@ public class RingSpeedSystem
   public float SpeedX { get; private set; }
   public float SpeedY { get; private set; }
 
-  private void RoundSpeeds()
+  private void RoundSpeed()
   {
     SpeedX = SpeedX.Round(SpeedRoundingDigits);
     SpeedY = SpeedY.Round(SpeedRoundingDigits);
+  }
+
+  public void Initialize(float speedX, float speedY)
+  {
+    SpeedX = speedX;
+    SpeedY = speedY;
   }
 
   public void SetSpeed(RingSpeedContext context)
@@ -36,7 +42,7 @@ public class RingSpeedSystem
       SetSpeed_Airborne();
     }
 
-    RoundSpeeds();
+    RoundSpeed();
   }
 
   private void SetSpeed_Airborne()

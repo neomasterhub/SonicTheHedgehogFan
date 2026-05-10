@@ -1,4 +1,5 @@
 using UnityEngine;
+using static RingConsts.Physics;
 using static SharedConsts.Physics;
 using static SharedConsts.SecretCodes;
 using static SonicConsts.Physics;
@@ -46,6 +47,11 @@ public partial class SonicController
     if (_inputSystem.CheckLastPressed(ToggleDebugMode))
     {
       _showDebugInfo = !_showDebugInfo;
+    }
+
+    if (_inputSystem.Pressed.HasAny(PlayerInput.B))
+    {
+      LoseRings();
     }
   }
 
@@ -272,5 +278,36 @@ public partial class SonicController
     }
 
     return result;
+  }
+
+  private void LoseRings()
+  {
+    var flip = false;
+    var speed = LostPortion1Speed;
+    var angleRad = LostInitialAngleRad;
+
+    for (var i = 1; i <= Mathf.Min(Rings.Count, MaxLostNumber); i++)
+    {
+      var speedX = speed * Mathf.Cos(angleRad);
+      var speedY = speed * Mathf.Sin(angleRad);
+
+      if (flip)
+      {
+        speedX *= -1;
+        angleRad += LostAngleStepRad;
+      }
+
+      flip = !flip;
+
+      if (i == MaxLostNumber / 2)
+      {
+        angleRad = LostInitialAngleRad;
+        speed = LostPortion2Speed;
+      }
+
+      Instantiate(_ringPrefab, transform.position + Vector3.right, Quaternion.identity)
+        .GetComponent<RingController>()
+        .Initialize(transform.gameObject, _physicsMode, speedX, speedY);
+    }
   }
 }

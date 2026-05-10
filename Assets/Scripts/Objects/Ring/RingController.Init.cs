@@ -14,10 +14,33 @@ public partial class RingController : MonoBehaviour
 
   private void Awake()
   {
+    _speedSystem.Initialize(_initialSpeed.x, _initialSpeed.y);
+
     _animator = GetComponent<Animator>();
     _collider = GetComponent<BoxCollider2D>();
     _spriteRenderer = GetComponent<SpriteRenderer>();
+
+    if (_player != null)
+    {
+      _playerCollider = _player.GetComponent<BoxCollider2D>();
+      _playerRings = _player.GetComponent<IRingCollector>().Rings;
+    }
+  }
+
+  public void Initialize(
+    GameObject player,
+    PhysicsMode physicsMode = PhysicsMode.Normal,
+    float speedX = 0,
+    float speedY = 0)
+  {
+    _player = player;
     _playerCollider = _player.GetComponent<BoxCollider2D>();
     _playerRings = _player.GetComponent<IRingCollector>().Rings;
+
+    _speedSystem.Initialize(speedX, speedY);
+
+    _physicsMode = physicsMode;
+
+    _initialized = true;
   }
 }
