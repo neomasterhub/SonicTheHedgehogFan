@@ -8,6 +8,7 @@ public partial class RingController : MonoBehaviour
   public RingController()
   {
     _configs = new(_physicsMode);
+    _effects = new();
     _speedSystem = new(_configs);
     _sensorSystem = new();
   }

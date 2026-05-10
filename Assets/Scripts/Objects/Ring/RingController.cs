@@ -8,6 +8,7 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public partial class RingController : MonoBehaviour
 {
+  private readonly Pipeline _effects;
   private readonly RingConfigs _configs;
   private readonly RingSpeedSystem _speedSystem;
   private readonly RingSensorSystem _sensorSystem;
