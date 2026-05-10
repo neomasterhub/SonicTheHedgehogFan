@@ -282,7 +282,7 @@ public partial class SonicController
 
   private void LoseRings()
   {
-    var flip = false;
+    var flip = _spriteRenderer.flipX;
     var speed = LostPortion1Speed;
     var angleRad = LostInitialAngleRad;
 
@@ -309,5 +309,7 @@ public partial class SonicController
         .GetComponent<RingController>()
         .Initialize(transform.gameObject, _physicsMode, speedX, speedY);
     }
+
+    Rings.Clear();
   }
 }

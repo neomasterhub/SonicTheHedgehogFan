@@ -1,4 +1,5 @@
 using UnityEngine;
+using static RingConsts.Physics;
 using static SharedConsts.Physics;
 
 public class RingSpeedSystem
@@ -62,5 +63,15 @@ public class RingSpeedSystem
 
     SpeedX = speed.x;
     SpeedY = speed.y;
+
+    if (Mathf.Abs(SpeedX) <= MaxStopSpeed)
+    {
+      SpeedX = 0;
+    }
+
+    if (Mathf.Abs(SpeedY) <= MaxStopSpeed)
+    {
+      SpeedY = 0;
+    }
   }
 }

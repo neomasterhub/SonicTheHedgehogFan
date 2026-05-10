@@ -17,6 +17,7 @@ public static class RingConsts
     private const float _lostInitialAngleDeg = 101.25f;
 
     public const int MaxLostNumber = 32;
+    public const float MaxStopSpeed = 0.002f;
     public const float SensorY = 0.075f;
     public const float InnerSensorRayLength = 0.2f;
     public const float OuterSensorRayLength = 0.1f;
