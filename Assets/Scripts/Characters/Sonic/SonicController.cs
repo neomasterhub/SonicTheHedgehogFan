@@ -93,7 +93,7 @@ public partial class SonicController
   [Header("Prefabs")]
   [SerializeField]
   [InspectorLabel("Ring")]
-  private RingController _ringPrefab;
+  private GameObject _ringPrefab;
 
   public ICollector Rings { get; }
   public VerticalDirection LookVerticalDirection
