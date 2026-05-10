@@ -29,7 +29,7 @@ public partial class RingController : MonoBehaviour
 
   private void CollectByPlayer()
   {
-    if (_collected)
+    if (_player == null)
     {
       return;
     }

@@ -17,7 +17,11 @@ public partial class RingController : MonoBehaviour
     _animator = GetComponent<Animator>();
     _collider = GetComponent<BoxCollider2D>();
     _spriteRenderer = GetComponent<SpriteRenderer>();
-    _playerCollider = _player.GetComponent<BoxCollider2D>();
-    _playerRings = _player.GetComponent<IRingCollector>().Rings;
+
+    if (_player != null)
+    {
+      _playerCollider = _player.GetComponent<BoxCollider2D>();
+      _playerRings = _player.GetComponent<IRingCollector>().Rings;
+    }
   }
 }
