@@ -273,4 +273,12 @@ public partial class SonicController
 
     return result;
   }
+
+  private void LoseRings()
+  {
+    var ring = Instantiate(
+      _ringPrefab,
+      transform.position + new Vector3(0.4f, 0.4f),
+      Quaternion.identity);
+  }
 }
