@@ -90,6 +90,11 @@ public partial class SonicController
   [InspectorLabel("Ring")]
   private AudioClip _ringAudioClip;
 
+  [Header("Prefabs")]
+  [SerializeField]
+  [InspectorLabel("Ring")]
+  private RingController _ringPrefab;
+
   public ICollector Rings { get; }
   public VerticalDirection LookVerticalDirection
   {
