@@ -281,11 +281,37 @@ public partial class SonicController
 
   private void LoseRings()
   {
-    for (var i = 0; i < 16; i++)
+    var ringCount = 0;
+    var angle = 101.25f;
+    var angleStep = 22.5f;
+    var ringFlip = false;
+    var speed = 4;
+
+    for (var i = 0; i < 32; i++)
     {
+      var angleRad = angle * Mathf.Deg2Rad;
+      var speedX = speed * Mathf.Cos(angleRad) / SharedConsts.ConvertValues.PxPerUnit;
+      var speedY = speed * Mathf.Sin(angleRad) / SharedConsts.ConvertValues.PxPerUnit;
+
+      if (ringFlip)
+      {
+        speedX *= -1;
+        angle += angleStep;
+      }
+
+      ringFlip = !ringFlip;
+      ringCount++;
+
+      if (ringCount == 16)
+      {
+        ringCount = 0;
+        angle = 101.25f;
+        speed = 2;
+      }
+
       Instantiate(_ringPrefab, transform.position + Vector3.right, Quaternion.identity)
         .GetComponent<RingController>()
-        .Initialize(transform.gameObject, _physicsMode, Random.Range(-0.05f, 0.05f), Random.Range(0.05f, 0.2f));
+        .Initialize(transform.gameObject, _physicsMode, speedX, speedY);
     }
   }
 }
