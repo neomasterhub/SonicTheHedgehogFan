@@ -26,6 +26,6 @@ public static class RingConsts
     public const float LostPortion2Speed = _lostPortion2SpeedPx / PxPerUnit;
     public const float LostAngleStepRad = _lostAngleStepDeg * Mathf.Deg2Rad;
     public const float LostInitialAngleRad = _lostInitialAngleDeg * Mathf.Deg2Rad;
-    public static readonly RingPhysicsModeConfig NormalConfig = new(0.003f, 0.8f);
+    public static readonly RingPhysicsModeConfig NormalConfig = new(24f / SpxPerUnit, 0.75f);
   }
 }
