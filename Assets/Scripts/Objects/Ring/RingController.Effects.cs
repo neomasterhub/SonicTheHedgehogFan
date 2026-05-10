@@ -32,7 +32,8 @@ public partial class RingController
     return PipelineStepBuilder.Create()
       .WithDisplayName("Collect by player")
       .WithCondition(() =>
-        _player != null
+        !_isCollected
+        && _player != null
         && _collider.bounds.Intersects(_playerCollider.bounds))
       .WithAction(() =>
       {
