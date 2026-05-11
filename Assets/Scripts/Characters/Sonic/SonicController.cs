@@ -14,9 +14,9 @@ public partial class SonicController
   IRingCollector
 {
   private readonly ConditionalValueProvider<float> _slopeSpeedProvider;
+  private readonly ConditionalValueProvider<float> _gravitySpeedProvider;
   private readonly ConditionalValueProvider<Vector2> _airToGroundSpeedProvider;
   private readonly ConditionalValueProvider<Vector2> _groundToAirSpeedProvider;
-  private readonly ConditionalValueProvider<GravitySpeed> _gravitySpeedProvider;
   private readonly GroundInfoSystem _groundInfoSystem;
   private readonly PlayerInputSystem _inputSystem;
   private readonly PlayerViewRotatorProvider<SonicViewRotatorContext> _viewRotatorProvider;
