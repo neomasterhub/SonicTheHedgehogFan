@@ -39,6 +39,11 @@ public class SonicViewSystem
     RotateSprite();
   }
 
+  public void StartBlinking(float alpha, float timer, float interval)
+  {
+    _blinker.Start(alpha, timer, interval);
+  }
+
   private void UpdateAnimator()
   {
     float animatorParameterSpeed;
