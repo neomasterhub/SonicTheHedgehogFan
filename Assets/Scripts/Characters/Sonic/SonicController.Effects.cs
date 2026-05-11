@@ -27,9 +27,12 @@ public partial class SonicController
   {
     return PipelineStepBuilder.Create()
       .WithDisplayName("Getting hit")
-      .WithCondition(() => _inputSystem.Pressed.HasAny(PlayerInput.B))
+      .WithCondition(() =>
+        !_isHurt
+        && _inputSystem.Pressed.HasAny(PlayerInput.B))
       .WithAction(() =>
       {
+        _isHurt = true;
         SetSizes(SonicSizeMode.Big);
 
         return PipelineStepResult.Break;
@@ -42,7 +45,7 @@ public partial class SonicController
     return PipelineStepBuilder.Create()
       .WithDisplayName("Hurt blinking/Enter")
       .WithCondition(() =>
-        _inputSystem.Pressed.HasAny(PlayerInput.B)
+        _isHurt
         && !_prevIsGrounded
         && _isGrounded)
       .WithAction(() =>
