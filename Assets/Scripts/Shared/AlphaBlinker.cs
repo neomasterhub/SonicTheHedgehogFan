@@ -16,6 +16,7 @@ public class AlphaBlinker
   public void SetComponent(SpriteRenderer spriteRenderer)
   {
     _spriteRenderer = spriteRenderer;
+    _sourceColor = _spriteRenderer.color;
   }
 
   public void Start(float alpha, float timer, float interval)
@@ -26,7 +27,6 @@ public class AlphaBlinker
     _timer = timer;
     _interval = interval;
 
-    _sourceColor = _spriteRenderer.color;
     _dimmedColor = _sourceColor;
     _dimmedColor.a = alpha;
 
