@@ -153,7 +153,7 @@ public partial class SonicController
 
   private void UpdateView()
   {
-    _viewContext = new(!_spriteRenderer.flipX, _isGrounded, _speedSystem.IsSkidding, _isBalancing, _isCurlingUp, _isLookingUp, _isRolling, _speedSystem.IsZeroGroundSpeedProgressReached, _triggeredGroundSensorSide, _speedSystem.SpeedX, _speedSystem.GroundSpeed, _groundInfoSystem.Current.AngleDeg, Time.fixedDeltaTime, _groundInfoSystem.Current.Side, _groundInfoSystem.Previous.Side);
+    _viewContext = new(!_spriteRenderer.flipX, _isHurt, _isGrounded, _speedSystem.IsSkidding, _isBalancing, _isCurlingUp, _isLookingUp, _isRolling, _speedSystem.IsZeroGroundSpeedProgressReached, _triggeredGroundSensorSide, _speedSystem.SpeedX, _speedSystem.GroundSpeed, _groundInfoSystem.Current.AngleDeg, Time.fixedDeltaTime, _groundInfoSystem.Current.Side, _groundInfoSystem.Previous.Side);
     _viewSystem.Update(_viewContext);
   }
 
