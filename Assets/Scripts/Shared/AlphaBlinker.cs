@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class AlphaBlinker
 {
-  private readonly SpriteRenderer _spriteRenderer;
-
   private bool _dimmed;
   private bool _isRunning;
   private float _time;
@@ -11,13 +9,14 @@ public class AlphaBlinker
   private float _interval;
   private Color _dimmedColor;
   private Color _sourceColor;
+  private SpriteRenderer _spriteRenderer;
 
-  public AlphaBlinker(SpriteRenderer spriteRenderer)
+  public bool IsRunning => _isRunning;
+
+  public void SetComponent(SpriteRenderer spriteRenderer)
   {
     _spriteRenderer = spriteRenderer;
   }
-
-  public bool IsRunning => _isRunning;
 
   public void Start(float alpha, float timer, float interval)
   {
