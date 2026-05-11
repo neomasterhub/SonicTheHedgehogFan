@@ -1,6 +1,6 @@
 public class SonicPhysicsModeConfig
 {
-  public SonicPhysicsModeConfig(float accelerationSpeed, float decelerationSpeed, float minSkiddingSpeed, float frictionSpeed, float minWallSpeed, float minCeilingSpeed, float topSpeed, float airAccelerationSpeed, float airTopSpeed, float gravityDownSpeed, float gravityUpSpeed, float maxFallSpeed, float slopeFactor, float rollDecelerationSpeed, float rollFrictionSpeed, float rollUphillSlopeFactor, float rollDownhillSlopeFactor, float rollMinWallSpeed, float rollMinCeilingSpeed, float jumpSpeed, float jumpCutoffSpeed)
+  public SonicPhysicsModeConfig(float accelerationSpeed, float decelerationSpeed, float minSkiddingSpeed, float frictionSpeed, float minWallSpeed, float minCeilingSpeed, float topSpeed, float airAccelerationSpeed, float airTopSpeed, float gravityDownSpeed, float gravityUpSpeed, float maxFallSpeed, float slopeFactor, float rollDecelerationSpeed, float rollFrictionSpeed, float rollUphillSlopeFactor, float rollDownhillSlopeFactor, float rollMinWallSpeed, float rollMinCeilingSpeed, float jumpSpeed, float jumpCutoffSpeed, float hurtSpeedX, float hurtSpeedY)
   {
     AccelerationSpeed = accelerationSpeed;
     DecelerationSpeed = decelerationSpeed;
@@ -22,6 +22,8 @@ public class SonicPhysicsModeConfig
     RollMinCeilingSpeed = rollMinCeilingSpeed;
     JumpSpeed = jumpSpeed;
     JumpCutoffSpeed = jumpCutoffSpeed;
+    HurtSpeedX = hurtSpeedX;
+    HurtSpeedY = hurtSpeedY;
   }
 
   public float AccelerationSpeed { get; }
@@ -43,5 +45,7 @@ public class SonicPhysicsModeConfig
   public float RollMinCeilingSpeed { get; }
   public float JumpSpeed { get; }
   public float JumpCutoffSpeed { get; }
+  public float HurtSpeedX { get; }
+  public float HurtSpeedY { get; }
   public GravitySpeed GravitySpeed { get; }
 }

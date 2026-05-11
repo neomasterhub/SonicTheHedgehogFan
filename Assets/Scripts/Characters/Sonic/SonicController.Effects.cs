@@ -7,6 +7,7 @@ public partial class SonicController
 {
   private void SetEffectPipeline()
   {
+    _effects.AddStep(CreateEffect_GettingHit());
     _effects.AddStep(CreateEffect_HurtBlinking_Enter());
     _effects.AddStep(CreateEffect_Jumping_Exit());
     _effects.AddStep(CreateEffect_Jumping_Enter());
@@ -22,16 +23,36 @@ public partial class SonicController
     _effects.AddStep(CreateEffect_CeilingDetach());
   }
 
+  private PipelineStep CreateEffect_GettingHit()
+  {
+    return PipelineStepBuilder.Create()
+      .WithDisplayName("Getting hit")
+      .WithCondition(() =>
+        !_isHurt
+        && _inputSystem.Pressed.HasAny(PlayerInput.B))
+      .WithAction(() =>
+      {
+        _isHit = true;
+        _isHurt = true;
+        SetSizes(SonicSizeMode.Big);
+        AnalyzeEnvironment_Airborne();
+
+        return PipelineStepResult.Break;
+      })
+      .Build();
+  }
+
   private PipelineStep CreateEffect_HurtBlinking_Enter()
   {
     return PipelineStepBuilder.Create()
       .WithDisplayName("Hurt blinking/Enter")
       .WithCondition(() =>
-        _inputSystem.Pressed.HasAny(PlayerInput.B)
+        _isHurt
         && !_prevIsGrounded
         && _isGrounded)
       .WithAction(() =>
       {
+        _isHurt = false;
         _viewSystem.StartBlinking(0, HurtBlinkingTimer, BlinkingInterval);
 
         return PipelineStepResult.Continue;

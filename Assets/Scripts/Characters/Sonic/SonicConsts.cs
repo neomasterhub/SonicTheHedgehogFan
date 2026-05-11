@@ -33,7 +33,9 @@ public static class SonicConsts
       Normal.RollMinWallSpeedSpx / SpxPerUnit,
       Normal.RollMinCeilingSpeedSpx / SpxPerUnit,
       Normal.JumpSpeedPx / PxPerUnit,
-      Normal.JumpCutoffSpeedPx / PxPerUnit);
+      Normal.JumpCutoffSpeedPx / PxPerUnit,
+      Normal.HurtSpeedXPx / PxPerUnit,
+      Normal.HurtSpeedYPx / PxPerUnit);
 
     private static class Normal
     {
@@ -58,6 +60,8 @@ public static class SonicConsts
       public const float RollMinCeilingSpeedSpx = 128;
       public const float JumpSpeedPx = 3.8f;
       public const float JumpCutoffSpeedPx = 2;
+      public const float HurtSpeedXPx = 2;
+      public const float HurtSpeedYPx = 4;
     }
   }
 

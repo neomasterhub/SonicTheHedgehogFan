@@ -72,7 +72,11 @@ public class SonicSpeedSystem
 
     SetStateData();
 
-    if (_context.IsGrounded)
+    if (_context.IsHurt)
+    {
+      SetSpeed_HurtKnockback();
+    }
+    else if (_context.IsGrounded)
     {
       SetSpeed_Grounded();
     }
@@ -111,6 +115,12 @@ public class SonicSpeedSystem
       MinWallSpeed = _config.MinWallSpeed;
       MinCeilingSpeed = _config.MinCeilingSpeed;
     }
+  }
+
+  private void SetSpeed_HurtKnockback()
+  {
+    SpeedX = -_config.HurtSpeedX;
+    SpeedY = _config.HurtSpeedY;
   }
 
   private void SetSpeed_Airborne()
