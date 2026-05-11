@@ -67,6 +67,6 @@ public static class SharedConsts
 
   public static class SecretCodes
   {
-    public static readonly PlayerInput[] ToggleDebugMode = new PlayerInput[] { Y, Y, B };
+    public static readonly PlayerInput[] ToggleDebugMode = new PlayerInput[] { Z, Y, B };
   }
 }
