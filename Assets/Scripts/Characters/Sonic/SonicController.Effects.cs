@@ -7,6 +7,7 @@ public partial class SonicController
 {
   private void SetEffectPipeline()
   {
+    _effects.AddStep(CreateEffect_GettingHit());
     _effects.AddStep(CreateEffect_HurtBlinking_Enter());
     _effects.AddStep(CreateEffect_Jumping_Exit());
     _effects.AddStep(CreateEffect_Jumping_Enter());
@@ -20,6 +21,20 @@ public partial class SonicController
     _effects.AddStep(CreateEffect_Rolling_Enter());
     _effects.AddStep(CreateEffect_WallDetach());
     _effects.AddStep(CreateEffect_CeilingDetach());
+  }
+
+  private PipelineStep CreateEffect_GettingHit()
+  {
+    return PipelineStepBuilder.Create()
+      .WithDisplayName("Getting hit")
+      .WithCondition(() => _inputSystem.Pressed.HasAny(PlayerInput.B))
+      .WithAction(() =>
+      {
+        SetSizes(SonicSizeMode.Big);
+
+        return PipelineStepResult.Break;
+      })
+      .Build();
   }
 
   private PipelineStep CreateEffect_HurtBlinking_Enter()
