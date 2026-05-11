@@ -19,7 +19,7 @@ public class Blinker
 
   public bool IsRunning => _isRunning;
 
-  public void Run(float alpha, float timer, float interval)
+  public void Start(float alpha, float timer, float interval)
   {
     _isRunning = true;
 
@@ -34,6 +34,19 @@ public class Blinker
     ToggleAlpha();
   }
 
+  public void Stop()
+  {
+    _time = 0;
+    _timer = 0;
+    _interval = 0;
+    _isRunning = false;
+
+    if (_dimmed)
+    {
+      ToggleAlpha();
+    }
+  }
+
   public void Update(float deltaTime)
   {
     if (!_isRunning)
@@ -43,16 +56,7 @@ public class Blinker
 
     if (_timer <= 0)
     {
-      _time = 0;
-      _timer = 0;
-      _interval = 0;
-      _isRunning = false;
-
-      if (_dimmed)
-      {
-        ToggleAlpha();
-      }
-
+      Stop();
       return;
     }
 
