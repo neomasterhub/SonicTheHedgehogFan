@@ -34,6 +34,7 @@ public class SonicViewSystem
   public void Update(SonicViewContext context)
   {
     _context = context;
+    _blinker.Update(_context.DeltaTime);
     UpdateAnimator();
     RotateSprite();
   }
