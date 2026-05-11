@@ -137,7 +137,7 @@ public partial class SonicController
     ring.clip = _ringAudioClip;
 
     var lostRings = this.AddComponent<AudioSource>();
-    lostRings.clip = _loseRingsClip;
+    lostRings.clip = _lostRingsClip;
 
     _sounds = new Sound[]
     {

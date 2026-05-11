@@ -93,8 +93,8 @@ public partial class SonicController
   [InspectorLabel("Ring")]
   private AudioClip _ringAudioClip;
   [SerializeField]
-  [InspectorLabel("Lose rings")]
-  private AudioClip _loseRingsClip;
+  [InspectorLabel("Lost rings")]
+  private AudioClip _lostRingsClip;
 
   [Header("Prefabs")]
   [SerializeField]
