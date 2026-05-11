@@ -7,11 +7,11 @@ public class Sound
   private readonly Func<bool> _playCondition;
   private readonly Func<bool> _stopCondition;
 
-  public Sound(AudioSource audioSource, Func<bool> playCondition, Func<bool> stopCondition)
+  public Sound(AudioSource audioSource, Func<bool> playCondition, Func<bool> stopCondition = null)
   {
     _audioSource = audioSource;
     _playCondition = playCondition;
-    _stopCondition = stopCondition;
+    _stopCondition = stopCondition ?? (() => false);
   }
 
   public void Play()

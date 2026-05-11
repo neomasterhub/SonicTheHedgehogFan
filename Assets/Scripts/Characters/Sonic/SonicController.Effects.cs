@@ -35,7 +35,6 @@ public partial class SonicController
       {
         _isHit = true;
         _isHurt = true;
-        SetSizes(SonicSizeMode.Big);
         AnalyzeEnvironment_Airborne();
 
         return PipelineStepResult.Continue;
@@ -52,6 +51,7 @@ public partial class SonicController
         && Rings.Count > 0)
       .WithAction(() =>
       {
+        _ringsLost = true;
         LoseRings();
 
         return PipelineStepResult.Break;

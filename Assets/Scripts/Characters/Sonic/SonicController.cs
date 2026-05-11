@@ -44,6 +44,7 @@ public partial class SonicController
   private bool _postWallDetachDpadLock;
   private bool _postWallDetachPositionOffset;
   private bool _ringCollected;
+  private bool _ringsLost;
   private bool _triggeredGroundSensorSide;
   private bool _isDownGrounded;
   private bool _isDownGroundedStatic;
@@ -91,6 +92,9 @@ public partial class SonicController
   [SerializeField]
   [InspectorLabel("Ring")]
   private AudioClip _ringAudioClip;
+  [SerializeField]
+  [InspectorLabel("Lost rings")]
+  private AudioClip _lostRingsClip;
 
   [Header("Prefabs")]
   [SerializeField]
