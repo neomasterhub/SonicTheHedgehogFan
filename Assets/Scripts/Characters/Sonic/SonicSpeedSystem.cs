@@ -72,9 +72,9 @@ public class SonicSpeedSystem
 
     SetStateData();
 
-    if (_context.IsHurt)
+    if (_context.IsHit)
     {
-      SetSpeed_HurtKnockback();
+      SetSpeed_HitKnockback();
     }
     else if (_context.IsGrounded)
     {
@@ -117,7 +117,7 @@ public class SonicSpeedSystem
     }
   }
 
-  private void SetSpeed_HurtKnockback()
+  private void SetSpeed_HitKnockback()
   {
     SpeedX = -_config.HurtSpeedX;
     SpeedY = _config.HurtSpeedY;

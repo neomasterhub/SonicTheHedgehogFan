@@ -1,6 +1,6 @@
 public readonly struct SonicSpeedContext
 {
-  public readonly bool IsHurt;
+  public readonly bool IsHit;
   public readonly bool IsRolling;
   public readonly bool IsJumping;
   public readonly bool IsGrounded;
@@ -10,9 +10,9 @@ public readonly struct SonicSpeedContext
   public readonly float? DistanceToLeftWall;
   public readonly float? DistanceToRightWall;
 
-  private SonicSpeedContext(bool isHurt, bool isRolling, bool isJumping, bool isGrounded, bool prevIsGrounded, float? groundAngleRad, float? distanceToGround, float? distanceToLeftWall, float? distanceToRightWall)
+  private SonicSpeedContext(bool isHit, bool isRolling, bool isJumping, bool isGrounded, bool prevIsGrounded, float? groundAngleRad, float? distanceToGround, float? distanceToLeftWall, float? distanceToRightWall)
   {
-    IsHurt = isHurt;
+    IsHit = isHit;
     IsRolling = isRolling;
     IsJumping = isJumping;
     IsGrounded = isGrounded;
@@ -23,13 +23,13 @@ public readonly struct SonicSpeedContext
     DistanceToRightWall = distanceToRightWall;
   }
 
-  public static SonicSpeedContext GetGrounded(bool isHurt, bool isRolling, bool isJumping, bool prevIsGrounded, float groundAngleRad, float distanceToGround, float? distanceToLeftWall, float? distanceToRightWall)
+  public static SonicSpeedContext GetGrounded(bool isHit, bool isRolling, bool isJumping, bool prevIsGrounded, float groundAngleRad, float distanceToGround, float? distanceToLeftWall, float? distanceToRightWall)
   {
-    return new(isHurt, isRolling, isJumping, true, prevIsGrounded, groundAngleRad, distanceToGround, distanceToLeftWall, distanceToRightWall);
+    return new(isHit, isRolling, isJumping, true, prevIsGrounded, groundAngleRad, distanceToGround, distanceToLeftWall, distanceToRightWall);
   }
 
-  public static SonicSpeedContext GetAirborne(bool isHurt, bool isRolling, bool isJumping, bool prevIsGrounded, float? distanceToLeftWall, float? distanceToRightWall)
+  public static SonicSpeedContext GetAirborne(bool isHit, bool isRolling, bool isJumping, bool prevIsGrounded, float? distanceToLeftWall, float? distanceToRightWall)
   {
-    return new(isHurt, isRolling, isJumping, false, prevIsGrounded, null, null, distanceToLeftWall, distanceToRightWall);
+    return new(isHit, isRolling, isJumping, false, prevIsGrounded, null, null, distanceToLeftWall, distanceToRightWall);
   }
 }
