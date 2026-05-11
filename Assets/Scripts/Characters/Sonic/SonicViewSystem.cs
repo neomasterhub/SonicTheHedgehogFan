@@ -29,6 +29,7 @@ public class SonicViewSystem
   {
     _animator = animator;
     _spriteRenderer = spriteRenderer;
+    _blinker.SetComponent(spriteRenderer);
   }
 
   public void Update(SonicViewContext context)
