@@ -206,6 +206,7 @@ public partial class SonicController
     }
 
     _ringCollected = false;
+    _ringsLost = false;
   }
 
   private void SetSizes(SonicSizeMode sizeMode)

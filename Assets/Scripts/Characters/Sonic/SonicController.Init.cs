@@ -136,6 +136,9 @@ public partial class SonicController
     var ring = this.AddComponent<AudioSource>();
     ring.clip = _ringAudioClip;
 
+    var lostRings = this.AddComponent<AudioSource>();
+    lostRings.clip = _loseRingsClip;
+
     _sounds = new Sound[]
     {
       new(jump,
@@ -153,6 +156,10 @@ public partial class SonicController
       new(ring,
         () => _ringCollected,
         () => _ringCollected && ring.isPlaying),
+
+      new(lostRings,
+        () => _ringsLost,
+        () => false),
     };
   }
 

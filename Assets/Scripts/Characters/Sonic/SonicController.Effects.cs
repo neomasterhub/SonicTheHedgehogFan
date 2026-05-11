@@ -52,6 +52,7 @@ public partial class SonicController
         && Rings.Count > 0)
       .WithAction(() =>
       {
+        _ringsLost = true;
         LoseRings();
 
         return PipelineStepResult.Break;
