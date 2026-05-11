@@ -23,5 +23,15 @@ public class Blinker
     _time = 0;
     _timer = timer;
     _interval = interval;
+
+    ToggleAlpha();
+  }
+
+  private void ToggleAlpha()
+  {
+    var color = _spriteRenderer.color;
+    color.a = _dimmed ? _alpha : 1;
+    _spriteRenderer.color = color;
+    _dimmed = !_dimmed;
   }
 }
