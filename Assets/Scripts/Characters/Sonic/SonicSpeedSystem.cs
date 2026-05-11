@@ -9,9 +9,9 @@ public class SonicSpeedSystem
   private readonly SonicConfigs _configs;
   private readonly PlayerInputSystem _inputSystem;
   private readonly ConditionalValueProvider<float> _slopeSpeedProvider;
+  private readonly ConditionalValueProvider<float> _gravitySpeedProvider;
   private readonly ConditionalValueProvider<Vector2> _airToGroundSpeedProvider;
   private readonly ConditionalValueProvider<Vector2> _groundToAirSpeedProvider;
-  private readonly ConditionalValueProvider<GravitySpeed> _gravitySpeedProvider;
 
   private bool _friction;
   private float _accSpeed;
@@ -27,16 +27,16 @@ public class SonicSpeedSystem
     SonicConfigs configs,
     PlayerInputSystem inputSystem,
     ConditionalValueProvider<float> slopeSpeedProvider,
+    ConditionalValueProvider<float> gravitySpeedProvider,
     ConditionalValueProvider<Vector2> airToGroundSpeedProvider,
-    ConditionalValueProvider<Vector2> groundToAirSpeedProvider,
-    ConditionalValueProvider<GravitySpeed> gravitySpeedProvider)
+    ConditionalValueProvider<Vector2> groundToAirSpeedProvider)
   {
     _configs = configs;
     _inputSystem = inputSystem;
     _slopeSpeedProvider = slopeSpeedProvider;
+    _gravitySpeedProvider = gravitySpeedProvider;
     _airToGroundSpeedProvider = airToGroundSpeedProvider;
     _groundToAirSpeedProvider = groundToAirSpeedProvider;
-    _gravitySpeedProvider = gravitySpeedProvider;
   }
 
   public bool IsSkidding { get; private set; }
