@@ -5,6 +5,7 @@ using AnimatorStates = SharedConsts.Animator.States;
 
 public class SonicViewSystem
 {
+  private readonly AlphaBlinker _blinker;
   private readonly SonicConfigs _configs;
   private readonly PlayerInputSystem _inputSystem;
   private readonly PlayerViewRotatorProvider<SonicViewRotatorContext> _rotatorProvider;
@@ -16,6 +17,7 @@ public class SonicViewSystem
 
   public SonicViewSystem(SonicConfigs configs, PlayerInputSystem inputSystem, PlayerViewRotatorProvider<SonicViewRotatorContext> rotatorProvider)
   {
+    _blinker = new();
     _configs = configs;
     _inputSystem = inputSystem;
     _rotatorProvider = rotatorProvider;
@@ -27,13 +29,20 @@ public class SonicViewSystem
   {
     _animator = animator;
     _spriteRenderer = spriteRenderer;
+    _blinker.SetComponent(spriteRenderer);
   }
 
   public void Update(SonicViewContext context)
   {
     _context = context;
+    _blinker.Update(_context.DeltaTime);
     UpdateAnimator();
     RotateSprite();
+  }
+
+  public void StartBlinking(float alpha, float timer, float interval)
+  {
+    _blinker.Start(alpha, timer, interval);
   }
 
   private void UpdateAnimator()

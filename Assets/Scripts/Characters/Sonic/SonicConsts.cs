@@ -92,5 +92,7 @@ public static class SonicConsts
     public const float StandingStraightAngleDegMax = 38;
     public const float WallToAirAngleDegDelta = 3;
     public const float CeilingToAirAngleDegDelta = 6;
+    public const float BlinkingInterval = 0.1f;
+    public const float HurtBlinkingTimer = 3;
   }
 }
