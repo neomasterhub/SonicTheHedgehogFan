@@ -154,8 +154,7 @@ public class SonicSpeedSystem
       SpeedY = _config.JumpCutoffSpeed;
     }
 
-    var gravitySpeeds = _gravitySpeedProvider.FirstTriggeredOrDefault();
-    GravitySpeed = SpeedY > 0 ? gravitySpeeds.Up : gravitySpeeds.Down;
+    GravitySpeed = _gravitySpeedProvider.FirstTriggeredOrDefault();
 
     SpeedY -= GravitySpeed;
 
