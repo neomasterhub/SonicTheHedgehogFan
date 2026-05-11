@@ -8,6 +8,7 @@ public partial class SonicController
   private void SetEffectPipeline()
   {
     _effects.AddStep(CreateEffect_GettingHit());
+    _effects.AddStep(CreateEffect_LoseRings());
     _effects.AddStep(CreateEffect_HurtBlinking_Enter());
     _effects.AddStep(CreateEffect_Jumping_Exit());
     _effects.AddStep(CreateEffect_Jumping_Enter());
@@ -36,6 +37,22 @@ public partial class SonicController
         _isHurt = true;
         SetSizes(SonicSizeMode.Big);
         AnalyzeEnvironment_Airborne();
+
+        return PipelineStepResult.Continue;
+      })
+      .Build();
+  }
+
+  private PipelineStep CreateEffect_LoseRings()
+  {
+    return PipelineStepBuilder.Create()
+      .WithDisplayName("Lose rings")
+      .WithCondition(() =>
+        _isHit
+        && Rings.Count > 0)
+      .WithAction(() =>
+      {
+        LoseRings();
 
         return PipelineStepResult.Break;
       })
