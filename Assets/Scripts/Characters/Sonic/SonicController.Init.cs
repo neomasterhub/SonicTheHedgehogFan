@@ -176,18 +176,7 @@ public partial class SonicController
 
   private PlayerInput GetPlayerInput()
   {
-    var input = PlayerInput.None;
-
-    if (!_postWallDetachDpadLock)
-    {
-      input = input
-        .Set(PlayerInput.Up, Input.GetKey(KeyCode.UpArrow))
-        .Set(PlayerInput.Down, Input.GetKey(KeyCode.DownArrow))
-        .Set(PlayerInput.Left, Input.GetKey(KeyCode.LeftArrow))
-        .Set(PlayerInput.Right, Input.GetKey(KeyCode.RightArrow));
-    }
-
-    return input
+    var input = PlayerInput.None
       .Set(PlayerInput.Start, Input.GetKey(KeyCode.KeypadEnter))
       .Set(PlayerInput.A, Input.GetKey(KeyCode.Keypad1))
       .Set(PlayerInput.B, Input.GetKey(KeyCode.Keypad2))
@@ -195,5 +184,17 @@ public partial class SonicController
       .Set(PlayerInput.X, Input.GetKey(KeyCode.Keypad4))
       .Set(PlayerInput.Y, Input.GetKey(KeyCode.Keypad5))
       .Set(PlayerInput.Z, Input.GetKey(KeyCode.Keypad6));
+
+    if (_isHurt
+      || _postWallDetachDpadLock)
+    {
+      return input;
+    }
+
+    return input
+      .Set(PlayerInput.Up, Input.GetKey(KeyCode.UpArrow))
+      .Set(PlayerInput.Down, Input.GetKey(KeyCode.DownArrow))
+      .Set(PlayerInput.Left, Input.GetKey(KeyCode.LeftArrow))
+      .Set(PlayerInput.Right, Input.GetKey(KeyCode.RightArrow));
   }
 }
