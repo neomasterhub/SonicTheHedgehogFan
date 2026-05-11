@@ -35,7 +35,8 @@ public static class SonicConsts
       Normal.JumpSpeedPx / PxPerUnit,
       Normal.JumpCutoffSpeedPx / PxPerUnit,
       Normal.HurtSpeedXPx / PxPerUnit,
-      Normal.HurtSpeedYPx / PxPerUnit);
+      Normal.HurtSpeedYPx / PxPerUnit,
+      Normal.HurtGravitySpx / SpxPerUnit);
 
     private static class Normal
     {
