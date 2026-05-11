@@ -2864,7 +2864,7 @@ MonoBehaviour:
   _rollAudioClip: {fileID: 8300000, guid: 9e7565537048c9b4f91f055796014713, type: 3}
   _skidAudioClip: {fileID: 8300000, guid: 9b89e2710e6c85545ba780692ee316f8, type: 3}
   _ringAudioClip: {fileID: 8300000, guid: c8efd8eb513a86c49a8d0d36ec53197d, type: 3}
-  _loseRingsClip: {fileID: 8300000, guid: 508dd4a324f607645a681f7a27e45103, type: 3}
+  _lostRingsClip: {fileID: 8300000, guid: 508dd4a324f607645a681f7a27e45103, type: 3}
   _ringPrefab: {fileID: 5601778466645593367, guid: e75974286517f944dac2e72436689482, type: 3}
 --- !u!61 &710850506
 BoxCollider2D:
