@@ -21,6 +21,7 @@ public partial class SonicController
     UpdatePosition();
     UpdateSounds();
     UpdateDebugInfo();
+    EndFrame();
   }
 
   private void BeginFrame()
@@ -204,7 +205,10 @@ public partial class SonicController
       _sounds[i].Stop();
       _sounds[i].Play();
     }
+  }
 
+  private void EndFrame()
+  {
     _ringCollected = false;
     _ringsLost = false;
   }
