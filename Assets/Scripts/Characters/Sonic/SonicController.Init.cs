@@ -28,7 +28,7 @@ public partial class SonicController
     _configs = new(_physicsMode);
     _inputSystem = new(GetPlayerInput);
     _sensorRayLengths = new(OLength, TopUDFLengths, BottomUDFLengths);
-    _speedSystem = new(_configs, _inputSystem, _slopeSpeedProvider, _airToGroundSpeedProvider, _groundToAirSpeedProvider, _gravitySpeedProvider);
+    _speedSystem = new(_configs, _inputSystem, _slopeSpeedProvider, _gravitySpeedProvider, _airToGroundSpeedProvider, _groundToAirSpeedProvider);
     _viewSystem = new(_configs, _inputSystem, _viewRotatorProvider);
 
     Rings = new Collector()
@@ -100,7 +100,7 @@ public partial class SonicController
   private void InitializeSpeedSystemProviders()
   {
     _gravitySpeedProvider
-      .When(() => _groundInfoSystem.Current.Side == GroundSide.Down, () => _configs.PhysicsModeConfig.GravitySpeed);
+      .When(() => _groundInfoSystem.Current.Side == GroundSide.Down, GetDownGroundGravitySpeed);
 
     _slopeSpeedProvider
       .When(() => _groundInfoSystem.Current.Side == GroundSide.Down, () => _slopeFactor * Mathf.Sin(_groundInfoSystem.Current.AngleRad))
@@ -116,7 +116,7 @@ public partial class SonicController
       .When(() => _groundInfoSystem.Previous.Side == GroundSide.Right, () => _isFallingOffWall ? default : WallToAirSpeedDelta + new Vector2(-_speedSystem.SpeedY, _speedSystem.SpeedX))
       .When(() => _groundInfoSystem.Previous.Side == GroundSide.Up, () => new Vector2(-_speedSystem.SpeedX, _isJumping ? Mathf.Min(0, -_speedSystem.SpeedY) : 0));
 
-    _gravitySpeedProvider.DefaultProvider = () => GravitySpeed.Zero;
+    _gravitySpeedProvider.DefaultProvider = () => 0;
     _airToGroundSpeedProvider.DefaultProvider = () => new(_speedSystem.SpeedX, _speedSystem.SpeedY);
     _groundToAirSpeedProvider.DefaultProvider = () => new(_speedSystem.SpeedX, _speedSystem.SpeedY);
   }
@@ -172,6 +172,18 @@ public partial class SonicController
     _groundNormal.endWidth = 0.03f;
     _groundNormal.positionCount = 2;
     _groundNormal.sortingOrder = 2;
+  }
+
+  private float GetDownGroundGravitySpeed()
+  {
+    if (_isHurt)
+    {
+      return _configs.PhysicsModeConfig.HurtGravitySpeed;
+    }
+
+    return _speedSystem.SpeedY > 0
+      ? _configs.PhysicsModeConfig.GravityUpSpeed
+      : _configs.PhysicsModeConfig.GravityDownSpeed;
   }
 
   private PlayerInput GetPlayerInput()
