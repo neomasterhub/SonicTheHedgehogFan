@@ -28,6 +28,7 @@ public partial class SonicController
     _configs.Update(_physicsMode);
     _timerSystem.Update(Time.deltaTime);
 
+    _isHit = false;
     _prevState = _state;
     _prevSizeMode = _sizeMode;
     _prevIsRolling = _isRolling;
@@ -126,7 +127,7 @@ public partial class SonicController
     {
       var isDownGrounded = _groundInfoSystem.Current.Side == GroundSide.Down;
       _speedContext = SonicSpeedContext.GetGrounded(
-        _isHurt,
+        _isHit,
         _isRolling,
         _isJumping,
         _prevIsGrounded,
@@ -138,7 +139,7 @@ public partial class SonicController
     else
     {
       _speedContext = SonicSpeedContext.GetAirborne(
-        _isHurt,
+        _isHit,
         _isRolling,
         _isJumping,
         _prevIsGrounded,

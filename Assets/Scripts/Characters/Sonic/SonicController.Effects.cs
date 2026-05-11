@@ -32,8 +32,10 @@ public partial class SonicController
         && _inputSystem.Pressed.HasAny(PlayerInput.B))
       .WithAction(() =>
       {
+        _isHit = true;
         _isHurt = true;
         SetSizes(SonicSizeMode.Big);
+        AnalyzeEnvironment_Airborne();
 
         return PipelineStepResult.Break;
       })
@@ -50,6 +52,7 @@ public partial class SonicController
         && _isGrounded)
       .WithAction(() =>
       {
+        _isHurt = false;
         _viewSystem.StartBlinking(0, HurtBlinkingTimer, BlinkingInterval);
 
         return PipelineStepResult.Continue;

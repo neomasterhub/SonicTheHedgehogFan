@@ -37,6 +37,7 @@ public partial class SonicController
   private bool _isRolling;
   private bool _isFallingOffWall;
   private bool _isJumping;
+  private bool _isHit;
   private bool _isHurt;
   private bool _prevIsGrounded;
   private bool _prevIsRolling;
