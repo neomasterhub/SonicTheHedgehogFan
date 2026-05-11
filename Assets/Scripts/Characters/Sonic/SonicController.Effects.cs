@@ -5,6 +5,7 @@ public partial class SonicController
 {
   private void SetEffectPipeline()
   {
+    _effects.AddStep(CreateEffect_Blinking_Enter());
     _effects.AddStep(CreateEffect_Jumping_Exit());
     _effects.AddStep(CreateEffect_Jumping_Enter());
     _effects.AddStep(CreateEffect_Rolling_Exit());
@@ -17,6 +18,20 @@ public partial class SonicController
     _effects.AddStep(CreateEffect_Rolling_Enter());
     _effects.AddStep(CreateEffect_WallDetach());
     _effects.AddStep(CreateEffect_CeilingDetach());
+  }
+
+  private PipelineStep CreateEffect_Blinking_Enter()
+  {
+    return PipelineStepBuilder.Create()
+      .WithDisplayName("Blinking/Enter")
+      .WithCondition(() => _inputSystem.Pressed.HasAny(PlayerInput.B))
+      .WithAction(() =>
+      {
+        _viewSystem.StartBlinking(0, 3, 0.1f);
+
+        return PipelineStepResult.Continue;
+      })
+      .Build();
   }
 
   private PipelineStep CreateEffect_Jumping_Exit()
