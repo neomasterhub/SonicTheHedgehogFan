@@ -62,6 +62,7 @@ public static class SonicConsts
       public const float JumpCutoffSpeedPx = 2;
       public const float HurtSpeedXPx = 2;
       public const float HurtSpeedYPx = 4;
+      public const float HurtGravitySpx = 48;
     }
   }
 
