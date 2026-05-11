@@ -38,12 +38,9 @@ public class AlphaBlinker
     _time = 0;
     _timer = 0;
     _interval = 0;
+    _dimmed = false;
     _isRunning = false;
-
-    if (_dimmed)
-    {
-      ToggleAlpha();
-    }
+    _spriteRenderer.color = _sourceColor;
   }
 
   public void Update(float deltaTime)
