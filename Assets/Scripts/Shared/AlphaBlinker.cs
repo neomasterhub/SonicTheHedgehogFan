@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Blinker
+public class AlphaBlinker
 {
   private readonly SpriteRenderer _spriteRenderer;
 
@@ -12,7 +12,7 @@ public class Blinker
   private Color _dimmedColor;
   private Color _sourceColor;
 
-  public Blinker(SpriteRenderer spriteRenderer)
+  public AlphaBlinker(SpriteRenderer spriteRenderer)
   {
     _spriteRenderer = spriteRenderer;
   }
