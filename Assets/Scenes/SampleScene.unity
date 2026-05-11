@@ -153,6 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RingController
   _initialized: 1
   _gravityEnabled: 0
+  _lifetime: Infinity
   _player: {fileID: 710850496}
   _physicsMode: 0
   _initialSpeed: {x: 0, y: 0}
@@ -2944,6 +2945,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RingController
   _initialized: 1
   _gravityEnabled: 0
+  _lifetime: Infinity
   _player: {fileID: 710850496}
   _physicsMode: 0
   _initialSpeed: {x: 0, y: 0}
@@ -3202,6 +3204,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RingController
   _initialized: 1
   _gravityEnabled: 0
+  _lifetime: Infinity
   _player: {fileID: 710850496}
   _physicsMode: 0
   _initialSpeed: {x: 0, y: 0}
@@ -3744,6 +3747,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RingController
   _initialized: 1
   _gravityEnabled: 0
+  _lifetime: Infinity
   _player: {fileID: 710850496}
   _physicsMode: 0
   _initialSpeed: {x: 0, y: 0}
