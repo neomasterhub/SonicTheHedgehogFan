@@ -4,4 +4,4 @@
 
 |Code|Action|
 |-|-|
-|<kbd>y</kbd> <kbd>y</kbd> <kbd>B</kbd>|Toggle debug mode|
+|<kbd>z</kbd> <kbd>y</kbd> <kbd>B</kbd>|Toggle debug mode|
