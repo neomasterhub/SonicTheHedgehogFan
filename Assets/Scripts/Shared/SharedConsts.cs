@@ -48,6 +48,7 @@ public static class SharedConsts
       public const string LookingUp = nameof(LookingUp);
       public const string Rolling = nameof(Rolling);
       public const string Collected = nameof(Collected);
+      public const string Hurt = nameof(Hurt);
     }
 
     public static class States
@@ -62,6 +63,7 @@ public static class SharedConsts
       public const string CurlingUp = nameof(CurlingUp);
       public const string LookingUp = nameof(LookingUp);
       public const string Rolling = nameof(Rolling);
+      public const string Hurt = nameof(Hurt);
     }
   }
 
