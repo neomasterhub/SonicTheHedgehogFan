@@ -35,7 +35,6 @@ public partial class SonicController
       {
         _isHit = true;
         _isHurt = true;
-        SetSizes(SonicSizeMode.Big);
         AnalyzeEnvironment_Airborne();
 
         return PipelineStepResult.Continue;
