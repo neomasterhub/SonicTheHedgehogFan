@@ -9,5 +9,12 @@ public partial class EnemyController
     {
       return;
     }
+
+    ApplyEffects();
+  }
+
+  private void ApplyEffects()
+  {
+    _effects.Run(false);
   }
 }
