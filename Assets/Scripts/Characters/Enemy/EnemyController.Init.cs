@@ -8,6 +8,7 @@ public partial class EnemyController
   public EnemyController()
   {
     _effects = new();
+    SetEffectPipeline();
   }
 
   private void Awake()
