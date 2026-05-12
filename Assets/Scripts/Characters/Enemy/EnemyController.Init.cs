@@ -5,6 +5,11 @@ using UnityEngine;
 /// </summary>
 public partial class EnemyController
 {
+  public EnemyController()
+  {
+    _effects = new();
+  }
+
   private void Awake()
   {
     _collider = GetComponent<BoxCollider2D>();

@@ -7,6 +7,8 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public partial class EnemyController : MonoBehaviour
 {
+  private readonly Pipeline _effects;
+
   private BoxCollider2D _collider;
   private BoxCollider2D _playerCollider;
   private SpriteRenderer _spriteRenderer;
