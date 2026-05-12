@@ -9,6 +9,7 @@ public partial class EnemyController : MonoBehaviour
 {
   private readonly Pipeline _effects;
 
+  private IEnemy _enemy;
   private BoxCollider2D _collider;
   private BoxCollider2D _enemyCollider;
   private SpriteRenderer _spriteRenderer;
@@ -16,5 +17,6 @@ public partial class EnemyController : MonoBehaviour
   [SerializeField]
   private bool _initialized;
   [SerializeField]
-  private GameObject _enemy;
+  [InspectorLabel("Enemy")]
+  private GameObject _enemyGameObject;
 }
