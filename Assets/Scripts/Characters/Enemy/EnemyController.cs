@@ -10,11 +10,11 @@ public partial class EnemyController : MonoBehaviour
   private readonly Pipeline _effects;
 
   private BoxCollider2D _collider;
-  private BoxCollider2D _playerCollider;
+  private BoxCollider2D _enemyCollider;
   private SpriteRenderer _spriteRenderer;
 
   [SerializeField]
   private bool _initialized;
   [SerializeField]
-  private GameObject _player;
+  private GameObject _enemy;
 }
