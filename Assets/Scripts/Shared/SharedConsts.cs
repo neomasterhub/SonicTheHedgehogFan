@@ -71,6 +71,6 @@ public static class SharedConsts
   {
     public static readonly PlayerInput[] TakeLeftHit = new[] { X, X, A };
     public static readonly PlayerInput[] TakeRightHit = new[] { X, X, B };
-    public static readonly PlayerInput[] ToggleDebugMode = new[] { Y, Y };
+    public static readonly PlayerInput[] ToggleDebugMode = new[] { Z, Y, Y };
   }
 }
