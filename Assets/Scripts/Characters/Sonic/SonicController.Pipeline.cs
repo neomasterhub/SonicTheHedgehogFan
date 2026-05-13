@@ -120,21 +120,22 @@ public partial class SonicController
   {
     if (_isGrounded)
     {
-      var isDownGrounded = _groundInfoSystem.Current.Side == GroundSide.Down;
       _speedContext = SonicSpeedContext.GetGrounded(
         IsHit,
+        LastHitSource == null ? LastHitSource.transform.position : null,
         _isRolling,
         _isJumping,
         _prevIsGrounded,
         _groundInfoSystem.Current.SideAngleRad,
         _lastGroundDetectionResult.Distance,
-        isDownGrounded && _leftWallDetectionResult?.AngleDeg == 0 ? _leftWallDetectionResult.Value.Distance : null,
-        isDownGrounded && _rightWallDetectionResult?.AngleDeg == 0 ? _rightWallDetectionResult.Value.Distance : null);
+        _isDownGrounded && _leftWallDetectionResult?.AngleDeg == 0 ? _leftWallDetectionResult.Value.Distance : null,
+        _isDownGrounded && _rightWallDetectionResult?.AngleDeg == 0 ? _rightWallDetectionResult.Value.Distance : null);
     }
     else
     {
       _speedContext = SonicSpeedContext.GetAirborne(
         IsHit,
+        LastHitSource == null ? LastHitSource.transform.position : null,
         _isRolling,
         _isJumping,
         _prevIsGrounded,
