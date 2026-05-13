@@ -114,7 +114,7 @@ public class SonicViewSystem
       return;
     }
 
-    if (_context.IsRolling)
+    if (_context.IsRolling && !_context.IsHurt)
     {
       if (_context.SpeedX > 0)
       {
