@@ -122,7 +122,7 @@ public partial class SonicController
     {
       _speedContext = SonicSpeedContext.GetGrounded(
         IsHit,
-        LastHitSource == null ? 0 : Mathf.Sign(transform.position.x - LastHitSource.transform.position.x),
+        GetHitHorizontalDirection(),
         _isRolling,
         _isJumping,
         _prevIsGrounded,
@@ -135,7 +135,7 @@ public partial class SonicController
     {
       _speedContext = SonicSpeedContext.GetAirborne(
         IsHit,
-        LastHitSource == null ? 0 : Mathf.Sign(transform.position.x - LastHitSource.transform.position.x),
+        GetHitHorizontalDirection(),
         _isRolling,
         _isJumping,
         _prevIsGrounded,
@@ -218,6 +218,23 @@ public partial class SonicController
   {
     _sizeMode = sizeMode;
     _boxCollider.size = sizeMode == SonicSizeMode.Big ? Big.BoxColliderSize : Small.BoxColliderSize;
+  }
+
+  private float GetHitHorizontalDirection()
+  {
+    if (_takeLeftHit)
+    {
+      return -1;
+    }
+
+    if (_takeRightHit)
+    {
+      return 1;
+    }
+
+    return LastHitSource == null
+      ? 0
+      : Mathf.Sign(transform.position.x - LastHitSource.transform.position.x);
   }
 
   private float GetSlopeFactor(SonicPhysicsModeConfig config)
