@@ -69,8 +69,8 @@ public static class SharedConsts
 
   public static class SecretCodes
   {
-    public static readonly PlayerInput[] TakeLeftHit = new[] { B, X, Left };
-    public static readonly PlayerInput[] TakeRightHit = new[] { B, X, Right };
-    public static readonly PlayerInput[] ToggleDebugMode = new[] { Y };
+    public static readonly PlayerInput[] TakeLeftHit = new[] { X, X, A };
+    public static readonly PlayerInput[] TakeRightHit = new[] { X, X, B };
+    public static readonly PlayerInput[] ToggleDebugMode = new[] { Y, Y };
   }
 }
