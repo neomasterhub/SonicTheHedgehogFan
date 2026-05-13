@@ -247,7 +247,7 @@ public partial class SonicController
       .WithAction(() =>
       {
         _isFallingOffWall = false;
-        _timerSystem.StartIfNotRunning(_dpadUnlockTimer);
+        _timerSystem.StartIfNotRunning(_dpadLockTimer);
 
         return PipelineStepResult.Break;
       })

@@ -165,7 +165,7 @@ public partial class SonicController
 
   private void InitializeTimers()
   {
-    _dpadUnlockTimer = new Timer(DpadUnlockTimer)
+    _dpadLockTimer = new Timer(DpadUnlockTimer)
       .WhenCompleted(() => _postWallDetachDpadLock = false);
 
     _postHurtImmortalityTimer = new Timer(PostHurtImmortalityTimer)
