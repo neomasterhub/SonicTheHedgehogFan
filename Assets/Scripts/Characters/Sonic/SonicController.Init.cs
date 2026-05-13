@@ -183,7 +183,7 @@ public partial class SonicController
 
   private float GetDownGroundGravitySpeed()
   {
-    if (_isHurt)
+    if (IsHurt)
     {
       return _configs.PhysicsModeConfig.HurtGravitySpeed;
     }
