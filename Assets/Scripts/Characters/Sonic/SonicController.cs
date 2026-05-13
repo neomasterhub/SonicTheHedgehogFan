@@ -51,6 +51,8 @@ public partial class SonicController
   private bool _isUpGrounded;
   private bool _isWallGrounded;
   private bool _showDebugInfo;
+  private bool _takeLeftHit;
+  private bool _takeRightHit;
   private float _slopeFactor;
   private float _absGroundSpeed;
   private Animator _animator;
