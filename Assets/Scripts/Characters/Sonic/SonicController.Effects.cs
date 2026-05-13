@@ -52,6 +52,7 @@ public partial class SonicController
       .WithAction(() =>
       {
         IsImmortal = true;
+        CanCollectRing = false;
         AnalyzeEnvironment_Airborne();
 
         return PipelineStepResult.Continue;
