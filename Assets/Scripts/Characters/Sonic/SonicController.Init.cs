@@ -204,7 +204,7 @@ public partial class SonicController
       .Set(PlayerInput.Y, Input.GetKey(KeyCode.Keypad5))
       .Set(PlayerInput.Z, Input.GetKey(KeyCode.Keypad6));
 
-    if (_isHurt
+    if (IsHurt
       || _postWallDetachDpadLock)
     {
       return input;
