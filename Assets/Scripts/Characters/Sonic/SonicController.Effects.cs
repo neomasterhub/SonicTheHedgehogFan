@@ -29,12 +29,9 @@ public partial class SonicController
     return PipelineStepBuilder.Create()
       .WithDisplayName("Getting hit")
       .WithCondition(() =>
-        !_isHurt
-        && _inputSystem.Pressed.HasAny(PlayerInput.B))
+        IsHit)
       .WithAction(() =>
       {
-        _isHit = true;
-        _isHurt = true;
         AnalyzeEnvironment_Airborne();
 
         return PipelineStepResult.Continue;
