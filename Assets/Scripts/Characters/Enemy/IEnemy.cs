@@ -1,7 +1,10 @@
+using UnityEngine;
+
 public interface IEnemy
 {
-  public bool IsHit { get; set; }
-  public bool IsHurt { get; set; }
-  public bool IsImmortal { get; set; }
-  public bool IsAttacking { get; set; }
+  bool IsHit { get; set; }
+  bool IsHurt { get; set; }
+  bool IsImmortal { get; set; }
+  bool IsAttacking { get; set; }
+  GameObject LastHitSource { get; set; }
 }

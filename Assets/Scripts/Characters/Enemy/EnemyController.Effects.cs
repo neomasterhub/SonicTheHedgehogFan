@@ -22,6 +22,7 @@ public partial class EnemyController
       {
         _otherEnemy.IsHit = true;
         _otherEnemy.IsHurt = true;
+        _otherEnemy.LastHitSource = gameObject;
 
         return PipelineStepResult.Break;
       })
