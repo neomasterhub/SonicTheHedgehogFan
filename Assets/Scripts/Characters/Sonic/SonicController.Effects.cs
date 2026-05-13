@@ -52,6 +52,7 @@ public partial class SonicController
       .WithAction(() =>
       {
         IsImmortal = true;
+        CanCollectRing = false;
         AnalyzeEnvironment_Airborne();
 
         return PipelineStepResult.Continue;
@@ -88,6 +89,7 @@ public partial class SonicController
       {
         IsHurt = false;
         _timerSystem.StartIfNotRunning(_postHurtImmortalityTimer);
+        _timerSystem.StartIfNotRunning(_ringCollectorDisabledTimer);
         _viewSystem.StartBlinking(0, PostHurtImmortalityTimer, BlinkingInterval);
 
         return PipelineStepResult.Continue;
@@ -247,7 +249,7 @@ public partial class SonicController
       .WithAction(() =>
       {
         _isFallingOffWall = false;
-        _timerSystem.StartIfNotRunning(_dpadUnlockTimer);
+        _timerSystem.StartIfNotRunning(_dpadLockTimer);
 
         return PipelineStepResult.Break;
       })

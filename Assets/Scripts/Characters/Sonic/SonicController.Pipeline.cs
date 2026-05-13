@@ -327,7 +327,7 @@ public partial class SonicController
         speed = LostPortion2Speed;
       }
 
-      Instantiate(_ringPrefab, transform.position + Vector3.right, Quaternion.identity)
+      Instantiate(_ringPrefab, transform.position, Quaternion.identity)
         .GetComponent<RingController>()
         .Initialize(transform.gameObject, _physicsMode, LostLifetime, speedX, speedY);
     }

@@ -33,13 +33,13 @@ public partial class RingController
       .WithDisplayName("Collect by player")
       .WithCondition(() =>
         !_isCollected
-        && _player != null
-        && _collider.bounds.Intersects(_playerCollider.bounds))
+        && _collector?.CanCollectRing == true
+        && _collider.bounds.Intersects(_collectorCollider.bounds))
       .WithAction(() =>
       {
         _lifetime = 1;
         _isCollected = true;
-        _playerRings.Add();
+        _collector.Rings.Add();
         _animator.SetTrigger(AnimatorParameters.Collected);
         _spriteRenderer.sortingOrder = SparkleOrderInLayer;
 

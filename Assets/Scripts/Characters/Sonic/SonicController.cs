@@ -71,8 +71,9 @@ public partial class SonicController
   private SpriteRenderer _spriteRenderer;
   private TextMeshProUGUI _diagnosticsTextMesh;
   private TextMeshProUGUI _effectHistoryTextMesh;
-  private Timer _dpadUnlockTimer;
+  private Timer _dpadLockTimer;
   private Timer _postHurtImmortalityTimer;
+  private Timer _ringCollectorDisabledTimer;
   private WallDetectionResult? _leftWallDetectionResult;
   private WallDetectionResult? _rightWallDetectionResult;
 
@@ -101,6 +102,7 @@ public partial class SonicController
   [InspectorLabel("Ring")]
   private GameObject _ringPrefab;
 
+  public bool CanCollectRing { get; private set; }
   public ICollector Rings { get; }
   public VerticalDirection LookVerticalDirection
   {

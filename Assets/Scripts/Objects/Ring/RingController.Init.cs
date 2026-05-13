@@ -25,10 +25,10 @@ public partial class RingController : MonoBehaviour
     _collider = GetComponent<BoxCollider2D>();
     _spriteRenderer = GetComponent<SpriteRenderer>();
 
-    if (_player != null)
+    if (_collectorObj != null)
     {
-      _playerCollider = _player.GetComponent<BoxCollider2D>();
-      _playerRings = _player.GetComponent<IRingCollector>().Rings;
+      _collector = _collectorObj.GetComponent<IRingCollector>();
+      _collectorCollider = _collectorObj.GetComponent<BoxCollider2D>();
     }
   }
 
@@ -39,9 +39,9 @@ public partial class RingController : MonoBehaviour
     float speedX = 0,
     float speedY = 0)
   {
-    _player = player;
-    _playerCollider = _player.GetComponent<BoxCollider2D>();
-    _playerRings = _player.GetComponent<IRingCollector>().Rings;
+    _collectorObj = player;
+    _collector = _collectorObj.GetComponent<IRingCollector>();
+    _collectorCollider = _collectorObj.GetComponent<BoxCollider2D>();
 
     _physicsMode = physicsMode;
     _lifetime = lifetime;

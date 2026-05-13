@@ -17,9 +17,9 @@ public partial class RingController : MonoBehaviour
   private bool _isCollected;
   private Animator _animator;
   private BoxCollider2D _collider;
-  private BoxCollider2D _playerCollider;
+  private BoxCollider2D _collectorCollider;
   private GroundDetectionResult _lastGroundDetectionResult;
-  private ICollector _playerRings;
+  private IRingCollector _collector;
   private RingSpeedContext _speedContext;
   private SpriteRenderer _spriteRenderer;
 
@@ -30,7 +30,8 @@ public partial class RingController : MonoBehaviour
   [SerializeField]
   private float _lifetime;
   [SerializeField]
-  private GameObject _player;
+  [InspectorLabel("Collector")]
+  private GameObject _collectorObj;
   [SerializeField]
   private PhysicsMode _physicsMode;
   [SerializeField]

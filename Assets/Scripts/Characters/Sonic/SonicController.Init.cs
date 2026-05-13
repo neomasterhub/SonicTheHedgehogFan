@@ -31,6 +31,7 @@ public partial class SonicController
     _speedSystem = new(_configs, _inputSystem, _slopeSpeedProvider, _gravitySpeedProvider, _airToGroundSpeedProvider, _groundToAirSpeedProvider);
     _viewSystem = new(_configs, _inputSystem, _viewRotatorProvider);
 
+    CanCollectRing = true;
     Rings = new Collector()
       .WhenAdded(() => _ringCollected = true);
 
@@ -165,11 +166,14 @@ public partial class SonicController
 
   private void InitializeTimers()
   {
-    _dpadUnlockTimer = new Timer(DpadUnlockTimer)
+    _dpadLockTimer = new Timer(DpadUnlockTimer)
       .WhenCompleted(() => _postWallDetachDpadLock = false);
 
     _postHurtImmortalityTimer = new Timer(PostHurtImmortalityTimer)
       .WhenCompleted(() => IsImmortal = false);
+
+    _ringCollectorDisabledTimer = new Timer(RingCollectorDisabledTimer)
+      .WhenCompleted(() => CanCollectRing = true);
   }
 
   private void InitializeGroundNormal()
