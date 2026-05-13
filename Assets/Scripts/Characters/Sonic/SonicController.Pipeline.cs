@@ -29,8 +29,6 @@ public partial class SonicController
     _configs.Update(_physicsMode);
     _timerSystem.Update(Time.deltaTime);
 
-    IsHit = false;
-
     _prevState = _state;
     _prevSizeMode = _sizeMode;
     _prevIsRolling = _isRolling;
@@ -212,6 +210,7 @@ public partial class SonicController
   {
     _ringCollected = false;
     _ringsLost = false;
+    IsHit = false;
   }
 
   private void SetSizes(SonicSizeMode sizeMode)
