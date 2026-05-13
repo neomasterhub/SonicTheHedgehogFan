@@ -29,7 +29,8 @@ public partial class SonicController
     _configs.Update(_physicsMode);
     _timerSystem.Update(Time.deltaTime);
 
-    _isHit = false;
+    IsHit = false;
+
     _prevState = _state;
     _prevSizeMode = _sizeMode;
     _prevIsRolling = _isRolling;
@@ -123,7 +124,7 @@ public partial class SonicController
     {
       var isDownGrounded = _groundInfoSystem.Current.Side == GroundSide.Down;
       _speedContext = SonicSpeedContext.GetGrounded(
-        _isHit,
+        IsHit,
         _isRolling,
         _isJumping,
         _prevIsGrounded,
@@ -135,7 +136,7 @@ public partial class SonicController
     else
     {
       _speedContext = SonicSpeedContext.GetAirborne(
-        _isHit,
+        IsHit,
         _isRolling,
         _isJumping,
         _prevIsGrounded,
@@ -149,7 +150,7 @@ public partial class SonicController
 
   private void UpdateView()
   {
-    _viewContext = new(!_spriteRenderer.flipX, _isHurt, _isGrounded, _speedSystem.IsSkidding, _isBalancing, _isCurlingUp, _isLookingUp, _isRolling, _speedSystem.IsZeroGroundSpeedProgressReached, _triggeredGroundSensorSide, _speedSystem.SpeedX, _speedSystem.GroundSpeed, _groundInfoSystem.Current.AngleDeg, Time.fixedDeltaTime, _groundInfoSystem.Current.Side, _groundInfoSystem.Previous.Side);
+    _viewContext = new(!_spriteRenderer.flipX, IsHurt, _isGrounded, _speedSystem.IsSkidding, _isBalancing, _isCurlingUp, _isLookingUp, _isRolling, _speedSystem.IsZeroGroundSpeedProgressReached, _triggeredGroundSensorSide, _speedSystem.SpeedX, _speedSystem.GroundSpeed, _groundInfoSystem.Current.AngleDeg, Time.fixedDeltaTime, _groundInfoSystem.Current.Side, _groundInfoSystem.Previous.Side);
     _viewSystem.Update(_viewContext);
   }
 
