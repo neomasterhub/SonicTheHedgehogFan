@@ -1,4 +1,7 @@
 public interface IEnemy
 {
-  void Hit(IEnemy other);
+  public bool IsHit { get; }
+  public bool IsHurt { get; }
+  public bool IsImmortal { get; }
+  public bool IsAttacking { get; }
 }
