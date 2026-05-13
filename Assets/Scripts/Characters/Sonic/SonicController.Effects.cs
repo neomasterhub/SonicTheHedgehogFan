@@ -89,6 +89,7 @@ public partial class SonicController
       {
         IsHurt = false;
         _timerSystem.StartIfNotRunning(_postHurtImmortalityTimer);
+        _timerSystem.StartIfNotRunning(_ringCollectorDisabledTimer);
         _viewSystem.StartBlinking(0, PostHurtImmortalityTimer, BlinkingInterval);
 
         return PipelineStepResult.Continue;
