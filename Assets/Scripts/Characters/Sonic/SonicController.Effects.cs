@@ -1,3 +1,4 @@
+using static SonicConsts.Physics;
 using static SonicConsts.View;
 
 /// <summary>
@@ -68,7 +69,8 @@ public partial class SonicController
       .WithAction(() =>
       {
         IsHurt = false;
-        _viewSystem.StartBlinking(0, HurtBlinkingTimer, BlinkingInterval);
+        _timerSystem.StartIfNotRunning(_postHurtImmortalityTimer);
+        _viewSystem.StartBlinking(0, PostHurtImmortalityTimer, BlinkingInterval);
 
         return PipelineStepResult.Continue;
       })

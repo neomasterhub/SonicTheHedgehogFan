@@ -72,6 +72,7 @@ public partial class SonicController
   private TextMeshProUGUI _diagnosticsTextMesh;
   private TextMeshProUGUI _effectHistoryTextMesh;
   private Timer _dpadUnlockTimer;
+  private Timer _postHurtImmortalityTimer;
   private WallDetectionResult? _leftWallDetectionResult;
   private WallDetectionResult? _rightWallDetectionResult;
 

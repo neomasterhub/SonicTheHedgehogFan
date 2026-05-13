@@ -167,6 +167,9 @@ public partial class SonicController
   {
     _dpadUnlockTimer = new Timer(DpadUnlockTimer)
       .WhenCompleted(() => _postWallDetachDpadLock = false);
+
+    _postHurtImmortalityTimer = new Timer(PostHurtImmortalityTimer)
+      .WhenCompleted(() => IsImmortal = false);
   }
 
   private void InitializeGroundNormal()
