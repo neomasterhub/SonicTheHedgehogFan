@@ -32,6 +32,7 @@ public partial class SonicController
         IsHit)
       .WithAction(() =>
       {
+        IsImmortal = true;
         AnalyzeEnvironment_Airborne();
 
         return PipelineStepResult.Continue;
