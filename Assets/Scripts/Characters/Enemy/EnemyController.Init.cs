@@ -16,18 +16,18 @@ public partial class EnemyController
     _collider = GetComponent<BoxCollider2D>();
     _spriteRenderer = GetComponent<SpriteRenderer>();
 
-    if (_otherEnemyGameObject != null)
+    if (_otherEnemyObj != null)
     {
-      _otherEnemy = _otherEnemyGameObject.GetComponent<IEnemy>();
-      _otherEnemyCollider = _otherEnemyGameObject.GetComponent<BoxCollider2D>();
+      _otherEnemy = _otherEnemyObj.GetComponent<IEnemy>();
+      _otherEnemyCollider = _otherEnemyObj.GetComponent<BoxCollider2D>();
     }
   }
 
   public void Initialize(GameObject enemy)
   {
-    _otherEnemyGameObject = enemy;
-    _otherEnemy = _otherEnemyGameObject.GetComponent<IEnemy>();
-    _otherEnemyCollider = _otherEnemyGameObject.GetComponent<BoxCollider2D>();
+    _otherEnemyObj = enemy;
+    _otherEnemy = _otherEnemyObj.GetComponent<IEnemy>();
+    _otherEnemyCollider = _otherEnemyObj.GetComponent<BoxCollider2D>();
 
     _initialized = true;
   }

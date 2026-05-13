@@ -18,5 +18,5 @@ public partial class EnemyController : MonoBehaviour
   private bool _initialized;
   [SerializeField]
   [InspectorLabel("Other Enemy")]
-  private GameObject _otherEnemyGameObject;
+  private GameObject _otherEnemyObj;
 }
