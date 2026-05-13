@@ -44,7 +44,7 @@ public partial class SonicController
     return PipelineStepBuilder.Create()
       .WithDisplayName("Lose rings")
       .WithCondition(() =>
-        _isHit
+        IsHit
         && Rings.Count > 0)
       .WithAction(() =>
       {
