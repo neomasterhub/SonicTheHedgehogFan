@@ -11,7 +11,8 @@ using UnityEngine;
 public partial class SonicController
   : MonoBehaviour,
   ILookVerticalDirectionProvider,
-  IRingCollector
+  IRingCollector,
+  IEnemy
 {
   private readonly ConditionalValueProvider<float> _slopeSpeedProvider;
   private readonly ConditionalValueProvider<float> _gravitySpeedProvider;
@@ -37,8 +38,6 @@ public partial class SonicController
   private bool _isRolling;
   private bool _isFallingOffWall;
   private bool _isJumping;
-  private bool _isHit;
-  private bool _isHurt;
   private bool _prevIsGrounded;
   private bool _prevIsRolling;
   private bool _postWallDetachDpadLock;
@@ -119,4 +118,10 @@ public partial class SonicController
       return VerticalDirection.None;
     }
   }
+
+  public bool IsHit { get; set; }
+  public bool IsHurt { get; set; }
+  public bool IsImmortal { get; set; }
+  public bool IsAttacking { get; set; }
+  public GameObject LastHitSource { get; set; }
 }
