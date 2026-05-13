@@ -29,7 +29,6 @@ public partial class SonicController
     _configs.Update(_physicsMode);
     _timerSystem.Update(Time.deltaTime);
 
-    _prevState = _state;
     _prevSizeMode = _sizeMode;
     _prevIsRolling = _isRolling;
     _prevIsGrounded = _isGrounded;
@@ -94,13 +93,6 @@ public partial class SonicController
     _isDownGroundedMoving = _isDownGrounded && _speedSystem.GroundSpeed != 0;
     _isUpGrounded = _groundInfoSystem.Current.Side == GroundSide.Up;
     _isWallGrounded = _groundInfoSystem.Current.Side is GroundSide.Left or GroundSide.Right;
-
-    _state = SonicState.Grounded
-      .Set(SonicState.Balancing, _isBalancing)
-      .Set(SonicState.CurlingUp, _isCurlingUp)
-      .Set(SonicState.LookingUp, _isLookingUp)
-      .Set(SonicState.Rolling, _isRolling)
-      .Set(SonicState.FallingOffWall, _isFallingOffWall);
   }
 
   private void AnalyzeEnvironment_Airborne()
@@ -117,10 +109,6 @@ public partial class SonicController
     _isDownGroundedMoving = false;
     _isUpGrounded = false;
     _isWallGrounded = false;
-
-    _state = SonicState.Airborne
-      .Set(SonicState.Rolling, _isRolling)
-      .Set(SonicState.FallingOffWall, _isFallingOffWall);
   }
 
   private void ApplyEffects()
@@ -156,7 +144,6 @@ public partial class SonicController
     }
 
     _speedSystem.SetSpeed(_speedContext);
-    _state = _state.Set(SonicState.Skidding, _speedSystem.IsSkidding);
   }
 
   private void UpdateView()
