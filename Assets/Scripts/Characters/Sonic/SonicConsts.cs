@@ -7,6 +7,7 @@ public static class SonicConsts
   {
     public const float DpadUnlockTimer = 0.5f;
     public const float PostHurtImmortalityTimer = 3;
+    public const float RingCollectorDisabledTimer = 0.5f;
     public const float OLength = Sizes.Big.VRadius + 0.4f;
     public static readonly Vector3 TopUDFLengths = new(0.3f, 0.3f, 0.5f);
     public static readonly Vector3 BottomUDFLengths = new(0.3f, 0.1f, 0.5f);

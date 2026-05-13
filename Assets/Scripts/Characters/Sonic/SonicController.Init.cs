@@ -172,7 +172,7 @@ public partial class SonicController
     _postHurtImmortalityTimer = new Timer(PostHurtImmortalityTimer)
       .WhenCompleted(() => IsImmortal = false);
 
-    _ringCollectorDisabledTimer = new Timer(0.3f)
+    _ringCollectorDisabledTimer = new Timer(RingCollectorDisabledTimer)
       .WhenCompleted(() => CanCollectRing = true);
   }
 
