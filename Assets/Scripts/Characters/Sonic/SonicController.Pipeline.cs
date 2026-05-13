@@ -122,7 +122,7 @@ public partial class SonicController
     {
       _speedContext = SonicSpeedContext.GetGrounded(
         IsHit,
-        LastHitSource == null ? LastHitSource.transform.position : null,
+        LastHitSource == null ? 0 : Mathf.Sign(transform.position.x - LastHitSource.transform.position.x),
         _isRolling,
         _isJumping,
         _prevIsGrounded,
@@ -135,7 +135,7 @@ public partial class SonicController
     {
       _speedContext = SonicSpeedContext.GetAirborne(
         IsHit,
-        LastHitSource == null ? LastHitSource.transform.position : null,
+        LastHitSource == null ? 0 : Mathf.Sign(transform.position.x - LastHitSource.transform.position.x),
         _isRolling,
         _isJumping,
         _prevIsGrounded,
