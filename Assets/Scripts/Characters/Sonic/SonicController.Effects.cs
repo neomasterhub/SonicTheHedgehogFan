@@ -1,3 +1,4 @@
+using static SonicConsts.Physics;
 using static SonicConsts.View;
 
 /// <summary>
@@ -29,12 +30,10 @@ public partial class SonicController
     return PipelineStepBuilder.Create()
       .WithDisplayName("Getting hit")
       .WithCondition(() =>
-        !_isHurt
-        && _inputSystem.Pressed.HasAny(PlayerInput.B))
+        IsHit)
       .WithAction(() =>
       {
-        _isHit = true;
-        _isHurt = true;
+        IsImmortal = true;
         AnalyzeEnvironment_Airborne();
 
         return PipelineStepResult.Continue;
@@ -47,7 +46,7 @@ public partial class SonicController
     return PipelineStepBuilder.Create()
       .WithDisplayName("Lose rings")
       .WithCondition(() =>
-        _isHit
+        IsHit
         && Rings.Count > 0)
       .WithAction(() =>
       {
@@ -64,13 +63,14 @@ public partial class SonicController
     return PipelineStepBuilder.Create()
       .WithDisplayName("Hurt blinking/Enter")
       .WithCondition(() =>
-        _isHurt
+        IsHurt
         && !_prevIsGrounded
         && _isGrounded)
       .WithAction(() =>
       {
-        _isHurt = false;
-        _viewSystem.StartBlinking(0, HurtBlinkingTimer, BlinkingInterval);
+        IsHurt = false;
+        _timerSystem.StartIfNotRunning(_postHurtImmortalityTimer);
+        _viewSystem.StartBlinking(0, PostHurtImmortalityTimer, BlinkingInterval);
 
         return PipelineStepResult.Continue;
       })

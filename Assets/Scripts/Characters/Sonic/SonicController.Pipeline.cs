@@ -29,7 +29,6 @@ public partial class SonicController
     _configs.Update(_physicsMode);
     _timerSystem.Update(Time.deltaTime);
 
-    _isHit = false;
     _prevState = _state;
     _prevSizeMode = _sizeMode;
     _prevIsRolling = _isRolling;
@@ -121,21 +120,22 @@ public partial class SonicController
   {
     if (_isGrounded)
     {
-      var isDownGrounded = _groundInfoSystem.Current.Side == GroundSide.Down;
       _speedContext = SonicSpeedContext.GetGrounded(
-        _isHit,
+        IsHit,
+        LastHitSource == null ? 0 : Mathf.Sign(transform.position.x - LastHitSource.transform.position.x),
         _isRolling,
         _isJumping,
         _prevIsGrounded,
         _groundInfoSystem.Current.SideAngleRad,
         _lastGroundDetectionResult.Distance,
-        isDownGrounded && _leftWallDetectionResult?.AngleDeg == 0 ? _leftWallDetectionResult.Value.Distance : null,
-        isDownGrounded && _rightWallDetectionResult?.AngleDeg == 0 ? _rightWallDetectionResult.Value.Distance : null);
+        _isDownGrounded && _leftWallDetectionResult?.AngleDeg == 0 ? _leftWallDetectionResult.Value.Distance : null,
+        _isDownGrounded && _rightWallDetectionResult?.AngleDeg == 0 ? _rightWallDetectionResult.Value.Distance : null);
     }
     else
     {
       _speedContext = SonicSpeedContext.GetAirborne(
-        _isHit,
+        IsHit,
+        LastHitSource == null ? 0 : Mathf.Sign(transform.position.x - LastHitSource.transform.position.x),
         _isRolling,
         _isJumping,
         _prevIsGrounded,
@@ -149,7 +149,7 @@ public partial class SonicController
 
   private void UpdateView()
   {
-    _viewContext = new(!_spriteRenderer.flipX, _isHurt, _isGrounded, _speedSystem.IsSkidding, _isBalancing, _isCurlingUp, _isLookingUp, _isRolling, _speedSystem.IsZeroGroundSpeedProgressReached, _triggeredGroundSensorSide, _speedSystem.SpeedX, _speedSystem.GroundSpeed, _groundInfoSystem.Current.AngleDeg, Time.fixedDeltaTime, _groundInfoSystem.Current.Side, _groundInfoSystem.Previous.Side);
+    _viewContext = new(!_spriteRenderer.flipX, IsHurt, _isGrounded, _speedSystem.IsSkidding, _isBalancing, _isCurlingUp, _isLookingUp, _isRolling, _speedSystem.IsZeroGroundSpeedProgressReached, _triggeredGroundSensorSide, _speedSystem.SpeedX, _speedSystem.GroundSpeed, _groundInfoSystem.Current.AngleDeg, Time.fixedDeltaTime, _groundInfoSystem.Current.Side, _groundInfoSystem.Previous.Side);
     _viewSystem.Update(_viewContext);
   }
 
@@ -211,6 +211,7 @@ public partial class SonicController
   {
     _ringCollected = false;
     _ringsLost = false;
+    IsHit = false;
   }
 
   private void SetSizes(SonicSizeMode sizeMode)

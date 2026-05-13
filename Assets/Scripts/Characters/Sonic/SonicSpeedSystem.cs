@@ -119,7 +119,7 @@ public class SonicSpeedSystem
 
   private void SetSpeed_HitKnockback()
   {
-    SpeedX = -_config.HurtSpeedX;
+    SpeedX = _config.HurtSpeedX * _context.HitHorizontalDirection;
     SpeedY = _config.HurtSpeedY;
   }
 

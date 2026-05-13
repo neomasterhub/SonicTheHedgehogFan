@@ -165,8 +165,11 @@ public partial class SonicController
 
   private void InitializeTimers()
   {
-    _dpadUnlockTimer = new Timer(DpadUnlockTimerSeconds)
+    _dpadUnlockTimer = new Timer(DpadUnlockTimer)
       .WhenCompleted(() => _postWallDetachDpadLock = false);
+
+    _postHurtImmortalityTimer = new Timer(PostHurtImmortalityTimer)
+      .WhenCompleted(() => IsImmortal = false);
   }
 
   private void InitializeGroundNormal()
@@ -183,7 +186,7 @@ public partial class SonicController
 
   private float GetDownGroundGravitySpeed()
   {
-    if (_isHurt)
+    if (IsHurt)
     {
       return _configs.PhysicsModeConfig.HurtGravitySpeed;
     }
@@ -204,7 +207,7 @@ public partial class SonicController
       .Set(PlayerInput.Y, Input.GetKey(KeyCode.Keypad5))
       .Set(PlayerInput.Z, Input.GetKey(KeyCode.Keypad6));
 
-    if (_isHurt
+    if (IsHurt
       || _postWallDetachDpadLock)
     {
       return input;
