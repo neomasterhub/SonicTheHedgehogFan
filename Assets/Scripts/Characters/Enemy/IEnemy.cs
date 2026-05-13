@@ -1,4 +1,4 @@
 public interface IEnemy
 {
-  void Hit();
+  void Hit(IEnemy other);
 }
