@@ -102,7 +102,7 @@ public partial class SonicController
   [InspectorLabel("Ring")]
   private GameObject _ringPrefab;
 
-  public bool CanCollectRing { get; }
+  public bool CanCollectRing { get; private set; }
   public ICollector Rings { get; }
   public VerticalDirection LookVerticalDirection
   {
