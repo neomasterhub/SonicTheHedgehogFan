@@ -61,12 +61,12 @@ public partial class SonicController
     return PipelineStepBuilder.Create()
       .WithDisplayName("Hurt blinking/Enter")
       .WithCondition(() =>
-        _isHurt
+        IsHurt
         && !_prevIsGrounded
         && _isGrounded)
       .WithAction(() =>
       {
-        _isHurt = false;
+        IsHurt = false;
         _viewSystem.StartBlinking(0, HurtBlinkingTimer, BlinkingInterval);
 
         return PipelineStepResult.Continue;
