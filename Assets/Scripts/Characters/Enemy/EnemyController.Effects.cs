@@ -12,9 +12,17 @@ public partial class EnemyController
   {
     return PipelineStepBuilder.Create()
       .WithDisplayName("Hit")
-      .WithCondition(() => true)
+      .WithCondition(() =>
+        _otherEnemy != null
+        && !_otherEnemy.IsHit
+        && !_otherEnemy.IsImmortal
+        && !_otherEnemy.IsAttacking
+        && _collider.bounds.Intersects(_otherEnemyCollider.bounds))
       .WithAction(() =>
       {
+        _otherEnemy.IsHit = true;
+        _otherEnemy.IsHurt = true;
+
         return PipelineStepResult.Break;
       })
       .Build();
