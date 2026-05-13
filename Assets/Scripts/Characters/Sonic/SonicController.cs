@@ -66,8 +66,6 @@ public partial class SonicController
   private SonicSpeedContext _speedContext;
   private SonicSizeMode _sizeMode;
   private SonicSizeMode _prevSizeMode;
-  private SonicState _state;
-  private SonicState _prevState;
   private SonicViewContext _viewContext;
   private Sound[] _sounds;
   private SpriteRenderer _spriteRenderer;

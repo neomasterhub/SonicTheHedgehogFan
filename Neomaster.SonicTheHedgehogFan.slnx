@@ -1,6 +1,3 @@
-<Solution>
-  <Folder Name="/Solution Items/">
-    <File Path="README.md" />
-  </Folder>
+﻿<Solution>
   <Project Path="Assembly-CSharp.csproj" />
 </Solution>
