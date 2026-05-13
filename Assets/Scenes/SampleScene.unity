@@ -154,7 +154,7 @@ MonoBehaviour:
   _initialized: 1
   _gravityEnabled: 0
   _lifetime: Infinity
-  _player: {fileID: 710850496}
+  _collectorObj: {fileID: 710850496}
   _physicsMode: 0
   _initialSpeed: {x: 0, y: 0}
 --- !u!61 &116679810
@@ -3123,7 +3123,7 @@ MonoBehaviour:
   _initialized: 1
   _gravityEnabled: 0
   _lifetime: Infinity
-  _player: {fileID: 710850496}
+  _collectorObj: {fileID: 710850496}
   _physicsMode: 0
   _initialSpeed: {x: 0, y: 0}
 --- !u!61 &894690037
@@ -3382,7 +3382,7 @@ MonoBehaviour:
   _initialized: 1
   _gravityEnabled: 0
   _lifetime: Infinity
-  _player: {fileID: 710850496}
+  _collectorObj: {fileID: 710850496}
   _physicsMode: 0
   _initialSpeed: {x: 0, y: 0}
 --- !u!61 &950993255
@@ -3925,7 +3925,7 @@ MonoBehaviour:
   _initialized: 1
   _gravityEnabled: 0
   _lifetime: Infinity
-  _player: {fileID: 710850496}
+  _collectorObj: {fileID: 710850496}
   _physicsMode: 0
   _initialSpeed: {x: 0, y: 0}
 --- !u!61 &1769879878
@@ -4666,6 +4666,10 @@ PrefabInstance:
       propertyPath: _initialized
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3937169843856006646, guid: e75974286517f944dac2e72436689482, type: 3}
+      propertyPath: _collectorObj
+      value: 
+      objectReference: {fileID: 710850496}
     - target: {fileID: 5601778466645593367, guid: e75974286517f944dac2e72436689482, type: 3}
       propertyPath: m_Name
       value: Ring

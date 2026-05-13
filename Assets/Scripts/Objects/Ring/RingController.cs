@@ -30,6 +30,7 @@ public partial class RingController : MonoBehaviour
   [SerializeField]
   private float _lifetime;
   [SerializeField]
+  [InspectorLabel("Collector")]
   private GameObject _collectorObj;
   [SerializeField]
   private PhysicsMode _physicsMode;
