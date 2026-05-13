@@ -49,6 +49,18 @@ public partial class SonicController
     {
       _showDebugInfo = !_showDebugInfo;
     }
+
+    if (!IsHurt)
+    {
+      if (_inputSystem.CheckLastPressed(TakeLeftHit))
+      {
+        _takeLeftHit = true;
+      }
+      else if (_inputSystem.CheckLastPressed(TakeRightHit))
+      {
+        _takeRightHit = true;
+      }
+    }
   }
 
   private void AnalyzeEnvironment()
@@ -211,6 +223,8 @@ public partial class SonicController
   {
     _ringCollected = false;
     _ringsLost = false;
+    _takeLeftHit = false;
+    _takeRightHit = false;
     IsHit = false;
   }
 
