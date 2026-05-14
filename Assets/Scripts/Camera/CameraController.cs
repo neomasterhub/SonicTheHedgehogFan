@@ -1,3 +1,4 @@
+using Unity.Cinemachine;
 using UnityEngine;
 
 /// <summary>
@@ -5,6 +6,8 @@ using UnityEngine;
 /// </summary>
 public partial class CameraController : MonoBehaviour
 {
+  private CinemachineCamera _cm;
+
   [SerializeField]
   private ICameraTarget _target;
 }
