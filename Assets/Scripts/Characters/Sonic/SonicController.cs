@@ -10,9 +10,10 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public partial class SonicController
   : MonoBehaviour,
+  ICameraTarget,
+  IEnemy,
   ILookVerticalDirectionProvider,
-  IRingCollector,
-  IEnemy
+  IRingCollector
 {
   private readonly ConditionalValueProvider<float> _slopeSpeedProvider;
   private readonly ConditionalValueProvider<float> _gravitySpeedProvider;
@@ -38,6 +39,8 @@ public partial class SonicController
   private bool _isRolling;
   private bool _isFallingOffWall;
   private bool _isJumping;
+  private bool _isDying;
+  private bool _isDead;
   private bool _prevIsGrounded;
   private bool _prevIsRolling;
   private bool _postWallDetachDpadLock;
@@ -102,8 +105,18 @@ public partial class SonicController
   [InspectorLabel("Ring")]
   private GameObject _ringPrefab;
 
-  public bool CanCollectRing { get; private set; }
-  public ICollector Rings { get; }
+  // Camera target
+  public bool IsDead => _isDead;
+  public bool IsDying => _isDying;
+
+  // Enemy
+  public bool IsHit { get; set; }
+  public bool IsHurt { get; set; }
+  public bool IsImmortal { get; set; }
+  public bool IsAttacking { get; set; }
+  public GameObject LastHitSource { get; set; }
+
+  // Look vertical direction provider
   public VerticalDirection LookVerticalDirection
   {
     get
@@ -122,9 +135,7 @@ public partial class SonicController
     }
   }
 
-  public bool IsHit { get; set; }
-  public bool IsHurt { get; set; }
-  public bool IsImmortal { get; set; }
-  public bool IsAttacking { get; set; }
-  public GameObject LastHitSource { get; set; }
+  // Ring collector
+  public bool CanCollectRing { get; private set; }
+  public ICollector Rings { get; }
 }

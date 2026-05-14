@@ -119,6 +119,14 @@ public class SonicSpeedSystem
 
   private void SetSpeed_HitKnockback()
   {
+    if (_context.IsDying)
+    {
+      SpeedX = 0;
+      SpeedY = _config.DeathBounceSpeed;
+
+      return;
+    }
+
     SpeedX = _config.HurtSpeedX * _context.HitHorizontalDirection;
     SpeedY = _config.HurtSpeedY;
   }

@@ -123,6 +123,7 @@ public partial class SonicController
       _speedContext = SonicSpeedContext.GetGrounded(
         IsHit,
         GetHitHorizontalDirection(),
+        _isDying,
         _isRolling,
         _isJumping,
         _prevIsGrounded,
@@ -136,6 +137,7 @@ public partial class SonicController
       _speedContext = SonicSpeedContext.GetAirborne(
         IsHit,
         GetHitHorizontalDirection(),
+        _isDying,
         _isRolling,
         _isJumping,
         _prevIsGrounded,
@@ -280,6 +282,11 @@ public partial class SonicController
 
   private SonicSensorFlags GetSensorFlags()
   {
+    if (_isDying)
+    {
+      return SonicSensorFlags.None;
+    }
+
     return new(
       _isGrounded || _speedSystem.SpeedY <= 0,
       _isGrounded || _speedSystem.SpeedY >= 0,

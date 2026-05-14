@@ -195,6 +195,11 @@ public partial class SonicController
       return _configs.PhysicsModeConfig.HurtGravitySpeed;
     }
 
+    if (_isDying)
+    {
+      return _configs.PhysicsModeConfig.GravityDownSpeed;
+    }
+
     return _speedSystem.SpeedY > 0
       ? _configs.PhysicsModeConfig.GravityUpSpeed
       : _configs.PhysicsModeConfig.GravityDownSpeed;
