@@ -11,6 +11,7 @@ public partial class SonicController
     _effects.AddStep(CreateEffect_SetHit());
     _effects.AddStep(CreateEffect_GettingHit());
     _effects.AddStep(CreateEffect_LoseRings());
+    _effects.AddStep(CreateEffect_Dying());
     _effects.AddStep(CreateEffect_HurtBlinking_Enter());
     _effects.AddStep(CreateEffect_Jumping_Exit());
     _effects.AddStep(CreateEffect_Jumping_Enter());
@@ -71,6 +72,23 @@ public partial class SonicController
       {
         _ringsLost = true;
         LoseRings();
+
+        return PipelineStepResult.Break;
+      })
+      .Build();
+  }
+
+  private PipelineStep CreateEffect_Dying()
+  {
+    return PipelineStepBuilder.Create()
+      .WithDisplayName("Dying")
+      .WithCondition(() =>
+        IsHit
+        && Rings.Count == 0)
+      .WithAction(() =>
+      {
+        _isDying = true;
+        AnalyzeEnvironment_Airborne();
 
         return PipelineStepResult.Break;
       })
