@@ -38,6 +38,8 @@ public partial class SonicController
   private bool _isRolling;
   private bool _isFallingOffWall;
   private bool _isJumping;
+  private bool _isDying;
+  private bool _isDead;
   private bool _prevIsGrounded;
   private bool _prevIsRolling;
   private bool _postWallDetachDpadLock;
