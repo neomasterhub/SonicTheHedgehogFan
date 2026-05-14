@@ -1,5 +1,5 @@
 public interface ICameraTarget
 {
-  public bool IsDying { get; }
-  public bool IsDead { get; }
+  bool IsDead { get; }
+  bool IsDying { get; }
 }
