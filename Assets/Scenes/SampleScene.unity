@@ -2627,7 +2627,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
   _initialized: 1
-  _otherEnemyGameObject: {fileID: 710850496}
+  _otherEnemyObj: {fileID: 710850496}
 --- !u!1 &262485117
 GameObject:
   m_ObjectHideFlags: 0
