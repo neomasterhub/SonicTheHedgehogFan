@@ -52,7 +52,7 @@ public partial class SonicController
         IsHit)
       .WithAction(() =>
       {
-        IsImmortal = true;
+        IsInvincible = true;
         CanCollectRing = false;
         AnalyzeEnvironment_Airborne();
 
@@ -108,7 +108,7 @@ public partial class SonicController
         IsHurt = false;
         _timerSystem.StartIfNotRunning(_postHurtImmortalityTimer);
         _timerSystem.StartIfNotRunning(_ringCollectorDisabledTimer);
-        _viewSystem.StartBlinking(0, PostHurtImmortalityTimer, BlinkingInterval);
+        _viewSystem.StartBlinking(0, PostHurtInvincibleTimer, BlinkingInterval);
 
         return PipelineStepResult.Continue;
       })

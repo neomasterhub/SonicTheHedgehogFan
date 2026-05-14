@@ -14,9 +14,9 @@ public partial class EnemyController
       .WithDisplayName("Hit")
       .WithCondition(() =>
         _otherEnemy != null
-        && !_otherEnemy.IsHurt
-        && !_otherEnemy.IsImmortal
+        && !_otherEnemy.IsInvincible
         && !_otherEnemy.IsAttacking
+        && !_otherEnemy.IsHurt
         && _collider.bounds.Intersects(_otherEnemyCollider.bounds))
       .WithAction(() =>
       {
