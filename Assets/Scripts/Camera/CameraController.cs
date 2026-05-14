@@ -7,7 +7,8 @@ using UnityEngine;
 public partial class CameraController : MonoBehaviour
 {
   private CinemachineCamera _cm;
+  private ICameraTarget _target;
 
   [SerializeField]
-  private ICameraTarget _target;
+  private GameObject _targetObj;
 }

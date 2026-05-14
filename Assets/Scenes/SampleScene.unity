@@ -3826,6 +3826,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 693152af547f28c47911cc4457e6a045, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraController
+  _targetObj: {fileID: 710850496}
 --- !u!1 &971844282
 GameObject:
   m_ObjectHideFlags: 0
