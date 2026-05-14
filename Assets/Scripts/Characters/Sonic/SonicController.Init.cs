@@ -174,7 +174,7 @@ public partial class SonicController
     _dpadLockTimer = new Timer(DpadUnlockTimer)
       .WhenCompleted(() => _postWallDetachDpadLock = false);
 
-    _postHurtImmortalityTimer = new Timer(PostHurtInvincibleTimer)
+    _postHurtInvincibleTimer = new Timer(PostHurtInvincibleTimer)
       .WhenCompleted(() => IsInvincible = false);
 
     _ringCollectorDisabledTimer = new Timer(RingCollectorDisabledTimer)

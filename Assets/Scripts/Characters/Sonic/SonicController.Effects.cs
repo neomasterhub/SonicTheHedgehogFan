@@ -107,7 +107,7 @@ public partial class SonicController
       .WithAction(() =>
       {
         IsHurt = false;
-        _timerSystem.StartIfNotRunning(_postHurtImmortalityTimer);
+        _timerSystem.StartIfNotRunning(_postHurtInvincibleTimer);
         _timerSystem.StartIfNotRunning(_ringCollectorDisabledTimer);
         _viewSystem.StartBlinking(0, PostHurtInvincibleTimer, BlinkingInterval);
 
