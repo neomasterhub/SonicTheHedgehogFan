@@ -88,6 +88,7 @@ public partial class SonicController
       .WithAction(() =>
       {
         _isDying = true;
+        IsHurt = false;
         AnalyzeEnvironment_Airborne();
 
         return PipelineStepResult.Break;
