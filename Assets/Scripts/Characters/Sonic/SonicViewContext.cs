@@ -2,6 +2,7 @@ public readonly struct SonicViewContext
 {
   public readonly bool HorizontalDirection;
   public readonly bool IsHurt;
+  public readonly bool IsDying;
   public readonly bool IsGrounded;
   public readonly bool IsSkidding;
   public readonly bool IsBalancing;
@@ -17,10 +18,11 @@ public readonly struct SonicViewContext
   public readonly GroundSide GroundSide;
   public readonly GroundSide PrevGroundSide;
 
-  public SonicViewContext(bool horizontalDirection, bool isHurt, bool isGrounded, bool isSkidding, bool isBalancing, bool isCurlingUp, bool isLookingUp, bool isRolling, bool isZeroGroundSpeedProgressReached, bool? triggeredGroundSensorSide, float speedX, float groundSpeed, float groundAngleDeg, float deltaTime, GroundSide groundSide, GroundSide prevGroundSide)
+  public SonicViewContext(bool horizontalDirection, bool isHurt, bool isDying, bool isGrounded, bool isSkidding, bool isBalancing, bool isCurlingUp, bool isLookingUp, bool isRolling, bool isZeroGroundSpeedProgressReached, bool? triggeredGroundSensorSide, float speedX, float groundSpeed, float groundAngleDeg, float deltaTime, GroundSide groundSide, GroundSide prevGroundSide)
   {
     HorizontalDirection = horizontalDirection;
     IsHurt = isHurt;
+    IsDying = isDying;
     IsGrounded = isGrounded;
     IsSkidding = isSkidding;
     IsBalancing = isBalancing;
