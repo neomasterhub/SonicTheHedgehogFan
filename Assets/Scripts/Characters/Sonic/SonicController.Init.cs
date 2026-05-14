@@ -53,9 +53,6 @@ public partial class SonicController
     Application.targetFrameRate = FramePerSec;
     Time.fixedDeltaTime = 1f / FramePerSec;
     QualitySettings.vSyncCount = 0;
-#if UNITY_EDITOR
-    _showDebugInfo = true;
-#endif
   }
 
   private void InitializeComponents()
