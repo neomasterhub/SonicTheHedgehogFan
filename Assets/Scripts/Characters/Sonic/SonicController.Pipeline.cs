@@ -282,6 +282,11 @@ public partial class SonicController
 
   private SonicSensorFlags GetSensorFlags()
   {
+    if (_isDying)
+    {
+      return SonicSensorFlags.None;
+    }
+
     return new(
       _isGrounded || _speedSystem.SpeedY <= 0,
       _isGrounded || _speedSystem.SpeedY >= 0,
