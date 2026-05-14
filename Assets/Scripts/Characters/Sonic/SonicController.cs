@@ -75,7 +75,7 @@ public partial class SonicController
   private TextMeshProUGUI _diagnosticsTextMesh;
   private TextMeshProUGUI _effectHistoryTextMesh;
   private Timer _dpadLockTimer;
-  private Timer _postHurtImmortalityTimer;
+  private Timer _postHurtInvincibleTimer;
   private Timer _ringCollectorDisabledTimer;
   private WallDetectionResult? _leftWallDetectionResult;
   private WallDetectionResult? _rightWallDetectionResult;
@@ -113,10 +113,10 @@ public partial class SonicController
   public bool IsDying => _isDying;
 
   // Enemy
+  public bool IsInvincible { get; private set; }
+  public bool IsAttacking { get; private set; }
   public bool IsHit { get; set; }
   public bool IsHurt { get; set; }
-  public bool IsImmortal { get; set; }
-  public bool IsAttacking { get; set; }
   public GameObject LastHitSource { get; set; }
 
   // Look vertical direction provider

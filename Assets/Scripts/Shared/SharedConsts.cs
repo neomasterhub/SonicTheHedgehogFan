@@ -49,6 +49,7 @@ public static class SharedConsts
       public const string Rolling = nameof(Rolling);
       public const string Collected = nameof(Collected);
       public const string Hurt = nameof(Hurt);
+      public const string Dying = nameof(Dying);
     }
 
     public static class States
