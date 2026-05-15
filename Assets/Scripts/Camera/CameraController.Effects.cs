@@ -7,14 +7,14 @@ public partial class CameraController : MonoBehaviour
 {
   private void SetEffectPipeline()
   {
-    _effects.AddStep(CreateEffect_DisableFollowing());
+    _effects.AddStep(CreateEffect_RemoveTrackingTarget());
     _effects.AddStep(CreateEffect_FadeOut());
   }
 
-  private PipelineStep CreateEffect_DisableFollowing()
+  private PipelineStep CreateEffect_RemoveTrackingTarget()
   {
     return PipelineStepBuilder.Create()
-      .WithDisplayName("Disable following")
+      .WithDisplayName("Remove tracking target")
       .WithCondition(() =>
         _target.IsDead)
       .WithAction(() =>
