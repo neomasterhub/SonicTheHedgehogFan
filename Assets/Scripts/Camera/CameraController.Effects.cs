@@ -34,7 +34,8 @@ public partial class CameraController : MonoBehaviour
     return PipelineStepBuilder.Create()
       .WithDisplayName("Fade out")
       .WithCondition(() =>
-        !_isFadingOut
+        !_isFadedOut
+        && !_isFadingOut
         && _target.IsDead)
       .WithAction(() =>
       {
