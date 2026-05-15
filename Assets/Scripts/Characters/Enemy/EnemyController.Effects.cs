@@ -22,7 +22,7 @@ public partial class EnemyController
           return PipelineStepResult.Break;
         }
 
-        _otherEnemy.LastHitEnemy = new(gameObject.transform.position);
+        _otherEnemy.LastHitEnemy = new(gameObject.transform.position, new(_speedSystem.SpeedX, _speedSystem.SpeedY));
 
         return PipelineStepResult.Continue;
       })
