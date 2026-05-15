@@ -118,7 +118,7 @@ public partial class SonicController
   public bool IsAttacking { get; private set; }
   public bool IsHit { get; set; }
   public bool IsHurt { get; set; }
-  public LastHitEnemy? LastHitEnemy { get; set; }
+  public HitEnemyInfo? LastHitEnemy { get; set; }
 
   // Look vertical direction provider
   public VerticalDirection LookVerticalDirection

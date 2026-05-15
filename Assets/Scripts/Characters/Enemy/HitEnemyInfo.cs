@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public readonly struct LastHitEnemy
+public readonly struct HitEnemyInfo
 {
   public readonly Vector2 Position;
 
-  public LastHitEnemy(Vector2 position)
+  public HitEnemyInfo(Vector2 position)
   {
     Position = position;
   }

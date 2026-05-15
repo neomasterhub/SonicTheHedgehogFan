@@ -4,5 +4,5 @@ public interface IEnemy
   bool IsAttacking { get; }
   bool IsHit { get; set; }
   bool IsHurt { get; set; }
-  LastHitEnemy? LastHitEnemy { get; set; }
+  HitEnemyInfo? LastHitEnemy { get; set; }
 }
