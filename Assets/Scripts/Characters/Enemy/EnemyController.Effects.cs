@@ -16,6 +16,8 @@ public partial class EnemyController
       .WithDisplayName("Intersected")
       .WithAction(() =>
       {
+        _otherEnemy.ContactEnemyInfo = null;
+
         return _otherEnemy == null
           || !_collider.bounds.Intersects(_otherEnemyCollider.bounds)
           ? PipelineStepResult.Break
