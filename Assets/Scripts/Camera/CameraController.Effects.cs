@@ -20,6 +20,7 @@ public partial class CameraController : MonoBehaviour
       .WithAction(() =>
       {
         _isFadingOut = true;
+        _overlayPanelObj.SetActive(true);
 
         return PipelineStepResult.Break;
       })

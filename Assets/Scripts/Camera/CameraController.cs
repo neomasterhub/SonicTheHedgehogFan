@@ -1,6 +1,6 @@
 using Unity.Cinemachine;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 /// <summary>
 /// Data.
@@ -12,7 +12,8 @@ public partial class CameraController : MonoBehaviour
   private bool _isFadingOut;
   private CinemachineCamera _cm;
   private ICameraTarget _target;
-  private IPanel _overlayPanel;
+  private GameObject _overlayPanelObj;
+  private Image _overlayPanelImage;
 
   [SerializeField]
   private Canvas _canvas;
