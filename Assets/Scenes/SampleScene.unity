@@ -2989,7 +2989,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 2.8
+  orthographic size: 3
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3827,6 +3827,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 693152af547f28c47911cc4457e6a045, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraController
+  _canvas: {fileID: 1049324918}
   _targetObj: {fileID: 710850496}
 --- !u!1 &971844282
 GameObject:
@@ -4493,7 +4494,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1391926817
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5050,7 +5051,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1821154569
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5469,7 +5470,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2143455031
 RectTransform:
   m_ObjectHideFlags: 0
