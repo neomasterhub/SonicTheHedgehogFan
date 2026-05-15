@@ -7,6 +7,8 @@ public partial class EnemyController
 {
   public EnemyController()
   {
+    _timerSystem = new();
+
     _effects = new();
     SetEffectPipeline();
   }
