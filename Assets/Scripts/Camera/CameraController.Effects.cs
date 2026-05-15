@@ -1,4 +1,5 @@
 using UnityEngine;
+using static SharedConsts.Colors;
 
 /// <summary>
 /// Effects.
@@ -37,6 +38,7 @@ public partial class CameraController : MonoBehaviour
       {
         _isFadingOut = true;
         _overlayPanelObj.SetActive(true);
+        _overlayPanelImage.color = TransparentBlack;
 
         return PipelineStepResult.Break;
       })
