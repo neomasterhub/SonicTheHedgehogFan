@@ -147,6 +147,7 @@ public partial class SonicController
       {
         _isJumping = true;
         _isRolling = true;
+        IsAttacking = true;
         SetSizes(SonicSizeMode.Small);
 
         return PipelineStepResult.Break;
