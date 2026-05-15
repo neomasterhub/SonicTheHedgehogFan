@@ -209,6 +209,11 @@ public partial class SonicController
 
   private PlayerInput GetPlayerInput()
   {
+    if (_isDead || _isDead)
+    {
+      return PlayerInput.None;
+    }
+
     var input = PlayerInput.None
       .Set(PlayerInput.Start, Input.GetKey(KeyCode.KeypadEnter))
       .Set(PlayerInput.A, Input.GetKey(KeyCode.Keypad1))
