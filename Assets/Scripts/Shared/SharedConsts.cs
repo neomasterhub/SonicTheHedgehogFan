@@ -11,6 +11,11 @@ public static class SharedConsts
     public const int SpxPerUnit = SpxPerPx * PxPerUnit;
   }
 
+  public static class Colors
+  {
+    public static readonly Color TransparentBlack = new(0, 0, 0, 0);
+  }
+
   public static class UI
   {
     public const float DebugScale = 10000;

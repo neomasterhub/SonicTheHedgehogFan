@@ -7,11 +7,11 @@ public partial class CameraController : MonoBehaviour
 {
   private void FixedUpdate()
   {
-    ApplyMovement();
+    ApplyEffects();
   }
 
-  private void ApplyMovement()
+  private void ApplyEffects()
   {
-    _cm.enabled = !_target.IsDying;
+    _effects.Run(false);
   }
 }
