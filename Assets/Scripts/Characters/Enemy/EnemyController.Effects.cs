@@ -14,9 +14,6 @@ public partial class EnemyController
   {
     return PipelineStepBuilder.Create()
       .WithDisplayName("Intersected")
-      .WithCondition(() =>
-        _otherEnemy != null
-        && _collider.bounds.Intersects(_otherEnemyCollider.bounds))
       .WithAction(() =>
       {
         if (_otherEnemy == null
