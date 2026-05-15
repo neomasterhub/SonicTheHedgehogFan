@@ -221,7 +221,13 @@ public partial class SonicController
 
   public Vector2 GetReboundSpeed()
   {
-    return new(_speedSystem.SpeedX, -_speedSystem.SpeedY);
+    if (_speedSystem.SpeedY < 0
+      && _speedSystem.SpeedY <= ContactEnemyInfo.Value.Speed.y)
+    {
+      return new(_speedSystem.SpeedX, -_speedSystem.SpeedY);
+    }
+
+    return new(_speedSystem.SpeedX, _speedSystem.SpeedY);
   }
 
   private PlayerInput GetPlayerInput()
