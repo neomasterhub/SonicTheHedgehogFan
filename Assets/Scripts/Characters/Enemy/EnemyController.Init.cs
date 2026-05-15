@@ -23,6 +23,8 @@ public partial class EnemyController
       _otherEnemy = _otherEnemyObj.GetComponent<IEnemy>();
       _otherEnemyCollider = _otherEnemyObj.GetComponent<BoxCollider2D>();
     }
+
+    InitializeTimers();
   }
 
   public void Initialize(GameObject enemy)
