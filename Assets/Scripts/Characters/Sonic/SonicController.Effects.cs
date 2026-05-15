@@ -53,6 +53,7 @@ public partial class SonicController
       .WithAction(() =>
       {
         IsInvincible = true;
+        IsAttacking = false;
         CanCollectRing = false;
         AnalyzeEnvironment_Airborne();
 
