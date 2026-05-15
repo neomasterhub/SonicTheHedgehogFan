@@ -18,6 +18,7 @@ public partial class SonicController
     _gravitySpeedProvider = new();
     _groundToAirSpeedProvider = new();
     _slopeSpeedProvider = new();
+    _reboundSpeedProvider = new();
 
     _groundInfoSystem = new();
     _sensorSystem = new();
@@ -114,9 +115,13 @@ public partial class SonicController
       .When(() => _groundInfoSystem.Previous.Side == GroundSide.Right, () => _isFallingOffWall ? default : WallToAirSpeedDelta + new Vector2(-_speedSystem.SpeedY, _speedSystem.SpeedX))
       .When(() => _groundInfoSystem.Previous.Side == GroundSide.Up, () => new Vector2(-_speedSystem.SpeedX, _isJumping ? Mathf.Min(0, -_speedSystem.SpeedY) : 0));
 
+    _reboundSpeedProvider
+      .When(() => _isRebounding, () => GetReboundSpeed());
+
     _gravitySpeedProvider.DefaultProvider = () => 0;
     _airToGroundSpeedProvider.DefaultProvider = () => new(_speedSystem.SpeedX, _speedSystem.SpeedY);
     _groundToAirSpeedProvider.DefaultProvider = () => new(_speedSystem.SpeedX, _speedSystem.SpeedY);
+    _reboundSpeedProvider.DefaultProvider = () => new(_speedSystem.SpeedX, _speedSystem.SpeedY);
   }
 
   private void InitializeSounds()
@@ -212,6 +217,11 @@ public partial class SonicController
     return _speedSystem.SpeedY > 0
       ? _configs.PhysicsModeConfig.GravityUpSpeed
       : _configs.PhysicsModeConfig.GravityDownSpeed;
+  }
+
+  public Vector2 GetReboundSpeed()
+  {
+    return new(_speedSystem.SpeedX, -_speedSystem.SpeedY);
   }
 
   private PlayerInput GetPlayerInput()

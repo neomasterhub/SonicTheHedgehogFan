@@ -19,6 +19,7 @@ public partial class SonicController
   private readonly ConditionalValueProvider<float> _gravitySpeedProvider;
   private readonly ConditionalValueProvider<Vector2> _airToGroundSpeedProvider;
   private readonly ConditionalValueProvider<Vector2> _groundToAirSpeedProvider;
+  private readonly ConditionalValueProvider<Vector2> _reboundSpeedProvider;
   private readonly GroundInfoSystem _groundInfoSystem;
   private readonly PlayerInputSystem _inputSystem;
   private readonly PlayerViewRotatorProvider<SonicViewRotatorContext> _viewRotatorProvider;
@@ -53,6 +54,7 @@ public partial class SonicController
   private bool _isDownGroundedMoving;
   private bool _isUpGrounded;
   private bool _isWallGrounded;
+  private bool _isRebounding;
   private bool _showDebugInfo;
   private bool _takeLeftHit;
   private bool _takeRightHit;
