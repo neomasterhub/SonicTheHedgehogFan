@@ -14,6 +14,7 @@ public partial class EnemyController : MonoBehaviour
   private BoxCollider2D _collider;
   private BoxCollider2D _otherEnemyCollider;
   private SpriteRenderer _spriteRenderer;
+  private Timer _deadVisibleTimer;
 
   [SerializeField]
   private bool _initialized;

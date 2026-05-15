@@ -33,4 +33,10 @@ public partial class EnemyController
 
     _initialized = true;
   }
+
+  private void InitializeTimers()
+  {
+    _deadVisibleTimer = new Timer(1)
+      .WhenCompleted(() => _spriteRenderer.enabled = false);
+  }
 }
