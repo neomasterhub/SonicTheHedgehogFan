@@ -30,7 +30,8 @@ public class SonicSpeedSystem
     ConditionalValueProvider<float> slopeSpeedProvider,
     ConditionalValueProvider<float> gravitySpeedProvider,
     ConditionalValueProvider<Vector2> airToGroundSpeedProvider,
-    ConditionalValueProvider<Vector2> groundToAirSpeedProvider)
+    ConditionalValueProvider<Vector2> groundToAirSpeedProvider,
+    ConditionalValueProvider<Vector2> reboundSpeedProvider)
   {
     _configs = configs;
     _inputSystem = inputSystem;
@@ -38,6 +39,7 @@ public class SonicSpeedSystem
     _gravitySpeedProvider = gravitySpeedProvider;
     _airToGroundSpeedProvider = airToGroundSpeedProvider;
     _groundToAirSpeedProvider = groundToAirSpeedProvider;
+    _reboundSpeedProvider = reboundSpeedProvider;
   }
 
   public bool IsSkidding { get; private set; }
