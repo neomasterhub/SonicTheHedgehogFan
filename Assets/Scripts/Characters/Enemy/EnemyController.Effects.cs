@@ -6,6 +6,7 @@ public partial class EnemyController
   private void SetEffectPipeline()
   {
     _effects.AddStep(CreateEffect_Hit());
+    _effects.AddStep(CreateEffect_GettingHit());
   }
 
   private PipelineStep CreateEffect_Hit()
@@ -22,6 +23,23 @@ public partial class EnemyController
       {
         _otherEnemy.IsHit = true;
         _otherEnemy.IsHurt = true;
+        _otherEnemy.LastHitSource = gameObject;
+
+        return PipelineStepResult.Break;
+      })
+      .Build();
+  }
+
+  private PipelineStep CreateEffect_GettingHit()
+  {
+    return PipelineStepBuilder.Create()
+      .WithDisplayName("Getting hit")
+      .WithCondition(() =>
+        _otherEnemy != null
+        && !_otherEnemy.IsAttacking
+        && _collider.bounds.Intersects(_otherEnemyCollider.bounds))
+      .WithAction(() =>
+      {
         _otherEnemy.LastHitSource = gameObject;
 
         return PipelineStepResult.Break;
