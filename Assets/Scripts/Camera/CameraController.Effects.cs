@@ -1,4 +1,5 @@
 using UnityEngine;
+using static CameraConsts;
 using static SharedConsts.Colors;
 
 /// <summary>
@@ -57,7 +58,7 @@ public partial class CameraController : MonoBehaviour
       .WithAction(() =>
       {
         var color = _overlayPanelImage.color;
-        color.a += 0.01f;
+        color.a += FadingOutAlphaStep;
         _overlayPanelImage.color = color;
 
         if (color.a >= 1)
