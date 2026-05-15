@@ -5,6 +5,7 @@ public static class SonicConsts
 {
   public static class Physics
   {
+    public const float DyingTimer = 3;
     public const float DpadUnlockTimer = 0.5f;
     public const float PostHurtInvincibleTimer = 3;
     public const float RingCollectorDisabledTimer = 0.5f;

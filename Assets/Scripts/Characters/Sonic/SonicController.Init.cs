@@ -168,6 +168,13 @@ public partial class SonicController
 
   private void InitializeTimers()
   {
+    _dyingTimer = new Timer(DyingTimer)
+      .WhenCompleted(() =>
+      {
+        _isDying = false;
+        _isDead = true;
+      });
+
     _dpadLockTimer = new Timer(DpadUnlockTimer)
       .WhenCompleted(() => _postWallDetachDpadLock = false);
 
