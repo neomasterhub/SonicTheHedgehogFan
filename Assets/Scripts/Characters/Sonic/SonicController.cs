@@ -74,6 +74,7 @@ public partial class SonicController
   private SpriteRenderer _spriteRenderer;
   private TextMeshProUGUI _diagnosticsTextMesh;
   private TextMeshProUGUI _effectHistoryTextMesh;
+  private Timer _dyingTimer;
   private Timer _dpadLockTimer;
   private Timer _postHurtInvincibleTimer;
   private Timer _ringCollectorDisabledTimer;

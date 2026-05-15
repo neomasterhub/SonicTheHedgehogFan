@@ -89,6 +89,7 @@ public partial class SonicController
       {
         _isDying = true;
         IsHurt = false;
+        _timerSystem.StartIfNotRunning(_dyingTimer);
         AnalyzeEnvironment_Airborne();
 
         return PipelineStepResult.Break;

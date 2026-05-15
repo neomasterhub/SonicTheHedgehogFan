@@ -5,6 +5,12 @@ using Unity.Cinemachine;
 /// </summary>
 public partial class CameraController
 {
+  public CameraController()
+  {
+    _effects = new();
+    SetEffectPipeline();
+  }
+
   private void Awake()
   {
     InitializeComponents();
