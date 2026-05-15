@@ -9,9 +9,9 @@ public partial class EnemyController : MonoBehaviour
   private readonly Pipeline _effects;
   private readonly TimerSystem _timerSystem;
 
-  private IEnemy _otherEnemy;
   private BoxCollider2D _collider;
   private BoxCollider2D _otherEnemyCollider;
+  private IEnemy _otherEnemy;
   private Timer _deadVisibleTimer;
 
   [SerializeField]

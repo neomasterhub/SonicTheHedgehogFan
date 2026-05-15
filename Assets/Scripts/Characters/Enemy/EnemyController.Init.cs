@@ -1,4 +1,5 @@
 using UnityEngine;
+using static EnemyConsts;
 
 /// <summary>
 /// Init.
@@ -41,7 +42,7 @@ public partial class EnemyController
 
   private void InitializeTimers()
   {
-    _deadVisibleTimer = new Timer(1)
+    _deadVisibleTimer = new Timer(DeadVisibleTimer)
       .WhenCompleted(() => gameObject.SetActive(false));
   }
 }
