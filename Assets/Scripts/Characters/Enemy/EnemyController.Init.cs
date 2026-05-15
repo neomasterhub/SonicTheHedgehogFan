@@ -31,7 +31,6 @@ public partial class EnemyController
   private void InitializeComponents()
   {
     _collider = GetComponent<BoxCollider2D>();
-    _spriteRenderer = GetComponent<SpriteRenderer>();
 
     if (_otherEnemyObj != null)
     {
@@ -43,6 +42,6 @@ public partial class EnemyController
   private void InitializeTimers()
   {
     _deadVisibleTimer = new Timer(1)
-      .WhenCompleted(() => _spriteRenderer.enabled = false);
+      .WhenCompleted(() => gameObject.SetActive(false));
   }
 }
