@@ -21,9 +21,9 @@ public class PipelineStepBuilder
     return this;
   }
 
-  public PipelineStepBuilder WithCondition(Func<bool> condition)
+  public PipelineStepBuilder WithCondition(Func<bool> condition = null)
   {
-    _condition = condition;
+    _condition = condition ?? (() => true);
     return this;
   }
 
