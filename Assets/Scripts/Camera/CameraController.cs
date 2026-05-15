@@ -6,6 +6,8 @@ using UnityEngine;
 /// </summary>
 public partial class CameraController : MonoBehaviour
 {
+  private readonly Pipeline _effects;
+
   private CinemachineCamera _cm;
   private ICameraTarget _target;
 
