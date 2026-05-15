@@ -17,6 +17,9 @@ public partial class EnemyController : MonoBehaviour
   [SerializeField]
   private bool _initialized;
   [SerializeField]
+  [InspectorLabel("Alive")]
+  private bool _isAlive;
+  [SerializeField]
   [InspectorLabel("Other Enemy")]
   private GameObject _otherEnemyObj;
 }

@@ -34,7 +34,8 @@ public partial class EnemyController
     return PipelineStepBuilder.Create()
       .WithDisplayName("Hit")
       .WithCondition(() =>
-        !_otherEnemy.IsInvincible
+        _isAlive
+        && !_otherEnemy.IsInvincible
         && !_otherEnemy.IsAttacking
         && !_otherEnemy.IsHurt)
       .WithAction(() =>
@@ -52,10 +53,11 @@ public partial class EnemyController
     return PipelineStepBuilder.Create()
       .WithDisplayName("Getting hit")
       .WithCondition(() =>
-        _otherEnemy.IsAttacking)
+        _isAlive
+        && _otherEnemy.IsAttacking)
       .WithAction(() =>
       {
-        _otherEnemy = null;
+        _isAlive = false;
         _timerSystem.StartIfNotRunning(_deadVisibleTimer);
 
         return PipelineStepResult.Break;
