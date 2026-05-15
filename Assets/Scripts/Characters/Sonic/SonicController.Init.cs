@@ -19,7 +19,6 @@ public partial class SonicController
     _groundToAirSpeedProvider = new();
     _slopeSpeedProvider = new();
 
-    _effects = new();
     _groundInfoSystem = new();
     _sensorSystem = new();
     _timerSystem = new();
@@ -35,6 +34,7 @@ public partial class SonicController
     Rings = new Collector()
       .WhenAdded(() => _ringCollected = true);
 
+    _effects = new();
     SetEffectPipeline();
   }
 
