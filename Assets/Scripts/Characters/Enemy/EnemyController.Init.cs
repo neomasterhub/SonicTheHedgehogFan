@@ -11,6 +11,7 @@ public partial class EnemyController
     _isAlive = true;
 
     _timerSystem = new();
+    _speedSystem = new();
 
     _effects = new();
     SetEffectPipeline();
