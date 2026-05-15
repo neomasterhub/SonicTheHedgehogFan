@@ -1,4 +1,4 @@
 public static class EnemyConsts
 {
-  public static float DeadVisibleTimer = 1;
+  public static float DeadActiveTimer = 1;
 }

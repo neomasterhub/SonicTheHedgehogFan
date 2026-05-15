@@ -58,7 +58,7 @@ public partial class EnemyController
       .WithAction(() =>
       {
         _isAlive = false;
-        _timerSystem.StartIfNotRunning(_deadVisibleTimer);
+        _timerSystem.StartIfNotRunning(_deadActiveTimer);
 
         return PipelineStepResult.Break;
       })

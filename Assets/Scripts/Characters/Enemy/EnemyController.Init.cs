@@ -44,7 +44,7 @@ public partial class EnemyController
 
   private void InitializeTimers()
   {
-    _deadVisibleTimer = new Timer(DeadVisibleTimer)
+    _deadActiveTimer = new Timer(DeadActiveTimer)
       .WhenCompleted(() => gameObject.SetActive(false));
   }
 }
