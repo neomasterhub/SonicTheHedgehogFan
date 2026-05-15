@@ -1,4 +1,5 @@
 using Unity.Cinemachine;
+using UnityEngine.UIElements;
 
 /// <summary>
 /// Init.
@@ -22,5 +23,7 @@ public partial class CameraController
 
     var cmObj = transform.Find("Cinemachine Camera").gameObject;
     _cm = cmObj.GetComponent<CinemachineCamera>();
+
+    _overlayPanel = _canvas.transform.Find("Overlay Panel").gameObject.GetComponent<IPanel>();
   }
 }
