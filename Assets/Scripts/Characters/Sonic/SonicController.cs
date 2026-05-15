@@ -54,7 +54,6 @@ public partial class SonicController
   private bool _isDownGroundedMoving;
   private bool _isUpGrounded;
   private bool _isWallGrounded;
-  private bool _isRebounding;
   private bool _showDebugInfo;
   private bool _takeLeftHit;
   private bool _takeRightHit;
@@ -120,7 +119,7 @@ public partial class SonicController
   public bool IsAttacking { get; private set; }
   public bool IsHit { get; set; }
   public bool IsHurt { get; set; }
-  public HitEnemyInfo? HitEnemyInfo { get; set; }
+  public ContactEnemyInfo? ContactEnemyInfo { get; set; }
 
   // Look vertical direction provider
   public VerticalDirection LookVerticalDirection

@@ -16,17 +16,10 @@ public partial class EnemyController
       .WithDisplayName("Intersected")
       .WithAction(() =>
       {
-        if (_otherEnemy == null
-          || !_collider.bounds.Intersects(_otherEnemyCollider.bounds))
-        {
-          _otherEnemy.HitEnemyInfo = null;
-
-          return PipelineStepResult.Break;
-        }
-
-        _otherEnemy.HitEnemyInfo = new(gameObject.transform.position, new(_speedSystem.SpeedX, _speedSystem.SpeedY));
-
-        return PipelineStepResult.Continue;
+        return _otherEnemy == null
+          || !_collider.bounds.Intersects(_otherEnemyCollider.bounds)
+          ? PipelineStepResult.Break
+          : PipelineStepResult.Continue;
       })
       .Build();
   }
@@ -44,6 +37,7 @@ public partial class EnemyController
       {
         _otherEnemy.IsHit = true;
         _otherEnemy.IsHurt = true;
+        _otherEnemy.ContactEnemyInfo = new(false, gameObject.transform.position, new(_speedSystem.SpeedX, _speedSystem.SpeedY));
 
         return PipelineStepResult.Break;
       })
@@ -61,6 +55,7 @@ public partial class EnemyController
       {
         _isAlive = false;
         _timerSystem.StartIfNotRunning(_deadActiveTimer);
+        _otherEnemy.ContactEnemyInfo = new(true, gameObject.transform.position, new(_speedSystem.SpeedX, _speedSystem.SpeedY));
 
         return PipelineStepResult.Break;
       })

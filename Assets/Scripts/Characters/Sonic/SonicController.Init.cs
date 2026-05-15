@@ -116,7 +116,7 @@ public partial class SonicController
       .When(() => _groundInfoSystem.Previous.Side == GroundSide.Up, () => new Vector2(-_speedSystem.SpeedX, _isJumping ? Mathf.Min(0, -_speedSystem.SpeedY) : 0));
 
     _reboundSpeedProvider
-      .When(() => _isRebounding, () => GetReboundSpeed());
+      .When(() => !_isGrounded && ContactEnemyInfo?.IsHit == true, () => GetReboundSpeed());
 
     _gravitySpeedProvider.DefaultProvider = () => 0;
     _airToGroundSpeedProvider.DefaultProvider = () => new(_speedSystem.SpeedX, _speedSystem.SpeedY);
