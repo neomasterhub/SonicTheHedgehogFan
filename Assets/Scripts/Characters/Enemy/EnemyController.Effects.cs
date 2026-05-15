@@ -58,6 +58,9 @@ public partial class EnemyController
         _otherEnemy.IsAttacking)
       .WithAction(() =>
       {
+        _otherEnemy = null;
+        _timerSystem.StartIfNotRunning(_deadVisibleTimer);
+
         return PipelineStepResult.Break;
       })
       .Build();
