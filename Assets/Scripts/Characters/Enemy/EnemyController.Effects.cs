@@ -19,10 +19,12 @@ public partial class EnemyController
         if (_otherEnemy == null
           || !_collider.bounds.Intersects(_otherEnemyCollider.bounds))
         {
+          _otherEnemy.HitEnemyInfo = null;
+
           return PipelineStepResult.Break;
         }
 
-        _otherEnemy.LastHitEnemy = new(gameObject.transform.position, new(_speedSystem.SpeedX, _speedSystem.SpeedY));
+        _otherEnemy.HitEnemyInfo = new(gameObject.transform.position, new(_speedSystem.SpeedX, _speedSystem.SpeedY));
 
         return PipelineStepResult.Continue;
       })
