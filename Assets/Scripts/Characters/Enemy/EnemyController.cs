@@ -4,15 +4,16 @@ using UnityEngine;
 /// Data.
 /// </summary>
 [RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(IMotor))]
 public partial class EnemyController : MonoBehaviour
 {
   private readonly Pipeline _effects;
   private readonly TimerSystem _timerSystem;
-  private readonly ISpeedSystem _speedSystem;
 
   private BoxCollider2D _collider;
   private BoxCollider2D _otherEnemyCollider;
   private IEnemy _otherEnemy;
+  private IMotor _motor;
   private Timer _deadActiveTimer;
 
   [SerializeField]

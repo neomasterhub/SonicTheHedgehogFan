@@ -6,10 +6,8 @@ using static EnemyConsts;
 /// </summary>
 public partial class EnemyController
 {
-  public EnemyController(ISpeedSystem speedSystem)
+  public EnemyController()
   {
-    _speedSystem = speedSystem;
-
     _isAlive = true;
 
     _timerSystem = new();
@@ -35,6 +33,7 @@ public partial class EnemyController
 
   private void InitializeComponents()
   {
+    _motor = GetComponent<IMotor>();
     _collider = GetComponent<BoxCollider2D>();
 
     if (_otherEnemyObj != null)
