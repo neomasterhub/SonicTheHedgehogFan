@@ -55,6 +55,7 @@ public static class SharedConsts
       public const string Collected = nameof(Collected);
       public const string Hurt = nameof(Hurt);
       public const string Dying = nameof(Dying);
+      public const string Destroyed = nameof(Destroyed);
     }
 
     public static class States
