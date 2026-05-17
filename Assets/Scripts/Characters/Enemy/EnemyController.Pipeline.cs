@@ -14,6 +14,7 @@ public partial class EnemyController
 
     BeginFrame();
     ApplyEffects();
+    ApplyMovement();
   }
 
   private void BeginFrame()
@@ -24,5 +25,10 @@ public partial class EnemyController
   private void ApplyEffects()
   {
     _effects.Run(false);
+  }
+
+  private void ApplyMovement()
+  {
+    _motor.Move();
   }
 }
