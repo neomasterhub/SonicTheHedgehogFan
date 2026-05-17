@@ -8,7 +8,7 @@ public partial class EnemyController : MonoBehaviour
 {
   protected readonly Pipeline _effects;
   protected readonly TimerSystem _timerSystem;
-  private readonly EnemySpeedSystem _speedSystem;
+  protected readonly ISpeedSystem _speedSystem;
 
   protected BoxCollider2D _collider;
   protected BoxCollider2D _otherEnemyCollider;
