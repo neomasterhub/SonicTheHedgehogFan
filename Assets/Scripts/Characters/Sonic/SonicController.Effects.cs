@@ -8,6 +8,7 @@ public partial class SonicController
 {
   private void SetEffectPipeline()
   {
+    _effects.AddStep(CreateEffect_Disable());
     _effects.AddStep(CreateEffect_SetHit());
     _effects.AddStep(CreateEffect_GettingHit());
     _effects.AddStep(CreateEffect_LoseRings());
@@ -25,6 +26,22 @@ public partial class SonicController
     _effects.AddStep(CreateEffect_Rolling_Enter());
     _effects.AddStep(CreateEffect_WallDetach());
     _effects.AddStep(CreateEffect_CeilingDetach());
+  }
+
+  private PipelineStep CreateEffect_Disable()
+  {
+    return PipelineStepBuilder.Create()
+      .WithDisplayName("Disable")
+      .WithCondition(() =>
+        _isDead
+        && gameObject.activeSelf)
+      .WithAction(() =>
+      {
+        gameObject.SetActive(false);
+
+        return PipelineStepResult.Break;
+      })
+      .Build();
   }
 
   private PipelineStep CreateEffect_SetHit()
