@@ -50,7 +50,7 @@ public static class SonicConsts
       public const float MinWallSpeedSpx = 128;
       public const float MinCeilingSpeedPx = 2.5f;
       public const float TopSpeedPx = 6;
-      public const float AirAccelerationSpeedSpx = 14;
+      public const float AirAccelerationSpeedSpx = 24;
       public const float AirTopSpeedPx = 6;
       public const float GravitySpeedSpx = 56;
       public const float MaxFallSpeedPx = 16;
