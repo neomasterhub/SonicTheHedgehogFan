@@ -53,6 +53,7 @@ public partial class SonicController
       .WithAction(() =>
       {
         IsInvincible = true;
+        IsAttacking = false;
         CanCollectRing = false;
         AnalyzeEnvironment_Airborne();
 
@@ -147,6 +148,7 @@ public partial class SonicController
       {
         _isJumping = true;
         _isRolling = true;
+        IsAttacking = true;
         SetSizes(SonicSizeMode.Small);
 
         return PipelineStepResult.Break;
@@ -164,6 +166,7 @@ public partial class SonicController
       .WithAction(() =>
       {
         _isRolling = false;
+        IsAttacking = false;
         SetSizes(SonicSizeMode.Big);
 
         return PipelineStepResult.Continue;
@@ -289,6 +292,7 @@ public partial class SonicController
       .WithAction(() =>
       {
         _isRolling = true;
+        IsAttacking = true;
         SetSizes(SonicSizeMode.Small);
 
         return PipelineStepResult.Break;

@@ -18,6 +18,7 @@ public partial class SonicController
     _gravitySpeedProvider = new();
     _groundToAirSpeedProvider = new();
     _slopeSpeedProvider = new();
+    _reboundSpeedProvider = new();
 
     _groundInfoSystem = new();
     _sensorSystem = new();
@@ -27,7 +28,7 @@ public partial class SonicController
     _configs = new(_physicsMode);
     _inputSystem = new(GetPlayerInput);
     _sensorRayLengths = new(OLength, TopUDFLengths, BottomUDFLengths);
-    _speedSystem = new(_configs, _inputSystem, _slopeSpeedProvider, _gravitySpeedProvider, _airToGroundSpeedProvider, _groundToAirSpeedProvider);
+    _speedSystem = new(_configs, _inputSystem, _slopeSpeedProvider, _gravitySpeedProvider, _airToGroundSpeedProvider, _groundToAirSpeedProvider, _reboundSpeedProvider);
     _viewSystem = new(_configs, _inputSystem, _viewRotatorProvider);
 
     CanCollectRing = true;
@@ -114,9 +115,13 @@ public partial class SonicController
       .When(() => _groundInfoSystem.Previous.Side == GroundSide.Right, () => _isFallingOffWall ? default : WallToAirSpeedDelta + new Vector2(-_speedSystem.SpeedY, _speedSystem.SpeedX))
       .When(() => _groundInfoSystem.Previous.Side == GroundSide.Up, () => new Vector2(-_speedSystem.SpeedX, _isJumping ? Mathf.Min(0, -_speedSystem.SpeedY) : 0));
 
+    _reboundSpeedProvider
+      .When(() => !_isGrounded && ContactEnemyInfo?.IsHit == true, () => GetAirReboundSpeed());
+
     _gravitySpeedProvider.DefaultProvider = () => 0;
     _airToGroundSpeedProvider.DefaultProvider = () => new(_speedSystem.SpeedX, _speedSystem.SpeedY);
     _groundToAirSpeedProvider.DefaultProvider = () => new(_speedSystem.SpeedX, _speedSystem.SpeedY);
+    _reboundSpeedProvider.DefaultProvider = () => new(_speedSystem.SpeedX, _speedSystem.SpeedY);
   }
 
   private void InitializeSounds()
@@ -212,6 +217,17 @@ public partial class SonicController
     return _speedSystem.SpeedY > 0
       ? _configs.PhysicsModeConfig.GravityUpSpeed
       : _configs.PhysicsModeConfig.GravityDownSpeed;
+  }
+
+  public Vector2 GetAirReboundSpeed()
+  {
+    if (_speedSystem.SpeedY <= 0
+      && _speedSystem.SpeedY < ContactEnemyInfo.Value.Speed.y)
+    {
+      return new(_speedSystem.SpeedX, -_speedSystem.SpeedY);
+    }
+
+    return new(_speedSystem.SpeedX, _speedSystem.SpeedY - (Mathf.Sign(_speedSystem.SpeedY) / SpxPerUnit));
   }
 
   private PlayerInput GetPlayerInput()

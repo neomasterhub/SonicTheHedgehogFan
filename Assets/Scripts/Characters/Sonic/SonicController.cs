@@ -19,6 +19,7 @@ public partial class SonicController
   private readonly ConditionalValueProvider<float> _gravitySpeedProvider;
   private readonly ConditionalValueProvider<Vector2> _airToGroundSpeedProvider;
   private readonly ConditionalValueProvider<Vector2> _groundToAirSpeedProvider;
+  private readonly ConditionalValueProvider<Vector2> _reboundSpeedProvider;
   private readonly GroundInfoSystem _groundInfoSystem;
   private readonly PlayerInputSystem _inputSystem;
   private readonly PlayerViewRotatorProvider<SonicViewRotatorContext> _viewRotatorProvider;
@@ -118,7 +119,7 @@ public partial class SonicController
   public bool IsAttacking { get; private set; }
   public bool IsHit { get; set; }
   public bool IsHurt { get; set; }
-  public GameObject LastHitSource { get; set; }
+  public ContactEnemyInfo? ContactEnemyInfo { get; set; }
 
   // Look vertical direction provider
   public VerticalDirection LookVerticalDirection

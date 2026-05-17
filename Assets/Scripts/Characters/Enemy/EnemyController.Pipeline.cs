@@ -1,3 +1,5 @@
+using UnityEngine;
+
 /// <summary>
 /// Pipeline.
 /// </summary>
@@ -10,7 +12,13 @@ public partial class EnemyController
       return;
     }
 
+    BeginFrame();
     ApplyEffects();
+  }
+
+  private void BeginFrame()
+  {
+    _timerSystem.Update(Time.fixedDeltaTime);
   }
 
   private void ApplyEffects()

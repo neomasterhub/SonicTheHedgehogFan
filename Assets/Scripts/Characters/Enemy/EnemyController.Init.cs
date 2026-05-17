@@ -1,4 +1,5 @@
 using UnityEngine;
+using static EnemyConsts;
 
 /// <summary>
 /// Init.
@@ -7,20 +8,19 @@ public partial class EnemyController
 {
   public EnemyController()
   {
+    _isAlive = true;
+
+    _timerSystem = new();
+    _speedSystem = new();
+
     _effects = new();
     SetEffectPipeline();
   }
 
   private void Awake()
   {
-    _collider = GetComponent<BoxCollider2D>();
-    _spriteRenderer = GetComponent<SpriteRenderer>();
-
-    if (_otherEnemyObj != null)
-    {
-      _otherEnemy = _otherEnemyObj.GetComponent<IEnemy>();
-      _otherEnemyCollider = _otherEnemyObj.GetComponent<BoxCollider2D>();
-    }
+    InitializeComponents();
+    InitializeTimers();
   }
 
   public void Initialize(GameObject enemy)
@@ -30,5 +30,22 @@ public partial class EnemyController
     _otherEnemyCollider = _otherEnemyObj.GetComponent<BoxCollider2D>();
 
     _initialized = true;
+  }
+
+  private void InitializeComponents()
+  {
+    _collider = GetComponent<BoxCollider2D>();
+
+    if (_otherEnemyObj != null)
+    {
+      _otherEnemy = _otherEnemyObj.GetComponent<IEnemy>();
+      _otherEnemyCollider = _otherEnemyObj.GetComponent<BoxCollider2D>();
+    }
+  }
+
+  private void InitializeTimers()
+  {
+    _deadActiveTimer = new Timer(DeadActiveTimer)
+      .WhenCompleted(() => gameObject.SetActive(false));
   }
 }

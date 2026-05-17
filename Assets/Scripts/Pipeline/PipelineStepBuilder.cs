@@ -35,6 +35,6 @@ public class PipelineStepBuilder
 
   public PipelineStep Build()
   {
-    return new(_displayName, _condition, _action);
+    return new(_displayName, _condition ?? (() => true), _action);
   }
 }

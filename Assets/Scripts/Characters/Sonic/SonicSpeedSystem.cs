@@ -12,6 +12,7 @@ public class SonicSpeedSystem
   private readonly ConditionalValueProvider<float> _gravitySpeedProvider;
   private readonly ConditionalValueProvider<Vector2> _airToGroundSpeedProvider;
   private readonly ConditionalValueProvider<Vector2> _groundToAirSpeedProvider;
+  private readonly ConditionalValueProvider<Vector2> _reboundSpeedProvider;
 
   private bool _friction;
   private float _accSpeed;
@@ -29,7 +30,8 @@ public class SonicSpeedSystem
     ConditionalValueProvider<float> slopeSpeedProvider,
     ConditionalValueProvider<float> gravitySpeedProvider,
     ConditionalValueProvider<Vector2> airToGroundSpeedProvider,
-    ConditionalValueProvider<Vector2> groundToAirSpeedProvider)
+    ConditionalValueProvider<Vector2> groundToAirSpeedProvider,
+    ConditionalValueProvider<Vector2> reboundSpeedProvider)
   {
     _configs = configs;
     _inputSystem = inputSystem;
@@ -37,6 +39,7 @@ public class SonicSpeedSystem
     _gravitySpeedProvider = gravitySpeedProvider;
     _airToGroundSpeedProvider = airToGroundSpeedProvider;
     _groundToAirSpeedProvider = groundToAirSpeedProvider;
+    _reboundSpeedProvider = reboundSpeedProvider;
   }
 
   public bool IsSkidding { get; private set; }
@@ -137,6 +140,7 @@ public class SonicSpeedSystem
     SlopeSpeed = 0;
 
     SetSpeed_Airborne_FromGrounded();
+    SetSpeed_Airborne_Rebound();
     SetSpeed_Airborne_Gravity();
     SetSpeed_Airborne_PreventGroundOvershoot();
     SetSpeed_Airborne_Horizontal();
@@ -151,6 +155,13 @@ public class SonicSpeedSystem
       SpeedX = speed.x;
       SpeedY = speed.y;
     }
+  }
+
+  private void SetSpeed_Airborne_Rebound()
+  {
+    var speed = _reboundSpeedProvider.FirstTriggeredOrDefault();
+    SpeedX = speed.x;
+    SpeedY = speed.y;
   }
 
   private void SetSpeed_Airborne_Gravity()

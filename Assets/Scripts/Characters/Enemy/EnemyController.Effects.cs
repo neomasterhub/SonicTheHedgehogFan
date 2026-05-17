@@ -5,7 +5,25 @@ public partial class EnemyController
 {
   private void SetEffectPipeline()
   {
+    _effects.AddStep(CreateEffect_Intersected());
     _effects.AddStep(CreateEffect_Hit());
+    _effects.AddStep(CreateEffect_GettingHit());
+  }
+
+  private PipelineStep CreateEffect_Intersected()
+  {
+    return PipelineStepBuilder.Create()
+      .WithDisplayName("Intersected")
+      .WithAction(() =>
+      {
+        _otherEnemy.ContactEnemyInfo = null;
+
+        return _otherEnemy == null
+          || !_collider.bounds.Intersects(_otherEnemyCollider.bounds)
+          ? PipelineStepResult.Break
+          : PipelineStepResult.Continue;
+      })
+      .Build();
   }
 
   private PipelineStep CreateEffect_Hit()
@@ -13,16 +31,33 @@ public partial class EnemyController
     return PipelineStepBuilder.Create()
       .WithDisplayName("Hit")
       .WithCondition(() =>
-        _otherEnemy != null
+        _isAlive
         && !_otherEnemy.IsInvincible
         && !_otherEnemy.IsAttacking
-        && !_otherEnemy.IsHurt
-        && _collider.bounds.Intersects(_otherEnemyCollider.bounds))
+        && !_otherEnemy.IsHurt)
       .WithAction(() =>
       {
         _otherEnemy.IsHit = true;
         _otherEnemy.IsHurt = true;
-        _otherEnemy.LastHitSource = gameObject;
+        _otherEnemy.ContactEnemyInfo = new(false, gameObject.transform.position, new(_speedSystem.SpeedX, _speedSystem.SpeedY));
+
+        return PipelineStepResult.Break;
+      })
+      .Build();
+  }
+
+  private PipelineStep CreateEffect_GettingHit()
+  {
+    return PipelineStepBuilder.Create()
+      .WithDisplayName("Getting hit")
+      .WithCondition(() =>
+        _isAlive
+        && _otherEnemy.IsAttacking)
+      .WithAction(() =>
+      {
+        _isAlive = false;
+        _timerSystem.StartIfNotRunning(_deadActiveTimer);
+        _otherEnemy.ContactEnemyInfo = new(true, gameObject.transform.position, new(_speedSystem.SpeedX, _speedSystem.SpeedY));
 
         return PipelineStepResult.Break;
       })

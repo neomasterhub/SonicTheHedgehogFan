@@ -4,18 +4,22 @@ using UnityEngine;
 /// Data.
 /// </summary>
 [RequireComponent(typeof(BoxCollider2D))]
-[RequireComponent(typeof(SpriteRenderer))]
 public partial class EnemyController : MonoBehaviour
 {
   private readonly Pipeline _effects;
+  private readonly TimerSystem _timerSystem;
+  private readonly EnemySpeedSystem _speedSystem;
 
-  private IEnemy _otherEnemy;
   private BoxCollider2D _collider;
   private BoxCollider2D _otherEnemyCollider;
-  private SpriteRenderer _spriteRenderer;
+  private IEnemy _otherEnemy;
+  private Timer _deadActiveTimer;
 
   [SerializeField]
   private bool _initialized;
+  [SerializeField]
+  [InspectorLabel("Alive")]
+  private bool _isAlive;
   [SerializeField]
   [InspectorLabel("Other Enemy")]
   private GameObject _otherEnemyObj;
