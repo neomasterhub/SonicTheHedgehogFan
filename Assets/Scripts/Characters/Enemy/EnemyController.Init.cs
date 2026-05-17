@@ -6,12 +6,13 @@ using static EnemyConsts;
 /// </summary>
 public partial class EnemyController
 {
-  public EnemyController()
+  public EnemyController(ISpeedSystem speedSystem)
   {
+    _speedSystem = speedSystem;
+
     _isAlive = true;
 
     _timerSystem = new();
-    _speedSystem = new();
 
     _effects = new();
     SetEffectPipeline();
@@ -23,7 +24,7 @@ public partial class EnemyController
     InitializeTimers();
   }
 
-  public void Initialize(GameObject enemy)
+  protected virtual void Initialize(GameObject enemy)
   {
     _otherEnemyObj = enemy;
     _otherEnemy = _otherEnemyObj.GetComponent<IEnemy>();
@@ -32,7 +33,7 @@ public partial class EnemyController
     _initialized = true;
   }
 
-  private void InitializeComponents()
+  protected virtual void InitializeComponents()
   {
     _collider = GetComponent<BoxCollider2D>();
 
@@ -43,7 +44,7 @@ public partial class EnemyController
     }
   }
 
-  private void InitializeTimers()
+  protected virtual void InitializeTimers()
   {
     _deadActiveTimer = new Timer(DeadActiveTimer)
       .WhenCompleted(() => gameObject.SetActive(false));
