@@ -25,8 +25,7 @@ public static class SonicConsts
       Normal.TopSpeedPx / PxPerUnit,
       Normal.AirAccelerationSpeedSpx / SpxPerUnit,
       Normal.AirTopSpeedPx / PxPerUnit,
-      Normal.GravityDownSpeedSpx / SpxPerUnit,
-      Normal.GravityUpSpeedSpx / SpxPerUnit,
+      Normal.GravitySpeedSpx / SpxPerUnit,
       Normal.MaxFallSpeedPx / PxPerUnit,
       Normal.SlopeFactorSpx / SpxPerUnit,
       Normal.RollDecelerationSpeedSpx / SpxPerUnit,
@@ -53,8 +52,7 @@ public static class SonicConsts
       public const float TopSpeedPx = 6;
       public const float AirAccelerationSpeedSpx = 14;
       public const float AirTopSpeedPx = 6;
-      public const float GravityDownSpeedSpx = 56;
-      public const float GravityUpSpeedSpx = 16;
+      public const float GravitySpeedSpx = 56;
       public const float MaxFallSpeedPx = 16;
       public const float SlopeFactorSpx = 32;
       public const float RollDecelerationSpeedSpx = 32;
@@ -63,7 +61,7 @@ public static class SonicConsts
       public const float RollDownhillSlopeFactorSpx = 80;
       public const float RollMinWallSpeedSpx = 32;
       public const float RollMinCeilingSpeedSpx = 128;
-      public const float JumpSpeedPx = 3.8f;
+      public const float JumpSpeedPx = 6.5f;
       public const float JumpCutoffSpeedPx = 2;
       public const float HurtSpeedXPx = 2;
       public const float HurtSpeedYPx = 4;
