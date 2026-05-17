@@ -31,7 +31,7 @@ public partial class EnemyController
 
   private void ApplyMovement()
   {
-    _motor.Update(_motorContext);
+    _motor.SetSpeed(_motorContext);
   }
 
   private void UpdatePosition()

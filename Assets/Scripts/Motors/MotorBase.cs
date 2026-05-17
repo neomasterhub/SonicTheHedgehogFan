@@ -1,4 +1,6 @@
-public abstract class MotorBase : IMotor
+using UnityEngine;
+
+public abstract class MotorBase : MonoBehaviour, IMotor
 {
   public MotorState State { get; protected set; }
   public float SpeedX { get; protected set; }
@@ -14,5 +16,5 @@ public abstract class MotorBase : IMotor
     State = MotorState.Idle;
   }
 
-  public abstract void Update(MotorContext context);
+  public abstract void SetSpeed(MotorContext context);
 }
