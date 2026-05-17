@@ -211,12 +211,12 @@ public partial class SonicController
 
     if (_isDying)
     {
-      return _configs.PhysicsModeConfig.GravityDownSpeed;
+      return _configs.PhysicsModeConfig.GravitySpeed;
     }
 
     return _speedSystem.SpeedY > 0
       ? _configs.PhysicsModeConfig.GravityUpSpeed
-      : _configs.PhysicsModeConfig.GravityDownSpeed;
+      : _configs.PhysicsModeConfig.GravitySpeed;
   }
 
   public Vector2 GetAirReboundSpeed()

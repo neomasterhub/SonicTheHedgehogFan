@@ -1,6 +1,6 @@
 public class SonicPhysicsModeConfig
 {
-  public SonicPhysicsModeConfig(float accelerationSpeed, float decelerationSpeed, float minSkiddingSpeed, float frictionSpeed, float minWallSpeed, float minCeilingSpeed, float topSpeed, float airAccelerationSpeed, float airTopSpeed, float gravityDownSpeed, float gravityUpSpeed, float maxFallSpeed, float slopeFactor, float rollDecelerationSpeed, float rollFrictionSpeed, float rollUphillSlopeFactor, float rollDownhillSlopeFactor, float rollMinWallSpeed, float rollMinCeilingSpeed, float jumpSpeed, float jumpCutoffSpeed, float hurtSpeedX, float hurtSpeedY, float hurtGravitySpeed, float deathBounceSpeed)
+  public SonicPhysicsModeConfig(float accelerationSpeed, float decelerationSpeed, float minSkiddingSpeed, float frictionSpeed, float minWallSpeed, float minCeilingSpeed, float topSpeed, float airAccelerationSpeed, float airTopSpeed, float gravitySpeed, float maxFallSpeed, float slopeFactor, float rollDecelerationSpeed, float rollFrictionSpeed, float rollUphillSlopeFactor, float rollDownhillSlopeFactor, float rollMinWallSpeed, float rollMinCeilingSpeed, float jumpSpeed, float jumpCutoffSpeed, float hurtSpeedX, float hurtSpeedY, float hurtGravitySpeed, float deathBounceSpeed)
   {
     AccelerationSpeed = accelerationSpeed;
     DecelerationSpeed = decelerationSpeed;
@@ -11,8 +11,7 @@ public class SonicPhysicsModeConfig
     TopSpeed = topSpeed;
     AirAccelerationSpeed = airAccelerationSpeed;
     AirTopSpeed = airTopSpeed;
-    GravityDownSpeed = gravityDownSpeed;
-    GravityUpSpeed = gravityUpSpeed;
+    GravitySpeed = gravitySpeed;
     MaxFallSpeed = maxFallSpeed;
     SlopeFactor = slopeFactor;
     RollDecelerationSpeed = rollDecelerationSpeed;
@@ -38,8 +37,7 @@ public class SonicPhysicsModeConfig
   public float TopSpeed { get; }
   public float AirAccelerationSpeed { get; }
   public float AirTopSpeed { get; }
-  public float GravityDownSpeed { get; }
-  public float GravityUpSpeed { get; }
+  public float GravitySpeed { get; }
   public float MaxFallSpeed { get; }
   public float SlopeFactor { get; }
   public float RollDecelerationSpeed { get; }
