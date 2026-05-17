@@ -4,7 +4,7 @@
 public partial class MotobugController
 {
   public MotobugController()
-    : base()
+    : base(new MotobugSpeedSystem())
   {
     _viewSystem = new();
   }

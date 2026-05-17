@@ -6,12 +6,13 @@ using static EnemyConsts;
 /// </summary>
 public partial class EnemyController
 {
-  public EnemyController()
+  public EnemyController(ISpeedSystem speedSystem)
   {
+    _speedSystem = speedSystem;
+
     _isAlive = true;
 
     _timerSystem = new();
-    _speedSystem = new();
 
     _effects = new();
     SetEffectPipeline();
