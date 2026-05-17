@@ -178,7 +178,6 @@ public partial class SonicController
       {
         _isDying = false;
         _isDead = true;
-        gameObject.SetActive(false);
       });
 
     _dpadLockTimer = new Timer(DpadUnlockTimer)
