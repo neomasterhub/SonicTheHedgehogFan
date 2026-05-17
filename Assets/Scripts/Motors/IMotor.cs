@@ -1,4 +1,4 @@
 public interface IMotor : ISpeedSystem
 {
-  void Move();
+  void Update(MotorContext context);
 }
