@@ -1,4 +1,5 @@
 using UnityEngine;
+using static SharedConsts.Physics;
 
 /// <summary>
 /// Pipeline.
@@ -35,6 +36,6 @@ public partial class EnemyController
 
   private void UpdatePosition()
   {
-    transform.position += new Vector3(_motor.SpeedX.Round(3), _motor.SpeedY.Round(3));
+    transform.position += new Vector3(_motor.SpeedX.Round(SpeedRoundingDigits), _motor.SpeedY.Round(SpeedRoundingDigits));
   }
 }
