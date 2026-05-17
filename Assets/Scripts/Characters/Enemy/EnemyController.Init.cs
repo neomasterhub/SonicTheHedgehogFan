@@ -24,7 +24,7 @@ public partial class EnemyController
     InitializeTimers();
   }
 
-  protected virtual void Initialize(GameObject enemy)
+  public void Initialize(GameObject enemy)
   {
     _otherEnemyObj = enemy;
     _otherEnemy = _otherEnemyObj.GetComponent<IEnemy>();
@@ -33,7 +33,7 @@ public partial class EnemyController
     _initialized = true;
   }
 
-  protected virtual void InitializeComponents()
+  private void InitializeComponents()
   {
     _collider = GetComponent<BoxCollider2D>();
 
@@ -44,7 +44,7 @@ public partial class EnemyController
     }
   }
 
-  protected virtual void InitializeTimers()
+  private void InitializeTimers()
   {
     _deadActiveTimer = new Timer(DeadActiveTimer)
       .WhenCompleted(() => gameObject.SetActive(false));

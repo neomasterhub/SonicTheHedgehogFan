@@ -4,23 +4,23 @@ using UnityEngine;
 /// Data.
 /// </summary>
 [RequireComponent(typeof(BoxCollider2D))]
-public abstract partial class EnemyController : MonoBehaviour
+public partial class EnemyController : MonoBehaviour
 {
-  protected readonly Pipeline _effects;
-  protected readonly TimerSystem _timerSystem;
-  protected readonly ISpeedSystem _speedSystem;
+  private readonly Pipeline _effects;
+  private readonly TimerSystem _timerSystem;
+  private readonly ISpeedSystem _speedSystem;
 
-  protected BoxCollider2D _collider;
-  protected BoxCollider2D _otherEnemyCollider;
-  protected IEnemy _otherEnemy;
-  protected Timer _deadActiveTimer;
+  private BoxCollider2D _collider;
+  private BoxCollider2D _otherEnemyCollider;
+  private IEnemy _otherEnemy;
+  private Timer _deadActiveTimer;
 
   [SerializeField]
-  protected bool _initialized;
+  private bool _initialized;
   [SerializeField]
   [InspectorLabel("Alive")]
-  protected bool _isAlive;
+  private bool _isAlive;
   [SerializeField]
   [InspectorLabel("Other Enemy")]
-  protected GameObject _otherEnemyObj;
+  private GameObject _otherEnemyObj;
 }
