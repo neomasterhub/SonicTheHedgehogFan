@@ -15,6 +15,7 @@ public partial class EnemyController
     BeginFrame();
     ApplyEffects();
     ApplyMovement();
+    UpdatePosition();
   }
 
   private void BeginFrame()
@@ -30,5 +31,10 @@ public partial class EnemyController
   private void ApplyMovement()
   {
     _motor.Move();
+  }
+
+  private void UpdatePosition()
+  {
+    transform.position += new Vector3(_motor.SpeedX.Round(3), _motor.SpeedY.Round(3));
   }
 }
