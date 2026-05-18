@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class MotorBase : MonoBehaviour, IMotor
+public abstract class MotorControllerBase : MonoBehaviour, IMotor
 {
   public MotorState State { get; protected set; }
   public float SpeedX { get; protected set; }
