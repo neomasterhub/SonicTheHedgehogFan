@@ -1,7 +1,12 @@
-public class GroundEnemyAIController : AIControllerBase<GroundEnemyAIContext>
+using UnityEngine;
+
+/// <summary>
+/// Data.
+/// </summary>
+public partial class GroundEnemyAIController : AIControllerBase<GroundEnemyAIContext>
 {
-  public GroundEnemyAIController()
-    : base()
-  {
-  }
+  [SerializeField]
+  private float _maxPositionX;
+  [SerializeField]
+  private float _minPositionX;
 }
