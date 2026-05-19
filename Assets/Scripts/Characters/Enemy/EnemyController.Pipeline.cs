@@ -31,11 +31,10 @@ public partial class EnemyController
 
   private void ApplyMovement()
   {
-    _motor.SetSpeed(_motorContext);
   }
 
   private void UpdatePosition()
   {
-    transform.position += new Vector3(_motor.SpeedX.Round(SpeedRoundingDigits), _motor.SpeedY.Round(SpeedRoundingDigits));
+    transform.position += new Vector3(0f.Round(SpeedRoundingDigits), 0f.Round(SpeedRoundingDigits));
   }
 }

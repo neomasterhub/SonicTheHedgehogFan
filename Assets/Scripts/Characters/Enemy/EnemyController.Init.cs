@@ -33,7 +33,6 @@ public partial class EnemyController
 
   private void InitializeComponents()
   {
-    _motor = GetComponent<IMotor>();
     _collider = GetComponent<BoxCollider2D>();
 
     if (_otherEnemyObj != null)
