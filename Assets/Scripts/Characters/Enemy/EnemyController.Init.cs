@@ -9,7 +9,7 @@ public partial class EnemyController
   public EnemyController()
   {
     _isAlive = true;
-
+    _drawGizmos = () => { };
     _timerSystem = new();
 
     _effects = new();
@@ -43,6 +43,11 @@ public partial class EnemyController
       _ => throw _sensorSystemType.ArgumentOutOfRangeException(),
     };
     _sensorSystem.SetNext(_ai);
+
+    _drawGizmos = () =>
+    {
+      _sensorSystem.Draw();
+    };
 
     if (_otherEnemyObj != null)
     {

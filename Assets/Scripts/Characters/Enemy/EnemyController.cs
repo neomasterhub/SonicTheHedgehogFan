@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -11,6 +12,7 @@ public partial class EnemyController : MonoBehaviour
   private readonly Pipeline _effects;
   private readonly TimerSystem _timerSystem;
 
+  private Action _drawGizmos;
   private BoxCollider2D _collider;
   private BoxCollider2D _otherEnemyCollider;
   private IEnemy _otherEnemy;
