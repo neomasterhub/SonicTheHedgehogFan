@@ -14,6 +14,7 @@ public partial class EnemyController
     }
 
     BeginFrame();
+    AnalyzeEnvironment();
     ApplyEffects();
     ApplyMovement();
     UpdatePosition();
@@ -22,6 +23,11 @@ public partial class EnemyController
   private void BeginFrame()
   {
     _timerSystem.Update(Time.fixedDeltaTime);
+  }
+
+  private void AnalyzeEnvironment()
+  {
+    _sensorSystem.UpdateNext();
   }
 
   private void ApplyEffects()
