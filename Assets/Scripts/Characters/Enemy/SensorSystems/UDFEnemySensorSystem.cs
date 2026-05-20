@@ -21,6 +21,11 @@ public class UDFEnemySensorSystem : IEnemySensorSystem
     _o.FrontRay.Direction = context.HorizontalDirection ? Vector2.right : Vector2.left;
   }
 
+  public void Draw()
+  {
+    _o.Draw();
+  }
+
   public void Apply()
   {
     DetectWall(GroundLayer);
