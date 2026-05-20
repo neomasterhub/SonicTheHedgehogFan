@@ -16,11 +16,6 @@ public abstract class AIControllerBase<TAIContext>
 
   public Pipeline Effects { get; }
 
-  private void Update()
-  {
-    Effects.Run(false);
-  }
-
   public void SetContext(TAIContext context)
   {
     _context = context;
