@@ -6,7 +6,7 @@ using static EnemyConsts.Physics;
 public partial class GroundEnemyAIController
 {
   public GroundEnemyAIController()
-    : base()
+    : base(EnemyAIType.Ground)
   {
     SetEffectPipeline();
   }

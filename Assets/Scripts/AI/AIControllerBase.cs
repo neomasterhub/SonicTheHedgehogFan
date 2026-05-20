@@ -9,13 +9,6 @@ public abstract class AIControllerBase<TAIContext>
   [SerializeField]
   protected bool _initialized;
 
-  protected AIControllerBase()
-  {
-    Effects = new();
-  }
-
-  public Pipeline Effects { get; }
-
   public void SetContext(TAIContext context)
   {
     _context = context;

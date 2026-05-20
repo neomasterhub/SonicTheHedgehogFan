@@ -35,6 +35,7 @@ public partial class EnemyController
   private void ApplyEffects()
   {
     _effects.Run(false);
+    _ai.Effects.Run(false);
   }
 
   private void ApplyMovement()
