@@ -27,6 +27,7 @@ public partial class EnemyController
 
   private void AnalyzeEnvironment()
   {
+    _sensorSystem.Apply();
     _sensorSystem.UpdateNext();
   }
 
