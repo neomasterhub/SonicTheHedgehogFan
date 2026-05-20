@@ -10,14 +10,15 @@ public class UDFEnemySensorSystem : IEnemySensorSystem
   private WallDetectionResult? _wall;
   private GroundDetectionResult? _ground;
 
-  public UDFEnemySensorSystem(Vector2 parentPosition)
+  public UDFEnemySensorSystem(EnemySensorContext context)
   {
-    _o = new(Color.red, parentPosition, Vector2.up, Vector2.down, Vector2.right);
+    _o = new(Color.red, context.ParentPosition, Vector2.up, Vector2.down, context.HorizontalDirection ? Vector2.right : Vector2.left);
   }
 
   public void Update(EnemySensorContext context)
   {
     _o.SetParentPosition(context.ParentPosition);
+    _o.FrontRay.Direction = context.HorizontalDirection ? Vector2.right : Vector2.left;
   }
 
   public void Apply()

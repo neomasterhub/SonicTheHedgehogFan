@@ -35,6 +35,7 @@ public partial class EnemyController
   {
     _ai = GetComponent<IEnemyAI>();
     _collider = GetComponent<BoxCollider2D>();
+    _spriteRenderer = GetComponent<SpriteRenderer>();
     _sensorSystem = GetComponent<IEnemySensorSystem>();
 
     if (_otherEnemyObj != null)

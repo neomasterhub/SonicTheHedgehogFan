@@ -6,6 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(IEnemyAI))]
 [RequireComponent(typeof(IEnemySensorSystem))]
+[RequireComponent(typeof(SpriteRenderer))]
 public partial class EnemyController : MonoBehaviour
 {
   private readonly Pipeline _effects;
@@ -16,6 +17,7 @@ public partial class EnemyController : MonoBehaviour
   private IEnemy _otherEnemy;
   private IEnemyAI _ai;
   private IEnemySensorSystem _sensorSystem;
+  private SpriteRenderer _spriteRenderer;
   private Timer _deadActiveTimer;
 
   [SerializeField]
