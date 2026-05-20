@@ -11,4 +11,6 @@ public partial class GroundEnemyAIController
   private float _maxPositionX;
   [SerializeField]
   private float _minPositionX;
+
+  public EnemyAIType Type => EnemyAIType.Ground;
 }
