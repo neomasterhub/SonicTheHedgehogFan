@@ -44,6 +44,6 @@ public partial class EnemyController
 
   private void UpdatePosition()
   {
-    transform.position += new Vector3(0f.Round(SpeedRoundingDigits), 0f.Round(SpeedRoundingDigits));
+    transform.position += new Vector3(0f.Round(PositionRoundingDigits), 0f.Round(PositionRoundingDigits));
   }
 }
