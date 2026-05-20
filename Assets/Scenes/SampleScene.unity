@@ -2623,12 +2623,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 151653049}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9dad1e5142fc4a444959ed70ace317af, type: 3}
+  m_Script: {fileID: 11500000, guid: 782aa1b443acada449f91412331aee82, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MotobugController
-  _initialized: 1
-  _isAlive: 1
-  _otherEnemyObj: {fileID: 710850496}
+  m_EditorClassIdentifier: Assembly-CSharp::GroundEnemyAIController
+  _initialized: 0
+  _maxPositionX: 0
+  _minPositionX: 0
 --- !u!1 &262485117
 GameObject:
   m_ObjectHideFlags: 0
@@ -2982,10 +2982,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
+    x: -0.25
+    y: -0.25
+    width: 0.5
+    height: 0.5
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 34
