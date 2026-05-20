@@ -7,9 +7,8 @@ public class UDFEnemySensorSystem : IEnemySensorSystem
   private readonly UDFSensor _o;
 
   private Action _updateNext;
+  private WallDetectionResult? _wall;
   private GroundDetectionResult? _ground;
-  private WallDetectionResult? _leftWall;
-  private WallDetectionResult? _rightWall;
 
   public UDFEnemySensorSystem(Vector2 parentPosition)
   {
@@ -23,6 +22,7 @@ public class UDFEnemySensorSystem : IEnemySensorSystem
 
   public void Apply()
   {
+    DetectWall(GroundLayer);
     DetectGround(GroundLayer);
   }
 
@@ -47,6 +47,14 @@ public class UDFEnemySensorSystem : IEnemySensorSystem
   public void UpdateNext()
   {
     _updateNext();
+  }
+
+  private void DetectWall(LayerMask groundLayer)
+  {
+    var hit = _o.FrontRay.Cast(groundLayer);
+    _wall = hit == null
+      ? null
+      : new(hit.Value.distance, Vector2.SignedAngle(-_o.FrontRay.Direction, hit.Value.normal).Round());
   }
 
   private void DetectGround(LayerMask groundLayer)
