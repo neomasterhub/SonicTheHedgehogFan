@@ -5,7 +5,6 @@ using UnityEngine;
 /// </summary>
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(IEnemyAI))]
-[RequireComponent(typeof(IEnemySensorSystem))]
 [RequireComponent(typeof(SpriteRenderer))]
 public partial class EnemyController : MonoBehaviour
 {
@@ -28,4 +27,7 @@ public partial class EnemyController : MonoBehaviour
   [SerializeField]
   [InspectorLabel("Other Enemy")]
   private GameObject _otherEnemyObj;
+  [SerializeField]
+  [InspectorLabel("Sensor System")]
+  private EnemySensorSystemType _sensorSystemType;
 }

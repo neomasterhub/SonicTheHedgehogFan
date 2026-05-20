@@ -36,7 +36,12 @@ public partial class EnemyController
     _ai = GetComponent<IEnemyAI>();
     _collider = GetComponent<BoxCollider2D>();
     _spriteRenderer = GetComponent<SpriteRenderer>();
-    _sensorSystem = GetComponent<IEnemySensorSystem>();
+
+    _sensorSystem = _sensorSystemType switch
+    {
+      EnemySensorSystemType.UFD => new UDFEnemySensorSystem(new(!_spriteRenderer.flipX, transform.position)),
+      _ => throw _sensorSystemType.ArgumentOutOfRangeException(),
+    };
 
     if (_otherEnemyObj != null)
     {
