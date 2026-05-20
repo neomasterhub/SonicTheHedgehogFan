@@ -1,4 +1,6 @@
 using System;
+using UnityEngine;
+using static SharedConsts.Physics;
 
 public class UDFEnemySensorSystem : IEnemySensorSystem
 {
@@ -21,6 +23,7 @@ public class UDFEnemySensorSystem : IEnemySensorSystem
 
   public void Apply()
   {
+    DetectGround(GroundLayer);
   }
 
   public void SetNext(IEnemyAI next)
@@ -44,5 +47,24 @@ public class UDFEnemySensorSystem : IEnemySensorSystem
   public void UpdateNext()
   {
     _updateNext();
+  }
+
+  private void DetectGround(LayerMask groundLayer)
+  {
+    var hit = _o.DownRay.Cast(groundLayer);
+    if (hit != null)
+    {
+      _ground = new(false, hit.Value, Vector2.down, VerticalRelation.Above);
+      return;
+    }
+
+    hit = _o.UpRay.Cast(groundLayer);
+    if (hit != null)
+    {
+      _ground = new(false, hit.Value, Vector2.up, VerticalRelation.Below);
+      return;
+    }
+
+    _ground = null;
   }
 }
