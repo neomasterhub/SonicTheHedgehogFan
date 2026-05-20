@@ -1,4 +1,4 @@
-public interface IMotor : ISpeedSystem
+public interface IMotor : IEnemySpeedSystem
 {
   MotorState State { get; }
   void Idle();
