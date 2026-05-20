@@ -42,6 +42,7 @@ public partial class EnemyController
       EnemySensorSystemType.UFD => new UDFEnemySensorSystem(new(!_spriteRenderer.flipX, transform.position)),
       _ => throw _sensorSystemType.ArgumentOutOfRangeException(),
     };
+    _sensorSystem.SetNext(_ai);
 
     if (_otherEnemyObj != null)
     {
