@@ -2465,6 +2465,7 @@ GameObject:
   - component: {fileID: 151653052}
   - component: {fileID: 151653053}
   - component: {fileID: 151653054}
+  - component: {fileID: 151653055}
   m_Layer: 0
   m_Name: Motobug
   m_TagString: Untagged
@@ -2629,6 +2630,22 @@ MonoBehaviour:
   _initialized: 0
   _maxPositionX: 0
   _minPositionX: 0
+--- !u!114 &151653055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 151653049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66a4a497b0e83c24e8fbee624b05600f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyController
+  _initialized: 1
+  _isAlive: 1
+  _otherEnemyObj: {fileID: 710850496}
+  _sensorSystemType: 0
 --- !u!1 &262485117
 GameObject:
   m_ObjectHideFlags: 0
