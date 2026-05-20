@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using static EnemyConsts.Physics;
 using static SharedConsts.Physics;
 
 public class UDFEnemySensorSystem : IEnemySensorSystem
@@ -13,6 +14,9 @@ public class UDFEnemySensorSystem : IEnemySensorSystem
   public UDFEnemySensorSystem(EnemySensorContext context)
   {
     _o = new(Color.red, context.ParentPosition, Vector2.up, Vector2.down, context.HorizontalDirection ? Vector2.right : Vector2.left);
+    _o.UpRay.Length = UDFLengths.x;
+    _o.DownRay.Length = UDFLengths.y;
+    _o.FrontRay.Length = UDFLengths.z;
   }
 
   public void Update(EnemySensorContext context)
