@@ -1,4 +1,5 @@
 using static EnemyConsts.Physics;
+using static SharedConsts.Physics;
 
 /// <summary>
 /// Init.
@@ -15,8 +16,8 @@ public partial class GroundEnemyAIController
   {
     if (_minPositionX == 0 && _maxPositionX == 0)
     {
-      _minPositionX = transform.position.x - DefaultPatrolRadius;
-      _maxPositionX = transform.position.x + DefaultPatrolRadius;
+      _minPositionX = (transform.position.x - DefaultPatrolRadius).Round(PositionRoundingDigits);
+      _maxPositionX = (transform.position.x + DefaultPatrolRadius).Round(PositionRoundingDigits);
     }
   }
 }
