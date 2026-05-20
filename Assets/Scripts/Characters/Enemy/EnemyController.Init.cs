@@ -39,7 +39,7 @@ public partial class EnemyController
 
     _sensorSystem = _sensorSystemType switch
     {
-      EnemySensorSystemType.UFD => new UDFEnemySensorSystem(new(!_spriteRenderer.flipX, transform.position)),
+      EnemySensorSystemType.UFD => new UDFEnemySensorSystemController(new(!_spriteRenderer.flipX, transform.position)),
       _ => throw _sensorSystemType.ArgumentOutOfRangeException(),
     };
     _sensorSystem.SetNext(_ai);

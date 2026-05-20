@@ -3,7 +3,7 @@ using UnityEngine;
 using static EnemyConsts.Physics;
 using static SharedConsts.Physics;
 
-public class UDFEnemySensorSystem : IEnemySensorSystem
+public class UDFEnemySensorSystemController : IEnemySensorSystem
 {
   private readonly UDFSensor _o;
 
@@ -11,7 +11,7 @@ public class UDFEnemySensorSystem : IEnemySensorSystem
   private WallDetectionResult? _wall;
   private GroundDetectionResult? _ground;
 
-  public UDFEnemySensorSystem(EnemySensorContext context)
+  public UDFEnemySensorSystemController(EnemySensorContext context)
   {
     _o = new(Color.red, context.ParentPosition, Vector2.up, Vector2.down, context.HorizontalDirection ? Vector2.right : Vector2.left);
     _o.UpRay.Length = UDFLengths.x;
@@ -19,7 +19,7 @@ public class UDFEnemySensorSystem : IEnemySensorSystem
     _o.FrontRay.Length = UDFLengths.z;
   }
 
-  public void Update(EnemySensorContext context)
+  public void SetContext(EnemySensorContext context)
   {
     _o.SetParentPosition(context.ParentPosition);
     _o.FrontRay.Direction = context.HorizontalDirection ? Vector2.right : Vector2.left;
