@@ -1,28 +1,18 @@
 using System;
 using UnityEngine;
-using static EnemyConsts.Physics;
 using static SharedConsts.Physics;
 
-public class UDFEnemySensorSystemController : IEnemySensorSystem
+/// <summary>
+/// Implementation.
+/// </summary>
+public partial class UDFEnemySensorSystemController
 {
-  private readonly UDFSensor _o;
+  public EnemySensorSystemType Type => EnemySensorSystemType.UFD;
 
-  private Action _updateNext;
-  private WallDetectionResult? _wall;
-  private GroundDetectionResult? _ground;
-
-  public UDFEnemySensorSystemController(EnemySensorContext context)
-  {
-    _o = new(Color.red, context.ParentPosition, Vector2.up, Vector2.down, context.HorizontalDirection ? Vector2.right : Vector2.left);
-    _o.UpRay.Length = UDFLengths.x;
-    _o.DownRay.Length = UDFLengths.y;
-    _o.FrontRay.Length = UDFLengths.z;
-  }
-
-  public void SetContext(EnemySensorContext context)
+  public void UpdateSystem(EnemySensorContext context)
   {
     _o.SetParentPosition(context.ParentPosition);
-    _o.FrontRay.Direction = context.HorizontalDirection ? Vector2.right : Vector2.left;
+    _o.FrontRay.Direction = _spriteRenderer.flipX ? Vector2.left : Vector2.right;
   }
 
   public void Draw()
@@ -62,6 +52,7 @@ public class UDFEnemySensorSystemController : IEnemySensorSystem
   private void DetectWall(LayerMask groundLayer)
   {
     var hit = _o.FrontRay.Cast(groundLayer);
+
     _wall = hit == null
       ? null
       : new(hit.Value.distance, Vector2.SignedAngle(-_o.FrontRay.Direction, hit.Value.normal).Round());

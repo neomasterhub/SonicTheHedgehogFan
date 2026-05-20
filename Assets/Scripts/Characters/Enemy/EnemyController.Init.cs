@@ -35,14 +35,8 @@ public partial class EnemyController
   {
     _ai = GetComponent<IEnemyAI>();
     _collider = GetComponent<BoxCollider2D>();
-    _spriteRenderer = GetComponent<SpriteRenderer>();
 
-    _sensorSystem = _sensorSystemType switch
-    {
-      EnemySensorSystemType.UFD => new UDFEnemySensorSystemController(new(!_spriteRenderer.flipX, transform.position)),
-      _ => throw _sensorSystemType.ArgumentOutOfRangeException(),
-    };
-    _sensorSystem.SetNext(_ai);
+    InitializeSystems();
 
     _drawGizmos = () =>
     {
@@ -54,6 +48,17 @@ public partial class EnemyController
       _otherEnemy = _otherEnemyObj.GetComponent<IEnemy>();
       _otherEnemyCollider = _otherEnemyObj.GetComponent<BoxCollider2D>();
     }
+  }
+
+  private void InitializeSystems()
+  {
+    var sensorSystem = GetComponent<IEnemySensorSystem>();
+    _sensorSystem = sensorSystem.Type switch
+    {
+      EnemySensorSystemType.UFD => (UDFEnemySensorSystemController)GetComponent<IEnemySensorSystem>(),
+      _ => throw sensorSystem.Type.ArgumentOutOfRangeException(),
+    };
+    _sensorSystem.SetNext(_ai);
   }
 
   private void InitializeTimers()

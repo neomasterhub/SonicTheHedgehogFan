@@ -1,6 +1,7 @@
 public interface IEnemySensorSystem : INextUpdater<IEnemyAI>
 {
-  void SetContext(EnemySensorContext context);
+  EnemySensorSystemType Type { get; }
+  void UpdateSystem(EnemySensorContext context);
   void Apply();
   void Draw();
 }

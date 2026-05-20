@@ -27,7 +27,7 @@ public partial class EnemyController
 
   private void AnalyzeEnvironment()
   {
-    _sensorSystem.SetContext(new(!_spriteRenderer.flipX, transform.position));
+    _sensorSystem.UpdateSystem(new(transform.position));
     _sensorSystem.Apply();
     _sensorSystem.UpdateNext();
   }
