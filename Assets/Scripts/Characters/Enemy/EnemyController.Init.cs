@@ -1,5 +1,5 @@
 using UnityEngine;
-using static EnemyConsts;
+using static EnemyConsts.Physics;
 
 /// <summary>
 /// Init.
