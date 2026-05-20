@@ -1,4 +1,5 @@
 public static class EnemyConsts
 {
-  public static float DeadActiveTimer = 1;
+  public const float DeadActiveTimer = 1;
+  public const float DefaultPatrolRadius = 10;
 }
