@@ -2,12 +2,12 @@ public abstract class EnemyAIControllerBase<TAIContext>
   : AIControllerBase<TAIContext>,
   IEnemyAI
 {
-  protected EnemyAIControllerBase(EnemyAIType type)
+  protected EnemyAIControllerBase(EnemyAISystemType type)
   {
     Type = type;
     Effects = new();
   }
 
-  public EnemyAIType Type { get; }
+  public EnemyAISystemType Type { get; }
   public Pipeline Effects { get; }
 }

@@ -30,7 +30,7 @@ public partial class UDFEnemySensorSystemController
   {
     switch (next.Type)
     {
-      case EnemyAIType.Ground:
+      case EnemyAISystemType.Ground:
 
         var ai = (GroundEnemyAIController)next;
         _updateNext = () =>

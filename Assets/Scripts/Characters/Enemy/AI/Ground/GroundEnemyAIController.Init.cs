@@ -7,7 +7,7 @@ using static SharedConsts.Physics;
 public partial class GroundEnemyAIController
 {
   public GroundEnemyAIController()
-    : base(EnemyAIType.Ground)
+    : base(EnemyAISystemType.Ground)
   {
     SetEffectPipeline();
   }
