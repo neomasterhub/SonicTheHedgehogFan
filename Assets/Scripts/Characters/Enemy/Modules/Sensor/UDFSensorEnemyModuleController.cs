@@ -3,6 +3,7 @@ using UnityEngine;
 /// <summary>
 /// Data.
 /// </summary>
+[RequireComponent(typeof(SpriteRenderer))]
 public partial class UDFSensorEnemyModuleController : EnemyModuleControllerBase
 {
   private UDFSensor _o;
