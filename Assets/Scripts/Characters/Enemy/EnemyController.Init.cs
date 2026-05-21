@@ -9,7 +9,6 @@ public partial class EnemyController
   public EnemyController()
   {
     _isAlive = true;
-    _drawGizmos = () => { };
     _timerSystem = new();
 
     _effects = new();
