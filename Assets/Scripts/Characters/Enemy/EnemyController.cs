@@ -15,8 +15,6 @@ public partial class EnemyController : MonoBehaviour
   private Timer _deadActiveTimer;
 
   [SerializeField]
-  private bool _initialized;
-  [SerializeField]
   [InspectorLabel("Alive")]
   private bool _isAlive;
   [SerializeField]
