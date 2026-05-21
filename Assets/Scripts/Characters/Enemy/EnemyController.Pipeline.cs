@@ -27,15 +27,11 @@ public partial class EnemyController
 
   private void AnalyzeEnvironment()
   {
-    _sensorSystem.UpdateSystem(new(transform.position));
-    _sensorSystem.Apply();
-    _sensorSystem.UpdateNext();
   }
 
   private void ApplyEffects()
   {
     _effects.Run(false);
-    _ai.Effects.Run(false);
   }
 
   private void ApplyMovement()
