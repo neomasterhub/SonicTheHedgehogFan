@@ -220,7 +220,7 @@ public partial class SonicController
   public Vector2 GetAirReboundSpeed()
   {
     if (_speedSystem.SpeedY <= 0
-      && _speedSystem.SpeedY < ContactEnemy.Value.Speed.y)
+      && _speedSystem.SpeedY < ContactEnemy.SpeedY)
     {
       return new(_speedSystem.SpeedX, -_speedSystem.SpeedY);
     }
