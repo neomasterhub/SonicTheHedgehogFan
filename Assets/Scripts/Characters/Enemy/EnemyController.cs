@@ -27,7 +27,7 @@ public partial class EnemyController : MonoBehaviour, IEnemy
   public bool IsHurt { get; set; }
   public float SpeedX { get; private set; }
   public float SpeedY { get; private set; }
-  public float PositionX { get; private set; }
-  public float PositionY { get; private set; }
+  public float PositionX => transform.position.x;
+  public float PositionY => transform.position.y;
   public IEnemy ContactEnemy { get; set; }
 }
