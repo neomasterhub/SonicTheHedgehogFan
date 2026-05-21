@@ -119,7 +119,7 @@ public partial class SonicController
   public bool IsAttacking { get; private set; }
   public bool IsHit { get; set; }
   public bool IsHurt { get; set; }
-  public ContactEnemyInfo? ContactEnemyInfo { get; set; }
+  public ContactEnemyInfo? ContactEnemy { get; set; }
 
   // Look vertical direction provider
   public VerticalDirection LookVerticalDirection

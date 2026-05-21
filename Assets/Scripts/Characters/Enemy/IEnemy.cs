@@ -8,5 +8,5 @@ public interface IEnemy
   float SpeedY { get; }
   float PositionX { get; }
   float PositionY { get; }
-  ContactEnemyInfo? ContactEnemyInfo { get; set; }
+  IEnemy ContactEnemy { get; set; }
 }

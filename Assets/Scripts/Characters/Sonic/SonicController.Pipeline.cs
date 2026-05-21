@@ -235,9 +235,9 @@ public partial class SonicController
       return 1;
     }
 
-    return ContactEnemyInfo == null
+    return ContactEnemy == null
       ? 0
-      : Mathf.Sign(transform.position.x - ContactEnemyInfo.Value.Position.x);
+      : Mathf.Sign(transform.position.x - ContactEnemy.Value.Position.x);
   }
 
   private float GetSlopeFactor(SonicPhysicsModeConfig config)
