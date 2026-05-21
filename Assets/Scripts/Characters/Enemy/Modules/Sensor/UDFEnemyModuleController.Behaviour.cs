@@ -8,8 +8,15 @@ public partial class UDFEnemyModuleController
 {
   public override void Apply()
   {
+    UpdateSensorSystem();
     DetectWall(GroundLayer);
     DetectGround(GroundLayer);
+  }
+
+  private void UpdateSensorSystem()
+  {
+    _o.SetParentPosition(transform.position);
+    _o.FrontRay.Direction = _spriteRenderer.flipX ? Vector2.left : Vector2.right;
   }
 
   private void DetectWall(LayerMask groundLayer)
