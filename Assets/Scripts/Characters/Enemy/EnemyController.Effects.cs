@@ -39,7 +39,7 @@ public partial class EnemyController
       {
         _otherEnemy.IsHit = true;
         _otherEnemy.IsHurt = true;
-        _otherEnemy.ContactEnemy = new(false, gameObject.transform.position, new(0, 0));
+        _otherEnemy.ContactEnemy = this;
 
         return PipelineStepResult.Break;
       })
@@ -57,7 +57,7 @@ public partial class EnemyController
       {
         _isAlive = false;
         _timerSystem.StartIfNotRunning(_deadActiveTimer);
-        _otherEnemy.ContactEnemy = new(true, gameObject.transform.position, new(0, 0));
+        _otherEnemy.ContactEnemy = this;
 
         return PipelineStepResult.Break;
       })
