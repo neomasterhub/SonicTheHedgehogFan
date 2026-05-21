@@ -4,5 +4,9 @@ public interface IEnemy
   bool IsAttacking { get; }
   bool IsHit { get; set; }
   bool IsHurt { get; set; }
+  float SpeedX { get; }
+  float SpeedY { get; }
+  float PositionX { get; }
+  float PositionY { get; }
   ContactEnemyInfo? ContactEnemyInfo { get; set; }
 }
