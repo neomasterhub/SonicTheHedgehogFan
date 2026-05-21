@@ -16,7 +16,7 @@ public partial class UDFEnemyModuleController
   {
     var hit = _o.FrontRay.Cast(groundLayer);
 
-    _wall = hit == null
+    _context.Wall = hit == null
       ? null
       : new(hit.Value.distance, Vector2.SignedAngle(-_o.FrontRay.Direction, hit.Value.normal).Round());
   }
@@ -26,17 +26,17 @@ public partial class UDFEnemyModuleController
     var hit = _o.DownRay.Cast(groundLayer);
     if (hit != null)
     {
-      _ground = new(false, hit.Value, Vector2.down, VerticalRelation.Above);
+      _context.Ground = new(false, hit.Value, Vector2.down, VerticalRelation.Above);
       return;
     }
 
     hit = _o.UpRay.Cast(groundLayer);
     if (hit != null)
     {
-      _ground = new(false, hit.Value, Vector2.up, VerticalRelation.Below);
+      _context.Ground = new(false, hit.Value, Vector2.up, VerticalRelation.Below);
       return;
     }
 
-    _ground = null;
+    _context.Ground = null;
   }
 }
