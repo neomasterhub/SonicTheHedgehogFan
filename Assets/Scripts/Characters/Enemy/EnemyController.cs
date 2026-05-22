@@ -4,7 +4,9 @@ using UnityEngine;
 /// Data.
 /// </summary>
 [RequireComponent(typeof(BoxCollider2D))]
-public partial class EnemyController : MonoBehaviour, IEnemy
+public partial class EnemyController
+  : MonoBehaviour,
+  IEnemyContext
 {
   private readonly Pipeline _effects;
   private readonly TimerSystem _timerSystem;
@@ -31,4 +33,8 @@ public partial class EnemyController : MonoBehaviour, IEnemy
   public float PositionX => transform.position.x;
   public float PositionY => transform.position.y;
   public IEnemy ContactEnemy { get; set; }
+  public bool IsStatic { get; set; }
+  public float AccelerationSpeed { get; set; }
+  public WallDetectionResult? Wall { get; set; }
+  public GroundDetectionResult? Ground { get; set; }
 }
