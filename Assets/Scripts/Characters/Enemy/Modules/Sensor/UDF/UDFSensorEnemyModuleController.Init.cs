@@ -1,5 +1,4 @@
 using UnityEngine;
-using static EnemyConsts.Physics;
 
 /// <summary>
 /// Init.
@@ -13,8 +12,8 @@ public partial class UDFSensorEnemyModuleController
     _spriteRenderer = GetComponent<SpriteRenderer>();
 
     _o = new(Color.red, _position, Vector2.up, Vector2.down, _spriteRenderer.flipX ? Vector2.left : Vector2.right);
-    _o.UpRay.Length = UDFLengths.x;
-    _o.DownRay.Length = UDFLengths.y;
-    _o.FrontRay.Length = UDFLengths.z;
+    _o.UpRay.Length = _udfLengths.x;
+    _o.DownRay.Length = _udfLengths.y;
+    _o.FrontRay.Length = _udfLengths.z;
   }
 }

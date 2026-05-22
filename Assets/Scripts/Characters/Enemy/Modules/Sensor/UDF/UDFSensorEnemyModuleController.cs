@@ -12,4 +12,6 @@ public partial class UDFSensorEnemyModuleController
 
   [SerializeField]
   private Vector2 _position;
+  [SerializeField]
+  private Vector3 _udfLengths;
 }
