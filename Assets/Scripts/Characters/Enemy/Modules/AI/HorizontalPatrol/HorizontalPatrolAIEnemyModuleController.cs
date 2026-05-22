@@ -6,8 +6,15 @@ using UnityEngine;
 public partial class HorizontalPatrolAIEnemyModuleController
   : AIEnemyModuleControllerBase
 {
+  private readonly TimerSystem _timerSystem;
+
+  private bool _isStopped;
+  private Timer _stopTimer;
+
   [SerializeField]
   private float _speed;
+  [SerializeField]
+  private float _stopDuration;
   [SerializeField]
   private float _minPositionX;
   [SerializeField]

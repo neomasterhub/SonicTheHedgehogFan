@@ -13,11 +13,13 @@ public partial class HorizontalPatrolAIEnemyModuleController
     return PipelineStepBuilder.Create()
       .WithDisplayName("Stop")
       .WithCondition(() =>
-        !_context.IsStatic
+        !_isStopped
         && (transform.position.x <= _minPositionX
         || transform.position.x >= _maxPositionX))
       .WithAction(() =>
       {
+        _isStopped = true;
+        _timerSystem.StartIfNotRunning(_stopTimer);
         _context.IsStatic = true;
 
         return PipelineStepResult.Break;
