@@ -4,7 +4,7 @@ using static EnemyConsts.Physics;
 /// <summary>
 /// Init.
 /// </summary>
-public partial class UDFSensorEnemyModuleController : EnemyModuleControllerBase
+public partial class UDFSensorEnemyModuleController
 {
   public override void Initialize(IEnemyContext context)
   {
