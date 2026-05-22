@@ -24,7 +24,7 @@ public partial class HorizontalPatrolAIEnemyModuleController
         _timerSystem.StartIfNotRunning(_stopTimer);
 
         _context.IsStatic = true;
-        _context.Speed = 0;
+        _context.AccelerationSpeed = 0;
 
         return PipelineStepResult.Break;
       })
@@ -41,7 +41,7 @@ public partial class HorizontalPatrolAIEnemyModuleController
       .WithAction(() =>
       {
         _context.IsStatic = false;
-        _context.Speed = _speed;
+        _context.AccelerationSpeed = _speed;
 
         return PipelineStepResult.Break;
       })
