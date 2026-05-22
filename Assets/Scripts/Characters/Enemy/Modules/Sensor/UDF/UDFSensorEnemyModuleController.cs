@@ -4,7 +4,8 @@ using UnityEngine;
 /// Data.
 /// </summary>
 [RequireComponent(typeof(SpriteRenderer))]
-public partial class UDFSensorEnemyModuleController : EnemyModuleControllerBase
+public partial class UDFSensorEnemyModuleController
+  : EnemyModuleControllerBase
 {
   private UDFSensor _o;
   private SpriteRenderer _spriteRenderer;
