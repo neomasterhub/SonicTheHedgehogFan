@@ -19,6 +19,7 @@ public partial class HorizontalPatrolAIEnemyModuleController
       .WithAction(() =>
       {
         _isStopped = true;
+        _speed = -_speed;
         _timerSystem.StartIfNotRunning(_stopTimer);
         _context.IsStatic = true;
 
