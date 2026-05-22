@@ -12,6 +12,7 @@ public partial class EnemyController : MonoBehaviour, IEnemy
   private BoxCollider2D _collider;
   private BoxCollider2D _otherEnemyCollider;
   private IEnemy _otherEnemy;
+  private IEnemyModule[] _modules;
   private Timer _deadActiveTimer;
 
   [SerializeField]

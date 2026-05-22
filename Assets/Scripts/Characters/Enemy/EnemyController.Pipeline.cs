@@ -7,17 +7,13 @@ public partial class EnemyController
 {
   private void FixedUpdate()
   {
-    BeginFrame();
-    ApplyEffects();
-  }
-
-  private void BeginFrame()
-  {
     _timerSystem.Update(Time.fixedDeltaTime);
-  }
 
-  private void ApplyEffects()
-  {
     _effects.Run(false);
+
+    for (var i = 0; i < _modules.Length; i++)
+    {
+      _modules[i].Apply();
+    }
   }
 }

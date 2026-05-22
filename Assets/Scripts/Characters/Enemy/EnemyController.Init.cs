@@ -24,6 +24,7 @@ public partial class EnemyController
   private void InitializeComponents()
   {
     _collider = GetComponent<BoxCollider2D>();
+    _modules = GetComponents<IEnemyModule>();
 
     if (_otherEnemyObj != null)
     {
