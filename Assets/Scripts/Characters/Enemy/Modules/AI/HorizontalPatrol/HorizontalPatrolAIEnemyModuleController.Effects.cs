@@ -15,7 +15,8 @@ public partial class HorizontalPatrolAIEnemyModuleController
       .WithDisplayName("Stop")
       .WithCondition(() =>
         !_isStopped
-        && (transform.position.x <= _minPositionX
+        && ((_context.Wall?.AngleDeg == 0)
+        || transform.position.x <= _minPositionX
         || transform.position.x >= _maxPositionX))
       .WithAction(() =>
       {
