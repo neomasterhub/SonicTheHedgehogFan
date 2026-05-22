@@ -1,10 +1,7 @@
-using UnityEngine;
-
 /// <summary>
 /// Data.
 /// </summary>
 public partial class HorizontalPatrolAIEnemyModuleController
-  : AIEnemyModuleControllerBase
 {
   [SerializeField]
   private float _minPositionX;
