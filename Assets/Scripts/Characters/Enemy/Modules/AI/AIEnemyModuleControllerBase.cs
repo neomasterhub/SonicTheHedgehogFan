@@ -1,7 +1,7 @@
 public abstract class AIEnemyModuleControllerBase
   : EnemyModuleControllerBase
 {
-  private readonly Pipeline _effects;
+  protected readonly Pipeline _effects;
 
   protected AIEnemyModuleControllerBase()
   {
