@@ -7,7 +7,7 @@ public abstract class EnemyModuleControllerBase
 {
   protected IEnemyContext _context;
 
-  protected virtual void Awake()
+  private void Awake()
   {
     Initialize(GetComponent<IEnemyContext>());
   }

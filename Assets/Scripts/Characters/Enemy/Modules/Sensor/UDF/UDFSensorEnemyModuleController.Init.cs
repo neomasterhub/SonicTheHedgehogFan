@@ -6,9 +6,9 @@ using static EnemyConsts.Physics;
 /// </summary>
 public partial class UDFSensorEnemyModuleController : EnemyModuleControllerBase
 {
-  protected override void Awake()
+  public override void Initialize(IEnemyContext context)
   {
-    base.Awake();
+    base.Initialize(context);
 
     _spriteRenderer = GetComponent<SpriteRenderer>();
 
