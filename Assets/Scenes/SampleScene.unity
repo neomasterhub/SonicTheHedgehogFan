@@ -2541,7 +2541,7 @@ Transform:
   m_GameObject: {fileID: 151653049}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 19.63, y: 11.35, z: 0}
+  m_LocalPosition: {x: 22.09, y: 9.91, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2643,6 +2643,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ABSensorEnemyModuleController
   _position: {x: 0, y: -0.3}
   _abDistance: 0.4
+  _wallClearance: 0
 --- !u!1 &262485117
 GameObject:
   m_ObjectHideFlags: 0
@@ -3004,7 +3005,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 3
+  orthographic size: 2.8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

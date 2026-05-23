@@ -215,6 +215,7 @@ public partial class SonicController
     _takeLeftHit = false;
     _takeRightHit = false;
     IsHit = false;
+    ContactEnemy = null;
   }
 
   private void SetSizes(SonicSizeMode sizeMode)
