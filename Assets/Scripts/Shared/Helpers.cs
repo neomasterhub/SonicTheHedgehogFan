@@ -82,22 +82,22 @@ public static class Helpers
 
       if (ur1Hit != null)
       {
-        return new(!horizontalDirection, ur1Hit.Value, ur1.Direction, VerticalRelation.Below, IsBalancing(groundLayer));
+        return new(!horizontalDirection, ur1Hit.Value, ur1.Direction, VerticalRelation.Below, checkBalancing());
       }
 
       if (ur2Hit != null)
       {
-        return new(horizontalDirection, ur2Hit.Value, ur2.Direction, VerticalRelation.Below, IsBalancing(groundLayer));
+        return new(horizontalDirection, ur2Hit.Value, ur2.Direction, VerticalRelation.Below, checkBalancing());
       }
 
       if (dr1Hit != null)
       {
-        return new(!horizontalDirection, dr1Hit.Value, dr1.Direction, VerticalRelation.Above, IsBalancing(groundLayer));
+        return new(!horizontalDirection, dr1Hit.Value, dr1.Direction, VerticalRelation.Above, checkBalancing());
       }
 
       if (dr2Hit != null)
       {
-        return new(horizontalDirection, dr2Hit.Value, dr2.Direction, VerticalRelation.Above, IsBalancing(groundLayer));
+        return new(horizontalDirection, dr2Hit.Value, dr2.Direction, VerticalRelation.Above, checkBalancing());
       }
 
       return null;
