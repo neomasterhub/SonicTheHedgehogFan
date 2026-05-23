@@ -8,12 +8,12 @@ public partial class HorizontalPatrolAIEnemyModuleController
 {
   private bool _isStopped;
   private float _speed;
-  private Timer _stopTimer;
+  private Timer _stoppedTimer;
 
   [SerializeField]
   private float _speedSpx;
   [SerializeField]
-  private float _stopDuration;
+  private float _stopTimer;
   [SerializeField]
   private float _minPositionX;
   [SerializeField]
