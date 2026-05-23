@@ -34,7 +34,7 @@ public partial class GroundSpeedEnemyModuleController
   private void SetSpeed_Grounded()
   {
     var angleRad = _context.Ground.Value.AngleRad;
-    _context.SpeedX = _context.AccelerationSpeed * MathF.Cos(angleRad);
-    _context.SpeedY = _context.AccelerationSpeed * MathF.Sin(angleRad);
+    _context.SpeedX = _context.Speed * MathF.Cos(angleRad);
+    _context.SpeedY = _context.Speed * MathF.Sin(angleRad);
   }
 }
