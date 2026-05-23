@@ -12,11 +12,6 @@ public partial class GroundSpeedEnemyModuleController
 
   private void SetSpeed()
   {
-    if (_context.IsStatic)
-    {
-      return;
-    }
-
     if (_context.Ground == null)
     {
       SetSpeed_Airborne();
@@ -29,6 +24,8 @@ public partial class GroundSpeedEnemyModuleController
 
   private void SetSpeed_Airborne()
   {
+    _context.SpeedX = _context.Speed;
+    _context.SpeedY -= 0.01f;
   }
 
   private void SetSpeed_Grounded()
