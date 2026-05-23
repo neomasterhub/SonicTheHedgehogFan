@@ -17,7 +17,7 @@ public partial class EnemyController
       .WithAction(() =>
       {
         return _otherEnemy != null
-          || _collider.bounds.Intersects(_otherEnemyCollider.bounds)
+          && _collider.bounds.Intersects(_otherEnemyCollider.bounds)
           ? PipelineStepResult.Continue
           : PipelineStepResult.Break;
       })
