@@ -11,6 +11,7 @@ public partial class HorizontalPatrolAIEnemyModuleController
     : base()
   {
     _speedSpx = DefaultSpeedSpx;
+    _stopDuration = DefaultPatrolStopTimer;
 
     var x = transform.position.x.Round(PositionRoundingDigits);
     _minPositionX = x - DefaultPatrolRadius;
