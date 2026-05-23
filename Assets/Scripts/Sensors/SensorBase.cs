@@ -10,6 +10,12 @@ public abstract class SensorBase : ISensor
   public Vector2 LocalPosition { get; protected set; }
   public Vector2 ParentPosition { get; protected set; }
 
+  public virtual void SetLocalPosition(Vector2 localPosition)
+  {
+    LocalPosition = localPosition;
+    Position = ParentPosition + localPosition;
+  }
+
   public virtual void SetParentPosition(Vector2 parentPosition)
   {
     ParentPosition = parentPosition;
