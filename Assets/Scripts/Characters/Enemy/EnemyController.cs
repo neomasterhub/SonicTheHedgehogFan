@@ -35,6 +35,7 @@ public partial class EnemyController
   public IEnemy ContactEnemy { get; set; }
   public bool IsStatic { get; set; }
   public float AccelerationSpeed { get; set; }
-  public WallDetectionResult? Wall { get; set; }
   public GroundDetectionResult? Ground { get; set; }
+  public WallDetectionResult? LeftWall { get; set; }
+  public WallDetectionResult? RightWall { get; set; }
 }
