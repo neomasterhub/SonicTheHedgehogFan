@@ -6,8 +6,6 @@ using UnityEngine;
 public partial class HorizontalPatrolAIEnemyModuleController
   : AIEnemyModuleControllerBase
 {
-  private readonly TimerSystem _timerSystem;
-
   private bool _isStopped;
   private Timer _stopTimer;
 

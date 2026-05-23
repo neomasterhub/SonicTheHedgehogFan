@@ -6,12 +6,6 @@ using static SharedConsts.Physics;
 /// </summary>
 public partial class HorizontalPatrolAIEnemyModuleController
 {
-  public HorizontalPatrolAIEnemyModuleController()
-    : base()
-  {
-    _timerSystem = new();
-  }
-
   public override void Initialize(EnemyControllerBase context)
   {
     base.Initialize(context);

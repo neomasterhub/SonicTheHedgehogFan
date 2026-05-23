@@ -1,11 +1,15 @@
+using UnityEngine;
+
 public abstract class AIEnemyModuleControllerBase
   : EnemyModuleControllerBase
 {
   protected readonly Pipeline _effects;
+  protected readonly TimerSystem _timerSystem;
 
   protected AIEnemyModuleControllerBase()
   {
     _effects = new();
+    _timerSystem = new();
     SetEffectPipeline();
   }
 
@@ -13,6 +17,7 @@ public abstract class AIEnemyModuleControllerBase
 
   public override void Apply()
   {
+    _timerSystem.Update(Time.deltaTime);
     _effects.Run(false);
   }
 }
