@@ -11,8 +11,8 @@ public partial class EnemyController : EnemyControllerBase
 
   private BoxCollider2D _collider;
   private BoxCollider2D _otherEnemyCollider;
+  private EnemyModuleControllerBase[] _modules;
   private IEnemy _otherEnemy;
-  private IEnemyModule[] _modules;
   private Timer _deadActiveTimer;
 
   [SerializeField]
