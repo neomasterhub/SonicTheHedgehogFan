@@ -2464,10 +2464,8 @@ GameObject:
   - component: {fileID: 151653050}
   - component: {fileID: 151653052}
   - component: {fileID: 151653053}
+  - component: {fileID: 151653054}
   - component: {fileID: 151653055}
-  - component: {fileID: 151653056}
-  - component: {fileID: 151653058}
-  - component: {fileID: 151653057}
   m_Layer: 0
   m_Name: Motobug
   m_TagString: Untagged
@@ -2617,7 +2615,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.975, y: 0.725}
   m_EdgeRadius: 0
---- !u!114 &151653055
+--- !u!114 &151653054
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2631,7 +2629,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
   _isAlive: 1
   _otherEnemyObj: {fileID: 710850496}
---- !u!114 &151653056
+--- !u!114 &151653055
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2642,36 +2640,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d869cb3c26447747a3441b2d357460f, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UDFSensorEnemyModuleController
+  m_EditorClassIdentifier: Assembly-CSharp::ABSensorEnemyModuleController
   _position: {x: 0, y: -0.3}
---- !u!114 &151653057
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 151653049}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c501291734a41b642b0320044a76a710, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GroundSpeedEnemyModuleController
---- !u!114 &151653058
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 151653049}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d9029c3a2aaf14438af6b85f1da6868, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HorizontalPatrolAIEnemyModuleController
-  _speed: 0
-  _stopDuration: 0
-  _minPositionX: 0
-  _maxPositionX: 0
+  _abDistance: 0.4
 --- !u!1 &262485117
 GameObject:
   m_ObjectHideFlags: 0
@@ -3033,7 +3004,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 2.8
+  orthographic size: 3
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
