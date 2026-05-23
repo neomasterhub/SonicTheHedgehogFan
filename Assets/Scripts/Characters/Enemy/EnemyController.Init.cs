@@ -1,17 +1,14 @@
 using UnityEngine;
-using static EnemyConsts;
+using static EnemyConsts.Physics;
 
 /// <summary>
 /// Init.
 /// </summary>
 public partial class EnemyController
 {
-  public EnemyController(ISpeedSystem speedSystem)
+  public EnemyController()
   {
-    _speedSystem = speedSystem;
-
     _isAlive = true;
-
     _timerSystem = new();
 
     _effects = new();
@@ -24,18 +21,10 @@ public partial class EnemyController
     InitializeTimers();
   }
 
-  protected virtual void Initialize(GameObject enemy)
-  {
-    _otherEnemyObj = enemy;
-    _otherEnemy = _otherEnemyObj.GetComponent<IEnemy>();
-    _otherEnemyCollider = _otherEnemyObj.GetComponent<BoxCollider2D>();
-
-    _initialized = true;
-  }
-
-  protected virtual void InitializeComponents()
+  private void InitializeComponents()
   {
     _collider = GetComponent<BoxCollider2D>();
+    _modules = GetComponents<EnemyModuleControllerBase>();
 
     if (_otherEnemyObj != null)
     {
@@ -44,7 +33,7 @@ public partial class EnemyController
     }
   }
 
-  protected virtual void InitializeTimers()
+  private void InitializeTimers()
   {
     _deadActiveTimer = new Timer(DeadActiveTimer)
       .WhenCompleted(() => gameObject.SetActive(false));

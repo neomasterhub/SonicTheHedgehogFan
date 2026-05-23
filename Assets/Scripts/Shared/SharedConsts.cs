@@ -30,6 +30,7 @@ public static class SharedConsts
   public static class Physics
   {
     public const int SpeedRoundingDigits = 3;
+    public const int PositionRoundingDigits = 3;
     public const float PositionBackwardOffset = 0.02f;
     public const float GroundedPositionUpwardOffset = 0.05f;
     public static readonly LayerMask GroundLayer = 1 << 3;

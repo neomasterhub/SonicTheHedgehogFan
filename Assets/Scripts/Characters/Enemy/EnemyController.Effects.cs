@@ -5,41 +5,39 @@ public partial class EnemyController
 {
   private void SetEffectPipeline()
   {
-    _effects.AddStep(CreateEffect_Intersected());
-    _effects.AddStep(CreateEffect_Hit());
+    _effects.AddStep(CreateEffect_Intersect());
+    _effects.AddStep(CreateEffect_Contact());
     _effects.AddStep(CreateEffect_GettingHit());
   }
 
-  private PipelineStep CreateEffect_Intersected()
+  private PipelineStep CreateEffect_Intersect()
   {
     return PipelineStepBuilder.Create()
-      .WithDisplayName("Intersected")
+      .WithDisplayName("Intersect")
       .WithAction(() =>
       {
-        _otherEnemy.ContactEnemyInfo = null;
-
-        return _otherEnemy == null
-          || !_collider.bounds.Intersects(_otherEnemyCollider.bounds)
-          ? PipelineStepResult.Break
-          : PipelineStepResult.Continue;
+        return _otherEnemy != null
+          && _collider.bounds.Intersects(_otherEnemyCollider.bounds)
+          ? PipelineStepResult.Continue
+          : PipelineStepResult.Break;
       })
       .Build();
   }
 
-  private PipelineStep CreateEffect_Hit()
+  private PipelineStep CreateEffect_Contact()
   {
     return PipelineStepBuilder.Create()
-      .WithDisplayName("Hit")
-      .WithCondition(() =>
-        _isAlive
-        && !_otherEnemy.IsInvincible
-        && !_otherEnemy.IsAttacking
-        && !_otherEnemy.IsHurt)
+      .WithDisplayName("Contact")
       .WithAction(() =>
       {
-        _otherEnemy.IsHit = true;
-        _otherEnemy.IsHurt = true;
-        _otherEnemy.ContactEnemyInfo = new(false, gameObject.transform.position, new(_speedSystem.SpeedX, _speedSystem.SpeedY));
+        if (_isAlive
+          && !IsHurt
+          && !IsInvincible)
+        {
+          _otherEnemy.ContactEnemy = this;
+
+          return PipelineStepResult.Continue;
+        }
 
         return PipelineStepResult.Break;
       })
@@ -51,13 +49,11 @@ public partial class EnemyController
     return PipelineStepBuilder.Create()
       .WithDisplayName("Getting hit")
       .WithCondition(() =>
-        _isAlive
-        && _otherEnemy.IsAttacking)
+        _otherEnemy.IsAttacking)
       .WithAction(() =>
       {
-        _isAlive = false;
-        _timerSystem.StartIfNotRunning(_deadActiveTimer);
-        _otherEnemy.ContactEnemyInfo = new(true, gameObject.transform.position, new(_speedSystem.SpeedX, _speedSystem.SpeedY));
+        IsHit = true;
+        IsHurt = true;
 
         return PipelineStepResult.Break;
       })

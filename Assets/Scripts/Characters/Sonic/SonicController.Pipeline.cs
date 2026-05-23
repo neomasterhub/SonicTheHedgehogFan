@@ -196,7 +196,7 @@ public partial class SonicController
       _ => throw _groundInfoSystem.Current.Side.ArgumentOutOfRangeException(),
     };
 
-    transform.position = new Vector3(pos.x.Round(3), pos.y.Round(3), transform.position.z);
+    transform.position = new Vector3(pos.x.Round(PositionRoundingDigits), pos.y.Round(PositionRoundingDigits), transform.position.z);
   }
 
   private void UpdateSounds()
@@ -215,6 +215,7 @@ public partial class SonicController
     _takeLeftHit = false;
     _takeRightHit = false;
     IsHit = false;
+    ContactEnemy = null;
   }
 
   private void SetSizes(SonicSizeMode sizeMode)
@@ -235,9 +236,9 @@ public partial class SonicController
       return 1;
     }
 
-    return ContactEnemyInfo == null
+    return ContactEnemy == null
       ? 0
-      : Mathf.Sign(transform.position.x - ContactEnemyInfo.Value.Position.x);
+      : Mathf.Sign(transform.position.x - ContactEnemy.PositionX);
   }
 
   private float GetSlopeFactor(SonicPhysicsModeConfig config)
