@@ -14,9 +14,7 @@ public partial class HorizontalPatrolAIEnemyModuleController
     return PipelineStepBuilder.Create()
       .WithDisplayName("Stop")
       .WithCondition(() =>
-        !_isStopped
-        || transform.position.x <= _minPositionX
-        || transform.position.x >= _maxPositionX)
+        MustStop())
       .WithAction(() =>
       {
         _isStopped = true;
@@ -46,6 +44,35 @@ public partial class HorizontalPatrolAIEnemyModuleController
         return PipelineStepResult.Break;
       })
       .Build();
+  }
+
+  private bool MustStop()
+  {
+    if (_isStopped)
+    {
+      return false;
+    }
+
+    if (transform.position.x <= _minPositionX
+      || transform.position.x >= _maxPositionX)
+    {
+      return true;
+    }
+
+    var isGrounded = _context.Ground.HasValue;
+
+    return (_context.LeftWall.HasValue && MustStop_LeftWall(_context.LeftWall.Value, isGrounded))
+      || (_context.RightWall.HasValue && MustStop_RightWall(_context.RightWall.Value, isGrounded));
+  }
+
+  private bool MustStop_LeftWall(WallDetectionResult wall, bool isGrounded)
+  {
+    return MustStop_Wall(wall, isGrounded, _context.SpeedX <= -wall.Distance + _context.WallClearance);
+  }
+
+  private bool MustStop_RightWall(WallDetectionResult wall, bool isGrounded)
+  {
+    return MustStop_Wall(wall, isGrounded, _context.SpeedX >= wall.Distance - _context.WallClearance);
   }
 
   private bool MustStop_Wall(WallDetectionResult wall, bool isGrounded, bool speedCondition)
