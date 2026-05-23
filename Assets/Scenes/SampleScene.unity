@@ -2466,6 +2466,9 @@ GameObject:
   - component: {fileID: 151653053}
   - component: {fileID: 151653054}
   - component: {fileID: 151653055}
+  - component: {fileID: 151653058}
+  - component: {fileID: 151653057}
+  - component: {fileID: 151653056}
   m_Layer: 0
   m_Name: Motobug
   m_TagString: Untagged
@@ -2541,7 +2544,7 @@ Transform:
   m_GameObject: {fileID: 151653049}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 22.09, y: 9.91, z: 0}
+  m_LocalPosition: {x: 22.09, y: 9.857, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2644,6 +2647,46 @@ MonoBehaviour:
   _position: {x: 0, y: -0.3}
   _abDistance: 0.4
   _wallClearance: 0
+--- !u!114 &151653056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 151653049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e1cb749e1ca91b42a189db26f17b7ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NormalPositionEnemyModuleController
+--- !u!114 &151653057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 151653049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c501291734a41b642b0320044a76a710, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GroundSpeedEnemyModuleController
+--- !u!114 &151653058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 151653049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d9029c3a2aaf14438af6b85f1da6868, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HorizontalPatrolAIEnemyModuleController
+  _speed: 0.01
+  _stopDuration: 4
+  _minPositionX: 0
+  _maxPositionX: 0
 --- !u!1 &262485117
 GameObject:
   m_ObjectHideFlags: 0
