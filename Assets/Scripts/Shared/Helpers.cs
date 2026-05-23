@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public static class Helpers
@@ -16,8 +17,11 @@ public static class Helpers
       UDFSensor _a,
       UDFSensor _b,
       LayerMask groundLayer,
-      bool horizontalDirection)
+      bool horizontalDirection,
+      Func<bool> checkBalancing = null)
     {
+      checkBalancing ??= () => false;
+
       SensorRay dr1;
       SensorRay dr2;
 
