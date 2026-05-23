@@ -29,11 +29,14 @@ public partial class EnemyController
       .WithDisplayName("Getting hit")
       .WithCondition(() =>
         _isAlive
+        && !IsHurt
+        && !IsInvincible
         && _otherEnemy.IsAttacking)
       .WithAction(() =>
       {
-        _isAlive = false;
-        _timerSystem.StartIfNotRunning(_deadActiveTimer);
+        IsHit = true;
+        IsHurt = true;
+
         _otherEnemy.ContactEnemy = this;
 
         return PipelineStepResult.Break;
