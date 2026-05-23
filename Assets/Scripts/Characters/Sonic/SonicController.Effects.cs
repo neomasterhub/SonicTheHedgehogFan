@@ -10,6 +10,7 @@ public partial class SonicController
   {
     _effects.AddStep(CreateEffect_Disable());
     _effects.AddStep(CreateEffect_SetHit());
+    _effects.AddStep(CreateEffect_Attacked());
     _effects.AddStep(CreateEffect_GettingHit());
     _effects.AddStep(CreateEffect_LoseRings());
     _effects.AddStep(CreateEffect_Dying());
@@ -51,6 +52,25 @@ public partial class SonicController
       .WithCondition(() =>
         _takeLeftHit
         || _takeRightHit)
+      .WithAction(() =>
+      {
+        IsHit = true;
+
+        return PipelineStepResult.Continue;
+      })
+      .Build();
+  }
+
+  private PipelineStep CreateEffect_Attacked()
+  {
+    return PipelineStepBuilder.Create()
+      .WithDisplayName("Attacked")
+      .WithCondition(() =>
+        !IsHit
+        && ContactEnemy != null
+        && !IsHurt
+        && !IsInvincible
+        && !IsAttacking)
       .WithAction(() =>
       {
         IsHit = true;
