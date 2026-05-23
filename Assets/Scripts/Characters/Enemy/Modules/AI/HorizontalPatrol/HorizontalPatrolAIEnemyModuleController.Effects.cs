@@ -47,4 +47,14 @@ public partial class HorizontalPatrolAIEnemyModuleController
       })
       .Build();
   }
+
+  private bool MustStop_Wall(WallDetectionResult wall, bool isGrounded, bool speedCondition)
+  {
+    if (isGrounded && wall.AngleDeg != 0)
+    {
+      return false;
+    }
+
+    return speedCondition;
+  }
 }
