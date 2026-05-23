@@ -1,4 +1,5 @@
 using UnityEngine;
+using static Helpers.Sensors;
 using static SharedConsts.Physics;
 
 /// <summary>
@@ -12,8 +13,7 @@ public partial class ABSensorEnemyModuleController
 
     _context.LeftWall = DetectWall(_a, GroundLayer);
     _context.RightWall = DetectWall(_b, GroundLayer);
-
-    DetectGround(GroundLayer);
+    _context.Ground = ABDetectGround(_a, _b, GroundLayer, !_spriteRenderer.flipX);
   }
 
   private void UpdateSensorSystem()
@@ -29,24 +29,5 @@ public partial class ABSensorEnemyModuleController
     return hit == null
       ? null
       : new(hit.Value.distance, Vector2.SignedAngle(-sensor.FrontRay.Direction, hit.Value.normal).Round());
-  }
-
-  private void DetectGround(LayerMask groundLayer)
-  {
-    var hit = _o.DownRay.Cast(groundLayer);
-    if (hit != null)
-    {
-      _context.Ground = new(false, hit.Value, Vector2.down, VerticalRelation.Above);
-      return;
-    }
-
-    hit = _o.UpRay.Cast(groundLayer);
-    if (hit != null)
-    {
-      _context.Ground = new(false, hit.Value, Vector2.up, VerticalRelation.Below);
-      return;
-    }
-
-    _context.Ground = null;
   }
 }
