@@ -4,7 +4,7 @@ using static SharedConsts.Physics;
 /// <summary>
 /// Behaviour.
 /// </summary>
-public partial class UDFSensorEnemyModuleController
+public partial class ABSensorEnemyModuleController
 {
   public override void Apply()
   {

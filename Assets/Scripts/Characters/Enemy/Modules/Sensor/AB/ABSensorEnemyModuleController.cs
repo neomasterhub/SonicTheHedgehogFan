@@ -4,7 +4,7 @@ using UnityEngine;
 /// Data.
 /// </summary>
 [RequireComponent(typeof(SpriteRenderer))]
-public partial class UDFSensorEnemyModuleController
+public partial class ABSensorEnemyModuleController
   : EnemyModuleControllerBase
 {
   private readonly UDFSensor _a;

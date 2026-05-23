@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 /// Init.
 /// </summary>
-public partial class UDFSensorEnemyModuleController
+public partial class ABSensorEnemyModuleController
 {
   public override void Initialize(IEnemyContext context)
   {

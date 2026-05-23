@@ -1,7 +1,7 @@
 /// <summary>
 /// Debug.
 /// </summary>
-public partial class UDFSensorEnemyModuleController
+public partial class ABSensorEnemyModuleController
 {
   private void OnDrawGizmos()
   {
