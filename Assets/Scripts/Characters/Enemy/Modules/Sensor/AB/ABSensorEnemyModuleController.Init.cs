@@ -9,6 +9,8 @@ public partial class ABSensorEnemyModuleController
   public ABSensorEnemyModuleController()
     : base()
   {
+    _context.WallClearance = _wallClearance;
+
     _a = new(Color.orangeRed, Vector2.zero, Vector2.up, Vector2.down, Vector2.left);
     _b = new(Color.red, Vector2.zero, Vector2.up, Vector2.down, Vector2.right);
   }
