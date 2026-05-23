@@ -10,6 +10,8 @@ public partial class HorizontalPatrolAIEnemyModuleController
   public HorizontalPatrolAIEnemyModuleController()
     : base()
   {
+    _speedSpx = DefaultSpeedSpx;
+
     var x = transform.position.x.Round(PositionRoundingDigits);
     _minPositionX = x - DefaultPatrolRadius;
     _maxPositionX = x + DefaultPatrolRadius;
