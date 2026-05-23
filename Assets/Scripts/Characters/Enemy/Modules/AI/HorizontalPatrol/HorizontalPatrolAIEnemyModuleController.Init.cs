@@ -12,17 +12,24 @@ public partial class HorizontalPatrolAIEnemyModuleController
   {
     _speedSpx = DefaultSpeedSpx;
     _stopDuration = DefaultPatrolStopTimer;
-
-    var x = transform.position.x.Round(PositionRoundingDigits);
-    _minPositionX = x - DefaultPatrolRadius;
-    _maxPositionX = x + DefaultPatrolRadius;
   }
 
   public override void Initialize(EnemyControllerBase context)
   {
     base.Initialize(context);
+    InitializePatrolArea();
     InitializeMovement();
     InitializeTimers();
+  }
+
+  private void InitializePatrolArea()
+  {
+    if (_minPositionX == 0 && _maxPositionX == 0)
+    {
+      var x = transform.position.x.Round(PositionRoundingDigits);
+      _minPositionX = x - DefaultPatrolRadius;
+      _maxPositionX = x + DefaultPatrolRadius;
+    }
   }
 
   private void InitializeMovement()
