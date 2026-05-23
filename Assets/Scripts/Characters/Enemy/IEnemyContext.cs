@@ -1,3 +1,5 @@
+using System;
+
 public interface IEnemyContext : IEnemy
 {
   bool IsStatic { get; set; }
@@ -6,4 +8,6 @@ public interface IEnemyContext : IEnemy
   GroundDetectionResult? Ground { get; set; }
   WallDetectionResult? LeftWall { get; set; }
   WallDetectionResult? RightWall { get; set; }
+
+  void SetEnemy(Action<IEnemy> setter);
 }
