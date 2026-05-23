@@ -7,11 +7,14 @@ using UnityEngine;
 public partial class UDFSensorEnemyModuleController
   : EnemyModuleControllerBase
 {
-  private UDFSensor _o;
+  private readonly UDFSensor _a;
+  private readonly UDFSensor _b;
+
   private SpriteRenderer _spriteRenderer;
 
   [SerializeField]
   private Vector2 _position;
   [SerializeField]
-  private Vector3 _udfLengths;
+  [InspectorLabel("A-B Distance")]
+  private Vector3 _abDistance;
 }
