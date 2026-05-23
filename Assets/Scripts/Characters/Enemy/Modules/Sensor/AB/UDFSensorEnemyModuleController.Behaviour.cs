@@ -15,8 +15,8 @@ public partial class ABSensorEnemyModuleController
 
   private void UpdateSensorSystem()
   {
-    _o.SetParentPosition(transform.position);
-    _o.FrontRay.Direction = _spriteRenderer.flipX ? Vector2.left : Vector2.right;
+    _a.SetParentPosition(transform.position);
+    _b.SetParentPosition(transform.position);
   }
 
   private void DetectWall(LayerMask groundLayer)
