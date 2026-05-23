@@ -16,6 +16,7 @@ public partial class HorizontalPatrolAIEnemyModuleController
   {
     base.Initialize(context);
     InitializePatrolArea();
+    InitializeMovement();
     InitializeTimers();
   }
 
@@ -27,6 +28,12 @@ public partial class HorizontalPatrolAIEnemyModuleController
       _minPositionX = x - DefaultPatrolRadius;
       _maxPositionX = x + DefaultPatrolRadius;
     }
+  }
+
+  private void InitializeMovement()
+  {
+    _isStopped = false;
+    _context.IsStatic = true;
   }
 
   private void InitializeTimers()
