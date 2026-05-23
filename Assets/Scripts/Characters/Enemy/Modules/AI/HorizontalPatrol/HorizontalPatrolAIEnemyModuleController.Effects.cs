@@ -53,8 +53,8 @@ public partial class HorizontalPatrolAIEnemyModuleController
       return false;
     }
 
-    if (transform.position.x <= _minPositionX
-      || transform.position.x >= _maxPositionX)
+    if (_context.PositionX <= _minPositionX
+      || _context.PositionX >= _maxPositionX)
     {
       return true;
     }
