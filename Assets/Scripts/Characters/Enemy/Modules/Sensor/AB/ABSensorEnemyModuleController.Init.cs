@@ -13,7 +13,7 @@ public partial class ABSensorEnemyModuleController
     _b = new(Color.red, Vector2.zero, Vector2.up, Vector2.down, Vector2.right);
   }
 
-  public override void Initialize(IEnemyContext context)
+  public override void Initialize(EnemyControllerBase context)
   {
     base.Initialize(context);
 

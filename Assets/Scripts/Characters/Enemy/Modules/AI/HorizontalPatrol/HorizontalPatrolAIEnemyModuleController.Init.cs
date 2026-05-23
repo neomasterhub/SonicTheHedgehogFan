@@ -12,7 +12,7 @@ public partial class HorizontalPatrolAIEnemyModuleController
     _timerSystem = new();
   }
 
-  public override void Initialize(IEnemyContext context)
+  public override void Initialize(EnemyControllerBase context)
   {
     base.Initialize(context);
     InitializePatrolArea();
