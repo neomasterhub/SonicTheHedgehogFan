@@ -54,7 +54,6 @@ public partial class SonicController
       .WithAction(() =>
       {
         IsHit = true;
-        IsHurt = true;
 
         return PipelineStepResult.Continue;
       })
@@ -69,6 +68,7 @@ public partial class SonicController
         IsHit)
       .WithAction(() =>
       {
+        IsHurt = true;
         IsInvincible = true;
         IsAttacking = false;
         CanCollectRing = false;
