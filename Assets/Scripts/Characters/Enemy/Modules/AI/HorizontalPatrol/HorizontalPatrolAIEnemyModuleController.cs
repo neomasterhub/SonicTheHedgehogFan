@@ -7,10 +7,11 @@ public partial class HorizontalPatrolAIEnemyModuleController
   : AIEnemyModuleControllerBase
 {
   private bool _isStopped;
+  private float _speed;
   private Timer _stopTimer;
 
   [SerializeField]
-  private float _speed;
+  private float _speedSpx;
   [SerializeField]
   private float _stopDuration;
   [SerializeField]

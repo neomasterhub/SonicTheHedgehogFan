@@ -1,4 +1,5 @@
 using static EnemyConsts.Physics;
+using static SharedConsts.ConvertValues;
 using static SharedConsts.Physics;
 
 /// <summary>
@@ -23,6 +24,7 @@ public partial class HorizontalPatrolAIEnemyModuleController
 
   private void InitializeMovement()
   {
+    _speed = _speedSpx / SpxPerUnit;
     _isStopped = false;
     _context.IsStatic = true;
   }
