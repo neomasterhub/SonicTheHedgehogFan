@@ -75,13 +75,13 @@ public partial class HorizontalPatrolAIEnemyModuleController
     return MustStop_Wall(wall, isGrounded, _context.SpeedX >= wall.Distance - _context.WallClearance);
   }
 
-  private bool MustStop_Wall(WallDetectionResult wall, bool isGrounded, bool speedCondition)
+  private bool MustStop_Wall(WallDetectionResult wall, bool isGrounded, bool stop)
   {
     if (isGrounded && wall.AngleDeg != 0)
     {
       return false;
     }
 
-    return speedCondition;
+    return stop;
   }
 }
