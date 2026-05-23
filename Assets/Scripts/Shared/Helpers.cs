@@ -12,7 +12,11 @@ public static class Helpers
 
   public static class Sensors
   {
-    public GroundDetectionResult? DetectGround(bool horizontalDirection, LayerMask groundLayer)
+    public static GroundDetectionResult? ABDetectGround(
+      UDFSensor _a,
+      UDFSensor _b,
+      LayerMask groundLayer,
+      bool horizontalDirection)
     {
       SensorRay dr1;
       SensorRay dr2;
