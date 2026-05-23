@@ -35,8 +35,7 @@ public partial class ABSensorEnemyModuleController
 
   private void InitializeSensor(UDFSensor sensor, Vector2 offset)
   {
-    sensor.SetLocalPosition(offset);
-    sensor.SetParentPosition(_position);
+    sensor.SetLocalPosition(_position + offset);
     sensor.UpRay.Length = UDFLengths.x;
     sensor.DownRay.Length = UDFLengths.y;
     sensor.FrontRay.Length = UDFLengths.z;
