@@ -16,5 +16,5 @@ public partial class ABSensorEnemyModuleController
   private Vector2 _position;
   [SerializeField]
   [InspectorLabel("A-B Distance")]
-  private Vector3 _abDistance;
+  private float _abDistance;
 }
