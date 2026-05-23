@@ -9,7 +9,10 @@ public partial class ABSensorEnemyModuleController
   public override void Apply()
   {
     UpdateSensorSystem();
-    DetectWall(GroundLayer);
+
+    _context.LeftWall = DetectWall(_a, GroundLayer);
+    _context.RightWall = DetectWall(_b, GroundLayer);
+
     DetectGround(GroundLayer);
   }
 
@@ -19,13 +22,13 @@ public partial class ABSensorEnemyModuleController
     _b.SetParentPosition(transform.position);
   }
 
-  private void DetectWall(LayerMask groundLayer)
+  private WallDetectionResult? DetectWall(UDFSensor sensor, LayerMask groundLayer)
   {
-    var hit = _o.FrontRay.Cast(groundLayer);
+    var hit = sensor.FrontRay.Cast(groundLayer);
 
-    _context.Wall = hit == null
+    return hit == null
       ? null
-      : new(hit.Value.distance, Vector2.SignedAngle(-_o.FrontRay.Direction, hit.Value.normal).Round());
+      : new(hit.Value.distance, Vector2.SignedAngle(-sensor.FrontRay.Direction, hit.Value.normal).Round());
   }
 
   private void DetectGround(LayerMask groundLayer)
