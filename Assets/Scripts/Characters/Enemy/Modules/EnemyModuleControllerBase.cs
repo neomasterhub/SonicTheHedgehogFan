@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[RequireComponent(typeof(IEnemyContext))]
+[RequireComponent(typeof(EnemyControllerBase))]
 public abstract class EnemyModuleControllerBase
   : MonoBehaviour,
   IEnemyModule
@@ -9,7 +9,7 @@ public abstract class EnemyModuleControllerBase
 
   private void Awake()
   {
-    Initialize(GetComponent<IEnemyContext>());
+    Initialize(GetComponent<EnemyControllerBase>());
   }
 
   public virtual void Initialize(IEnemyContext context)

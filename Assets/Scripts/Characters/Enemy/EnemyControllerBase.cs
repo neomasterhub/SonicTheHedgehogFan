@@ -1,18 +1,20 @@
-using System;
+using UnityEngine;
 
 /// <summary>
 /// Behaviour.
 /// </summary>
-public partial class EnemyController
+public class EnemyControllerBase
+  : MonoBehaviour,
+  IEnemyContext
 {
-  public bool IsInvincible { get; private set; }
-  public bool IsAttacking { get; private set; }
+  public bool IsInvincible { get; set; }
+  public bool IsAttacking { get; set; }
   public bool IsHit { get; set; }
   public bool IsHurt { get; set; }
-  public float SpeedX { get; private set; }
-  public float SpeedY { get; private set; }
-  public float PositionX { get; private set; }
-  public float PositionY { get; private set; }
+  public float SpeedX { get; set; }
+  public float SpeedY { get; set; }
+  public float PositionX { get; set; }
+  public float PositionY { get; set; }
   public IEnemy ContactEnemy { get; set; }
   public bool IsStatic { get; set; }
   public float AccelerationSpeed { get; set; }
@@ -20,9 +22,4 @@ public partial class EnemyController
   public GroundDetectionResult? Ground { get; set; }
   public WallDetectionResult? LeftWall { get; set; }
   public WallDetectionResult? RightWall { get; set; }
-
-  public void SetEnemy(Action<IEnemy> setter)
-  {
-    setter(this);
-  }
 }

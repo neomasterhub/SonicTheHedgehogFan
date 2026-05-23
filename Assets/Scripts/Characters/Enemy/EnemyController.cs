@@ -4,9 +4,7 @@ using UnityEngine;
 /// Data.
 /// </summary>
 [RequireComponent(typeof(BoxCollider2D))]
-public partial class EnemyController
-  : MonoBehaviour,
-  IEnemyContext
+public partial class EnemyController : EnemyControllerBase
 {
   private readonly Pipeline _effects;
   private readonly TimerSystem _timerSystem;
