@@ -5,7 +5,7 @@ public static class EnemyConsts
   public static class Physics
   {
     public const float DeadActiveTimer = 1;
-    public const float DefaultSpeedSpx = 16;
+    public const float DefaultSpeedSpx = 128;
     public const float DefaultPatrolRadius = 10;
     public const float DefaultPatrolStopTimer = 3;
     public static readonly Vector3 UDFLengths = new(0.2f, 0.1f, 0.5f);
