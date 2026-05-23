@@ -14,8 +14,8 @@ public static class Helpers
   public static class Sensors
   {
     public static GroundDetectionResult? ABDetectGround(
-      UDFSensor _a,
-      UDFSensor _b,
+      UDFSensor a,
+      UDFSensor b,
       LayerMask groundLayer,
       bool horizontalDirection,
       Func<bool> checkBalancing = null)
@@ -27,13 +27,13 @@ public static class Helpers
 
       if (horizontalDirection)
       {
-        dr1 = _a.DownRay;
-        dr2 = _b.DownRay;
+        dr1 = a.DownRay;
+        dr2 = b.DownRay;
       }
       else
       {
-        dr1 = _b.DownRay;
-        dr2 = _a.DownRay;
+        dr1 = b.DownRay;
+        dr2 = a.DownRay;
       }
 
       var dr1Hit = dr1.Cast(groundLayer);
@@ -56,13 +56,13 @@ public static class Helpers
 
       if (horizontalDirection)
       {
-        ur1 = _a.UpRay;
-        ur2 = _b.UpRay;
+        ur1 = a.UpRay;
+        ur2 = b.UpRay;
       }
       else
       {
-        ur1 = _b.UpRay;
-        ur2 = _a.UpRay;
+        ur1 = b.UpRay;
+        ur2 = a.UpRay;
       }
 
       var ur1Hit = ur1.Cast(groundLayer);
