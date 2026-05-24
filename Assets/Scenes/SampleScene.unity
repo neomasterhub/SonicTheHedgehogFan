@@ -2467,6 +2467,7 @@ GameObject:
   - component: {fileID: 151653054}
   - component: {fileID: 151653055}
   - component: {fileID: 151653058}
+  - component: {fileID: 151653061}
   - component: {fileID: 151653060}
   - component: {fileID: 151653057}
   - component: {fileID: 151653056}
@@ -2686,7 +2687,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d9029c3a2aaf14438af6b85f1da6868, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HorizontalPatrolAIEnemyModuleController
-  _speedSpx: 128
+  _speedSpx: -128
   _stoppedDuration: 3
   _minPositionX: 0
   _maxPositionX: 0
@@ -2714,6 +2715,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 093cf3553b74f06458fbe2d9418d99e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NormalViewEnemyModuleController
+--- !u!114 &151653061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 151653049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4657a086f68b624485a2d70dd099fd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DeathDefeatAIEnemyModuleController
+  _deadActiveDuration: 1
 --- !u!1 &262485117
 GameObject:
   m_ObjectHideFlags: 0
