@@ -123,6 +123,9 @@ public partial class SonicController
   public float SpeedY => _speedSystem.SpeedY;
   public float PositionX => transform.position.x;
   public float PositionY => transform.position.y;
+  public float Health { get; }
+  public float MaxHealth { get; }
+  public float AttackDamage { get; }
   public IEnemy ContactEnemy { get; set; }
 
   // Look vertical direction provider
