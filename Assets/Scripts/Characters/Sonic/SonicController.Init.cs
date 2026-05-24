@@ -173,20 +173,20 @@ public partial class SonicController
 
   private void InitializeTimers()
   {
-    _dyingTimer = new Timer(DyingTimer)
+    _dyingTimer = new Timer(DyingDuration)
       .WhenCompleted(() =>
       {
         _isDying = false;
         _isDead = true;
       });
 
-    _dpadLockTimer = new Timer(DpadUnlockTimer)
+    _dpadLockTimer = new Timer(DpadLockDuration)
       .WhenCompleted(() => _postWallDetachDpadLock = false);
 
-    _postHurtInvincibleTimer = new Timer(PostHurtInvincibleTimer)
+    _postHurtInvincibleTimer = new Timer(PostHurtInvincibleDuration)
       .WhenCompleted(() => IsInvincible = false);
 
-    _ringCollectorDisabledTimer = new Timer(RingCollectorDisabledTimer)
+    _ringCollectorDisabledTimer = new Timer(RingCollectorDisabledDuration)
       .WhenCompleted(() => CanCollectRing = true);
   }
 

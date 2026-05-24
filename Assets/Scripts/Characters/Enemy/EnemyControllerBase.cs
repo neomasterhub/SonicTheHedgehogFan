@@ -11,6 +11,7 @@ public class EnemyControllerBase
   public bool IsAttacking { get; set; }
   public bool IsHit { get; set; }
   public bool IsHurt { get; set; }
+  public bool IsDead { get; set; }
   public float SpeedX { get; set; }
   public float SpeedY { get; set; }
   public float PositionX { get; set; }
@@ -18,6 +19,7 @@ public class EnemyControllerBase
   public IEnemy ContactEnemy { get; set; }
   public bool IsStatic { get; set; }
   public bool HorizontalDirection { get; set; }
+  public int Health { get; set; }
   public float Speed { get; set; }
   public float AnimatorSpeed { get; set; }
   public float WallClearance { get; set; }

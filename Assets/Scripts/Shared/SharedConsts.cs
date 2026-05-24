@@ -49,7 +49,7 @@ public static class SharedConsts
       public const string Balancing = nameof(Balancing);
       public const string Collected = nameof(Collected);
       public const string CurlingUp = nameof(CurlingUp);
-      public const string Destroyed = nameof(Destroyed);
+      public const string Dead = nameof(Dead);
       public const string Dying = nameof(Dying);
       public const string Hurt = nameof(Hurt);
       public const string Idle = nameof(Idle);

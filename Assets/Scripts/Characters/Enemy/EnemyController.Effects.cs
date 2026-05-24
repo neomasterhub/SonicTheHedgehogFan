@@ -7,7 +7,7 @@ public partial class EnemyController
   {
     _effects.AddStep(CreateEffect_Intersect());
     _effects.AddStep(CreateEffect_Contact());
-    _effects.AddStep(CreateEffect_GettingHit());
+    _effects.AddStep(CreateEffect_Attacked());
   }
 
   private PipelineStep CreateEffect_Intersect()
@@ -30,7 +30,7 @@ public partial class EnemyController
       .WithDisplayName("Contact")
       .WithAction(() =>
       {
-        if (_isAlive
+        if (!IsDead
           && !IsHurt
           && !IsInvincible)
         {
@@ -44,18 +44,20 @@ public partial class EnemyController
       .Build();
   }
 
-  private PipelineStep CreateEffect_GettingHit()
+  private PipelineStep CreateEffect_Attacked()
   {
     return PipelineStepBuilder.Create()
-      .WithDisplayName("Getting hit")
+      .WithDisplayName("Attacked")
       .WithCondition(() =>
         _otherEnemy.IsAttacking)
       .WithAction(() =>
       {
         IsHit = true;
         IsHurt = true;
+        IsInvincible = true;
+        Health--;
 
-        return PipelineStepResult.Break;
+        return PipelineStepResult.Continue;
       })
       .Build();
   }

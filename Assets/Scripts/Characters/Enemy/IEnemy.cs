@@ -4,6 +4,8 @@ public interface IEnemy
   bool IsAttacking { get; }
   bool IsHit { get; }
   bool IsHurt { get; }
+  bool IsDead { get; }
+  int Health { get; }
   float SpeedX { get; }
   float SpeedY { get; }
   float PositionX { get; }
