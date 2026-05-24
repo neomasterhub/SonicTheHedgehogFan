@@ -20,8 +20,8 @@ public partial class NormalViewEnemyModuleController
   {
     _animator.SetFloat(AnimatorParameters.Speed, _context.Speed);
 
-    _animator.SetBool(AnimatorParameters.Dead, _context.IsDead);
-    _animator.SetBool(AnimatorParameters.Hurt, _context.IsHurt);
+    _animator.SetBool(AnimatorParameters.Dying, _context.IsDying);
+    _animator.SetBool(AnimatorParameters.Hit, _context.IsHit);
     _animator.SetBool(AnimatorParameters.Static, _context.IsStatic);
   }
 }

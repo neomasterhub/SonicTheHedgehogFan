@@ -51,6 +51,7 @@ public static class SharedConsts
       public const string CurlingUp = nameof(CurlingUp);
       public const string Dead = nameof(Dead);
       public const string Dying = nameof(Dying);
+      public const string Hit = nameof(Hit);
       public const string Hurt = nameof(Hurt);
       public const string Idle = nameof(Idle);
       public const string LookingUp = nameof(LookingUp);
