@@ -30,7 +30,7 @@ public partial class EnemyController
       .WithDisplayName("Contact")
       .WithAction(() =>
       {
-        if (_isAlive
+        if (!IsDead
           && !IsHurt
           && !IsInvincible)
         {
