@@ -5,10 +5,10 @@ public static class SonicConsts
 {
   public static class Physics
   {
-    public const float DyingTimer = 2;
-    public const float DpadUnlockTimer = 0.5f;
-    public const float PostHurtInvincibleTimer = 3;
-    public const float RingCollectorDisabledTimer = 0.5f;
+    public const float DyingDuration = 2;
+    public const float DpadLockDuration = 0.5f;
+    public const float PostHurtInvincibleDuration = 3;
+    public const float RingCollectorDisabledDuration = 0.5f;
     public const float OLength = Sizes.Big.VRadius + 0.4f;
     public static readonly Vector3 TopUDFLengths = new(0.3f, 0.3f, 0.5f);
     public static readonly Vector3 BottomUDFLengths = new(0.3f, 0.1f, 0.5f);

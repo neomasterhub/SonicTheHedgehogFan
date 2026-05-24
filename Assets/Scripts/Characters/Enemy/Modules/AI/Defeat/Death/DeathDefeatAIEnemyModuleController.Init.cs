@@ -8,7 +8,7 @@ public partial class DeathDefeatAIEnemyModuleController
   public DeathDefeatAIEnemyModuleController()
     : base()
   {
-    _deadActiveDuration = DeadActiveTimer;
+    _deadActiveDuration = DeadActiveDuration;
   }
 
   public override void Initialize(EnemyControllerBase context)

@@ -11,7 +11,7 @@ public partial class HorizontalPatrolAIEnemyModuleController
     : base()
   {
     _speedSpx = SpeedSpx;
-    _stopTimer = PatrolStoppedTimer;
+    _stoppedDuration = PatrolStoppedTimer;
   }
 
   public override void Initialize(EnemyControllerBase context)
@@ -46,7 +46,7 @@ public partial class HorizontalPatrolAIEnemyModuleController
 
   private void InitializeTimers()
   {
-    _stoppedTimer = new Timer(_stopTimer)
+    _stoppedTimer = new Timer(_stoppedDuration)
       .WhenCompleted(() => _isStopped = false);
   }
 }
