@@ -8,6 +8,8 @@ public partial class EnemyController
 {
   public EnemyController()
   {
+    AnimatorSpeed = 1;
+
     _isAlive = true;
     _timerSystem = new();
 
