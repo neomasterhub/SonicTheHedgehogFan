@@ -1,7 +1,7 @@
 /// <summary>
 /// Data.
 /// </summary>
-public partial class DefeatAIEnemyModuleController
+public partial class DeathDefeatAIEnemyModuleController
   : AIEnemyModuleControllerBase
 {
 }

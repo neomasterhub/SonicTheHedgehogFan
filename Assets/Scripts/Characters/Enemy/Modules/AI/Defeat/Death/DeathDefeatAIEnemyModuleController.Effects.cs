@@ -1,7 +1,7 @@
 /// <summary>
 /// Effects.
 /// </summary>
-public partial class DefeatAIEnemyModuleController
+public partial class DeathDefeatAIEnemyModuleController
 {
   protected override void SetEffectPipeline()
   {
