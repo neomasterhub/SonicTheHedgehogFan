@@ -7,13 +7,11 @@ using UnityEngine;
 public partial class EnemyController : EnemyControllerBase
 {
   private readonly Pipeline _effects;
-  private readonly TimerSystem _timerSystem;
 
   private BoxCollider2D _collider;
   private BoxCollider2D _otherEnemyCollider;
   private EnemyModuleControllerBase[] _modules;
   private IEnemy _otherEnemy;
-  private Timer _deadActiveTimer;
 
   [SerializeField]
   [InspectorLabel("Alive")]

@@ -1,5 +1,3 @@
-using UnityEngine;
-
 /// <summary>
 /// Pipeline.
 /// </summary>
@@ -14,8 +12,6 @@ public partial class EnemyController
 
   private void BeginFrame()
   {
-    _timerSystem.Update(Time.fixedDeltaTime);
-
     PositionX = transform.position.x;
     PositionY = transform.position.y;
   }

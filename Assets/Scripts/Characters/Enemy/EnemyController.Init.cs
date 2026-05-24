@@ -1,5 +1,4 @@
 using UnityEngine;
-using static EnemyConsts.Physics;
 
 /// <summary>
 /// Init.
@@ -8,11 +7,10 @@ public partial class EnemyController
 {
   public EnemyController()
   {
+    _isAlive = true;
+
     IsStatic = true;
     AnimatorSpeed = 1;
-
-    _isAlive = true;
-    _timerSystem = new();
 
     _effects = new();
     SetEffectPipeline();
@@ -21,7 +19,6 @@ public partial class EnemyController
   private void Awake()
   {
     InitializeComponents();
-    InitializeTimers();
   }
 
   private void InitializeComponents()
@@ -34,11 +31,5 @@ public partial class EnemyController
       _otherEnemy = _otherEnemyObj.GetComponent<IEnemy>();
       _otherEnemyCollider = _otherEnemyObj.GetComponent<BoxCollider2D>();
     }
-  }
-
-  private void InitializeTimers()
-  {
-    _deadActiveTimer = new Timer(DeadActiveTimer)
-      .WhenCompleted(() => gameObject.SetActive(false));
   }
 }
