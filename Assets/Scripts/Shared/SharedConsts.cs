@@ -62,17 +62,8 @@ public static class SharedConsts
 
     public static class States
     {
-      public const string Idle = nameof(Idle);
-      public const string Bored = nameof(Bored);
-      public const string Waiting = nameof(Waiting);
       public const string Walking = nameof(Walking);
-      public const string Running = nameof(Running);
-      public const string Skidding = nameof(Skidding);
-      public const string Balancing = nameof(Balancing);
-      public const string CurlingUp = nameof(CurlingUp);
-      public const string LookingUp = nameof(LookingUp);
       public const string Rolling = nameof(Rolling);
-      public const string Hurt = nameof(Hurt);
     }
   }
 
