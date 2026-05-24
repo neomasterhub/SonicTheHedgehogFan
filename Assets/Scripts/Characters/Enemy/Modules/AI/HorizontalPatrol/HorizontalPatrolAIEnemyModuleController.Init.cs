@@ -19,6 +19,7 @@ public partial class HorizontalPatrolAIEnemyModuleController
     base.Initialize(context);
     InitializePatrolArea();
     InitializeMovement();
+    InitializeContext();
     InitializeTimers();
   }
 
@@ -36,7 +37,11 @@ public partial class HorizontalPatrolAIEnemyModuleController
   {
     _speed = _speedSpx / SpxPerUnit;
     _isStopped = false;
-    _context.IsStatic = true;
+  }
+
+  private void InitializeContext()
+  {
+    _context.HorizontalDirection = _speed > 0;
   }
 
   private void InitializeTimers()

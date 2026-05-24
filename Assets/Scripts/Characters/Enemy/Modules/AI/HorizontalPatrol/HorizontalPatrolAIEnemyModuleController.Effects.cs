@@ -20,6 +20,7 @@ public partial class HorizontalPatrolAIEnemyModuleController
       {
         _context.IsStatic = false;
         _context.Speed = _speed;
+        _context.HorizontalDirection = _speed > 0;
 
         return PipelineStepResult.Break;
       })
