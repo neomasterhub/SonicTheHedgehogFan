@@ -41,7 +41,6 @@ public partial class HorizontalPatrolAIEnemyModuleController
 
   private void InitializeContext()
   {
-    _context.IsStatic = true;
     _context.HorizontalDirection = _speed > 0;
   }
 
