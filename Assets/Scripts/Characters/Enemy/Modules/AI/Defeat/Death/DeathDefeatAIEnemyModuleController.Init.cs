@@ -20,6 +20,11 @@ public partial class DeathDefeatAIEnemyModuleController
   private void InitializeTimers()
   {
     _dyingTimer = new Timer(_dyingDuration)
-      .WhenCompleted(() => gameObject.SetActive(false));
+      .WhenCompleted(() =>
+      {
+        _context.IsDying = false;
+        _context.IsDead = true;
+        gameObject.SetActive(false);
+      });
   }
 }
