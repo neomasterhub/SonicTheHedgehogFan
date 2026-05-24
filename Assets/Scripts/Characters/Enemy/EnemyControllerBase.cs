@@ -17,6 +17,7 @@ public class EnemyControllerBase
   public float PositionY { get; set; }
   public IEnemy ContactEnemy { get; set; }
   public bool IsStatic { get; set; }
+  public bool HorizontalDirection { get; set; }
   public float Speed { get; set; }
   public float WallClearance { get; set; }
   public GroundDetectionResult? Ground { get; set; }
