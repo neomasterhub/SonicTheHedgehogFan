@@ -21,6 +21,8 @@ public partial class DeathDefeatAIEnemyModuleController
         _context.IsStatic = true;
         _context.Speed = 0;
 
+        _timerSystem.StartIfNotRunning(_deadActiveTimer);
+
         return PipelineStepResult.Break;
       })
       .Build();
