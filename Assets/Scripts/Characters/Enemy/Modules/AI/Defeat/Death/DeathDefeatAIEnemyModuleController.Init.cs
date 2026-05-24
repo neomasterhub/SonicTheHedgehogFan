@@ -8,7 +8,7 @@ public partial class DeathDefeatAIEnemyModuleController
   public DeathDefeatAIEnemyModuleController()
     : base()
   {
-    _deadActiveDuration = DeadActiveDuration;
+    _dyingDuration = DyingDuration;
   }
 
   public override void Initialize(EnemyControllerBase context)
@@ -19,7 +19,7 @@ public partial class DeathDefeatAIEnemyModuleController
 
   private void InitializeTimers()
   {
-    _deadActiveTimer = new Timer(_deadActiveDuration)
+    _dyingTimer = new Timer(_dyingDuration)
       .WhenCompleted(() => gameObject.SetActive(false));
   }
 }
