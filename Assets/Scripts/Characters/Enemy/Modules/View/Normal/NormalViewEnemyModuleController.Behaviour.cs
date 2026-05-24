@@ -1,3 +1,5 @@
+using AnimatorParameters = SharedConsts.Animator.Parameters;
+
 /// <summary>
 /// Behaviour.
 /// </summary>
@@ -16,5 +18,9 @@ public partial class NormalViewEnemyModuleController
 
   private void UpdateAnimator()
   {
+    _animator.SetFloat(AnimatorParameters.Speed, _context.Speed);
+
+    _animator.SetBool(AnimatorParameters.Hurt, _context.IsHurt);
+    _animator.SetBool(AnimatorParameters.Static, _context.IsStatic);
   }
 }
