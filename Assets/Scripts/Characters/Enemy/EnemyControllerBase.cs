@@ -18,12 +18,10 @@ public class EnemyControllerBase
   public IEnemy ContactEnemy { get; set; }
   public bool IsStatic { get; set; }
   public bool HorizontalDirection { get; set; }
+  public int Health { get; set; }
   public float Speed { get; set; }
   public float AnimatorSpeed { get; set; }
   public float WallClearance { get; set; }
-  public float Health { get; set; }
-  public float MaxHealth { get; set; }
-  public float AttackDamage { get; set; }
   public GroundDetectionResult? Ground { get; set; }
   public WallDetectionResult? LeftWall { get; set; }
   public WallDetectionResult? RightWall { get; set; }

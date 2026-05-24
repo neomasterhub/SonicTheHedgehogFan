@@ -119,13 +119,11 @@ public partial class SonicController
   public bool IsAttacking { get; private set; }
   public bool IsHit { get; set; }
   public bool IsHurt { get; set; }
+  public int Health { get; }
   public float SpeedX => _speedSystem.SpeedX;
   public float SpeedY => _speedSystem.SpeedY;
   public float PositionX => transform.position.x;
   public float PositionY => transform.position.y;
-  public float Health { get; }
-  public float MaxHealth { get; }
-  public float AttackDamage { get; }
   public IEnemy ContactEnemy { get; set; }
 
   // Look vertical direction provider
