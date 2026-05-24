@@ -14,9 +14,6 @@ public partial class EnemyController : EnemyControllerBase
   private IEnemy _otherEnemy;
 
   [SerializeField]
-  [InspectorLabel("Alive")]
-  private bool _isAlive;
-  [SerializeField]
   [InspectorLabel("Other Enemy")]
   private GameObject _otherEnemyObj;
 }
