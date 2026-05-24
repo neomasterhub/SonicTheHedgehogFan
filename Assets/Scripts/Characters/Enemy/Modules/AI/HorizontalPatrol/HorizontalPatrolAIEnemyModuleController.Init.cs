@@ -10,8 +10,8 @@ public partial class HorizontalPatrolAIEnemyModuleController
   public HorizontalPatrolAIEnemyModuleController()
     : base()
   {
-    _speedSpx = DefaultSpeedSpx;
-    _stopTimer = DefaultPatrolStopTimer;
+    _speedSpx = SpeedSpx;
+    _stopTimer = PatrolStoppedTimer;
   }
 
   public override void Initialize(EnemyControllerBase context)
@@ -27,8 +27,8 @@ public partial class HorizontalPatrolAIEnemyModuleController
     if (_minPositionX == 0 && _maxPositionX == 0)
     {
       var x = transform.position.x.Round(PositionRoundingDigits);
-      _minPositionX = x - DefaultPatrolRadius;
-      _maxPositionX = x + DefaultPatrolRadius;
+      _minPositionX = x - PatrolRadius;
+      _maxPositionX = x + PatrolRadius;
     }
   }
 

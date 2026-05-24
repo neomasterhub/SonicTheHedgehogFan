@@ -25,7 +25,12 @@ public partial class GroundSpeedEnemyModuleController
   private void SetSpeed_Airborne()
   {
     _context.SpeedX = _context.Speed;
-    _context.SpeedY -= 0.01f;
+    _context.SpeedY -= _gravitySpeed;
+
+    if (_context.SpeedY < -_maxFallSpeed)
+    {
+      _context.SpeedY = -_maxFallSpeed;
+    }
   }
 
   private void SetSpeed_Grounded()
