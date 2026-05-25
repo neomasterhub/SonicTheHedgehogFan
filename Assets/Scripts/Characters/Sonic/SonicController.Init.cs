@@ -188,7 +188,7 @@ public partial class SonicController
       .WhenCompleted(() => IsInvincible = false);
 
     _ringCollectorDisabledTimer = new Timer(RingCollectorDisabledDuration)
-      .WhenCompleted(() => CanCollectRing = true);
+      .WhenCompleted(() => CanCollectRing = !_isDying);
   }
 
   private void InitializeGroundNormal()
