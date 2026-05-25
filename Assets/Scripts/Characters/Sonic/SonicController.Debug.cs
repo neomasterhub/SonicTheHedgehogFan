@@ -12,18 +12,24 @@ public partial class SonicController
 
   private void UpdateDebug()
   {
+    if (_debugMode != _prevDebugMode)
+    {
+      UpdateDebug_Toggle();
+    }
+
+    if (_debugMode)
+    {
+      UpdateDebug_GroundNormal();
+      UpdateDebug_Diagnostics();
+      UpdateDebug_EffectHistory();
+    }
+  }
+
+  private void UpdateDebug_Toggle()
+  {
     _groundNormal.enabled = _debugMode;
     _diagnosticsPanel.SetActive(_debugMode);
     _effectHistoryPanel.SetActive(_debugMode);
-
-    if (!_debugMode)
-    {
-      return;
-    }
-
-    UpdateDebug_GroundNormal();
-    UpdateDebug_Diagnostics();
-    UpdateDebug_EffectHistory();
   }
 
   private void UpdateDebug_Diagnostics()
