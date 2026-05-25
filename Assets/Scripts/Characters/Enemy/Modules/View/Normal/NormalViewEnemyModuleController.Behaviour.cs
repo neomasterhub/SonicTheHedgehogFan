@@ -1,3 +1,4 @@
+using static SharedConsts.Rendering;
 using AnimatorParameters = SharedConsts.Animator.Parameters;
 
 /// <summary>
@@ -7,13 +8,18 @@ public partial class NormalViewEnemyModuleController
 {
   public override void Apply()
   {
-    RotateSprite();
+    UpdateSprite();
     UpdateAnimator();
   }
 
-  private void RotateSprite()
+  private void UpdateSprite()
   {
     _spriteRenderer.flipX = !_context.HorizontalDirection;
+
+    if (_context.IsHit && _context.IsDying)
+    {
+      _spriteRenderer.sortingOrder = PlayerOrderInLayer + 1;
+    }
   }
 
   private void UpdateAnimator()
