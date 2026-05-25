@@ -7,6 +7,7 @@ public abstract class AIEnemyModuleControllerBase
   protected readonly TimerSystem _timerSystem;
 
   protected AIEnemyModuleControllerBase()
+    : base()
   {
     _effects = new();
     _timerSystem = new();
