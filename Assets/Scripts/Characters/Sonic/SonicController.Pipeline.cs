@@ -29,6 +29,7 @@ public partial class SonicController
     _configs.Update(_physicsMode);
     _timerSystem.Update(Time.deltaTime);
 
+    _prevDebugMode = _debugMode;
     _prevSizeMode = _sizeMode;
     _prevIsRolling = _isRolling;
     _prevIsGrounded = _isGrounded;
@@ -46,7 +47,7 @@ public partial class SonicController
 
     if (_inputSystem.CheckLastPressed(ToggleDebugMode))
     {
-      _showDebugInfo = !_showDebugInfo;
+      _debugMode = !_debugMode;
     }
 
     if (!IsHurt)
@@ -113,7 +114,7 @@ public partial class SonicController
 
   private void ApplyEffects()
   {
-    _effects.Run(_showDebugInfo);
+    _effects.Run(_debugMode);
   }
 
   private void ApplyMovement()

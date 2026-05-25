@@ -12,11 +12,11 @@ public partial class SonicController
 
   private void UpdateDebugInfo()
   {
-    _groundNormal.enabled = _showDebugInfo;
-    _diagnosticsPanel.SetActive(_showDebugInfo);
-    _effectHistoryPanel.SetActive(_showDebugInfo);
+    _groundNormal.enabled = _debugMode;
+    _diagnosticsPanel.SetActive(_debugMode);
+    _effectHistoryPanel.SetActive(_debugMode);
 
-    if (!_showDebugInfo)
+    if (!_debugMode)
     {
       return;
     }
