@@ -10,7 +10,7 @@ public partial class SonicController
     _sensorSystem.Draw();
   }
 
-  private void UpdateDebugInfo()
+  private void UpdateDebug()
   {
     _groundNormal.enabled = _debugMode;
     _diagnosticsPanel.SetActive(_debugMode);
@@ -21,12 +21,12 @@ public partial class SonicController
       return;
     }
 
-    UpdateGroundNormal();
-    UpdateDebugInfo_Diagnostics();
-    UpdateDebugInfo_EffectHistory();
+    UpdateDebug_GroundNormal();
+    UpdateDebug_Diagnostics();
+    UpdateDebug_EffectHistory();
   }
 
-  private void UpdateGroundNormal()
+  private void UpdateDebug_GroundNormal()
   {
     if (!_isGrounded)
     {
@@ -37,7 +37,7 @@ public partial class SonicController
     _groundNormal.SetPosition(1, _lastGroundDetectionResult.Contact + _lastGroundDetectionResult.Normal);
   }
 
-  private void UpdateDebugInfo_EffectHistory()
+  private void UpdateDebug_EffectHistory()
   {
     _effectHistoryText.Clear();
 
@@ -50,7 +50,7 @@ public partial class SonicController
     _effectHistoryTextMesh.SetText(_effectHistoryText);
   }
 
-  private void UpdateDebugInfo_Diagnostics()
+  private void UpdateDebug_Diagnostics()
   {
     _diagnosticsText
       .Clear()
