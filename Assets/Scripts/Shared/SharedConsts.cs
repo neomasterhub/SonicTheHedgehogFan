@@ -16,7 +16,7 @@ public static class SharedConsts
     public static readonly Color TransparentBlack = new(0, 0, 0, 0);
   }
 
-  public static class UI
+  public static class Rendering
   {
     public const float DebugScale = 10000;
     public const int PlayerOrderInLayer = 1;
