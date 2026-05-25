@@ -10,4 +10,12 @@ public abstract class SoundEnemyModuleControllerBase
   {
     _sounds = new();
   }
+
+  protected abstract void SetSounds();
+
+  public override void Initialize(EnemyControllerBase context)
+  {
+    base.Initialize(context);
+    SetSounds();
+  }
 }

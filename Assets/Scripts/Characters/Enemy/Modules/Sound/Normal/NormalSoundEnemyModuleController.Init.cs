@@ -3,4 +3,7 @@
 /// </summary>
 public partial class NormalSoundEnemyModuleController
 {
+  protected override void SetSounds()
+  {
+  }
 }
