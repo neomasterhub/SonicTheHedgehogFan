@@ -231,7 +231,7 @@ public partial class SonicController
 
   private PlayerInput GetPlayerInput()
   {
-    if (_isDead || _isDead)
+    if (_isDying)
     {
       return PlayerInput.None;
     }
