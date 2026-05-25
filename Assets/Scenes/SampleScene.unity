@@ -2472,6 +2472,7 @@ GameObject:
   - component: {fileID: 151653057}
   - component: {fileID: 151653056}
   - component: {fileID: 151653059}
+  - component: {fileID: 151653062}
   m_Layer: 0
   m_Name: Motobug
   m_TagString: Untagged
@@ -2727,7 +2728,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4657a086f68b624485a2d70dd099fd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeathDefeatAIEnemyModuleController
-  _deadActiveDuration: 1
+  _dyingDuration: 1
+--- !u!114 &151653062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 151653049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ce9eb79b1e8c9469d9ce76b8ee93fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NormalSoundEnemyModuleController
+  _attackedAudioClip: {fileID: 0}
+  _dyingAudioClip: {fileID: 8300000, guid: cdee9d3a3b371c64db527b661d90a514, type: 3}
 --- !u!1 &262485117
 GameObject:
   m_ObjectHideFlags: 0
