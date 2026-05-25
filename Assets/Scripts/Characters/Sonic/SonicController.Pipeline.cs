@@ -30,10 +30,10 @@ public partial class SonicController
     _timerSystem.Update(Time.deltaTime);
 
     _prevDebugMode = _debugMode;
-    _prevSizeMode = _sizeMode;
-    _prevIsRolling = _isRolling;
     _prevIsGrounded = _isGrounded;
+    _prevIsRolling = _isRolling;
     _prevPhysicsMode = _physicsMode;
+    _prevSizeMode = _sizeMode;
   }
 
   private void UpdateInput()
