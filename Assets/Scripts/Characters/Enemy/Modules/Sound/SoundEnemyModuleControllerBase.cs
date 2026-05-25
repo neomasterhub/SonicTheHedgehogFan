@@ -18,4 +18,13 @@ public abstract class SoundEnemyModuleControllerBase
     base.Initialize(context);
     SetSounds();
   }
+
+  public override void Apply()
+  {
+    for (var i = 0; i < _sounds.Count; i++)
+    {
+      _sounds[i].Stop();
+      _sounds[i].Play();
+    }
+  }
 }
