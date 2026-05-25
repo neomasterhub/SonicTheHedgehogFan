@@ -45,6 +45,11 @@ public class SonicViewSystem
     _blinker.Start(alpha, timer, interval);
   }
 
+  public void StopBlinking()
+  {
+    _blinker.Stop();
+  }
+
   private void UpdateAnimator()
   {
     float animatorParameterSpeed;
