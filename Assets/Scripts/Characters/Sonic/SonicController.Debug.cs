@@ -1,4 +1,4 @@
-using static SharedConsts.UI;
+using static SharedConsts.Rendering;
 
 /// <summary>
 /// Debug.

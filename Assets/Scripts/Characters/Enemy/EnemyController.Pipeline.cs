@@ -14,6 +14,11 @@ public partial class EnemyController
   {
     PositionX = transform.position.x;
     PositionY = transform.position.y;
+
+    if (_otherEnemy.ContactEnemy == null)
+    {
+      IsHit = false;
+    }
   }
 
   private void ApplyEffects()

@@ -6,8 +6,8 @@ using UnityEngine;
 public partial class DeathDefeatAIEnemyModuleController
   : AIEnemyModuleControllerBase
 {
-  private Timer _deadActiveTimer;
+  private Timer _dyingTimer;
 
   [SerializeField]
-  private float _deadActiveDuration;
+  private float _dyingDuration;
 }

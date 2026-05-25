@@ -1,6 +1,6 @@
 using UnityEngine;
 using static SharedConsts.ConvertValues;
-using static SharedConsts.UI;
+using static SharedConsts.Rendering;
 
 public static class RingConsts
 {

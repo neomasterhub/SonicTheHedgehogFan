@@ -3,12 +3,30 @@ using static PlayerInput;
 
 public static class SharedConsts
 {
-  public static class ConvertValues
+  public static class Animator
   {
-    public const int FramePerSec = 60;
-    public const int PxPerUnit = 40;
-    public const int SpxPerPx = 256;
-    public const int SpxPerUnit = SpxPerPx * PxPerUnit;
+    public static class Parameters
+    {
+      public const string Balancing = nameof(Balancing);
+      public const string Collected = nameof(Collected);
+      public const string CurlingUp = nameof(CurlingUp);
+      public const string Dead = nameof(Dead);
+      public const string Dying = nameof(Dying);
+      public const string Hit = nameof(Hit);
+      public const string Hurt = nameof(Hurt);
+      public const string Idle = nameof(Idle);
+      public const string LookingUp = nameof(LookingUp);
+      public const string Rolling = nameof(Rolling);
+      public const string Skidding = nameof(Skidding);
+      public const string Speed = nameof(Speed);
+      public const string Static = nameof(Static);
+    }
+
+    public static class States
+    {
+      public const string Rolling = nameof(Rolling);
+      public const string Walking = nameof(Walking);
+    }
   }
 
   public static class Colors
@@ -16,10 +34,12 @@ public static class SharedConsts
     public static readonly Color TransparentBlack = new(0, 0, 0, 0);
   }
 
-  public static class UI
+  public static class ConvertValues
   {
-    public const float DebugScale = 10000;
-    public const int PlayerOrderInLayer = 1;
+    public const int FramePerSec = 60;
+    public const int PxPerUnit = 40;
+    public const int SpxPerPx = 256;
+    public const int SpxPerUnit = SpxPerPx * PxPerUnit;
   }
 
   public static class Input
@@ -42,29 +62,10 @@ public static class SharedConsts
     }
   }
 
-  public static class Animator
+  public static class Rendering
   {
-    public static class Parameters
-    {
-      public const string Balancing = nameof(Balancing);
-      public const string Collected = nameof(Collected);
-      public const string CurlingUp = nameof(CurlingUp);
-      public const string Dead = nameof(Dead);
-      public const string Dying = nameof(Dying);
-      public const string Hurt = nameof(Hurt);
-      public const string Idle = nameof(Idle);
-      public const string LookingUp = nameof(LookingUp);
-      public const string Rolling = nameof(Rolling);
-      public const string Skidding = nameof(Skidding);
-      public const string Speed = nameof(Speed);
-      public const string Static = nameof(Static);
-    }
-
-    public static class States
-    {
-      public const string Rolling = nameof(Rolling);
-      public const string Walking = nameof(Walking);
-    }
+    public const float DebugScale = 10000;
+    public const int PlayerOrderInLayer = 1;
   }
 
   public static class SecretCodes
