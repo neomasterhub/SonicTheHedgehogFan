@@ -63,13 +63,11 @@ public partial class SonicController
 
   private void UpdateDebug_GroundNormal()
   {
-    if (!_isGrounded)
+    if (_isGrounded)
     {
-      return;
+      _groundNormal.SetPosition(0, _lastGroundDetectionResult.Contact);
+      _groundNormal.SetPosition(1, _lastGroundDetectionResult.Contact + _lastGroundDetectionResult.Normal);
     }
-
-    _groundNormal.SetPosition(0, _lastGroundDetectionResult.Contact);
-    _groundNormal.SetPosition(1, _lastGroundDetectionResult.Contact + _lastGroundDetectionResult.Normal);
   }
 
   private string GetDpadState()
