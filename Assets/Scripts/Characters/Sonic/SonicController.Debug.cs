@@ -26,30 +26,6 @@ public partial class SonicController
     UpdateDebug_EffectHistory();
   }
 
-  private void UpdateDebug_GroundNormal()
-  {
-    if (!_isGrounded)
-    {
-      return;
-    }
-
-    _groundNormal.SetPosition(0, _lastGroundDetectionResult.Contact);
-    _groundNormal.SetPosition(1, _lastGroundDetectionResult.Contact + _lastGroundDetectionResult.Normal);
-  }
-
-  private void UpdateDebug_EffectHistory()
-  {
-    _effectHistoryText.Clear();
-
-    var effectHistory = _effects.GetAppliedHistory();
-    for (var i = 0; i < effectHistory.Length; i++)
-    {
-      _effectHistoryText.AppendLine(effectHistory[i].ToEffectString());
-    }
-
-    _effectHistoryTextMesh.SetText(_effectHistoryText);
-  }
-
   private void UpdateDebug_Diagnostics()
   {
     _diagnosticsText
@@ -70,6 +46,30 @@ public partial class SonicController
       ;
 
     _diagnosticsTextMesh.SetText(_diagnosticsText);
+  }
+
+  private void UpdateDebug_EffectHistory()
+  {
+    _effectHistoryText.Clear();
+
+    var effectHistory = _effects.GetAppliedHistory();
+    for (var i = 0; i < effectHistory.Length; i++)
+    {
+      _effectHistoryText.AppendLine(effectHistory[i].ToEffectString());
+    }
+
+    _effectHistoryTextMesh.SetText(_effectHistoryText);
+  }
+
+  private void UpdateDebug_GroundNormal()
+  {
+    if (!_isGrounded)
+    {
+      return;
+    }
+
+    _groundNormal.SetPosition(0, _lastGroundDetectionResult.Contact);
+    _groundNormal.SetPosition(1, _lastGroundDetectionResult.Contact + _lastGroundDetectionResult.Normal);
   }
 
   private string GetDpadState()
