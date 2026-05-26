@@ -11,7 +11,7 @@ public class Pipeline
   private bool _writeAppliedHistory;
   private PipelineStepInfo _lastApplied;
 
-  public Pipeline(int prevAppliedHistoryCapacity = 2, int lastAppliedCountMax = 3)
+  public Pipeline(int prevAppliedHistoryCapacity = 3, int lastAppliedCountMax = 3)
   {
     _steps = new();
     _appliedHistory = new PipelineStepInfo[prevAppliedHistoryCapacity + 1];
