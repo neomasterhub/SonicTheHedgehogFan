@@ -10,8 +10,8 @@ public partial class SonicController
   // Enemy
   public bool IsInvincible { get; private set; }
   public bool IsAttacking { get; private set; }
-  public bool IsHit { get; set; }
-  public bool IsHurt { get; set; }
+  public bool IsHit { get; private set; }
+  public bool IsHurt { get; private set; }
   public int Health { get; }
   public float SpeedX => _speedSystem.SpeedX;
   public float SpeedY => _speedSystem.SpeedY;
