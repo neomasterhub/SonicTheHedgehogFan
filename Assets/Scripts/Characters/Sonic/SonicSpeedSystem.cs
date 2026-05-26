@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using static SharedConsts.Physics;
+using static SonicConsts.Physics;
 
 public class SonicSpeedSystem
 {
@@ -209,9 +210,9 @@ public class SonicSpeedSystem
   private void SetSpeed_Airborne_PreventWallOvershoot()
   {
     if ((_context.DistanceToLeftWall != null
-      && SpeedX <= -_context.DistanceToLeftWall + PositionBackwardOffset)
+      && SpeedX <= -_context.DistanceToLeftWall + WallClearance)
       || (_context.DistanceToRightWall != null
-      && SpeedX >= _context.DistanceToRightWall - PositionBackwardOffset))
+      && SpeedX >= _context.DistanceToRightWall - WallClearance))
     {
       SpeedX = 0;
     }
@@ -374,9 +375,9 @@ public class SonicSpeedSystem
   private void SetSpeed_Grounded_PreventWallOvershoot()
   {
     if ((_context.DistanceToLeftWall != null
-      && GroundSpeed <= -_context.DistanceToLeftWall + PositionBackwardOffset)
+      && GroundSpeed <= -_context.DistanceToLeftWall + WallClearance)
       || (_context.DistanceToRightWall != null
-      && GroundSpeed >= _context.DistanceToRightWall - PositionBackwardOffset))
+      && GroundSpeed >= _context.DistanceToRightWall - WallClearance))
     {
       GroundSpeed = 0;
     }
