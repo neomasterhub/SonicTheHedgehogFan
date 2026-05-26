@@ -3,6 +3,23 @@ using UnityEngine;
 
 public static class Helpers
 {
+  public static class Diagnostics
+  {
+    private static float _fps;
+    private static float _fpsExpiredAt;
+
+    public static float GetFPS(float delay = 1)
+    {
+      if (Time.unscaledTime > _fpsExpiredAt)
+      {
+        _fpsExpiredAt = Time.unscaledTime.Round() + delay;
+        _fps = (1 / Time.unscaledDeltaTime).Round();
+      }
+
+      return _fps;
+    }
+  }
+
   public static class Math
   {
     public static Vector3 Vector3(float x = 0, float y = 0, float z = 0)
