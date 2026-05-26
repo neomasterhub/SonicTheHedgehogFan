@@ -8,12 +8,7 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(SpriteRenderer))]
-public partial class SonicController
-  : MonoBehaviour,
-  ICameraTarget,
-  IEnemy,
-  ILookVerticalDirectionProvider,
-  IRingCollector
+public partial class SonicController : MonoBehaviour
 {
   private readonly ConditionalValueProvider<float> _slopeSpeedProvider;
   private readonly ConditionalValueProvider<float> _gravitySpeedProvider;

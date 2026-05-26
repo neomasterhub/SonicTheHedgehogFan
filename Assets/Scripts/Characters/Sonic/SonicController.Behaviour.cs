@@ -2,6 +2,10 @@
 /// Behaviour.
 /// </summary>
 public partial class SonicController
+  : ICameraTarget,
+  IEnemy,
+  ILookVerticalDirectionProvider,
+  IRingCollector
 {
   // Camera target
   public bool IsDead => _isDead;
