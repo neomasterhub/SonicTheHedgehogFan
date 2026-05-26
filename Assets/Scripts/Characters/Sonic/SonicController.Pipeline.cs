@@ -84,7 +84,7 @@ public partial class SonicController
   {
     _isGrounded = true;
     _isBalancing = _lastGroundDetectionResult.IsBalancing;
-    _triggeredGroundSensorSide = _lastGroundDetectionResult.SourceSensorSide;
+    _triggeredGroundSensorId = _lastGroundDetectionResult.SourceSensorId;
     _groundInfoSystem.Update(_lastGroundDetectionResult.AngleDeg);
     _slopeFactor = GetSlopeFactor(_configs.PhysicsModeConfig);
 
@@ -100,7 +100,7 @@ public partial class SonicController
   {
     _isGrounded = false;
     _isBalancing = false;
-    _triggeredGroundSensorSide = false;
+    _triggeredGroundSensorId = default;
     _groundInfoSystem.Reset();
     _slopeFactor = 0;
 
@@ -151,7 +151,7 @@ public partial class SonicController
 
   private void UpdateView()
   {
-    _viewContext = new(!_spriteRenderer.flipX, IsHurt, _isDying, _isGrounded, _speedSystem.IsSkidding, _isBalancing, _isCurlingUp, _isLookingUp, _isRolling, _speedSystem.IsZeroGroundSpeedProgressReached, _triggeredGroundSensorSide, _speedSystem.SpeedX, _speedSystem.GroundSpeed, _groundInfoSystem.Current.AngleDeg, Time.fixedDeltaTime, _groundInfoSystem.Current.Side, _groundInfoSystem.Previous.Side);
+    _viewContext = new(!_spriteRenderer.flipX, IsHurt, _isDying, _isGrounded, _speedSystem.IsSkidding, _isBalancing, _isCurlingUp, _isLookingUp, _isRolling, _speedSystem.IsZeroGroundSpeedProgressReached, _triggeredGroundSensorId, _speedSystem.SpeedX, _speedSystem.GroundSpeed, _groundInfoSystem.Current.AngleDeg, Time.fixedDeltaTime, _groundInfoSystem.Current.Side, _groundInfoSystem.Previous.Side);
     _viewSystem.Update(_viewContext);
   }
 
