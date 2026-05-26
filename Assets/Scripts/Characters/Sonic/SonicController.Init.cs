@@ -54,10 +54,10 @@ public partial class SonicController
     _boxCollider = GetComponent<BoxCollider2D>();
     _spriteRenderer = GetComponent<SpriteRenderer>();
 
-    _effectHistoryPanel = _canvas.transform.Find("Effect History Panel").gameObject;
+    _effectHistoryPanel = _canvas.transform.Find("Sonic Effect History Panel").gameObject;
     _effectHistoryTextMesh = _effectHistoryPanel.transform.Find("Text").GetComponent<TextMeshProUGUI>();
 
-    _diagnosticsPanel = _canvas.transform.Find("Diagnostics Panel").gameObject;
+    _diagnosticsPanel = _canvas.transform.Find("Sonic Diagnostics Panel").gameObject;
     _diagnosticsTextMesh = _diagnosticsPanel.transform.Find("Text").GetComponent<TextMeshProUGUI>();
 
     InitializeGroundNormal();

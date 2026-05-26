@@ -5,9 +5,20 @@ using static SharedConsts.SecretCodes;
 /// </summary>
 public partial class LevelSceneController
 {
+  private void Update()
+  {
+    UpdateDebug();
+  }
+
   private void FixedUpdate()
   {
+    BeginFrame();
     UpdateInput();
+  }
+
+  private void BeginFrame()
+  {
+    _prevDebugMode = _debugMode;
   }
 
   private void UpdateInput()
