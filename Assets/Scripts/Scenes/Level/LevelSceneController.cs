@@ -5,6 +5,8 @@ using UnityEngine;
 /// </summary>
 public partial class LevelSceneController : SceneControllerBase
 {
+  private ISceneObjectDebug[] _debugObjects;
+
   [SerializeField]
   private bool _debugMode;
 }
