@@ -27,4 +27,14 @@ public readonly struct GroundDetectionResult
     SensorGroundRelation = sensorGroundRelation;
     IsBalancing = isBalancing;
   }
+
+  public static GroundDetectionResult CreateABResult(
+    bool horizontalDirection,
+    RaycastHit2D hit,
+    Vector2 sensorDirection,
+    VerticalRelation sensorGroundRelation = VerticalRelation.Above,
+    bool isBalancing = false)
+  {
+    return new GroundDetectionResult(horizontalDirection ? 'B' : 'A', hit, sensorDirection, sensorGroundRelation, isBalancing);
+  }
 }

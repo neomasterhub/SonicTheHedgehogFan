@@ -29,13 +29,13 @@ public class RingSensorSystem
     var hit = _a.DownRay.Cast(groundLayer);
     if (hit != null)
     {
-      return new(false, hit.Value, _a.DownRay.Direction, VerticalRelation.Above);
+      return new('O', hit.Value, _a.DownRay.Direction, VerticalRelation.Above);
     }
 
     hit = _a.UpRay.Cast(groundLayer);
     if (hit != null)
     {
-      return new(false, hit.Value, _a.UpRay.Direction, VerticalRelation.Below);
+      return new('O', hit.Value, _a.UpRay.Direction, VerticalRelation.Below);
     }
 
     return null;
