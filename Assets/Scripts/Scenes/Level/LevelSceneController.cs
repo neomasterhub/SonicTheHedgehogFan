@@ -1,8 +1,6 @@
-using UnityEngine;
-
 /// <summary>
 /// Data.
 /// </summary>
-public partial class LevelSceneController : MonoBehaviour
+public partial class LevelSceneController : SceneControllerBase
 {
 }
