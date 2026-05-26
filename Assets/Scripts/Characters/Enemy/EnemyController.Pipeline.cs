@@ -23,7 +23,7 @@ public partial class EnemyController
 
   private void ApplyEffects()
   {
-    _effects.Run(false);
+    _effects.Run();
   }
 
   private void ApplyModules()

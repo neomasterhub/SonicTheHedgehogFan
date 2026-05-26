@@ -12,6 +12,6 @@ public partial class CameraController : MonoBehaviour
 
   private void ApplyEffects()
   {
-    _effects.Run(false);
+    _effects.Run();
   }
 }

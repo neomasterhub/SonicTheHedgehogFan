@@ -33,7 +33,7 @@ public partial class RingController : MonoBehaviour
 
   private void ApplyEffects()
   {
-    _effects.Run(false);
+    _effects.Run();
   }
 
   private void AnalyzeEnvironment()

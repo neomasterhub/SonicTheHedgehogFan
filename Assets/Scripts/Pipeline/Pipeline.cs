@@ -8,6 +8,7 @@ public class Pipeline
   private readonly PipelineStepInfo[] _appliedHistory;
   private readonly RingBuffer<PipelineStepInfo> _prevAppliedHistory;
 
+  private bool _writeAppliedHistory;
   private PipelineStepInfo _lastApplied;
 
   public Pipeline(int prevAppliedHistoryCapacity = 2, int lastAppliedCountMax = 3)
@@ -24,7 +25,13 @@ public class Pipeline
     return this;
   }
 
-  public void Run(bool writeAppliedHistory = true)
+  public Pipeline WithHistoryWriting(bool writeAppliedHistory = true)
+  {
+    _writeAppliedHistory = writeAppliedHistory;
+    return this;
+  }
+
+  public void Run()
   {
     for (var i = 0; i < _steps.Count; i++)
     {
@@ -37,7 +44,7 @@ public class Pipeline
 
       var result = step.Action();
 
-      if (writeAppliedHistory)
+      if (_writeAppliedHistory)
       {
         if (step.DisplayName == _lastApplied.DisplayName
           && result == _lastApplied.Result)
