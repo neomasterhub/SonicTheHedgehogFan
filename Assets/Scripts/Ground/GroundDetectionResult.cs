@@ -2,7 +2,7 @@ using UnityEngine;
 
 public readonly struct GroundDetectionResult
 {
-  public readonly bool SourceSensorSide;
+  public readonly char SourceSensorId;
   public readonly float Distance;
   public readonly float AngleDeg;
   public readonly float AngleRad;
@@ -12,13 +12,13 @@ public readonly struct GroundDetectionResult
   public readonly bool IsBalancing;
 
   public GroundDetectionResult(
-    bool sourceSensorSide,
+    char sourceSensorId,
     RaycastHit2D hit,
     Vector2 sensorDirection,
     VerticalRelation sensorGroundRelation = VerticalRelation.Above,
     bool isBalancing = false)
   {
-    SourceSensorSide = sourceSensorSide;
+    SourceSensorId = sourceSensorId;
     Contact = hit.point;
     Normal = hit.normal;
     Distance = hit.distance;
