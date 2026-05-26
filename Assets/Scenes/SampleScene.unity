@@ -3104,7 +3104,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 3
+  orthographic size: 2.8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3129,7 +3129,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 19.63, y: 9.99, z: -10}
+  m_LocalPosition: {x: 19.38, y: 9.99, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3363,7 +3363,7 @@ Transform:
   m_GameObject: {fileID: 710850496}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 19.63, y: 9.99, z: 0}
+  m_LocalPosition: {x: 19.38, y: 9.99, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4152,7 +4152,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Effect History
 
-    Curling up/Enter         BR 3+'
+    Curling up/Enter         BR 3+
+
+    1'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 80788c3403104b940a534d2bbae44f3a, type: 2}
   m_sharedMaterial: {fileID: -5477974177161770089, guid: 80788c3403104b940a534d2bbae44f3a, type: 2}
@@ -4179,8 +4181,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16
-  m_fontSizeBase: 16
+  m_fontSize: 14
+  m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4628,7 +4630,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 145, y: 254}
+  m_SizeDelta: {x: 127, y: 224}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1391926818
 MonoBehaviour:
@@ -4643,7 +4645,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.49019608}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.78431374}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5130,7 +5132,7 @@ Transform:
   m_GameObject: {fileID: 1814098413}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 19.63, y: 9.99, z: -10}
+  m_LocalPosition: {x: 19.38, y: 9.99, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5184,8 +5186,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 68}
-  m_SizeDelta: {x: 284, y: 68}
+  m_AnchoredPosition: {x: 0, y: 60}
+  m_SizeDelta: {x: 250, y: 60}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1821154570
 MonoBehaviour:
@@ -5200,7 +5202,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.49019608}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.78431374}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5310,8 +5312,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16
-  m_fontSizeBase: 16
+  m_fontSize: 14
+  m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
