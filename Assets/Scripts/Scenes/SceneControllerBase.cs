@@ -9,7 +9,7 @@ public abstract class SceneControllerBase : MonoBehaviour
     _inputSystem = new PlayerInputSystem(GetPlayerInput);
   }
 
-  private PlayerInput GetPlayerInput()
+  protected virtual PlayerInput GetPlayerInput()
   {
     return PlayerInput.None
       .Set(PlayerInput.Up, Input.GetKey(KeyCode.UpArrow))
