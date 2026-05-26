@@ -5,7 +5,7 @@ using static SharedConsts.ConvertValues;
 using static SonicConsts.Physics;
 
 /// <summary>
-/// Initializations.
+/// Init.
 /// </summary>
 public partial class SonicController
 {
