@@ -19,6 +19,6 @@ public abstract class AIEnemyModuleControllerBase
   public override void Apply()
   {
     _timerSystem.Update(Time.deltaTime);
-    _effects.Run(false);
+    _effects.Run();
   }
 }

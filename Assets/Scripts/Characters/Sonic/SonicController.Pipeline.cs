@@ -114,7 +114,7 @@ public partial class SonicController
 
   private void ApplyEffects()
   {
-    _effects.Run(_debugMode);
+    _effects.WithHistoryWriting(_debugMode).Run();
   }
 
   private void ApplyMovement()
