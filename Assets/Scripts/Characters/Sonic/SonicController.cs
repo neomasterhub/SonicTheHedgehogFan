@@ -43,7 +43,6 @@ public partial class SonicController : MonoBehaviour
   private bool _postWallDetachPositionOffset;
   private bool _ringCollected;
   private bool _ringsLost;
-  private bool _triggeredGroundSensorSide;
   private bool _isDownGrounded;
   private bool _isDownGroundedStatic;
   private bool _isDownGroundedMoving;
@@ -53,6 +52,7 @@ public partial class SonicController : MonoBehaviour
   private bool _prevDebugMode;
   private bool _takeLeftHit;
   private bool _takeRightHit;
+  private char _triggeredGroundSensorId;
   private float _slopeFactor;
   private float _absGroundSpeed;
   private Animator _animator;
