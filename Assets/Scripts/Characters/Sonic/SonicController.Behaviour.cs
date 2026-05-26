@@ -5,7 +5,8 @@ public partial class SonicController
   : ICameraTarget,
   IEnemy,
   ILookVerticalDirectionProvider,
-  IRingCollector
+  IRingCollector,
+  ISceneObjectDebug
 {
   public bool IsInvincible { get; private set; }
   public bool IsAttacking { get; private set; }
@@ -19,8 +20,10 @@ public partial class SonicController
   public float PositionX => transform.position.x;
   public float PositionY => transform.position.y;
   public IEnemy ContactEnemy { get; set; }
+
   public bool CanCollectRing { get; private set; }
   public ICollector Rings { get; }
+
   public VerticalDirection LookVerticalDirection
   {
     get
@@ -36,6 +39,15 @@ public partial class SonicController
       }
 
       return VerticalDirection.None;
+    }
+  }
+
+  public bool DebugMode
+  {
+    set
+    {
+      _prevDebugMode = _debugMode;
+      _debugMode = value;
     }
   }
 }
