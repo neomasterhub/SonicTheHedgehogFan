@@ -41,19 +41,11 @@ public partial class SonicController
 
   private void Awake()
   {
-    InitializeEngine();
     InitializeComponents();
     InitializeViewSystem();
     InitializeSpeedSystemProviders();
     InitializeSounds();
     InitializeTimers();
-  }
-
-  private void InitializeEngine()
-  {
-    Application.targetFrameRate = FramePerSec;
-    Time.fixedDeltaTime = 1f / FramePerSec;
-    QualitySettings.vSyncCount = 0;
   }
 
   private void InitializeComponents()

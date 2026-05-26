@@ -36,7 +36,7 @@ public static class SharedConsts
 
   public static class ConvertValues
   {
-    public const int FramePerSec = 60;
+    public const int FramePerSec = 120;
     public const int PxPerUnit = 40;
     public const int SpxPerPx = 256;
     public const int SpxPerUnit = SpxPerPx * PxPerUnit;
