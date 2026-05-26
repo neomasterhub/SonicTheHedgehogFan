@@ -84,7 +84,7 @@ public partial class SonicController
   {
     _isGrounded = true;
     _isBalancing = _lastGroundDetectionResult.IsBalancing;
-    _triggeredGroundSensorId = _lastGroundDetectionResult.SourceSensorSide;
+    _triggeredGroundSensorId = _lastGroundDetectionResult.SourceSensorId;
     _groundInfoSystem.Update(_lastGroundDetectionResult.AngleDeg);
     _slopeFactor = GetSlopeFactor(_configs.PhysicsModeConfig);
 
@@ -100,7 +100,7 @@ public partial class SonicController
   {
     _isGrounded = false;
     _isBalancing = false;
-    _triggeredGroundSensorId = false;
+    _triggeredGroundSensorId = default;
     _groundInfoSystem.Reset();
     _slopeFactor = 0;
 

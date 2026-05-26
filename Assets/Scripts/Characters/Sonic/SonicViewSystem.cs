@@ -116,7 +116,7 @@ public class SonicViewSystem
 
     if (_context.IsBalancing)
     {
-      _spriteRenderer.flipX = _context.TriggeredGroundSensorSide.Value;
+      _spriteRenderer.flipX = _context.TriggeredGroundSensorId == 'B';
       return;
     }
 
