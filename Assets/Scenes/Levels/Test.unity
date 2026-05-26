@@ -3104,7 +3104,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 2.8
+  orthographic size: 3
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -4070,6 +4070,8 @@ MonoBehaviour:
 
     Curling up/Enter         BR 3+
 
+    2
+
     1'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 80788c3403104b940a534d2bbae44f3a, type: 2}
@@ -4527,7 +4529,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1391926817
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4561,7 +4563,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.78431374}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.8627451}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5084,7 +5086,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1821154569
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5102,8 +5104,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 60}
-  m_SizeDelta: {x: 250, y: 60}
+  m_AnchoredPosition: {x: 0, y: 76}
+  m_SizeDelta: {x: 250, y: 76}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1821154570
 MonoBehaviour:
@@ -5118,7 +5120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.78431374}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.8627451}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5325,6 +5327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2af74e55b69d6ad46878a51d1c7be3a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelSceneController
+  _debugMode: 0
 --- !u!1001 &2041925512
 PrefabInstance:
   m_ObjectHideFlags: 0
