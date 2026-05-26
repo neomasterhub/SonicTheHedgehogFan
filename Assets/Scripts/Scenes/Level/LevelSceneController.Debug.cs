@@ -1,3 +1,5 @@
+using static Helpers.Diagnostics;
+
 /// <summary>
 /// Debug.
 /// </summary>
@@ -25,7 +27,7 @@ public partial class LevelSceneController
   {
     _diagnosticsText
       .Clear()
-      .AppendLine($"FPS {FPS}")
+      .AppendLine($"FPS {GetFPS()}")
       ;
 
     _diagnosticsTextMesh.SetText(_diagnosticsText);

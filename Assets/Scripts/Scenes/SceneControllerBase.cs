@@ -9,8 +9,6 @@ public abstract class SceneControllerBase : MonoBehaviour
     _inputSystem = new PlayerInputSystem(GetPlayerInput);
   }
 
-  protected float FPS => 1 / Time.smoothDeltaTime;
-
   protected virtual PlayerInput GetPlayerInput()
   {
     return PlayerInput.None
