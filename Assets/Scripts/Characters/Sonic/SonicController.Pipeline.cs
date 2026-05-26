@@ -29,7 +29,6 @@ public partial class SonicController
     _configs.Update(_physicsMode);
     _timerSystem.Update(Time.deltaTime);
 
-    _prevDebugMode = _debugMode;
     _prevIsGrounded = _isGrounded;
     _prevIsRolling = _isRolling;
     _prevPhysicsMode = _physicsMode;
@@ -43,11 +42,6 @@ public partial class SonicController
     if (_inputSystem.Pressed == PlayerInput.None)
     {
       return;
-    }
-
-    if (_inputSystem.CheckLastPressed(ToggleDebugMode))
-    {
-      _debugMode = !_debugMode;
     }
 
     if (!IsHurt)
