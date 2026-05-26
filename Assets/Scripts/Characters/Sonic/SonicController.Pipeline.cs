@@ -45,11 +45,6 @@ public partial class SonicController
       return;
     }
 
-    if (_inputSystem.CheckLastPressed(ToggleDebugMode))
-    {
-      _debugMode = !_debugMode;
-    }
-
     if (!IsHurt)
     {
       if (_inputSystem.CheckLastPressed(TakeLeftHit))
