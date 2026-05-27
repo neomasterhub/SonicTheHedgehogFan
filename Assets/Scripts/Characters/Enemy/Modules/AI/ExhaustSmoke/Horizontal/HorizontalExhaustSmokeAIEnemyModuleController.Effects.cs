@@ -7,21 +7,7 @@ public partial class HorizontalExhaustSmokeAIEnemyModuleController
 {
   protected override void SetEffectPipeline()
   {
-    _effects.AddStep(CreateEffect_Read());
     _effects.AddStep(CreateEffect_SetOrigin());
-  }
-
-  private PipelineStep CreateEffect_Read()
-  {
-    return PipelineStepBuilder.Create()
-      .WithDisplayName("Read exhaust smoke")
-      .WithAction(() =>
-      {
-        _origin = _exhaustSmoke.Origin;
-
-        return PipelineStepResult.Continue;
-      })
-      .Build();
   }
 
   private PipelineStep CreateEffect_SetOrigin()
