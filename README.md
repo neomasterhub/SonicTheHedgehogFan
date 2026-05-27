@@ -1,5 +1,7 @@
 # Sonic the Hedgehog Fan
 
+[Play](https://neomasterhub.github.io/SonicTheHedgehogFanGame)
+
 ## Secret Codes
 
 |Code|Action|
