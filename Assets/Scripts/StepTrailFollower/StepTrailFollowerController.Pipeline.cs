@@ -7,10 +7,16 @@ public partial class StepTrailFollowerController
 {
   private void FixedUpdate()
   {
-    _stepTime = Time.fixedDeltaTime;
+    UpdatePosition();
+  }
+
+  private void UpdatePosition()
+  {
+    _stepTime += Time.fixedDeltaTime;
 
     if (_stepTime > _stepDuration)
     {
+      _stepTime = 0;
       _position = _parentTransform.position + _origin;
     }
 

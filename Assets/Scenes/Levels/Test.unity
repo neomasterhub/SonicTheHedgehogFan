@@ -3592,7 +3592,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StepTrailFollowerController
   _parentTransform: {fileID: 0}
   _origin: {x: 0.6, y: 0, z: 0}
-  _stepDuration: 0
+  _stepDuration: 0.5
 --- !u!1 &874072223
 GameObject:
   m_ObjectHideFlags: 0
