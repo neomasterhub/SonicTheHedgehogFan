@@ -2625,7 +2625,7 @@ Transform:
   m_GameObject: {fileID: 151653049}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 22.09, y: 9.857, z: 0}
+  m_LocalPosition: {x: 22, y: 9.857, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2768,8 +2768,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HorizontalPatrolAIEnemyModuleController
   _speedSpx: -128
   _stoppedDuration: 3
-  _minPositionX: 0
-  _maxPositionX: 0
+  _minPositionX: 20
+  _maxPositionX: 24
 --- !u!114 &151653059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2833,6 +2833,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10685efc1b4c3404c91039d288d59b80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HorizontalExhaustSmokeAIEnemyModuleController
+  _exhaustSmokeOrigin: {x: 0.6, y: 0, z: 0}
 --- !u!1 &262485117
 GameObject:
   m_ObjectHideFlags: 0
@@ -3219,7 +3220,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 19.38, y: 9.99, z: -10}
+  m_LocalPosition: {x: 17.94, y: 9.99, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3369,7 +3370,7 @@ Transform:
   m_GameObject: {fileID: 710850496}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 19.38, y: 9.99, z: 0}
+  m_LocalPosition: {x: 17.94, y: 9.99, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3474,7 +3475,6 @@ GameObject:
   - component: {fileID: 777969678}
   - component: {fileID: 777969680}
   - component: {fileID: 777969679}
-  - component: {fileID: 777969681}
   m_Layer: 0
   m_Name: Exhaust Smoke
   m_TagString: Untagged
@@ -3578,21 +3578,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &777969681
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 777969677}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f41f90e51104edc42a279fbf94135330, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StepTrailFollowerController
-  _parentTransform: {fileID: 0}
-  _origin: {x: 0.6, y: 0, z: 0}
-  _stepDuration: 0.45
 --- !u!1 &874072223
 GameObject:
   m_ObjectHideFlags: 0
@@ -5408,7 +5393,7 @@ Transform:
   m_GameObject: {fileID: 1814098413}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 19.38, y: 9.99, z: -10}
+  m_LocalPosition: {x: 17.94, y: 9.99, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -14,7 +14,9 @@ public partial class HorizontalExhaustSmokeAIEnemyModuleController
   private void InitializeComponents()
   {
     var exhaustSmoke = transform.Find("Exhaust Smoke");
+
     _exhaustSmokeTransform = exhaustSmoke.transform;
     _exhaustSmokeAnimator = exhaustSmoke.GetComponent<Animator>();
+    _exhaustSmokePosition = transform.position + _exhaustSmokeOrigin;
   }
 }
