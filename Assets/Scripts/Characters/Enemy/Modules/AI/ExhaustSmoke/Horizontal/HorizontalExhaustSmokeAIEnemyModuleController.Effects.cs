@@ -29,11 +29,11 @@ public partial class HorizontalExhaustSmokeAIEnemyModuleController
     return PipelineStepBuilder.Create()
       .WithDisplayName("Set exhaust smoke origin")
       .WithCondition(() =>
-        (_context.HorizontalDirection && _origin.x > 0)
-        || (!_context.HorizontalDirection && _origin.x < 0))
+        (_context.HorizontalDirection && _exhaustSmokeOrigin.x > 0)
+        || (!_context.HorizontalDirection && _exhaustSmokeOrigin.x < 0))
       .WithAction(() =>
       {
-        _exhaustSmoke.Origin = new Vector3(-_origin.x, _origin.y);
+        _exhaustSmokeOrigin = new Vector3(-_exhaustSmokeOrigin.x, _exhaustSmokeOrigin.y);
 
         return PipelineStepResult.Continue;
       })

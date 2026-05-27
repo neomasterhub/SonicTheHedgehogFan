@@ -1,3 +1,5 @@
+using UnityEngine;
+
 /// <summary>
 /// Init.
 /// </summary>
@@ -11,6 +13,8 @@ public partial class HorizontalExhaustSmokeAIEnemyModuleController
 
   private void InitializeComponents()
   {
-    _exhaustSmoke = transform.Find("Exhaust Smoke").GetComponent<IStepTrailFollower>();
+    var exhaustSmoke = transform.Find("Exhaust Smoke");
+    _exhaustSmokeTransform = exhaustSmoke.transform;
+    _exhaustSmokeAnimator = exhaustSmoke.GetComponent<Animator>();
   }
 }

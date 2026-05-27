@@ -6,6 +6,9 @@ using UnityEngine;
 public partial class HorizontalExhaustSmokeAIEnemyModuleController
   : AIEnemyModuleControllerBase
 {
-  private Vector2 _origin;
-  private IStepTrailFollower _exhaustSmoke;
+  private Animator _exhaustSmokeAnimator;
+  private Transform _exhaustSmokeTransform;
+
+  [SerializeField]
+  private Vector2 _exhaustSmokeOrigin;
 }
