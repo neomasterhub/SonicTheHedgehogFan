@@ -7,11 +7,12 @@ public partial class HorizontalExhaustSmokeAIEnemyModuleController
 {
   protected override void SetEffectPipeline()
   {
-    _effects.AddStep(CreateEffect_SetOrigin());
-    _effects.AddStep(CreateEffect_UpdatePosition());
+    _effects.AddStep(CreateEffect_SetExhaustSmokeOrigin());
+    _effects.AddStep(CreateEffect_SetExhaustSmokeVisibility());
+    _effects.AddStep(CreateEffect_UpdateExhaustSmokePosition());
   }
 
-  private PipelineStep CreateEffect_SetOrigin()
+  private PipelineStep CreateEffect_SetExhaustSmokeOrigin()
   {
     return PipelineStepBuilder.Create()
       .WithDisplayName("Set exhaust smoke origin")
@@ -27,7 +28,23 @@ public partial class HorizontalExhaustSmokeAIEnemyModuleController
       .Build();
   }
 
-  private PipelineStep CreateEffect_UpdatePosition()
+  private PipelineStep CreateEffect_SetExhaustSmokeVisibility()
+  {
+    return PipelineStepBuilder.Create()
+      .WithDisplayName("Set exhaust smoke visibility")
+      .WithCondition(() =>
+        _exhaustSmokeVisibility == _context.IsStatic)
+      .WithAction(() =>
+      {
+        _exhaustSmokeVisibility = !_context.IsStatic;
+        _exhaustSmokeSpriteRenderer.enabled = _exhaustSmokeVisibility;
+
+        return PipelineStepResult.Continue;
+      })
+      .Build();
+  }
+
+  private PipelineStep CreateEffect_UpdateExhaustSmokePosition()
   {
     return PipelineStepBuilder.Create()
       .WithDisplayName("Update exhaust smoke position")
@@ -37,7 +54,11 @@ public partial class HorizontalExhaustSmokeAIEnemyModuleController
 
         if (animatorState.normalizedTime > 1)
         {
-          _exhaustSmokeAnimator.Play("ExhaustSmoke", 0, 0);
+          if (_exhaustSmokeVisibility)
+          {
+            _exhaustSmokeAnimator.Play("ExhaustSmoke", 0, 0);
+          }
+
           _exhaustSmokePosition = transform.position + _exhaustSmokeOrigin;
         }
 
