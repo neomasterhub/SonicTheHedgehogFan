@@ -6,5 +6,9 @@ using UnityEngine;
 public partial class StepTrailFollowerController
   : IStepTrailFollower
 {
-  public Vector3 Origin { set => _origin = value; }
+  public Vector3 Origin
+  {
+    get => _origin;
+    set => _origin = value;
+  }
 }

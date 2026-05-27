@@ -2544,6 +2544,7 @@ GameObject:
   - component: {fileID: 151653055}
   - component: {fileID: 151653058}
   - component: {fileID: 151653061}
+  - component: {fileID: 151653063}
   - component: {fileID: 151653060}
   - component: {fileID: 151653057}
   - component: {fileID: 151653056}
@@ -2820,6 +2821,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NormalSoundEnemyModuleController
   _attackedAudioClip: {fileID: 0}
   _dyingAudioClip: {fileID: 8300000, guid: cdee9d3a3b371c64db527b661d90a514, type: 3}
+--- !u!114 &151653063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 151653049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10685efc1b4c3404c91039d288d59b80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HorizontalExhaustSmokeAIEnemyModuleController
 --- !u!1 &262485117
 GameObject:
   m_ObjectHideFlags: 0
@@ -3461,6 +3474,7 @@ GameObject:
   - component: {fileID: 777969678}
   - component: {fileID: 777969680}
   - component: {fileID: 777969679}
+  - component: {fileID: 777969681}
   m_Layer: 0
   m_Name: Exhaust Smoke
   m_TagString: Untagged
@@ -3564,6 +3578,21 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &777969681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777969677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f41f90e51104edc42a279fbf94135330, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StepTrailFollowerController
+  _parentTransform: {fileID: 0}
+  _origin: {x: 0.6, y: 0, z: 0}
+  _stepDuration: 0
 --- !u!1 &874072223
 GameObject:
   m_ObjectHideFlags: 0
