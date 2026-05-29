@@ -1,4 +1,8 @@
+using UnityEngine;
+
 public interface IAnimal
 {
-  void BreakOut(bool horizontalDirection);
+  void BreakOut(
+    Vector2 position,
+    bool horizontalDirection);
 }
