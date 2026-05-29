@@ -1,6 +1,5 @@
 using UnityEngine;
 using static Helpers.Sensors;
-using static RingConsts.Physics;
 
 public class RingSensorSystem
 {
@@ -8,13 +7,17 @@ public class RingSensorSystem
   private readonly UDSensor _a;
   private readonly Vector2 _aOffset;
 
-  public RingSensorSystem(char sensorId = 'A')
+  public RingSensorSystem(
+    Vector2 position,
+    float innerSensorRayLength,
+    float outerSensorRayLength,
+    char sensorId = 'A')
   {
     _aId = sensorId;
-    _aOffset = new(0, -SensorY);
+    _aOffset = position;
     _a = new(Color.gold, _aOffset, Vector2.up, Vector2.down);
-    _a.UpRay.Length = InnerSensorRayLength;
-    _a.DownRay.Length = OuterSensorRayLength;
+    _a.UpRay.Length = innerSensorRayLength;
+    _a.DownRay.Length = outerSensorRayLength;
   }
 
   public void Draw()
