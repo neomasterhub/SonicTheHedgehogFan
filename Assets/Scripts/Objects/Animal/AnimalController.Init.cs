@@ -11,7 +11,7 @@ public partial class AnimalController
   {
     _speedXPx = SpeedXPx;
     _jumpSpeedPx = JumpSpeedPx;
-    _releasedSpeedPx = ReleasedSpeedPx;
+    _releaseSpeedPx = ReleaseSpeedPx;
     _gravitySpeedSpx = GravitySpeedSpx;
 
     _sensorSystem = new ASensorSystem(
@@ -26,6 +26,6 @@ public partial class AnimalController
 
   private void Awake()
   {
-    _speedSystem.Initialize(0, _releasedSpeedPx / PxPerUnit);
+    _speedSystem.Initialize(0, _releaseSpeedPx / PxPerUnit);
   }
 }

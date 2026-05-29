@@ -16,7 +16,7 @@ public partial class AnimalController : MonoBehaviour
   [SerializeField]
   private float _jumpSpeedPx;
   [SerializeField]
-  private float _releasedSpeedPx;
+  private float _releaseSpeedPx;
   [SerializeField]
   private float _gravitySpeedSpx;
 }
