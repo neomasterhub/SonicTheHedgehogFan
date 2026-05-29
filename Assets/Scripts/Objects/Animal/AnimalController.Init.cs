@@ -21,7 +21,7 @@ public partial class AnimalController
     _speedSystem = new(
       _speedXPx / PxPerUnit,
       _jumpSpeedPx / PxPerUnit,
-      _gravitySpeedSpx / SpxPerPx);
+      _gravitySpeedSpx / SpxPerUnit);
   }
 
   private void Awake()
