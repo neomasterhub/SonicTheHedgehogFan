@@ -1,8 +1,7 @@
 using UnityEngine;
 using static RingConsts.Physics;
-using static SharedConsts.Physics;
 
-public class RingSpeedSystem
+public class RingSpeedSystem : SpeedSystemBase
 {
   private readonly RingConfigs _configs;
 
@@ -12,21 +11,6 @@ public class RingSpeedSystem
   public RingSpeedSystem(RingConfigs configs)
   {
     _configs = configs;
-  }
-
-  public float SpeedX { get; private set; }
-  public float SpeedY { get; private set; }
-
-  private void RoundSpeed()
-  {
-    SpeedX = SpeedX.Round(SpeedRoundingDigits);
-    SpeedY = SpeedY.Round(SpeedRoundingDigits);
-  }
-
-  public void Initialize(float speedX, float speedY)
-  {
-    SpeedX = speedX;
-    SpeedY = speedY;
   }
 
   public void SetSpeed(RingSpeedContext context)
