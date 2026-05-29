@@ -9,10 +9,8 @@ public partial class AnimalController : IAnimal
     Vector2 position,
     bool horizontalDirection)
   {
-    _horizontalSpeedPx = horizontalDirection ? _horizontalSpeedPx : -_horizontalSpeedPx;
-
+    _spriteRenderer.flipX = !horizontalDirection;
     transform.position = position;
-
     gameObject.SetActive(true);
   }
 }

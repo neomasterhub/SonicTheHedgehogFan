@@ -11,6 +11,7 @@ public partial class AnimalController : MonoBehaviour
 
   private bool _isGrounded;
   private GroundDetectionResult _lastGroundDetectionResult;
+  private SpriteRenderer _spriteRenderer;
 
   [SerializeField]
   private float _gravitySpeedSpx;
