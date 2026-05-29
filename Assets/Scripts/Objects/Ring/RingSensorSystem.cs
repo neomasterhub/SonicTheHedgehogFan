@@ -4,11 +4,13 @@ using static RingConsts.Physics;
 
 public class RingSensorSystem
 {
+  private readonly char _aId;
   private readonly UDSensor _a;
   private readonly Vector2 _aOffset;
 
-  public RingSensorSystem()
+  public RingSensorSystem(char sensorId = 'A')
   {
+    _aId = sensorId;
     _aOffset = new(0, -SensorY);
     _a = new(Color.gold, _aOffset, Vector2.up, Vector2.down);
     _a.UpRay.Length = InnerSensorRayLength;
@@ -25,8 +27,8 @@ public class RingSensorSystem
     _a.SetParentPosition(parentPosition + _aOffset);
   }
 
-  public GroundDetectionResult? DetectGround(LayerMask groundLayer, char sensorId = 'A')
+  public GroundDetectionResult? DetectGround(LayerMask groundLayer)
   {
-    return ADetectGround(sensorId, _a, groundLayer);
+    return ADetectGround(_aId, _a, groundLayer);
   }
 }
