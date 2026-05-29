@@ -30,6 +30,26 @@ public static class Helpers
 
   public static class Sensors
   {
+    public static GroundDetectionResult? ADetectGround(
+      char sensorId,
+      UDSensor sensor,
+      LayerMask groundLayer)
+    {
+      var hit = sensor.DownRay.Cast(groundLayer);
+      if (hit != null)
+      {
+        return new(sensorId, hit.Value, sensor.DownRay.Direction, VerticalRelation.Above);
+      }
+
+      hit = sensor.UpRay.Cast(groundLayer);
+      if (hit != null)
+      {
+        return new(sensorId, hit.Value, sensor.UpRay.Direction, VerticalRelation.Below);
+      }
+
+      return null;
+    }
+
     public static GroundDetectionResult? ABDetectGround(
       UDFSensor a,
       UDFSensor b,
