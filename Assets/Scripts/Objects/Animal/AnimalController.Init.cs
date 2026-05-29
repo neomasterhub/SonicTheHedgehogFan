@@ -15,10 +15,10 @@ public partial class AnimalController
 
   private void Awake()
   {
-    GetComponent<SpriteRenderer>().flipX = _speedXPx < 0;
+    GetComponent<SpriteRenderer>().flipX = _horizontalSpeedPx < 0;
 
     _speedSystem.Initialize(
-      _speedXPx / PxPerUnit,
+      _horizontalSpeedPx / PxPerUnit,
       _releaseSpeedPx / PxPerUnit,
       _jumpSpeedPx / PxPerUnit,
       _gravitySpeedSpx / SpxPerUnit);

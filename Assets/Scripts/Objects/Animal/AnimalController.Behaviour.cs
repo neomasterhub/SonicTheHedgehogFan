@@ -9,7 +9,7 @@ public partial class AnimalController : IAnimal
     Vector2 position,
     bool horizontalDirection)
   {
-    _speedXPx = horizontalDirection ? _speedXPx : -_speedXPx;
+    _horizontalSpeedPx = horizontalDirection ? _horizontalSpeedPx : -_horizontalSpeedPx;
 
     transform.position = position;
 
