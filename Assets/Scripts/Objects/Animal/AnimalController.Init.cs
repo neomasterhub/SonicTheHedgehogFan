@@ -9,23 +9,23 @@ public partial class AnimalController
 {
   public AnimalController()
   {
-    _speedXPx = SpeedXPx;
+    _gravitySpeedSpx = GravitySpeedSpx;
     _jumpSpeedPx = JumpSpeedPx;
     _releaseSpeedPx = ReleaseSpeedPx;
-    _gravitySpeedSpx = GravitySpeedSpx;
+    _speedXPx = SpeedXPx;
 
-    _sensorSystem = new ASensorSystem(
-      new(0, SensorY),
-      Color.aliceBlue);
-
-    _speedSystem = new(
-      _speedXPx / PxPerUnit,
-      _jumpSpeedPx / PxPerUnit,
-      _gravitySpeedSpx / SpxPerUnit);
+    _sensorSystem = new ASensorSystem(new(0, SensorY), Color.aliceBlue);
+    _speedSystem = new();
   }
 
   private void Awake()
   {
-    _speedSystem.Initialize(0, _releaseSpeedPx / PxPerUnit);
+    GetComponent<SpriteRenderer>().flipX = _speedXPx < 0;
+
+    _speedSystem.Initialize(
+      _speedXPx / PxPerUnit,
+      _releaseSpeedPx / PxPerUnit,
+      _jumpSpeedPx / PxPerUnit,
+      _gravitySpeedSpx / SpxPerUnit);
   }
 }
