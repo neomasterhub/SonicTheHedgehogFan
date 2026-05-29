@@ -1,11 +1,18 @@
 public class AnimalSpeedSystem : SpeedSystemBase
 {
-  private AnimalSpeedContext _context;
+  private readonly float _speedX;
+  private readonly float _jumpSpeed;
+  private readonly float _gravitySpeed;
+
+  public AnimalSpeedSystem(float speedX, float jumpSpeed, float gravitySpeed)
+  {
+    _speedX = speedX;
+    _jumpSpeed = jumpSpeed;
+    _gravitySpeed = gravitySpeed;
+  }
 
   public void SetSpeed(AnimalSpeedContext context)
   {
-    _context = context;
-
     if (context.IsGrounded)
     {
       SetSpeed_Grounded();
@@ -14,15 +21,16 @@ public class AnimalSpeedSystem : SpeedSystemBase
     {
       SetSpeed_Airborne();
     }
-
-    RoundSpeed();
   }
 
   private void SetSpeed_Airborne()
   {
+    SpeedY = -_gravitySpeed;
   }
 
   private void SetSpeed_Grounded()
   {
+    SpeedX = _speedX;
+    SpeedY = _jumpSpeed;
   }
 }
