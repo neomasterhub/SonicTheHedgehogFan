@@ -14,6 +14,8 @@ public partial class AnimalController : MonoBehaviour
   private SpriteRenderer _spriteRenderer;
 
   [SerializeField]
+  private bool _horizontalDirection;
+  [SerializeField]
   private float _gravitySpeedSpx;
   [SerializeField]
   private float _horizontalSpeedPx;

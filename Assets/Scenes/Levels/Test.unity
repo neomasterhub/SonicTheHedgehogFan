@@ -2767,7 +2767,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d9029c3a2aaf14438af6b85f1da6868, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HorizontalPatrolAIEnemyModuleController
-  _speedSpx: -128
+  _speedSpx: -256
   _stoppedDuration: 3
   _minPositionX: 20
   _maxPositionX: 24
@@ -5351,10 +5351,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37ecf97e62395a24db3495da0869f9b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimalController
-  _speedXPx: 3
+  _horizontalDirection: 0
+  _gravitySpeedSpx: 56
+  _horizontalSpeedPx: 3
   _jumpSpeedPx: 6
   _releaseSpeedPx: 4
-  _gravitySpeedSpx: 56
 --- !u!212 &1812668740
 SpriteRenderer:
   serializedVersion: 2
