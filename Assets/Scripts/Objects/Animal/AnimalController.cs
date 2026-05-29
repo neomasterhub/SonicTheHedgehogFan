@@ -12,11 +12,11 @@ public partial class AnimalController : MonoBehaviour
   private GroundDetectionResult _lastGroundDetectionResult;
 
   [SerializeField]
-  private float? _speedX;
+  private float _speedXPx;
   [SerializeField]
-  private float? _jumpSpeed;
+  private float _jumpSpeedPx;
   [SerializeField]
-  private float? _gravitySpeed;
+  private float _releasedSpeedPx;
   [SerializeField]
-  private Vector2 _initialSpeed;
+  private float _gravitySpeedSpx;
 }
