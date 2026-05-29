@@ -2,13 +2,13 @@ using UnityEngine;
 using static Helpers.Sensors;
 using static SharedConsts.Physics;
 
-public class RingSensorSystem
+public class ASensorSystem
 {
   private readonly char _aId;
   private readonly UDSensor _a;
   private readonly Vector2 _aOffset;
 
-  public RingSensorSystem(
+  public ASensorSystem(
     Vector2? position = null,
     Color? sensorColor = null,
     float innerSensorRayLength = SensorRayLengths.GroundInner,
