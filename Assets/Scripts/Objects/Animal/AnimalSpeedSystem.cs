@@ -25,7 +25,7 @@ public class AnimalSpeedSystem : SpeedSystemBase
 
   private void SetSpeed_Airborne()
   {
-    SpeedY = -_gravitySpeed;
+    SpeedY -= _gravitySpeed;
   }
 
   private void SetSpeed_Grounded()
