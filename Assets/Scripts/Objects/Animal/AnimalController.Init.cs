@@ -9,11 +9,6 @@ public partial class AnimalController
 {
   public AnimalController()
   {
-    _gravitySpeedSpx = GravitySpeedSpx;
-    _jumpSpeedPx = JumpSpeedPx;
-    _releaseSpeedPx = ReleaseSpeedPx;
-    _speedXPx = SpeedXPx;
-
     _sensorSystem = new ASensorSystem(new(0, SensorY), Color.aliceBlue);
     _speedSystem = new();
   }
