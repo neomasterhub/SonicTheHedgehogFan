@@ -5318,7 +5318,7 @@ Transform:
   m_GameObject: {fileID: 1812668737}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17.99023, y: 11.27351, z: 0}
+  m_LocalPosition: {x: 19.11, y: 11.27351, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5336,10 +5336,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37ecf97e62395a24db3495da0869f9b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimalController
-  _speedXPx: 2
-  _jumpSpeedPx: 4
-  _releaseSpeedPx: 5
-  _gravitySpeedSpx: 58
+  _speedXPx: 3
+  _jumpSpeedPx: 6
+  _releaseSpeedPx: 4
+  _gravitySpeedSpx: 56
 --- !u!212 &1812668740
 SpriteRenderer:
   serializedVersion: 2
