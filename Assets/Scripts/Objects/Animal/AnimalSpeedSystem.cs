@@ -1,11 +1,13 @@
 public class AnimalSpeedSystem : SpeedSystemBase
 {
-  private readonly float _speedX;
-  private readonly float _jumpSpeed;
-  private readonly float _gravitySpeed;
+  private float _speedX;
+  private float _jumpSpeed;
+  private float _gravitySpeed;
 
-  public AnimalSpeedSystem(float speedX, float jumpSpeed, float gravitySpeed)
+  public void Initialize(float speedX, float speedY, float jumpSpeed, float gravitySpeed)
   {
+    Initialize(speedX, speedY);
+
     _speedX = speedX;
     _jumpSpeed = jumpSpeed;
     _gravitySpeed = gravitySpeed;
