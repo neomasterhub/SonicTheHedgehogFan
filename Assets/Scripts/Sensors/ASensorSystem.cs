@@ -29,7 +29,7 @@ public class ASensorSystem
 
   public void Update(Vector2 parentPosition)
   {
-    _a.SetParentPosition(parentPosition + _aOffset);
+    _a.SetParentPosition(parentPosition);
   }
 
   public GroundDetectionResult? DetectGround(LayerMask groundLayer)
