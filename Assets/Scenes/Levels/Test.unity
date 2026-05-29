@@ -2550,6 +2550,7 @@ GameObject:
   - component: {fileID: 151653056}
   - component: {fileID: 151653059}
   - component: {fileID: 151653062}
+  - component: {fileID: 151653064}
   m_Layer: 0
   m_Name: Motobug
   m_TagString: Untagged
@@ -2834,6 +2835,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HorizontalExhaustSmokeAIEnemyModuleController
   _exhaustSmokeOrigin: {x: 0.6, y: 0, z: 0}
+--- !u!114 &151653064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 151653049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 848cec0a95d4975419c9f3c17891238a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalContainerEnemyModuleController
+  _animalObj: {fileID: 1812668737}
 --- !u!1 &262485117
 GameObject:
   m_ObjectHideFlags: 0
