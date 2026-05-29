@@ -2847,6 +2847,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 848cec0a95d4975419c9f3c17891238a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimalContainerEnemyModuleController
+  _animalHorizontalDirection: 0
   _animalObj: {fileID: 1812668737}
 --- !u!1 &262485117
 GameObject:
