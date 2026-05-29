@@ -1,10 +1,9 @@
 using UnityEngine;
+using static Helpers.Sensors;
 using static RingConsts.Physics;
 
 public class RingSensorSystem
 {
-  private const char _oId = 'O';
-
   private readonly UDSensor _o;
   private readonly Vector2 _oOffset;
 
@@ -26,20 +25,8 @@ public class RingSensorSystem
     _o.SetParentPosition(parentPosition + _oOffset);
   }
 
-  public GroundDetectionResult? DetectGround(LayerMask groundLayer)
+  public GroundDetectionResult? DetectGround(LayerMask groundLayer, char sensorId = 'A')
   {
-    var hit = _o.DownRay.Cast(groundLayer);
-    if (hit != null)
-    {
-      return new(_oId, hit.Value, _o.DownRay.Direction, VerticalRelation.Above);
-    }
-
-    hit = _o.UpRay.Cast(groundLayer);
-    if (hit != null)
-    {
-      return new(_oId, hit.Value, _o.UpRay.Direction, VerticalRelation.Below);
-    }
-
-    return null;
+    return ADetectGround(sensorId, _o, groundLayer);
   }
 }
