@@ -6,7 +6,7 @@ public class AnimalSpeedSystem : SpeedSystemBase
 
   public void Initialize(float speedX, float speedY, float jumpSpeed, float gravitySpeed)
   {
-    Initialize(speedX, speedY);
+    Initialize(0, speedY);
 
     _speedX = speedX;
     _jumpSpeed = jumpSpeed;
