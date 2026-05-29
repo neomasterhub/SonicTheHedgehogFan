@@ -59,6 +59,13 @@ public static class SharedConsts
       public static readonly Range Flat = new(-23, 23);
       public static readonly Range Slope = new(-45, 45);
     }
+
+    public static class SensorRayLengths
+    {
+      public const float GroundInner = 0.2f;
+      public const float GroundOuter = 0.1f;
+      public const float GroundFront = 0.5f;
+    }
   }
 
   public static class Rendering
