@@ -14,7 +14,9 @@ public partial class AnimalContainerEnemyModuleController
     {
       _isAnimalReleased = true;
 
-      _animal.BreakOut(transform.position, _animalHorizontalDirection);
+      _animal.BreakOut(
+        transform.position + _animalBreakOutOrigin,
+        _animalHorizontalDirection);
     }
   }
 }
