@@ -12,5 +12,6 @@ public partial class AnimalContainerEnemyModuleController
   [SerializeField]
   private bool _animalHorizontalDirection;
   [SerializeField]
+  [InspectorLabel("Animal")]
   private GameObject _animalObj;
 }
