@@ -5,35 +5,26 @@ using UnityEngine;
 /// </summary>
 public partial class OffscreenDeactivatorController
 {
-  private void FixedUpdate()
+  private void Start()
   {
-    if (IsOffscreenCheckIntervalElapsed() && IsOffscreen())
-    {
-      Deactivate();
-    }
+    _timerSystem.StartIfNotRunning(_activeTimer);
   }
 
-  private bool IsOffscreenCheckIntervalElapsed()
+  private void LateUpdate()
   {
-    _time += Time.fixedDeltaTime;
+    _timerSystem.Update(Time.deltaTime);
 
-    if (_time > _offscreenCheckInterval)
+    if (_activeTimer.IsCompleted)
     {
-      _time = 0;
-      return true;
+      if (_isActive)
+      {
+        _timerSystem.StartIfNotRunning(_activeTimer);
+      }
+      else
+      {
+        Deactivate();
+      }
     }
-
-    return false;
-  }
-
-  private bool IsOffscreen()
-  {
-    var viewportPos = _camera.WorldToViewportPoint(transform.position);
-
-    return viewportPos.x < 0
-      || viewportPos.x > 1
-      || viewportPos.y < 0
-      || viewportPos.y > 1;
   }
 
   private void Deactivate()

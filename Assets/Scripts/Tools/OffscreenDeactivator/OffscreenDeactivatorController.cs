@@ -5,8 +5,11 @@ using UnityEngine;
 /// </summary>
 public partial class OffscreenDeactivatorController : MonoBehaviour
 {
-  private float _time;
+  private readonly TimerSystem _timerSystem;
+
+  private bool _isActive;
   private Camera _camera;
+  private Timer _activeTimer;
 
   [SerializeField]
   private float _offscreenCheckInterval;
