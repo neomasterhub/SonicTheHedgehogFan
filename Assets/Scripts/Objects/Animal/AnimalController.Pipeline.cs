@@ -11,6 +11,7 @@ public partial class AnimalController
     AnalyzeEnvironment();
     ApplyMovement();
     UpdatePosition();
+    UpdateView();
   }
 
   private void AnalyzeEnvironment()
@@ -24,6 +25,7 @@ public partial class AnimalController
 
     if (_isGrounded)
     {
+      _isRunning = true;
       _lastGroundDetectionResult = ground.Value;
     }
   }
@@ -45,5 +47,10 @@ public partial class AnimalController
     }
 
     transform.position += new Vector3(_speedSystem.SpeedX, speedY);
+  }
+
+  private void UpdateView()
+  {
+    _viewSystem.Update(new(_isRunning, _speedSystem.SpeedY));
   }
 }
