@@ -9,7 +9,7 @@ public partial class AnimalController
 {
   public AnimalController()
   {
-    _sensorSystem = new ASensorSystem(new(0, SensorY), Color.aliceBlue);
+    _sensorSystem = new ASensorSystem(new(0, SensorY), Color.skyBlue);
     _speedSystem = new();
     _viewSystem = new();
   }
