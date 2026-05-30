@@ -5,9 +5,8 @@ using UnityEngine;
 /// </summary>
 public partial class OffscreenDeactivatorController : MonoBehaviour
 {
-  private float _screenHalfWidth;
-  private float _screenHalfHeight;
-  private Transform _cameraTransform;
+  private float _time;
+  private Camera _camera;
 
   [SerializeField]
   private float _checkInterval;

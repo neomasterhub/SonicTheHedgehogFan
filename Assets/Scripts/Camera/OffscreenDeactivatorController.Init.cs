@@ -5,11 +5,13 @@ using UnityEngine;
 /// </summary>
 public partial class OffscreenDeactivatorController
 {
+  public OffscreenDeactivatorController()
+  {
+    _checkInterval = 1;
+  }
+
   private void Awake()
   {
-    var camera = _cameraObj.GetComponent<Camera>();
-    _cameraTransform = camera.transform;
-    _screenHalfHeight = camera.orthographicSize;
-    _screenHalfWidth = _screenHalfHeight * camera.aspect;
+    _camera = _cameraObj.GetComponent<Camera>();
   }
 }
