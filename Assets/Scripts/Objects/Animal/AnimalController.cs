@@ -9,11 +9,10 @@ public partial class AnimalController : MonoBehaviour
 {
   private readonly ASensorSystem _sensorSystem;
   private readonly AnimalSpeedSystem _speedSystem;
+  private readonly AnimalViewSystem _viewSystem;
 
   private bool _isGrounded;
-  private Animator _animator;
   private GroundDetectionResult _lastGroundDetectionResult;
-  private SpriteRenderer _spriteRenderer;
 
   [SerializeField]
   private bool _horizontalDirection;

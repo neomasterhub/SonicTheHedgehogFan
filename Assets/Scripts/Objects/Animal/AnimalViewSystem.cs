@@ -3,11 +3,10 @@ using AnimatorParameters = SharedConsts.Animator.Parameters;
 
 public class AnimalViewSystem
 {
-  private readonly Animator _animator;
-
+  private Animator _animator;
   private AnimalViewContext _context;
 
-  public AnimalViewSystem(Animator animator)
+  public void InitializeComponents(Animator animator)
   {
     _animator = animator;
   }

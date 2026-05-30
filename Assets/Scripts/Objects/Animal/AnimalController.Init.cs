@@ -11,6 +11,7 @@ public partial class AnimalController
   {
     _sensorSystem = new ASensorSystem(new(0, SensorY), Color.aliceBlue);
     _speedSystem = new();
+    _viewSystem = new();
   }
 
   private void Awake()
@@ -21,9 +22,8 @@ public partial class AnimalController
 
   private void InitializeComponents()
   {
-    _animator = GetComponent<Animator>();
-    _spriteRenderer = GetComponent<SpriteRenderer>();
-    _spriteRenderer.flipX = !_horizontalDirection;
+    GetComponent<SpriteRenderer>().flipX = !_horizontalDirection;
+    _viewSystem.InitializeComponents(GetComponent<Animator>());
   }
 
   private void InitializeSpeedSystem()
