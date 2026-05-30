@@ -5318,6 +5318,7 @@ GameObject:
   - component: {fileID: 1812668740}
   - component: {fileID: 1812668739}
   - component: {fileID: 1812668741}
+  - component: {fileID: 1812668742}
   m_Layer: 0
   m_Name: Flicky
   m_TagString: Untagged
@@ -5438,6 +5439,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1812668742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1812668737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 839b72a20e57f9145994458cd4137cee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OffscreenDeactivatorController
+  _offscreenCheckInterval: 1
+  _cameraObj: {fileID: 519420028}
 --- !u!1 &1814098413
 GameObject:
   m_ObjectHideFlags: 0
@@ -6182,8 +6197,8 @@ SceneRoots:
   m_Roots:
   - {fileID: 1920839051}
   - {fileID: 968677397}
-  - {fileID: 1812668738}
   - {fileID: 710850500}
+  - {fileID: 1812668738}
   - {fileID: 151653051}
   - {fileID: 971844284}
   - {fileID: 1049324919}

@@ -7,7 +7,7 @@ public partial class OffscreenDeactivatorController
 {
   public OffscreenDeactivatorController()
   {
-    _checkInterval = 1;
+    _offscreenCheckInterval = 1;
   }
 
   private void Awake()
