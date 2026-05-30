@@ -1,4 +1,5 @@
 using UnityEngine;
+using static RingConsts.Physics;
 
 /// <summary>
 /// Init.
@@ -11,7 +12,7 @@ public partial class RingController : MonoBehaviour
 
     _configs = new(_physicsMode);
     _speedSystem = new(_configs);
-    _sensorSystem = new();
+    _sensorSystem = new(new(0, SensorY), Color.gold);
 
     _effects = new();
     SetEffectPipeline();

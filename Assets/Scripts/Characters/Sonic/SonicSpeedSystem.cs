@@ -3,7 +3,7 @@ using UnityEngine;
 using static SharedConsts.Physics;
 using static SonicConsts.Physics;
 
-public class SonicSpeedSystem
+public class SonicSpeedSystem : SpeedSystemBase
 {
   private const int _zeroGroundSpeedProgressMax = 5;
 
@@ -44,8 +44,6 @@ public class SonicSpeedSystem
   }
 
   public bool IsSkidding { get; private set; }
-  public float SpeedX { get; private set; }
-  public float SpeedY { get; private set; }
   public float SlopeSpeed { get; private set; }
   public float GroundSpeed { get; private set; }
   public float GravitySpeed { get; private set; }
@@ -54,10 +52,9 @@ public class SonicSpeedSystem
   public int ZeroGroundSpeedProgress { get; private set; }
   public bool IsZeroGroundSpeedProgressReached { get; private set; }
 
-  private void RoundSpeeds()
+  public override void RoundSpeed()
   {
-    SpeedX = SpeedX.Round(SpeedRoundingDigits);
-    SpeedY = SpeedY.Round(SpeedRoundingDigits);
+    base.RoundSpeed();
     GroundSpeed = GroundSpeed.Round(SpeedRoundingDigits);
   }
 
@@ -89,7 +86,7 @@ public class SonicSpeedSystem
       SetSpeed_Airborne();
     }
 
-    RoundSpeeds();
+    RoundSpeed();
   }
 
   private void SetStateData()

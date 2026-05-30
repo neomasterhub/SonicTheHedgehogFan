@@ -11,7 +11,7 @@ public partial class RingController : MonoBehaviour
   private readonly Pipeline _effects;
   private readonly RingConfigs _configs;
   private readonly RingSpeedSystem _speedSystem;
-  private readonly RingSensorSystem _sensorSystem;
+  private readonly ASensorSystem _sensorSystem;
 
   private bool _isGrounded;
   private bool _isCollected;

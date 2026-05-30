@@ -17,8 +17,11 @@ public static class SharedConsts
       public const string Idle = nameof(Idle);
       public const string LookingUp = nameof(LookingUp);
       public const string Rolling = nameof(Rolling);
+      public const string Running = nameof(Running);
       public const string Skidding = nameof(Skidding);
       public const string Speed = nameof(Speed);
+      public const string SpeedX = nameof(SpeedX);
+      public const string SpeedY = nameof(SpeedY);
       public const string Static = nameof(Static);
     }
 
@@ -58,6 +61,13 @@ public static class SharedConsts
     {
       public static readonly Range Flat = new(-23, 23);
       public static readonly Range Slope = new(-45, 45);
+    }
+
+    public static class SensorRayLengths
+    {
+      public const float GroundInner = 0.2f;
+      public const float GroundOuter = 0.1f;
+      public const float GroundFront = 0.5f;
     }
   }
 

@@ -1,5 +1,5 @@
 using UnityEngine;
-using static EnemyConsts.Physics;
+using static SharedConsts.Physics;
 
 /// <summary>
 /// Init.
@@ -37,8 +37,8 @@ public partial class ABSensorEnemyModuleController
   private void InitializeSensor(UDFSensor sensor, Vector2 offset)
   {
     sensor.SetLocalPosition(_position + offset);
-    sensor.UpRay.Length = UDFLengths.x;
-    sensor.DownRay.Length = UDFLengths.y;
-    sensor.FrontRay.Length = UDFLengths.z;
+    sensor.UpRay.Length = SensorRayLengths.GroundInner;
+    sensor.DownRay.Length = SensorRayLengths.GroundOuter;
+    sensor.FrontRay.Length = SensorRayLengths.GroundFront;
   }
 }
