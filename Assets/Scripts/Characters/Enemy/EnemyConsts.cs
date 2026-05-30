@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public static class EnemyConsts
 {
   public static class Physics
@@ -8,5 +10,6 @@ public static class EnemyConsts
     public const float MaxFallSpeedPx = 16;
     public const float PatrolRadius = 10;
     public const float PatrolStoppedTimer = 3;
+    public static readonly Vector2 AnimalBreakOutOrigin = new(0, 0.5f);
   }
 }
