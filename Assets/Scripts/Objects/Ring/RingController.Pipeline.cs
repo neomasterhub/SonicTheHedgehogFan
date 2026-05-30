@@ -1,4 +1,5 @@
 using UnityEngine;
+using static Helpers.Physics;
 using static SharedConsts.Physics;
 
 /// <summary>
@@ -77,9 +78,7 @@ public partial class RingController : MonoBehaviour
 
     if (_isGrounded)
     {
-      speedY -= (_lastGroundDetectionResult.Distance
-        * (int)_lastGroundDetectionResult.SensorGroundRelation)
-        - GroundedPositionUpwardOffset;
+      speedY -= GetGroundClearance(_lastGroundDetectionResult);
     }
 
     transform.position += new Vector3(_speedSystem.SpeedX, speedY);

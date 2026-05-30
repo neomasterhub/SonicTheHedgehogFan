@@ -1,5 +1,5 @@
 using UnityEngine;
-using static SharedConsts.Physics;
+using static Helpers.Physics;
 
 /// <summary>
 /// Behaviour.
@@ -17,11 +17,7 @@ public partial class NormalPositionEnemyModuleController
 
     if (_context.Ground.HasValue)
     {
-      var ground = _context.Ground.Value;
-
-      speedY -= (ground.Distance
-        * (int)ground.SensorGroundRelation)
-        - GroundedPositionUpwardOffset;
+      speedY -= GetGroundClearance(_context.Ground.Value);
     }
 
     transform.position += new Vector3(_context.SpeedX, speedY);
