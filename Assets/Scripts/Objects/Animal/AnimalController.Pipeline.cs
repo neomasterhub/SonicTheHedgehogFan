@@ -19,7 +19,9 @@ public partial class AnimalController
 
     var ground = _sensorSystem.DetectGround(GroundLayer);
 
-    _isGrounded = ground != null;
+    _isGrounded = ground != null
+      && GroundAngleRanges.Slope.Includes(ground.Value.AngleDeg);
+
     if (_isGrounded)
     {
       _lastGroundDetectionResult = ground.Value;
