@@ -10,8 +10,10 @@ public partial class AnimalContainerEnemyModuleController
   private IAnimal _animal;
 
   [SerializeField]
-  private bool _animalHorizontalDirection;
-  [SerializeField]
   [InspectorLabel("Animal")]
   private GameObject _animalObj;
+  [SerializeField]
+  private Vector3 _animalBreakOutOrigin;
+  [SerializeField]
+  private bool _animalHorizontalDirection;
 }
