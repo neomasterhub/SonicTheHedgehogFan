@@ -11,6 +11,7 @@ public partial class AnimalController : MonoBehaviour
   private readonly AnimalSpeedSystem _speedSystem;
   private readonly AnimalViewSystem _viewSystem;
 
+  private bool _isRunning;
   private bool _isGrounded;
   private GroundDetectionResult _lastGroundDetectionResult;
 
