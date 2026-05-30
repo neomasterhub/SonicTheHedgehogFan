@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using static SharedConsts.Physics;
 
 public static class Helpers
 {
@@ -25,6 +26,18 @@ public static class Helpers
     public static Vector3 Vector3(float x = 0, float y = 0, float z = 0)
     {
       return new Vector3(x, y, z);
+    }
+  }
+
+  public static class Physics
+  {
+    public static float GetGroundClearance(GroundDetectionResult ground)
+    {
+      // Snap to ground with small upward offset.
+      // Keeps surface normal aligned with slope.
+      return (ground.Distance
+        * (int)ground.SensorGroundRelation)
+        - GroundedPositionUpwardOffset;
     }
   }
 

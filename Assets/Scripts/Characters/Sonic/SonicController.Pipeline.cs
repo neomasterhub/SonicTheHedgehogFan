@@ -1,4 +1,5 @@
 using UnityEngine;
+using static Helpers.Physics;
 using static RingConsts.Physics;
 using static SharedConsts.Physics;
 using static SharedConsts.SecretCodes;
@@ -156,11 +157,7 @@ public partial class SonicController
 
     if (_isGrounded)
     {
-      // Snap to ground with small upward offset.
-      // Keeps surface normal aligned with slope.
-      speedY -= (_lastGroundDetectionResult.Distance
-        * (int)_lastGroundDetectionResult.SensorGroundRelation)
-        - GroundedPositionUpwardOffset;
+      speedY -= GetGroundClearance(_lastGroundDetectionResult);
     }
     else
     {
