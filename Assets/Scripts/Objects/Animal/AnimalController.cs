@@ -3,6 +3,7 @@ using UnityEngine;
 /// <summary>
 /// Data.
 /// </summary>
+[RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(SpriteRenderer))]
 public partial class AnimalController : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public partial class AnimalController : MonoBehaviour
   private readonly AnimalSpeedSystem _speedSystem;
 
   private bool _isGrounded;
+  private Animator _animator;
   private GroundDetectionResult _lastGroundDetectionResult;
   private SpriteRenderer _spriteRenderer;
 

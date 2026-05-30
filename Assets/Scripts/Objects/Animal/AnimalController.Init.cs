@@ -21,6 +21,7 @@ public partial class AnimalController
 
   private void InitializeComponents()
   {
+    _animator = GetComponent<Animator>();
     _spriteRenderer = GetComponent<SpriteRenderer>();
     _spriteRenderer.flipX = !_horizontalDirection;
   }
