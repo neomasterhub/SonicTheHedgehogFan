@@ -3210,7 +3210,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 2.8
+  orthographic size: 3.75
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -5355,7 +5355,7 @@ MonoBehaviour:
   _horizontalDirection: 0
   _gravitySpeedSpx: 56
   _horizontalSpeedPx: 3
-  _jumpSpeedPx: 6
+  _jumpSpeedPx: 6.5
   _releaseSpeedPx: 4
 --- !u!212 &1812668740
 SpriteRenderer:
