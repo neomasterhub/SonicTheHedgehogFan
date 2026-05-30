@@ -9,7 +9,7 @@ public partial class OffscreenDeactivatorController : MonoBehaviour
   private Camera _camera;
 
   [SerializeField]
-  private float _checkInterval;
+  private float _offscreenCheckInterval;
   [SerializeField]
   [InspectorLabel("Camera")]
   private GameObject _cameraObj;
