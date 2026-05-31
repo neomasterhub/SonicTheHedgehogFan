@@ -179,7 +179,7 @@ public static class Helpers
 
       if (ur1Hit != null && ur2Hit != null)
       {
-        if (ur1Hit.Value.distance >= ur2Hit.Value.distance)
+        if (ur1Hit.Value.distance <= ur2Hit.Value.distance)
         {
           return GroundDetectionResult.CreateABResult(!horizontalDirection, ur1Hit.Value, ur1.Direction, VerticalRelation.Below);
         }
@@ -208,7 +208,7 @@ public static class Helpers
 
       if (dr1Hit != null && dr2Hit != null)
       {
-        if (dr1Hit.Value.distance <= dr2Hit.Value.distance)
+        if (dr1Hit.Value.distance >= dr2Hit.Value.distance)
         {
           return GroundDetectionResult.CreateABResult(!horizontalDirection, dr1Hit.Value, dr1.Direction);
         }
