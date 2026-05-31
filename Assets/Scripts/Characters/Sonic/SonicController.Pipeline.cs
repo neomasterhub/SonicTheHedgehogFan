@@ -64,19 +64,19 @@ public partial class SonicController
     var horizontalDirection = !_spriteRenderer.flipX;
     _sensorSystem.Update(new(_sizeMode, _groundInfoSystem.Current.Side, transform.position, sensorFlags, _sensorRayLengths));
 
-    var ceilingDetectionResult = DetectCeiling(sensorFlags, horizontalDirection);
-    var groundDetectionResult = DetectGround(sensorFlags, horizontalDirection);
+    var ceiling = DetectCeiling(sensorFlags, horizontalDirection);
+    var ground = DetectGround(sensorFlags, horizontalDirection);
     _leftWallDetectionResult = _sensorSystem.DetectLeftWall(GroundLayer);
     _rightWallDetectionResult = _sensorSystem.DetectRightWall(GroundLayer);
 
-    if (ceilingDetectionResult.HasValue)
+    if (ceiling.HasValue)
     {
-      _lastCeilingDetectionResult = ceilingDetectionResult.Value;
+      _lastCeilingDetectionResult = ceiling.Value;
     }
 
-    if (groundDetectionResult.HasValue)
+    if (ground.HasValue)
     {
-      _lastGroundDetectionResult = groundDetectionResult.Value;
+      _lastGroundDetectionResult = ground.Value;
 
       AnalyzeEnvironment_Grounded();
     }
