@@ -1,4 +1,6 @@
+using UnityEngine;
 using static EnemyConsts.Physics;
+using static Helpers.Math;
 
 /// <summary>
 /// Init.
@@ -18,6 +20,14 @@ public partial class AnimalContainerEnemyModuleController
 
   private void InitializeComponents()
   {
+    if (_animalObj == null)
+    {
+      var animalPrefab = _animalPrefabs[SystemRandom.Next(0, _animalPrefabs.Length)];
+      animalPrefab.SetActive(false);
+
+      _animalObj = Instantiate(animalPrefab, transform.position + _animalBreakOutOrigin, Quaternion.identity);
+    }
+
     _animal = _animalObj.GetComponent<IAnimal>();
   }
 }
