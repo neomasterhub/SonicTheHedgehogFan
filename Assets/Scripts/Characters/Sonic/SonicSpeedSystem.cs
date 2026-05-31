@@ -208,13 +208,7 @@ public class SonicSpeedSystem : SpeedSystemBase
 
   private void SetSpeed_Airborne_PreventWallOvershoot()
   {
-    IsStoppedByLeftWall = _context.DistanceToLeftWall != null
-      && SpeedX <= -_context.DistanceToLeftWall + WallClearance;
-
-    IsStoppedByRightWall = _context.DistanceToRightWall != null
-      && SpeedX >= _context.DistanceToRightWall - WallClearance;
-
-    if (IsStoppedByLeftWall || IsStoppedByRightWall)
+    if (IsStoppedByWall(SpeedX))
     {
       SpeedX = 0;
     }
@@ -376,15 +370,20 @@ public class SonicSpeedSystem : SpeedSystemBase
 
   private void SetSpeed_Grounded_PreventWallOvershoot()
   {
-    IsStoppedByLeftWall = _context.DistanceToLeftWall != null
-      && GroundSpeed <= -_context.DistanceToLeftWall + WallClearance;
-
-    IsStoppedByRightWall = _context.DistanceToRightWall != null
-      && GroundSpeed >= _context.DistanceToRightWall - WallClearance;
-
-    if (IsStoppedByLeftWall || IsStoppedByRightWall)
+    if (IsStoppedByWall(GroundSpeed))
     {
       GroundSpeed = 0;
     }
+  }
+
+  private bool IsStoppedByWall(float speed)
+  {
+    IsStoppedByLeftWall = _context.DistanceToLeftWall != null
+      && speed <= -_context.DistanceToLeftWall + WallClearance;
+
+    IsStoppedByRightWall = _context.DistanceToRightWall != null
+      && speed >= _context.DistanceToRightWall - WallClearance;
+
+    return IsStoppedByLeftWall || IsStoppedByRightWall;
   }
 }
