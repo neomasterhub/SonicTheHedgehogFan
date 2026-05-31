@@ -160,6 +160,85 @@ public static class Helpers
       LayerMask groundLayer,
       bool horizontalDirection)
     {
+      SensorRay dr1;
+      SensorRay dr2;
+
+      if (horizontalDirection)
+      {
+        dr1 = a.DownRay;
+        dr2 = b.DownRay;
+      }
+      else
+      {
+        dr1 = b.DownRay;
+        dr2 = a.DownRay;
+      }
+
+      var dr1Hit = dr1.Cast(groundLayer);
+      var dr2Hit = dr2.Cast(groundLayer);
+
+      if (dr1Hit != null && dr2Hit != null)
+      {
+        if (dr1Hit.Value.distance <= dr2Hit.Value.distance)
+        {
+          return GroundDetectionResult.CreateABResult(!horizontalDirection, dr1Hit.Value, dr1.Direction);
+        }
+        else
+        {
+          return GroundDetectionResult.CreateABResult(horizontalDirection, dr2Hit.Value, dr2.Direction);
+        }
+      }
+
+      SensorRay ur1;
+      SensorRay ur2;
+
+      if (horizontalDirection)
+      {
+        ur1 = a.UpRay;
+        ur2 = b.UpRay;
+      }
+      else
+      {
+        ur1 = b.UpRay;
+        ur2 = a.UpRay;
+      }
+
+      var ur1Hit = ur1.Cast(groundLayer);
+      var ur2Hit = ur2.Cast(groundLayer);
+
+      if (ur1Hit != null && ur2Hit != null)
+      {
+        if (ur1Hit.Value.distance >= ur2Hit.Value.distance)
+        {
+          return GroundDetectionResult.CreateABResult(!horizontalDirection, ur1Hit.Value, ur1.Direction, VerticalRelation.Below);
+        }
+        else
+        {
+          return GroundDetectionResult.CreateABResult(horizontalDirection, ur2Hit.Value, ur2.Direction, VerticalRelation.Below);
+        }
+      }
+
+      if (ur1Hit != null)
+      {
+        return GroundDetectionResult.CreateABResult(!horizontalDirection, ur1Hit.Value, ur1.Direction, VerticalRelation.Below, checkBalancing());
+      }
+
+      if (ur2Hit != null)
+      {
+        return GroundDetectionResult.CreateABResult(horizontalDirection, ur2Hit.Value, ur2.Direction, VerticalRelation.Below, checkBalancing());
+      }
+
+      if (dr1Hit != null)
+      {
+        return GroundDetectionResult.CreateABResult(!horizontalDirection, dr1Hit.Value, dr1.Direction, VerticalRelation.Above, checkBalancing());
+      }
+
+      if (dr2Hit != null)
+      {
+        return GroundDetectionResult.CreateABResult(horizontalDirection, dr2Hit.Value, dr2.Direction, VerticalRelation.Above, checkBalancing());
+      }
+
+      return null;
     }
   }
 }
