@@ -15,7 +15,7 @@ public readonly struct GroundDetectionResult
     char sourceSensorId,
     RaycastHit2D hit,
     Vector2 sensorDirection,
-    VerticalRelation sensorGroundRelation = VerticalRelation.Above,
+    VerticalRelation sensorGroundRelation,
     bool isBalancing = false)
   {
     SourceSensorId = sourceSensorId;
@@ -32,7 +32,7 @@ public readonly struct GroundDetectionResult
     bool horizontalDirection,
     RaycastHit2D hit,
     Vector2 sensorDirection,
-    VerticalRelation sensorGroundRelation = VerticalRelation.Above,
+    VerticalRelation sensorGroundRelation,
     bool isBalancing = false)
   {
     return new GroundDetectionResult(horizontalDirection ? 'B' : 'A', hit, sensorDirection, sensorGroundRelation, isBalancing);

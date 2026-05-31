@@ -94,11 +94,11 @@ public static class Helpers
       {
         if (dr1Hit.Value.distance <= dr2Hit.Value.distance)
         {
-          return GroundDetectionResult.CreateABResult(!horizontalDirection, dr1Hit.Value, dr1.Direction);
+          return GroundDetectionResult.CreateABResult(!horizontalDirection, dr1Hit.Value, dr1.Direction, VerticalRelation.Above);
         }
         else
         {
-          return GroundDetectionResult.CreateABResult(horizontalDirection, dr2Hit.Value, dr2.Direction);
+          return GroundDetectionResult.CreateABResult(horizontalDirection, dr2Hit.Value, dr2.Direction, VerticalRelation.Above);
         }
       }
 
