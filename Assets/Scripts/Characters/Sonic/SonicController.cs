@@ -52,6 +52,8 @@ public partial class SonicController : MonoBehaviour
   private bool _prevDebugMode;
   private bool _takeLeftHit;
   private bool _takeRightHit;
+  private bool _canMoveLeft;
+  private bool _canMoveRight;
   private char _triggeredGroundSensorId;
   private float _slopeFactor;
   private float _absGroundSpeed;
