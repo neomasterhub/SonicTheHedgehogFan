@@ -220,22 +220,22 @@ public static class Helpers
 
       if (ur1Hit != null)
       {
-        return GroundDetectionResult.CreateABResult(!horizontalDirection, ur1Hit.Value, ur1.Direction, VerticalRelation.Below, checkBalancing());
+        return GroundDetectionResult.CreateABResult(!horizontalDirection, ur1Hit.Value, ur1.Direction, VerticalRelation.Below);
       }
 
       if (ur2Hit != null)
       {
-        return GroundDetectionResult.CreateABResult(horizontalDirection, ur2Hit.Value, ur2.Direction, VerticalRelation.Below, checkBalancing());
+        return GroundDetectionResult.CreateABResult(horizontalDirection, ur2Hit.Value, ur2.Direction, VerticalRelation.Below);
       }
 
       if (dr1Hit != null)
       {
-        return GroundDetectionResult.CreateABResult(!horizontalDirection, dr1Hit.Value, dr1.Direction, VerticalRelation.Above, checkBalancing());
+        return GroundDetectionResult.CreateABResult(!horizontalDirection, dr1Hit.Value, dr1.Direction, VerticalRelation.Above);
       }
 
       if (dr2Hit != null)
       {
-        return GroundDetectionResult.CreateABResult(horizontalDirection, dr2Hit.Value, dr2.Direction, VerticalRelation.Above, checkBalancing());
+        return GroundDetectionResult.CreateABResult(horizontalDirection, dr2Hit.Value, dr2.Direction, VerticalRelation.Above);
       }
 
       return null;
