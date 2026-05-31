@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PockyIdle
+  m_Name: Idle
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,7 +21,7 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 8724824010890819614, guid: 8d8e52b1a4f4ce34f879842ccefc5de8, type: 3}
+      value: {fileID: 1715538747768885149, guid: 47fa0a05a44fb6d4ca84e2f3bcf84ba5, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -44,7 +44,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 8724824010890819614, guid: 8d8e52b1a4f4ce34f879842ccefc5de8, type: 3}
+    - {fileID: 1715538747768885149, guid: 47fa0a05a44fb6d4ca84e2f3bcf84ba5, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
