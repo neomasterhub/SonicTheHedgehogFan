@@ -64,13 +64,20 @@ public partial class SonicController
     var horizontalDirection = !_spriteRenderer.flipX;
     _sensorSystem.Update(new(_sizeMode, _groundInfoSystem.Current.Side, transform.position, sensorFlags, _sensorRayLengths));
 
-    var groundDetectionResult = DetectGround(sensorFlags);
+    var ceilingDetectionResult = DetectCeiling(sensorFlags, horizontalDirection);
+    var groundDetectionResult = DetectGround(sensorFlags, horizontalDirection);
     _leftWallDetectionResult = _sensorSystem.DetectLeftWall(GroundLayer);
     _rightWallDetectionResult = _sensorSystem.DetectRightWall(GroundLayer);
 
-    if (groundDetectionResult != null)
+    if (ceilingDetectionResult.HasValue)
+    {
+      _lastCeilingDetectionResult = ceilingDetectionResult.Value;
+    }
+
+    if (groundDetectionResult.HasValue)
     {
       _lastGroundDetectionResult = groundDetectionResult.Value;
+
       AnalyzeEnvironment_Grounded();
     }
     else
@@ -288,6 +295,20 @@ public partial class SonicController
       _isGrounded || _speedSystem.SpeedY <= 0,
       _isGrounded || _speedSystem.SpeedY >= 0,
       _isGrounded);
+  }
+
+  private CeilingDetectionResult? DetectCeiling(SonicSensorFlags sensorFlags, bool horizontalDirection)
+  {
+    var result = _sensorSystem.DetectCeiling(horizontalDirection, GroundLayer);
+
+    if (result != null && result.Value.Distance == 0)
+    {
+      transform.position -= new Vector3(0, GroundedPositionUpwardOffset);
+      _sensorSystem.Update(new(_sizeMode, _groundInfoSystem.Current.Side, transform.position, sensorFlags, _sensorRayLengths));
+      result = _sensorSystem.DetectCeiling(horizontalDirection, GroundLayer);
+    }
+
+    return result;
   }
 
   private GroundDetectionResult? DetectGround(SonicSensorFlags sensorFlags, bool horizontalDirection)

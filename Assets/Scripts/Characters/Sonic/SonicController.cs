@@ -59,6 +59,7 @@ public partial class SonicController : MonoBehaviour
   private float _absGroundSpeed;
   private Animator _animator;
   private BoxCollider2D _boxCollider;
+  private CeilingDetectionResult _lastCeilingDetectionResult;
   private GameObject _diagnosticsPanel;
   private GameObject _effectHistoryPanel;
   private GroundDetectionResult _lastGroundDetectionResult;
