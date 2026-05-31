@@ -155,8 +155,8 @@ public static class Helpers
     }
 
     public static GroundDetectionResult? CDDetectCeiling(
-      UDFSensor a,
-      UDFSensor b,
+      UDFSensor c,
+      UDFSensor d,
       LayerMask groundLayer,
       bool horizontalDirection)
     {
@@ -165,13 +165,13 @@ public static class Helpers
 
       if (horizontalDirection)
       {
-        ur1 = a.UpRay;
-        ur2 = b.UpRay;
+        ur1 = c.UpRay;
+        ur2 = d.UpRay;
       }
       else
       {
-        ur1 = b.UpRay;
-        ur2 = a.UpRay;
+        ur1 = d.UpRay;
+        ur2 = c.UpRay;
       }
 
       var ur1Hit = ur1.Cast(groundLayer);
@@ -194,13 +194,13 @@ public static class Helpers
 
       if (horizontalDirection)
       {
-        dr1 = a.DownRay;
-        dr2 = b.DownRay;
+        dr1 = c.DownRay;
+        dr2 = d.DownRay;
       }
       else
       {
-        dr1 = b.DownRay;
-        dr2 = a.DownRay;
+        dr1 = d.DownRay;
+        dr2 = c.DownRay;
       }
 
       var dr1Hit = dr1.Cast(groundLayer);
