@@ -189,35 +189,6 @@ public static class Helpers
         }
       }
 
-      SensorRay ur1;
-      SensorRay ur2;
-
-      if (horizontalDirection)
-      {
-        ur1 = a.UpRay;
-        ur2 = b.UpRay;
-      }
-      else
-      {
-        ur1 = b.UpRay;
-        ur2 = a.UpRay;
-      }
-
-      var ur1Hit = ur1.Cast(groundLayer);
-      var ur2Hit = ur2.Cast(groundLayer);
-
-      if (ur1Hit != null && ur2Hit != null)
-      {
-        if (ur1Hit.Value.distance >= ur2Hit.Value.distance)
-        {
-          return GroundDetectionResult.CreateABResult(!horizontalDirection, ur1Hit.Value, ur1.Direction, VerticalRelation.Below);
-        }
-        else
-        {
-          return GroundDetectionResult.CreateABResult(horizontalDirection, ur2Hit.Value, ur2.Direction, VerticalRelation.Below);
-        }
-      }
-
       if (ur1Hit != null)
       {
         return GroundDetectionResult.CreateABResult(!horizontalDirection, ur1Hit.Value, ur1.Direction, VerticalRelation.Below);
