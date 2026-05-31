@@ -433,6 +433,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 848cec0a95d4975419c9f3c17891238a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimalContainerEnemyModuleController
-  _animalObj: {fileID: 0}
   _animalBreakOutOrigin: {x: 0, y: 0.5, z: 0}
   _animalHorizontalDirection: 0
+  _animalObj: {fileID: 0}
+  _animalPrefabs:
+  - {fileID: 5201288898864119241, guid: 6ba3b1096110aaf47bfc1f6935bd95f5, type: 3}
+  - {fileID: 2052383938711999307, guid: c7f0a34ccd83ab34caf236e9ae6a3ece, type: 3}
+  - {fileID: 2069109425008964647, guid: df0b61a2c5705984e88a203619e6dbd3, type: 3}
+  - {fileID: 5394930989186490212, guid: bb425ecf189d73740899e81fe0526ecd, type: 3}
+  - {fileID: 5964934197802084540, guid: 8e7036083de3da845a0b5b13ec19f4a5, type: 3}
+  - {fileID: 4289965127086530964, guid: b805d627f10f35f45b25ba1b8c15c7d7, type: 3}
+  - {fileID: 5662527187883656044, guid: 7c7c6be47d0ac894d83a16e1b7aefba5, type: 3}
