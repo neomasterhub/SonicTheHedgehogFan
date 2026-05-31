@@ -13,7 +13,9 @@ public partial class OffscreenDeactivatorController
 
   private void Awake()
   {
-    _camera = _cameraObj.GetComponent<Camera>();
+    _camera = _cameraObj == null
+      ? Camera.main
+      : _cameraObj.GetComponent<Camera>();
 
     _isActive = true;
 

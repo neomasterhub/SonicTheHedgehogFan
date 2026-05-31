@@ -8,6 +8,9 @@ TextureImporter:
   - first:
       213: 7653447857805331577
     second: animal_ricky_1
+  - first:
+      213: 4913133139150267921
+    second: animal_ricky_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -56,7 +59,7 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 40
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 1
+  spriteGenerateFallbackPhysicsShape: 0
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -173,10 +176,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 484ff0517f7bc1147a798f638b6a0df6
-      internalID: -1400139016
+      spriteID: 11660452f84fe2440800000000000000
+      internalID: 4913133139150267921
       vertices: []
       indices: 
       edges: []
@@ -185,7 +188,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 6865a212ba3c00642b07f966d636f923
+    spriteID: 6a2a52ad3b9232c44b1d9f6efb198ea0
     internalID: 0
     vertices: []
     indices: 
@@ -199,7 +202,7 @@ TextureImporter:
     nameFileIdTable:
       animal_ricky_0: 417029835220649820
       animal_ricky_1: 7653447857805331577
-      animal_ricky_2: -1400139016
+      animal_ricky_2: 4913133139150267921
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
