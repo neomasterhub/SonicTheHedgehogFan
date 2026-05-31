@@ -153,5 +153,13 @@ public static class Helpers
 
       return null;
     }
+
+    public static GroundDetectionResult? CDDetectCeiling(
+      UDFSensor a,
+      UDFSensor b,
+      LayerMask groundLayer,
+      bool horizontalDirection)
+    {
+    }
   }
 }
