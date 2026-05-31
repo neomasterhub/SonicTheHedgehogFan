@@ -34,6 +34,8 @@ public partial class SonicController
     _prevIsRolling = _isRolling;
     _prevPhysicsMode = _physicsMode;
     _prevSizeMode = _sizeMode;
+
+    _horizontalDirection = !_spriteRenderer.flipX;
   }
 
   private void UpdateInput()
@@ -61,11 +63,10 @@ public partial class SonicController
   private void AnalyzeEnvironment()
   {
     var sensorFlags = GetSensorFlags();
-    var horizontalDirection = !_spriteRenderer.flipX;
     _sensorSystem.Update(new(_sizeMode, _groundInfoSystem.Current.Side, transform.position, sensorFlags, _sensorRayLengths));
 
-    var ceiling = DetectCeiling(sensorFlags, horizontalDirection);
-    var ground = DetectGround(sensorFlags, horizontalDirection);
+    var ceiling = DetectCeiling(sensorFlags, _horizontalDirection);
+    var ground = DetectGround(sensorFlags, _horizontalDirection);
     _leftWallDetectionResult = _sensorSystem.DetectLeftWall(GroundLayer);
     _rightWallDetectionResult = _sensorSystem.DetectRightWall(GroundLayer);
 
@@ -157,7 +158,7 @@ public partial class SonicController
 
   private void UpdateView()
   {
-    _viewContext = new(!_spriteRenderer.flipX, IsHurt, _isDying, _isGrounded, _speedSystem.IsSkidding, _isBalancing, _isCurlingUp, _isLookingUp, _isRolling, _speedSystem.IsZeroGroundSpeedProgressReached, _triggeredGroundSensorId, _speedSystem.SpeedX, _speedSystem.GroundSpeed, _groundInfoSystem.Current.AngleDeg, Time.fixedDeltaTime, _groundInfoSystem.Current.Side, _groundInfoSystem.Previous.Side);
+    _viewContext = new(_horizontalDirection, IsHurt, _isDying, _isGrounded, _speedSystem.IsSkidding, _isBalancing, _isCurlingUp, _isLookingUp, _isRolling, _speedSystem.IsZeroGroundSpeedProgressReached, _triggeredGroundSensorId, _speedSystem.SpeedX, _speedSystem.GroundSpeed, _groundInfoSystem.Current.AngleDeg, Time.fixedDeltaTime, _groundInfoSystem.Current.Side, _groundInfoSystem.Previous.Side);
     _viewSystem.Update(_viewContext);
   }
 
@@ -327,7 +328,7 @@ public partial class SonicController
 
   private void LoseRings()
   {
-    var flip = _spriteRenderer.flipX;
+    var flip = !_horizontalDirection;
     var speed = LostPortion1Speed;
     var angleRad = LostInitialAngleRad;
 
