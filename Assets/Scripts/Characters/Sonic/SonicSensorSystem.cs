@@ -62,6 +62,11 @@ public class SonicSensorSystem
     UpdateSensorRayLengths(context.SensorRayLengths);
   }
 
+  public CeilingDetectionResult? DetectCeiling(bool horizontalDirection, LayerMask groundLayer)
+  {
+    return CDDetectCeiling(_c, _d, groundLayer, horizontalDirection);
+  }
+
   public GroundDetectionResult? DetectGround(bool horizontalDirection, LayerMask groundLayer)
   {
     return ABDetectGround(_a, _b, groundLayer, horizontalDirection, () => IsBalancing(groundLayer));
