@@ -9,6 +9,7 @@ public partial class SonicController
   private void SetEffectPipeline()
   {
     _effects.AddStep(CreateEffect_Disable());
+    _effects.AddStep(CreateEffect_SetMovementFlags());
     _effects.AddStep(CreateEffect_SetHit());
     _effects.AddStep(CreateEffect_Attacked());
     _effects.AddStep(CreateEffect_GettingHit());
@@ -41,6 +42,35 @@ public partial class SonicController
         gameObject.SetActive(false);
 
         return PipelineStepResult.Break;
+      })
+      .Build();
+  }
+
+  private PipelineStep CreateEffect_SetMovementFlags()
+  {
+    return PipelineStepBuilder.Create()
+      .WithDisplayName("Set movement flags")
+      .WithAction(() =>
+      {
+        if (_isGrounded)
+        {
+          _canMoveLeft = !_speedSystem.IsStoppedByLeftWall;
+          _canMoveRight = !_speedSystem.IsStoppedByRightWall;
+        }
+        else
+        {
+          if (_speedSystem.IsStoppedByLeftWall)
+          {
+            _canMoveLeft = false;
+          }
+
+          if (_speedSystem.IsStoppedByRightWall)
+          {
+            _canMoveRight = false;
+          }
+        }
+
+        return PipelineStepResult.Continue;
       })
       .Build();
   }
