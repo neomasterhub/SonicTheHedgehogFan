@@ -154,7 +154,7 @@ public static class Helpers
       return null;
     }
 
-    public static GroundDetectionResult? CDDetectCeiling(
+    public static CeilingDetectionResult? CDDetectCeiling(
       UDFSensor c,
       UDFSensor d,
       LayerMask groundLayer,
@@ -181,11 +181,11 @@ public static class Helpers
       {
         if (ur1Hit.Value.distance <= ur2Hit.Value.distance)
         {
-          return GroundDetectionResult.CreateABResult(!horizontalDirection, ur1Hit.Value, ur1.Direction, VerticalRelation.Below);
+          return CeilingDetectionResult.CreateCDResult(!horizontalDirection, ur1Hit.Value, ur1.Direction, VerticalRelation.Below);
         }
         else
         {
-          return GroundDetectionResult.CreateABResult(horizontalDirection, ur2Hit.Value, ur2.Direction, VerticalRelation.Below);
+          return CeilingDetectionResult.CreateCDResult(horizontalDirection, ur2Hit.Value, ur2.Direction, VerticalRelation.Below);
         }
       }
 
@@ -210,32 +210,32 @@ public static class Helpers
       {
         if (dr1Hit.Value.distance >= dr2Hit.Value.distance)
         {
-          return GroundDetectionResult.CreateABResult(!horizontalDirection, dr1Hit.Value, dr1.Direction);
+          return CeilingDetectionResult.CreateCDResult(!horizontalDirection, dr1Hit.Value, dr1.Direction, VerticalRelation.Above);
         }
         else
         {
-          return GroundDetectionResult.CreateABResult(horizontalDirection, dr2Hit.Value, dr2.Direction);
+          return CeilingDetectionResult.CreateCDResult(horizontalDirection, dr2Hit.Value, dr2.Direction, VerticalRelation.Above);
         }
       }
 
       if (dr1Hit != null)
       {
-        return GroundDetectionResult.CreateABResult(!horizontalDirection, dr1Hit.Value, dr1.Direction, VerticalRelation.Above);
+        return CeilingDetectionResult.CreateCDResult(!horizontalDirection, dr1Hit.Value, dr1.Direction, VerticalRelation.Above);
       }
 
       if (dr2Hit != null)
       {
-        return GroundDetectionResult.CreateABResult(horizontalDirection, dr2Hit.Value, dr2.Direction, VerticalRelation.Above);
+        return CeilingDetectionResult.CreateCDResult(horizontalDirection, dr2Hit.Value, dr2.Direction, VerticalRelation.Above);
       }
 
       if (ur1Hit != null)
       {
-        return GroundDetectionResult.CreateABResult(!horizontalDirection, ur1Hit.Value, ur1.Direction, VerticalRelation.Below);
+        return CeilingDetectionResult.CreateCDResult(!horizontalDirection, ur1Hit.Value, ur1.Direction, VerticalRelation.Below);
       }
 
       if (ur2Hit != null)
       {
-        return GroundDetectionResult.CreateABResult(horizontalDirection, ur2Hit.Value, ur2.Direction, VerticalRelation.Below);
+        return CeilingDetectionResult.CreateCDResult(horizontalDirection, ur2Hit.Value, ur2.Direction, VerticalRelation.Below);
       }
 
       return null;
