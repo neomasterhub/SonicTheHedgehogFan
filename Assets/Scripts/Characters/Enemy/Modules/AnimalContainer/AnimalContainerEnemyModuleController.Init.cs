@@ -22,7 +22,7 @@ public partial class AnimalContainerEnemyModuleController
   {
     if (_animalObj == null)
     {
-      var animalPrefab = _animalPrefabs[SystemRandom.Next(0, _animalPrefabs.Length)];
+      var animalPrefab = _animalPrefabs[SystemRandom.Next(_animalPrefabs.Length)];
       animalPrefab.SetActive(false);
 
       _animalObj = Instantiate(animalPrefab, transform.position + _animalBreakOutOrigin, Quaternion.identity);
