@@ -11,6 +11,9 @@ public partial class SonicController
 {
   public SonicController()
   {
+    _canMoveLeft = true;
+    _canMoveRight = true;
+
     _diagnosticsText = new();
     _effectHistoryText = new();
 
