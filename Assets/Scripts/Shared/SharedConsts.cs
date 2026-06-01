@@ -54,7 +54,8 @@ public static class SharedConsts
   {
     public const int SpeedRoundingDigits = 3;
     public const int PositionRoundingDigits = 3;
-    public const float GroundedPositionUpwardOffset = 0.05f;
+    public const float FloorDetectionOffset = 0.05f;
+    public const float CeilingDetectionOffset = -0.05f;
     public static readonly LayerMask GroundLayer = 1 << 3;
 
     public static class GroundAngleRanges

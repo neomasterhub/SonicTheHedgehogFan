@@ -34,6 +34,8 @@ public partial class SonicController
     _prevIsRolling = _isRolling;
     _prevPhysicsMode = _physicsMode;
     _prevSizeMode = _sizeMode;
+
+    _horizontalDirection = !_spriteRenderer.flipX;
   }
 
   private void UpdateInput()
@@ -60,13 +62,23 @@ public partial class SonicController
 
   private void AnalyzeEnvironment()
   {
-    var groundDetectionResult = DetectGround();
+    var sensorFlags = GetSensorFlags();
+    _sensorSystem.Update(new(_sizeMode, _groundInfoSystem.Current.Side, transform.position, sensorFlags, _sensorRayLengths));
+
+    var ceiling = DetectCeiling(sensorFlags, _horizontalDirection);
+    var ground = DetectGround(sensorFlags, _horizontalDirection);
     _leftWallDetectionResult = _sensorSystem.DetectLeftWall(GroundLayer);
     _rightWallDetectionResult = _sensorSystem.DetectRightWall(GroundLayer);
 
-    if (groundDetectionResult != null)
+    if (ceiling.HasValue)
     {
-      _lastGroundDetectionResult = groundDetectionResult.Value;
+      _lastCeilingDetectionResult = ceiling.Value;
+    }
+
+    if (ground.HasValue)
+    {
+      _lastGroundDetectionResult = ground.Value;
+
       AnalyzeEnvironment_Grounded();
     }
     else
@@ -142,11 +154,34 @@ public partial class SonicController
     }
 
     _speedSystem.SetSpeed(_speedContext);
+
+    ApplyMovement_UpdateMovementFlags();
+  }
+
+  private void ApplyMovement_UpdateMovementFlags()
+  {
+    if (_isGrounded)
+    {
+      _canMoveLeft = !_speedSystem.IsStoppedByLeftWall;
+      _canMoveRight = !_speedSystem.IsStoppedByRightWall;
+    }
+    else
+    {
+      if (_speedSystem.IsStoppedByLeftWall)
+      {
+        _canMoveLeft = false;
+      }
+
+      if (_speedSystem.IsStoppedByRightWall)
+      {
+        _canMoveRight = false;
+      }
+    }
   }
 
   private void UpdateView()
   {
-    _viewContext = new(!_spriteRenderer.flipX, IsHurt, _isDying, _isGrounded, _speedSystem.IsSkidding, _isBalancing, _isCurlingUp, _isLookingUp, _isRolling, _speedSystem.IsZeroGroundSpeedProgressReached, _triggeredGroundSensorId, _speedSystem.SpeedX, _speedSystem.GroundSpeed, _groundInfoSystem.Current.AngleDeg, Time.fixedDeltaTime, _groundInfoSystem.Current.Side, _groundInfoSystem.Previous.Side);
+    _viewContext = new(_horizontalDirection, IsHurt, _isDying, _isGrounded, _speedSystem.IsSkidding, _isBalancing, _isCurlingUp, _isLookingUp, _isRolling, _speedSystem.IsZeroGroundSpeedProgressReached, _triggeredGroundSensorId, _speedSystem.SpeedX, _speedSystem.GroundSpeed, _groundInfoSystem.Current.AngleDeg, Time.fixedDeltaTime, _groundInfoSystem.Current.Side, _groundInfoSystem.Previous.Side);
     _viewSystem.Update(_viewContext);
   }
 
@@ -286,17 +321,29 @@ public partial class SonicController
       _isGrounded);
   }
 
-  private GroundDetectionResult? DetectGround()
+  private CeilingDetectionResult? DetectCeiling(SonicSensorFlags sensorFlags, bool horizontalDirection)
   {
-    var sensorFlags = GetSensorFlags();
-    _sensorSystem.Update(new(_sizeMode, _groundInfoSystem.Current.Side, transform.position, sensorFlags, _sensorRayLengths));
-    var result = _sensorSystem.DetectGround(!_spriteRenderer.flipX, GroundLayer);
+    var result = _sensorSystem.DetectCeiling(horizontalDirection, GroundLayer);
 
     if (result != null && result.Value.Distance == 0)
     {
-      transform.position += new Vector3(0, GroundedPositionUpwardOffset);
+      transform.position += new Vector3(0, CeilingDetectionOffset);
       _sensorSystem.Update(new(_sizeMode, _groundInfoSystem.Current.Side, transform.position, sensorFlags, _sensorRayLengths));
-      result = _sensorSystem.DetectGround(!_spriteRenderer.flipX, GroundLayer);
+      result = _sensorSystem.DetectCeiling(horizontalDirection, GroundLayer);
+    }
+
+    return result;
+  }
+
+  private GroundDetectionResult? DetectGround(SonicSensorFlags sensorFlags, bool horizontalDirection)
+  {
+    var result = _sensorSystem.DetectGround(horizontalDirection, GroundLayer);
+
+    if (result != null && result.Value.Distance == 0)
+    {
+      transform.position += new Vector3(0, FloorDetectionOffset);
+      _sensorSystem.Update(new(_sizeMode, _groundInfoSystem.Current.Side, transform.position, sensorFlags, _sensorRayLengths));
+      result = _sensorSystem.DetectGround(horizontalDirection, GroundLayer);
     }
 
     return result;
@@ -304,7 +351,7 @@ public partial class SonicController
 
   private void LoseRings()
   {
-    var flip = _spriteRenderer.flipX;
+    var flip = !_horizontalDirection;
     var speed = LostPortion1Speed;
     var angleRad = LostInitialAngleRad;
 

@@ -38,7 +38,7 @@ public static class Helpers
       // Keeps surface normal aligned with slope.
       return (ground.Distance
         * (int)ground.SensorGroundRelation)
-        - GroundedPositionUpwardOffset;
+        - FloorDetectionOffset;
     }
   }
 
@@ -94,11 +94,11 @@ public static class Helpers
       {
         if (dr1Hit.Value.distance <= dr2Hit.Value.distance)
         {
-          return GroundDetectionResult.CreateABResult(!horizontalDirection, dr1Hit.Value, dr1.Direction);
+          return GroundDetectionResult.CreateABResult(!horizontalDirection, dr1Hit.Value, dr1.Direction, VerticalRelation.Above);
         }
         else
         {
-          return GroundDetectionResult.CreateABResult(horizontalDirection, dr2Hit.Value, dr2.Direction);
+          return GroundDetectionResult.CreateABResult(horizontalDirection, dr2Hit.Value, dr2.Direction, VerticalRelation.Above);
         }
       }
 
@@ -149,6 +149,93 @@ public static class Helpers
       if (dr2Hit != null)
       {
         return GroundDetectionResult.CreateABResult(horizontalDirection, dr2Hit.Value, dr2.Direction, VerticalRelation.Above, checkBalancing());
+      }
+
+      return null;
+    }
+
+    public static CeilingDetectionResult? CDDetectCeiling(
+      UDFSensor c,
+      UDFSensor d,
+      LayerMask groundLayer,
+      bool horizontalDirection)
+    {
+      SensorRay ur1;
+      SensorRay ur2;
+
+      if (horizontalDirection)
+      {
+        ur1 = c.UpRay;
+        ur2 = d.UpRay;
+      }
+      else
+      {
+        ur1 = d.UpRay;
+        ur2 = c.UpRay;
+      }
+
+      var ur1Hit = ur1.Cast(groundLayer);
+      var ur2Hit = ur2.Cast(groundLayer);
+
+      if (ur1Hit != null && ur2Hit != null)
+      {
+        if (ur1Hit.Value.distance <= ur2Hit.Value.distance)
+        {
+          return CeilingDetectionResult.CreateCDResult(!horizontalDirection, ur1Hit.Value, ur1.Direction, VerticalRelation.Below);
+        }
+        else
+        {
+          return CeilingDetectionResult.CreateCDResult(horizontalDirection, ur2Hit.Value, ur2.Direction, VerticalRelation.Below);
+        }
+      }
+
+      SensorRay dr1;
+      SensorRay dr2;
+
+      if (horizontalDirection)
+      {
+        dr1 = c.DownRay;
+        dr2 = d.DownRay;
+      }
+      else
+      {
+        dr1 = d.DownRay;
+        dr2 = c.DownRay;
+      }
+
+      var dr1Hit = dr1.Cast(groundLayer);
+      var dr2Hit = dr2.Cast(groundLayer);
+
+      if (dr1Hit != null && dr2Hit != null)
+      {
+        if (dr1Hit.Value.distance >= dr2Hit.Value.distance)
+        {
+          return CeilingDetectionResult.CreateCDResult(!horizontalDirection, dr1Hit.Value, dr1.Direction, VerticalRelation.Above);
+        }
+        else
+        {
+          return CeilingDetectionResult.CreateCDResult(horizontalDirection, dr2Hit.Value, dr2.Direction, VerticalRelation.Above);
+        }
+      }
+
+      if (dr1Hit != null)
+      {
+        return CeilingDetectionResult.CreateCDResult(!horizontalDirection, dr1Hit.Value, dr1.Direction, VerticalRelation.Above);
+      }
+
+      if (dr2Hit != null)
+      {
+        return CeilingDetectionResult.CreateCDResult(horizontalDirection, dr2Hit.Value, dr2.Direction, VerticalRelation.Above);
+      }
+
+      if (ur1Hit != null)
+      {
+        return CeilingDetectionResult.CreateCDResult(!horizontalDirection, ur1Hit.Value, ur1.Direction, VerticalRelation.Below);
+      }
+
+      if (ur2Hit != null)
+      {
+        return CeilingDetectionResult.CreateCDResult(horizontalDirection, ur2Hit.Value, ur2.Direction, VerticalRelation.Below);
       }
 
       return null;

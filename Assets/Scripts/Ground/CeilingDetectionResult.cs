@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public readonly struct GroundDetectionResult
+public readonly struct CeilingDetectionResult
 {
   public readonly char SourceSensorId;
   public readonly float Distance;
@@ -8,15 +8,13 @@ public readonly struct GroundDetectionResult
   public readonly float AngleRad;
   public readonly Vector2 Contact;
   public readonly Vector2 Normal;
-  public readonly VerticalRelation SensorGroundRelation;
-  public readonly bool IsBalancing;
+  public readonly VerticalRelation SensorCeilingRelation;
 
-  public GroundDetectionResult(
+  public CeilingDetectionResult(
     char sourceSensorId,
     RaycastHit2D hit,
     Vector2 sensorDirection,
-    VerticalRelation sensorGroundRelation,
-    bool isBalancing = false)
+    VerticalRelation sensorCeilingRelation)
   {
     SourceSensorId = sourceSensorId;
     Contact = hit.point;
@@ -24,17 +22,15 @@ public readonly struct GroundDetectionResult
     Distance = hit.distance;
     AngleDeg = Vector2.SignedAngle(-sensorDirection, hit.normal).Round();
     AngleRad = AngleDeg * Mathf.Deg2Rad;
-    SensorGroundRelation = sensorGroundRelation;
-    IsBalancing = isBalancing;
+    SensorCeilingRelation = sensorCeilingRelation;
   }
 
-  public static GroundDetectionResult CreateABResult(
+  public static CeilingDetectionResult CreateCDResult(
     bool horizontalDirection,
     RaycastHit2D hit,
     Vector2 sensorDirection,
-    VerticalRelation sensorGroundRelation,
-    bool isBalancing = false)
+    VerticalRelation sensorCeilingRelation)
   {
-    return new GroundDetectionResult(horizontalDirection ? 'B' : 'A', hit, sensorDirection, sensorGroundRelation, isBalancing);
+    return new CeilingDetectionResult(horizontalDirection ? 'D' : 'C', hit, sensorDirection, sensorCeilingRelation);
   }
 }
