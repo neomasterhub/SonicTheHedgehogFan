@@ -1,6 +1,6 @@
 using UnityEngine;
 using static EnemyConsts.Physics;
-using static Helpers.Math;
+using static SharedConsts.Utilities;
 
 /// <summary>
 /// Init.
