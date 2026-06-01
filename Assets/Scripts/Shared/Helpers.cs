@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using static SharedConsts.Physics;
+using static SharedConsts.Utilities;
 
 public static class Helpers
 {
@@ -23,7 +24,6 @@ public static class Helpers
 
   public static class Math
   {
-    public static readonly System.Random SystemRandom = new();
     public static Vector3 Vector3(float x = 0, float y = 0, float z = 0)
     {
       return new Vector3(x, y, z);
@@ -71,8 +71,6 @@ public static class Helpers
       bool horizontalDirection,
       Func<bool> checkBalancing = null)
     {
-      checkBalancing ??= () => false;
-
       SensorRay dr1;
       SensorRay dr2;
 
@@ -130,6 +128,8 @@ public static class Helpers
           return GroundDetectionResult.CreateABResult(horizontalDirection, ur2Hit.Value, ur2.Direction, VerticalRelation.Below);
         }
       }
+
+      checkBalancing ??= FalseProvider;
 
       if (ur1Hit != null)
       {

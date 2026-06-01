@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using static PlayerInput;
 
@@ -83,5 +84,11 @@ public static class SharedConsts
     public static readonly PlayerInput[] TakeLeftHit = new[] { X, X, A };
     public static readonly PlayerInput[] TakeRightHit = new[] { X, X, B };
     public static readonly PlayerInput[] ToggleDebugMode = new[] { Z, Y, Y };
+  }
+
+  public static class Utilities
+  {
+    public static readonly Func<bool> FalseProvider = () => false;
+    public static readonly System.Random SystemRandom = new();
   }
 }
