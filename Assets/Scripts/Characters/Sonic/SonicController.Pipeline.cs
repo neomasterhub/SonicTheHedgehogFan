@@ -304,7 +304,7 @@ public partial class SonicController
 
     if (result != null && result.Value.Distance == 0)
     {
-      transform.position += new Vector3(0, CeilingPositionDownwardOffset);
+      transform.position += new Vector3(0, CeilingDetectionOffset);
       _sensorSystem.Update(new(_sizeMode, _groundInfoSystem.Current.Side, transform.position, sensorFlags, _sensorRayLengths));
       result = _sensorSystem.DetectCeiling(horizontalDirection, GroundLayer);
     }
@@ -318,7 +318,7 @@ public partial class SonicController
 
     if (result != null && result.Value.Distance == 0)
     {
-      transform.position += new Vector3(0, GroundedPositionUpwardOffset);
+      transform.position += new Vector3(0, FloorDetectionOffset);
       _sensorSystem.Update(new(_sizeMode, _groundInfoSystem.Current.Side, transform.position, sensorFlags, _sensorRayLengths));
       result = _sensorSystem.DetectGround(horizontalDirection, GroundLayer);
     }

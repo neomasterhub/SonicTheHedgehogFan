@@ -38,7 +38,7 @@ public static class Helpers
       // Keeps surface normal aligned with slope.
       return (ground.Distance
         * (int)ground.SensorGroundRelation)
-        - GroundedPositionUpwardOffset;
+        - FloorDetectionOffset;
     }
   }
 
