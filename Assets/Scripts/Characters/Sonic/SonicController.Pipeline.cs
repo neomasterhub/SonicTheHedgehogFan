@@ -150,7 +150,9 @@ public partial class SonicController
         _isJumping,
         _prevIsGrounded,
         _leftWallDetectionResult?.Distance,
-        _rightWallDetectionResult?.Distance);
+        _rightWallDetectionResult?.Distance,
+        _lastCeilingDetectionResult.AngleDeg,
+        _lastCeilingDetectionResult.Distance);
     }
 
     _speedSystem.SetSpeed(_speedContext);

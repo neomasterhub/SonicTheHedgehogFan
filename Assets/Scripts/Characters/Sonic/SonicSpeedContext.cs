@@ -11,8 +11,10 @@ public readonly struct SonicSpeedContext
   public readonly float? DistanceToGround;
   public readonly float? DistanceToLeftWall;
   public readonly float? DistanceToRightWall;
+  public readonly float? CeilingAngleDeg;
+  public readonly float? DistanceToCeiling;
 
-  private SonicSpeedContext(bool isHit, float hitHorizontalDirection, bool isDying, bool isRolling, bool isJumping, bool isGrounded, bool prevIsGrounded, float? groundAngleRad, float? distanceToGround, float? distanceToLeftWall, float? distanceToRightWall)
+  private SonicSpeedContext(bool isHit, float hitHorizontalDirection, bool isDying, bool isRolling, bool isJumping, bool isGrounded, bool prevIsGrounded, float? groundAngleRad, float? distanceToGround, float? distanceToLeftWall, float? distanceToRightWall, float? ceilingAngleDeg, float? distanceToCeiling)
   {
     IsHit = isHit;
     HitHorizontalDirection = hitHorizontalDirection;
@@ -25,15 +27,17 @@ public readonly struct SonicSpeedContext
     DistanceToGround = distanceToGround;
     DistanceToLeftWall = distanceToLeftWall;
     DistanceToRightWall = distanceToRightWall;
+    CeilingAngleDeg = ceilingAngleDeg;
+    DistanceToCeiling = distanceToCeiling;
   }
 
   public static SonicSpeedContext GetGrounded(bool isHit, float hitHorizontalDirection, bool isDying, bool isRolling, bool isJumping, bool prevIsGrounded, float groundAngleRad, float distanceToGround, float? distanceToLeftWall, float? distanceToRightWall)
   {
-    return new(isHit, hitHorizontalDirection, isDying, isRolling, isJumping, true, prevIsGrounded, groundAngleRad, distanceToGround, distanceToLeftWall, distanceToRightWall);
+    return new(isHit, hitHorizontalDirection, isDying, isRolling, isJumping, true, prevIsGrounded, groundAngleRad, distanceToGround, distanceToLeftWall, distanceToRightWall, null, null);
   }
 
-  public static SonicSpeedContext GetAirborne(bool isHit, float hitHorizontalDirection, bool isDying, bool isRolling, bool isJumping, bool prevIsGrounded, float? distanceToLeftWall, float? distanceToRightWall)
+  public static SonicSpeedContext GetAirborne(bool isHit, float hitHorizontalDirection, bool isDying, bool isRolling, bool isJumping, bool prevIsGrounded, float? distanceToLeftWall, float? distanceToRightWall, float? ceilingAngleDeg, float? distanceToCeiling)
   {
-    return new(isHit, hitHorizontalDirection, isDying, isRolling, isJumping, false, prevIsGrounded, null, null, distanceToLeftWall, distanceToRightWall);
+    return new(isHit, hitHorizontalDirection, isDying, isRolling, isJumping, false, prevIsGrounded, null, null, distanceToLeftWall, distanceToRightWall, ceilingAngleDeg, distanceToCeiling);
   }
 }
