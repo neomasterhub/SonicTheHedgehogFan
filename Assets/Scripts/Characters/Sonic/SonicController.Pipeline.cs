@@ -65,15 +65,12 @@ public partial class SonicController
     var sensorFlags = GetSensorFlags();
     _sensorSystem.Update(new(_sizeMode, _groundInfoSystem.Current.Side, transform.position, sensorFlags, _sensorRayLengths));
 
-    var ceiling = DetectCeiling(sensorFlags, _horizontalDirection);
+    _ceilingDetectionResult = DetectCeiling(sensorFlags, _horizontalDirection);
+
     var ground = DetectGround(sensorFlags, _horizontalDirection);
+
     _leftWallDetectionResult = _sensorSystem.DetectLeftWall(GroundLayer);
     _rightWallDetectionResult = _sensorSystem.DetectRightWall(GroundLayer);
-
-    if (ceiling.HasValue)
-    {
-      _lastCeilingDetectionResult = ceiling.Value;
-    }
 
     if (ground.HasValue)
     {
@@ -151,8 +148,8 @@ public partial class SonicController
         _prevIsGrounded,
         _leftWallDetectionResult?.Distance,
         _rightWallDetectionResult?.Distance,
-        _lastCeilingDetectionResult.AngleDeg,
-        _lastCeilingDetectionResult.Distance);
+        _ceilingDetectionResult?.AngleDeg,
+        _ceilingDetectionResult?.Distance);
     }
 
     _speedSystem.SetSpeed(_speedContext);
