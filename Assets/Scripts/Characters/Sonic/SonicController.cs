@@ -47,7 +47,8 @@ public partial class SonicController : MonoBehaviour
   private bool _isDownGroundedStatic;
   private bool _isDownGroundedMoving;
   private bool _isUpGrounded;
-  private bool _isWallGrounded;
+  private bool _isLeftGrounded;
+  private bool _isRightGrounded;
   private bool _debugMode;
   private bool _prevDebugMode;
   private bool _takeLeftHit;
