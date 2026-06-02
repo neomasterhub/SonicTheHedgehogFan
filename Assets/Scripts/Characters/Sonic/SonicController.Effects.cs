@@ -184,6 +184,7 @@ public partial class SonicController
         && _inputSystem.Pressed.HasAny(PlayerInput.C))
       .WithAction(() =>
       {
+        _isRollingJumped = _isRolling;
         _isJumping = true;
         _isRolling = true;
         IsAttacking = true;

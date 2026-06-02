@@ -238,6 +238,7 @@ public partial class SonicController
       .Set(PlayerInput.Z, Input.GetKey(KeyCode.Keypad6));
 
     if (IsHurt
+      || _isRollingJumped
       || _postWallDetachDpadLock)
     {
       return input;
