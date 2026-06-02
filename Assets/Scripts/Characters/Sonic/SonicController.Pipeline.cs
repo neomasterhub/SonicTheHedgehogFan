@@ -153,29 +153,6 @@ public partial class SonicController
     }
 
     _speedSystem.SetSpeed(_speedContext);
-
-    //ApplyMovement_UpdateMovementFlags();
-  }
-
-  private void ApplyMovement_UpdateMovementFlags()
-  {
-    if (_isGrounded)
-    {
-      _canMoveLeft = !_speedSystem.IsStoppedByLeftWall;
-      _canMoveRight = !_speedSystem.IsStoppedByRightWall;
-    }
-    else
-    {
-      if (_speedSystem.IsStoppedByLeftWall)
-      {
-        _canMoveLeft = false;
-      }
-
-      if (_speedSystem.IsStoppedByRightWall)
-      {
-        _canMoveRight = false;
-      }
-    }
   }
 
   private void UpdateView()
