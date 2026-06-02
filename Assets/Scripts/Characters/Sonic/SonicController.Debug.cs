@@ -74,6 +74,13 @@ public partial class SonicController
       _groundNormal.SetPosition(0, _lastGroundDetectionResult.Contact);
       _groundNormal.SetPosition(1, _lastGroundDetectionResult.Contact + _lastGroundDetectionResult.Normal);
     }
+
+    if (_ceilingDetectionResult.HasValue)
+    {
+      var ceiling = _ceilingDetectionResult.Value;
+      _groundNormal.SetPosition(0, ceiling.Contact);
+      _groundNormal.SetPosition(1, ceiling.Contact + ceiling.Normal);
+    }
   }
 
   private string GetDpadState()
