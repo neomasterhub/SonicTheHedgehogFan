@@ -65,15 +65,12 @@ public partial class SonicController
     var sensorFlags = GetSensorFlags();
     _sensorSystem.Update(new(_sizeMode, _groundInfoSystem.Current.Side, transform.position, sensorFlags, _sensorRayLengths));
 
-    var ceiling = DetectCeiling(sensorFlags, _horizontalDirection);
+    _ceilingDetectionResult = DetectCeiling(sensorFlags, _horizontalDirection);
+
     var ground = DetectGround(sensorFlags, _horizontalDirection);
+
     _leftWallDetectionResult = _sensorSystem.DetectLeftWall(GroundLayer);
     _rightWallDetectionResult = _sensorSystem.DetectRightWall(GroundLayer);
-
-    if (ceiling.HasValue)
-    {
-      _lastCeilingDetectionResult = ceiling.Value;
-    }
 
     if (ground.HasValue)
     {
@@ -150,33 +147,12 @@ public partial class SonicController
         _isJumping,
         _prevIsGrounded,
         _leftWallDetectionResult?.Distance,
-        _rightWallDetectionResult?.Distance);
+        _rightWallDetectionResult?.Distance,
+        _ceilingDetectionResult?.AngleDeg,
+        _ceilingDetectionResult?.Distance);
     }
 
     _speedSystem.SetSpeed(_speedContext);
-
-    ApplyMovement_UpdateMovementFlags();
-  }
-
-  private void ApplyMovement_UpdateMovementFlags()
-  {
-    if (_isGrounded)
-    {
-      _canMoveLeft = !_speedSystem.IsStoppedByLeftWall;
-      _canMoveRight = !_speedSystem.IsStoppedByRightWall;
-    }
-    else
-    {
-      if (_speedSystem.IsStoppedByLeftWall)
-      {
-        _canMoveLeft = false;
-      }
-
-      if (_speedSystem.IsStoppedByRightWall)
-      {
-        _canMoveRight = false;
-      }
-    }
   }
 
   private void UpdateView()
