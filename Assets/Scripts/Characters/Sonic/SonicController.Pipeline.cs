@@ -74,6 +74,7 @@ public partial class SonicController
 
     if (ground.HasValue)
     {
+      _isRollingJumped = false;
       _lastGroundDetectionResult = ground.Value;
 
       AnalyzeEnvironment_Grounded();

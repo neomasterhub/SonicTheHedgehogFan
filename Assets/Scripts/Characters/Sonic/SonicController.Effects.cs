@@ -184,6 +184,7 @@ public partial class SonicController
         && _inputSystem.Pressed.HasAny(PlayerInput.C))
       .WithAction(() =>
       {
+        _isRollingJumped = _isRolling;
         _isJumping = true;
         _isRolling = true;
         IsAttacking = true;
@@ -199,8 +200,9 @@ public partial class SonicController
     return PipelineStepBuilder.Create()
       .WithDisplayName("Rolling/Exit")
       .WithCondition(() =>
-        _isDownGroundedStatic
-        && _isRolling)
+        _isRolling
+        && (_isDownGroundedStatic
+        || (_isDownGrounded && !_prevIsGrounded)))
       .WithAction(() =>
       {
         _isRolling = false;

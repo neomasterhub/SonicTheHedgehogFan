@@ -37,6 +37,7 @@ public partial class SonicController : MonoBehaviour
   private bool _isJumping;
   private bool _isDying;
   private bool _isDead;
+  private bool _isRollingJumped;
   private bool _prevIsGrounded;
   private bool _prevIsRolling;
   private bool _postWallDetachDpadLock;
