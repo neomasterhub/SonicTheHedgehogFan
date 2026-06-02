@@ -154,7 +154,7 @@ public partial class SonicController
 
     _speedSystem.SetSpeed(_speedContext);
 
-    ApplyMovement_UpdateMovementFlags();
+    //ApplyMovement_UpdateMovementFlags();
   }
 
   private void ApplyMovement_UpdateMovementFlags()

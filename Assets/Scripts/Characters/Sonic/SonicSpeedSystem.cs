@@ -141,6 +141,7 @@ public class SonicSpeedSystem : SpeedSystemBase
 
     SetSpeed_Airborne_FromGrounded();
     SetSpeed_Airborne_Rebound();
+    SetSpeed_Airborne_PreventCeilingOvershoot();
     SetSpeed_Airborne_Gravity();
     SetSpeed_Airborne_PreventGroundOvershoot();
     SetSpeed_Airborne_Horizontal();
@@ -162,6 +163,17 @@ public class SonicSpeedSystem : SpeedSystemBase
     var speed = _reboundSpeedProvider.FirstTriggeredOrDefault();
     SpeedX = speed.x;
     SpeedY = speed.y;
+  }
+
+  private void SetSpeed_Airborne_PreventCeilingOvershoot()
+  {
+    if (_context.CeilingAngleDeg.HasValue
+      && _context.CeilingAngleDeg.Value != 0
+      && SpeedY > 0
+      && (_context.DistanceToLeftWall.HasValue || _context.DistanceToRightWall.HasValue))
+    {
+      SpeedY = 0;
+    }
   }
 
   private void SetSpeed_Airborne_Gravity()
