@@ -92,12 +92,14 @@ public partial class SonicController
     _groundInfoSystem.Update(_lastGroundDetectionResult.AngleDeg);
     _slopeFactor = GetSlopeFactor(_configs.PhysicsModeConfig);
 
+    var groundSide = _groundInfoSystem.Current.Side;
     _absGroundSpeed = Mathf.Abs(_speedSystem.GroundSpeed);
-    _isDownGrounded = _groundInfoSystem.Current.Side == GroundSide.Down;
+    _isDownGrounded = groundSide == GroundSide.Down;
     _isDownGroundedStatic = _isDownGrounded && _speedSystem.GroundSpeed == 0;
     _isDownGroundedMoving = _isDownGrounded && _speedSystem.GroundSpeed != 0;
-    _isUpGrounded = _groundInfoSystem.Current.Side == GroundSide.Up;
-    _isWallGrounded = _groundInfoSystem.Current.Side is GroundSide.Left or GroundSide.Right;
+    _isUpGrounded = groundSide == GroundSide.Up;
+    _isLeftGrounded = groundSide == GroundSide.Left;
+    _isRightGrounded = groundSide == GroundSide.Right;
   }
 
   private void AnalyzeEnvironment_Airborne()
@@ -113,7 +115,8 @@ public partial class SonicController
     _isDownGroundedStatic = false;
     _isDownGroundedMoving = false;
     _isUpGrounded = false;
-    _isWallGrounded = false;
+    _isLeftGrounded = false;
+    _isRightGrounded = false;
   }
 
   private void ApplyEffects()

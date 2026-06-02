@@ -343,7 +343,8 @@ public partial class SonicController
     return PipelineStepBuilder.Create()
       .WithDisplayName("Wall detach")
       .WithCondition(() =>
-        _isWallGrounded
+        ((_isLeftGrounded && !_horizontalDirection)
+        || (_isRightGrounded && _horizontalDirection))
         && _absGroundSpeed < _speedSystem.MinWallSpeed)
       .WithAction(() =>
       {
