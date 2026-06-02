@@ -246,7 +246,7 @@ public partial class SonicController
     return input
       .Set(PlayerInput.Up, Input.GetKey(KeyCode.UpArrow))
       .Set(PlayerInput.Down, Input.GetKey(KeyCode.DownArrow))
-      .Set(PlayerInput.Left, _canMoveLeft && Input.GetKey(KeyCode.LeftArrow))
-      .Set(PlayerInput.Right, _canMoveRight && Input.GetKey(KeyCode.RightArrow));
+      .Set(PlayerInput.Left, Input.GetKey(KeyCode.LeftArrow))
+      .Set(PlayerInput.Right, Input.GetKey(KeyCode.RightArrow));
   }
 }
