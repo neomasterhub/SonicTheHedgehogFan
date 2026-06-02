@@ -199,8 +199,9 @@ public partial class SonicController
     return PipelineStepBuilder.Create()
       .WithDisplayName("Rolling/Exit")
       .WithCondition(() =>
-        _isDownGroundedStatic
-        && _isRolling)
+        _isRolling
+        && (_isDownGroundedStatic
+        || (_isDownGrounded && !_prevIsGrounded)))
       .WithAction(() =>
       {
         _isRolling = false;
