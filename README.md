@@ -1,11 +1,23 @@
 # Sonic the Hedgehog Fan
 
-[Play](https://neomasterhub.github.io/SonicTheHedgehogFanGame)
+## Copyright
 
-## Secret Codes
+© 2026 Neomaster. All rights reserved.
 
-|Code|Action|
-|-|-|
-|<kbd>z</kbd> <kbd>y</kbd> <kbd>y</kbd>|Debug mode|
-|<kbd>x</kbd> <kbd>x</kbd> <kbd>A</kbd>|Take left hit|
-|<kbd>x</kbd> <kbd>x</kbd> <kbd>B</kbd>|Take right hit|
+## Disclaimer
+
+SEGA-related intellectual property is owned by SEGA
+and is not covered by this license.
+
+This project is a non-commercial fan work
+and is not affiliated with or endorsed by SEGA.
+
+## License
+
+This license applies only to
+the original work created by the author.
+
+Permission is hereby granted to use, study, and modify this project
+for personal, educational, and non-commercial purposes only.
+
+Commercial use is prohibited without permission from the author.
