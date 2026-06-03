@@ -23,9 +23,9 @@ public partial class AnimalContainerEnemyModuleController
     if (_animalObj == null)
     {
       var animalPrefab = _animalPrefabs[SystemRandom.Next(_animalPrefabs.Length)];
-      animalPrefab.SetActive(false);
 
       _animalObj = Instantiate(animalPrefab, transform.position + _animalBreakOutOrigin, Quaternion.identity);
+      _animalObj.SetActive(false);
     }
 
     _animal = _animalObj.GetComponent<IAnimal>();

@@ -1,4 +1,5 @@
 using UnityEngine;
+using static SharedConsts;
 
 /// <summary>
 /// Init.
@@ -24,10 +25,12 @@ public partial class EnemyController
     _collider = GetComponent<BoxCollider2D>();
     _modules = GetComponents<EnemyModuleControllerBase>();
 
-    if (_otherEnemyObj != null)
+    if (_otherEnemyObj == null)
     {
-      _otherEnemy = _otherEnemyObj.GetComponent<IEnemy>();
-      _otherEnemyCollider = _otherEnemyObj.GetComponent<BoxCollider2D>();
+      _otherEnemyObj = GameObject.FindWithTag(Tags.Player);
     }
+
+    _otherEnemy = _otherEnemyObj.GetComponent<IEnemy>();
+    _otherEnemyCollider = _otherEnemyObj.GetComponent<BoxCollider2D>();
   }
 }
