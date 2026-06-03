@@ -210,8 +210,7 @@ public partial class SonicController
   {
     for (var i = 0; i < _sounds.Length; i++)
     {
-      _sounds[i].Stop();
-      _sounds[i].Play();
+      _sounds[i].Stop().Play();
     }
   }
 
