@@ -86,6 +86,11 @@ public static class SharedConsts
     public static readonly PlayerInput[] ToggleDebugMode = new[] { Z, Y, Y };
   }
 
+  public static class Tags
+  {
+    public const string Player = nameof(Player);
+  }
+
   public static class Utilities
   {
     public static readonly Func<bool> FalseProvider = () => false;
