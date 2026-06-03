@@ -1,3 +1,5 @@
+using static AnimalConsts;
+
 public class AnimalSpeedSystem : SpeedSystemBase
 {
   private float _speedX;
@@ -28,6 +30,11 @@ public class AnimalSpeedSystem : SpeedSystemBase
   private void SetSpeed_Airborne()
   {
     SpeedY -= _gravitySpeed;
+
+    if (SpeedY < -MaxFallSpeed)
+    {
+      SpeedY = -MaxFallSpeed;
+    }
   }
 
   private void SetSpeed_Grounded()
