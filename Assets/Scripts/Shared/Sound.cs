@@ -14,19 +14,23 @@ public class Sound
     _stopCondition = stopCondition ?? (() => false);
   }
 
-  public void Play()
+  public Sound Play()
   {
     if (_playCondition())
     {
       _audioSource.Play();
     }
+
+    return this;
   }
 
-  public void Stop()
+  public Sound Stop()
   {
     if (_stopCondition())
     {
       _audioSource.Stop();
     }
+
+    return this;
   }
 }
