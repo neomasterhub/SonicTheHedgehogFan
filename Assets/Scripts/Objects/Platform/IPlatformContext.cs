@@ -1,5 +1,3 @@
-public interface IPlatformContext
+public interface IPlatformContext : IPlatform
 {
-  float SpeedX { get; set; }
-  float SpeedY { get; set; }
 }
