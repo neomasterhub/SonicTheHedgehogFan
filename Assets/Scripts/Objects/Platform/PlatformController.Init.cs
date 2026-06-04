@@ -13,12 +13,8 @@ public partial class PlatformController
 
   private void InitializePlatformObjects()
   {
-    if (_platformObjectPrefabs == null
-      || _platformObjectPrefabs.Length == 0)
-    {
-      _platformObjects = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None)
-        .OfType<IPlatformObject>()
-        .ToArray();
-    }
+    _platformObjects = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None)
+      .OfType<IPlatformObject>()
+      .ToArray();
   }
 }
