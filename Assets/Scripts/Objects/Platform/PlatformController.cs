@@ -9,5 +9,5 @@ public partial class PlatformController : MonoBehaviour
 
   [SerializeField]
   [InspectorLabel("Platform Objects")]
-  private GameObject[] _platformObjectObjs;
+  private GameObject[] _platformObjectPrefabs;
 }
