@@ -1,3 +1,6 @@
+using UnityEngine;
+using static SharedConsts.Physics;
+
 /// <summary>
 /// Pipeline.
 /// </summary>
@@ -11,6 +14,7 @@ public partial class PlatformController
 
   private void ApplyMovement()
   {
+    transform.position = new Vector3(SpeedX.Round(PositionRoundingDigits), SpeedY.Round(PositionRoundingDigits));
   }
 
   private void UpdatePosition()

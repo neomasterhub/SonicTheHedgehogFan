@@ -58,6 +58,8 @@ public partial class SonicController : MonoBehaviour
   private char _triggeredGroundSensorId;
   private float _slopeFactor;
   private float _absGroundSpeed;
+  private float _platformSpeedX;
+  private float _platformSpeedY;
   private Animator _animator;
   private BoxCollider2D _boxCollider;
   private CeilingDetectionResult? _ceilingDetectionResult;

@@ -1,3 +1,5 @@
+using UnityEngine;
+
 /// <summary>
 /// Behaviour.
 /// </summary>
@@ -5,6 +7,7 @@ public partial class SonicController
   : ICameraTarget,
   IEnemy,
   ILookVerticalDirectionProvider,
+  IPlatformObject,
   IRingCollector,
   ISceneObjectDebug
 {
@@ -41,6 +44,11 @@ public partial class SonicController
       return VerticalDirection.None;
     }
   }
+
+  public bool IsGrounded => _isGrounded;
+  public Collider2D Collider => _boxCollider;
+  public float PlatformSpeedX { set => _platformSpeedX = value; }
+  public float PlatformSpeedY { set => _platformSpeedY = value; }
 
   public bool DebugMode
   {
