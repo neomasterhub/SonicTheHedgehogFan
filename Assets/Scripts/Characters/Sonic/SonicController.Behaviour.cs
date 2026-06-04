@@ -47,8 +47,7 @@ public partial class SonicController
 
   public bool IsGrounded => _isGrounded;
   public Collider2D Collider => _boxCollider;
-  public float PlatformSpeedX { set => _platformSpeedX = value; }
-  public float PlatformSpeedY { set => _platformSpeedY = value; }
+  public IPlatform ContactPlatform { set => _contactPlatform = value; }
 
   public bool DebugMode
   {
