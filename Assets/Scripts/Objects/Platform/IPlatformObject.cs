@@ -2,7 +2,6 @@ using UnityEngine;
 
 public interface IPlatformObject
 {
-  bool IsGrounded { get; }
-  Collider2D Collider { get; }
+  Transform ContactTransform { get; }
   IPlatform ContactPlatform { set; }
 }

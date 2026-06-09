@@ -45,8 +45,7 @@ public partial class SonicController
     }
   }
 
-  public bool IsGrounded => _isGrounded;
-  public Collider2D Collider => _boxCollider;
+  public Transform ContactTransform => _contactGroundTransform;
   public IPlatform ContactPlatform { set => _contactPlatform = value; }
 
   public bool DebugMode

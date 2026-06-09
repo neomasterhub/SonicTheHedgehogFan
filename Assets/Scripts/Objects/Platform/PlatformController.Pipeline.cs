@@ -13,7 +13,11 @@ public partial class PlatformController
     for (var i = 0; i < _platformObjects.Length; i++)
     {
       var obj = _platformObjects[i];
-      obj.ContactPlatform = _collider.bounds.Intersects(obj.Collider.bounds) ? this : null;
+
+      if (obj.ContactTransform == transform)
+      {
+        obj.ContactPlatform = this;
+      }
     }
   }
 }

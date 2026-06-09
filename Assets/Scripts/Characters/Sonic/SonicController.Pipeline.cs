@@ -92,6 +92,7 @@ public partial class SonicController
     _triggeredGroundSensorId = _lastGroundDetectionResult.SourceSensorId;
     _groundInfoSystem.Update(_lastGroundDetectionResult.AngleDeg);
     _slopeFactor = GetSlopeFactor(_configs.PhysicsModeConfig);
+    _contactGroundTransform = _lastGroundDetectionResult.ContactTransform;
 
     var groundSide = _groundInfoSystem.Current.Side;
     _absGroundSpeed = Mathf.Abs(_speedSystem.GroundSpeed);
@@ -110,6 +111,7 @@ public partial class SonicController
     _triggeredGroundSensorId = default;
     _groundInfoSystem.Reset();
     _slopeFactor = 0;
+    _contactGroundTransform = null;
 
     _absGroundSpeed = 0;
     _isDownGrounded = false;

@@ -80,6 +80,7 @@ public partial class SonicController : MonoBehaviour
   private Timer _dpadLockTimer;
   private Timer _postHurtInvincibleTimer;
   private Timer _ringCollectorDisabledTimer;
+  private Transform _contactGroundTransform;
   private WallDetectionResult? _leftWallDetectionResult;
   private WallDetectionResult? _rightWallDetectionResult;
 
