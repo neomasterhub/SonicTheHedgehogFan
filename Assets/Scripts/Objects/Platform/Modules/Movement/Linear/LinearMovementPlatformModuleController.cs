@@ -10,6 +10,7 @@ public partial class LinearMovementPlatformModuleController
 
   private Timer _targetStopTimer;
   private Vector3 _target;
+  private float _speed;
   private bool _isStopped;
 
   [SerializeField]
@@ -17,7 +18,7 @@ public partial class LinearMovementPlatformModuleController
   [SerializeField]
   private Vector3 _to;
   [SerializeField]
-  private float _speed;
+  private float _speedPx;
   [SerializeField]
   private float _targetStopDuration;
 }

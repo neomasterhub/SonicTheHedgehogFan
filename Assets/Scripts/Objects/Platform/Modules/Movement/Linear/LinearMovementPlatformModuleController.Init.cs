@@ -1,3 +1,6 @@
+using static PlatformConsts;
+using static SharedConsts.ConvertValues;
+
 /// <summary>
 /// Init.
 /// </summary>
@@ -7,7 +10,9 @@ public partial class LinearMovementPlatformModuleController
     : base()
   {
     _timerSystem = new();
-    _targetStopDuration = 1;
+
+    _speedPx = SpeedPx;
+    _targetStopDuration = StopDuration;
   }
 
   public override void Initialize(PlatformControllerBase context)
@@ -15,6 +20,7 @@ public partial class LinearMovementPlatformModuleController
     base.Initialize(context);
 
     _target = _to;
+    _speed = _speedPx / PxPerUnit;
 
     var dir = (_to - _from).normalized;
 
