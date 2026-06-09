@@ -9,6 +9,7 @@ public readonly struct GroundDetectionResult
   public readonly Vector2 Contact;
   public readonly Vector2 Normal;
   public readonly VerticalRelation SensorGroundRelation;
+  public readonly Transform ContactTransform;
   public readonly bool IsBalancing;
 
   public GroundDetectionResult(
@@ -25,6 +26,7 @@ public readonly struct GroundDetectionResult
     AngleDeg = Vector2.SignedAngle(-sensorDirection, hit.normal).Round();
     AngleRad = AngleDeg * Mathf.Deg2Rad;
     SensorGroundRelation = sensorGroundRelation;
+    ContactTransform = hit.transform;
     IsBalancing = isBalancing;
   }
 
