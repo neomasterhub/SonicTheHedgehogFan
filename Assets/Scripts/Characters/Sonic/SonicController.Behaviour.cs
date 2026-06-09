@@ -1,3 +1,5 @@
+using UnityEngine;
+
 /// <summary>
 /// Behaviour.
 /// </summary>
@@ -5,6 +7,7 @@ public partial class SonicController
   : ICameraTarget,
   IEnemy,
   ILookVerticalDirectionProvider,
+  IPlatformObject,
   IRingCollector,
   ISceneObjectDebug
 {
@@ -41,6 +44,9 @@ public partial class SonicController
       return VerticalDirection.None;
     }
   }
+
+  public Transform ContactTransform => _contactGroundTransform;
+  public IPlatform ContactPlatform { set => _contactPlatform = value; }
 
   public bool DebugMode
   {

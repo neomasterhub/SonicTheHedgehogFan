@@ -64,6 +64,7 @@ public partial class SonicController : MonoBehaviour
   private GameObject _diagnosticsPanel;
   private GameObject _effectHistoryPanel;
   private GroundDetectionResult _lastGroundDetectionResult;
+  private IPlatform _contactPlatform;
   private LineRenderer _groundNormal;
   private PhysicsMode _physicsMode;
   private PhysicsMode _prevPhysicsMode;
@@ -79,6 +80,7 @@ public partial class SonicController : MonoBehaviour
   private Timer _dpadLockTimer;
   private Timer _postHurtInvincibleTimer;
   private Timer _ringCollectorDisabledTimer;
+  private Transform _contactGroundTransform;
   private WallDetectionResult? _leftWallDetectionResult;
   private WallDetectionResult? _rightWallDetectionResult;
 
