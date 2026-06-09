@@ -8,7 +8,13 @@ public partial class PlatformController
 {
   private void Awake()
   {
+    InitializeComponents();
     InitializePlatformObjects();
+  }
+
+  private void InitializeComponents()
+  {
+    _modules = GetComponents<PlatformModuleControllerBase>();
   }
 
   private void InitializePlatformObjects()

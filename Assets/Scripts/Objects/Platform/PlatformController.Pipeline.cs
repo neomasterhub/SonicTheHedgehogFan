@@ -5,6 +5,7 @@ public partial class PlatformController
 {
   private void FixedUpdate()
   {
+    ApplyModules();
     SetContact();
   }
 
@@ -18,6 +19,14 @@ public partial class PlatformController
       {
         obj.ContactPlatform = this;
       }
+    }
+  }
+
+  private void ApplyModules()
+  {
+    for (var i = 0; i < _modules.Length; i++)
+    {
+      _modules[i].Apply();
     }
   }
 }
