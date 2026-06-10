@@ -8,4 +8,5 @@ public partial class PlatformController : PlatformControllerBase
 {
   private PlatformModuleControllerBase[] _modules;
   private IPlatformObject[] _platformObjects;
+  private Vector3 _prevPosition;
 }
