@@ -23,6 +23,8 @@ public partial class LinearMovementPlatformModuleController
     _speed = _speedPx / PxPerUnit;
 
     var dir = (_to - _from).normalized;
+    _context.SpeedX = _speed * dir.x;
+    _context.SpeedY = _speed * dir.y;
 
     _targetStopTimer = new Timer(_targetStopDuration)
       .WhenStarted(() =>
