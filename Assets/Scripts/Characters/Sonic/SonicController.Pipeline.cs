@@ -205,9 +205,9 @@ public partial class SonicController
       _ => throw _groundInfoSystem.Current.Side.ArgumentOutOfRangeException(),
     };
 
-    if (_contactGroundTransform != null && _contactPlatform != null)
+    if (_isGrounded && _contactPlatform != null)
     {
-      pos += new Vector3(_contactPlatform.SpeedX, _contactPlatform.SpeedY);
+      transform.position += new Vector3(_contactPlatform.SpeedX, _contactPlatform.SpeedY);
     }
 
     transform.position = new Vector3(pos.x.Round(PositionRoundingDigits), pos.y.Round(PositionRoundingDigits));

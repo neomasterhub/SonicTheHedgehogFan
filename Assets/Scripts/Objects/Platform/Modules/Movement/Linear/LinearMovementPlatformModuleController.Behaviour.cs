@@ -9,14 +9,17 @@ public partial class LinearMovementPlatformModuleController
   {
     _timerSystem.Update(Time.fixedDeltaTime);
 
-    if (!_isStopped)
+    if (_isStopped)
     {
-      transform.position = Vector3.MoveTowards(transform.position, _target, _speed);
+      return;
     }
 
     if (transform.position == _target)
     {
       _timerSystem.StartIfNotRunning(_targetStopTimer);
+      return;
     }
+
+    transform.position = Vector3.MoveTowards(transform.position, _target, _speed);
   }
 }
