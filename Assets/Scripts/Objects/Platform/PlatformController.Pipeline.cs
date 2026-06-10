@@ -29,7 +29,6 @@ public partial class PlatformController
     for (var i = 0; i < _platformObjects.Length; i++)
     {
       var obj = _platformObjects[i];
-      obj.ContactPlatform = null;
 
       if (obj.ContactTransform == transform)
       {
