@@ -205,12 +205,12 @@ public partial class SonicController
       _ => throw _groundInfoSystem.Current.Side.ArgumentOutOfRangeException(),
     };
 
-    if (_contactGroundTransform != null && _contactPlatform != null)
-    {
-      pos += new Vector3(_contactPlatform.SpeedX, _contactPlatform.SpeedY);
-    }
-
     transform.position = new Vector3(pos.x.Round(PositionRoundingDigits), pos.y.Round(PositionRoundingDigits));
+
+    if (_isGrounded && _contactPlatform != null)
+    {
+      transform.position += _contactPlatform.Translation;
+    }
   }
 
   private void UpdateSounds()
