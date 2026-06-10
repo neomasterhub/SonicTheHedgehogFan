@@ -314,7 +314,7 @@ Transform:
   m_GameObject: {fileID: 93652173}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 22, y: 9, z: 0}
+  m_LocalPosition: {x: 22, y: 9.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -373,8 +373,8 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -0.8613186, y: 0.03067875}
-  - {x: 1.16469, y: 0.027269363}
+  - {x: -0.8613186, y: 0.027}
+  - {x: 1.16469, y: 0.027}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
@@ -391,7 +391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c61696c551d56349b964bf8344bf4a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LinearMovementPlatformModuleController
-  _from: {x: 22, y: 9, z: 0}
+  _from: {x: 22, y: 9.6, z: 0}
   _to: {x: 22, y: 11, z: 0}
   _speedPx: 2
   _targetStopDuration: 1
@@ -2838,7 +2838,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 3.75
+  orthographic size: 2.8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

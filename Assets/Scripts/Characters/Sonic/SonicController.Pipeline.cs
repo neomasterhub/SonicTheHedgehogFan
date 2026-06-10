@@ -195,22 +195,19 @@ public partial class SonicController
         : speedY + VRadiusDelta;
     }
 
-    // SpeedX, SpeedY - offsets in units per frame.
-    var pos = transform.position + _groundInfoSystem.Current.Side switch
-    {
-      GroundSide.Down => new Vector3(speedX, speedY),
-      GroundSide.Right => new Vector3(-speedY, speedX),
-      GroundSide.Up => new Vector3(-speedX, -speedY),
-      GroundSide.Left => new Vector3(speedY, -speedX),
-      _ => throw _groundInfoSystem.Current.Side.ArgumentOutOfRangeException(),
-    };
-
     if (_isGrounded && _contactPlatform != null)
     {
       transform.position += new Vector3(_contactPlatform.SpeedX, _contactPlatform.SpeedY);
     }
 
-    transform.position = new Vector3(pos.x.Round(PositionRoundingDigits), pos.y.Round(PositionRoundingDigits));
+    transform.position += _groundInfoSystem.Current.Side switch
+    {
+      GroundSide.Down => new Vector3(speedX, speedY).RoundPosition2D(),
+      GroundSide.Right => new Vector3(-speedY, speedX).RoundPosition2D(),
+      GroundSide.Up => new Vector3(-speedX, -speedY).RoundPosition2D(),
+      GroundSide.Left => new Vector3(speedY, -speedX).RoundPosition2D(),
+      _ => throw _groundInfoSystem.Current.Side.ArgumentOutOfRangeException(),
+    };
   }
 
   private void UpdateSounds()
