@@ -1,4 +1,5 @@
 using UnityEngine;
+using static Helpers.Math;
 using static Helpers.Physics;
 using static RingConsts.Physics;
 using static SharedConsts.Physics;
@@ -196,16 +197,14 @@ public partial class SonicController
     }
 
     // SpeedX, SpeedY - offsets in units per frame.
-    var pos = transform.position + _groundInfoSystem.Current.Side switch
+    transform.position += _groundInfoSystem.Current.Side switch
     {
-      GroundSide.Down => new Vector3(speedX, speedY),
-      GroundSide.Right => new Vector3(-speedY, speedX),
-      GroundSide.Up => new Vector3(-speedX, -speedY),
-      GroundSide.Left => new Vector3(speedY, -speedX),
+      GroundSide.Down => PositionVector3(speedX, speedY),
+      GroundSide.Right => PositionVector3(-speedY, speedX),
+      GroundSide.Up => PositionVector3(-speedX, -speedY),
+      GroundSide.Left => PositionVector3(speedY, -speedX),
       _ => throw _groundInfoSystem.Current.Side.ArgumentOutOfRangeException(),
     };
-
-    transform.position = new Vector3(pos.x.Round(PositionRoundingDigits), pos.y.Round(PositionRoundingDigits));
 
     if (_isGrounded && _contactPlatform != null)
     {
