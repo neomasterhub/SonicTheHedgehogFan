@@ -30,7 +30,7 @@ public partial class PlatformController
     {
       var obj = _platformObjects[i];
 
-      if (obj.ContactTransform == transform)
+      if (obj.ContactGroundTransform == transform)
       {
         obj.ContactPlatform = this;
       }

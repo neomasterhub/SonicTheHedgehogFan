@@ -2,6 +2,6 @@ using UnityEngine;
 
 public interface IPlatformObject
 {
-  Transform ContactTransform { get; }
+  Transform ContactGroundTransform { get; }
   IPlatform ContactPlatform { set; }
 }
