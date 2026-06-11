@@ -10,7 +10,8 @@ public class BlockSpeedSystem : SpeedSystemBase
   public void SetSpeed(BlockSpeedContext context)
   {
     if (_player.ContactBlock == null
-      || !_player.IsGrounded)
+      || !_player.IsGrounded
+      || !_player.PrevIsGrounded)
     {
       SpeedX = 0;
       return;
