@@ -132,7 +132,7 @@ public partial class SonicController
     _isPushing = false;
     _pushingSpeed = null;
 
-    if (!_isGrounded || ContactBlock == null)
+    if (ContactBlock == null)
     {
       return;
     }
@@ -187,7 +187,8 @@ public partial class SonicController
         _leftWallDetectionResult?.Distance,
         _rightWallDetectionResult?.Distance,
         _ceilingDetectionResult?.AngleDeg,
-        _ceilingDetectionResult?.Distance);
+        _ceilingDetectionResult?.Distance,
+        _pushingSpeed);
     }
 
     _speedSystem.SetSpeed(_speedContext);

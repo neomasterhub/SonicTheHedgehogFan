@@ -146,6 +146,7 @@ public class SonicSpeedSystem : SpeedSystemBase
     SetSpeed_Airborne_PreventGroundOvershoot();
     SetSpeed_Airborne_Horizontal();
     SetSpeed_Airborne_PreventWallOvershoot();
+    SetSpeed_Airborne_PreventBlockOvershoot();
   }
 
   private void SetSpeed_Airborne_FromGrounded()
@@ -221,6 +222,14 @@ public class SonicSpeedSystem : SpeedSystemBase
   private void SetSpeed_Airborne_PreventWallOvershoot()
   {
     if (IsStoppedByWall(SpeedX))
+    {
+      SpeedX = 0;
+    }
+  }
+
+  private void SetSpeed_Airborne_PreventBlockOvershoot()
+  {
+    if (_context.PushingSpeed.HasValue)
     {
       SpeedX = 0;
     }
