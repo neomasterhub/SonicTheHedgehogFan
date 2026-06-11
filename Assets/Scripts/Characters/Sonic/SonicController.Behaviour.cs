@@ -5,6 +5,7 @@ using UnityEngine;
 /// </summary>
 public partial class SonicController
   : ICameraTarget,
+  IBlockPlayer,
   IEnemy,
   ILookVerticalDirectionProvider,
   IPlatformObject,
