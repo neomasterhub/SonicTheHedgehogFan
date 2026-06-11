@@ -106,6 +106,9 @@ public partial class SonicController : MonoBehaviour
   [InspectorLabel("Lost rings")]
   private AudioClip _lostRingsClip;
   [SerializeField]
+  [InspectorLabel("Push")]
+  private AudioClip _pushClip;
+  [SerializeField]
   [InspectorLabel("Death")]
   private AudioClip _deathClip;
 
