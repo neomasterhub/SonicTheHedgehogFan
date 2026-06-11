@@ -3136,7 +3136,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 22.607, y: 9.99, z: -10}
+  m_LocalPosition: {x: 19.113401, y: 9.99, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3468,7 +3468,7 @@ Transform:
   m_GameObject: {fileID: 710850496}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 22.607, y: 9.99, z: 0}
+  m_LocalPosition: {x: 19.113401, y: 9.99, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4517,7 +4517,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47510f52d31043e42a00d3f92f550e46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BlockController
-  _pushSpeedPx: 1
+  _pushSpeedPx: 0.5
 --- !u!61 &1595010447
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4632,7 +4632,7 @@ Transform:
   m_GameObject: {fileID: 1595010445}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 23.5106, y: 9.9198, z: 0}
+  m_LocalPosition: {x: 20.017, y: 9.9198, z: 0}
   m_LocalScale: {x: 1.8263785, y: 1.5071, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4849,7 +4849,7 @@ Transform:
   m_GameObject: {fileID: 1814098413}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 22.607, y: 9.99, z: -10}
+  m_LocalPosition: {x: 19.113401, y: 9.99, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
