@@ -7,6 +7,7 @@ using static SharedConsts;
 public partial class EnemyController
 {
   public EnemyController()
+    : base()
   {
     IsStatic = true;
     AnimatorSpeed = 1;
