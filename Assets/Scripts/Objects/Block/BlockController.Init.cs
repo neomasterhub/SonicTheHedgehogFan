@@ -6,6 +6,13 @@ using static SharedConsts;
 /// </summary>
 public partial class BlockController
 {
+  public BlockController()
+    : base()
+  {
+    _effects = new();
+    SetEffectPipeline();
+  }
+
   private void Awake()
   {
     InitializeComponents();
