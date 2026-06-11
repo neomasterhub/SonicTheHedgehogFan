@@ -229,6 +229,7 @@ public partial class SonicController
     _takeLeftHit = false;
     _takeRightHit = false;
     IsHit = false;
+    ContactBlock = null;
     ContactEnemy = null;
   }
 

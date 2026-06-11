@@ -9,6 +9,7 @@ public partial class BlockController
   {
     ApplyEffects();
     ApplyMovement();
+    UpdatePosition();
   }
 
   private void ApplyEffects()
@@ -18,6 +19,11 @@ public partial class BlockController
 
   private void ApplyMovement()
   {
-    transform.position += PositionVector3(_player.SpeedX, 0);
+    _speedSystem.SetSpeed(new(transform.position.x));
+  }
+
+  private void UpdatePosition()
+  {
+    transform.position += PositionVector3(_speedSystem.SpeedX, _speedSystem.SpeedY);
   }
 }

@@ -48,6 +48,8 @@ public partial class SonicController
 
   public Transform ContactGroundTransform => _contactGroundTransform;
   public IPlatform ContactPlatform { set => _contactPlatform = value; }
+
+  public bool IsGrounded => _isGrounded;
   public IBlock ContactBlock { get; set; }
 
   public bool DebugMode
