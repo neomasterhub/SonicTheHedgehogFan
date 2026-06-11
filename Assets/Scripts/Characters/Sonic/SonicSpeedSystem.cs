@@ -256,6 +256,7 @@ public class SonicSpeedSystem : SpeedSystemBase
       SetSpeed_Grounded_Friction();
     }
 
+    SetSpeed_Grounded_Pushing();
     SetSpeed_Grounded_PreventWallOvershoot();
 
     SpeedX = GroundSpeed * _groundAngleCos;
@@ -378,6 +379,23 @@ public class SonicSpeedSystem : SpeedSystemBase
     }
 
     GroundSpeed -= _frictionSpeed * Mathf.Sign(GroundSpeed);
+  }
+
+  private void SetSpeed_Grounded_Pushing()
+  {
+    if (_context.PushingSpeed == null)
+    {
+      return;
+    }
+
+    var pushingSpeed = _context.PushingSpeed.Value;
+
+    if (pushingSpeed == 0
+      || (pushingSpeed < 0 && GroundSpeed < pushingSpeed)
+      || (pushingSpeed > 0 && GroundSpeed > pushingSpeed))
+    {
+      GroundSpeed = pushingSpeed;
+    }
   }
 
   private void SetSpeed_Grounded_PreventWallOvershoot()

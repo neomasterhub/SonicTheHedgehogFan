@@ -144,7 +144,8 @@ public partial class SonicController
         _groundInfoSystem.Current.SideAngleRad,
         _lastGroundDetectionResult.Distance,
         _isDownGrounded && _leftWallDetectionResult?.AngleDeg == 0 ? _leftWallDetectionResult.Value.Distance : null,
-        _isDownGrounded && _rightWallDetectionResult?.AngleDeg == 0 ? _rightWallDetectionResult.Value.Distance : null);
+        _isDownGrounded && _rightWallDetectionResult?.AngleDeg == 0 ? _rightWallDetectionResult.Value.Distance : null,
+        GetPushingSpeed());
     }
     else
     {
@@ -368,5 +369,26 @@ public partial class SonicController
     }
 
     Rings.Clear();
+  }
+
+  private float? GetPushingSpeed()
+  {
+    if (_isGrounded && ContactBlock != null)
+    {
+      var x = transform.position.x;
+      if (_horizontalDirection
+        && x < ContactBlock.PositionX)
+      {
+        return ContactBlock.PushSpeed;
+      }
+
+      if (!_horizontalDirection
+        && x > ContactBlock.PositionX)
+      {
+        return -ContactBlock.PushSpeed;
+      }
+    }
+
+    return null;
   }
 }
