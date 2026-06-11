@@ -50,6 +50,7 @@ public partial class SonicController
   public IPlatform ContactPlatform { set => _contactPlatform = value; }
 
   public bool IsGrounded => _isGrounded;
+  public bool PrevIsGrounded => _prevIsGrounded;
   public IBlock ContactBlock { get; set; }
 
   public bool DebugMode
