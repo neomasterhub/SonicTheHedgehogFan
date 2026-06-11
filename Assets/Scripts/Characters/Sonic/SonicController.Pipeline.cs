@@ -210,7 +210,7 @@ public partial class SonicController
 
     if (_isGrounded && _contactPlatform != null)
     {
-      transform.position += _contactPlatform.Translation;
+      transform.position += _contactPlatform.Displacement;
     }
   }
 

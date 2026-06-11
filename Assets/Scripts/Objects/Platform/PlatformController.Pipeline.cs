@@ -20,7 +20,7 @@ public partial class PlatformController
 
   private void UpdateData()
   {
-    Translation = transform.position - _prevPosition;
+    Displacement = transform.position - _prevPosition;
     _prevPosition = transform.position;
   }
 
