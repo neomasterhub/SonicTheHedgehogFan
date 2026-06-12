@@ -4,6 +4,7 @@ public interface IBlockPlayer
   bool PrevIsGrounded { get; }
   float PositionX { get; }
   float SpeedX { get; }
+  float BlockDetectionRadius { get; }
   float? HDistanceToBlock { set; }
   IBlock ContactBlock { get; set; }
 }
