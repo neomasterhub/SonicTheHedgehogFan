@@ -1,3 +1,4 @@
+using UnityEngine;
 using static Helpers.Math;
 
 /// <summary>
@@ -7,15 +8,15 @@ public partial class BlockController
 {
   private void FixedUpdate()
   {
-    BeginFrame();
+    AnalyzeEnvironment();
     ApplyEffects();
     ApplyMovement();
     UpdatePosition();
   }
 
-  private void BeginFrame()
+  private void AnalyzeEnvironment()
   {
-    UpdateHDistanceToPlayer();
+    _hDistanceToPlayer = GetHDistanceToPlayer();
   }
 
   private void ApplyEffects()
@@ -31,13 +32,20 @@ public partial class BlockController
   private void UpdatePosition()
   {
     transform.position += PositionVector3(_speedSystem.SpeedX, _speedSystem.SpeedY);
+
+    _hDistanceToPlayer = GetHDistanceToPlayer();
+
+    if (Mathf.Abs(_hDistanceToPlayer) < _player.BlockDetectionRadius)
+    {
+      _player.HDistanceToBlock = _hDistanceToPlayer;
+    }
   }
 
-  private void UpdateHDistanceToPlayer()
+  private float GetHDistanceToPlayer()
   {
     var x = transform.position.x;
 
-    _hDistanceToPlayer = x - _player.PositionX
-      + (x > _player.PositionX ? -_playerCombinedHRadius : _playerCombinedHRadius);
+    return _hDistanceToPlayer = x - _player.PositionX
+      + (_player.PositionX < x ? -_playerCombinedHRadius : _playerCombinedHRadius);
   }
 }
