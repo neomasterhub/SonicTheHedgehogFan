@@ -17,6 +17,7 @@ public static class SharedConsts
       public const string Hurt = nameof(Hurt);
       public const string Idle = nameof(Idle);
       public const string LookingUp = nameof(LookingUp);
+      public const string Pushing = nameof(Pushing);
       public const string Rolling = nameof(Rolling);
       public const string Running = nameof(Running);
       public const string Skidding = nameof(Skidding);
