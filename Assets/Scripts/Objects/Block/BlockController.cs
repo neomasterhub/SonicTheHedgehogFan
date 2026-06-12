@@ -12,6 +12,8 @@ public partial class BlockController : BlockControllerBase
   private Collider2D _collider;
   private Collider2D _playerCollider;
   private IBlockPlayer _player;
+  private float _playerCombinedHRadius;
+  private float _hDistanceToPlayer;
 
   [SerializeField]
   private float _pushSpeedPx;

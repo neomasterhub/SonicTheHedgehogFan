@@ -40,5 +40,6 @@ public partial class BlockController
   private void InitializeData()
   {
     PushSpeed = _pushSpeedPx / PxPerUnit;
+    _playerCombinedHRadius = (_collider.bounds.size.x + _playerCollider.bounds.size.x) / 2;
   }
 }
