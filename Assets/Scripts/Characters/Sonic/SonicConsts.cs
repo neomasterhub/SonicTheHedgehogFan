@@ -10,7 +10,7 @@ public static class SonicConsts
     public const float PostHurtInvincibleDuration = 3;
     public const float RingCollectorDisabledDuration = 0.5f;
     public const float OLength = Sizes.Big.VRadius + 0.4f;
-    public const float WallClearance = 0.04f;
+    public const float WallClearance = 0.07f;
     public static readonly Vector3 TopUDFLengths = new(0.2f, 0.2f, 0.5f);
     public static readonly Vector3 BottomUDFLengths = new(0.15f, 0.1f, 0.5f);
     public static readonly Vector2 WallToAirSpeedDelta = new(0.011f, 0);
