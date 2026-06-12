@@ -145,7 +145,8 @@ public partial class SonicController
         _groundInfoSystem.Current.SideAngleRad,
         _lastGroundDetectionResult.Distance,
         _isDownGrounded && _leftWallDetectionResult?.AngleDeg == 0 ? _leftWallDetectionResult.Value.Distance : null,
-        _isDownGrounded && _rightWallDetectionResult?.AngleDeg == 0 ? _rightWallDetectionResult.Value.Distance : null);
+        _isDownGrounded && _rightWallDetectionResult?.AngleDeg == 0 ? _rightWallDetectionResult.Value.Distance : null,
+        _contactBlock);
     }
     else
     {
