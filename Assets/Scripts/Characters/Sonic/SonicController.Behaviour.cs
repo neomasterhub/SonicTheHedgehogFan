@@ -4,7 +4,8 @@ using UnityEngine;
 /// Behaviour.
 /// </summary>
 public partial class SonicController
-  : ICameraTarget,
+  : IBlockPlayer,
+  ICameraTarget,
   IEnemy,
   ILookVerticalDirectionProvider,
   IPlatformObject,
@@ -47,6 +48,9 @@ public partial class SonicController
 
   public Transform ContactGroundTransform => _contactGroundTransform;
   public IPlatform ContactPlatform { set => _contactPlatform = value; }
+
+  public Transform ContactWallTransform => _contactWallTransform;
+  public IBlock ContactBlock { set => _contactBlock = value; }
 
   public bool DebugMode
   {
