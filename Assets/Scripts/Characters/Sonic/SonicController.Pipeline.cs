@@ -71,7 +71,10 @@ public partial class SonicController
     var ground = DetectGround(sensorFlags, _horizontalDirection);
 
     _leftWallDetectionResult = _sensorSystem.DetectLeftWall(GroundLayer);
+    _contactLeftWallTransform = _leftWallDetectionResult?.ContactTransform;
+
     _rightWallDetectionResult = _sensorSystem.DetectRightWall(GroundLayer);
+    _contactRightWallTransform = _rightWallDetectionResult?.ContactTransform;
 
     if (ground.HasValue)
     {

@@ -49,7 +49,8 @@ public partial class SonicController
   public Transform ContactGroundTransform => _contactGroundTransform;
   public IPlatform ContactPlatform { set => _contactPlatform = value; }
 
-  public Transform ContactWallTransform => _contactWallTransform;
+  public Transform ContactLeftWallTransform => _contactLeftWallTransform;
+  public Transform ContactRightWallTransform => _contactRightWallTransform;
   public IBlock ContactBlock { set => _contactBlock = value; }
 
   public bool DebugMode

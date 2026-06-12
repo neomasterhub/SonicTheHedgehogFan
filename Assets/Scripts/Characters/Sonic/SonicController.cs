@@ -82,7 +82,8 @@ public partial class SonicController : MonoBehaviour
   private Timer _postHurtInvincibleTimer;
   private Timer _ringCollectorDisabledTimer;
   private Transform _contactGroundTransform;
-  private Transform _contactWallTransform;
+  private Transform _contactLeftWallTransform;
+  private Transform _contactRightWallTransform;
   private WallDetectionResult? _leftWallDetectionResult;
   private WallDetectionResult? _rightWallDetectionResult;
 

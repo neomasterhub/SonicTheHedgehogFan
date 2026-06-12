@@ -2,6 +2,7 @@ using UnityEngine;
 
 public interface IBlockPlayer
 {
-  Transform ContactWallTransform { get; }
+  Transform ContactLeftWallTransform { get; }
+  Transform ContactRightWallTransform { get; }
   IBlock ContactBlock { set; }
 }
