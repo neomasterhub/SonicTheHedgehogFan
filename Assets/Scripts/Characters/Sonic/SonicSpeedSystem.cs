@@ -257,6 +257,7 @@ public class SonicSpeedSystem : SpeedSystemBase
     }
 
     SetSpeed_Grounded_PreventWallOvershoot();
+    SetSpeed_Grounded_Pushing();
 
     SpeedX = GroundSpeed * _groundAngleCos;
     SpeedY = GroundSpeed * _groundAngleSin;
@@ -385,6 +386,25 @@ public class SonicSpeedSystem : SpeedSystemBase
     if (IsStoppedByWall(GroundSpeed))
     {
       GroundSpeed = 0;
+    }
+  }
+
+  private void SetSpeed_Grounded_Pushing()
+  {
+    if (_context.ContactBlock != null
+      && _context.ContactBlock.PushSpeed != 0)
+    {
+      if (IsStoppedByLeftWall && _inputSystem.X < 0)
+      {
+        GroundSpeed = -_context.ContactBlock.PushSpeed;
+        return;
+      }
+
+      if (IsStoppedByRightWall && _inputSystem.X > 0)
+      {
+        GroundSpeed = _context.ContactBlock.PushSpeed;
+        return;
+      }
     }
   }
 
