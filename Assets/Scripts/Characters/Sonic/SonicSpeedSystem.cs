@@ -426,11 +426,8 @@ public class SonicSpeedSystem : SpeedSystemBase
 
   private bool IsStoppedByWall(float speed)
   {
-    IsStoppedByLeftWall = _context.DistanceToLeftWall != null
-      && speed <= -_context.DistanceToLeftWall + WallClearance;
-
-    IsStoppedByRightWall = _context.DistanceToRightWall != null
-      && speed >= _context.DistanceToRightWall - WallClearance;
+    IsStoppedByLeftWall = speed <= -_context.DistanceToLeftWall + WallClearance;
+    IsStoppedByRightWall = speed >= _context.DistanceToRightWall - WallClearance;
 
     return IsStoppedByLeftWall || IsStoppedByRightWall;
   }
