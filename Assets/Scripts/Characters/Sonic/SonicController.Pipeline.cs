@@ -86,6 +86,8 @@ public partial class SonicController
 
       AnalyzeEnvironment_Airborne();
     }
+
+    AnalyzeEnvironment_Pushing();
   }
 
   private void AnalyzeEnvironment_Grounded()
@@ -125,6 +127,32 @@ public partial class SonicController
     _isRightGrounded = false;
   }
 
+  private void AnalyzeEnvironment_Pushing()
+  {
+    _isPushing = false;
+    _pushingSpeed = null;
+
+    if (ContactBlock == null)
+    {
+      return;
+    }
+
+    var x = transform.position.x;
+    if (_horizontalDirection
+      && x < ContactBlock.PositionX)
+    {
+      _pushingSpeed = ContactBlock.PushSpeed;
+      _isPushing = _speedSystem.SpeedX > 0;
+    }
+
+    if (!_horizontalDirection
+      && x > ContactBlock.PositionX)
+    {
+      _pushingSpeed = -ContactBlock.PushSpeed;
+      _isPushing = _speedSystem.SpeedX < 0;
+    }
+  }
+
   private void ApplyEffects()
   {
     _effects.WithHistoryWriting(_debugMode).Run();
@@ -144,7 +172,8 @@ public partial class SonicController
         _groundInfoSystem.Current.SideAngleRad,
         _lastGroundDetectionResult.Distance,
         _isDownGrounded && _leftWallDetectionResult?.AngleDeg == 0 ? _leftWallDetectionResult.Value.Distance : null,
-        _isDownGrounded && _rightWallDetectionResult?.AngleDeg == 0 ? _rightWallDetectionResult.Value.Distance : null);
+        _isDownGrounded && _rightWallDetectionResult?.AngleDeg == 0 ? _rightWallDetectionResult.Value.Distance : null,
+        _pushingSpeed);
     }
     else
     {
@@ -158,7 +187,8 @@ public partial class SonicController
         _leftWallDetectionResult?.Distance,
         _rightWallDetectionResult?.Distance,
         _ceilingDetectionResult?.AngleDeg,
-        _ceilingDetectionResult?.Distance);
+        _ceilingDetectionResult?.Distance,
+        _pushingSpeed);
     }
 
     _speedSystem.SetSpeed(_speedContext);
@@ -166,7 +196,7 @@ public partial class SonicController
 
   private void UpdateView()
   {
-    _viewContext = new(_horizontalDirection, IsHurt, _isDying, _isGrounded, _speedSystem.IsSkidding, _isBalancing, _isCurlingUp, _isLookingUp, _isRolling, _speedSystem.IsZeroGroundSpeedProgressReached, _triggeredGroundSensorId, _speedSystem.SpeedX, _speedSystem.GroundSpeed, _groundInfoSystem.Current.AngleDeg, Time.fixedDeltaTime, _groundInfoSystem.Current.Side, _groundInfoSystem.Previous.Side);
+    _viewContext = new(_horizontalDirection, IsHurt, _isDying, _isGrounded, _speedSystem.IsSkidding, _isBalancing, _isCurlingUp, _isLookingUp, _isRolling, _isPushing, _speedSystem.IsZeroGroundSpeedProgressReached, _triggeredGroundSensorId, _speedSystem.SpeedX, _speedSystem.GroundSpeed, _groundInfoSystem.Current.AngleDeg, Time.fixedDeltaTime, _groundInfoSystem.Current.Side, _groundInfoSystem.Previous.Side);
     _viewSystem.Update(_viewContext);
   }
 
@@ -210,7 +240,7 @@ public partial class SonicController
 
     if (_isGrounded && _contactPlatform != null)
     {
-      transform.position += _contactPlatform.Translation;
+      transform.position += _contactPlatform.Displacement;
     }
   }
 
@@ -229,6 +259,7 @@ public partial class SonicController
     _takeLeftHit = false;
     _takeRightHit = false;
     IsHit = false;
+    ContactBlock = null;
     ContactEnemy = null;
   }
 

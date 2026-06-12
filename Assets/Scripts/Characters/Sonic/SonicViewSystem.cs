@@ -72,6 +72,7 @@ public class SonicViewSystem
     _animator.SetBool(AnimatorParameters.Dying, _context.IsDying);
     _animator.SetBool(AnimatorParameters.Hurt, _context.IsHurt);
     _animator.SetBool(AnimatorParameters.LookingUp, _context.IsLookingUp);
+    _animator.SetBool(AnimatorParameters.Pushing, _context.IsPushing);
     _animator.SetBool(AnimatorParameters.Rolling, _context.IsRolling);
     _animator.SetBool(AnimatorParameters.Skidding, _context.IsSkidding);
     _animator.SetFloat(AnimatorParameters.Speed, animatorParameterSpeed);

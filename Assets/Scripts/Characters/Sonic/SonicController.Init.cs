@@ -137,6 +137,9 @@ public partial class SonicController
     var death = this.AddComponent<AudioSource>();
     death.clip = _deathClip;
 
+    var push = this.AddComponent<AudioSource>();
+    push.clip = _pushClip;
+
     _sounds = new Sound[]
     {
       new(jump,
@@ -157,6 +160,9 @@ public partial class SonicController
 
       new(lostRings,
         () => _ringsLost),
+
+      new(push,
+        () => _isPushing && !push.isPlaying && _isGrounded && _contactPlatform == null),
 
       new(death,
         () => IsHit && _isDying),

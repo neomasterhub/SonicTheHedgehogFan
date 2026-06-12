@@ -55,9 +55,11 @@ public partial class SonicController : MonoBehaviour
   private bool _takeLeftHit;
   private bool _takeRightHit;
   private bool _horizontalDirection;
+  private bool _isPushing;
   private char _triggeredGroundSensorId;
   private float _slopeFactor;
   private float _absGroundSpeed;
+  private float? _pushingSpeed;
   private Animator _animator;
   private BoxCollider2D _boxCollider;
   private CeilingDetectionResult? _ceilingDetectionResult;
@@ -103,6 +105,9 @@ public partial class SonicController : MonoBehaviour
   [SerializeField]
   [InspectorLabel("Lost rings")]
   private AudioClip _lostRingsClip;
+  [SerializeField]
+  [InspectorLabel("Push")]
+  private AudioClip _pushClip;
   [SerializeField]
   [InspectorLabel("Death")]
   private AudioClip _deathClip;

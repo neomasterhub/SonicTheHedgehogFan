@@ -5,6 +5,7 @@ using UnityEngine;
 /// </summary>
 public partial class SonicController
   : ICameraTarget,
+  IBlockPlayer,
   IEnemy,
   ILookVerticalDirectionProvider,
   IPlatformObject,
@@ -45,8 +46,12 @@ public partial class SonicController
     }
   }
 
-  public Transform ContactTransform => _contactGroundTransform;
+  public Transform ContactGroundTransform => _contactGroundTransform;
   public IPlatform ContactPlatform { set => _contactPlatform = value; }
+
+  public bool IsGrounded => _isGrounded;
+  public bool PrevIsGrounded => _prevIsGrounded;
+  public IBlock ContactBlock { get; set; }
 
   public bool DebugMode
   {

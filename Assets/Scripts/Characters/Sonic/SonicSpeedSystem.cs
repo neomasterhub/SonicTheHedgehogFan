@@ -146,6 +146,7 @@ public class SonicSpeedSystem : SpeedSystemBase
     SetSpeed_Airborne_PreventGroundOvershoot();
     SetSpeed_Airborne_Horizontal();
     SetSpeed_Airborne_PreventWallOvershoot();
+    SetSpeed_Airborne_PreventBlockOvershoot();
   }
 
   private void SetSpeed_Airborne_FromGrounded()
@@ -226,6 +227,14 @@ public class SonicSpeedSystem : SpeedSystemBase
     }
   }
 
+  private void SetSpeed_Airborne_PreventBlockOvershoot()
+  {
+    if (_context.PushingSpeed.HasValue)
+    {
+      SpeedX = 0;
+    }
+  }
+
   private void SetSpeed_Grounded()
   {
     _groundAngleCos = MathF.Cos(_context.GroundAngleRad.Value);
@@ -256,6 +265,7 @@ public class SonicSpeedSystem : SpeedSystemBase
       SetSpeed_Grounded_Friction();
     }
 
+    SetSpeed_Grounded_Pushing();
     SetSpeed_Grounded_PreventWallOvershoot();
 
     SpeedX = GroundSpeed * _groundAngleCos;
@@ -378,6 +388,23 @@ public class SonicSpeedSystem : SpeedSystemBase
     }
 
     GroundSpeed -= _frictionSpeed * Mathf.Sign(GroundSpeed);
+  }
+
+  private void SetSpeed_Grounded_Pushing()
+  {
+    if (_context.PushingSpeed == null)
+    {
+      return;
+    }
+
+    var pushingSpeed = _context.PushingSpeed.Value;
+
+    if (pushingSpeed == 0
+      || (pushingSpeed < 0 && GroundSpeed < pushingSpeed)
+      || (pushingSpeed > 0 && GroundSpeed > pushingSpeed))
+    {
+      GroundSpeed = pushingSpeed;
+    }
   }
 
   private void SetSpeed_Grounded_PreventWallOvershoot()
