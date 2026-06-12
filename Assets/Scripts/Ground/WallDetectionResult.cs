@@ -1,11 +1,17 @@
+using UnityEngine;
+
 public readonly struct WallDetectionResult
 {
   public readonly float Distance;
   public readonly float AngleDeg;
+  public readonly Transform ContactTransform;
 
-  public WallDetectionResult(float distance, float angleDeg)
+  public WallDetectionResult(
+    RaycastHit2D hit,
+    Vector2 sensorDirection)
   {
-    Distance = distance;
-    AngleDeg = angleDeg;
+    Distance = hit.distance;
+    AngleDeg = Vector2.SignedAngle(-sensorDirection, hit.normal).Round();
+    ContactTransform = hit.transform;
   }
 }
