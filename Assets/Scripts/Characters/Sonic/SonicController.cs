@@ -60,6 +60,7 @@ public partial class SonicController : MonoBehaviour
   private float _slopeFactor;
   private float _absGroundSpeed;
   private float? _pushingSpeed;
+  private float? _hDistanceToBlock;
   private Animator _animator;
   private BoxCollider2D _boxCollider;
   private CeilingDetectionResult? _ceilingDetectionResult;

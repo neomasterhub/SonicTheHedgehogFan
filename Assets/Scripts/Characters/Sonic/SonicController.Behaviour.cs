@@ -51,6 +51,7 @@ public partial class SonicController
 
   public bool IsGrounded => _isGrounded;
   public bool PrevIsGrounded => _prevIsGrounded;
+  public float? HDistanceToBlock { set => _hDistanceToBlock = value; }
   public IBlock ContactBlock { get; set; }
 
   public bool DebugMode
