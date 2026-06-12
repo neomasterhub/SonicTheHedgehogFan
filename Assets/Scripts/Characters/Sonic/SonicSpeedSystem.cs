@@ -267,6 +267,7 @@ public class SonicSpeedSystem : SpeedSystemBase
 
     SetSpeed_Grounded_Pushing();
     SetSpeed_Grounded_PreventWallOvershoot();
+    SetSpeed_Grounded_PreventBlockOvershoot();
 
     SpeedX = GroundSpeed * _groundAngleCos;
     SpeedY = GroundSpeed * _groundAngleSin;
@@ -415,6 +416,14 @@ public class SonicSpeedSystem : SpeedSystemBase
     }
   }
 
+  private void SetSpeed_Grounded_PreventBlockOvershoot()
+  {
+    if (IsStoppedByBlock(GroundSpeed))
+    {
+      GroundSpeed = _context.HDistanceToBlock.Value;
+    }
+  }
+
   private bool IsStoppedByWall(float speed)
   {
     IsStoppedByLeftWall = _context.DistanceToLeftWall != null
@@ -424,5 +433,13 @@ public class SonicSpeedSystem : SpeedSystemBase
       && speed >= _context.DistanceToRightWall - WallClearance;
 
     return IsStoppedByLeftWall || IsStoppedByRightWall;
+  }
+
+  private bool IsStoppedByBlock(float speed)
+  {
+    return speed != 0
+      && _context.PushingSpeed == null
+      && ((_context.HDistanceToBlock > 0 && speed > _context.HDistanceToBlock)
+      || (_context.HDistanceToBlock < 0 && speed < _context.HDistanceToBlock));
   }
 }
