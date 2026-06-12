@@ -82,6 +82,7 @@ public partial class SonicController
     }
     else
     {
+      _contactBlock = null;
       _contactPlatform = null;
 
       AnalyzeEnvironment_Airborne();
