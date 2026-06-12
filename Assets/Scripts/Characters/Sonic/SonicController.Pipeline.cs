@@ -85,7 +85,7 @@ public partial class SonicController
     }
     else
     {
-      _contactBlock = null;
+      ContactBlock = null;
       _contactPlatform = null;
 
       AnalyzeEnvironment_Airborne();
@@ -149,7 +149,7 @@ public partial class SonicController
         _lastGroundDetectionResult.Distance,
         _isDownGrounded && _leftWallDetectionResult?.AngleDeg == 0 ? _leftWallDetectionResult.Value.Distance : null,
         _isDownGrounded && _rightWallDetectionResult?.AngleDeg == 0 ? _rightWallDetectionResult.Value.Distance : null,
-        _contactBlock);
+        ContactBlock);
     }
     else
     {

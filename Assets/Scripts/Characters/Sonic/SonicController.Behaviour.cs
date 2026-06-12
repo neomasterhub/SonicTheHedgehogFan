@@ -51,7 +51,7 @@ public partial class SonicController
 
   public Transform ContactLeftWallTransform => _contactLeftWallTransform;
   public Transform ContactRightWallTransform => _contactRightWallTransform;
-  public IBlock ContactBlock { set => _contactBlock = value; }
+  public IBlock ContactBlock { get; set; }
 
   public bool DebugMode
   {
