@@ -6,4 +6,5 @@ public interface IBlockPlayer
   Transform ContactRightWallTransform { get; }
   IBlock ContactBlock { get; set; }
   float SpeedX { get; }
+  bool IsPushing { get; }
 }

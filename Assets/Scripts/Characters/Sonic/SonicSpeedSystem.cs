@@ -43,6 +43,7 @@ public class SonicSpeedSystem : SpeedSystemBase
     _reboundSpeedProvider = reboundSpeedProvider;
   }
 
+  public bool IsPushing { get; private set; }
   public bool IsSkidding { get; private set; }
   public bool IsStoppedByLeftWall { get; private set; }
   public bool IsStoppedByRightWall { get; private set; }
@@ -93,6 +94,8 @@ public class SonicSpeedSystem : SpeedSystemBase
 
   private void SetStateData()
   {
+    IsPushing = false;
+
     _config = _configs.PhysicsModeConfig;
     _reverseStartSpeed = _config.DecelerationSpeed;
 
@@ -391,18 +394,21 @@ public class SonicSpeedSystem : SpeedSystemBase
 
   private void SetSpeed_Grounded_Pushing()
   {
-    if (_context.ContactBlock != null
-      && _context.ContactBlock.PushSpeed != 0)
+    if (_context.ContactBlock != null)
     {
       if (IsStoppedByLeftWall && _inputSystem.X < 0)
       {
+        IsPushing = true;
         GroundSpeed = -_context.ContactBlock.PushSpeed;
+
         return;
       }
 
       if (IsStoppedByRightWall && _inputSystem.X > 0)
       {
+        IsPushing = true;
         GroundSpeed = _context.ContactBlock.PushSpeed;
+
         return;
       }
     }
