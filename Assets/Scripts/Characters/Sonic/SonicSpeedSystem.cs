@@ -16,6 +16,7 @@ public class SonicSpeedSystem : SpeedSystemBase
   private readonly ConditionalValueProvider<Vector2> _reboundSpeedProvider;
 
   private bool _friction;
+  private bool _prevIsPushing;
   private float _accSpeed;
   private float _decSpeed;
   private float _frictionSpeed;
@@ -94,8 +95,6 @@ public class SonicSpeedSystem : SpeedSystemBase
 
   private void SetStateData()
   {
-    IsPushing = false;
-
     _config = _configs.PhysicsModeConfig;
     _reverseStartSpeed = _config.DecelerationSpeed;
 
@@ -139,6 +138,7 @@ public class SonicSpeedSystem : SpeedSystemBase
 
   private void SetSpeed_Airborne()
   {
+    IsPushing = false;
     IsSkidding = false;
     SlopeSpeed = 0;
 
@@ -233,6 +233,9 @@ public class SonicSpeedSystem : SpeedSystemBase
   {
     _groundAngleCos = MathF.Cos(_context.GroundAngleRad.Value);
     _groundAngleSin = MathF.Sin(_context.GroundAngleRad.Value);
+
+    _prevIsPushing = IsPushing;
+    IsPushing = false;
 
     GravitySpeed = 0;
     SetSpeed_Grounded_FromAirborne();
