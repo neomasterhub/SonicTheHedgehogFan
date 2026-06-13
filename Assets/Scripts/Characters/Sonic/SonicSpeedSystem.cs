@@ -428,8 +428,15 @@ public class SonicSpeedSystem : SpeedSystemBase
   {
     if (_prevIsPushing)
     {
-      IsStoppedByLeftWall = !IsStoppedByLeftWall && _inputSystem.X < 0;
-      IsStoppedByRightWall = !IsStoppedByRightWall && _inputSystem.X > 0;
+      if (!IsStoppedByLeftWall && _inputSystem.X < 0)
+      {
+        IsStoppedByLeftWall = true;
+      }
+
+      if (!IsStoppedByRightWall && _inputSystem.X > 0)
+      {
+        IsStoppedByRightWall = true;
+      }
     }
   }
 
