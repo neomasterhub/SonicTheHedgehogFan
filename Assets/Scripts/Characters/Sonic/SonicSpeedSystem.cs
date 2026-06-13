@@ -393,6 +393,34 @@ public class SonicSpeedSystem : SpeedSystemBase
     if (IsStoppedByWall(GroundSpeed))
     {
       GroundSpeed = 0;
+
+      if (_context.ContactBlock != null
+        && !IsPushing)
+      {
+        if (_context.DistanceToLeftWall != null)
+        {
+          var dist = _context.DistanceToLeftWall.Value - WallClearance;
+          if (dist > 0)
+          {
+            GroundSpeed = -dist;
+            return;
+          }
+
+          return;
+        }
+
+        if (_context.DistanceToRightWall != null)
+        {
+          var dist = _context.DistanceToRightWall.Value - WallClearance;
+          if (dist > 0)
+          {
+            GroundSpeed = dist;
+            return;
+          }
+
+          return;
+        }
+      }
     }
   }
 
@@ -407,7 +435,7 @@ public class SonicSpeedSystem : SpeedSystemBase
 
   private void SetSpeed_Grounded_Pushing()
   {
-    if (_context.ContactBlock != null)
+    if (_context.ContactBlock != null && GroundSpeed == 0)
     {
       if (IsStoppedByLeftWall && _inputSystem.X < 0)
       {
