@@ -7,6 +7,7 @@ public partial class BlockController
   {
     SetContact();
     ApplyMovement();
+    ApplyModules();
   }
 
   private void SetContact()
@@ -24,6 +25,14 @@ public partial class BlockController
       && _player.IsPushing)
     {
       transform.position += new UnityEngine.Vector3(_player.SpeedX, 0);
+    }
+  }
+
+  private void ApplyModules()
+  {
+    for (var i = 0; i < _modules.Length; i++)
+    {
+      _modules[i].Apply();
     }
   }
 }

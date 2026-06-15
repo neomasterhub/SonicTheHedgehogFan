@@ -5,6 +5,7 @@ using UnityEngine;
 /// </summary>
 public partial class BlockController : BlockControllerBase
 {
+  private BlockModuleControllerBase[] _modules;
   private IBlockPlayer _player;
 
   [SerializeField]

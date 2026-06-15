@@ -15,6 +15,8 @@ public partial class BlockController
 
   private void InitializeComponents()
   {
+    _modules = GetComponents<BlockModuleControllerBase>();
+
     var player = GameObject.FindWithTag(Tags.Player);
     _player = player.GetComponent<IBlockPlayer>();
   }
