@@ -405,26 +405,19 @@ public class SonicSpeedSystem : SpeedSystemBase
 
     if (_context.DistanceToLeftWall != null)
     {
-      var dist = _context.DistanceToLeftWall.Value - WallClearance;
+      var dist = (_context.DistanceToLeftWall.Value - WallClearance).Round(SpeedRoundingDigits);
       if (dist > 0)
       {
         GroundSpeed = -dist;
-        return;
       }
-
-      return;
     }
-
-    if (_context.DistanceToRightWall != null)
+    else if (_context.DistanceToRightWall != null)
     {
-      var dist = _context.DistanceToRightWall.Value - WallClearance;
+      var dist = (_context.DistanceToRightWall.Value - WallClearance).Round(SpeedRoundingDigits);
       if (dist > 0)
       {
         GroundSpeed = dist;
-        return;
       }
-
-      return;
     }
   }
 
