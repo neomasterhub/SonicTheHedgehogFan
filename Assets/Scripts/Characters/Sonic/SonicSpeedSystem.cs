@@ -439,23 +439,26 @@ public class SonicSpeedSystem : SpeedSystemBase
 
   private void SetSpeed_Grounded_Pushing()
   {
-    if (_context.ContactBlock != null && GroundSpeed == 0)
+    if (_context.ContactBlock == null
+      || GroundSpeed != 0)
     {
-      if (IsStoppedByLeftWall && _inputSystem.X < 0)
-      {
-        IsPushing = true;
-        GroundSpeed = -_context.ContactBlock.PushSpeed;
+      return;
+    }
 
-        return;
-      }
+    if (IsStoppedByLeftWall && _inputSystem.X < 0)
+    {
+      IsPushing = true;
+      GroundSpeed = -_context.ContactBlock.PushSpeed;
 
-      if (IsStoppedByRightWall && _inputSystem.X > 0)
-      {
-        IsPushing = true;
-        GroundSpeed = _context.ContactBlock.PushSpeed;
+      return;
+    }
 
-        return;
-      }
+    if (IsStoppedByRightWall && _inputSystem.X > 0)
+    {
+      IsPushing = true;
+      GroundSpeed = _context.ContactBlock.PushSpeed;
+
+      return;
     }
   }
 
