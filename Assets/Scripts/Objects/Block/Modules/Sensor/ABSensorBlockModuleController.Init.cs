@@ -18,7 +18,7 @@ public partial class ABSensorBlockModuleController
     base.Initialize(context);
 
     InitializeComponents();
-    InitializeSensors();
+    InitializeData();
   }
 
   private void InitializeComponents()
@@ -26,8 +26,10 @@ public partial class ABSensorBlockModuleController
     _spriteRenderer = GetComponent<SpriteRenderer>();
   }
 
-  private void InitializeSensors()
+  private void InitializeData()
   {
+    _maxPushSpeed = _context.PushSpeed;
+
     var sensorOffset = new Vector2(_abDistance / 2, 0);
     InitializeSensor(_a, -sensorOffset);
     InitializeSensor(_b, sensorOffset);
