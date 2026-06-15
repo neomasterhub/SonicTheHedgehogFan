@@ -390,36 +390,38 @@ public class SonicSpeedSystem : SpeedSystemBase
 
   private void SetSpeed_Grounded_PreventWallOvershoot()
   {
-    if (IsStoppedByWall(GroundSpeed))
+    if (!IsStoppedByWall(GroundSpeed))
     {
-      GroundSpeed = 0;
+      return;
+    }
 
-      if (_context.ContactBlock != null
-        && !IsPushing)
+    GroundSpeed = 0;
+
+    if (_context.ContactBlock != null
+      && !IsPushing)
+    {
+      if (_context.DistanceToLeftWall != null)
       {
-        if (_context.DistanceToLeftWall != null)
+        var dist = _context.DistanceToLeftWall.Value - WallClearance;
+        if (dist > 0)
         {
-          var dist = _context.DistanceToLeftWall.Value - WallClearance;
-          if (dist > 0)
-          {
-            GroundSpeed = -dist;
-            return;
-          }
-
+          GroundSpeed = -dist;
           return;
         }
 
-        if (_context.DistanceToRightWall != null)
-        {
-          var dist = _context.DistanceToRightWall.Value - WallClearance;
-          if (dist > 0)
-          {
-            GroundSpeed = dist;
-            return;
-          }
+        return;
+      }
 
+      if (_context.DistanceToRightWall != null)
+      {
+        var dist = _context.DistanceToRightWall.Value - WallClearance;
+        if (dist > 0)
+        {
+          GroundSpeed = dist;
           return;
         }
+
+        return;
       }
     }
   }
