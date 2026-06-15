@@ -397,32 +397,34 @@ public class SonicSpeedSystem : SpeedSystemBase
 
     GroundSpeed = 0;
 
-    if (_context.ContactBlock != null
-      && !IsPushing)
+    if (_context.ContactBlock == null
+      || IsPushing)
     {
-      if (_context.DistanceToLeftWall != null)
-      {
-        var dist = _context.DistanceToLeftWall.Value - WallClearance;
-        if (dist > 0)
-        {
-          GroundSpeed = -dist;
-          return;
-        }
+      return;
+    }
 
+    if (_context.DistanceToLeftWall != null)
+    {
+      var dist = _context.DistanceToLeftWall.Value - WallClearance;
+      if (dist > 0)
+      {
+        GroundSpeed = -dist;
         return;
       }
 
-      if (_context.DistanceToRightWall != null)
-      {
-        var dist = _context.DistanceToRightWall.Value - WallClearance;
-        if (dist > 0)
-        {
-          GroundSpeed = dist;
-          return;
-        }
+      return;
+    }
 
+    if (_context.DistanceToRightWall != null)
+    {
+      var dist = _context.DistanceToRightWall.Value - WallClearance;
+      if (dist > 0)
+      {
+        GroundSpeed = dist;
         return;
       }
+
+      return;
     }
   }
 
