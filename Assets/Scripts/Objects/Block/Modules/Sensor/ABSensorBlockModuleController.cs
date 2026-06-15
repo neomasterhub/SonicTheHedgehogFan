@@ -11,7 +11,8 @@ public partial class ABSensorBlockModuleController
   private readonly UDFSensor _b;
 
   private SpriteRenderer _spriteRenderer;
-  private float _maxPushSpeed;
+  private float _maxLeftPushSpeed;
+  private float _maxRightPushSpeed;
 
   [SerializeField]
   private Vector2 _position;

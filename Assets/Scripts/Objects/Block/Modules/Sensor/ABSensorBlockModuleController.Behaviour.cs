@@ -25,18 +25,8 @@ public partial class ABSensorBlockModuleController
 
   private void UpdatePushSpeed()
   {
-    if (_context.LeftWall == null)
-    {
-      _context.PushSpeed = _maxPushSpeed;
-    }
-    else
-    {
-      var dist = _context.LeftWall.Value.Distance.Round(SpeedRoundingDigits);
-      if (dist < _maxPushSpeed)
-      {
-        _context.PushSpeed = dist;
-      }
-    }
+    _context.LeftPushSpeed = GetSidePushSpeed(_context.LeftWall, _maxLeftPushSpeed);
+    _context.RightPushSpeed = GetSidePushSpeed(_context.RightWall, _maxRightPushSpeed);
   }
 
   private WallDetectionResult? DetectWall(UDFSensor sensor, LayerMask groundLayer)
@@ -46,5 +36,13 @@ public partial class ABSensorBlockModuleController
     return hit == null
       ? null
       : new(hit.Value, sensor.FrontRay.Direction);
+  }
+
+  private float GetSidePushSpeed(WallDetectionResult? wall, float maxSpeed)
+  {
+    return wall == null
+      || (wall.Value.Distance - _wallClearance).Round(SpeedRoundingDigits) > maxSpeed
+      ? maxSpeed
+      : 0;
   }
 }

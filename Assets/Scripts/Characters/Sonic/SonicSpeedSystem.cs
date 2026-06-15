@@ -448,7 +448,7 @@ public class SonicSpeedSystem : SpeedSystemBase
     if (IsStoppedByLeftWall && _inputSystem.X < 0)
     {
       IsPushing = true;
-      GroundSpeed = -_context.ContactBlock.PushSpeed;
+      GroundSpeed = -_context.ContactBlock.LeftPushSpeed;
 
       return;
     }
@@ -456,7 +456,7 @@ public class SonicSpeedSystem : SpeedSystemBase
     if (IsStoppedByRightWall && _inputSystem.X > 0)
     {
       IsPushing = true;
-      GroundSpeed = _context.ContactBlock.PushSpeed;
+      GroundSpeed = _context.ContactBlock.RightPushSpeed;
 
       return;
     }

@@ -2481,7 +2481,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 22.607, y: 9.99, z: -10}
+  m_LocalPosition: {x: 13.3, y: 9.99, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2631,7 +2631,7 @@ Transform:
   m_GameObject: {fileID: 710850496}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 22.607, y: 9.99, z: 0}
+  m_LocalPosition: {x: 13.3, y: 9.99, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3370,6 +3370,7 @@ GameObject:
   - component: {fileID: 1595010448}
   - component: {fileID: 1595010447}
   - component: {fileID: 1595010446}
+  - component: {fileID: 1595010450}
   m_Layer: 3
   m_Name: Block
   m_TagString: Untagged
@@ -3389,7 +3390,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47510f52d31043e42a00d3f92f550e46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BlockController
-  _pushSpeedPx: 0.4
+  _leftPushSpeedPx: 1.5
+  _rightPushSpeedPx: 1
 --- !u!61 &1595010447
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3434,7 +3436,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.5, y: 0.5}
+  m_Size: {x: 0.5, y: 0.47}
   m_EdgeRadius: 0
 --- !u!212 &1595010448
 SpriteRenderer:
@@ -3504,12 +3506,27 @@ Transform:
   m_GameObject: {fileID: 1595010445}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 23.5106, y: 10, z: 0}
+  m_LocalPosition: {x: 10.63, y: 10, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1595010450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595010445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74ebf45b824432e458024fa61c92e6c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ABSensorBlockModuleController
+  _position: {x: 0, y: -0.49}
+  _abDistance: 0
+  _wallClearance: 0.5
 --- !u!1 &1814098413
 GameObject:
   m_ObjectHideFlags: 0
@@ -3612,7 +3629,7 @@ Transform:
   m_GameObject: {fileID: 1814098413}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 22.607, y: 9.99, z: -10}
+  m_LocalPosition: {x: 13.3, y: 9.99, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

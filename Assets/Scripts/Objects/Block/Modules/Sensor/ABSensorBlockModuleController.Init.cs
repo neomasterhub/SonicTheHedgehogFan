@@ -28,7 +28,8 @@ public partial class ABSensorBlockModuleController
 
   private void InitializeData()
   {
-    _maxPushSpeed = _context.PushSpeed;
+    _maxLeftPushSpeed = _context.LeftPushSpeed;
+    _maxRightPushSpeed = _context.RightPushSpeed;
 
     var sensorOffset = new Vector2(_abDistance / 2, 0);
     InitializeSensor(_a, -sensorOffset);

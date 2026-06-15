@@ -23,6 +23,7 @@ public partial class BlockController
 
   private void InitializeData()
   {
-    PushSpeed = _pushSpeedPx / PxPerUnit;
+    LeftPushSpeed = _leftPushSpeedPx / PxPerUnit;
+    RightPushSpeed = _rightPushSpeedPx / PxPerUnit;
   }
 }

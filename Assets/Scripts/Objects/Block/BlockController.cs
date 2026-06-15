@@ -9,5 +9,7 @@ public partial class BlockController : BlockControllerBase
   private IBlockPlayer _player;
 
   [SerializeField]
-  private float _pushSpeedPx;
+  private float _leftPushSpeedPx;
+  [SerializeField]
+  private float _rightPushSpeedPx;
 }
