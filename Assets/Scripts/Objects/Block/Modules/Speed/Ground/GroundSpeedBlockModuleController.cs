@@ -13,6 +13,4 @@ public partial class GroundSpeedBlockModuleController
   private float _gravitySpeedSpx;
   [SerializeField]
   private float _maxFallSpeedPx;
-  [SerializeField]
-  private float _maxGroundAngleDeg;
 }
