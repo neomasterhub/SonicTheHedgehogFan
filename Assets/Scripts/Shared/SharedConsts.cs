@@ -58,6 +58,7 @@ public static class SharedConsts
     public const int PositionRoundingDigits = 3;
     public const float FloorDetectionOffset = 0.05f;
     public const float CeilingDetectionOffset = -0.05f;
+    public static readonly LayerMask BlockLayer = 1 << 6;
     public static readonly LayerMask GroundLayer = 1 << 3;
 
     public static class GroundAngleRanges
