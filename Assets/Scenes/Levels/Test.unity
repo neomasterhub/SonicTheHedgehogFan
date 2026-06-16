@@ -3371,6 +3371,8 @@ GameObject:
   - component: {fileID: 1595010447}
   - component: {fileID: 1595010446}
   - component: {fileID: 1595010450}
+  - component: {fileID: 1595010452}
+  - component: {fileID: 1595010451}
   m_Layer: 6
   m_Name: Block
   m_TagString: Untagged
@@ -3390,7 +3392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47510f52d31043e42a00d3f92f550e46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BlockController
-  _leftPushSpeedPx: 1.5
+  _leftPushSpeedPx: 1
   _rightPushSpeedPx: 1
 --- !u!61 &1595010447
 BoxCollider2D:
@@ -3524,9 +3526,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74ebf45b824432e458024fa61c92e6c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ABSensorBlockModuleController
-  _position: {x: 0, y: -0.49}
-  _abDistance: 0
-  _wallClearance: 0.5
+  _position: {x: 0, y: -0.45}
+  _abDistance: 0.9
+  _wallClearance: 0.05
+--- !u!114 &1595010451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595010445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4156a7c0ce4d07543b076d1cbd4d4dfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NormalPositionBlockModuleController
+--- !u!114 &1595010452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595010445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0769f6bfe036f34fae1e0d28659cc8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GroundSpeedBlockModuleController
+  _gravitySpeedSpx: 56
+  _maxFallSpeedPx: 16
 --- !u!1 &1814098413
 GameObject:
   m_ObjectHideFlags: 0
