@@ -70,10 +70,10 @@ public partial class SonicController
 
     var ground = DetectGround(sensorFlags, _horizontalDirection);
 
-    _leftWallDetectionResult = _sensorSystem.DetectLeftWall(GroundLayer);
+    _leftWallDetectionResult = _sensorSystem.DetectLeftWall(SensorLayer);
     _contactLeftWallTransform = _leftWallDetectionResult?.ContactTransform;
 
-    _rightWallDetectionResult = _sensorSystem.DetectRightWall(GroundLayer);
+    _rightWallDetectionResult = _sensorSystem.DetectRightWall(SensorLayer);
     _contactRightWallTransform = _rightWallDetectionResult?.ContactTransform;
 
     if (ground.HasValue)
@@ -315,13 +315,13 @@ public partial class SonicController
 
   private CeilingDetectionResult? DetectCeiling(SonicSensorFlags sensorFlags, bool horizontalDirection)
   {
-    var result = _sensorSystem.DetectCeiling(horizontalDirection, GroundLayer);
+    var result = _sensorSystem.DetectCeiling(horizontalDirection, SensorLayer);
 
     if (result != null && result.Value.Distance == 0)
     {
       transform.position += new Vector3(0, CeilingDetectionOffset);
       _sensorSystem.Update(new(_sizeMode, _groundInfoSystem.Current.Side, transform.position, sensorFlags, _sensorRayLengths));
-      result = _sensorSystem.DetectCeiling(horizontalDirection, GroundLayer);
+      result = _sensorSystem.DetectCeiling(horizontalDirection, SensorLayer);
     }
 
     return result;
@@ -329,13 +329,13 @@ public partial class SonicController
 
   private GroundDetectionResult? DetectGround(SonicSensorFlags sensorFlags, bool horizontalDirection)
   {
-    var result = _sensorSystem.DetectGround(horizontalDirection, GroundLayer);
+    var result = _sensorSystem.DetectGround(horizontalDirection, SensorLayer);
 
     if (result != null && result.Value.Distance == 0)
     {
       transform.position += new Vector3(0, FloorDetectionOffset);
       _sensorSystem.Update(new(_sizeMode, _groundInfoSystem.Current.Side, transform.position, sensorFlags, _sensorRayLengths));
-      result = _sensorSystem.DetectGround(horizontalDirection, GroundLayer);
+      result = _sensorSystem.DetectGround(horizontalDirection, SensorLayer);
     }
 
     return result;

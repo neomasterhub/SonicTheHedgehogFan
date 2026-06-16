@@ -1,5 +1,6 @@
 using UnityEngine;
 using static SharedConsts.ConvertValues;
+using static SharedConsts.Physics;
 
 public static class SonicConsts
 {
@@ -15,6 +16,7 @@ public static class SonicConsts
     public static readonly Vector3 BottomUDFLengths = new(0.15f, 0.1f, 0.5f);
     public static readonly Vector2 WallToAirSpeedDelta = new(0.011f, 0);
     public static readonly Vector2 WallDetachPositionOffset = new(-0.1f, 0);
+    public static readonly LayerMask SensorLayer = GroundLayer | BlockLayer;
 
     public static readonly SonicPhysicsModeConfig NormalConfig = new(
       Normal.AccelerationSpeedSpx / SpxPerUnit,
