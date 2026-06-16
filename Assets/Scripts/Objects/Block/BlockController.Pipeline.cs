@@ -1,3 +1,5 @@
+using UnityEngine;
+
 /// <summary>
 /// Pipeline.
 /// </summary>
@@ -24,7 +26,7 @@ public partial class BlockController
     if (_player.ContactBlock == this
       && _player.IsPushing)
     {
-      transform.position += new UnityEngine.Vector3(_player.SpeedX, 0);
+      transform.position += new Vector3(_player.SpeedX, 0);
     }
   }
 
