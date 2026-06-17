@@ -12,20 +12,6 @@ public partial class DestructionBlockModule
 
   private void ToggleBlockLayer()
   {
-    if (_player.ContactBlock != null)
-    {
-      return;
-    }
-
-    if (_player.IsRolling
-      && (_player.SpeedX > 0.02f
-      || _player.SpeedX < -0.02f))
-    {
-      gameObject.layer = 0;
-    }
-    else
-    {
-      gameObject.layer = BlockLayerIndex;
-    }
+    gameObject.layer = BlockLayerIndex;
   }
 }
