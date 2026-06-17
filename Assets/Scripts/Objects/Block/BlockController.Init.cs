@@ -19,6 +19,7 @@ public partial class BlockController
 
     var player = GameObject.FindWithTag(Tags.Player);
     _player = player.GetComponent<IBlockPlayer>();
+    Player = _player;
   }
 
   private void InitializeData()

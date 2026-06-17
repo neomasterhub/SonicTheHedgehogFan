@@ -12,4 +12,5 @@ public abstract class BlockControllerBase
   public GroundDetectionResult? Ground { get; set; }
   public WallDetectionResult? LeftWall { get; set; }
   public WallDetectionResult? RightWall { get; set; }
+  public IBlockPlayer Player { get; protected set; }
 }
