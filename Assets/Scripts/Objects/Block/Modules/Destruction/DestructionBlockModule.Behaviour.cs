@@ -1,3 +1,4 @@
+using static BlockConsts;
 using static SharedConsts.Physics;
 
 /// <summary>
@@ -12,6 +13,22 @@ public partial class DestructionBlockModule
 
   private void ToggleBlockLayer()
   {
+    if (_player.ContactBlock != null)
+    {
+      gameObject.layer = BlockLayerIndex;
+      return;
+    }
+
+    var pSpeedX = _player.SpeedX;
+
+    if (_player.IsRolling
+      && (pSpeedX > MinDestructionPlayerSpeedX
+      || pSpeedX < -MinDestructionPlayerSpeedX))
+    {
+      gameObject.layer = 0;
+      return;
+    }
+
     gameObject.layer = BlockLayerIndex;
   }
 }
