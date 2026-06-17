@@ -52,6 +52,7 @@ public partial class SonicController
   public Transform ContactLeftWallTransform => _contactLeftWallTransform;
   public Transform ContactRightWallTransform => _contactRightWallTransform;
   public IBlock ContactBlock { get; set; }
+  public bool IsGrounded => _isGrounded;
   public bool IsPushing => _speedSystem.IsPushing;
   public bool IsRolling => _isRolling;
 

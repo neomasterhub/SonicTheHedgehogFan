@@ -22,7 +22,7 @@ public partial class DestructionBlockModule
 
     var pSpeedX = _player.SpeedX;
 
-    if (_player.IsRolling
+    if (_player.IsGrounded
       && (pSpeedX > MinDestructionPlayerSpeedX
       || pSpeedX < -MinDestructionPlayerSpeedX))
     {
