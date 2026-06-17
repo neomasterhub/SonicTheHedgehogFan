@@ -1,3 +1,5 @@
+using static SharedConsts.Physics;
+
 /// <summary>
 /// Behaviour.
 /// </summary>
@@ -23,7 +25,7 @@ public partial class DestructionBlockModule
     }
     else
     {
-      gameObject.layer = 6;
+      gameObject.layer = BlockLayerIndex;
     }
   }
 }
