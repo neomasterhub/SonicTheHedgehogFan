@@ -217,6 +217,27 @@ public partial class SonicController
     {
       transform.position += _contactPlatform.Displacement;
     }
+
+    UpdatePosition_PreventBlockWallOvershoot();
+  }
+
+  private void UpdatePosition_PreventBlockWallOvershoot()
+  {
+    if (!_prevIsGrounded
+      && _isGrounded
+      && ContactBlock != null)
+    {
+      if (_rightWallDetectionResult.HasValue
+        && _rightWallDetectionResult.Value.Distance < WallClearance)
+      {
+        transform.position -= PositionVector3(WallClearance - _rightWallDetectionResult.Value.Distance, 0);
+      }
+      else if (_leftWallDetectionResult.HasValue
+        && _leftWallDetectionResult.Value.Distance < WallClearance)
+      {
+        transform.position += PositionVector3(WallClearance - _leftWallDetectionResult.Value.Distance, 0);
+      }
+    }
   }
 
   private void UpdateSounds()
