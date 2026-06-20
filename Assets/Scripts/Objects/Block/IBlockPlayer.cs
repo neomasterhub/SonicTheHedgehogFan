@@ -9,6 +9,7 @@ public interface IBlockPlayer
   Collider2D Collider { get; }
   float SpeedX { get; }
   float SpeedY { get; }
+  float GroundSpeed { get; }
   bool IsGrounded { get; }
   bool IsPushing { get; }
   bool IsRolling { get; }
