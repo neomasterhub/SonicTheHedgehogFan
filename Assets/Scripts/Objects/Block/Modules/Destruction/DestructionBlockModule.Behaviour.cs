@@ -7,12 +7,13 @@ public partial class DestructionBlockModule
 {
   public override void Apply()
   {
-    SetPlayerFlags();
+    SetPlayerAttacking();
     SetLayer();
+    SetPlayerIntersecting();
     _effects.Run();
   }
 
-  private void SetPlayerFlags()
+  private void SetPlayerAttacking()
   {
     if (!_player.IsRolling
       || _player.ContactBlock != null)
@@ -51,6 +52,13 @@ public partial class DestructionBlockModule
     {
       gameObject.layer = _layer;
     }
+  }
+
+  private void SetPlayerIntersecting()
+  {
+    _playerIsIntersecting =
+      _layer == 0
+      && _collider.bounds.Intersects(_playerCollider.bounds);
   }
 
   private int GetLayer()

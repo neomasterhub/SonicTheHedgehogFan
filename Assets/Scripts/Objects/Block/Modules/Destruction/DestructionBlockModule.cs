@@ -12,6 +12,7 @@ public partial class DestructionBlockModule
   private int _layer;
   private int _prevLayer;
   private bool _playerIsAttacking;
+  private bool _playerIsIntersecting;
   private float _minAttackPlayerGroundSpeed;
   private float _minAttackPlayerAirSpeedX;
   private float _minAttackPlayerAirSpeedY;
