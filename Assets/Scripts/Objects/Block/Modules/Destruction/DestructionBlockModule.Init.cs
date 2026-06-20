@@ -1,4 +1,5 @@
 using UnityEngine;
+using static BlockConsts;
 using static SharedConsts.ConvertValues;
 
 /// <summary>
@@ -10,6 +11,9 @@ public partial class DestructionBlockModule
   public DestructionBlockModule()
     : base()
   {
+    _minAttackPlayerAirSpeedXPx = MinAttackPlayerAirSpeedXPx;
+    _minAttackPlayerGroundSpeedPx = MinAttackPlayerGroundSpeedPx;
+
     _effects = new();
     SetEffectPipeline();
   }
