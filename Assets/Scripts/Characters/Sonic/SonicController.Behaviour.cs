@@ -56,6 +56,7 @@ public partial class SonicController
   public bool IsGrounded => _isGrounded;
   public bool IsPushing => _speedSystem.IsPushing;
   public bool IsRolling => _isRolling;
+  Vector2 IBlockPlayer.ReboundSpeed { set => _blockReboundSpeed = value; }
 
   public bool DebugMode
   {

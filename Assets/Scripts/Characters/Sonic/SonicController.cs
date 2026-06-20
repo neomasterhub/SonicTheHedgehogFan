@@ -83,6 +83,7 @@ public partial class SonicController : MonoBehaviour
   private Transform _contactGroundTransform;
   private Transform _contactLeftWallTransform;
   private Transform _contactRightWallTransform;
+  private Vector2 _blockReboundSpeed;
   private WallDetectionResult? _leftWallDetectionResult;
   private WallDetectionResult? _rightWallDetectionResult;
 

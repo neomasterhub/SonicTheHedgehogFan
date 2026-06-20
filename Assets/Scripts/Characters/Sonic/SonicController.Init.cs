@@ -109,7 +109,7 @@ public partial class SonicController
 
     _reboundSpeedProvider
       .When(() => !_isGrounded && ContactEnemy?.IsHit == true, () => GetEnemyReboundSpeed())
-      .When(() => ContactBlock?.IsHit == true, () => GetBlockReboundSpeed());
+      .When(() => _blockReboundSpeed != default, () => GetBlockReboundSpeed());
 
     _gravitySpeedProvider.DefaultProvider = () => 0;
     _airToGroundSpeedProvider.DefaultProvider = () => new(_speedSystem.SpeedX, _speedSystem.SpeedY);
@@ -224,7 +224,10 @@ public partial class SonicController
 
   public Vector2 GetBlockReboundSpeed()
   {
-    return new Vector2(_speedSystem.SpeedX, _speedSystem.SpeedY) * -0.5f;
+    var speed = _blockReboundSpeed;
+    _blockReboundSpeed = default;
+
+    return speed;
   }
 
   private PlayerInput GetPlayerInput()
