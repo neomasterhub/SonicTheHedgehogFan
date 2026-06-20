@@ -56,6 +56,7 @@ public partial class DestructionBlockModule
 
   private void SetPlayerIntersecting()
   {
+    _prevPlayerIsIntersecting = _playerIsIntersecting;
     _playerIsIntersecting =
       _layer == 0
       && _collider.bounds.Intersects(_playerCollider.bounds);

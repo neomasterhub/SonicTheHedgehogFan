@@ -17,7 +17,7 @@ public partial class DestructionBlockModule
       .WithCondition(() =>
         _playerIsAttacking
         && _playerIsIntersecting
-        && !_context.IsHit)
+        && !_prevPlayerIsIntersecting)
       .WithAction(() =>
       {
         _context.IsHit = true;
