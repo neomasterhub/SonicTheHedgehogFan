@@ -49,6 +49,6 @@ public partial class DestructionBlockModule
 
   private int GetLayer()
   {
-    return BlockLayerIndex;
+    return _playerIsAttacking ? 0 : BlockLayerIndex;
   }
 }
