@@ -11,6 +11,7 @@ public partial class DestructionBlockModule
 
   private int _layer;
   private int _prevLayer;
+  private bool _playerIsAttacking;
   private Collider2D _collider;
   private Collider2D _playerCollider;
   private IBlockPlayer _player;
