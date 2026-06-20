@@ -8,6 +8,8 @@ public partial class DestructionBlockModule
 {
   private readonly Pipeline _effects;
 
+  private int _layer;
+  private int _prevLayer;
   private IBlockPlayer _player;
 
   [SerializeField]

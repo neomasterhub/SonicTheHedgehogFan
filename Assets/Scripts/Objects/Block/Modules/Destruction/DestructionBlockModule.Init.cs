@@ -15,5 +15,6 @@ public partial class DestructionBlockModule
   {
     base.Initialize(context);
     _player = context.Player;
+    _layer = gameObject.layer;
   }
 }
