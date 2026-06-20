@@ -6,6 +6,7 @@ public interface IBlockPlayer
   Transform ContactLeftWallTransform { get; }
   Transform ContactRightWallTransform { get; }
   IBlock ContactBlock { get; set; }
+  Collider2D Collider { get; }
   float SpeedX { get; }
   float SpeedY { get; }
   bool IsGrounded { get; }
