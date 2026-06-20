@@ -20,4 +20,6 @@ public partial class DestructionBlockModule
   private float _minAttackPlayerGroundSpeed;
   [SerializeField]
   private float _minAttackPlayerAirSpeedX;
+  [SerializeField]
+  private float _maxAttackPlayerAirSpeedY;
 }
