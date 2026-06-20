@@ -17,5 +17,5 @@ public partial class DestructionBlockModule
   private IBlockPlayer _player;
 
   [SerializeField]
-  private float _minAttackPlayerSpeedX;
+  private float _minAttackPlayerGroundSpeed;
 }

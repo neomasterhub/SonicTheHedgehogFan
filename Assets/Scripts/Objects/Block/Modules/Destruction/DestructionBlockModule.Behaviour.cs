@@ -24,8 +24,8 @@ public partial class DestructionBlockModule
     var pSpeedX = _player.SpeedX;
 
     _playerIsAttacking =
-      pSpeedX >= _minAttackPlayerSpeedX
-      || pSpeedX <= -_minAttackPlayerSpeedX;
+      pSpeedX >= _minAttackPlayerGroundSpeed
+      || pSpeedX <= -_minAttackPlayerGroundSpeed;
   }
 
   private void SetLayer()
