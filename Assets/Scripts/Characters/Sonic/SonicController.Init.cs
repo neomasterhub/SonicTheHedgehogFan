@@ -108,7 +108,8 @@ public partial class SonicController
       .When(() => _groundInfoSystem.Previous.Side == GroundSide.Up, () => new Vector2(-_speedSystem.SpeedX, _isJumping ? Mathf.Min(0, -_speedSystem.SpeedY) : 0));
 
     _reboundSpeedProvider
-      .When(() => !_isGrounded && ContactEnemy?.IsHit == true, () => GetAirReboundSpeed());
+      .When(() => !_isGrounded && ContactEnemy?.IsHit == true, () => GetEnemyReboundSpeed())
+      .When(() => ContactBlock?.IsHit == true, () => GetBlockReboundSpeed());
 
     _gravitySpeedProvider.DefaultProvider = () => 0;
     _airToGroundSpeedProvider.DefaultProvider = () => new(_speedSystem.SpeedX, _speedSystem.SpeedY);
@@ -210,7 +211,7 @@ public partial class SonicController
     return _configs.PhysicsModeConfig.GravitySpeed;
   }
 
-  public Vector2 GetAirReboundSpeed()
+  public Vector2 GetEnemyReboundSpeed()
   {
     if (_speedSystem.SpeedY <= 0
       && _speedSystem.SpeedY < ContactEnemy.SpeedY)
@@ -219,6 +220,11 @@ public partial class SonicController
     }
 
     return new(_speedSystem.SpeedX, _speedSystem.SpeedY - (Mathf.Sign(_speedSystem.SpeedY) / SpxPerUnit));
+  }
+
+  public Vector2 GetBlockReboundSpeed()
+  {
+    return new Vector2(_speedSystem.SpeedX, _speedSystem.SpeedY) * -0.5f;
   }
 
   private PlayerInput GetPlayerInput()
