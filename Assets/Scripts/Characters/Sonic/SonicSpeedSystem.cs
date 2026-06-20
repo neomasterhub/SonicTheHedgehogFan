@@ -300,8 +300,7 @@ public class SonicSpeedSystem : SpeedSystemBase
   private void SetSpeed_Grounded_Rebound()
   {
     var speed = _reboundSpeedProvider.FirstTriggeredOrDefault();
-    SpeedX = speed.x;
-    SpeedY = speed.y;
+    GroundSpeed = speed.x;
   }
 
   private void SetSpeed_Grounded_Jump()
