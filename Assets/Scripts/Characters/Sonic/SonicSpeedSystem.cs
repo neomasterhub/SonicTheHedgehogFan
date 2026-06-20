@@ -239,6 +239,7 @@ public class SonicSpeedSystem : SpeedSystemBase
 
     GravitySpeed = 0;
     SetSpeed_Grounded_FromAirborne();
+    SetSpeed_Grounded_Rebound();
 
     if (_context.IsJumping)
     {
@@ -294,6 +295,13 @@ public class SonicSpeedSystem : SpeedSystemBase
         -_config.TopSpeed,
         _config.TopSpeed);
     }
+  }
+
+  private void SetSpeed_Grounded_Rebound()
+  {
+    var speed = _reboundSpeedProvider.FirstTriggeredOrDefault();
+    SpeedX = speed.x;
+    SpeedY = speed.y;
   }
 
   private void SetSpeed_Grounded_Jump()
