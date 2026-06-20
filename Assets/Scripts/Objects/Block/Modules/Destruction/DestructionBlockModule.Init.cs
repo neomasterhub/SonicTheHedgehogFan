@@ -1,3 +1,5 @@
+using UnityEngine;
+
 /// <summary>
 /// Init.
 /// </summary>
@@ -14,7 +16,12 @@ public partial class DestructionBlockModule
   public override void Initialize(BlockControllerBase context)
   {
     base.Initialize(context);
-    _player = context.Player;
+
+    _collider = GetComponent<Collider2D>();
+
     _layer = gameObject.layer;
+
+    _player = context.Player;
+    _playerCollider = _player.Collider;
   }
 }
