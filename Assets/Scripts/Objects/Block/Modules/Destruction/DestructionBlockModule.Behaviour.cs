@@ -21,11 +21,15 @@ public partial class DestructionBlockModule
       return;
     }
 
-    var pSpeedX = _player.SpeedX;
-
-    _playerIsAttacking =
-      pSpeedX >= _minAttackPlayerGroundSpeed
-      || pSpeedX <= -_minAttackPlayerGroundSpeed;
+    if (_player.IsGrounded)
+    {
+      _playerIsAttacking =
+        _player.GroundSpeed >= _minAttackPlayerGroundSpeed
+        || _player.GroundSpeed <= -_minAttackPlayerGroundSpeed;
+    }
+    else
+    {
+    }
   }
 
   private void SetLayer()
