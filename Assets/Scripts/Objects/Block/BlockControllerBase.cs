@@ -4,6 +4,9 @@ public abstract class BlockControllerBase
   : MonoBehaviour,
   IBlockContext
 {
+  public bool IsHit { get; set; }
+  public bool IsHurt { get; set; }
+  public int Health { get; set; }
   public float Speed { get; set; }
   public float SpeedX { get; set; }
   public float SpeedY { get; set; }
