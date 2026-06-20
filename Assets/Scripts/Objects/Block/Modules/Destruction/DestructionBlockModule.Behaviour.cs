@@ -23,16 +23,22 @@ public partial class DestructionBlockModule
 
     if (_player.IsGrounded)
     {
+      var pGroundSpeed = _player.GroundSpeed;
+
       _playerIsAttacking =
-        _player.GroundSpeed >= _minAttackPlayerGroundSpeed
-        || _player.GroundSpeed <= -_minAttackPlayerGroundSpeed;
+        pGroundSpeed >= _minAttackPlayerGroundSpeed
+        || pGroundSpeed <= -_minAttackPlayerGroundSpeed;
     }
     else
     {
+      var pSpeedX = _player.SpeedX;
+      var pSpeedY = _player.SpeedY;
+
       _playerIsAttacking =
-        _player.SpeedY <= _topAttackPlayerAirSpeedY
-        && (_player.SpeedX >= _minAttackPlayerAirSpeedX
-        || _player.GroundSpeed <= -_minAttackPlayerAirSpeedX);
+        (pSpeedY <= -_minAttackPlayerAirSpeedY
+        || pSpeedY >= _minAttackPlayerAirSpeedY)
+        && (pSpeedX >= _minAttackPlayerAirSpeedX
+        || pSpeedX <= -_minAttackPlayerAirSpeedX);
     }
   }
 

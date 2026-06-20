@@ -14,7 +14,7 @@ public partial class DestructionBlockModule
   private bool _playerIsAttacking;
   private float _minAttackPlayerGroundSpeed;
   private float _minAttackPlayerAirSpeedX;
-  private float _topAttackPlayerAirSpeedY;
+  private float _minAttackPlayerAirSpeedY;
   private Collider2D _collider;
   private Collider2D _playerCollider;
   private IBlockPlayer _player;
@@ -24,5 +24,5 @@ public partial class DestructionBlockModule
   [SerializeField]
   private float _minAttackPlayerAirSpeedXPx;
   [SerializeField]
-  private float _topAttackPlayerAirSpeedYPx;
+  private float _minAttackPlayerAirSpeedYPx;
 }

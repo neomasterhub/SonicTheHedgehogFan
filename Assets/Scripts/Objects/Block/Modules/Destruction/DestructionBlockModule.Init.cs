@@ -11,8 +11,9 @@ public partial class DestructionBlockModule
   public DestructionBlockModule()
     : base()
   {
-    _minAttackPlayerAirSpeedXPx = MinAttackPlayerAirSpeedXPx;
     _minAttackPlayerGroundSpeedPx = MinAttackPlayerGroundSpeedPx;
+    _minAttackPlayerAirSpeedXPx = MinAttackPlayerAirSpeedXPx;
+    _minAttackPlayerAirSpeedYPx = MinAttackPlayerAirSpeedYPx;
 
     _effects = new();
     SetEffectPipeline();
@@ -31,6 +32,6 @@ public partial class DestructionBlockModule
 
     _minAttackPlayerGroundSpeed = _minAttackPlayerGroundSpeedPx / PxPerUnit;
     _minAttackPlayerAirSpeedX = _minAttackPlayerAirSpeedXPx / PxPerUnit;
-    _topAttackPlayerAirSpeedY = _topAttackPlayerAirSpeedYPx / PxPerUnit;
+    _minAttackPlayerAirSpeedY = _minAttackPlayerAirSpeedYPx / PxPerUnit;
   }
 }
