@@ -12,14 +12,17 @@ public partial class DestructionBlockModule
   private int _layer;
   private int _prevLayer;
   private bool _playerIsAttacking;
+  private float _minAttackPlayerGroundSpeed;
+  private float _minAttackPlayerAirSpeedX;
+  private float _topAttackPlayerAirSpeedY;
   private Collider2D _collider;
   private Collider2D _playerCollider;
   private IBlockPlayer _player;
 
   [SerializeField]
-  private float _minAttackPlayerGroundSpeed;
+  private float _minAttackPlayerGroundSpeedPx;
   [SerializeField]
-  private float _minAttackPlayerAirSpeedX;
+  private float _minAttackPlayerAirSpeedXPx;
   [SerializeField]
-  private float _maxAttackPlayerAirSpeedY;
+  private float _topAttackPlayerAirSpeedYPx;
 }

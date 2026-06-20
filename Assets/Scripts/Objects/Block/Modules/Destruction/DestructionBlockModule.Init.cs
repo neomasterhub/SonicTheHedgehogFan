@@ -1,4 +1,5 @@
 using UnityEngine;
+using static SharedConsts.ConvertValues;
 
 /// <summary>
 /// Init.
@@ -23,5 +24,9 @@ public partial class DestructionBlockModule
 
     _player = context.Player;
     _playerCollider = _player.Collider;
+
+    _minAttackPlayerGroundSpeed = _minAttackPlayerGroundSpeedPx / PxPerUnit;
+    _minAttackPlayerAirSpeedX = _minAttackPlayerAirSpeedXPx / PxPerUnit;
+    _topAttackPlayerAirSpeedY = _topAttackPlayerAirSpeedYPx / PxPerUnit;
   }
 }

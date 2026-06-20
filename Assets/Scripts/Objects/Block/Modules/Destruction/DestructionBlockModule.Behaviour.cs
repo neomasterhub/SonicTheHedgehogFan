@@ -30,7 +30,7 @@ public partial class DestructionBlockModule
     else
     {
       _playerIsAttacking =
-        _player.SpeedY <= _maxAttackPlayerAirSpeedY
+        _player.SpeedY <= _topAttackPlayerAirSpeedY
         && (_player.SpeedX >= _minAttackPlayerAirSpeedX
         || _player.GroundSpeed <= -_minAttackPlayerAirSpeedX);
     }
