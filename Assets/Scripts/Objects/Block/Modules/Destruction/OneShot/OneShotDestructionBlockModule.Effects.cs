@@ -22,6 +22,8 @@ public partial class OneShotDestructionBlockModule
         _context.IsHurt = true;
         _context.Health = -1;
 
+        gameObject.SetActive(false);
+
         return PipelineStepResult.Continue;
       })
       .Build();
