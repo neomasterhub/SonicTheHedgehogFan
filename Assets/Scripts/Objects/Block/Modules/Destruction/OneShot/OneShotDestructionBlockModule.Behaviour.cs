@@ -9,6 +9,7 @@ public partial class OneShotDestructionBlockModule
   {
     SetPlayerAttacking();
     SetLayer();
+    SetPlayerIntersecting();
     _effects.Run();
   }
 
@@ -27,5 +28,11 @@ public partial class OneShotDestructionBlockModule
     {
       gameObject.layer = _layer;
     }
+  }
+
+  private void SetPlayerIntersecting()
+  {
+    _playerIsIntersecting = _layer == 0
+      && _collider.bounds.Intersects(_playerCollider.bounds);
   }
 }
