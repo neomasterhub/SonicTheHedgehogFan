@@ -56,7 +56,7 @@ public partial class SonicController
   public bool IsGrounded => _isGrounded;
   public bool IsPushing => _speedSystem.IsPushing;
   public bool IsRolling => _isRolling;
-  Vector2 IBlockPlayer.ReboundSpeed { set => _blockReboundSpeed = value; }
+  public ReboundSignal ReboundSignal { set => _reboundSignal = value; }
   public float GroundSpeed => _speedSystem.GroundSpeed;
 
   public bool DebugMode

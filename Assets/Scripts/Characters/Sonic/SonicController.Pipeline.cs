@@ -18,6 +18,7 @@ public partial class SonicController
     UpdateInput();
     AnalyzeEnvironment();
     ApplyEffects();
+    UpdateReboundSpeeds();
     ApplyMovement();
     UpdateView();
     UpdatePosition();
@@ -132,6 +133,23 @@ public partial class SonicController
   private void ApplyEffects()
   {
     _effects.WithHistoryWriting(_debugMode).Run();
+  }
+
+  private void UpdateReboundSpeeds()
+  {
+    if (_reboundSignal == null)
+    {
+      return;
+    }
+
+    var signal = _reboundSignal.Value;
+
+    switch (signal.SourceType)
+    {
+      case ReboundSourceType.Block:
+        break;
+      default: throw signal.ArgumentOutOfRangeException();
+    }
   }
 
   private void ApplyMovement()
