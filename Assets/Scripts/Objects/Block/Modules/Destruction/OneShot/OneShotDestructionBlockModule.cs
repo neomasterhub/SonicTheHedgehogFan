@@ -6,6 +6,8 @@ public partial class OneShotDestructionBlockModule
 {
   private readonly Pipeline _effects;
 
+  private int _layer;
+  private int _prevLayer;
   private bool _playerIsAttacking;
   private IBlockPlayer _player;
 }
