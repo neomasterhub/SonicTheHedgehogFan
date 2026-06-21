@@ -9,4 +9,11 @@ public partial class OneShotDestructionBlockModule
     _effects = new();
     SetEffectPipeline();
   }
+
+  public override void Initialize(BlockControllerBase context)
+  {
+    base.Initialize(context);
+
+    _player = context.Player;
+  }
 }
