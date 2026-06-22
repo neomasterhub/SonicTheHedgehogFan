@@ -20,11 +20,35 @@ public partial class SonicController
       case ReboundSourceType.Block:
         ApplyRebound_Block(signal);
         break;
+
+      case ReboundSourceType.Enemy:
+        ApplyRebound_Enemy(signal);
+        break;
+
       default: throw signal.ArgumentOutOfRangeException();
     }
   }
 
   private void ApplyRebound_Block(ReboundSignal signal)
+  {
+    if (signal.SourceHealth < 0)
+    {
+      if (!_isGrounded)
+      {
+        if (_speedSystem.SpeedY <= 0
+          && _speedSystem.SpeedY < signal.SourceSpeedY)
+        {
+          _reboundAirSpeed = new(_speedSystem.SpeedX, -_speedSystem.SpeedY);
+        }
+        else
+        {
+          _reboundAirSpeed = new(_speedSystem.SpeedX, _speedSystem.SpeedY - (Mathf.Sign(_speedSystem.SpeedY) / SpxPerUnit));
+        }
+      }
+    }
+  }
+
+  private void ApplyRebound_Enemy(ReboundSignal signal)
   {
     if (signal.SourceHealth < 0)
     {
