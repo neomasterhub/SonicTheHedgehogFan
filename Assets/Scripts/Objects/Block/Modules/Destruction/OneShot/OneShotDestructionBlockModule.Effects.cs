@@ -22,7 +22,7 @@ public partial class OneShotDestructionBlockModule
         _context.IsHurt = true;
         _context.Health = -1;
 
-        _player.ReboundSignal = new(ReboundSourceType.Block, _context.Health);
+        _player.ReboundSignal = new(ReboundSourceType.Block, _context.Health, _context.SpeedX, _context.SpeedY);
 
         gameObject.SetActive(false);
 

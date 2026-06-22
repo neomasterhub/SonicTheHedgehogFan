@@ -30,7 +30,8 @@ public partial class SonicController
     {
       if (!_isGrounded)
       {
-        if (_speedSystem.SpeedY <= 0)
+        if (_speedSystem.SpeedY <= 0
+          && _speedSystem.SpeedY < signal.SourceSpeedY)
         {
           _reboundAirSpeed = new(_speedSystem.SpeedX, -_speedSystem.SpeedY);
         }
