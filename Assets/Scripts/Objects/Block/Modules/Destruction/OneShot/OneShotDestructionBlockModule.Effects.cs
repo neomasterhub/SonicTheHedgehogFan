@@ -22,6 +22,8 @@ public partial class OneShotDestructionBlockModule
         _context.IsHurt = true;
         _context.Health = -1;
 
+        _player.ReboundSignal = new(ReboundSourceType.Block, _context.Health);
+
         gameObject.SetActive(false);
 
         return PipelineStepResult.Continue;
