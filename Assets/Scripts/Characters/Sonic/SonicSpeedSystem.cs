@@ -163,9 +163,12 @@ public class SonicSpeedSystem : SpeedSystemBase
 
   private void SetSpeed_Airborne_Rebound()
   {
-    var speed = _reboundSpeedProvider.FirstTriggeredOrDefault();
-    SpeedX = speed.x;
-    SpeedY = speed.y;
+    if (_context.ReboundAirSpeed.HasValue)
+    {
+      var speed = _context.ReboundAirSpeed.Value;
+      SpeedX = speed.x;
+      SpeedY = speed.y;
+    }
   }
 
   private void SetSpeed_Airborne_PreventCeilingOvershoot()
@@ -299,8 +302,10 @@ public class SonicSpeedSystem : SpeedSystemBase
 
   private void SetSpeed_Grounded_Rebound()
   {
-    var speed = _reboundSpeedProvider.FirstTriggeredOrDefault();
-    GroundSpeed = speed.x;
+    if (_context.ReboundGroundSpeed.HasValue)
+    {
+      GroundSpeed = _context.ReboundGroundSpeed.Value;
+    }
   }
 
   private void SetSpeed_Grounded_Jump()
