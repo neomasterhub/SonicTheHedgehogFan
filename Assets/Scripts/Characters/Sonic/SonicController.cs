@@ -14,7 +14,6 @@ public partial class SonicController : MonoBehaviour
   private readonly ConditionalValueProvider<float> _gravitySpeedProvider;
   private readonly ConditionalValueProvider<Vector2> _airToGroundSpeedProvider;
   private readonly ConditionalValueProvider<Vector2> _groundToAirSpeedProvider;
-  private readonly ConditionalValueProvider<Vector2> _reboundSpeedProvider;
   private readonly GroundInfoSystem _groundInfoSystem;
   private readonly PlayerInputSystem _inputSystem;
   private readonly PlayerViewRotatorProvider<SonicViewRotatorContext> _viewRotatorProvider;
