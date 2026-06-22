@@ -13,7 +13,6 @@ public class SonicSpeedSystem : SpeedSystemBase
   private readonly ConditionalValueProvider<float> _gravitySpeedProvider;
   private readonly ConditionalValueProvider<Vector2> _airToGroundSpeedProvider;
   private readonly ConditionalValueProvider<Vector2> _groundToAirSpeedProvider;
-  private readonly ConditionalValueProvider<Vector2> _reboundSpeedProvider;
 
   private bool _friction;
   private bool _prevIsPushing;
@@ -32,8 +31,7 @@ public class SonicSpeedSystem : SpeedSystemBase
     ConditionalValueProvider<float> slopeSpeedProvider,
     ConditionalValueProvider<float> gravitySpeedProvider,
     ConditionalValueProvider<Vector2> airToGroundSpeedProvider,
-    ConditionalValueProvider<Vector2> groundToAirSpeedProvider,
-    ConditionalValueProvider<Vector2> reboundSpeedProvider)
+    ConditionalValueProvider<Vector2> groundToAirSpeedProvider)
   {
     _configs = configs;
     _inputSystem = inputSystem;
@@ -41,7 +39,6 @@ public class SonicSpeedSystem : SpeedSystemBase
     _gravitySpeedProvider = gravitySpeedProvider;
     _airToGroundSpeedProvider = airToGroundSpeedProvider;
     _groundToAirSpeedProvider = groundToAirSpeedProvider;
-    _reboundSpeedProvider = reboundSpeedProvider;
   }
 
   public bool IsPushing { get; private set; }
