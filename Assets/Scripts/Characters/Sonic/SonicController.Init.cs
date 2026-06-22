@@ -28,7 +28,7 @@ public partial class SonicController
     _configs = new(_physicsMode);
     _inputSystem = new(GetPlayerInput);
     _sensorRayLengths = new(OLength, TopUDFLengths, BottomUDFLengths);
-    _speedSystem = new(_configs, _inputSystem, _slopeSpeedProvider, _gravitySpeedProvider, _airToGroundSpeedProvider, _groundToAirSpeedProvider, _reboundSpeedProvider);
+    _speedSystem = new(_configs, _inputSystem, _slopeSpeedProvider, _gravitySpeedProvider, _airToGroundSpeedProvider, _groundToAirSpeedProvider);
     _viewSystem = new(_configs, _inputSystem, _viewRotatorProvider);
 
     CanCollectRing = true;
