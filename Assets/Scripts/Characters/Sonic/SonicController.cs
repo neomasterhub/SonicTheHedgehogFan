@@ -70,6 +70,7 @@ public partial class SonicController : MonoBehaviour
   private LineRenderer _groundNormal;
   private PhysicsMode _physicsMode;
   private PhysicsMode _prevPhysicsMode;
+  private ReboundSignal? _reboundSignal;
   private SonicSpeedContext _speedContext;
   private SonicSizeMode _sizeMode;
   private SonicSizeMode _prevSizeMode;
@@ -85,7 +86,6 @@ public partial class SonicController : MonoBehaviour
   private Transform _contactGroundTransform;
   private Transform _contactLeftWallTransform;
   private Transform _contactRightWallTransform;
-  private ReboundSignal? _reboundSignal;
   private WallDetectionResult? _leftWallDetectionResult;
   private WallDetectionResult? _rightWallDetectionResult;
 

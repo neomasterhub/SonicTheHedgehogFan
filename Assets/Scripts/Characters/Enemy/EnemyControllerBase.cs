@@ -4,6 +4,8 @@ public class EnemyControllerBase
   : MonoBehaviour,
   IEnemyContext
 {
+  protected ReboundSignal? _reboundSignal;
+
   public bool IsInvincible { get; set; }
   public bool IsAttacking { get; set; }
   public bool IsHit { get; set; }
@@ -24,4 +26,5 @@ public class EnemyControllerBase
   public GroundDetectionResult? Ground { get; set; }
   public WallDetectionResult? LeftWall { get; set; }
   public WallDetectionResult? RightWall { get; set; }
+  public ReboundSignal ReboundSignal { set => _reboundSignal = value; }
 }

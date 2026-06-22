@@ -8,6 +8,7 @@ public partial class EnemyController
     BeginFrame();
     ApplyEffects();
     ApplyModules();
+    EndFrame();
   }
 
   private void BeginFrame()
@@ -32,5 +33,10 @@ public partial class EnemyController
     {
       _modules[i].Apply();
     }
+  }
+
+  private void EndFrame()
+  {
+    _reboundSignal = null;
   }
 }
