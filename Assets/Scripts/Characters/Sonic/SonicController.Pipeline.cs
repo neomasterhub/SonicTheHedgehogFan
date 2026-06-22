@@ -153,7 +153,8 @@ public partial class SonicController
         _lastGroundDetectionResult.Distance,
         _isDownGrounded && _leftWallDetectionResult?.AngleDeg == 0 ? _leftWallDetectionResult.Value.Distance : null,
         _isDownGrounded && _rightWallDetectionResult?.AngleDeg == 0 ? _rightWallDetectionResult.Value.Distance : null,
-        ContactBlock);
+        ContactBlock,
+        _reboundGroundSpeed);
     }
     else
     {
@@ -167,7 +168,8 @@ public partial class SonicController
         _leftWallDetectionResult?.Distance,
         _rightWallDetectionResult?.Distance,
         _ceilingDetectionResult?.AngleDeg,
-        _ceilingDetectionResult?.Distance);
+        _ceilingDetectionResult?.Distance,
+        _reboundAirSpeed);
     }
 
     _speedSystem.SetSpeed(_speedContext);
