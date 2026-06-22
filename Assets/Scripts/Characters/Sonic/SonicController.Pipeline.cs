@@ -18,7 +18,7 @@ public partial class SonicController
     UpdateInput();
     AnalyzeEnvironment();
     ApplyEffects();
-    UpdateReboundSpeeds();
+    ApplyRebound();
     ApplyMovement();
     UpdateView();
     UpdatePosition();
@@ -135,7 +135,7 @@ public partial class SonicController
     _effects.WithHistoryWriting(_debugMode).Run();
   }
 
-  private void UpdateReboundSpeeds()
+  private void ApplyRebound()
   {
     if (_reboundSignal == null)
     {
