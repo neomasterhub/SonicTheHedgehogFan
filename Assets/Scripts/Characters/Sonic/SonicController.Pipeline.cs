@@ -37,6 +37,9 @@ public partial class SonicController
     _prevPhysicsMode = _physicsMode;
     _prevSizeMode = _sizeMode;
 
+    _reboundAirSpeed = null;
+    _reboundGroundSpeed = null;
+
     _horizontalDirection = !_spriteRenderer.flipX;
   }
 
@@ -251,6 +254,7 @@ public partial class SonicController
 
   private void EndFrame()
   {
+    _reboundSignal = null;
     _ringCollected = false;
     _ringsLost = false;
     _takeLeftHit = false;
