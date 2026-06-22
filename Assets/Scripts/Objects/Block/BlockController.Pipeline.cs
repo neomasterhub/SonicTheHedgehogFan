@@ -16,7 +16,8 @@ public partial class BlockController
   {
     if (_player.ContactGroundTransform == transform
       || _player.ContactLeftWallTransform == transform
-      || _player.ContactRightWallTransform == transform)
+      || _player.ContactRightWallTransform == transform
+      || _player.ContactCeilingTransform == transform)
     {
       _player.ContactBlock = this;
     }

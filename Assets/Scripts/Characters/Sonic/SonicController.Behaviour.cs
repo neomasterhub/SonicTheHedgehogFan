@@ -46,6 +46,7 @@ public partial class SonicController
     }
   }
 
+  public Transform ContactCeilingTransform => _contactCeilingTransform;
   public Transform ContactGroundTransform => _contactGroundTransform;
   public IPlatform ContactPlatform { set => _contactPlatform = value; }
 

@@ -71,6 +71,7 @@ public partial class SonicController
     _sensorSystem.Update(new(_sizeMode, _groundInfoSystem.Current.Side, transform.position, sensorFlags, _sensorRayLengths));
 
     _ceilingDetectionResult = DetectCeiling(sensorFlags, _horizontalDirection);
+    _contactCeilingTransform = _ceilingDetectionResult?.ContactTransform;
 
     var ground = DetectGround(sensorFlags, _horizontalDirection);
 
