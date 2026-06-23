@@ -14,5 +14,6 @@ public interface IBlockPlayer
   bool IsGrounded { get; }
   bool IsPushing { get; }
   bool IsRolling { get; }
+  bool IsStoppedByCeiling { set; }
   ReboundSignal ReboundSignal { set; }
 }

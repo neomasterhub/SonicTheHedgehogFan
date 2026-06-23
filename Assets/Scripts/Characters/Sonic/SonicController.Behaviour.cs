@@ -57,6 +57,7 @@ public partial class SonicController
   public bool IsGrounded => _isGrounded;
   public bool IsPushing => _speedSystem.IsPushing;
   public bool IsRolling => _isRolling;
+  public bool IsStoppedByCeiling { set => _isStoppedByCeiling = value; }
   public ReboundSignal ReboundSignal { set => _reboundSignal = value; }
   public float GroundSpeed => _speedSystem.GroundSpeed;
 
