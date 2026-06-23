@@ -51,7 +51,10 @@ public partial class SonicController
     return PipelineStepBuilder.Create()
       .WithDisplayName("Falling block on head")
       .WithCondition(() =>
-        !_isRolling)
+        !_isRolling
+        && _ceilingDetectionResult.HasValue
+        && ContactBlock != null
+        && ContactBlock.SpeedY < _speedSystem.SpeedY)
       .Build();
   }
 
