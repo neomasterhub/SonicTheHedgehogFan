@@ -13,9 +13,9 @@ public class SonicSpeedSystem : SpeedSystemBase
   private readonly ConditionalValueProvider<float> _gravitySpeedProvider;
   private readonly ConditionalValueProvider<Vector2> _airToGroundSpeedProvider;
   private readonly ConditionalValueProvider<Vector2> _groundToAirSpeedProvider;
-  private readonly ConditionalValueProvider<Vector2> _reboundSpeedProvider;
 
   private bool _friction;
+  private bool _prevIsPushing;
   private float _accSpeed;
   private float _decSpeed;
   private float _frictionSpeed;
@@ -31,8 +31,7 @@ public class SonicSpeedSystem : SpeedSystemBase
     ConditionalValueProvider<float> slopeSpeedProvider,
     ConditionalValueProvider<float> gravitySpeedProvider,
     ConditionalValueProvider<Vector2> airToGroundSpeedProvider,
-    ConditionalValueProvider<Vector2> groundToAirSpeedProvider,
-    ConditionalValueProvider<Vector2> reboundSpeedProvider)
+    ConditionalValueProvider<Vector2> groundToAirSpeedProvider)
   {
     _configs = configs;
     _inputSystem = inputSystem;
@@ -40,9 +39,9 @@ public class SonicSpeedSystem : SpeedSystemBase
     _gravitySpeedProvider = gravitySpeedProvider;
     _airToGroundSpeedProvider = airToGroundSpeedProvider;
     _groundToAirSpeedProvider = groundToAirSpeedProvider;
-    _reboundSpeedProvider = reboundSpeedProvider;
   }
 
+  public bool IsPushing { get; private set; }
   public bool IsSkidding { get; private set; }
   public bool IsStoppedByLeftWall { get; private set; }
   public bool IsStoppedByRightWall { get; private set; }
@@ -136,6 +135,7 @@ public class SonicSpeedSystem : SpeedSystemBase
 
   private void SetSpeed_Airborne()
   {
+    IsPushing = false;
     IsSkidding = false;
     SlopeSpeed = 0;
 
@@ -160,9 +160,12 @@ public class SonicSpeedSystem : SpeedSystemBase
 
   private void SetSpeed_Airborne_Rebound()
   {
-    var speed = _reboundSpeedProvider.FirstTriggeredOrDefault();
-    SpeedX = speed.x;
-    SpeedY = speed.y;
+    if (_context.ReboundAirSpeed.HasValue)
+    {
+      var speed = _context.ReboundAirSpeed.Value;
+      SpeedX = speed.x;
+      SpeedY = speed.y;
+    }
   }
 
   private void SetSpeed_Airborne_PreventCeilingOvershoot()
@@ -231,8 +234,12 @@ public class SonicSpeedSystem : SpeedSystemBase
     _groundAngleCos = MathF.Cos(_context.GroundAngleRad.Value);
     _groundAngleSin = MathF.Sin(_context.GroundAngleRad.Value);
 
+    _prevIsPushing = IsPushing;
+    IsPushing = false;
+
     GravitySpeed = 0;
     SetSpeed_Grounded_FromAirborne();
+    SetSpeed_Grounded_Rebound();
 
     if (_context.IsJumping)
     {
@@ -257,6 +264,8 @@ public class SonicSpeedSystem : SpeedSystemBase
     }
 
     SetSpeed_Grounded_PreventWallOvershoot();
+    SetSpeed_Grounded_StopByPushedBlockWall();
+    SetSpeed_Grounded_Pushing();
 
     SpeedX = GroundSpeed * _groundAngleCos;
     SpeedY = GroundSpeed * _groundAngleSin;
@@ -285,6 +294,14 @@ public class SonicSpeedSystem : SpeedSystemBase
         (SpeedX * _groundAngleCos) + (SpeedY * _groundAngleSin),
         -_config.TopSpeed,
         _config.TopSpeed);
+    }
+  }
+
+  private void SetSpeed_Grounded_Rebound()
+  {
+    if (_context.ReboundGroundSpeed.HasValue)
+    {
+      GroundSpeed = _context.ReboundGroundSpeed.Value;
     }
   }
 
@@ -382,9 +399,75 @@ public class SonicSpeedSystem : SpeedSystemBase
 
   private void SetSpeed_Grounded_PreventWallOvershoot()
   {
-    if (IsStoppedByWall(GroundSpeed))
+    if (!IsStoppedByWall(GroundSpeed))
     {
-      GroundSpeed = 0;
+      return;
+    }
+
+    GroundSpeed = 0;
+
+    if (_context.ContactBlock == null
+      || IsPushing)
+    {
+      return;
+    }
+
+    if (_context.DistanceToLeftWall != null)
+    {
+      var dist = (_context.DistanceToLeftWall.Value - WallClearance).Round(SpeedRoundingDigits);
+      if (dist > 0)
+      {
+        GroundSpeed = -dist;
+      }
+    }
+    else if (_context.DistanceToRightWall != null)
+    {
+      var dist = (_context.DistanceToRightWall.Value - WallClearance).Round(SpeedRoundingDigits);
+      if (dist > 0)
+      {
+        GroundSpeed = dist;
+      }
+    }
+  }
+
+  private void SetSpeed_Grounded_StopByPushedBlockWall()
+  {
+    if (_prevIsPushing)
+    {
+      if (!IsStoppedByLeftWall && _inputSystem.X < 0)
+      {
+        IsStoppedByLeftWall = true;
+      }
+
+      if (!IsStoppedByRightWall && _inputSystem.X > 0)
+      {
+        IsStoppedByRightWall = true;
+      }
+    }
+  }
+
+  private void SetSpeed_Grounded_Pushing()
+  {
+    if (_context.ContactBlock == null
+      || GroundSpeed != 0)
+    {
+      return;
+    }
+
+    if (IsStoppedByLeftWall && _inputSystem.X < 0)
+    {
+      IsPushing = true;
+      GroundSpeed = -_context.ContactBlock.LeftPushSpeed;
+
+      return;
+    }
+
+    if (IsStoppedByRightWall && _inputSystem.X > 0)
+    {
+      IsPushing = true;
+      GroundSpeed = _context.ContactBlock.RightPushSpeed;
+
+      return;
     }
   }
 

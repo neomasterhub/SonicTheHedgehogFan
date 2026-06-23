@@ -14,7 +14,6 @@ public partial class SonicController : MonoBehaviour
   private readonly ConditionalValueProvider<float> _gravitySpeedProvider;
   private readonly ConditionalValueProvider<Vector2> _airToGroundSpeedProvider;
   private readonly ConditionalValueProvider<Vector2> _groundToAirSpeedProvider;
-  private readonly ConditionalValueProvider<Vector2> _reboundSpeedProvider;
   private readonly GroundInfoSystem _groundInfoSystem;
   private readonly PlayerInputSystem _inputSystem;
   private readonly PlayerViewRotatorProvider<SonicViewRotatorContext> _viewRotatorProvider;
@@ -58,6 +57,8 @@ public partial class SonicController : MonoBehaviour
   private char _triggeredGroundSensorId;
   private float _slopeFactor;
   private float _absGroundSpeed;
+  private float? _reboundGroundSpeed;
+  private Vector2? _reboundAirSpeed;
   private Animator _animator;
   private BoxCollider2D _boxCollider;
   private CeilingDetectionResult? _ceilingDetectionResult;
@@ -68,6 +69,7 @@ public partial class SonicController : MonoBehaviour
   private LineRenderer _groundNormal;
   private PhysicsMode _physicsMode;
   private PhysicsMode _prevPhysicsMode;
+  private ReboundSignal? _reboundSignal;
   private SonicSpeedContext _speedContext;
   private SonicSizeMode _sizeMode;
   private SonicSizeMode _prevSizeMode;
@@ -80,7 +82,10 @@ public partial class SonicController : MonoBehaviour
   private Timer _dpadLockTimer;
   private Timer _postHurtInvincibleTimer;
   private Timer _ringCollectorDisabledTimer;
+  private Transform _contactCeilingTransform;
   private Transform _contactGroundTransform;
+  private Transform _contactLeftWallTransform;
+  private Transform _contactRightWallTransform;
   private WallDetectionResult? _leftWallDetectionResult;
   private WallDetectionResult? _rightWallDetectionResult;
 

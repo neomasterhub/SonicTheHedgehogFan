@@ -57,6 +57,8 @@ public partial class EnemyController
         IsInvincible = true;
         Health--;
 
+        _otherEnemy.ReboundSignal = new(ReboundSourceType.Enemy, Health, SpeedX, SpeedY);
+
         return PipelineStepResult.Continue;
       })
       .Build();

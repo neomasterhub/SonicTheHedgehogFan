@@ -237,6 +237,6 @@ public class SonicSensorSystem
       return null;
     }
 
-    return new(hit.Value.distance, Vector2.SignedAngle(-topRay.Direction, hit.Value.normal).Round());
+    return new(hit.Value, topRay.Direction);
   }
 }

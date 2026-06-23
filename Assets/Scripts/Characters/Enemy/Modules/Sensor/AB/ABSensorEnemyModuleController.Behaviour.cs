@@ -28,6 +28,6 @@ public partial class ABSensorEnemyModuleController
 
     return hit == null
       ? null
-      : new(hit.Value.distance, Vector2.SignedAngle(-sensor.FrontRay.Direction, hit.Value.normal).Round());
+      : new(hit.Value, sensor.FrontRay.Direction);
   }
 }

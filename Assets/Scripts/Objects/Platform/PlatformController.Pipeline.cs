@@ -20,7 +20,7 @@ public partial class PlatformController
 
   private void UpdateData()
   {
-    Translation = transform.position - _prevPosition;
+    Displacement = transform.position - _prevPosition;
     _prevPosition = transform.position;
   }
 
@@ -30,7 +30,7 @@ public partial class PlatformController
     {
       var obj = _platformObjects[i];
 
-      if (obj.ContactTransform == transform)
+      if (obj.ContactGroundTransform == transform)
       {
         obj.ContactPlatform = this;
       }

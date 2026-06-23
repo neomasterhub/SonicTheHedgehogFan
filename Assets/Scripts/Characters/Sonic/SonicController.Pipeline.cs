@@ -18,6 +18,7 @@ public partial class SonicController
     UpdateInput();
     AnalyzeEnvironment();
     ApplyEffects();
+    ApplyRebound();
     ApplyMovement();
     UpdateView();
     UpdatePosition();
@@ -35,6 +36,9 @@ public partial class SonicController
     _prevIsRolling = _isRolling;
     _prevPhysicsMode = _physicsMode;
     _prevSizeMode = _sizeMode;
+
+    _reboundAirSpeed = null;
+    _reboundGroundSpeed = null;
 
     _horizontalDirection = !_spriteRenderer.flipX;
   }
@@ -67,11 +71,15 @@ public partial class SonicController
     _sensorSystem.Update(new(_sizeMode, _groundInfoSystem.Current.Side, transform.position, sensorFlags, _sensorRayLengths));
 
     _ceilingDetectionResult = DetectCeiling(sensorFlags, _horizontalDirection);
+    _contactCeilingTransform = _ceilingDetectionResult?.ContactTransform;
 
     var ground = DetectGround(sensorFlags, _horizontalDirection);
 
-    _leftWallDetectionResult = _sensorSystem.DetectLeftWall(GroundLayer);
-    _rightWallDetectionResult = _sensorSystem.DetectRightWall(GroundLayer);
+    _leftWallDetectionResult = _sensorSystem.DetectLeftWall(SensorLayer);
+    _contactLeftWallTransform = _leftWallDetectionResult?.ContactTransform;
+
+    _rightWallDetectionResult = _sensorSystem.DetectRightWall(SensorLayer);
+    _contactRightWallTransform = _rightWallDetectionResult?.ContactTransform;
 
     if (ground.HasValue)
     {
@@ -82,6 +90,7 @@ public partial class SonicController
     }
     else
     {
+      ContactBlock = null;
       _contactPlatform = null;
 
       AnalyzeEnvironment_Airborne();
@@ -144,7 +153,9 @@ public partial class SonicController
         _groundInfoSystem.Current.SideAngleRad,
         _lastGroundDetectionResult.Distance,
         _isDownGrounded && _leftWallDetectionResult?.AngleDeg == 0 ? _leftWallDetectionResult.Value.Distance : null,
-        _isDownGrounded && _rightWallDetectionResult?.AngleDeg == 0 ? _rightWallDetectionResult.Value.Distance : null);
+        _isDownGrounded && _rightWallDetectionResult?.AngleDeg == 0 ? _rightWallDetectionResult.Value.Distance : null,
+        ContactBlock,
+        _reboundGroundSpeed);
     }
     else
     {
@@ -158,7 +169,8 @@ public partial class SonicController
         _leftWallDetectionResult?.Distance,
         _rightWallDetectionResult?.Distance,
         _ceilingDetectionResult?.AngleDeg,
-        _ceilingDetectionResult?.Distance);
+        _ceilingDetectionResult?.Distance,
+        _reboundAirSpeed);
     }
 
     _speedSystem.SetSpeed(_speedContext);
@@ -166,7 +178,7 @@ public partial class SonicController
 
   private void UpdateView()
   {
-    _viewContext = new(_horizontalDirection, IsHurt, _isDying, _isGrounded, _speedSystem.IsSkidding, _isBalancing, _isCurlingUp, _isLookingUp, _isRolling, _speedSystem.IsZeroGroundSpeedProgressReached, _triggeredGroundSensorId, _speedSystem.SpeedX, _speedSystem.GroundSpeed, _groundInfoSystem.Current.AngleDeg, Time.fixedDeltaTime, _groundInfoSystem.Current.Side, _groundInfoSystem.Previous.Side);
+    _viewContext = new(_horizontalDirection, IsHurt, _isDying, _isGrounded, _speedSystem.IsSkidding, _isBalancing, _isCurlingUp, _isLookingUp, _isRolling, _speedSystem.IsPushing, _speedSystem.IsZeroGroundSpeedProgressReached, _triggeredGroundSensorId, _speedSystem.SpeedX, _speedSystem.GroundSpeed, _groundInfoSystem.Current.AngleDeg, Time.fixedDeltaTime, _groundInfoSystem.Current.Side, _groundInfoSystem.Previous.Side);
     _viewSystem.Update(_viewContext);
   }
 
@@ -210,7 +222,28 @@ public partial class SonicController
 
     if (_isGrounded && _contactPlatform != null)
     {
-      transform.position += _contactPlatform.Translation;
+      transform.position += _contactPlatform.Displacement;
+    }
+
+    UpdatePosition_PreventBlockWallOvershoot();
+  }
+
+  private void UpdatePosition_PreventBlockWallOvershoot()
+  {
+    if (!_prevIsGrounded
+      && _isGrounded
+      && ContactBlock != null)
+    {
+      if (_rightWallDetectionResult.HasValue
+        && _rightWallDetectionResult.Value.Distance < WallClearance)
+      {
+        transform.position -= PositionVector3(WallClearance - _rightWallDetectionResult.Value.Distance, 0);
+      }
+      else if (_leftWallDetectionResult.HasValue
+        && _leftWallDetectionResult.Value.Distance < WallClearance)
+      {
+        transform.position += PositionVector3(WallClearance - _leftWallDetectionResult.Value.Distance, 0);
+      }
     }
   }
 
@@ -224,6 +257,7 @@ public partial class SonicController
 
   private void EndFrame()
   {
+    _reboundSignal = null;
     _ringCollected = false;
     _ringsLost = false;
     _takeLeftHit = false;
@@ -310,13 +344,13 @@ public partial class SonicController
 
   private CeilingDetectionResult? DetectCeiling(SonicSensorFlags sensorFlags, bool horizontalDirection)
   {
-    var result = _sensorSystem.DetectCeiling(horizontalDirection, GroundLayer);
+    var result = _sensorSystem.DetectCeiling(horizontalDirection, SensorLayer);
 
     if (result != null && result.Value.Distance == 0)
     {
       transform.position += new Vector3(0, CeilingDetectionOffset);
       _sensorSystem.Update(new(_sizeMode, _groundInfoSystem.Current.Side, transform.position, sensorFlags, _sensorRayLengths));
-      result = _sensorSystem.DetectCeiling(horizontalDirection, GroundLayer);
+      result = _sensorSystem.DetectCeiling(horizontalDirection, SensorLayer);
     }
 
     return result;
@@ -324,13 +358,13 @@ public partial class SonicController
 
   private GroundDetectionResult? DetectGround(SonicSensorFlags sensorFlags, bool horizontalDirection)
   {
-    var result = _sensorSystem.DetectGround(horizontalDirection, GroundLayer);
+    var result = _sensorSystem.DetectGround(horizontalDirection, SensorLayer);
 
     if (result != null && result.Value.Distance == 0)
     {
       transform.position += new Vector3(0, FloorDetectionOffset);
       _sensorSystem.Update(new(_sizeMode, _groundInfoSystem.Current.Side, transform.position, sensorFlags, _sensorRayLengths));
-      result = _sensorSystem.DetectGround(horizontalDirection, GroundLayer);
+      result = _sensorSystem.DetectGround(horizontalDirection, SensorLayer);
     }
 
     return result;

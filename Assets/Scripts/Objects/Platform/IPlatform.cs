@@ -2,5 +2,5 @@ using UnityEngine;
 
 public interface IPlatform
 {
-  Vector3 Translation { get; }
+  Vector3 Displacement { get; }
 }

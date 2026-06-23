@@ -17,6 +17,7 @@ public static class SharedConsts
       public const string Hurt = nameof(Hurt);
       public const string Idle = nameof(Idle);
       public const string LookingUp = nameof(LookingUp);
+      public const string Pushing = nameof(Pushing);
       public const string Rolling = nameof(Rolling);
       public const string Running = nameof(Running);
       public const string Skidding = nameof(Skidding);
@@ -57,7 +58,10 @@ public static class SharedConsts
     public const int PositionRoundingDigits = 3;
     public const float FloorDetectionOffset = 0.05f;
     public const float CeilingDetectionOffset = -0.05f;
-    public static readonly LayerMask GroundLayer = 1 << 3;
+    public const int BlockLayerIndex = 6;
+    public const int GroundLayerIndex = 3;
+    public static readonly LayerMask BlockLayer = 1 << BlockLayerIndex;
+    public static readonly LayerMask GroundLayer = 1 << GroundLayerIndex;
 
     public static class GroundAngleRanges
     {

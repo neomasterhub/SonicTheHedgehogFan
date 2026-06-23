@@ -9,6 +9,7 @@ public readonly struct CeilingDetectionResult
   public readonly Vector2 Contact;
   public readonly Vector2 Normal;
   public readonly VerticalRelation SensorCeilingRelation;
+  public readonly Transform ContactTransform;
 
   public CeilingDetectionResult(
     char sourceSensorId,
@@ -23,6 +24,7 @@ public readonly struct CeilingDetectionResult
     AngleDeg = Vector2.SignedAngle(-sensorDirection, hit.normal).Round();
     AngleRad = AngleDeg * Mathf.Deg2Rad;
     SensorCeilingRelation = sensorCeilingRelation;
+    ContactTransform = hit.transform;
   }
 
   public static CeilingDetectionResult CreateCDResult(

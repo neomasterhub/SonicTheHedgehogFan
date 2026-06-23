@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[DefaultExecutionOrder(1)]
 public abstract class ModuleControllerBase<TCore>
   : MonoBehaviour,
   ISystemModule<TCore>

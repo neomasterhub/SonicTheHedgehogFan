@@ -4,7 +4,8 @@ using UnityEngine;
 /// Behaviour.
 /// </summary>
 public partial class SonicController
-  : ICameraTarget,
+  : IBlockPlayer,
+  ICameraTarget,
   IEnemy,
   ILookVerticalDirectionProvider,
   IPlatformObject,
@@ -45,8 +46,19 @@ public partial class SonicController
     }
   }
 
-  public Transform ContactTransform => _contactGroundTransform;
+  public Transform ContactCeilingTransform => _contactCeilingTransform;
+  public Transform ContactGroundTransform => _contactGroundTransform;
   public IPlatform ContactPlatform { set => _contactPlatform = value; }
+
+  public Transform ContactLeftWallTransform => _contactLeftWallTransform;
+  public Transform ContactRightWallTransform => _contactRightWallTransform;
+  public IBlock ContactBlock { get; set; }
+  public Collider2D Collider => _boxCollider;
+  public bool IsGrounded => _isGrounded;
+  public bool IsPushing => _speedSystem.IsPushing;
+  public bool IsRolling => _isRolling;
+  public ReboundSignal ReboundSignal { set => _reboundSignal = value; }
+  public float GroundSpeed => _speedSystem.GroundSpeed;
 
   public bool DebugMode
   {

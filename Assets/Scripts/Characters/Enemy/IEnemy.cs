@@ -12,4 +12,5 @@ public interface IEnemy
   float PositionX { get; }
   float PositionY { get; }
   IEnemy ContactEnemy { get; set; }
+  ReboundSignal ReboundSignal { set; }
 }
