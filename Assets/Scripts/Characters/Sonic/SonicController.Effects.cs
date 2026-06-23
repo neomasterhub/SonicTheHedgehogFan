@@ -1,3 +1,5 @@
+using static Helpers.Math;
+using static SonicConsts;
 using static SonicConsts.Physics;
 using static SonicConsts.View;
 
@@ -55,6 +57,32 @@ public partial class SonicController
         && _ceilingDetectionResult.HasValue
         && ContactBlock != null
         && ContactBlock.SpeedY < _speedSystem.SpeedY)
+      .WithAction(() =>
+      {
+        var blockX = _contactCeilingTransform.transform.position.x;
+        var offsetX = Sizes.Big.HRadius + ContactBlock.HRadius + WallClearance;
+        var offsetXDir = blockX < transform.position.x;
+        var x = offsetXDir ? blockX + offsetX : blockX - offsetX;
+
+        if (offsetXDir)
+        {
+          if (_speedSystem.SpeedX < 0)
+          {
+            x += _speedSystem.SpeedX;
+          }
+        }
+        else
+        {
+          if (_speedSystem.SpeedX > 0)
+          {
+            x -= _speedSystem.SpeedX;
+          }
+        }
+
+        transform.position = PositionVector3(x, transform.position.y);
+
+        return PipelineStepResult.Continue;
+      })
       .Build();
   }
 
