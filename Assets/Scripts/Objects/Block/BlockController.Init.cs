@@ -26,5 +26,12 @@ public partial class BlockController
   {
     LeftPushSpeed = _leftPushSpeedPx / PxPerUnit;
     RightPushSpeed = _rightPushSpeedPx / PxPerUnit;
+
+    if (TryGetComponent<Collider2D>(out var collider))
+    {
+      var size = collider.bounds.size;
+      HRadius = size.x / 2;
+      VRadius = size.y / 2;
+    }
   }
 }
