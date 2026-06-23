@@ -7,6 +7,8 @@ public abstract class BlockControllerBase
   public bool IsHit { get; set; }
   public bool IsHurt { get; set; }
   public int Health { get; set; }
+  public float HRadius { get; set; }
+  public float VRadius { get; set; }
   public float Speed { get; set; }
   public float SpeedX { get; set; }
   public float SpeedY { get; set; }
