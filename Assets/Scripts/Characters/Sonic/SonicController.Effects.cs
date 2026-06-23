@@ -9,6 +9,7 @@ public partial class SonicController
   private void SetEffectPipeline()
   {
     _effects.AddStep(CreateEffect_Disable());
+    _effects.AddStep(CreateEffect_FallingBlockOnHead());
     _effects.AddStep(CreateEffect_SetHit());
     _effects.AddStep(CreateEffect_Attacked());
     _effects.AddStep(CreateEffect_GettingHit());
@@ -42,6 +43,15 @@ public partial class SonicController
 
         return PipelineStepResult.Break;
       })
+      .Build();
+  }
+
+  private PipelineStep CreateEffect_FallingBlockOnHead()
+  {
+    return PipelineStepBuilder.Create()
+      .WithDisplayName("Falling block on head")
+      .WithCondition(() =>
+        !_isRolling)
       .Build();
   }
 
