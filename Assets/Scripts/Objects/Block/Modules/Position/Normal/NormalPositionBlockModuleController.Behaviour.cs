@@ -21,5 +21,9 @@ public partial class NormalPositionBlockModuleController
     }
 
     transform.position += new Vector3(_context.SpeedX, speedY);
+
+    var pos = transform.position;
+    _context.PositionX = pos.x;
+    _context.PositionY = pos.y;
   }
 }

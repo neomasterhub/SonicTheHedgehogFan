@@ -10,6 +10,8 @@ public abstract class BlockControllerBase
   public float HRadius { get; set; }
   public float VRadius { get; set; }
   public float Speed { get; set; }
+  public float PositionX { get; set; }
+  public float PositionY { get; set; }
   public float SpeedX { get; set; }
   public float SpeedY { get; set; }
   public float LeftPushSpeed { get; set; }

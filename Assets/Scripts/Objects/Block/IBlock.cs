@@ -5,6 +5,8 @@ public interface IBlock
   int Health { get; }
   float HRadius { get; }
   float VRadius { get; }
+  float PositionX { get; }
+  float PositionY { get; }
   float SpeedX { get; }
   float SpeedY { get; }
   float LeftPushSpeed { get; }
