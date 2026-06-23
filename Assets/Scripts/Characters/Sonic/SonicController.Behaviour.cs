@@ -1,4 +1,5 @@
 using UnityEngine;
+using static SonicConsts.Sizes;
 
 /// <summary>
 /// Behaviour.
@@ -59,6 +60,8 @@ public partial class SonicController
   public bool IsRolling => _isRolling;
   public bool IsStoppedByCeiling { set => _isStoppedByCeiling = value; }
   public ReboundSignal ReboundSignal { set => _reboundSignal = value; }
+  public float HRadius => _sizeMode == SonicSizeMode.Big ? Big.HRadius : Small.HRadius;
+  public float VRadius => _sizeMode == SonicSizeMode.Big ? Big.VRadius : Small.VRadius;
   public float GroundSpeed => _speedSystem.GroundSpeed;
 
   public bool DebugMode
