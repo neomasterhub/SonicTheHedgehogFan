@@ -11,12 +11,17 @@ public partial class GroundSpeedBlockModuleController
   {
     _gravitySpeedSpx = GravitySpeedSpx;
     _maxFallSpeedPx = MaxFallSpeedPx;
+    _minPushUpSpeedPx = MinPushUpSpeedPx;
   }
 
   public override void Initialize(BlockControllerBase context)
   {
     base.Initialize(context);
+
     _gravitySpeed = _gravitySpeedSpx / SpxPerUnit;
     _maxFallSpeed = _maxFallSpeedPx / PxPerUnit;
+    _minPushUpSpeed = _minPushUpSpeedPx / PxPerUnit;
+
+    _player = _context.Player;
   }
 }

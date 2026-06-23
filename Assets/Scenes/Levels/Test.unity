@@ -2448,15 +2448,15 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.021875001
-    y: 0.56
-    width: 0.5
-    height: 0.5
+    x: 0
+    y: 0
+    width: 1
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 2.8
+  orthographic size: 3.75
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3509,7 +3509,7 @@ Transform:
   m_GameObject: {fileID: 1595010445}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.84, y: 11.7, z: 0}
+  m_LocalPosition: {x: 10.6, y: 11.7, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3554,8 +3554,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0769f6bfe036f34fae1e0d28659cc8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GroundSpeedBlockModuleController
+  _fallAfterPushedUp: 1
   _gravitySpeedSpx: 56
   _maxFallSpeedPx: 16
+  _minPushUpSpeedPx: 2
 --- !u!114 &1595010453
 MonoBehaviour:
   m_ObjectHideFlags: 0
