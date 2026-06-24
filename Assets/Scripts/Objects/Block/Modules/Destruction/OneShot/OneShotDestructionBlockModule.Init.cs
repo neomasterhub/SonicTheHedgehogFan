@@ -22,5 +22,9 @@ public partial class OneShotDestructionBlockModule
 
     _player = context.Player;
     _playerCollider = _player.Collider;
+
+    var size = _collider.bounds.size;
+    _context.HRadius = size.x / 2;
+    _context.VRadius = size.y / 2;
   }
 }

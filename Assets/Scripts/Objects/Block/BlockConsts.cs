@@ -5,4 +5,5 @@ public static class BlockConsts
   public const float MinAttackPlayerGroundSpeedPx = 1;
   public const float MinAttackPlayerAirSpeedXPx = 0;
   public const float MinAttackPlayerAirSpeedYPx = 1;
+  public const float MinPushUpSpeedPx = 2;
 }

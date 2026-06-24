@@ -170,10 +170,11 @@ public class SonicSpeedSystem : SpeedSystemBase
 
   private void SetSpeed_Airborne_PreventCeilingOvershoot()
   {
-    if (_context.CeilingAngleDeg.HasValue
+    if (_context.IsStoppedByCeiling
+      || (_context.CeilingAngleDeg.HasValue
       && _context.CeilingAngleDeg.Value != 0
       && SpeedY > 0
-      && (_context.DistanceToLeftWall.HasValue || _context.DistanceToRightWall.HasValue))
+      && (_context.DistanceToLeftWall.HasValue || _context.DistanceToRightWall.HasValue)))
     {
       SpeedY = 0;
     }

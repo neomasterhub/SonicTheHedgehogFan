@@ -1,8 +1,7 @@
 public interface IBlockContext : IBlock
 {
+  bool IsPushedUpIntersecting { get; set; }
   float Speed { get; set; }
-  float SpeedX { get; set; }
-  float SpeedY { get; set; }
   IBlockPlayer Player { get; }
   GroundDetectionResult? Ground { get; set; }
 }

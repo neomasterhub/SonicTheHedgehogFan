@@ -15,7 +15,8 @@ public partial class OneShotDestructionBlockModule
       .WithCondition(() =>
         _playerIsAttacking
         && _playerIsIntersecting
-        && !_context.IsHurt)
+        && !_context.IsHurt
+        && !_context.IsPushedUpIntersecting)
       .WithAction(() =>
       {
         _context.IsHit = true;

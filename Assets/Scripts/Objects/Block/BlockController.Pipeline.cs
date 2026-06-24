@@ -29,6 +29,10 @@ public partial class BlockController
       && _player.IsPushing)
     {
       transform.position += new Vector3(_player.SpeedX, 0);
+
+      var pos = transform.position;
+      PositionX = pos.x;
+      PositionY = pos.y;
     }
   }
 
