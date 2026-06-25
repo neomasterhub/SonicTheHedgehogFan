@@ -40,7 +40,11 @@ public partial class BlockController
   {
     for (var i = 0; i < _modules.Length; i++)
     {
-      _modules[i].Apply();
+      var module = _modules[i];
+      if (module.enabled)
+      {
+        _modules[i].Apply();
+      }
     }
   }
 }
