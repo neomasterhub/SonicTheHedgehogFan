@@ -16,7 +16,7 @@ public partial class OneShotDestructionBlockModule
   private void SetPlayerAttacking()
   {
     _playerIsAttacking = _player.IsRolling
-      && _player.ContactBlock == null;
+      && _player.ContactBlock != _context;
   }
 
   private void SetLayer()
