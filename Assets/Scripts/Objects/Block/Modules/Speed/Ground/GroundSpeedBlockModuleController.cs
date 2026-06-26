@@ -10,6 +10,7 @@ public partial class GroundSpeedBlockModuleController
   private float _gravitySpeed;
   private float _maxFallSpeed;
   private float _minPushUpSpeed;
+  private float _maxPushUpSpeed;
   private IBlockPlayer _player;
 
   [SerializeField]
@@ -20,6 +21,8 @@ public partial class GroundSpeedBlockModuleController
   private float _maxFallSpeedPx;
   [SerializeField]
   private float _minPushUpSpeedPx;
+  [SerializeField]
+  private float _maxPushUpSpeedPx;
   [SerializeField]
   private float _hitboxPadding;
 }

@@ -3560,7 +3560,8 @@ MonoBehaviour:
   _fallAfterPushedUp: 1
   _gravitySpeedSpx: 56
   _maxFallSpeedPx: 16
-  _minPushUpSpeedPx: 2
+  _minPushUpSpeedPx: 1
+  _maxPushUpSpeedPx: 1
   _hitboxPadding: 0.07
 --- !u!114 &1595010453
 MonoBehaviour:
