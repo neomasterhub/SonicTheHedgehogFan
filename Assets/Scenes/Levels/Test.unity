@@ -2448,15 +2448,15 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.083333336
-    y: 0.15
-    width: 0.5
-    height: 0.5
+    x: 0
+    y: 0
+    width: 1
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 2.8
+  orthographic size: 3.75
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3605,7 +3605,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1595010445}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 661d67d9bc8819c488b9f7c0ea910712, type: 3}
+  m_Script: {fileID: 11500000, guid: 0109db2e7fbfad54282d318b1822fa2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonitorBlockModuleController
 --- !u!1 &1814098413
