@@ -46,7 +46,7 @@ public partial class GroundSpeedBlockModuleController
 
   private void SetSpeed_Airborne()
   {
-    if (_fallAfterPushedUp && !_isPushedUp)
+    if (_context.FallAfterPushedUp && !_isPushedUp)
     {
       return;
     }

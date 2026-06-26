@@ -8,6 +8,7 @@ public abstract class BlockControllerBase
   public bool IsHurt { get; set; }
   public bool IsDestroyed { get; set; }
   public bool IsPushedUpIntersecting { get; set; }
+  public bool FallAfterPushedUp { get; set; }
   public int Health { get; set; }
   public float HRadius { get; set; }
   public float VRadius { get; set; }

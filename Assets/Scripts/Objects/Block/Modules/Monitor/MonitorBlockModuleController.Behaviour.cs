@@ -28,6 +28,8 @@ public partial class MonitorBlockModuleController
     {
       DisableOtherModules();
 
+      _context.FallAfterPushedUp = false;
+
       _timerSystem.StartIfNotRunning(_screenActiveTimer);
       _animator.SetBool(AnimatorParameters.Destroyed, true);
       _screenAnimator.SetBool(AnimatorParameters.Destroyed, true);

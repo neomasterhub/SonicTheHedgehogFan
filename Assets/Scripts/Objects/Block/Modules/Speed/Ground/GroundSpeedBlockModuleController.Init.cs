@@ -19,6 +19,8 @@ public partial class GroundSpeedBlockModuleController
   {
     base.Initialize(context);
 
+    _context.FallAfterPushedUp = _fallAfterPushedUp;
+
     _gravitySpeed = _gravitySpeedSpx / SpxPerUnit;
     _maxFallSpeed = _maxFallSpeedPx / PxPerUnit;
     _minPushUpSpeed = _minPushUpSpeedPx / PxPerUnit;
