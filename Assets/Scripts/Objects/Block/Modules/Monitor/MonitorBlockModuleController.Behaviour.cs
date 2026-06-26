@@ -1,3 +1,4 @@
+using UnityEngine;
 using AnimatorParameters = SharedConsts.Animator.Parameters;
 
 /// <summary>
@@ -12,10 +13,15 @@ public partial class MonitorBlockModuleController
       return;
     }
 
-    if (_sensorModuleEnabledTimer.IsCompleted)
+    _timerSystem.Update(Time.fixedDeltaTime);
+
+    if (_movementModulesDisabled
+      && _sensorModuleEnabledTimer.IsCompleted)
     {
-      _sensorModule.enabled = false;
+      enabled = false;
       _core.enabled = false;
+
+      return;
     }
 
     if (!_otherModulesDisabled)
