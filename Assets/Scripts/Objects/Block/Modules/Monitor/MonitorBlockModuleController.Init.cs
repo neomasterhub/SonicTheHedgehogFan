@@ -1,4 +1,5 @@
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -39,6 +40,9 @@ public partial class MonitorBlockModuleController
     var screen = transform.Find("Screen");
     _screenObj = screen.gameObject;
     _screenAnimator = screen.GetComponent<Animator>();
+
+    _destroyedAudioSource = this.AddComponent<AudioSource>();
+    _destroyedAudioSource.clip = _destroyedClip;
   }
 
   private void InitializeTimers()

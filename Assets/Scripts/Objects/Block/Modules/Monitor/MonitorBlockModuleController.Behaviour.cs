@@ -30,9 +30,12 @@ public partial class MonitorBlockModuleController
 
       _context.FallAfterPushedUp = false;
 
-      _timerSystem.StartIfNotRunning(_screenActiveTimer);
       _animator.SetBool(AnimatorParameters.Destroyed, true);
       _screenAnimator.SetBool(AnimatorParameters.Destroyed, true);
+
+      _destroyedAudioSource.Play();
+
+      _timerSystem.StartIfNotRunning(_screenActiveTimer);
     }
 
     if (!_movementModulesDisabled

@@ -28,4 +28,10 @@ public partial class MonitorBlockModuleController
 
   private Timer _screenActiveTimer;
   private Timer _sensorModuleEnabledTimer;
+
+  private AudioSource _destroyedAudioSource;
+
+  [SerializeField]
+  [InspectorLabel("Destroyed")]
+  private AudioClip _destroyedClip;
 }

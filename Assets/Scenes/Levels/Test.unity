@@ -2448,10 +2448,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.083333336
-    y: 0.15
-    width: 0.5
-    height: 0.5
+    x: 0
+    y: 0
+    width: 1
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 34
@@ -3375,6 +3375,7 @@ GameObject:
   - component: {fileID: 1595010452}
   - component: {fileID: 1595010451}
   - component: {fileID: 1595010453}
+  - component: {fileID: 1595010456}
   - component: {fileID: 1595010455}
   m_Layer: 6
   m_Name: Monitor
@@ -3609,6 +3610,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0109db2e7fbfad54282d318b1822fa2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonitorBlockModuleController
+  _destroyedClip: {fileID: 8300000, guid: cdee9d3a3b371c64db527b661d90a514, type: 3}
+--- !u!114 &1595010456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595010445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1147278dc5d45df4a94d9c7e5b35bb90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RingContainerBlockModuleController
+  _ringCount: 10
 --- !u!1 &1814098413
 GameObject:
   m_ObjectHideFlags: 0
