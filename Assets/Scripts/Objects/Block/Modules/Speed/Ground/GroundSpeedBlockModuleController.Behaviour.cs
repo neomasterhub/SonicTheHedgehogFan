@@ -18,7 +18,8 @@ public partial class GroundSpeedBlockModuleController
       && !_player.IsGrounded
       && _player.SpeedY > 0
       && _player.SpeedY > _context.SpeedY
-      && _player.PositionY > _context.PositionY - _player.VRadius - _context.VRadius - _hitboxPadding
+      && _player.PositionY < _context.PositionY - _player.VRadius - _context.VRadius + _hitboxVRadius
+      && _player.PositionY > _context.PositionY - _player.VRadius - _context.VRadius - _hitboxVRadius
       && Mathf.Abs(_player.PositionX - _context.PositionX) < _context.HRadius)
     {
       SetSpeed_PushedUp();
@@ -79,8 +80,10 @@ public partial class GroundSpeedBlockModuleController
   {
     if (_context.IsPushedUpIntersecting)
     {
-      _context.IsPushedUpIntersecting = !_player.IsRolling
-        || _player.PositionY > _context.PositionY - _player.VRadius - _context.VRadius - _hitboxPadding
+      _context.IsPushedUpIntersecting = _context.IsDestroyed
+        || !_player.IsRolling
+        || _player.PositionY > _context.PositionY - _player.VRadius - _context.VRadius + _hitboxVRadius
+        || _player.PositionY < _context.PositionY - _player.VRadius - _context.VRadius - _hitboxVRadius
         || Mathf.Abs(_player.PositionX - _context.PositionX) > _context.HRadius;
     }
   }

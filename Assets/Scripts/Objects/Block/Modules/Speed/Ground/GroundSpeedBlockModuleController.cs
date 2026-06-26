@@ -24,5 +24,5 @@ public partial class GroundSpeedBlockModuleController
   [SerializeField]
   private float _maxPushUpSpeedPx;
   [SerializeField]
-  private float _hitboxPadding;
+  private float _hitboxVRadius;
 }
