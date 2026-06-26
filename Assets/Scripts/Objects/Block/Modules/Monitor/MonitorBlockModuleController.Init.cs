@@ -23,6 +23,7 @@ public partial class MonitorBlockModuleController
   {
     _animator = GetComponent<Animator>();
 
+    _core = GetComponent<BlockModuleControllerBase>();
     _positionModule = GetComponent<NormalPositionBlockModuleController>();
     _sensorModule = GetComponent<ABSensorBlockModuleController>();
     _speedModule = GetComponent<GroundSpeedBlockModuleController>();
@@ -44,5 +45,8 @@ public partial class MonitorBlockModuleController
   {
     _screenActiveTimer = new Timer(1)
       .WhenCompleted(() => _screenObj.SetActive(false));
+
+    _sensorModuleEnabledTimer = new Timer(1)
+      .WhenCompleted(() => _sensorModule.enabled = false);
   }
 }
