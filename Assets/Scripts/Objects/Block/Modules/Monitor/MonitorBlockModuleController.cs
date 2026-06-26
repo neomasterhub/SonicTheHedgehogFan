@@ -10,6 +10,8 @@ using UnityEngine;
 public partial class MonitorBlockModuleController
   : BlockModuleControllerBase
 {
+  private readonly TimerSystem _timerSystem;
+
   private Animator _animator;
 
   private GameObject _screenObj;
@@ -19,4 +21,6 @@ public partial class MonitorBlockModuleController
   private GroundSpeedBlockModuleController _speedModule;
   private NormalPositionBlockModuleController _positionModule;
   private BlockModuleControllerBase[] _otherModules;
+
+  private Timer _screenActiveTimer;
 }

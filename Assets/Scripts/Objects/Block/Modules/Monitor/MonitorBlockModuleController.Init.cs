@@ -6,11 +6,17 @@ using UnityEngine;
 /// </summary>
 public partial class MonitorBlockModuleController
 {
+  public MonitorBlockModuleController()
+    : base()
+  {
+    _timerSystem = new();
+  }
+
   public override void Initialize(BlockControllerBase context)
   {
     base.Initialize(context);
-
     InitializeComponents();
+    InitializeTimers();
   }
 
   private void InitializeComponents()
@@ -32,5 +38,11 @@ public partial class MonitorBlockModuleController
     var screen = transform.Find("Screen");
     _screenObj = screen.gameObject;
     _screenAnimator = screen.GetComponent<Animator>();
+  }
+
+  private void InitializeTimers()
+  {
+    _screenActiveTimer = new Timer(1)
+      .WhenCompleted(() => _screenObj.SetActive(false));
   }
 }
