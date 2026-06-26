@@ -4,7 +4,7 @@ using UnityEngine;
 /// Data.
 /// </summary>
 [RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(BlockModuleControllerBase))]
+[RequireComponent(typeof(BlockControllerBase))]
 [RequireComponent(typeof(ABSensorBlockModuleController))]
 [RequireComponent(typeof(GroundSpeedBlockModuleController))]
 [RequireComponent(typeof(NormalPositionBlockModuleController))]
@@ -20,7 +20,7 @@ public partial class MonitorBlockModuleController
   private GameObject _screenObj;
   private Animator _screenAnimator;
 
-  private BlockModuleControllerBase _core;
+  private BlockControllerBase _core;
   private ABSensorBlockModuleController _sensorModule;
   private GroundSpeedBlockModuleController _speedModule;
   private NormalPositionBlockModuleController _positionModule;

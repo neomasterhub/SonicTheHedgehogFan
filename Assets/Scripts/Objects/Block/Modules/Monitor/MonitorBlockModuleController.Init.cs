@@ -23,7 +23,7 @@ public partial class MonitorBlockModuleController
   {
     _animator = GetComponent<Animator>();
 
-    _core = GetComponent<BlockModuleControllerBase>();
+    _core = GetComponent<BlockControllerBase>();
     _positionModule = GetComponent<NormalPositionBlockModuleController>();
     _sensorModule = GetComponent<ABSensorBlockModuleController>();
     _speedModule = GetComponent<GroundSpeedBlockModuleController>();
