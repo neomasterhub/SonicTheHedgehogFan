@@ -90,7 +90,6 @@ public partial class SonicController
     }
     else
     {
-      ContactBlock = null;
       _contactPlatform = null;
 
       AnalyzeEnvironment_Airborne();
@@ -266,6 +265,7 @@ public partial class SonicController
     _takeLeftHit = false;
     _takeRightHit = false;
     IsHit = false;
+    ContactBlock = null;
     ContactEnemy = null;
   }
 

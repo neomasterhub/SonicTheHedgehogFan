@@ -6,12 +6,11 @@ using UnityEngine;
 public partial class GroundSpeedBlockModuleController
   : BlockModuleControllerBase
 {
-  private const float _clearance = 0.01f;
-
   private bool _isPushedUp;
   private float _gravitySpeed;
   private float _maxFallSpeed;
   private float _minPushUpSpeed;
+  private float _maxPushUpSpeed;
   private IBlockPlayer _player;
 
   [SerializeField]
@@ -22,4 +21,8 @@ public partial class GroundSpeedBlockModuleController
   private float _maxFallSpeedPx;
   [SerializeField]
   private float _minPushUpSpeedPx;
+  [SerializeField]
+  private float _maxPushUpSpeedPx;
+  [SerializeField]
+  private float _hitboxVRadius;
 }

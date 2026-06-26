@@ -21,11 +21,12 @@ public partial class OneShotDestructionBlockModule
       {
         _context.IsHit = true;
         _context.IsHurt = true;
+        _context.IsDestroyed = true;
         _context.Health = -1;
 
         _player.ReboundSignal = new(ReboundSourceType.Block, _context.Health, _context.SpeedX, _context.SpeedY);
 
-        gameObject.SetActive(false);
+        enabled = false;
 
         return PipelineStepResult.Continue;
       })

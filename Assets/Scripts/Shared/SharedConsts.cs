@@ -12,6 +12,7 @@ public static class SharedConsts
       public const string Collected = nameof(Collected);
       public const string CurlingUp = nameof(CurlingUp);
       public const string Dead = nameof(Dead);
+      public const string Destroyed = nameof(Destroyed);
       public const string Dying = nameof(Dying);
       public const string Hit = nameof(Hit);
       public const string Hurt = nameof(Hurt);
