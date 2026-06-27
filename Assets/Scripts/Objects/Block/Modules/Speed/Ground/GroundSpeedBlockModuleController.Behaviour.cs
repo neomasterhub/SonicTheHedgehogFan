@@ -42,7 +42,7 @@ public partial class GroundSpeedBlockModuleController
     _player.IsStoppedByCeiling = true;
     _context.IsPushedUpIntersecting = true;
 
-    _context.SpeedY = Mathf.Min(Mathf.Max(_player.SpeedY, _minPushUpSpeed), _maxPushUpSpeed);
+    _context.SpeedY = _pushUpSpeed;
   }
 
   private void SetSpeed_Airborne()
