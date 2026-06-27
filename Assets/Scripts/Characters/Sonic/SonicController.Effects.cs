@@ -15,6 +15,7 @@ public partial class SonicController
     _effects.AddStep(CreateEffect_SetHit());
     _effects.AddStep(CreateEffect_Attacked());
     _effects.AddStep(CreateEffect_GettingHit());
+    _effects.AddStep(CreateEffect_LoseShield());
     _effects.AddStep(CreateEffect_LoseRings());
     _effects.AddStep(CreateEffect_Dying());
     _effects.AddStep(CreateEffect_HurtBlinking_Enter());
@@ -136,6 +137,23 @@ public partial class SonicController
         AnalyzeEnvironment_Airborne();
 
         return PipelineStepResult.Continue;
+      })
+      .Build();
+  }
+
+  private PipelineStep CreateEffect_LoseShield()
+  {
+    return PipelineStepBuilder.Create()
+      .WithDisplayName("Lose shield")
+      .WithCondition(() =>
+        IsHit
+        && _hasShield)
+      .WithAction(() =>
+      {
+        _hasShield = false;
+        _shield.SetActive(false);
+
+        return PipelineStepResult.Break;
       })
       .Build();
   }

@@ -59,6 +59,15 @@ public partial class SonicController
   public bool IsPushing => _speedSystem.IsPushing;
   public bool IsRolling => _isRolling;
   public bool IsStoppedByCeiling { set => _isStoppedByCeiling = value; }
+  public bool ShieldReceived
+  {
+    set
+    {
+      _hasShield = true;
+      _shield.SetActive(true);
+    }
+  }
+
   public ReboundSignal ReboundSignal { set => _reboundSignal = value; }
   public float HRadius => _sizeMode == SonicSizeMode.Big ? Big.HRadius : Small.HRadius;
   public float VRadius => _sizeMode == SonicSizeMode.Big ? Big.VRadius : Small.VRadius;

@@ -32,6 +32,7 @@ public partial class SonicController
     _configs.Update(_physicsMode);
     _timerSystem.Update(Time.deltaTime);
 
+    _prevHasShield = _hasShield;
     _prevIsGrounded = _isGrounded;
     _prevIsRolling = _isRolling;
     _prevPhysicsMode = _physicsMode;
@@ -61,6 +62,11 @@ public partial class SonicController
       else if (_inputSystem.CheckLastPressed(TakeRightHit))
       {
         _takeRightHit = true;
+      }
+      else if (_inputSystem.CheckLastPressed(ToggleShield))
+      {
+        _hasShield = !_hasShield;
+        _shield.SetActive(_hasShield);
       }
     }
   }

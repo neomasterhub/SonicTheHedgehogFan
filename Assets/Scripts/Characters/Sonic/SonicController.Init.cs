@@ -58,6 +58,8 @@ public partial class SonicController
     _diagnosticsPanel = _canvas.transform.Find("Sonic Diagnostics Panel").gameObject;
     _diagnosticsTextMesh = _diagnosticsPanel.transform.Find("Text").GetComponent<TextMeshProUGUI>();
 
+    _shield = transform.Find("Shield").gameObject;
+
     InitializeGroundNormal();
   }
 
@@ -131,6 +133,12 @@ public partial class SonicController
     var death = this.AddComponent<AudioSource>();
     death.clip = _deathClip;
 
+    var shield = this.AddComponent<AudioSource>();
+    shield.clip = _shieldClip;
+
+    var lostShield = this.AddComponent<AudioSource>();
+    lostShield.clip = _lostShieldClip;
+
     _sounds = new Sound[]
     {
       new(jump,
@@ -154,6 +162,12 @@ public partial class SonicController
 
       new(death,
         () => IsHit && _isDying),
+
+      new(shield,
+        () => _hasShield && !_prevHasShield),
+
+      new(lostShield,
+        () => !_hasShield && _prevHasShield),
     };
   }
 
