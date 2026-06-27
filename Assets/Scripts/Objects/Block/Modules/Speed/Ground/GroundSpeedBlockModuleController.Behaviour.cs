@@ -8,19 +8,50 @@ public partial class GroundSpeedBlockModuleController
 {
   public override void Apply()
   {
+    SetPushedUpIntersecting();
     SetSpeed();
-    ResetPushedUpIntersecting();
+  }
+
+  private void SetPushedUpIntersecting()
+  {
+    _prevIsPushedUpIntersecting = _context.IsPushedUpIntersecting;
+
+    var yp = _player.PositionY + _player.VRadius;
+    var y0 = _context.PositionY - _context.VRadius;
+    var y1 = y0 + _hitboxVRadius;
+    var y2 = y0 - _hitboxVRadius;
+
+    if (_context.IsPushedUpIntersecting)
+    {
+      if (_context.IsDestroyed
+        || !_player.IsRolling
+        || _player.IsGrounded
+        || yp > y1
+        || yp < y2
+        || Mathf.Abs(_player.PositionX - _context.PositionX) > _context.HRadius)
+      {
+        _context.IsPushedUpIntersecting = false;
+      }
+    }
+    else
+    {
+      if (_player.IsRolling
+        && !_player.IsGrounded
+        && _player.SpeedY > 0
+        && _player.SpeedY > _context.SpeedY
+        && yp < y1
+        && yp > y2
+        && Mathf.Abs(_player.PositionX - _context.PositionX) < _context.HRadius)
+      {
+        _context.IsPushedUpIntersecting = true;
+      }
+    }
   }
 
   private void SetSpeed()
   {
-    if (_player.IsRolling
-      && !_player.IsGrounded
-      && _player.SpeedY > 0
-      && _player.SpeedY > _context.SpeedY
-      && _player.PositionY < _context.PositionY - _player.VRadius - _context.VRadius + _hitboxVRadius
-      && _player.PositionY > _context.PositionY - _player.VRadius - _context.VRadius - _hitboxVRadius
-      && Mathf.Abs(_player.PositionX - _context.PositionX) < _context.HRadius)
+    if (_context.IsPushedUpIntersecting
+      && !_prevIsPushedUpIntersecting)
     {
       SetSpeed_PushedUp();
       return;
@@ -40,8 +71,6 @@ public partial class GroundSpeedBlockModuleController
   {
     _isPushedUp = true;
     _player.IsStoppedByCeiling = true;
-    _context.IsPushedUpIntersecting = true;
-
     _context.SpeedY = _pushUpSpeed;
   }
 
@@ -74,17 +103,5 @@ public partial class GroundSpeedBlockModuleController
     var angleRad = _context.Ground.Value.AngleRad;
     _context.SpeedX = _context.Speed * MathF.Cos(angleRad);
     _context.SpeedY = _context.Speed * MathF.Sin(angleRad);
-  }
-
-  private void ResetPushedUpIntersecting()
-  {
-    if (_context.IsPushedUpIntersecting)
-    {
-      _context.IsPushedUpIntersecting = _context.IsDestroyed
-        || !_player.IsRolling
-        || _player.PositionY > _context.PositionY - _player.VRadius - _context.VRadius + _hitboxVRadius
-        || _player.PositionY < _context.PositionY - _player.VRadius - _context.VRadius - _hitboxVRadius
-        || Mathf.Abs(_player.PositionX - _context.PositionX) > _context.HRadius;
-    }
   }
 }

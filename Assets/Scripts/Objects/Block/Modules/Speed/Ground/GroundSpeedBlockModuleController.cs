@@ -7,6 +7,7 @@ public partial class GroundSpeedBlockModuleController
   : BlockModuleControllerBase
 {
   private bool _isPushedUp;
+  private bool _prevIsPushedUpIntersecting;
   private float _gravitySpeed;
   private float _maxFallSpeed;
   private float _pushUpSpeed;
