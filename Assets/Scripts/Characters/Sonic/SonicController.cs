@@ -55,6 +55,8 @@ public partial class SonicController : MonoBehaviour
   private bool _takeLeftHit;
   private bool _takeRightHit;
   private bool _horizontalDirection;
+  private bool _hasShield;
+  private bool _prevHasShield;
   private char _triggeredGroundSensorId;
   private float _slopeFactor;
   private float _absGroundSpeed;
@@ -65,6 +67,7 @@ public partial class SonicController : MonoBehaviour
   private CeilingDetectionResult? _ceilingDetectionResult;
   private GameObject _diagnosticsPanel;
   private GameObject _effectHistoryPanel;
+  private GameObject _shield;
   private GroundDetectionResult _lastGroundDetectionResult;
   private IPlatform _contactPlatform;
   private LineRenderer _groundNormal;
@@ -112,6 +115,9 @@ public partial class SonicController : MonoBehaviour
   [SerializeField]
   [InspectorLabel("Death")]
   private AudioClip _deathClip;
+  [SerializeField]
+  [InspectorLabel("Shield")]
+  private AudioClip _shieldClip;
 
   [Header("Prefabs")]
   [SerializeField]
