@@ -2759,7 +2759,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &363736806
 Transform:
   m_ObjectHideFlags: 0
@@ -3245,6 +3245,7 @@ MonoBehaviour:
   _lostRingsClip: {fileID: 8300000, guid: 508dd4a324f607645a681f7a27e45103, type: 3}
   _deathClip: {fileID: 8300000, guid: e329cfafc4e79674581928062f598794, type: 3}
   _shieldClip: {fileID: 8300000, guid: b6e65c72ad2f1e544b0e30df6bd58819, type: 3}
+  _lostShieldClip: {fileID: 8300000, guid: e329cfafc4e79674581928062f598794, type: 3}
   _ringPrefab: {fileID: 5601778466645593367, guid: e75974286517f944dac2e72436689482, type: 3}
 --- !u!61 &710850506
 BoxCollider2D:

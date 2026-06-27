@@ -118,6 +118,9 @@ public partial class SonicController : MonoBehaviour
   [SerializeField]
   [InspectorLabel("Shield")]
   private AudioClip _shieldClip;
+  [SerializeField]
+  [InspectorLabel("Lost shield")]
+  private AudioClip _lostShieldClip;
 
   [Header("Prefabs")]
   [SerializeField]

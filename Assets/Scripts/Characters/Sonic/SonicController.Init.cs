@@ -136,6 +136,9 @@ public partial class SonicController
     var shield = this.AddComponent<AudioSource>();
     shield.clip = _shieldClip;
 
+    var lostShield = this.AddComponent<AudioSource>();
+    lostShield.clip = _lostShieldClip;
+
     _sounds = new Sound[]
     {
       new(jump,
@@ -162,6 +165,9 @@ public partial class SonicController
 
       new(shield,
         () => _hasShield && !_prevHasShield),
+
+      new(lostShield,
+        () => !_hasShield && _prevHasShield),
     };
   }
 
