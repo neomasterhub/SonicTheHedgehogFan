@@ -7,10 +7,10 @@ public partial class GroundSpeedBlockModuleController
   : BlockModuleControllerBase
 {
   private bool _isPushedUp;
+  private bool _prevIsPushedUpIntersecting;
   private float _gravitySpeed;
   private float _maxFallSpeed;
-  private float _minPushUpSpeed;
-  private float _maxPushUpSpeed;
+  private float _pushUpSpeed;
   private IBlockPlayer _player;
 
   [SerializeField]
@@ -20,9 +20,7 @@ public partial class GroundSpeedBlockModuleController
   [SerializeField]
   private float _maxFallSpeedPx;
   [SerializeField]
-  private float _minPushUpSpeedPx;
-  [SerializeField]
-  private float _maxPushUpSpeedPx;
+  private float _pushUpSpeedPx;
   [SerializeField]
   private float _hitboxVRadius;
 }
