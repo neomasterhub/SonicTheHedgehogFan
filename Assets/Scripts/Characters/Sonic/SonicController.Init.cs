@@ -175,6 +175,9 @@ public partial class SonicController
 
   private void InitializeTimers()
   {
+    _dpadLockTimer = new Timer(DpadLockDuration)
+      .WhenCompleted(() => _postWallDetachDpadLock = false);
+
     _dyingTimer = new Timer(DyingDuration)
       .WhenCompleted(() =>
       {
@@ -182,9 +185,6 @@ public partial class SonicController
         _isDead = true;
         gameObject.SetActive(false);
       });
-
-    _dpadLockTimer = new Timer(DpadLockDuration)
-      .WhenCompleted(() => _postWallDetachDpadLock = false);
 
     _postHurtInvincibleTimer = new Timer(PostHurtInvincibleDuration)
       .WhenCompleted(() => IsInvincible = false);
