@@ -141,9 +141,25 @@ public partial class SonicController
 
     _sounds = new Sound[]
     {
+      new(_ringAudioSource,
+        () => !_isGettingRingFromMonitor && _ringCollected,
+        () => !_isGettingRingFromMonitor && _ringCollected && _ringAudioSource.isPlaying),
+
+      new(_shieldAudioSource,
+        () => !_isGettingShieldFromMonitor && _hasShield && !_prevHasShield),
+
+      new(death,
+        () => IsHit && _isDying),
+
       new(jump,
         () => _isGrounded && _isJumping,
         () => !_isJumping && !jump.isPlaying),
+
+      new(lostRings,
+        () => _ringsLost),
+
+      new(lostShield,
+        () => !_hasShield && _prevHasShield),
 
       new(roll,
         () => _isDownGroundedMoving && !_isJumping && _isRolling && !_prevIsRolling,
@@ -152,22 +168,6 @@ public partial class SonicController
       new(skid,
         () => _speedSystem.IsSkidding && !skid.isPlaying,
         () => !_speedSystem.IsSkidding && !skid.isPlaying),
-
-      new(_ringAudioSource,
-        () => !_isGettingRingFromMonitor && _ringCollected,
-        () => !_isGettingRingFromMonitor && _ringCollected && _ringAudioSource.isPlaying),
-
-      new(lostRings,
-        () => _ringsLost),
-
-      new(death,
-        () => IsHit && _isDying),
-
-      new(_shieldAudioSource,
-        () => !_isGettingShieldFromMonitor && _hasShield && !_prevHasShield),
-
-      new(lostShield,
-        () => !_hasShield && _prevHasShield),
     };
   }
 
