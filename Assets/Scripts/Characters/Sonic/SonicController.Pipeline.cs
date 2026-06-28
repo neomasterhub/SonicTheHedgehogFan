@@ -70,6 +70,13 @@ public partial class SonicController
       }
     }
 
+    if (_inputSystem.CheckLastPressed(ToggleInvincibilityStars))
+    {
+      _hasInvincibilityStars = !_hasInvincibilityStars;
+
+      return;
+    }
+
     if (_inputSystem.CheckLastPressed(ToggleShield))
     {
       _hasShield = !_hasShield;
