@@ -92,6 +92,11 @@ public static class SharedConsts
     public static readonly PlayerInput[] ToggleShield = new[] { B, B, Y };
   }
 
+  public static class Sounds
+  {
+    public const float MonitorEffectDelay = 0.4f;
+  }
+
   public static class Tags
   {
     public const string Player = nameof(Player);
