@@ -7,6 +7,7 @@ public partial class RingContainerBlockModuleController
   {
     if (_context.IsDestroyed)
     {
+      _context.Player.RingReceived = true;
       _ringCollector.Rings.Add(_ringCount);
       enabled = false;
     }

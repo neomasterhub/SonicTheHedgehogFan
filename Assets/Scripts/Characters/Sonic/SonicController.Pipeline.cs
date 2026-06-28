@@ -265,6 +265,7 @@ public partial class SonicController
 
   private void EndFrame()
   {
+    _isGettingRingFromMonitor = false;
     _isGettingShieldFromMonitor = false;
     _isStoppedByCeiling = false;
     _reboundSignal = null;

@@ -124,8 +124,8 @@ public partial class SonicController
     var skid = this.AddComponent<AudioSource>();
     skid.clip = _skidAudioClip;
 
-    var ring = this.AddComponent<AudioSource>();
-    ring.clip = _ringAudioClip;
+    _ringAudioSource = this.AddComponent<AudioSource>();
+    _ringAudioSource.clip = _ringAudioClip;
 
     var lostRings = this.AddComponent<AudioSource>();
     lostRings.clip = _lostRingsClip;
@@ -153,9 +153,9 @@ public partial class SonicController
         () => _speedSystem.IsSkidding && !skid.isPlaying,
         () => !_speedSystem.IsSkidding && !skid.isPlaying),
 
-      new(ring,
-        () => _ringCollected,
-        () => _ringCollected && ring.isPlaying),
+      new(_ringAudioSource,
+        () => !_isGettingRingFromMonitor && _ringCollected,
+        () => !_isGettingRingFromMonitor && _ringCollected && _ringAudioSource.isPlaying),
 
       new(lostRings,
         () => _ringsLost),

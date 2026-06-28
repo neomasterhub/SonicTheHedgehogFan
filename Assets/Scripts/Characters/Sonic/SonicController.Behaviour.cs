@@ -60,6 +60,16 @@ public partial class SonicController
   public bool IsPushing => _speedSystem.IsPushing;
   public bool IsRolling => _isRolling;
   public bool IsStoppedByCeiling { set => _isStoppedByCeiling = value; }
+
+  public bool RingReceived
+  {
+    set
+    {
+      _isGettingRingFromMonitor = true;
+      _ringAudioSource.PlayDelayed(MonitorEffectDelay);
+    }
+  }
+
   public bool ShieldReceived
   {
     set
