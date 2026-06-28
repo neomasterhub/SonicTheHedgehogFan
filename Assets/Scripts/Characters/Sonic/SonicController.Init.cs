@@ -133,8 +133,8 @@ public partial class SonicController
     var death = this.AddComponent<AudioSource>();
     death.clip = _deathClip;
 
-    var shield = this.AddComponent<AudioSource>();
-    shield.clip = _shieldClip;
+    _shieldAudioSource = this.AddComponent<AudioSource>();
+    _shieldAudioSource.clip = _shieldClip;
 
     var lostShield = this.AddComponent<AudioSource>();
     lostShield.clip = _lostShieldClip;
@@ -163,8 +163,8 @@ public partial class SonicController
       new(death,
         () => IsHit && _isDying),
 
-      new(shield,
-        () => _hasShield && !_prevHasShield),
+      new(_shieldAudioSource,
+        () => !_isGettingShieldFromMonitor && _hasShield && !_prevHasShield),
 
       new(lostShield,
         () => !_hasShield && _prevHasShield),

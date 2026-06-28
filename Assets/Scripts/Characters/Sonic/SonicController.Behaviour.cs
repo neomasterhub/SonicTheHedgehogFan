@@ -1,4 +1,5 @@
 using UnityEngine;
+using static SharedConsts.Sounds;
 using static SonicConsts.Sizes;
 
 /// <summary>
@@ -63,8 +64,15 @@ public partial class SonicController
   {
     set
     {
+      if (_hasShield)
+      {
+        return;
+      }
+
       _hasShield = true;
+      _isGettingShieldFromMonitor = true;
       _shield.SetActive(true);
+      _shieldAudioSource.PlayDelayed(MonitorEffectDelay);
     }
   }
 

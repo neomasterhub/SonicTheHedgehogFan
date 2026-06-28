@@ -63,11 +63,12 @@ public partial class SonicController
       {
         _takeRightHit = true;
       }
-      else if (_inputSystem.CheckLastPressed(ToggleShield))
-      {
-        _hasShield = !_hasShield;
-        _shield.SetActive(_hasShield);
-      }
+    }
+
+    if (_inputSystem.CheckLastPressed(ToggleShield))
+    {
+      _hasShield = !_hasShield;
+      _shield.SetActive(_hasShield);
     }
   }
 
@@ -264,6 +265,7 @@ public partial class SonicController
 
   private void EndFrame()
   {
+    _isGettingShieldFromMonitor = false;
     _isStoppedByCeiling = false;
     _reboundSignal = null;
     _ringCollected = false;

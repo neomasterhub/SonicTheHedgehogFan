@@ -57,11 +57,13 @@ public partial class SonicController : MonoBehaviour
   private bool _horizontalDirection;
   private bool _hasShield;
   private bool _prevHasShield;
+  private bool _isGettingShieldFromMonitor;
   private char _triggeredGroundSensorId;
   private float _slopeFactor;
   private float _absGroundSpeed;
   private float? _reboundGroundSpeed;
   private Vector2? _reboundAirSpeed;
+  private AudioSource _shieldAudioSource;
   private Animator _animator;
   private BoxCollider2D _boxCollider;
   private CeilingDetectionResult? _ceilingDetectionResult;
