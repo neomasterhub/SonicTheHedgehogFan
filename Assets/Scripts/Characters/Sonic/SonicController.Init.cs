@@ -128,16 +128,16 @@ public partial class SonicController
     _ringAudioSource.clip = _ringAudioClip;
 
     var lostRings = this.AddComponent<AudioSource>();
-    lostRings.clip = _lostRingsClip;
+    lostRings.clip = _lostRingsAudioClip;
 
     var death = this.AddComponent<AudioSource>();
-    death.clip = _deathClip;
+    death.clip = _deathAudioClip;
 
     _shieldAudioSource = this.AddComponent<AudioSource>();
-    _shieldAudioSource.clip = _shieldClip;
+    _shieldAudioSource.clip = _shieldAudioClip;
 
     var lostShield = this.AddComponent<AudioSource>();
-    lostShield.clip = _lostShieldClip;
+    lostShield.clip = _lostShieldAudioClip;
 
     _sounds = new Sound[]
     {

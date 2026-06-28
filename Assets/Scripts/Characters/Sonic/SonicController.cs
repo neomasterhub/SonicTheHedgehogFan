@@ -103,16 +103,16 @@ public partial class SonicController : MonoBehaviour
   [Header("Audio")]
   [SerializeField]
   [InspectorLabel("Death")]
-  private AudioClip _deathClip;
+  private AudioClip _deathAudioClip;
   [SerializeField]
   [InspectorLabel("Jump")]
   private AudioClip _jumpAudioClip;
   [SerializeField]
   [InspectorLabel("Lost rings")]
-  private AudioClip _lostRingsClip;
+  private AudioClip _lostRingsAudioClip;
   [SerializeField]
   [InspectorLabel("Lost shield")]
-  private AudioClip _lostShieldClip;
+  private AudioClip _lostShieldAudioClip;
   [SerializeField]
   [InspectorLabel("Ring")]
   private AudioClip _ringAudioClip;
@@ -121,7 +121,7 @@ public partial class SonicController : MonoBehaviour
   private AudioClip _rollAudioClip;
   [SerializeField]
   [InspectorLabel("Shield")]
-  private AudioClip _shieldClip;
+  private AudioClip _shieldAudioClip;
   [SerializeField]
   [InspectorLabel("Skid")]
   private AudioClip _skidAudioClip;
