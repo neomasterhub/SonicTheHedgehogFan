@@ -73,6 +73,7 @@ public partial class SonicController
     if (_inputSystem.CheckLastPressed(ToggleInvincibilityStars))
     {
       _hasInvincibilityStars = !_hasInvincibilityStars;
+      _invincibilityStars.SetActive(_hasInvincibilityStars);
 
       return;
     }

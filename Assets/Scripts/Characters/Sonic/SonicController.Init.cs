@@ -58,6 +58,8 @@ public partial class SonicController
     _diagnosticsPanel = _canvas.transform.Find("Sonic Diagnostics Panel").gameObject;
     _diagnosticsTextMesh = _diagnosticsPanel.transform.Find("Text").GetComponent<TextMeshProUGUI>();
 
+    _invincibilityStars = transform.Find("Invincibility Stars").gameObject;
+
     _shield = transform.Find("Shield").gameObject;
 
     InitializeGroundNormal();
