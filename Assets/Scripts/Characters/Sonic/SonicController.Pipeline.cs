@@ -48,7 +48,8 @@ public partial class SonicController
   {
     _inputSystem.Update();
 
-    if (_inputSystem.Pressed == PlayerInput.None)
+    if (_inputSystem.Pressed == PlayerInput.None
+      || _isDying)
     {
       return;
     }
