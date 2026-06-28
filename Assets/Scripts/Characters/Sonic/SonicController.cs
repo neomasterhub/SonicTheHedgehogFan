@@ -60,13 +60,12 @@ public partial class SonicController : MonoBehaviour
   private bool _isGettingRingFromMonitor;
   private bool _isGettingShieldFromMonitor;
   private char _triggeredGroundSensorId;
-  private float _slopeFactor;
   private float _absGroundSpeed;
   private float? _reboundGroundSpeed;
-  private Vector2? _reboundAirSpeed;
+  private float _slopeFactor;
+  private Animator _animator;
   private AudioSource _ringAudioSource;
   private AudioSource _shieldAudioSource;
-  private Animator _animator;
   private BoxCollider2D _boxCollider;
   private CeilingDetectionResult? _ceilingDetectionResult;
   private GameObject _diagnosticsPanel;
@@ -94,6 +93,7 @@ public partial class SonicController : MonoBehaviour
   private Transform _contactGroundTransform;
   private Transform _contactLeftWallTransform;
   private Transform _contactRightWallTransform;
+  private Vector2? _reboundAirSpeed;
   private WallDetectionResult? _leftWallDetectionResult;
   private WallDetectionResult? _rightWallDetectionResult;
 
