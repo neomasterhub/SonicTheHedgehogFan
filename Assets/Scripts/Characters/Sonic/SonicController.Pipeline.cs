@@ -59,10 +59,13 @@ public partial class SonicController
       if (_inputSystem.CheckLastPressed(TakeLeftHit))
       {
         _takeLeftHit = true;
+        return;
       }
-      else if (_inputSystem.CheckLastPressed(TakeRightHit))
+
+      if (_inputSystem.CheckLastPressed(TakeRightHit))
       {
         _takeRightHit = true;
+        return;
       }
     }
 
