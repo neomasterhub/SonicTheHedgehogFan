@@ -89,8 +89,9 @@ public partial class SonicController : MonoBehaviour
   private SpriteRenderer _spriteRenderer;
   private TextMeshProUGUI _diagnosticsTextMesh;
   private TextMeshProUGUI _effectHistoryTextMesh;
-  private Timer _dyingTimer;
   private Timer _dpadLockTimer;
+  private Timer _dyingTimer;
+  private Timer _invincibilityStarsTimer;
   private Timer _postHurtInvincibleTimer;
   private Timer _ringCollectorDisabledTimer;
   private Transform _contactCeilingTransform;

@@ -186,6 +186,13 @@ public partial class SonicController
         gameObject.SetActive(false);
       });
 
+    _invincibilityStarsTimer = new Timer(InvincibilityStarsDuration)
+      .WhenCompleted(() =>
+      {
+        _hasInvincibilityStars = false;
+        _invincibilityStars.SetActive(false);
+      });
+
     _postHurtInvincibleTimer = new Timer(PostHurtInvincibleDuration)
       .WhenCompleted(() => IsInvincible = false);
 
