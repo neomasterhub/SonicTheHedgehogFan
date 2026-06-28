@@ -3306,6 +3306,7 @@ GameObject:
   - component: {fileID: 711904929}
   - component: {fileID: 711904928}
   - component: {fileID: 711904930}
+  - component: {fileID: 711904931}
   m_Layer: 0
   m_Name: 4
   m_TagString: Untagged
@@ -3422,6 +3423,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrailController
   _delayFrameCount: 5
+--- !u!114 &711904931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711904926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: decabefba12cffb459eb5bd8b0148a85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AlphaBlinkerController
+  _alpha: 0
+  _interval: 0.03
 --- !u!1 &874072223
 GameObject:
   m_ObjectHideFlags: 0
@@ -3743,6 +3758,7 @@ GameObject:
   - component: {fileID: 1005176464}
   - component: {fileID: 1005176463}
   - component: {fileID: 1005176465}
+  - component: {fileID: 1005176466}
   m_Layer: 0
   m_Name: 3
   m_TagString: Untagged
@@ -3860,6 +3876,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrailController
   _delayFrameCount: 5
+--- !u!114 &1005176466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1005176461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: decabefba12cffb459eb5bd8b0148a85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AlphaBlinkerController
+  _alpha: 0
+  _interval: 0.03
 --- !u!1 &1049324915
 GameObject:
   m_ObjectHideFlags: 0
@@ -4929,6 +4959,7 @@ GameObject:
   - component: {fileID: 2107185037}
   - component: {fileID: 2107185036}
   - component: {fileID: 2107185038}
+  - component: {fileID: 2107185039}
   m_Layer: 0
   m_Name: 2
   m_TagString: Untagged
@@ -5046,6 +5077,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrailController
   _delayFrameCount: 5
+--- !u!114 &2107185039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2107185034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: decabefba12cffb459eb5bd8b0148a85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AlphaBlinkerController
+  _alpha: 0
+  _interval: 0.03
 --- !u!1 &2143455030
 GameObject:
   m_ObjectHideFlags: 0
