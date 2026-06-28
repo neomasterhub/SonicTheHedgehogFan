@@ -4793,6 +4793,7 @@ GameObject:
   - component: {fileID: 962770031668773412}
   - component: {fileID: 6109501885079542096}
   - component: {fileID: 8210852167246842332}
+  - component: {fileID: 8683513200504184622}
   - component: {fileID: 603386495880353859}
   m_Layer: 6
   m_Name: Monitor.Shield
@@ -4952,6 +4953,18 @@ Transform:
   - {fileID: 2366881789181772613}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8683513200504184622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6510085714064530363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db27a704dd0378b47963e268f3bf0ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShieldContainerBlockModuleController
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
