@@ -114,8 +114,23 @@ public partial class SonicController
 
   private void InitializeSounds()
   {
+    _ringAudioSource = this.AddComponent<AudioSource>();
+    _ringAudioSource.clip = _ringAudioClip;
+
+    _shieldAudioSource = this.AddComponent<AudioSource>();
+    _shieldAudioSource.clip = _shieldAudioClip;
+
+    var death = this.AddComponent<AudioSource>();
+    death.clip = _deathAudioClip;
+
     var jump = this.AddComponent<AudioSource>();
     jump.clip = _jumpAudioClip;
+
+    var lostRings = this.AddComponent<AudioSource>();
+    lostRings.clip = _lostRingsAudioClip;
+
+    var lostShield = this.AddComponent<AudioSource>();
+    lostShield.clip = _lostShieldAudioClip;
 
     var roll = this.AddComponent<AudioSource>();
     roll.clip = _rollAudioClip;
@@ -123,21 +138,6 @@ public partial class SonicController
 
     var skid = this.AddComponent<AudioSource>();
     skid.clip = _skidAudioClip;
-
-    _ringAudioSource = this.AddComponent<AudioSource>();
-    _ringAudioSource.clip = _ringAudioClip;
-
-    var lostRings = this.AddComponent<AudioSource>();
-    lostRings.clip = _lostRingsAudioClip;
-
-    var death = this.AddComponent<AudioSource>();
-    death.clip = _deathAudioClip;
-
-    _shieldAudioSource = this.AddComponent<AudioSource>();
-    _shieldAudioSource.clip = _shieldAudioClip;
-
-    var lostShield = this.AddComponent<AudioSource>();
-    lostShield.clip = _lostShieldAudioClip;
 
     _sounds = new Sound[]
     {
