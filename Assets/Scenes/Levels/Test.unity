@@ -3422,7 +3422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeacbe7765c00674db43d6ade974aed2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrailController
-  _delayFrameCount: 5
+  _delayFrameCount: 10
 --- !u!114 &711904931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3875,7 +3875,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeacbe7765c00674db43d6ade974aed2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrailController
-  _delayFrameCount: 5
+  _delayFrameCount: 10
 --- !u!114 &1005176466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5076,7 +5076,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeacbe7765c00674db43d6ade974aed2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrailController
-  _delayFrameCount: 5
+  _delayFrameCount: 10
 --- !u!114 &2107185039
 MonoBehaviour:
   m_ObjectHideFlags: 0
