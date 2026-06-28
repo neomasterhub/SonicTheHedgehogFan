@@ -1,0 +1,317 @@
+fileFormatVersion: 2
+guid: 6f02513736778a94f8ef6c90144f310f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1691853687668363553
+    second: invincibility-stars_0
+  - first:
+      213: -1401381578158631763
+    second: invincibility-stars_1
+  - first:
+      213: 1438120595085540657
+    second: invincibility-stars_2
+  - first:
+      213: 7028613564561358495
+    second: invincibility-stars_3
+  - first:
+      213: 6544001346367837348
+    second: invincibility-stars_4
+  - first:
+      213: -7447606308958699602
+    second: invincibility-stars_5
+  - first:
+      213: 6222675059734637554
+    second: invincibility-stars_6
+  - first:
+      213: -4429993620860826413
+    second: invincibility-stars_7
+  - first:
+      213: -4994525790897779398
+    second: invincibility-stars_8
+  - first:
+      213: -2702854131706432091
+    second: invincibility-stars_9
+  - first:
+      213: -4538079946434925193
+    second: invincibility-stars_10
+  - first:
+      213: 2994465042915317342
+    second: invincibility-stars_11
+  - first:
+      213: -1070250603208685229
+    second: invincibility-stars_12
+  - first:
+      213: 7227287652231430046
+    second: invincibility-stars_13
+  - first:
+      213: 6964330623107664945
+    second: invincibility-stars_14
+  - first:
+      213: -5318399539441403416
+    second: invincibility-stars_15
+  - first:
+      213: -6529676778101550006
+    second: invincibility-stars_16
+  - first:
+      213: -9085641805125541039
+    second: invincibility-stars_17
+  - first:
+      213: -2744288552460927031
+    second: invincibility-stars_18
+  - first:
+      213: -6779002111250597199
+    second: invincibility-stars_19
+  - first:
+      213: 4517047001234005932
+    second: invincibility-stars_20
+  - first:
+      213: 5756783648922373430
+    second: invincibility-stars_21
+  - first:
+      213: -8025694545544440950
+    second: invincibility-stars_22
+  - first:
+      213: 1564178577122317604
+    second: invincibility-stars_23
+  - first:
+      213: 7641086629297923489
+    second: invincibility-stars_24
+  - first:
+      213: 8907154234857103255
+    second: invincibility-stars_25
+  - first:
+      213: -5322395651022894807
+    second: invincibility-stars_26
+  - first:
+      213: -4496216900599054932
+    second: invincibility-stars_27
+  - first:
+      213: -3844564120022493247
+    second: invincibility-stars_28
+  - first:
+      213: 3206155412887340713
+    second: invincibility-stars_29
+  - first:
+      213: -8944832852706244377
+    second: invincibility-stars_30
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 40
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: invincibility-stars_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fdea79ee8045588e0800000000000000
+      internalID: -1691853687668363553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: invincibility-stars_1
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da4141721ea4d8ce0800000000000000
+      internalID: -1401381578158631763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: invincibility-stars_2
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13d3f3ecf0b35f310800000000000000
+      internalID: 1438120595085540657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: invincibility-stars_3
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9efb2b3cc6aa8160800000000000000
+      internalID: 7028613564561358495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5abbeda1f9ce6484cb3e80750f8ac597
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":4.0,"y":1.0},"gridSpriteSize":{"x":48.0,"y":48.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      invincibility-stars_0: -1691853687668363553
+      invincibility-stars_1: -1401381578158631763
+      invincibility-stars_2: 1438120595085540657
+      invincibility-stars_3: 7028613564561358495
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
