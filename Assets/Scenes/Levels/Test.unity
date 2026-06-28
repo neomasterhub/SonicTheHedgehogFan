@@ -3239,14 +3239,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SonicController
   _canvas: {fileID: 1049324918}
+  _deathAudioClip: {fileID: 0}
   _jumpAudioClip: {fileID: 8300000, guid: a01963b9359f7d14ca3c26c46fbb16e4, type: 3}
-  _rollAudioClip: {fileID: 8300000, guid: 9e7565537048c9b4f91f055796014713, type: 3}
-  _skidAudioClip: {fileID: 8300000, guid: 9b89e2710e6c85545ba780692ee316f8, type: 3}
+  _lostRingsAudioClip: {fileID: 0}
+  _lostShieldAudioClip: {fileID: 0}
   _ringAudioClip: {fileID: 8300000, guid: c8efd8eb513a86c49a8d0d36ec53197d, type: 3}
-  _lostRingsClip: {fileID: 8300000, guid: 508dd4a324f607645a681f7a27e45103, type: 3}
-  _deathClip: {fileID: 8300000, guid: e329cfafc4e79674581928062f598794, type: 3}
-  _shieldClip: {fileID: 8300000, guid: b6e65c72ad2f1e544b0e30df6bd58819, type: 3}
-  _lostShieldClip: {fileID: 8300000, guid: e329cfafc4e79674581928062f598794, type: 3}
+  _rollAudioClip: {fileID: 8300000, guid: 9e7565537048c9b4f91f055796014713, type: 3}
+  _shieldAudioClip: {fileID: 0}
+  _skidAudioClip: {fileID: 8300000, guid: 9b89e2710e6c85545ba780692ee316f8, type: 3}
   _ringPrefab: {fileID: 5601778466645593367, guid: e75974286517f944dac2e72436689482, type: 3}
 --- !u!61 &710850506
 BoxCollider2D:
@@ -4344,7 +4344,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1519827170
 Transform:
   m_ObjectHideFlags: 0
