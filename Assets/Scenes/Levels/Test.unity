@@ -3201,10 +3201,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 363736806}
-  - {fileID: 1149941423}
-  - {fileID: 2107185035}
-  - {fileID: 1005176462}
-  - {fileID: 711904927}
+  - {fileID: 1519827170}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &710850502
@@ -3308,8 +3305,9 @@ GameObject:
   - component: {fileID: 711904927}
   - component: {fileID: 711904929}
   - component: {fileID: 711904928}
+  - component: {fileID: 711904930}
   m_Layer: 0
-  m_Name: Invincibility Stars 4
+  m_Name: 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3323,12 +3321,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 711904926}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 710850500}
+  m_Father: {fileID: 1005176462}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &711904928
 Animator:
@@ -3411,6 +3409,19 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &711904930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711904926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeacbe7765c00674db43d6ade974aed2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TrailController
+  _delayFrameCount: 5
 --- !u!1 &874072223
 GameObject:
   m_ObjectHideFlags: 0
@@ -3731,8 +3742,9 @@ GameObject:
   - component: {fileID: 1005176462}
   - component: {fileID: 1005176464}
   - component: {fileID: 1005176463}
+  - component: {fileID: 1005176465}
   m_Layer: 0
-  m_Name: Invincibility Stars 3
+  m_Name: 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3746,12 +3758,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1005176461}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 710850500}
+  m_Children:
+  - {fileID: 711904927}
+  m_Father: {fileID: 2107185035}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1005176463
 Animator:
@@ -3834,6 +3847,19 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &1005176465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1005176461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeacbe7765c00674db43d6ade974aed2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TrailController
+  _delayFrameCount: 5
 --- !u!1 &1049324915
 GameObject:
   m_ObjectHideFlags: 0
@@ -3950,9 +3976,8 @@ GameObject:
   - component: {fileID: 1149941423}
   - component: {fileID: 1149941425}
   - component: {fileID: 1149941424}
-  - component: {fileID: 1149941426}
   m_Layer: 0
-  m_Name: Invincibility Stars 1
+  m_Name: 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3966,12 +3991,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1149941422}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 710850500}
+  m_Children:
+  - {fileID: 2107185035}
+  m_Father: {fileID: 1519827170}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1149941424
 Animator:
@@ -4054,18 +4080,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &1149941426
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1149941422}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eeacbe7765c00674db43d6ade974aed2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TrailController
 --- !u!1 &1153428017
 GameObject:
   m_ObjectHideFlags: 0
@@ -4285,6 +4299,38 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1391926816}
   m_CullTransparentMesh: 1
+--- !u!1 &1519827169
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1519827170}
+  m_Layer: 0
+  m_Name: Invincibility Stars
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1519827170
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1519827169}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1149941423}
+  m_Father: {fileID: 710850500}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1814098413
 GameObject:
   m_ObjectHideFlags: 0
@@ -4882,8 +4928,9 @@ GameObject:
   - component: {fileID: 2107185035}
   - component: {fileID: 2107185037}
   - component: {fileID: 2107185036}
+  - component: {fileID: 2107185038}
   m_Layer: 0
-  m_Name: Invincibility Stars 2
+  m_Name: 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4897,12 +4944,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2107185034}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 710850500}
+  m_Children:
+  - {fileID: 1005176462}
+  m_Father: {fileID: 1149941423}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &2107185036
 Animator:
@@ -4985,6 +5033,19 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &2107185038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2107185034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeacbe7765c00674db43d6ade974aed2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TrailController
+  _delayFrameCount: 5
 --- !u!1 &2143455030
 GameObject:
   m_ObjectHideFlags: 0
