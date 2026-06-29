@@ -20,6 +20,6 @@ public partial class TrailController
       _position = _target.position;
     }
 
-    transform.position = _position;
+    transform.position = Vector3.Lerp(transform.position, _position, _approachFactor);
   }
 }

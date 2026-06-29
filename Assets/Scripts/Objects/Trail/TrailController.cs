@@ -11,4 +11,6 @@ public partial class TrailController : MonoBehaviour
 
   [SerializeField]
   private float _delay;
+  [SerializeField]
+  private float _approachFactor;
 }
