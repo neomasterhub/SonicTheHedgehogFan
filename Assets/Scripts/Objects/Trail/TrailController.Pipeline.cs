@@ -5,9 +5,20 @@ using UnityEngine;
 /// </summary>
 public partial class TrailController
 {
+  private void OnEnable()
+  {
+    ResetPosition();
+  }
+
   private void FixedUpdate()
   {
     UpdatePosition();
+  }
+
+  private void ResetPosition()
+  {
+    _timer = 0;
+    transform.position = _target.position;
   }
 
   private void UpdatePosition()
