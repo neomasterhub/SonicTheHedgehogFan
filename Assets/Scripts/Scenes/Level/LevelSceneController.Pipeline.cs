@@ -14,11 +14,15 @@ public partial class LevelSceneController
   {
     BeginFrame();
     UpdateInput();
+    UpdateSounds();
   }
 
   private void BeginFrame()
   {
     _prevDebugMode = _debugMode;
+
+    _prevPlayerHasInvincibilityStars = _playerHasInvincibilityStars;
+    _playerHasInvincibilityStars = _player.HasInvincibilityStars;
   }
 
   private void UpdateInput()
@@ -37,6 +41,14 @@ public partial class LevelSceneController
       {
         _debugObjects[i].DebugMode = _debugMode;
       }
+    }
+  }
+
+  private void UpdateSounds()
+  {
+    for (var i = 0; i < _soundCount; i++)
+    {
+      _sounds[i].Stop().Play();
     }
   }
 }

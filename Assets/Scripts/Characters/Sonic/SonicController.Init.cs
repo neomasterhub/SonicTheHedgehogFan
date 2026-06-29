@@ -192,10 +192,19 @@ public partial class SonicController
       {
         _hasInvincibilityStars = false;
         _invincibilityStars.SetActive(false);
+
+        IsInvincible = false;
+        IsAttacking = _isRolling;
       });
 
     _postHurtInvincibleTimer = new Timer(PostHurtInvincibleDuration)
-      .WhenCompleted(() => IsInvincible = false);
+      .WhenCompleted(() =>
+      {
+        if (!_hasInvincibilityStars)
+        {
+          IsInvincible = false;
+        }
+      });
 
     _ringCollectorDisabledTimer = new Timer(RingCollectorDisabledDuration)
       .WhenCompleted(() => CanCollectRing = !_isDying);

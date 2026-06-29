@@ -1,12 +1,15 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class SceneControllerBase : MonoBehaviour
 {
   protected readonly PlayerInputSystem _inputSystem;
+  protected readonly List<Sound> _sounds;
 
   protected SceneControllerBase()
   {
     _inputSystem = new PlayerInputSystem(GetPlayerInput);
+    _sounds = new();
   }
 
   protected virtual PlayerInput GetPlayerInput()

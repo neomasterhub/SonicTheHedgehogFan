@@ -265,7 +265,12 @@ public partial class SonicController
       .WithAction(() =>
       {
         _isRolling = false;
-        IsAttacking = false;
+
+        if (!_hasInvincibilityStars)
+        {
+          IsAttacking = false;
+        }
+
         SetSizes(SonicSizeMode.Big);
 
         return PipelineStepResult.Continue;

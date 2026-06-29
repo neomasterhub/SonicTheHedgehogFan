@@ -12,7 +12,8 @@ public partial class SonicController
   ILookVerticalDirectionProvider,
   IPlatformObject,
   IRingCollector,
-  ISceneObjectDebug
+  ISceneObjectDebug,
+  ISceneObjectPlayer
 {
   public bool IsInvincible { get; private set; }
   public bool IsAttacking { get; private set; }
@@ -86,6 +87,27 @@ public partial class SonicController
     }
   }
 
+  public bool InvincibilityStarsReceived
+  {
+    set
+    {
+      if (_hasInvincibilityStars)
+      {
+        return;
+      }
+
+      _hasInvincibilityStars = true;
+      _isGettingInvincibilityStarsFromMonitor = true;
+      _invincibilityStars.SetActive(true);
+      _timerSystem.Remove(_postHurtInvincibleTimer);
+      _timerSystem.Remove(_invincibilityStarsTimer);
+      _timerSystem.StartIfNotRunning(_invincibilityStarsTimer);
+
+      IsAttacking = true;
+      IsInvincible = true;
+    }
+  }
+
   public ReboundSignal ReboundSignal { set => _reboundSignal = value; }
   public float HRadius => _sizeMode == SonicSizeMode.Big ? Big.HRadius : Small.HRadius;
   public float VRadius => _sizeMode == SonicSizeMode.Big ? Big.VRadius : Small.VRadius;
@@ -99,4 +121,6 @@ public partial class SonicController
       _debugMode = value;
     }
   }
+
+  public bool HasInvincibilityStars => _hasInvincibilityStars;
 }
