@@ -128,7 +128,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeacbe7765c00674db43d6ade974aed2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrailController
-  _delay: 0.1
+  _delay: 0.13
+  _approachFactor: 0.1
 --- !u!114 &3673233187232764854
 MonoBehaviour:
   m_ObjectHideFlags: 0

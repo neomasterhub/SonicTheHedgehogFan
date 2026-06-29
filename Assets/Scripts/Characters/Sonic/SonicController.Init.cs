@@ -59,6 +59,7 @@ public partial class SonicController
     _diagnosticsTextMesh = _diagnosticsPanel.transform.Find("Text").GetComponent<TextMeshProUGUI>();
 
     _invincibilityStars = transform.Find("Invincibility Stars").gameObject;
+    CreateInvincibilityStarsTrailChain();
 
     _shield = transform.Find("Shield").gameObject;
 
@@ -210,6 +211,13 @@ public partial class SonicController
     _groundNormal.endWidth = 0.03f;
     _groundNormal.positionCount = 2;
     _groundNormal.sortingOrder = 2;
+  }
+
+  private void CreateInvincibilityStarsTrailChain()
+  {
+    var t1 = Instantiate(_invincibilityStarsTrailPrefab, _invincibilityStars.transform);
+    var t2 = Instantiate(_invincibilityStarsTrailPrefab, t1.transform);
+    Instantiate(_invincibilityStarsTrailPrefab, t2.transform);
   }
 
   private float GetDownGroundGravitySpeed()
