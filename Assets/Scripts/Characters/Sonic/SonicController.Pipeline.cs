@@ -32,6 +32,7 @@ public partial class SonicController
     _configs.Update(_physicsMode);
     _timerSystem.Update(Time.deltaTime);
 
+    _prevHasInvincibilityStars = _hasInvincibilityStars;
     _prevHasShield = _hasShield;
     _prevIsGrounded = _isGrounded;
     _prevIsRolling = _isRolling;
@@ -48,7 +49,8 @@ public partial class SonicController
   {
     _inputSystem.Update();
 
-    if (_inputSystem.Pressed == PlayerInput.None)
+    if (_inputSystem.Pressed == PlayerInput.None
+      || _isDying)
     {
       return;
     }
@@ -58,11 +60,28 @@ public partial class SonicController
       if (_inputSystem.CheckLastPressed(TakeLeftHit))
       {
         _takeLeftHit = true;
+        return;
       }
-      else if (_inputSystem.CheckLastPressed(TakeRightHit))
+
+      if (_inputSystem.CheckLastPressed(TakeRightHit))
       {
         _takeRightHit = true;
+        return;
       }
+    }
+
+    if (_inputSystem.CheckLastPressed(ToggleInvincibilityStars))
+    {
+      _hasInvincibilityStars = !_hasInvincibilityStars;
+      _invincibilityStars.SetActive(_hasInvincibilityStars);
+      _timerSystem.Remove(_invincibilityStarsTimer);
+
+      if (_hasInvincibilityStars)
+      {
+        _timerSystem.StartIfNotRunning(_invincibilityStarsTimer);
+      }
+
+      return;
     }
 
     if (_inputSystem.CheckLastPressed(ToggleShield))
@@ -265,6 +284,7 @@ public partial class SonicController
 
   private void EndFrame()
   {
+    _isGettingInvincibilityStarsFromMonitor = false;
     _isGettingRingFromMonitor = false;
     _isGettingShieldFromMonitor = false;
     _isStoppedByCeiling = false;

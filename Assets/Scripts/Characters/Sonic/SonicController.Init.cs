@@ -58,6 +58,9 @@ public partial class SonicController
     _diagnosticsPanel = _canvas.transform.Find("Sonic Diagnostics Panel").gameObject;
     _diagnosticsTextMesh = _diagnosticsPanel.transform.Find("Text").GetComponent<TextMeshProUGUI>();
 
+    _invincibilityStars = transform.Find("Invincibility Stars").gameObject;
+    CreateInvincibilityStarsTrailChain();
+
     _shield = transform.Find("Shield").gameObject;
 
     InitializeGroundNormal();
@@ -114,8 +117,23 @@ public partial class SonicController
 
   private void InitializeSounds()
   {
+    _ringAudioSource = this.AddComponent<AudioSource>();
+    _ringAudioSource.clip = _ringAudioClip;
+
+    _shieldAudioSource = this.AddComponent<AudioSource>();
+    _shieldAudioSource.clip = _shieldAudioClip;
+
+    var death = this.AddComponent<AudioSource>();
+    death.clip = _deathAudioClip;
+
     var jump = this.AddComponent<AudioSource>();
     jump.clip = _jumpAudioClip;
+
+    var lostRings = this.AddComponent<AudioSource>();
+    lostRings.clip = _lostRingsAudioClip;
+
+    var lostShield = this.AddComponent<AudioSource>();
+    lostShield.clip = _lostShieldAudioClip;
 
     var roll = this.AddComponent<AudioSource>();
     roll.clip = _rollAudioClip;
@@ -124,26 +142,27 @@ public partial class SonicController
     var skid = this.AddComponent<AudioSource>();
     skid.clip = _skidAudioClip;
 
-    _ringAudioSource = this.AddComponent<AudioSource>();
-    _ringAudioSource.clip = _ringAudioClip;
-
-    var lostRings = this.AddComponent<AudioSource>();
-    lostRings.clip = _lostRingsClip;
-
-    var death = this.AddComponent<AudioSource>();
-    death.clip = _deathClip;
-
-    _shieldAudioSource = this.AddComponent<AudioSource>();
-    _shieldAudioSource.clip = _shieldClip;
-
-    var lostShield = this.AddComponent<AudioSource>();
-    lostShield.clip = _lostShieldClip;
-
     _sounds = new Sound[]
     {
+      new(_ringAudioSource,
+        () => !_isGettingRingFromMonitor && _ringCollected,
+        () => !_isGettingRingFromMonitor && _ringCollected && _ringAudioSource.isPlaying),
+
+      new(_shieldAudioSource,
+        () => !_isGettingShieldFromMonitor && _hasShield && !_prevHasShield),
+
+      new(death,
+        () => IsHit && _isDying),
+
       new(jump,
         () => _isGrounded && _isJumping,
         () => !_isJumping && !jump.isPlaying),
+
+      new(lostRings,
+        () => _ringsLost),
+
+      new(lostShield,
+        () => !_hasShield && _prevHasShield),
 
       new(roll,
         () => _isDownGroundedMoving && !_isJumping && _isRolling && !_prevIsRolling,
@@ -152,27 +171,14 @@ public partial class SonicController
       new(skid,
         () => _speedSystem.IsSkidding && !skid.isPlaying,
         () => !_speedSystem.IsSkidding && !skid.isPlaying),
-
-      new(_ringAudioSource,
-        () => !_isGettingRingFromMonitor && _ringCollected,
-        () => !_isGettingRingFromMonitor && _ringCollected && _ringAudioSource.isPlaying),
-
-      new(lostRings,
-        () => _ringsLost),
-
-      new(death,
-        () => IsHit && _isDying),
-
-      new(_shieldAudioSource,
-        () => !_isGettingShieldFromMonitor && _hasShield && !_prevHasShield),
-
-      new(lostShield,
-        () => !_hasShield && _prevHasShield),
     };
   }
 
   private void InitializeTimers()
   {
+    _dpadLockTimer = new Timer(DpadLockDuration)
+      .WhenCompleted(() => _postWallDetachDpadLock = false);
+
     _dyingTimer = new Timer(DyingDuration)
       .WhenCompleted(() =>
       {
@@ -181,8 +187,12 @@ public partial class SonicController
         gameObject.SetActive(false);
       });
 
-    _dpadLockTimer = new Timer(DpadLockDuration)
-      .WhenCompleted(() => _postWallDetachDpadLock = false);
+    _invincibilityStarsTimer = new Timer(InvincibilityStarsDuration)
+      .WhenCompleted(() =>
+      {
+        _hasInvincibilityStars = false;
+        _invincibilityStars.SetActive(false);
+      });
 
     _postHurtInvincibleTimer = new Timer(PostHurtInvincibleDuration)
       .WhenCompleted(() => IsInvincible = false);
@@ -201,6 +211,13 @@ public partial class SonicController
     _groundNormal.endWidth = 0.03f;
     _groundNormal.positionCount = 2;
     _groundNormal.sortingOrder = 2;
+  }
+
+  private void CreateInvincibilityStarsTrailChain()
+  {
+    var t1 = Instantiate(_invincibilityStarsTrailPrefab, _invincibilityStars.transform);
+    var t2 = Instantiate(_invincibilityStarsTrailPrefab, t1.transform);
+    Instantiate(_invincibilityStarsTrailPrefab, t2.transform);
   }
 
   private float GetDownGroundGravitySpeed()

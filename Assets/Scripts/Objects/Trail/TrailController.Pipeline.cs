@@ -1,0 +1,36 @@
+using UnityEngine;
+
+/// <summary>
+/// Pipeline.
+/// </summary>
+public partial class TrailController
+{
+  private void OnEnable()
+  {
+    ResetPosition();
+  }
+
+  private void FixedUpdate()
+  {
+    UpdatePosition();
+  }
+
+  private void ResetPosition()
+  {
+    _timer = 0;
+    transform.position = _target.position;
+  }
+
+  private void UpdatePosition()
+  {
+    _timer -= Time.fixedDeltaTime;
+
+    if (_timer <= 0)
+    {
+      _timer = _delay;
+      _position = _target.position;
+    }
+
+    transform.position = Vector3.Lerp(transform.position, _position, _approachFactor);
+  }
+}

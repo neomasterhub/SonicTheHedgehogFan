@@ -8,6 +8,7 @@ public static class SonicConsts
   {
     public const float DyingDuration = 2;
     public const float DpadLockDuration = 0.5f;
+    public const float InvincibilityStarsDuration = 20;
     public const float PostHurtInvincibleDuration = 3;
     public const float RingCollectorDisabledDuration = 0.5f;
     public const float OLength = Sizes.Big.VRadius + 0.4f;

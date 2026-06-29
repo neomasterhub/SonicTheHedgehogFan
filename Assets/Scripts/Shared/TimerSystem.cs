@@ -30,4 +30,9 @@ public class TimerSystem
 
     timer.Start();
   }
+
+  public void Remove(Timer timer)
+  {
+    _timers.Remove(timer);
+  }
 }

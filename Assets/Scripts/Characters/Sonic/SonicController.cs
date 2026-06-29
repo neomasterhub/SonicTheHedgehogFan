@@ -57,20 +57,23 @@ public partial class SonicController : MonoBehaviour
   private bool _horizontalDirection;
   private bool _hasShield;
   private bool _prevHasShield;
+  private bool _hasInvincibilityStars;
+  private bool _prevHasInvincibilityStars;
+  private bool _isGettingInvincibilityStarsFromMonitor;
   private bool _isGettingRingFromMonitor;
   private bool _isGettingShieldFromMonitor;
   private char _triggeredGroundSensorId;
-  private float _slopeFactor;
   private float _absGroundSpeed;
   private float? _reboundGroundSpeed;
-  private Vector2? _reboundAirSpeed;
+  private float _slopeFactor;
+  private Animator _animator;
   private AudioSource _ringAudioSource;
   private AudioSource _shieldAudioSource;
-  private Animator _animator;
   private BoxCollider2D _boxCollider;
   private CeilingDetectionResult? _ceilingDetectionResult;
   private GameObject _diagnosticsPanel;
   private GameObject _effectHistoryPanel;
+  private GameObject _invincibilityStars;
   private GameObject _shield;
   private GroundDetectionResult _lastGroundDetectionResult;
   private IPlatform _contactPlatform;
@@ -86,14 +89,16 @@ public partial class SonicController : MonoBehaviour
   private SpriteRenderer _spriteRenderer;
   private TextMeshProUGUI _diagnosticsTextMesh;
   private TextMeshProUGUI _effectHistoryTextMesh;
-  private Timer _dyingTimer;
   private Timer _dpadLockTimer;
+  private Timer _dyingTimer;
+  private Timer _invincibilityStarsTimer;
   private Timer _postHurtInvincibleTimer;
   private Timer _ringCollectorDisabledTimer;
   private Transform _contactCeilingTransform;
   private Transform _contactGroundTransform;
   private Transform _contactLeftWallTransform;
   private Transform _contactRightWallTransform;
+  private Vector2? _reboundAirSpeed;
   private WallDetectionResult? _leftWallDetectionResult;
   private WallDetectionResult? _rightWallDetectionResult;
 
@@ -102,31 +107,34 @@ public partial class SonicController : MonoBehaviour
 
   [Header("Audio")]
   [SerializeField]
+  [InspectorLabel("Death")]
+  private AudioClip _deathAudioClip;
+  [SerializeField]
   [InspectorLabel("Jump")]
   private AudioClip _jumpAudioClip;
   [SerializeField]
-  [InspectorLabel("Roll")]
-  private AudioClip _rollAudioClip;
+  [InspectorLabel("Lost rings")]
+  private AudioClip _lostRingsAudioClip;
   [SerializeField]
-  [InspectorLabel("Skid")]
-  private AudioClip _skidAudioClip;
+  [InspectorLabel("Lost shield")]
+  private AudioClip _lostShieldAudioClip;
   [SerializeField]
   [InspectorLabel("Ring")]
   private AudioClip _ringAudioClip;
   [SerializeField]
-  [InspectorLabel("Lost rings")]
-  private AudioClip _lostRingsClip;
-  [SerializeField]
-  [InspectorLabel("Death")]
-  private AudioClip _deathClip;
+  [InspectorLabel("Roll")]
+  private AudioClip _rollAudioClip;
   [SerializeField]
   [InspectorLabel("Shield")]
-  private AudioClip _shieldClip;
+  private AudioClip _shieldAudioClip;
   [SerializeField]
-  [InspectorLabel("Lost shield")]
-  private AudioClip _lostShieldClip;
+  [InspectorLabel("Skid")]
+  private AudioClip _skidAudioClip;
 
   [Header("Prefabs")]
+  [SerializeField]
+  [InspectorLabel("Invincibility stars trail")]
+  private GameObject _invincibilityStarsTrailPrefab;
   [SerializeField]
   [InspectorLabel("Ring")]
   private GameObject _ringPrefab;
