@@ -101,6 +101,9 @@ public partial class SonicController
       _invincibilityStars.SetActive(true);
       _timerSystem.Remove(_invincibilityStarsTimer);
       _timerSystem.StartIfNotRunning(_invincibilityStarsTimer);
+
+      IsAttacking = true;
+      IsInvincible = true;
     }
   }
 
