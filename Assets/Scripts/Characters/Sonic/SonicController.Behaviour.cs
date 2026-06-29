@@ -86,6 +86,23 @@ public partial class SonicController
     }
   }
 
+  public bool InvincibilityStarsReceived
+  {
+    set
+    {
+      if (_hasInvincibilityStars)
+      {
+        return;
+      }
+
+      _hasInvincibilityStars = true;
+      _isGettingInvincibilityStarsFromMonitor = true;
+      _invincibilityStars.SetActive(true);
+      _timerSystem.Remove(_invincibilityStarsTimer);
+      _timerSystem.StartIfNotRunning(_invincibilityStarsTimer);
+    }
+  }
+
   public ReboundSignal ReboundSignal { set => _reboundSignal = value; }
   public float HRadius => _sizeMode == SonicSizeMode.Big ? Big.HRadius : Small.HRadius;
   public float VRadius => _sizeMode == SonicSizeMode.Big ? Big.VRadius : Small.VRadius;
