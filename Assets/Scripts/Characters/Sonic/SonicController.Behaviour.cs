@@ -12,7 +12,8 @@ public partial class SonicController
   ILookVerticalDirectionProvider,
   IPlatformObject,
   IRingCollector,
-  ISceneObjectDebug
+  ISceneObjectDebug,
+  ISceneObjectPlayer
 {
   public bool IsInvincible { get; private set; }
   public bool IsAttacking { get; private set; }
@@ -116,4 +117,6 @@ public partial class SonicController
       _debugMode = value;
     }
   }
+
+  public bool HasInvincibilityStars => _hasInvincibilityStars;
 }
