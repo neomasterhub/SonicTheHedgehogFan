@@ -12,9 +12,11 @@ public partial class TrailController
 
   private void UpdatePosition()
   {
-    if (Time.frameCount - _lastUpdateFrame > _delayFrameCount)
+    _timer -= Time.fixedDeltaTime;
+
+    if (_timer <= 0)
     {
-      _lastUpdateFrame = Time.frameCount;
+      _timer = _delay;
       _position = _target.position;
     }
 

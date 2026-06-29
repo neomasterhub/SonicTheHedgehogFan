@@ -5,10 +5,10 @@ using UnityEngine;
 /// </summary>
 public partial class TrailController : MonoBehaviour
 {
-  private int _lastUpdateFrame;
+  private float _timer;
   private Vector3 _position;
   private Transform _target;
 
   [SerializeField]
-  private int _delayFrameCount;
+  private float _delay;
 }
