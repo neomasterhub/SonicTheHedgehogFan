@@ -133,6 +133,9 @@ public partial class SonicController : MonoBehaviour
 
   [Header("Prefabs")]
   [SerializeField]
+  [InspectorLabel("Invincibility stars trail")]
+  private GameObject _invincibilityStarsTrailPrefab;
+  [SerializeField]
   [InspectorLabel("Ring")]
   private GameObject _ringPrefab;
 }
