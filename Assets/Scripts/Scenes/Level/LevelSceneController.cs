@@ -7,10 +7,11 @@ using UnityEngine;
 /// </summary>
 public partial class LevelSceneController : SceneControllerBase
 {
+  private readonly StringBuilder _diagnosticsText;
+
   private bool _prevDebugMode;
   private ISceneObjectDebug[] _debugObjects;
   private GameObject _diagnosticsPanel;
-  private StringBuilder _diagnosticsText;
   private TextMeshProUGUI _diagnosticsTextMesh;
 
   [SerializeField]
