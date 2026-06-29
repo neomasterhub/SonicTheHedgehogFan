@@ -4703,6 +4703,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LevelSceneController
   _canvas: {fileID: 1049324918}
   _debugMode: 0
+  _invincibilityStarsAudioClip: {fileID: 8300000, guid: 68e0dabd5b2b7e94987bf2e68cdf8ec6, type: 3}
 --- !u!1001 &2041925512
 PrefabInstance:
   m_ObjectHideFlags: 0
