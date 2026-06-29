@@ -1,4 +1,4 @@
-public interface ISceneObjectPlayer
+public interface ISceneObjectPlayer : ISceneObject
 {
   bool HasInvincibilityStars { get; }
 }

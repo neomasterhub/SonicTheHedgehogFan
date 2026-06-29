@@ -10,7 +10,11 @@ public partial class LevelSceneController : SceneControllerBase
   private readonly StringBuilder _diagnosticsText;
 
   private bool _prevDebugMode;
+  private bool _playerHasInvincibilityStars;
+  private bool _prevPlayerHasInvincibilityStars;
+  private int _soundCount;
   private ISceneObjectDebug[] _debugObjects;
+  private ISceneObjectPlayer _player;
   private GameObject _diagnosticsPanel;
   private TextMeshProUGUI _diagnosticsTextMesh;
 
