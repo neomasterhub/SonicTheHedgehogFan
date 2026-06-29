@@ -17,4 +17,9 @@ public partial class LevelSceneController : SceneControllerBase
   private Canvas _canvas;
   [SerializeField]
   private bool _debugMode;
+
+  [Header("Audio")]
+  [SerializeField]
+  [InspectorLabel("Invincibility stars")]
+  private AudioClip _invincibilityStarsAudioClip;
 }
