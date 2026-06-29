@@ -192,6 +192,9 @@ public partial class SonicController
       {
         _hasInvincibilityStars = false;
         _invincibilityStars.SetActive(false);
+
+        IsInvincible = false;
+        IsAttacking = _isRolling;
       });
 
     _postHurtInvincibleTimer = new Timer(PostHurtInvincibleDuration)
