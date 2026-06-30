@@ -208,6 +208,9 @@ public partial class SonicController
 
     _ringCollectorDisabledTimer = new Timer(RingCollectorDisabledDuration)
       .WhenCompleted(() => CanCollectRing = !_isDying);
+
+    _speedShoesTimer = new Timer(SpeedShoesDuration)
+      .WhenCompleted(() => _hasSpeedShoes = false);
   }
 
   private void InitializeGroundNormal()

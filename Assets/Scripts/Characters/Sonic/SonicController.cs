@@ -93,6 +93,7 @@ public partial class SonicController : MonoBehaviour
   private Timer _invincibilityStarsTimer;
   private Timer _postHurtInvincibleTimer;
   private Timer _ringCollectorDisabledTimer;
+  private Timer _speedShoesTimer;
   private Transform _contactCeilingTransform;
   private Transform _contactGroundTransform;
   private Transform _contactLeftWallTransform;

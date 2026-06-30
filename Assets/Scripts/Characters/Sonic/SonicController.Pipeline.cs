@@ -91,6 +91,19 @@ public partial class SonicController
     {
       _hasShield = !_hasShield;
       _shield.SetActive(_hasShield);
+
+      return;
+    }
+
+    if (_inputSystem.CheckLastPressed(ToggleSpeedShoes))
+    {
+      _hasSpeedShoes = !_hasSpeedShoes;
+      _timerSystem.Remove(_speedShoesTimer);
+
+      if (_hasSpeedShoes)
+      {
+        _timerSystem.StartIfNotRunning(_speedShoesTimer);
+      }
     }
   }
 
