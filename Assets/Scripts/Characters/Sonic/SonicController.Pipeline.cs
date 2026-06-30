@@ -32,7 +32,6 @@ public partial class SonicController
     _configs.Update(_physicsMode);
     _timerSystem.Update(Time.deltaTime);
 
-    _prevHasInvincibilityStars = _hasInvincibilityStars;
     _prevHasShield = _hasShield;
     _prevIsGrounded = _isGrounded;
     _prevIsRolling = _isRolling;
@@ -288,7 +287,6 @@ public partial class SonicController
 
   private void EndFrame()
   {
-    _isGettingInvincibilityStarsFromMonitor = false;
     _isGettingRingFromMonitor = false;
     _isGettingShieldFromMonitor = false;
     _isStoppedByCeiling = false;

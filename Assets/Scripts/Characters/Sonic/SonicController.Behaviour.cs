@@ -97,7 +97,6 @@ public partial class SonicController
       }
 
       _hasInvincibilityStars = true;
-      _isGettingInvincibilityStarsFromMonitor = true;
       _invincibilityStars.SetActive(true);
       _timerSystem.Remove(_postHurtInvincibleTimer);
       _timerSystem.Remove(_invincibilityStarsTimer);

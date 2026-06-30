@@ -58,8 +58,6 @@ public partial class SonicController : MonoBehaviour
   private bool _hasShield;
   private bool _prevHasShield;
   private bool _hasInvincibilityStars;
-  private bool _prevHasInvincibilityStars;
-  private bool _isGettingInvincibilityStarsFromMonitor;
   private bool _isGettingRingFromMonitor;
   private bool _isGettingShieldFromMonitor;
   private char _triggeredGroundSensorId;
