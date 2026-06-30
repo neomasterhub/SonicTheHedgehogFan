@@ -1,7 +1,7 @@
 /// <summary>
 /// Behaviour.
 /// </summary>
-public partial class InvincibilityStarsContainer
+public partial class InvincibilityStarsContainerBlockModuleController
 {
   public override void Apply()
   {
