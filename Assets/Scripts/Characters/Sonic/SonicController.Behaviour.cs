@@ -87,15 +87,20 @@ public partial class SonicController
     }
   }
 
+  public bool SpeedShoesReceived
+  {
+    set
+    {
+      _hasSpeedShoes = true;
+      _timerSystem.Remove(_speedShoesTimer);
+      _timerSystem.StartIfNotRunning(_speedShoesTimer);
+    }
+  }
+
   public bool InvincibilityStarsReceived
   {
     set
     {
-      if (_hasInvincibilityStars)
-      {
-        return;
-      }
-
       _hasInvincibilityStars = true;
       _invincibilityStars.SetActive(true);
       _timerSystem.Remove(_postHurtInvincibleTimer);

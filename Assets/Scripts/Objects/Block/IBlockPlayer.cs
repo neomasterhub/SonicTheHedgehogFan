@@ -21,6 +21,7 @@ public interface IBlockPlayer
   bool IsStoppedByCeiling { set; }
   bool RingReceived { set; }
   bool ShieldReceived { set; }
+  bool SpeedShoesReceived { set; }
   bool InvincibilityStarsReceived { set; }
   ReboundSignal ReboundSignal { set; }
 }
