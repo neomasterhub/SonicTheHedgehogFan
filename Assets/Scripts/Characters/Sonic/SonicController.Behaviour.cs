@@ -126,5 +126,6 @@ public partial class SonicController
     }
   }
 
+  public bool HasSpeedShoes => _hasSpeedShoes;
   public bool HasInvincibilityStars => _hasInvincibilityStars;
 }
