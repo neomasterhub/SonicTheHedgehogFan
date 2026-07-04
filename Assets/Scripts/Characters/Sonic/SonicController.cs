@@ -58,8 +58,7 @@ public partial class SonicController : MonoBehaviour
   private bool _hasShield;
   private bool _prevHasShield;
   private bool _hasInvincibilityStars;
-  private bool _prevHasInvincibilityStars;
-  private bool _isGettingInvincibilityStarsFromMonitor;
+  private bool _hasSpeedShoes;
   private bool _isGettingRingFromMonitor;
   private bool _isGettingShieldFromMonitor;
   private char _triggeredGroundSensorId;
@@ -94,6 +93,7 @@ public partial class SonicController : MonoBehaviour
   private Timer _invincibilityStarsTimer;
   private Timer _postHurtInvincibleTimer;
   private Timer _ringCollectorDisabledTimer;
+  private Timer _speedShoesTimer;
   private Transform _contactCeilingTransform;
   private Transform _contactGroundTransform;
   private Transform _contactLeftWallTransform;

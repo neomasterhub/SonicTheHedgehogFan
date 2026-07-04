@@ -1,7 +1,7 @@
 /// <summary>
 /// Data.
 /// </summary>
-public partial class InvincibilityStarsContainer
+public partial class InvincibilityStarsContainerBlockModuleController
   : BlockModuleControllerBase
 {
 }
