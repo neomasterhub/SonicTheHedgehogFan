@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [DefaultExecutionOrder(1000)]
@@ -8,8 +9,9 @@ public class SharedMeshRendererController : MonoBehaviour
   private readonly List<Color> _colors = new();
   private readonly List<int> _triangles = new();
 
-  private Material _material;
   private Mesh _mesh;
+  private MeshFilter _meshFilter;
+  private MeshRenderer _meshRenderer;
 
   public static SharedMeshRendererController Instance { get; private set; }
 
@@ -32,8 +34,6 @@ public class SharedMeshRendererController : MonoBehaviour
     {
       Instance = null;
     }
-
-    DestroyComponents();
   }
 
   private void LateUpdate()
@@ -47,53 +47,22 @@ public class SharedMeshRendererController : MonoBehaviour
     _mesh.SetVertices(_vertices);
     _mesh.SetColors(_colors);
     _mesh.SetTriangles(_triangles, 0, false);
-  }
 
-  private void OnRenderObject()
-  {
-    if (_vertices.Count == 0)
-    {
-      return;
-    }
+    _meshFilter.sharedMesh = _mesh;
 
-    _material.SetPass(0);
-
-    Graphics.DrawMeshNow(_mesh, Matrix4x4.identity);
-
-    Clear();
+    ClearMeshData();
   }
 
   private void InitializeComponents()
   {
-    _material = new(Shader.Find("Sprites/Default"))
-    {
-      hideFlags = HideFlags.HideAndDontSave,
-    };
-
-    _mesh = new()
-    {
-      hideFlags = HideFlags.HideAndDontSave,
-    };
-
+    _mesh = new();
     _mesh.MarkDynamic();
+    _meshFilter = this.AddComponent<MeshFilter>();
+    _meshRenderer = this.AddComponent<MeshRenderer>();
+    _meshRenderer.sharedMaterial = new(Shader.Find("Sprites/Default"));
   }
 
-  private void DestroyComponents()
-  {
-    if (_material != null)
-    {
-      Destroy(_material);
-      _material = null;
-    }
-
-    if (_mesh != null)
-    {
-      Destroy(_mesh);
-      _mesh = null;
-    }
-  }
-
-  private void Clear()
+  private void ClearMeshData()
   {
     _vertices.Clear();
     _colors.Clear();
