@@ -48,6 +48,20 @@ public class SharedMeshRendererController : MonoBehaviour
     _mesh.SetTriangles(_triangles, 0, false);
   }
 
+  private void OnRenderObject()
+  {
+    if (_vertices.Count == 0)
+    {
+      return;
+    }
+
+    _material.SetPass(0);
+
+    Graphics.DrawMeshNow(_mesh, Matrix4x4.identity);
+
+    Clear();
+  }
+
   private void InitializeComponents()
   {
     _material = new(Shader.Find("Sprites/Default"))
@@ -76,5 +90,12 @@ public class SharedMeshRendererController : MonoBehaviour
       Destroy(_mesh);
       _mesh = null;
     }
+  }
+
+  private void Clear()
+  {
+    _vertices.Clear();
+    _colors.Clear();
+    _triangles.Clear();
   }
 }
