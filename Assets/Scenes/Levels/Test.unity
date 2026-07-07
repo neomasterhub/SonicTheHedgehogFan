@@ -4192,6 +4192,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1920839051}
   - component: {fileID: 1920839052}
+  - component: {fileID: 1920839053}
   m_Layer: 0
   m_Name: Scene
   m_TagString: Untagged
@@ -4229,6 +4230,18 @@ MonoBehaviour:
   _canvas: {fileID: 1049324918}
   _debugMode: 0
   _invincibilityStarsAudioClip: {fileID: 8300000, guid: 68e0dabd5b2b7e94987bf2e68cdf8ec6, type: 3}
+--- !u!114 &1920839053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1920839050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60c6a14d716100a43b93188f6086fbb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SharedMeshRendererController
 --- !u!1 &2143455030
 GameObject:
   m_ObjectHideFlags: 0
