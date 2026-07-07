@@ -1,7 +1,12 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SharedMeshRendererController : MonoBehaviour
 {
+  private readonly List<Vector3> _vertices = new();
+  private readonly List<Color> _colors = new();
+  private readonly List<int> _triangles = new();
+
   private Material _material;
   private Mesh _mesh;
 
@@ -28,6 +33,19 @@ public class SharedMeshRendererController : MonoBehaviour
     }
 
     DestroyComponents();
+  }
+
+  private void LateUpdate()
+  {
+    if (_vertices.Count == 0)
+    {
+      return;
+    }
+
+    _mesh.Clear();
+    _mesh.SetVertices(_vertices);
+    _mesh.SetColors(_colors);
+    _mesh.SetTriangles(_triangles, 0, false);
   }
 
   private void InitializeComponents()
