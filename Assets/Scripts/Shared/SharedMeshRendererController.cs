@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[DefaultExecutionOrder(1000)]
 public class SharedMeshRendererController : MonoBehaviour
 {
   private readonly List<Vector3> _vertices = new();
