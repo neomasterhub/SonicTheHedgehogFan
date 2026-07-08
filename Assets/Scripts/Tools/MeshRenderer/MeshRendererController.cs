@@ -14,4 +14,7 @@ public partial class MeshRendererController : MonoBehaviour
   private Mesh _mesh;
   private MeshFilter _meshFilter;
   private MeshRenderer _meshRenderer;
+
+  [SerializeField]
+  private int _sortingOrder = 1000;
 }
