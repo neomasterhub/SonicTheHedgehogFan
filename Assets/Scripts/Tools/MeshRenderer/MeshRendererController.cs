@@ -2,8 +2,11 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+/// <summary>
+/// Data.
+/// </summary>
 [DefaultExecutionOrder(1000)]
-public class MeshRendererController
+public partial class MeshRendererController
   : MonoBehaviour,
   IMeshRenderer
 {
@@ -14,11 +17,6 @@ public class MeshRendererController
   private Mesh _mesh;
   private MeshFilter _meshFilter;
   private MeshRenderer _meshRenderer;
-
-  private void Awake()
-  {
-    InitializeComponents();
-  }
 
   private void LateUpdate()
   {
@@ -35,15 +33,6 @@ public class MeshRendererController
     _meshFilter.sharedMesh = _mesh;
 
     ClearMeshData();
-  }
-
-  private void InitializeComponents()
-  {
-    _mesh = new();
-    _mesh.MarkDynamic();
-    _meshFilter = this.AddComponent<MeshFilter>();
-    _meshRenderer = this.AddComponent<MeshRenderer>();
-    _meshRenderer.sharedMaterial = new(Shader.Find("Sprites/Default"));
   }
 
   private void ClearMeshData()
