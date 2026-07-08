@@ -13,7 +13,7 @@ public partial class MeshRendererController
     _mesh.Clear();
     _mesh.SetVertices(_vertices);
     _mesh.SetColors(_colors);
-    _mesh.SetTriangles(_triangles, 0, false);
+    _mesh.SetTriangles(_triangles, 0);
 
     _meshFilter.sharedMesh = _mesh;
 
