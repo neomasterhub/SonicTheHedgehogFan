@@ -25,6 +25,13 @@ public class UDSensor : SensorBase
     DownRay.Origin = Position;
   }
 
+  public override void SetMeshRenderer(IMeshRenderer meshRenderer)
+  {
+    base.SetMeshRenderer(meshRenderer);
+    UpRay.SetMeshRenderer(meshRenderer);
+    DownRay.SetMeshRenderer(meshRenderer);
+  }
+
   public override void Draw()
   {
     if (Enabled)

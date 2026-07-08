@@ -87,25 +87,24 @@ public class SonicSensorSystem
   public void SetMeshRenderer(IMeshRenderer meshRenderer)
   {
     _meshRenderer = meshRenderer;
-    //_o.SetMeshRenderer(meshRenderer);
-    //_a.SetMeshRenderer(meshRenderer);
-    //_b.SetMeshRenderer(meshRenderer);
-    //_c.SetMeshRenderer(meshRenderer);
-    //_d.SetMeshRenderer(meshRenderer);
+    _bigUpSensorGroup.SetMeshRenderer(meshRenderer);
+    _bigDownSensorGroup.SetMeshRenderer(meshRenderer);
+    _bigLeftSensorGroup.SetMeshRenderer(meshRenderer);
+    _bigRightSensorGroup.SetMeshRenderer(meshRenderer);
+    _smallUpSensorGroup.SetMeshRenderer(meshRenderer);
+    _smallDownSensorGroup.SetMeshRenderer(meshRenderer);
+    _smallLeftSensorGroup.SetMeshRenderer(meshRenderer);
+    _smallRightSensorGroup.SetMeshRenderer(meshRenderer);
   }
 
   public void Draw()
   {
+    DrawBackground();
     _o.Draw();
     _a.Draw();
     _b.Draw();
     _c.Draw();
     _d.Draw();
-  }
-
-  public void Draw2()
-  {
-    DrawBackground();
   }
 
   private void DrawBackground()

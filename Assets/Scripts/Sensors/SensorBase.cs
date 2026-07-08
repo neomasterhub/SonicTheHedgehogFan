@@ -1,9 +1,12 @@
 using UnityEngine;
+using static SharedConsts.Rendering;
 
 public abstract class SensorBase : ISensor
 {
+  protected IMeshRenderer _meshRenderer;
+
   public bool Enabled { get; set; } = true;
-  public float Radius { get; set; } = 0.03f;
+  public float Radius { get; set; } = SensorOriginRadius;
   public Color EnabledColor { get; set; } = Color.red;
   public Color? DisabledColor { get; set; } = Color.darkRed;
   public Vector2 Position { get; protected set; }
@@ -22,6 +25,11 @@ public abstract class SensorBase : ISensor
     Position = parentPosition + LocalPosition;
   }
 
+  public virtual void SetMeshRenderer(IMeshRenderer meshRenderer)
+  {
+    _meshRenderer = meshRenderer;
+  }
+
   public virtual void Draw()
   {
     if (Enabled)
@@ -36,16 +44,14 @@ public abstract class SensorBase : ISensor
 
   protected void DrawEnabled()
   {
-    Gizmos.color = EnabledColor;
-    Gizmos.DrawSphere(Position, Radius);
+    _meshRenderer.DrawSquare(Position, Radius, EnabledColor);
   }
 
   protected void DrawDisabled()
   {
     if (DisabledColor.HasValue)
     {
-      Gizmos.color = DisabledColor.Value;
-      Gizmos.DrawSphere(Position, Radius);
+      _meshRenderer.DrawSquare(Position, Radius, DisabledColor.Value);
     }
   }
 }

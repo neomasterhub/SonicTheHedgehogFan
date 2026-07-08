@@ -22,6 +22,11 @@ public class ASensorSystem
     _a.DownRay.Length = outerSensorRayLength;
   }
 
+  public void SetMeshRenderer(IMeshRenderer meshRenderer)
+  {
+    _a.SetMeshRenderer(meshRenderer);
+  }
+
   public void Draw()
   {
     _a.Draw();

@@ -43,6 +43,15 @@ public class SonicSensorGroup
     }
   }
 
+  public void SetMeshRenderer(IMeshRenderer meshRenderer)
+  {
+    A.SetMeshRenderer(meshRenderer);
+    B.SetMeshRenderer(meshRenderer);
+    C.SetMeshRenderer(meshRenderer);
+    D.SetMeshRenderer(meshRenderer);
+    O.SetMeshRenderer(meshRenderer);
+  }
+
   public void Draw()
   {
     A.Draw();
