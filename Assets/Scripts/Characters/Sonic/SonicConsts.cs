@@ -4,6 +4,22 @@ using static SharedConsts.Physics;
 
 public static class SonicConsts
 {
+  public static class Debug
+  {
+    public const float NormalWidth = 0.08f;
+    public static readonly Color CeilingNormalColor;
+    public static readonly Color GroundNormalColor;
+
+    static Debug()
+    {
+      CeilingNormalColor = Color.yellow;
+      CeilingNormalColor.a = 0.5f;
+
+      GroundNormalColor = Color.green;
+      GroundNormalColor.a = 0.5f;
+    }
+  }
+
   public static class Physics
   {
     public const float DyingDuration = 2;

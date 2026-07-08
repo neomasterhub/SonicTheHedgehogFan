@@ -1,5 +1,5 @@
-using UnityEngine;
 using static SharedConsts.Rendering;
+using static SonicConsts.Debug;
 
 /// <summary>
 /// Debug.
@@ -22,8 +22,8 @@ public partial class SonicController
       _meshRenderer.DrawLine(
         _lastGroundDetectionResult.Contact,
         _lastGroundDetectionResult.Contact + _lastGroundDetectionResult.Normal,
-        0.4f,
-        Color.green);
+        NormalWidth,
+        GroundNormalColor);
     }
 
     if (_ceilingDetectionResult.HasValue)
@@ -32,8 +32,8 @@ public partial class SonicController
       _meshRenderer.DrawLine(
         ceiling.Contact,
         ceiling.Contact + ceiling.Normal,
-        0.4f,
-        Color.yellow);
+        NormalWidth,
+        CeilingNormalColor);
     }
   }
 
