@@ -40,11 +40,11 @@ public partial class SonicController
   private void Awake()
   {
     InitializeComponents();
-    InitializeViewSystem();
     InitializeSensorSystem();
     InitializeSpeedSystemProviders();
     InitializeSounds();
     InitializeTimers();
+    InitializeViewSystem();
   }
 
   private void InitializeComponents()
@@ -52,6 +52,7 @@ public partial class SonicController
     _animator = GetComponent<Animator>();
     _boxCollider = GetComponent<BoxCollider2D>();
     _spriteRenderer = GetComponent<SpriteRenderer>();
+    _meshRenderer = _meshRendererObj.GetComponent<IMeshRenderer>();
 
     _effectHistoryPanel = _canvas.transform.Find("Sonic Effect History Panel").gameObject;
     _effectHistoryTextMesh = _effectHistoryPanel.transform.Find("Text").GetComponent<TextMeshProUGUI>();
@@ -59,42 +60,14 @@ public partial class SonicController
     _diagnosticsPanel = _canvas.transform.Find("Sonic Diagnostics Panel").gameObject;
     _diagnosticsTextMesh = _diagnosticsPanel.transform.Find("Text").GetComponent<TextMeshProUGUI>();
 
+    _shield = transform.Find("Shield").gameObject;
     _invincibilityStars = transform.Find("Invincibility Stars").gameObject;
     CreateInvincibilityStarsTrailChain();
-
-    _shield = transform.Find("Shield").gameObject;
-
-    InitializeGroundNormal();
-  }
-
-  private void InitializeViewSystem()
-  {
-    _viewSystem.SetComponents(_animator, _spriteRenderer);
-
-    var rotGrounded = new GroundedSonicViewRotator(() =>
-      _isGrounded);
-
-    var rotWallToAir = new WallToAirSonicViewRotator(() =>
-      !_isGrounded
-      && !_isRolling
-      && _prevIsGrounded
-      && _groundInfoSystem.Previous.Side is GroundSide.Left or GroundSide.Right);
-
-    var rotCeilingToAir = new CeilingToAirSonicViewRotator(() =>
-      !_isGrounded
-      && !_isRolling
-      && _prevIsGrounded
-      && _groundInfoSystem.Previous.Side == GroundSide.Up);
-
-    _viewRotatorProvider
-      .Add(rotGrounded)
-      .Add(rotWallToAir)
-      .Add(rotCeilingToAir);
   }
 
   private void InitializeSensorSystem()
   {
-    _sensorSystem.SetMeshRenderer(_meshRendererObj.GetComponent<IMeshRenderer>());
+    _sensorSystem.SetMeshRenderer(_meshRenderer);
   }
 
   private void InitializeSpeedSystemProviders()
@@ -219,16 +192,29 @@ public partial class SonicController
       .WhenCompleted(() => _hasSpeedShoes = false);
   }
 
-  private void InitializeGroundNormal()
+  private void InitializeViewSystem()
   {
-    _groundNormal = this.AddComponent<LineRenderer>();
-    _groundNormal.material = new(Shader.Find("Sprites/Default"));
-    _groundNormal.startColor = Color.white;
-    _groundNormal.endColor = Color.white;
-    _groundNormal.startWidth = 0.03f;
-    _groundNormal.endWidth = 0.03f;
-    _groundNormal.positionCount = 2;
-    _groundNormal.sortingOrder = 2;
+    _viewSystem.SetComponents(_animator, _spriteRenderer);
+
+    var rotGrounded = new GroundedSonicViewRotator(() =>
+      _isGrounded);
+
+    var rotWallToAir = new WallToAirSonicViewRotator(() =>
+      !_isGrounded
+      && !_isRolling
+      && _prevIsGrounded
+      && _groundInfoSystem.Previous.Side is GroundSide.Left or GroundSide.Right);
+
+    var rotCeilingToAir = new CeilingToAirSonicViewRotator(() =>
+      !_isGrounded
+      && !_isRolling
+      && _prevIsGrounded
+      && _groundInfoSystem.Previous.Side == GroundSide.Up);
+
+    _viewRotatorProvider
+      .Add(rotGrounded)
+      .Add(rotWallToAir)
+      .Add(rotCeilingToAir);
   }
 
   private void CreateInvincibilityStarsTrailChain()

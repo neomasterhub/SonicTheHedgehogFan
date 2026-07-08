@@ -1,4 +1,5 @@
 using static SharedConsts.Rendering;
+using static SonicConsts.Debug;
 
 /// <summary>
 /// Debug.
@@ -10,6 +11,29 @@ public partial class SonicController
     if (_debugMode)
     {
       _sensorSystem.Draw();
+      DrawNormals();
+    }
+  }
+
+  private void DrawNormals()
+  {
+    if (_isGrounded)
+    {
+      _meshRenderer.DrawLine(
+        _lastGroundDetectionResult.Contact,
+        _lastGroundDetectionResult.Contact + _lastGroundDetectionResult.Normal,
+        NormalWidth,
+        GroundNormalColor);
+    }
+
+    if (_ceilingDetectionResult.HasValue)
+    {
+      var ceiling = _ceilingDetectionResult.Value;
+      _meshRenderer.DrawLine(
+        ceiling.Contact,
+        ceiling.Contact + ceiling.Normal,
+        NormalWidth,
+        CeilingNormalColor);
     }
   }
 
@@ -22,7 +46,6 @@ public partial class SonicController
 
     if (_debugMode)
     {
-      UpdateDebug_GroundNormal();
       UpdateDebug_Diagnostics();
       UpdateDebug_EffectHistory();
     }
@@ -30,7 +53,6 @@ public partial class SonicController
 
   private void UpdateDebug_Toggle()
   {
-    _groundNormal.enabled = _debugMode;
     _diagnosticsPanel.SetActive(_debugMode);
     _effectHistoryPanel.SetActive(_debugMode);
   }
@@ -68,22 +90,6 @@ public partial class SonicController
     }
 
     _effectHistoryTextMesh.SetText(_effectHistoryText);
-  }
-
-  private void UpdateDebug_GroundNormal()
-  {
-    if (_isGrounded)
-    {
-      _groundNormal.SetPosition(0, _lastGroundDetectionResult.Contact);
-      _groundNormal.SetPosition(1, _lastGroundDetectionResult.Contact + _lastGroundDetectionResult.Normal);
-    }
-
-    if (_ceilingDetectionResult.HasValue)
-    {
-      var ceiling = _ceilingDetectionResult.Value;
-      _groundNormal.SetPosition(0, ceiling.Contact);
-      _groundNormal.SetPosition(1, ceiling.Contact + ceiling.Normal);
-    }
   }
 
   private string GetDpadState()
