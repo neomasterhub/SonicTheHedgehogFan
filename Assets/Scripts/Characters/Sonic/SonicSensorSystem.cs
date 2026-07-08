@@ -1,5 +1,6 @@
 using UnityEngine;
 using static Helpers.Sensors;
+using static SharedConsts.Colors;
 using static SonicConsts.Sizes;
 
 public class SonicSensorSystem
@@ -114,7 +115,7 @@ public class SonicSensorSystem
           new (_d.FrontRay.Origin.x, _d.FrontRay.Origin.y),
           new (_c.FrontRay.Origin.x, _c.FrontRay.Origin.y),
         },
-        Color.black);
+        SensorSystemBG);
     }
     else
     {

@@ -38,6 +38,7 @@ public static class SharedConsts
   public static class Colors
   {
     public static readonly Color TransparentBlack = new(0, 0, 0, 0);
+    public static readonly Color SensorSystemBG = new(0, 0, 0, 0.5f);
   }
 
   public static class ConvertValues
