@@ -40,11 +40,11 @@ public partial class SonicController
   private void Awake()
   {
     InitializeComponents();
-    InitializeViewSystem();
     InitializeSensorSystem();
     InitializeSpeedSystemProviders();
     InitializeSounds();
     InitializeTimers();
+    InitializeViewSystem();
   }
 
   private void InitializeComponents()
@@ -63,31 +63,6 @@ public partial class SonicController
     _shield = transform.Find("Shield").gameObject;
     _invincibilityStars = transform.Find("Invincibility Stars").gameObject;
     CreateInvincibilityStarsTrailChain();
-  }
-
-  private void InitializeViewSystem()
-  {
-    _viewSystem.SetComponents(_animator, _spriteRenderer);
-
-    var rotGrounded = new GroundedSonicViewRotator(() =>
-      _isGrounded);
-
-    var rotWallToAir = new WallToAirSonicViewRotator(() =>
-      !_isGrounded
-      && !_isRolling
-      && _prevIsGrounded
-      && _groundInfoSystem.Previous.Side is GroundSide.Left or GroundSide.Right);
-
-    var rotCeilingToAir = new CeilingToAirSonicViewRotator(() =>
-      !_isGrounded
-      && !_isRolling
-      && _prevIsGrounded
-      && _groundInfoSystem.Previous.Side == GroundSide.Up);
-
-    _viewRotatorProvider
-      .Add(rotGrounded)
-      .Add(rotWallToAir)
-      .Add(rotCeilingToAir);
   }
 
   private void InitializeSensorSystem()
@@ -215,6 +190,31 @@ public partial class SonicController
 
     _speedShoesTimer = new Timer(SpeedShoesDuration)
       .WhenCompleted(() => _hasSpeedShoes = false);
+  }
+
+  private void InitializeViewSystem()
+  {
+    _viewSystem.SetComponents(_animator, _spriteRenderer);
+
+    var rotGrounded = new GroundedSonicViewRotator(() =>
+      _isGrounded);
+
+    var rotWallToAir = new WallToAirSonicViewRotator(() =>
+      !_isGrounded
+      && !_isRolling
+      && _prevIsGrounded
+      && _groundInfoSystem.Previous.Side is GroundSide.Left or GroundSide.Right);
+
+    var rotCeilingToAir = new CeilingToAirSonicViewRotator(() =>
+      !_isGrounded
+      && !_isRolling
+      && _prevIsGrounded
+      && _groundInfoSystem.Previous.Side == GroundSide.Up);
+
+    _viewRotatorProvider
+      .Add(rotGrounded)
+      .Add(rotWallToAir)
+      .Add(rotCeilingToAir);
   }
 
   private void CreateInvincibilityStarsTrailChain()
