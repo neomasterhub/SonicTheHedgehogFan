@@ -105,21 +105,46 @@ public class SonicSensorSystem
 
   public void Draw2()
   {
+    DrawBackground();
+  }
+
+  private void DrawBackground()
+  {
+    var lengths = _sensorRayLengths.Value;
+    Vector3[] points;
+
     if (_o.Enabled)
     {
-      _meshRenderer.DrawPolygon(
-        new Vector3[]
-        {
-          new (_a.FrontRay.Origin.x, _a.FrontRay.Origin.y),
-          new (_b.FrontRay.Origin.x, _b.FrontRay.Origin.y),
-          new (_d.FrontRay.Origin.x, _d.FrontRay.Origin.y),
-          new (_c.FrontRay.Origin.x, _c.FrontRay.Origin.y),
-        },
-        SensorSystemBG);
+      var oy = _o.Position.y - lengths.O;
+      var dx1 = lengths.BottomUDF.z;
+      var dx2 = lengths.TopUDF.z;
+      var dy2 = lengths.TopUDF.y;
+
+      points = new Vector3[]
+      {
+        new(_a.Position.x - dx1, oy),
+        new(_b.Position.x + dx1, oy),
+        new(_d.Position.x + dx2, _d.Position.y + dy2),
+        new(_c.Position.x - dx2, _c.Position.y + dy2),
+      };
     }
     else
     {
+      var dx1 = lengths.BottomUDF.z;
+      var dy1 = lengths.BottomUDF.y;
+      var dx2 = lengths.TopUDF.z;
+      var dy2 = lengths.TopUDF.y;
+
+      points = new Vector3[]
+      {
+        new(_a.Position.x - dx1, _a.Position.y - dy1),
+        new(_b.Position.x + dx1, _b.Position.y - dy1),
+        new(_d.Position.x + dx2, _d.Position.y + dy2),
+        new(_c.Position.x - dx2, _c.Position.y + dy2),
+      };
     }
+
+    _meshRenderer.DrawPolygon(points, SensorSystemBG);
   }
 
   private void SetCurrentSensorGroup()
