@@ -27,6 +27,11 @@ public partial class SonicController
     EndFrame();
   }
 
+  private void LateUpdate()
+  {
+    _sensorSystem.Draw2();
+  }
+
   private void BeginFrame()
   {
     _configs.Update(_physicsMode);

@@ -102,6 +102,25 @@ public class SonicSensorSystem
     _d.Draw();
   }
 
+  public void Draw2()
+  {
+    if (_o.Enabled)
+    {
+      _meshRenderer.DrawPolygon(
+        new Vector3[]
+        {
+          new (_a.FrontRay.Origin.x, _a.FrontRay.Origin.y),
+          new (_b.FrontRay.Origin.x, _b.FrontRay.Origin.y),
+          new (_d.FrontRay.Origin.x, _d.FrontRay.Origin.y),
+          new (_c.FrontRay.Origin.x, _c.FrontRay.Origin.y),
+        },
+        Color.black);
+    }
+    else
+    {
+    }
+  }
+
   private void SetCurrentSensorGroup()
   {
     var currentSensorGroup = SizeMode switch

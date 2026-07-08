@@ -138,4 +138,8 @@ public partial class SonicController : MonoBehaviour
   [SerializeField]
   [InspectorLabel("Ring")]
   private GameObject _ringPrefab;
+
+  [Header("Tools")]
+  [SerializeField]
+  private GameObject _meshRendererObj;
 }
