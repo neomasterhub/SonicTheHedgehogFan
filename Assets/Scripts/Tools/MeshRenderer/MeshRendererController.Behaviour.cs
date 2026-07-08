@@ -5,14 +5,12 @@ using UnityEngine;
 /// </summary>
 public partial class MeshRendererController : IMeshRenderer
 {
-  public void DrawPolygon(Vector3[] points, Color color, float alpha = 1)
+  public void DrawPolygon(Vector3[] points, Color color)
   {
     if (points == null || points.Length < 3)
     {
       return;
     }
-
-    color.a = alpha;
 
     var vi = _vertices.Count;
 
