@@ -3,7 +3,9 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 [DefaultExecutionOrder(1000)]
-public class MeshRendererController : MonoBehaviour
+public class MeshRendererController
+  : MonoBehaviour,
+  IMeshRenderer
 {
   private readonly List<Vector3> _vertices = new();
   private readonly List<Color> _colors = new();
