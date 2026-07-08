@@ -26,6 +26,7 @@ public class SonicSensorSystem
   private UDFSensor _d;
   private Vector2 _parentPosition;
   private SonicSensorRayLengths? _sensorRayLengths;
+  private IMeshRenderer _meshRenderer;
 
   public SonicSensorSystem(
     SonicSizeMode sizeMode = SonicSizeMode.Big,
@@ -80,6 +81,16 @@ public class SonicSensorSystem
   public WallDetectionResult? DetectRightWall(LayerMask groundLayer)
   {
     return DetectWall(_d.FrontRay, _b.FrontRay, groundLayer);
+  }
+
+  public void SetMeshRenderer(IMeshRenderer meshRenderer)
+  {
+    _meshRenderer = meshRenderer;
+    //_o.SetMeshRenderer(meshRenderer);
+    //_a.SetMeshRenderer(meshRenderer);
+    //_b.SetMeshRenderer(meshRenderer);
+    //_c.SetMeshRenderer(meshRenderer);
+    //_d.SetMeshRenderer(meshRenderer);
   }
 
   public void Draw()
