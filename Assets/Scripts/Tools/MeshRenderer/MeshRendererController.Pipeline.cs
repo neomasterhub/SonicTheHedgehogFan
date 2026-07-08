@@ -15,8 +15,6 @@ public partial class MeshRendererController
     _mesh.SetColors(_colors);
     _mesh.SetTriangles(_triangles, 0);
 
-    _meshFilter.sharedMesh = _mesh;
-
     ClearMeshData();
   }
 

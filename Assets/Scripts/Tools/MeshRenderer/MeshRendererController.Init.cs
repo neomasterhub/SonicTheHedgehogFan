@@ -10,7 +10,10 @@ public partial class MeshRendererController
   {
     _mesh = new();
     _mesh.MarkDynamic();
+
     _meshFilter = this.AddComponent<MeshFilter>();
+    _meshFilter.sharedMesh = _mesh;
+
     _meshRenderer = this.AddComponent<MeshRenderer>();
     _meshRenderer.sortingOrder = _sortingOrder;
     _meshRenderer.sharedMaterial = new(Shader.Find("Sprites/Default"));
