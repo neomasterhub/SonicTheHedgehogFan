@@ -22,8 +22,8 @@ public partial class MeshRendererController
 
   private void ClearMeshData()
   {
-    _vertices.Clear();
     _colors.Clear();
     _triangles.Clear();
+    _vertices.Clear();
   }
 }
