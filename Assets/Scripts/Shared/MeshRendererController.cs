@@ -3,7 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 [DefaultExecutionOrder(1000)]
-public class SharedMeshRendererController : MonoBehaviour
+public class MeshRendererController : MonoBehaviour
 {
   private readonly List<Vector3> _vertices = new();
   private readonly List<Color> _colors = new();
@@ -13,7 +13,7 @@ public class SharedMeshRendererController : MonoBehaviour
   private MeshFilter _meshFilter;
   private MeshRenderer _meshRenderer;
 
-  public static SharedMeshRendererController Instance { get; private set; }
+  public static MeshRendererController Instance { get; private set; }
 
   private void Awake()
   {
