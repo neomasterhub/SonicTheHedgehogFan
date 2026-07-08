@@ -75,8 +75,8 @@ public partial class SonicController : MonoBehaviour
   private GameObject _invincibilityStars;
   private GameObject _shield;
   private GroundDetectionResult _lastGroundDetectionResult;
+  private IMeshRenderer _meshRenderer;
   private IPlatform _contactPlatform;
-  private LineRenderer _groundNormal;
   private PhysicsMode _physicsMode;
   private PhysicsMode _prevPhysicsMode;
   private ReboundSignal? _reboundSignal;
@@ -141,5 +141,6 @@ public partial class SonicController : MonoBehaviour
 
   [Header("Tools")]
   [SerializeField]
+  [InspectorLabel("Mesh renderer")]
   private GameObject _meshRendererObj;
 }
