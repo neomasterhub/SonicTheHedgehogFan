@@ -82,6 +82,7 @@ public static class SharedConsts
   public static class Rendering
   {
     public const float DebugScale = 10000;
+    public const float SensorRayWidth = 0.01f;
     public const int PlayerOrderInLayer = 1;
   }
 
