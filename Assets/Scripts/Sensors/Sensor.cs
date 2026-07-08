@@ -21,6 +21,12 @@ public class Sensor : SensorBase
     Ray.Origin = Position;
   }
 
+  public override void SetMeshRenderer(IMeshRenderer meshRenderer)
+  {
+    base.SetMeshRenderer(meshRenderer);
+    Ray.SetMeshRenderer(meshRenderer);
+  }
+
   public override void Draw()
   {
     if (Enabled)

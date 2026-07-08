@@ -1,7 +1,10 @@
 using UnityEngine;
+using static SharedConsts.Rendering;
 
 public class SensorRay
 {
+  private IMeshRenderer _meshRenderer;
+
   public SensorRay()
   {
   }
@@ -31,12 +34,16 @@ public class SensorRay
     return hit.collider == null ? null : hit;
   }
 
+  public void SetMeshRenderer(IMeshRenderer meshRenderer)
+  {
+    _meshRenderer = meshRenderer;
+  }
+
   public void Draw()
   {
     if (Enabled)
     {
-      Gizmos.color = Color;
-      Gizmos.DrawLine(Origin, Origin + (Direction * Length));
+      _meshRenderer.DrawLine(Origin, Origin + (Direction * Length), SensorRayWidth, Color);
     }
   }
 }

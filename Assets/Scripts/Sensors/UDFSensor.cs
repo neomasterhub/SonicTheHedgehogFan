@@ -29,6 +29,14 @@ public class UDFSensor : SensorBase
     FrontRay.Origin = Position;
   }
 
+  public override void SetMeshRenderer(IMeshRenderer meshRenderer)
+  {
+    base.SetMeshRenderer(meshRenderer);
+    UpRay.SetMeshRenderer(meshRenderer);
+    DownRay.SetMeshRenderer(meshRenderer);
+    FrontRay.SetMeshRenderer(meshRenderer);
+  }
+
   public override void Draw()
   {
     if (Enabled)

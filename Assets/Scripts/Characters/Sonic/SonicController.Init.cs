@@ -41,6 +41,7 @@ public partial class SonicController
   {
     InitializeComponents();
     InitializeViewSystem();
+    InitializeSensorSystem();
     InitializeSpeedSystemProviders();
     InitializeSounds();
     InitializeTimers();
@@ -89,6 +90,11 @@ public partial class SonicController
       .Add(rotGrounded)
       .Add(rotWallToAir)
       .Add(rotCeilingToAir);
+  }
+
+  private void InitializeSensorSystem()
+  {
+    _sensorSystem.SetMeshRenderer(_meshRendererObj.GetComponent<IMeshRenderer>());
   }
 
   private void InitializeSpeedSystemProviders()

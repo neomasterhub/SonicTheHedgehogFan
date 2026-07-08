@@ -38,6 +38,7 @@ public static class SharedConsts
   public static class Colors
   {
     public static readonly Color TransparentBlack = new(0, 0, 0, 0);
+    public static readonly Color SensorSystemBG = new(0, 0, 0, 0.7f);
   }
 
   public static class ConvertValues
@@ -80,8 +81,10 @@ public static class SharedConsts
 
   public static class Rendering
   {
-    public const float DebugScale = 10000;
     public const int PlayerOrderInLayer = 1;
+    public const float DebugScale = 10000;
+    public const float SensorRayWidth = 0.026f;
+    public const float SensorOriginRadius = 0;
   }
 
   public static class SecretCodes

@@ -1,5 +1,6 @@
 using UnityEngine;
 using static Helpers.Sensors;
+using static SharedConsts.Colors;
 using static SonicConsts.Sizes;
 
 public class SonicSensorSystem
@@ -26,6 +27,7 @@ public class SonicSensorSystem
   private UDFSensor _d;
   private Vector2 _parentPosition;
   private SonicSensorRayLengths? _sensorRayLengths;
+  private IMeshRenderer _meshRenderer;
 
   public SonicSensorSystem(
     SonicSizeMode sizeMode = SonicSizeMode.Big,
@@ -82,13 +84,66 @@ public class SonicSensorSystem
     return DetectWall(_d.FrontRay, _b.FrontRay, groundLayer);
   }
 
+  public void SetMeshRenderer(IMeshRenderer meshRenderer)
+  {
+    _meshRenderer = meshRenderer;
+    _bigUpSensorGroup.SetMeshRenderer(meshRenderer);
+    _bigDownSensorGroup.SetMeshRenderer(meshRenderer);
+    _bigLeftSensorGroup.SetMeshRenderer(meshRenderer);
+    _bigRightSensorGroup.SetMeshRenderer(meshRenderer);
+    _smallUpSensorGroup.SetMeshRenderer(meshRenderer);
+    _smallDownSensorGroup.SetMeshRenderer(meshRenderer);
+    _smallLeftSensorGroup.SetMeshRenderer(meshRenderer);
+    _smallRightSensorGroup.SetMeshRenderer(meshRenderer);
+  }
+
   public void Draw()
   {
+    DrawBackground();
     _o.Draw();
     _a.Draw();
     _b.Draw();
     _c.Draw();
     _d.Draw();
+  }
+
+  private void DrawBackground()
+  {
+    var lengths = _sensorRayLengths.Value;
+    Vector3[] points;
+
+    if (_o.Enabled)
+    {
+      var oy = _o.Position.y - lengths.O;
+      var dx1 = lengths.BottomUDF.z;
+      var dx2 = lengths.TopUDF.z;
+      var dy2 = lengths.TopUDF.y;
+
+      points = new Vector3[]
+      {
+        new(_a.Position.x - dx1, oy),
+        new(_b.Position.x + dx1, oy),
+        new(_d.Position.x + dx2, _d.Position.y + dy2),
+        new(_c.Position.x - dx2, _c.Position.y + dy2),
+      };
+    }
+    else
+    {
+      var dx1 = lengths.BottomUDF.z;
+      var dy1 = lengths.BottomUDF.y;
+      var dx2 = lengths.TopUDF.z;
+      var dy2 = lengths.TopUDF.y;
+
+      points = new Vector3[]
+      {
+        new(_a.Position.x - dx1, _a.Position.y - dy1),
+        new(_b.Position.x + dx1, _b.Position.y - dy1),
+        new(_d.Position.x + dx2, _d.Position.y + dy2),
+        new(_c.Position.x - dx2, _c.Position.y + dy2),
+      };
+    }
+
+    _meshRenderer.DrawPolygon(points, SensorSystemBG);
   }
 
   private void SetCurrentSensorGroup()

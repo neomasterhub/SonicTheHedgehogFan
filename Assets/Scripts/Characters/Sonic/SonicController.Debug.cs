@@ -5,9 +5,12 @@ using static SharedConsts.Rendering;
 /// </summary>
 public partial class SonicController
 {
-  private void OnDrawGizmos()
+  private void LateUpdate()
   {
-    _sensorSystem.Draw();
+    if (_debugMode)
+    {
+      _sensorSystem.Draw();
+    }
   }
 
   private void UpdateDebug()

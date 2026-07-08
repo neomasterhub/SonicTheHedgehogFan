@@ -2826,7 +2826,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 2.8
+  orthographic size: 3.75
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3054,6 +3054,7 @@ MonoBehaviour:
   _skidAudioClip: {fileID: 8300000, guid: 9b89e2710e6c85545ba780692ee316f8, type: 3}
   _invincibilityStarsTrailPrefab: {fileID: 3470931886647774454, guid: baecbd0c50edcac40b9ea0694a77be97, type: 3}
   _ringPrefab: {fileID: 5601778466645593367, guid: e75974286517f944dac2e72436689482, type: 3}
+  _meshRendererObj: {fileID: 2109289686}
 --- !u!61 &710850506
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4192,6 +4193,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1920839051}
   - component: {fileID: 1920839052}
+  - component: {fileID: 1920839053}
   m_Layer: 0
   m_Name: Scene
   m_TagString: Untagged
@@ -4229,6 +4231,62 @@ MonoBehaviour:
   _canvas: {fileID: 1049324918}
   _debugMode: 0
   _invincibilityStarsAudioClip: {fileID: 8300000, guid: 68e0dabd5b2b7e94987bf2e68cdf8ec6, type: 3}
+--- !u!114 &1920839053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1920839050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60c6a14d716100a43b93188f6086fbb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SharedMeshRendererController
+--- !u!1 &2109289686
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2109289687}
+  - component: {fileID: 2109289688}
+  m_Layer: 0
+  m_Name: Mesh Renderer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2109289687
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2109289686}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2109289688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2109289686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60c6a14d716100a43b93188f6086fbb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MeshRendererController
 --- !u!1 &2143455030
 GameObject:
   m_ObjectHideFlags: 0
@@ -4314,3 +4372,4 @@ SceneRoots:
   - {fileID: 971844284}
   - {fileID: 1049324919}
   - {fileID: 915818887}
+  - {fileID: 2109289687}
