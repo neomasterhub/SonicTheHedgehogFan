@@ -15,27 +15,9 @@ public class MeshRendererController
   private MeshFilter _meshFilter;
   private MeshRenderer _meshRenderer;
 
-  public static MeshRendererController Instance { get; private set; }
-
   private void Awake()
   {
-    if (Instance != null && Instance != this)
-    {
-      Destroy(gameObject);
-      return;
-    }
-
-    Instance = this;
-
     InitializeComponents();
-  }
-
-  private void OnDestroy()
-  {
-    if (Instance == this)
-    {
-      Instance = null;
-    }
   }
 
   private void LateUpdate()
