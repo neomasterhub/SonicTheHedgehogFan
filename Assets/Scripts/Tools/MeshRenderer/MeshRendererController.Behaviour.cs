@@ -51,4 +51,27 @@ public partial class MeshRendererController : IMeshRenderer
       _triangles.Add(vi + i + 1);
     }
   }
+
+  public void DrawSquare(Vector3 position, float halfSize, Color color)
+  {
+    var vi = _vertices.Count;
+
+    _vertices.Add(new Vector3(position.x - halfSize, position.y - halfSize, position.z));
+    _vertices.Add(new Vector3(position.x + halfSize, position.y - halfSize, position.z));
+    _vertices.Add(new Vector3(position.x + halfSize, position.y + halfSize, position.z));
+    _vertices.Add(new Vector3(position.x - halfSize, position.y + halfSize, position.z));
+
+    _colors.Add(color);
+    _colors.Add(color);
+    _colors.Add(color);
+    _colors.Add(color);
+
+    _triangles.Add(vi);
+    _triangles.Add(vi + 1);
+    _triangles.Add(vi + 2);
+
+    _triangles.Add(vi);
+    _triangles.Add(vi + 2);
+    _triangles.Add(vi + 3);
+  }
 }
