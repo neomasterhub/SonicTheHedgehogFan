@@ -7,6 +7,12 @@ public partial class MeshRendererController
   {
     if (_vertices.Count == 0)
     {
+      if (_mesh.vertexCount > 0)
+      {
+        _mesh.Clear();
+        ClearMeshData();
+      }
+
       return;
     }
 
