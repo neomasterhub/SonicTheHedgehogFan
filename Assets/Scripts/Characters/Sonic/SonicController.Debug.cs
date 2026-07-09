@@ -1,3 +1,7 @@
+#if UNITY_EDITOR
+using UnityEditor;
+using UnityEngine;
+#endif
 using static SharedConsts.Rendering;
 using static SonicConsts.Debug;
 
@@ -49,6 +53,10 @@ public partial class SonicController
       UpdateDebug_Diagnostics();
       UpdateDebug_EffectHistory();
     }
+
+#if UNITY_EDITOR
+    UpdateDebug_PauseEditor();
+#endif
   }
 
   private void UpdateDebug_Toggle()
@@ -116,4 +124,14 @@ public partial class SonicController
 
     return $"{wall.Value.AngleDeg:0;-0;0}° {wall.Value.Distance * DebugScale:0}";
   }
+
+#if UNITY_EDITOR
+  private void UpdateDebug_PauseEditor()
+  {
+    if (Input.GetKeyDown(KeyCode.KeypadMinus))
+    {
+      EditorApplication.isPaused = true;
+    }
+  }
+#endif
 }
