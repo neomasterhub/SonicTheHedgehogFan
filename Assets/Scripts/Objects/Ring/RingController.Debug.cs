@@ -5,8 +5,10 @@ using UnityEngine;
 /// </summary>
 public partial class RingController : MonoBehaviour
 {
-  private void LateUpdate()
+  private void DrawSensorSystem()
   {
+
+
     _sensorSystem.Draw();
   }
 }

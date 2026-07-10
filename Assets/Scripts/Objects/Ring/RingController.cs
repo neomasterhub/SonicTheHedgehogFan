@@ -19,6 +19,7 @@ public partial class RingController : MonoBehaviour
   private BoxCollider2D _collider;
   private BoxCollider2D _collectorCollider;
   private GroundDetectionResult _lastGroundDetectionResult;
+  private IMeshRenderer _meshRenderer;
   private IRingCollector _collector;
   private RingSpeedContext _speedContext;
   private SpriteRenderer _spriteRenderer;

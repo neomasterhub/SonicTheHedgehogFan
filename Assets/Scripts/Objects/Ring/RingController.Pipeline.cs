@@ -27,6 +27,11 @@ public partial class RingController : MonoBehaviour
     UpdatePosition();
   }
 
+  private void LateUpdate()
+  {
+    DrawSensorSystem();
+  }
+
   private void BeginFrame()
   {
     _lifetime -= Time.fixedDeltaTime;
