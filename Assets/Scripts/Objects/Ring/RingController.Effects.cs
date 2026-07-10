@@ -1,4 +1,4 @@
-using static RingConsts.UI;
+using static RingConsts.Rendering;
 using AnimatorParameters = SharedConsts.Animator.Parameters;
 
 /// <summary>

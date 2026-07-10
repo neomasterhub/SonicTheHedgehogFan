@@ -4243,6 +4243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60c6a14d716100a43b93188f6086fbb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SharedMeshRendererController
+  _sortingOrder: 1000
 --- !u!1 &2109289686
 GameObject:
   m_ObjectHideFlags: 0
@@ -4287,6 +4288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60c6a14d716100a43b93188f6086fbb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeshRendererController
+  _sortingOrder: 1000
 --- !u!1 &2143455030
 GameObject:
   m_ObjectHideFlags: 0

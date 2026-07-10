@@ -174,8 +174,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aca7f2e2017b01143bf64657ae6b3bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RingController
-  _initialized: 0
-  _gravityEnabled: 1
-  _player: {fileID: 0}
+  _initialized: 1
+  _gravityEnabled: 0
+  _lifetime: Infinity
+  _collectorObj: {fileID: 0}
   _physicsMode: 0
   _initialSpeed: {x: 0, y: 0}
