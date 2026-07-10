@@ -1,5 +1,6 @@
 using UnityEngine;
 using static RingConsts.Physics;
+using static SharedConsts.Tags;
 
 /// <summary>
 /// Init.
@@ -28,11 +29,13 @@ public partial class RingController : MonoBehaviour
     _sensorSystem.SetMeshRenderer(_meshRenderer);
     _speedSystem.Initialize(_initialSpeed.x, _initialSpeed.y);
 
-    if (_collectorObj != null)
+    if (_collectorObj == null)
     {
-      _collector = _collectorObj.GetComponent<IRingCollector>();
-      _collectorCollider = _collectorObj.GetComponent<BoxCollider2D>();
+      _collectorObj = GameObject.FindGameObjectWithTag(Player);
     }
+
+    _collector = _collectorObj.GetComponent<IRingCollector>();
+    _collectorCollider = _collectorObj.GetComponent<BoxCollider2D>();
   }
 
   public void Initialize(
