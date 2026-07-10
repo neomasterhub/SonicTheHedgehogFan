@@ -13,7 +13,7 @@ public static class RingConsts
 
     public const int MaxLostNumber = 32;
     public const float MaxStopSpeed = 0.002f;
-    public const float SensorY = -0.165f;
+    public const float SensorY = -0.155f;
     public const float LostLifetime = 4.27f;
     public const float LostPortion1Speed = _lostPortion1SpeedPx / PxPerUnit;
     public const float LostPortion2Speed = _lostPortion2SpeedPx / PxPerUnit;
