@@ -4,11 +4,6 @@ using static SharedConsts.Rendering;
 
 public static class RingConsts
 {
-  public static class UI
-  {
-    public const int SparkleOrderInLayer = PlayerOrderInLayer + 1;
-  }
-
   public static class Physics
   {
     private const float _lostPortion1SpeedPx = 4;
@@ -25,5 +20,10 @@ public static class RingConsts
     public const float LostAngleStepRad = _lostAngleStepDeg * Mathf.Deg2Rad;
     public const float LostInitialAngleRad = _lostInitialAngleDeg * Mathf.Deg2Rad;
     public static readonly RingPhysicsModeConfig NormalConfig = new(24f / SpxPerUnit, 0.75f);
+  }
+
+  public static class Rendering
+  {
+    public const int SparkleOrderInLayer = PlayerOrderInLayer + 1;
   }
 }
