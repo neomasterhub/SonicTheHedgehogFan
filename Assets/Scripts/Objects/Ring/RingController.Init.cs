@@ -21,6 +21,7 @@ public partial class RingController : MonoBehaviour
   private void Awake()
   {
     _speedSystem.Initialize(_initialSpeed.x, _initialSpeed.y);
+    _sensorSystem.SetMeshRenderer(GameObject.Find("Mesh Renderer").GetComponent<IMeshRenderer>());
 
     _animator = GetComponent<Animator>();
     _collider = GetComponent<BoxCollider2D>();
