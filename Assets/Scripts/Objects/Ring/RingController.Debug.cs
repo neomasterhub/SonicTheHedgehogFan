@@ -7,8 +7,9 @@ public partial class RingController : MonoBehaviour
 {
   private void DrawSensorSystem()
   {
-
-
-    _sensorSystem.Draw();
+    if (_debugMode)
+    {
+      _sensorSystem.Draw();
+    }
   }
 }

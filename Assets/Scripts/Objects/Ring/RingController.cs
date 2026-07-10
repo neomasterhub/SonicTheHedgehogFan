@@ -13,6 +13,7 @@ public partial class RingController : MonoBehaviour
   private readonly RingSpeedSystem _speedSystem;
   private readonly ASensorSystem _sensorSystem;
 
+  private bool _debugMode;
   private bool _isGrounded;
   private bool _isCollected;
   private Animator _animator;
