@@ -58,6 +58,7 @@ public partial class SonicController
         IntersectingZones.HasAny(ZoneType.Death))
       .WithAction(() =>
       {
+        IsHit = true;
         Dying();
 
         return PipelineStepResult.Break;
