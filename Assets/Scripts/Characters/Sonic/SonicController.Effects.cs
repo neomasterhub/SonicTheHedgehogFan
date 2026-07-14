@@ -11,6 +11,7 @@ public partial class SonicController
   private void SetEffectPipeline()
   {
     _effects.AddStep(CreateEffect_Disable());
+    _effects.AddStep(CreateEffect_DeathZone());
     _effects.AddStep(CreateEffect_FallingBlockOnHead());
     _effects.AddStep(CreateEffect_SetHit());
     _effects.AddStep(CreateEffect_Attacked());
@@ -43,6 +44,23 @@ public partial class SonicController
       .WithAction(() =>
       {
         gameObject.SetActive(false);
+
+        return PipelineStepResult.Break;
+      })
+      .Build();
+  }
+
+  private PipelineStep CreateEffect_DeathZone()
+  {
+    return PipelineStepBuilder.Create()
+      .WithDisplayName("Death zone")
+      .WithCondition(() =>
+        !_isDying
+        && IntersectingZones.HasAny(ZoneType.Death))
+      .WithAction(() =>
+      {
+        IsHit = true;
+        Dying();
 
         return PipelineStepResult.Break;
       })
@@ -184,11 +202,7 @@ public partial class SonicController
         && Rings.Count == 0)
       .WithAction(() =>
       {
-        _isDying = true;
-        IsHurt = false;
-        _viewSystem.StopBlinking();
-        _timerSystem.StartIfNotRunning(_dyingTimer);
-        AnalyzeEnvironment_Airborne();
+        Dying();
 
         return PipelineStepResult.Break;
       })
@@ -439,5 +453,23 @@ public partial class SonicController
         return PipelineStepResult.Break;
       })
       .Build();
+  }
+
+  private void Dying()
+  {
+    _isDying = true;
+    _isRolling = false;
+
+    IsHurt = false;
+
+    _viewSystem.StopBlinking();
+
+    _timerSystem.Remove(_postHurtInvincibleTimer);
+    _timerSystem.Remove(_invincibilityStarsTimer);
+    _timerSystem.StartIfNotRunning(_dyingTimer);
+
+    EnableInvincibilityStars(false);
+
+    AnalyzeEnvironment_Airborne();
   }
 }
