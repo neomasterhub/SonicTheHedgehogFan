@@ -55,7 +55,8 @@ public partial class SonicController
     return PipelineStepBuilder.Create()
       .WithDisplayName("Death zone")
       .WithCondition(() =>
-        IntersectingZones.HasAny(ZoneType.Death))
+        !_isDying
+        && IntersectingZones.HasAny(ZoneType.Death))
       .WithAction(() =>
       {
         IsHit = true;
