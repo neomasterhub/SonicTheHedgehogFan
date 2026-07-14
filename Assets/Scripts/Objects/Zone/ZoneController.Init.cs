@@ -40,6 +40,11 @@ public partial class ZoneController
 
     switch (_zoneCollider)
     {
+      case BoxCollider2D bc:
+        color.a = ZoneFaceAlpha;
+        InitializeDrawing_Box(meshRenderer, bc, color);
+        break;
+
       case EdgeCollider2D ec:
         InitializeDrawing_Edge(meshRenderer, ec, color);
         break;
@@ -64,6 +69,24 @@ public partial class ZoneController
           ZoneEdgeWidth,
           color);
       }
+    };
+  }
+
+  public void InitializeDrawing_Box(IMeshRenderer meshRenderer, BoxCollider2D bc, Color color)
+  {
+    _drawZoneCollider = () =>
+    {
+      var bounds = bc.bounds;
+
+      meshRenderer.DrawPolygon(
+        new Vector3[]
+        {
+          bounds.min,
+          new(bounds.max.x, bounds.min.y),
+          bounds.max,
+          new(bounds.min.x, bounds.max.y),
+        },
+        color);
     };
   }
 }
