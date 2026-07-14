@@ -458,9 +458,16 @@ public partial class SonicController
   private void Dying()
   {
     _isDying = true;
+    _isRolling = false;
+
     IsHurt = false;
+
     _viewSystem.StopBlinking();
+
+    _timerSystem.Remove(_postHurtInvincibleTimer);
+    _timerSystem.Remove(_invincibilityStarsTimer);
     _timerSystem.StartIfNotRunning(_dyingTimer);
+
     AnalyzeEnvironment_Airborne();
   }
 }
