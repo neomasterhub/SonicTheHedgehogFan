@@ -13,7 +13,8 @@ public partial class SonicController
   IPlatformObject,
   IRingCollector,
   ISceneObjectDebug,
-  ISceneObjectPlayer
+  ISceneObjectPlayer,
+  IZoneObject
 {
   public bool IsInvincible { get; private set; }
   public bool IsAttacking { get; private set; }
@@ -128,4 +129,6 @@ public partial class SonicController
 
   public bool HasSpeedShoes => _hasSpeedShoes;
   public bool HasInvincibilityStars => _hasInvincibilityStars;
+
+  public ZoneType IntersectingZones { get; set; }
 }
