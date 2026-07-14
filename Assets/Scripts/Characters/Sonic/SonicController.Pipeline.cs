@@ -15,7 +15,7 @@ public partial class SonicController
   private void FixedUpdate()
   {
     BeginFrame();
-    UpdateInput();
+    ProcessInput();
     AnalyzeEnvironment();
     ApplyEffects();
     ApplyRebound();
@@ -44,7 +44,7 @@ public partial class SonicController
     _horizontalDirection = !_spriteRenderer.flipX;
   }
 
-  private void UpdateInput()
+  private void ProcessInput()
   {
     _inputSystem.Update();
 
@@ -71,18 +71,7 @@ public partial class SonicController
 
     if (_inputSystem.CheckLastPressed(ToggleInvincibilityStars))
     {
-      _hasInvincibilityStars = !_hasInvincibilityStars;
-      _invincibilityStars.SetActive(_hasInvincibilityStars);
-      _timerSystem.Remove(_postHurtInvincibleTimer);
-      _timerSystem.Remove(_invincibilityStarsTimer);
-
-      IsAttacking = _hasInvincibilityStars || _isRolling;
-      IsInvincible = _hasInvincibilityStars;
-
-      if (_hasInvincibilityStars)
-      {
-        _timerSystem.StartIfNotRunning(_invincibilityStarsTimer);
-      }
+      EnableInvincibilityStars(!_hasInvincibilityStars);
 
       return;
     }
@@ -448,5 +437,21 @@ public partial class SonicController
     }
 
     Rings.Clear();
+  }
+
+  private void EnableInvincibilityStars(bool enabled)
+  {
+    _hasInvincibilityStars = enabled;
+    _invincibilityStars.SetActive(_hasInvincibilityStars);
+    _timerSystem.Remove(_postHurtInvincibleTimer);
+    _timerSystem.Remove(_invincibilityStarsTimer);
+
+    IsAttacking = _hasInvincibilityStars || _isRolling;
+    IsInvincible = _hasInvincibilityStars;
+
+    if (_hasInvincibilityStars)
+    {
+      _timerSystem.StartIfNotRunning(_invincibilityStarsTimer);
+    }
   }
 }

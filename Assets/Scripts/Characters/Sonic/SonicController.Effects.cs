@@ -468,6 +468,8 @@ public partial class SonicController
     _timerSystem.Remove(_invincibilityStarsTimer);
     _timerSystem.StartIfNotRunning(_dyingTimer);
 
+    EnableInvincibilityStars(false);
+
     AnalyzeEnvironment_Airborne();
   }
 }
