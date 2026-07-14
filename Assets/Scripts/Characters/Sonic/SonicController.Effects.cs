@@ -58,11 +58,7 @@ public partial class SonicController
         IntersectingZones.HasAny(ZoneType.Death))
       .WithAction(() =>
       {
-        _isDying = true;
-        IsHurt = false;
-        _viewSystem.StopBlinking();
-        _timerSystem.StartIfNotRunning(_dyingTimer);
-        AnalyzeEnvironment_Airborne();
+        Dying();
 
         return PipelineStepResult.Break;
       })
@@ -204,11 +200,7 @@ public partial class SonicController
         && Rings.Count == 0)
       .WithAction(() =>
       {
-        _isDying = true;
-        IsHurt = false;
-        _viewSystem.StopBlinking();
-        _timerSystem.StartIfNotRunning(_dyingTimer);
-        AnalyzeEnvironment_Airborne();
+        Dying();
 
         return PipelineStepResult.Break;
       })
@@ -459,5 +451,14 @@ public partial class SonicController
         return PipelineStepResult.Break;
       })
       .Build();
+  }
+
+  private void Dying()
+  {
+    _isDying = true;
+    IsHurt = false;
+    _viewSystem.StopBlinking();
+    _timerSystem.StartIfNotRunning(_dyingTimer);
+    AnalyzeEnvironment_Airborne();
   }
 }
