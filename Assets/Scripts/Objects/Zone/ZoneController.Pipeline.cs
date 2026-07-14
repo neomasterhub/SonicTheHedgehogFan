@@ -18,6 +18,9 @@ public partial class ZoneController
 
   private void DrawZone()
   {
-    _drawZoneCollider.Invoke();
+    if (_debugMode)
+    {
+      _drawZoneCollider.Invoke();
+    }
   }
 }

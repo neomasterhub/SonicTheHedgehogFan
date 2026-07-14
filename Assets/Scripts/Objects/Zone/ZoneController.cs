@@ -7,6 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public partial class ZoneController : MonoBehaviour
 {
+  private bool _debugMode;
   private Action _drawZoneCollider;
   private Collider2D _zoneCollider;
   private Collider2D _zoneObjectCollider;

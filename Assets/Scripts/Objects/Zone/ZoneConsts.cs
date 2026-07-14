@@ -8,12 +8,12 @@ public static class ZoneConsts
 
     static Colors()
     {
-      Death = Color.firebrick;
+      Death = Color.darkRed;
     }
   }
 
   public static class Drawing
   {
-    public const float ZoneEdgeWidth = 0.2f;
+    public const float ZoneEdgeWidth = 0.02f;
   }
 }
