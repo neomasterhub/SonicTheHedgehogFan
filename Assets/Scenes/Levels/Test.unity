@@ -3045,6 +3045,7 @@ GameObject:
   - component: {fileID: 1814098416}
   - component: {fileID: 1814098415}
   - component: {fileID: 1814098414}
+  - component: {fileID: 1814098418}
   - component: {fileID: 1814098417}
   m_Layer: 0
   m_Name: Cinemachine Camera
@@ -3155,6 +3156,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraLookVertical
   DirectionProvider: {fileID: 710850496}
+--- !u!114 &1814098418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1814098413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49ae9995bc682af4c983ffb88aa933c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraLimitYMinController
+  _xMin: -10
+  _xMax: 10
+  _yMin: 12
 --- !u!1 &1821154568
 GameObject:
   m_ObjectHideFlags: 0
