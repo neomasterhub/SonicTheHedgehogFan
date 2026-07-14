@@ -44,4 +44,19 @@ public static class EnumExtensions
   {
     return enabled ? source | target : source & ~target;
   }
+
+  public static bool HasAll(this ZoneType source, ZoneType target)
+  {
+    return (source & target) == target;
+  }
+
+  public static bool HasAny(this ZoneType source, ZoneType target)
+  {
+    return (source & target) != 0;
+  }
+
+  public static ZoneType Set(this ZoneType source, ZoneType target, bool enabled)
+  {
+    return enabled ? source | target : source & ~target;
+  }
 }
