@@ -11,6 +11,7 @@ public partial class SonicController
   private void SetEffectPipeline()
   {
     _effects.AddStep(CreateEffect_Disable());
+    _effects.AddStep(CreateEffect_DeathZone());
     _effects.AddStep(CreateEffect_FallingBlockOnHead());
     _effects.AddStep(CreateEffect_SetHit());
     _effects.AddStep(CreateEffect_Attacked());
@@ -43,6 +44,25 @@ public partial class SonicController
       .WithAction(() =>
       {
         gameObject.SetActive(false);
+
+        return PipelineStepResult.Break;
+      })
+      .Build();
+  }
+
+  private PipelineStep CreateEffect_DeathZone()
+  {
+    return PipelineStepBuilder.Create()
+      .WithDisplayName("Death zone")
+      .WithCondition(() =>
+        IntersectingZones.HasAny(ZoneType.Death))
+      .WithAction(() =>
+      {
+        _isDying = true;
+        IsHurt = false;
+        _viewSystem.StopBlinking();
+        _timerSystem.StartIfNotRunning(_dyingTimer);
+        AnalyzeEnvironment_Airborne();
 
         return PipelineStepResult.Break;
       })
