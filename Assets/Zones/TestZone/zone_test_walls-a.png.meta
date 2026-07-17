@@ -207,8 +207,8 @@ TextureImporter:
       name: zone_test_walls-a_4
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 64
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -229,8 +229,8 @@ TextureImporter:
       name: zone_test_walls-a_5
       rect:
         serializedVersion: 2
-        x: 16
-        y: 0
+        x: 80
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -251,7 +251,7 @@ TextureImporter:
       name: zone_test_walls-a_6
       rect:
         serializedVersion: 2
-        x: 32
+        x: 0
         y: 0
         width: 16
         height: 16
@@ -273,7 +273,7 @@ TextureImporter:
       name: zone_test_walls-a_7
       rect:
         serializedVersion: 2
-        x: 48
+        x: 16
         y: 0
         width: 16
         height: 16
@@ -287,6 +287,94 @@ TextureImporter:
       bones: []
       spriteID: f58b133782511a54e8c4dead8ace217a
       internalID: 2037317461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zone_test_walls-a_8
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea700c655e40b0d4cb6d6771ca653c9e
+      internalID: 1387254915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zone_test_walls-a_9
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33236a47139029448b30232da28820ad
+      internalID: -849628556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zone_test_walls-a_10
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b394a1b0fbe2ec24a93af4aa4b22471b
+      internalID: -573627098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zone_test_walls-a_11
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c143f33f3f4ae6645815df63faf06cfd
+      internalID: -41465423
       vertices: []
       indices: 
       edges: []
@@ -309,12 +397,16 @@ TextureImporter:
     nameFileIdTable:
       zone_test_walls-a_0: 193428674022987697
       zone_test_walls-a_1: -7988223705409331967
+      zone_test_walls-a_10: -573627098
+      zone_test_walls-a_11: -41465423
       zone_test_walls-a_2: 1386887520
       zone_test_walls-a_3: 1520434389
       zone_test_walls-a_4: -219830120
       zone_test_walls-a_5: 744189342
       zone_test_walls-a_6: -1368605557
       zone_test_walls-a_7: 2037317461
+      zone_test_walls-a_8: 1387254915
+      zone_test_walls-a_9: -849628556
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

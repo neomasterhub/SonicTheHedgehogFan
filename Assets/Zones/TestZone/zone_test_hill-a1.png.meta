@@ -292,8 +292,8 @@ TextureImporter:
       name: zone_test_hill-a1_8
       rect:
         serializedVersion: 2
-        x: 128
-        y: 16
+        x: 0
+        y: 0
         width: 16
         height: 16
       alignment: 0
@@ -314,7 +314,7 @@ TextureImporter:
       name: zone_test_hill-a1_9
       rect:
         serializedVersion: 2
-        x: 0
+        x: 16
         y: 0
         width: 16
         height: 16
@@ -336,7 +336,7 @@ TextureImporter:
       name: zone_test_hill-a1_10
       rect:
         serializedVersion: 2
-        x: 16
+        x: 96
         y: 0
         width: 16
         height: 16
@@ -376,28 +376,6 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: zone_test_hill-a1_12
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 605dd294d8b2e3448ad070b4182008fd
-      internalID: 1250258306
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -418,7 +396,6 @@ TextureImporter:
       zone_test_hill-a1_1: 402791770
       zone_test_hill-a1_10: -719951301
       zone_test_hill-a1_11: -2078967705
-      zone_test_hill-a1_12: 1250258306
       zone_test_hill-a1_2: 1700038889
       zone_test_hill-a1_3: 1624300903
       zone_test_hill-a1_4: -1013875411

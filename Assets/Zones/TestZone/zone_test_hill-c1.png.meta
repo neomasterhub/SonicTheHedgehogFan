@@ -358,7 +358,7 @@ TextureImporter:
       name: zone_test_hill-c1_11
       rect:
         serializedVersion: 2
-        x: 80
+        x: 176
         y: 64
         width: 16
         height: 16
@@ -380,8 +380,8 @@ TextureImporter:
       name: zone_test_hill-c1_12
       rect:
         serializedVersion: 2
-        x: 160
-        y: 64
+        x: 48
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -402,8 +402,8 @@ TextureImporter:
       name: zone_test_hill-c1_13
       rect:
         serializedVersion: 2
-        x: 176
-        y: 64
+        x: 64
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -424,7 +424,7 @@ TextureImporter:
       name: zone_test_hill-c1_14
       rect:
         serializedVersion: 2
-        x: 48
+        x: 176
         y: 48
         width: 16
         height: 16
@@ -446,7 +446,7 @@ TextureImporter:
       name: zone_test_hill-c1_15
       rect:
         serializedVersion: 2
-        x: 64
+        x: 192
         y: 48
         width: 16
         height: 16
@@ -468,8 +468,8 @@ TextureImporter:
       name: zone_test_hill-c1_16
       rect:
         serializedVersion: 2
-        x: 176
-        y: 48
+        x: 32
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -490,8 +490,8 @@ TextureImporter:
       name: zone_test_hill-c1_17
       rect:
         serializedVersion: 2
-        x: 192
-        y: 48
+        x: 48
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -512,7 +512,7 @@ TextureImporter:
       name: zone_test_hill-c1_18
       rect:
         serializedVersion: 2
-        x: 32
+        x: 192
         y: 32
         width: 16
         height: 16
@@ -534,7 +534,7 @@ TextureImporter:
       name: zone_test_hill-c1_19
       rect:
         serializedVersion: 2
-        x: 48
+        x: 208
         y: 32
         width: 16
         height: 16
@@ -556,8 +556,8 @@ TextureImporter:
       name: zone_test_hill-c1_20
       rect:
         serializedVersion: 2
-        x: 192
-        y: 32
+        x: 0
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -578,8 +578,8 @@ TextureImporter:
       name: zone_test_hill-c1_21
       rect:
         serializedVersion: 2
-        x: 208
-        y: 32
+        x: 16
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -600,7 +600,7 @@ TextureImporter:
       name: zone_test_hill-c1_22
       rect:
         serializedVersion: 2
-        x: 0
+        x: 32
         y: 16
         width: 16
         height: 16
@@ -622,7 +622,7 @@ TextureImporter:
       name: zone_test_hill-c1_23
       rect:
         serializedVersion: 2
-        x: 16
+        x: 48
         y: 16
         width: 16
         height: 16
@@ -644,7 +644,7 @@ TextureImporter:
       name: zone_test_hill-c1_24
       rect:
         serializedVersion: 2
-        x: 32
+        x: 192
         y: 16
         width: 16
         height: 16
@@ -666,7 +666,7 @@ TextureImporter:
       name: zone_test_hill-c1_25
       rect:
         serializedVersion: 2
-        x: 48
+        x: 208
         y: 16
         width: 16
         height: 16
@@ -688,7 +688,7 @@ TextureImporter:
       name: zone_test_hill-c1_26
       rect:
         serializedVersion: 2
-        x: 192
+        x: 224
         y: 16
         width: 16
         height: 16
@@ -710,7 +710,7 @@ TextureImporter:
       name: zone_test_hill-c1_27
       rect:
         serializedVersion: 2
-        x: 208
+        x: 240
         y: 16
         width: 16
         height: 16
@@ -732,8 +732,8 @@ TextureImporter:
       name: zone_test_hill-c1_28
       rect:
         serializedVersion: 2
-        x: 224
-        y: 16
+        x: 0
+        y: 0
         width: 16
         height: 16
       alignment: 0
@@ -754,8 +754,8 @@ TextureImporter:
       name: zone_test_hill-c1_29
       rect:
         serializedVersion: 2
-        x: 240
-        y: 16
+        x: 16
+        y: 0
         width: 16
         height: 16
       alignment: 0
@@ -776,7 +776,7 @@ TextureImporter:
       name: zone_test_hill-c1_30
       rect:
         serializedVersion: 2
-        x: 0
+        x: 224
         y: 0
         width: 16
         height: 16
@@ -798,7 +798,7 @@ TextureImporter:
       name: zone_test_hill-c1_31
       rect:
         serializedVersion: 2
-        x: 16
+        x: 240
         y: 0
         width: 16
         height: 16
@@ -812,50 +812,6 @@ TextureImporter:
       bones: []
       spriteID: 1399d98a5ab80614a889ac85975eef61
       internalID: -781709517
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: zone_test_hill-c1_32
-      rect:
-        serializedVersion: 2
-        x: 224
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 49bebac108431ad4f85e240149c25a90
-      internalID: 730719339
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: zone_test_hill-c1_33
-      rect:
-        serializedVersion: 2
-        x: 240
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e86ed32a7923b794e8a8474c50c39999
-      internalID: 983296322
       vertices: []
       indices: 
       edges: []
@@ -902,8 +858,6 @@ TextureImporter:
       zone_test_hill-c1_3: -1742967862
       zone_test_hill-c1_30: 1115594418
       zone_test_hill-c1_31: -781709517
-      zone_test_hill-c1_32: 730719339
-      zone_test_hill-c1_33: 983296322
       zone_test_hill-c1_4: 595929860
       zone_test_hill-c1_5: -63424038
       zone_test_hill-c1_6: 453269831
