@@ -261,20 +261,20 @@ EdgeCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 9.5}
+  m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: 2, y: 5}
-  - {x: 2, y: 0}
-  - {x: 12.45, y: 0}
-  - {x: 12.85, y: 0.14}
-  - {x: 14.5, y: 1.25}
-  - {x: 15.25, y: 1.5}
-  - {x: 16.25, y: 1.5}
-  - {x: 17, y: 1.25}
-  - {x: 18.65, y: 0.14}
-  - {x: 19.05, y: 0}
-  - {x: 50, y: 0}
+  - {x: 2, y: 14.5}
+  - {x: 2, y: 9.5}
+  - {x: 12.45, y: 9.5}
+  - {x: 12.85, y: 9.64}
+  - {x: 14.5, y: 10.75}
+  - {x: 15.25, y: 11}
+  - {x: 16.25, y: 11}
+  - {x: 17, y: 10.75}
+  - {x: 18.65, y: 9.64}
+  - {x: 19.05, y: 9.5}
+  - {x: 50, y: 9.5}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0

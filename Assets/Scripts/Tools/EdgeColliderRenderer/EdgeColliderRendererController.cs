@@ -5,6 +5,7 @@ using UnityEngine;
 /// </summary>
 public partial class EdgeColliderRendererController : MonoBehaviour
 {
+  private bool _debugMode;
   private IMeshRenderer _meshRenderer;
   private EdgeCollider2D[] _edgeColliders;
 

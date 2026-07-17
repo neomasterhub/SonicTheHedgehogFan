@@ -10,10 +10,14 @@ public partial class EdgeColliderRendererController
 
   private void Draw()
   {
+    if (!_debugMode)
+    {
+      return;
+    }
+
     for (var i = 0; i < _edgeColliders.Length; i++)
     {
       var ec = _edgeColliders[i];
-
       var points = ec.points;
       var transform = ec.transform;
 
