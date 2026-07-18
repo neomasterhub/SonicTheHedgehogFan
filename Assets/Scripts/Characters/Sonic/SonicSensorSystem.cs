@@ -110,6 +110,19 @@ public class SonicSensorSystem
   private void DrawBackground()
   {
     var lengths = _sensorRayLengths.Value;
+    Vector3[] points = GroundSide switch
+    {
+      GroundSide.Down => GetBackgroundPoints_DownGround(lengths),
+      GroundSide.Right => GetBackgroundPoints_DownGround(lengths),
+      GroundSide.Up => GetBackgroundPoints_DownGround(lengths),
+      GroundSide.Left => GetBackgroundPoints_DownGround(lengths),
+      _ => throw GroundSide.ArgumentOutOfRangeException(),
+    };
+    _meshRenderer.DrawPolygon(points, SensorSystemBG);
+  }
+
+  private Vector3[] GetBackgroundPoints_DownGround(SonicSensorRayLengths lengths)
+  {
     Vector3[] points;
 
     if (_o.Enabled)
@@ -143,7 +156,7 @@ public class SonicSensorSystem
       };
     }
 
-    _meshRenderer.DrawPolygon(points, SensorSystemBG);
+    return points;
   }
 
   private void SetCurrentSensorGroup()
