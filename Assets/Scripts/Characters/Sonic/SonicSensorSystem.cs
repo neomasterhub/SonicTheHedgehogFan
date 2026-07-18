@@ -115,7 +115,7 @@ public class SonicSensorSystem
       GroundSide.Down => GetBackgroundPoints_DownGround(lengths),
       GroundSide.Right => GetBackgroundPoints_RightGround(lengths),
       GroundSide.Up => GetBackgroundPoints_DownGround(lengths),
-      GroundSide.Left => GetBackgroundPoints_DownGround(lengths),
+      GroundSide.Left => GetBackgroundPoints_LeftGround(lengths),
       _ => throw GroundSide.ArgumentOutOfRangeException(),
     };
     _meshRenderer.DrawPolygon(points, SensorSystemBG);
@@ -209,6 +209,54 @@ public class SonicSensorSystem
         new(_a.Position.x + dx2, _a.Position.y - dy2),
         new(_b.Position.x + dx2, _b.Position.y + dy2),
         new(_d.Position.x - dx1, _d.Position.y + dy1),
+      };
+    }
+
+    return points;
+  }
+
+  private Vector3[] GetBackgroundPoints_LeftGround(SonicSensorRayLengths lengths)
+  {
+    Vector3[] points;
+
+    // Sensors:
+    //   A---C
+    //   |   |
+    //   B-->D
+    // UDF:
+    //   z
+    // y---x
+    //
+    // y---x
+    //   z
+    if (_o.Enabled)
+    {
+      var ox = _o.Position.x - lengths.O;
+      var dy1 = lengths.BottomUDF.z;
+      var dx2 = lengths.TopUDF.x;
+      var dy2 = lengths.TopUDF.z;
+
+      points = new Vector3[]
+      {
+        new(ox, _b.Position.y - dy1),
+        new(_d.Position.x + dx2, _d.Position.y - dy2),
+        new(_c.Position.x + dx2, _c.Position.y + dy2),
+        new(ox, _a.Position.y + dy1),
+      };
+    }
+    else
+    {
+      var dx1 = lengths.BottomUDF.y;
+      var dy1 = lengths.BottomUDF.z;
+      var dx2 = lengths.TopUDF.x;
+      var dy2 = lengths.TopUDF.z;
+
+      points = new Vector3[]
+      {
+        new(_b.Position.x - dx1, _b.Position.y - dy1),
+        new(_d.Position.x + dx2, _d.Position.y - dy2),
+        new(_c.Position.x + dx2, _c.Position.y + dy2),
+        new(_a.Position.x - dx1, _a.Position.y + dy1),
       };
     }
 
