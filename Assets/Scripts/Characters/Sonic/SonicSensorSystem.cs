@@ -125,12 +125,20 @@ public class SonicSensorSystem
   {
     Vector3[] points;
 
+    // Sensors:
+    //   C---D
+    //   |   |
+    //   A-->B
+    // UDF:
+    //   x   x
+    // z-|   |-z
+    //   y   y
     if (_o.Enabled)
     {
       var oy = _o.Position.y - lengths.O;
       var dx1 = lengths.BottomUDF.z;
       var dx2 = lengths.TopUDF.z;
-      var dy2 = lengths.TopUDF.y;
+      var dy2 = lengths.TopUDF.x;
 
       points = new Vector3[]
       {
@@ -145,7 +153,7 @@ public class SonicSensorSystem
       var dx1 = lengths.BottomUDF.z;
       var dy1 = lengths.BottomUDF.y;
       var dx2 = lengths.TopUDF.z;
-      var dy2 = lengths.TopUDF.y;
+      var dy2 = lengths.TopUDF.x;
 
       points = new Vector3[]
       {
