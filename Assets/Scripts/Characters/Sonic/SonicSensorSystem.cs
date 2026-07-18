@@ -370,10 +370,10 @@ public class SonicSensorSystem
       o: new(_oColor, Vector2.zero, Vector2.up),
       parentPosition: parentPosition);
     left = new(
-      c: new(_cColor, new(vRadius, -hRadius), Vector2.right, Vector2.left, Vector2.up),
-      d: new(_dColor, new(vRadius, hRadius), Vector2.right, Vector2.left, Vector2.down),
-      a: new(_aColor, new(-vRadius, -hRadius), Vector2.right, Vector2.left, Vector2.up),
-      b: new(_bColor, new(-vRadius, hRadius), Vector2.right, Vector2.left, Vector2.down),
+      c: new(_cColor, new(vRadius, hRadius), Vector2.right, Vector2.left, Vector2.up),
+      d: new(_dColor, new(vRadius, -hRadius), Vector2.right, Vector2.left, Vector2.down),
+      a: new(_aColor, new(-vRadius, hRadius), Vector2.right, Vector2.left, Vector2.up),
+      b: new(_bColor, new(-vRadius, -hRadius), Vector2.right, Vector2.left, Vector2.down),
       o: new(_oColor, Vector2.zero, Vector2.left),
       parentPosition: parentPosition);
   }
