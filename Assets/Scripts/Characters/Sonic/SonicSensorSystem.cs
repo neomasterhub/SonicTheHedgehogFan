@@ -110,14 +110,35 @@ public class SonicSensorSystem
   private void DrawBackground()
   {
     var lengths = _sensorRayLengths.Value;
+    Vector3[] points = GroundSide switch
+    {
+      GroundSide.Down => GetBackgroundPoints_DownGround(lengths),
+      GroundSide.Right => GetBackgroundPoints_RightGround(lengths),
+      GroundSide.Up => GetBackgroundPoints_UpGround(lengths),
+      GroundSide.Left => GetBackgroundPoints_LeftGround(lengths),
+      _ => throw GroundSide.ArgumentOutOfRangeException(),
+    };
+    _meshRenderer.DrawPolygon(points, SensorSystemBG);
+  }
+
+  private Vector3[] GetBackgroundPoints_DownGround(SonicSensorRayLengths lengths)
+  {
     Vector3[] points;
 
+    // Sensors:
+    //   C---D
+    //   |   |
+    //   A-->B
+    // UDF:
+    //   x   x
+    // z-|   |-z
+    //   y   y
     if (_o.Enabled)
     {
       var oy = _o.Position.y - lengths.O;
       var dx1 = lengths.BottomUDF.z;
       var dx2 = lengths.TopUDF.z;
-      var dy2 = lengths.TopUDF.y;
+      var dy2 = lengths.TopUDF.x;
 
       points = new Vector3[]
       {
@@ -132,7 +153,7 @@ public class SonicSensorSystem
       var dx1 = lengths.BottomUDF.z;
       var dy1 = lengths.BottomUDF.y;
       var dx2 = lengths.TopUDF.z;
-      var dy2 = lengths.TopUDF.y;
+      var dy2 = lengths.TopUDF.x;
 
       points = new Vector3[]
       {
@@ -143,7 +164,149 @@ public class SonicSensorSystem
       };
     }
 
-    _meshRenderer.DrawPolygon(points, SensorSystemBG);
+    return points;
+  }
+
+  private Vector3[] GetBackgroundPoints_UpGround(SonicSensorRayLengths lengths)
+  {
+    Vector3[] points;
+
+    // Sensors:
+    //   B---A
+    //   |   |
+    //   D-->C
+    // UDF:
+    //   y   y
+    // z-|   |-z
+    //   x   x
+    if (_o.Enabled)
+    {
+      var oy = _o.Position.y + lengths.O;
+      var dx1 = lengths.TopUDF.z;
+      var dy1 = lengths.TopUDF.x;
+      var dx2 = lengths.BottomUDF.z;
+
+      points = new Vector3[]
+      {
+        new(_d.Position.x - dx1, _d.Position.y - dy1),
+        new(_c.Position.x + dx1, _d.Position.y - dy1),
+        new(_a.Position.x + dx2, oy),
+        new(_b.Position.x - dx2, oy),
+      };
+    }
+    else
+    {
+      var dx1 = lengths.TopUDF.z;
+      var dy1 = lengths.TopUDF.x;
+      var dx2 = lengths.BottomUDF.z;
+      var dy2 = lengths.BottomUDF.y;
+
+      points = new Vector3[]
+      {
+        new(_d.Position.x - dx1, _d.Position.y - dy1),
+        new(_c.Position.x + dx1, _d.Position.y - dy1),
+        new(_a.Position.x + dx2, _d.Position.y + dy2),
+        new(_b.Position.x - dx2, _d.Position.y + dy2),
+      };
+    }
+
+    return points;
+  }
+
+  private Vector3[] GetBackgroundPoints_RightGround(SonicSensorRayLengths lengths)
+  {
+    Vector3[] points;
+
+    // Sensors:
+    //   D---B
+    //   |   |
+    //   C-->A
+    // UDF:
+    //   z
+    // x---y
+    //
+    // x---y
+    //   z
+    if (_o.Enabled)
+    {
+      var ox = _o.Position.x + lengths.O;
+      var dx1 = lengths.TopUDF.x;
+      var dy1 = lengths.TopUDF.z;
+      var dy2 = lengths.BottomUDF.z;
+
+      points = new Vector3[]
+      {
+        new(_c.Position.x - dx1, _c.Position.y - dy1),
+        new(ox, _a.Position.y - dy2),
+        new(ox, _b.Position.y + dy2),
+        new(_d.Position.x - dx1, _d.Position.y + dy1),
+      };
+    }
+    else
+    {
+      var dx1 = lengths.TopUDF.x;
+      var dy1 = lengths.TopUDF.z;
+      var dx2 = lengths.BottomUDF.y;
+      var dy2 = lengths.BottomUDF.z;
+
+      points = new Vector3[]
+      {
+        new(_c.Position.x - dx1, _c.Position.y - dy1),
+        new(_a.Position.x + dx2, _a.Position.y - dy2),
+        new(_b.Position.x + dx2, _b.Position.y + dy2),
+        new(_d.Position.x - dx1, _d.Position.y + dy1),
+      };
+    }
+
+    return points;
+  }
+
+  private Vector3[] GetBackgroundPoints_LeftGround(SonicSensorRayLengths lengths)
+  {
+    Vector3[] points;
+
+    // Sensors:
+    //   A---C
+    //   |   |
+    //   B-->D
+    // UDF:
+    //   z
+    // y---x
+    //
+    // y---x
+    //   z
+    if (_o.Enabled)
+    {
+      var ox = _o.Position.x - lengths.O;
+      var dy1 = lengths.BottomUDF.z;
+      var dx2 = lengths.TopUDF.x;
+      var dy2 = lengths.TopUDF.z;
+
+      points = new Vector3[]
+      {
+        new(ox, _b.Position.y - dy1),
+        new(_d.Position.x + dx2, _d.Position.y - dy2),
+        new(_c.Position.x + dx2, _c.Position.y + dy2),
+        new(ox, _a.Position.y + dy1),
+      };
+    }
+    else
+    {
+      var dx1 = lengths.BottomUDF.y;
+      var dy1 = lengths.BottomUDF.z;
+      var dx2 = lengths.TopUDF.x;
+      var dy2 = lengths.TopUDF.z;
+
+      points = new Vector3[]
+      {
+        new(_b.Position.x - dx1, _b.Position.y - dy1),
+        new(_d.Position.x + dx2, _d.Position.y - dy2),
+        new(_c.Position.x + dx2, _c.Position.y + dy2),
+        new(_a.Position.x - dx1, _a.Position.y + dy1),
+      };
+    }
+
+    return points;
   }
 
   private void SetCurrentSensorGroup()
@@ -246,17 +409,17 @@ public class SonicSensorSystem
       o: new(_oColor, Vector2.zero, Vector2.right),
       parentPosition: parentPosition);
     up = new(
-      c: new(_cColor, new(-hRadius, -vRadius), Vector2.down, Vector2.up, Vector2.right),
-      d: new(_dColor, new(hRadius, -vRadius), Vector2.down, Vector2.up, Vector2.left),
-      a: new(_aColor, new(-hRadius, vRadius), Vector2.down, Vector2.up, Vector2.right),
-      b: new(_bColor, new(hRadius, vRadius), Vector2.down, Vector2.up, Vector2.left),
+      c: new(_cColor, new(hRadius, -vRadius), Vector2.down, Vector2.up, Vector2.right),
+      d: new(_dColor, new(-hRadius, -vRadius), Vector2.down, Vector2.up, Vector2.left),
+      a: new(_aColor, new(hRadius, vRadius), Vector2.down, Vector2.up, Vector2.right),
+      b: new(_bColor, new(-hRadius, vRadius), Vector2.down, Vector2.up, Vector2.left),
       o: new(_oColor, Vector2.zero, Vector2.up),
       parentPosition: parentPosition);
     left = new(
-      c: new(_cColor, new(vRadius, -hRadius), Vector2.right, Vector2.left, Vector2.up),
-      d: new(_dColor, new(vRadius, hRadius), Vector2.right, Vector2.left, Vector2.down),
-      a: new(_aColor, new(-vRadius, -hRadius), Vector2.right, Vector2.left, Vector2.up),
-      b: new(_bColor, new(-vRadius, hRadius), Vector2.right, Vector2.left, Vector2.down),
+      c: new(_cColor, new(vRadius, hRadius), Vector2.right, Vector2.left, Vector2.up),
+      d: new(_dColor, new(vRadius, -hRadius), Vector2.right, Vector2.left, Vector2.down),
+      a: new(_aColor, new(-vRadius, hRadius), Vector2.right, Vector2.left, Vector2.up),
+      b: new(_bColor, new(-vRadius, -hRadius), Vector2.right, Vector2.left, Vector2.down),
       o: new(_oColor, Vector2.zero, Vector2.left),
       parentPosition: parentPosition);
   }
