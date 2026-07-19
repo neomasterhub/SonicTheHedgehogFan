@@ -72,3 +72,6 @@ crashlytics-build.properties
 
 /SonicTheHedgehogFan.Engine/obj
 /SonicTheHedgehogFan.Engine/bin/Debug/netstandard2.1
+
+# Temp MS files
+~$*.*
