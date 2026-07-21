@@ -1,4 +1,5 @@
 using UnityEngine;
+using static SharedConsts.Physics.GroundAngleRanges;
 using static SonicConsts.View;
 using AnimatorParameters = SharedConsts.Animator.Parameters;
 using AnimatorStates = SharedConsts.Animator.States;
@@ -115,9 +116,12 @@ public class SonicViewSystem
       return;
     }
 
-    if (_context.IsBalancing)
+    if (_context.IsBalancing
+      && _context.GroundSide == GroundSide.Down
+      && Flat.Includes(_context.GroundAngleDeg))
     {
       _spriteRenderer.flipX = _context.TriggeredGroundSensorId == 'B';
+
       return;
     }
 
