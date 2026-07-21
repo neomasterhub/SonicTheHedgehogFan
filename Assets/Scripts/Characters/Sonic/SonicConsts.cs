@@ -34,6 +34,8 @@ public static class SonicConsts
     public static readonly Vector3 BottomUDFLengths = new(0.2f, 0.2f, 0.5f);
     public static readonly Vector2 WallToAirSpeedDelta = new(0.011f, 0);
     public static readonly Vector2 WallDetachPositionOffset = new(-0.1f, 0);
+    public static readonly Vector3 LeftSteepLandingOffset = new(0.2f, -0.2f);
+    public static readonly Vector3 RightSteepLandingOffset = new(-0.2f, -0.2f);
     public static readonly LayerMask SensorLayer = GroundLayer | BlockLayer;
 
     public static readonly SonicPhysicsModeConfig NormalConfig = new(

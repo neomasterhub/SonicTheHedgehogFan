@@ -118,6 +118,7 @@ public partial class SonicController
       _lastGroundDetectionResult = ground.Value;
 
       AnalyzeEnvironment_Grounded();
+      CorrectSteepLanding(sensorFlags);
     }
     else
     {
@@ -404,6 +405,37 @@ public partial class SonicController
     }
 
     return result;
+  }
+
+  private void CorrectSteepLanding(SonicSensorFlags sensorFlags)
+  {
+    if (!_prevIsGrounded
+      && !_isFallingOffWall
+      && _speedSystem.SpeedY < 0
+      && ((_groundInfoSystem.Current.Side == GroundSide.Right
+        && _lastGroundDetectionResult.SourceSensorId == 'B')
+        || (_groundInfoSystem.Current.Side == GroundSide.Left
+        && _lastGroundDetectionResult.SourceSensorId == 'A'))
+      && !GroundAngleRanges.Slope.Includes(_groundInfoSystem.Current.AngleDeg))
+    {
+      PreventSteepGroundOvershoot(_groundInfoSystem.Current.Side == GroundSide.Right, sensorFlags);
+    }
+  }
+
+  private void PreventSteepGroundOvershoot(bool normalHorizontalDirection, SonicSensorFlags sensorFlags)
+  {
+    transform.position += normalHorizontalDirection ? RightSteepLandingOffset : LeftSteepLandingOffset;
+    _sensorSystem.Update(new(_sizeMode, _groundInfoSystem.Current.Side, transform.position, sensorFlags, _sensorRayLengths));
+    var ground = _sensorSystem.DetectGround(_horizontalDirection, SensorLayer);
+
+    if (ground == null)
+    {
+      PreventSteepGroundOvershoot(normalHorizontalDirection, sensorFlags);
+      return;
+    }
+
+    _lastGroundDetectionResult = ground.Value;
+    AnalyzeEnvironment_Grounded();
   }
 
   private void LoseRings()
