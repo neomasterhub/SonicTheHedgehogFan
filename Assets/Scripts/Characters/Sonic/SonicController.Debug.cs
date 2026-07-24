@@ -14,8 +14,9 @@ public partial class SonicController
   {
     if (_debugMode)
     {
-      _sensorSystem.Draw();
+      DrawSensorSystem();
       DrawNormals();
+      DrawSpeedVector();
     }
   }
 
@@ -39,6 +40,22 @@ public partial class SonicController
         NormalWidth,
         CeilingNormalColor);
     }
+  }
+
+  private void DrawSensorSystem()
+  {
+    _sensorSystem.Update(new(_sizeMode, _groundInfoSystem.Current.Side, transform.position, GetSensorFlags(), _sensorRayLengths));
+    _sensorSystem.Draw();
+  }
+
+  private void DrawSpeedVector()
+  {
+    var pos = transform.position;
+    _meshRenderer.DrawLine(
+      pos,
+      pos + (SpeedVectorFactor * new Vector3(_speedSystem.SpeedX, _speedSystem.SpeedY)),
+      SpeedVectorWidth,
+      SpeedVectorColor);
   }
 
   private void UpdateDebug()
