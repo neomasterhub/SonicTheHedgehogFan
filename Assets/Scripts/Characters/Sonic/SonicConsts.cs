@@ -7,8 +7,11 @@ public static class SonicConsts
   public static class Debug
   {
     public const float NormalWidth = 0.08f;
+    public const float SpeedVectorWidth = 0.03f;
+    public const float SpeedVectorFactor = 4;
     public static readonly Color CeilingNormalColor;
     public static readonly Color GroundNormalColor;
+    public static readonly Color SpeedVectorColor;
 
     static Debug()
     {
@@ -17,6 +20,8 @@ public static class SonicConsts
 
       GroundNormalColor = Color.green;
       GroundNormalColor.a = 0.5f;
+
+      SpeedVectorColor = Color.cyan;
     }
   }
 
