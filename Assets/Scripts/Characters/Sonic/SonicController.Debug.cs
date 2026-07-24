@@ -14,48 +14,8 @@ public partial class SonicController
   {
     if (_debugMode)
     {
-      DrawSensorSystem();
-      DrawNormals();
-      DrawSpeedVector();
+      DrawDebug();
     }
-  }
-
-  private void DrawNormals()
-  {
-    if (_isGrounded)
-    {
-      _meshRenderer.DrawLine(
-        _lastGroundDetectionResult.Contact,
-        _lastGroundDetectionResult.Contact + _lastGroundDetectionResult.Normal,
-        NormalWidth,
-        GroundNormalColor);
-    }
-
-    if (_ceilingDetectionResult.HasValue)
-    {
-      var ceiling = _ceilingDetectionResult.Value;
-      _meshRenderer.DrawLine(
-        ceiling.Contact,
-        ceiling.Contact + ceiling.Normal,
-        NormalWidth,
-        CeilingNormalColor);
-    }
-  }
-
-  private void DrawSensorSystem()
-  {
-    _sensorSystem.Update(new(_sizeMode, _groundInfoSystem.Current.Side, transform.position, GetSensorFlags(), _sensorRayLengths));
-    _sensorSystem.Draw();
-  }
-
-  private void DrawSpeedVector()
-  {
-    var pos = transform.position;
-    _meshRenderer.DrawLine(
-      pos,
-      pos + (SpeedVectorFactor * new Vector3(_speedSystem.SpeedX, _speedSystem.SpeedY)),
-      SpeedVectorWidth,
-      SpeedVectorColor);
   }
 
   private void UpdateDebug()
@@ -140,6 +100,49 @@ public partial class SonicController
     }
 
     return $"{wall.Value.AngleDeg:0;-0;0}° {wall.Value.Distance * DebugScale:0}";
+  }
+
+  private void DrawDebug()
+  {
+    var sensorFlags = GetSensorFlags();
+    _sensorSystem.Update(new(_sizeMode, _groundInfoSystem.Current.Side, transform.position, sensorFlags, _sensorRayLengths));
+
+    var ceiling = DetectCeiling(sensorFlags, _horizontalDirection);
+    var ground = DetectGround(sensorFlags, _horizontalDirection);
+
+    var pos = transform.position;
+
+    // Sensors
+    _sensorSystem.Draw();
+
+    // Ceiling normal
+    if (ceiling != null)
+    {
+      var cv = ceiling.Value;
+      _meshRenderer.DrawLine(
+        cv.Contact,
+        cv.Contact + cv.Normal,
+        NormalWidth,
+        CeilingNormalColor);
+    }
+
+    // Ground normal
+    if (ground != null)
+    {
+      var gv = ground.Value;
+      _meshRenderer.DrawLine(
+        gv.Contact,
+        gv.Contact + gv.Normal,
+        NormalWidth,
+        GroundNormalColor);
+    }
+
+    // Speed vector
+    _meshRenderer.DrawLine(
+      pos,
+      pos + (SpeedVectorFactor * new Vector3(_speedSystem.SpeedX, _speedSystem.SpeedY)),
+      SpeedVectorWidth,
+      SpeedVectorColor);
   }
 
 #if UNITY_EDITOR
