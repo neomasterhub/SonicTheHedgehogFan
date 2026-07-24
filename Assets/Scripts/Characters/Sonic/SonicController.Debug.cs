@@ -147,7 +147,7 @@ public partial class SonicController
   {
     if (Input.GetKeyDown(KeyCode.KeypadMinus))
     {
-      EditorApplication.isPaused = true;
+      EditorApplication.isPaused = true;//1
     }
   }
 #endif
