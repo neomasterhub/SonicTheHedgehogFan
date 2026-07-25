@@ -69,6 +69,7 @@ public static class SharedConsts
     {
       public static readonly Range Flat = new(-23, 23);
       public static readonly Range Slope = new(-45, 45);
+      public static readonly Range Steep = new(-60, 60);
     }
 
     public static class SensorRayLengths
