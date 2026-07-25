@@ -1,10 +1,8 @@
 using UnityEngine;
-using static SharedConsts.Physics.GroundAngleRanges;
+using static SharedConsts.Physics;
 
 public class GroundInfoSystem
 {
-  private readonly Range _slopeRangeDeg = Slope;
-
   public GroundInfo Previous { get; private set; }
   public GroundInfo Current { get; private set; }
 
@@ -20,7 +18,7 @@ public class GroundInfoSystem
 
     var side = Current.Side;
 
-    if (!_slopeRangeDeg.Includes(sideNormalAngleDeg))
+    if (!GroundAngleRanges.Steep.Includes(sideNormalAngleDeg))
     {
       if (sideNormalAngleDeg < 0)
       {
