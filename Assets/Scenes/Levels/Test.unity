@@ -4084,7 +4084,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 2.8
+  orthographic size: 3.75
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -4310,7 +4310,7 @@ MonoBehaviour:
   _rollAudioClip: {fileID: 8300000, guid: 9e7565537048c9b4f91f055796014713, type: 3}
   _shieldAudioClip: {fileID: 8300000, guid: b6e65c72ad2f1e544b0e30df6bd58819, type: 3}
   _skidAudioClip: {fileID: 8300000, guid: 9b89e2710e6c85545ba780692ee316f8, type: 3}
-  _spinDashStartAudioClip: {fileID: 8300000, guid: 9e7565537048c9b4f91f055796014713, type: 3}
+  _spinDashStartAudioClip: {fileID: 8300000, guid: 9ee3b27b01a2eb74a940bdf102633e9c, type: 3}
   _spinDashChargingAudioClip: {fileID: 8300000, guid: 376afdf245b01a344beaf7c45342e9a6, type: 3}
   _invincibilityStarsTrailPrefab: {fileID: 3470931886647774454, guid: baecbd0c50edcac40b9ea0694a77be97, type: 3}
   _ringPrefab: {fileID: 5601778466645593367, guid: e75974286517f944dac2e72436689482, type: 3}

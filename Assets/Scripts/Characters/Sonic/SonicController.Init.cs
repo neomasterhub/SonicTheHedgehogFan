@@ -116,17 +116,18 @@ public partial class SonicController
 
     var roll = this.AddComponent<AudioSource>();
     roll.clip = _rollAudioClip;
-    roll.volume = 0.3f;
+    roll.volume = 0.4f;
 
     var skid = this.AddComponent<AudioSource>();
     skid.clip = _skidAudioClip;
 
     var spinDashStart = this.AddComponent<AudioSource>();
     spinDashStart.clip = _spinDashStartAudioClip;
-    spinDashStart.volume = 0.3f;
+    spinDashStart.volume = 0.4f;
 
     var spinDashCharging = this.AddComponent<AudioSource>();
     spinDashCharging.clip = _spinDashChargingAudioClip;
+    spinDashCharging.volume = 0.4f;
 
     _sounds = new Sound[]
     {
@@ -161,7 +162,7 @@ public partial class SonicController
       new(spinDashCharging,
         () => _isSpinDashCharging && !spinDashCharging.isPlaying,
         () => !_isSpinDashCharging,
-        loopDelay: 0.5f),
+        loopDelay: 0.4f),
 
       new(skid,
         () => _speedSystem.IsSkidding && !skid.isPlaying,
