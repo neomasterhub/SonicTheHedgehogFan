@@ -76,6 +76,7 @@ public class SonicViewSystem
     _animator.SetBool(AnimatorParameters.Pushing, _context.IsPushing);
     _animator.SetBool(AnimatorParameters.Rolling, _context.IsRolling);
     _animator.SetBool(AnimatorParameters.Skidding, _context.IsSkidding);
+    _animator.SetBool(AnimatorParameters.SpinDashCharging, _context.IsSpinDashCharging);
     _animator.SetFloat(AnimatorParameters.Speed, animatorParameterSpeed);
 
     var animatorState = _animator.GetCurrentAnimatorStateInfo(0);

@@ -22,6 +22,7 @@ public static class SharedConsts
       public const string Rolling = nameof(Rolling);
       public const string Running = nameof(Running);
       public const string Skidding = nameof(Skidding);
+      public const string SpinDashCharging = nameof(SpinDashCharging);
       public const string Speed = nameof(Speed);
       public const string SpeedX = nameof(SpeedX);
       public const string SpeedY = nameof(SpeedY);
