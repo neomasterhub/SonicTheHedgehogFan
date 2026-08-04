@@ -298,7 +298,9 @@ public partial class SonicController
       .WithDisplayName("Curling up/Exit")
       .WithCondition(() =>
         _isCurlingUp
-        && _inputSystem.Released == PlayerInput.Down)
+        && (_inputSystem.Released.HasAny(PlayerInput.Down)
+        || IsHurt
+        || _isDying))
       .WithAction(() =>
       {
         SetSizes(SonicSizeMode.Big);
@@ -333,7 +335,9 @@ public partial class SonicController
       .WithDisplayName("Looking up/Exit")
       .WithCondition(() =>
         _isLookingUp
-        && _inputSystem.Released == PlayerInput.Up)
+        && (_inputSystem.Released.HasAny(PlayerInput.Up)
+        || IsHurt
+        || _isDying))
       .WithAction(() =>
       {
         _isLookingUp = false;
