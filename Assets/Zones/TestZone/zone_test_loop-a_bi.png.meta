@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 39371e4ca879d5e47afafdddcaaabcc5
+guid: da02fcf7da50d934db5b646f96b987aa
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -666887058220036560
-    second: zone_test_hill-b1_0
+      213: 7270235271066403968
+    second: zone_test_loop-a_bi_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,10 +113,10 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: zone_test_hill-b1_0
+      name: zone_test_loop-a_bi_0
       rect:
         serializedVersion: 2
-        x: 64
+        x: 0
         y: 48
         width: 16
         height: 16
@@ -128,17 +128,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 03e4d7df0cdbeb6f0800000000000000
-      internalID: -666887058220036560
+      spriteID: 084cd6da57015e460800000000000000
+      internalID: 7270235271066403968
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: zone_test_hill-b1_1
+      name: zone_test_loop-a_bi_1
       rect:
         serializedVersion: 2
-        x: 80
+        x: 16
         y: 48
         width: 16
         height: 16
@@ -150,17 +150,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ebe59f7c3cd6e1b4586abc8d5d759549
-      internalID: 980167937
+      spriteID: 7c3a4b3154d063b46880750049c21f94
+      internalID: -1068612780
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: zone_test_hill-b1_2
+      name: zone_test_loop-a_bi_2
       rect:
         serializedVersion: 2
-        x: 96
+        x: 32
         y: 48
         width: 16
         height: 16
@@ -172,17 +172,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ba83720d77ecc7549a58e877224b865c
-      internalID: -2094535105
+      spriteID: dec9f5f7d09d6a244b199cbf8cf2189d
+      internalID: -1777916728
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: zone_test_hill-b1_3
+      name: zone_test_loop-a_bi_3
       rect:
         serializedVersion: 2
-        x: 112
+        x: 48
         y: 48
         width: 16
         height: 16
@@ -194,18 +194,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 25fe6a18c410b6a4a838197527f62f06
-      internalID: -431602906
+      spriteID: 8a09853b287744447a4cd932b48b3dd9
+      internalID: 1397103402
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: zone_test_hill-b1_4
+      name: zone_test_loop-a_bi_4
       rect:
         serializedVersion: 2
-        x: 128
-        y: 48
+        x: 0
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -216,18 +216,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 081ec13d8f019574d8086589e7f01967
-      internalID: 326138735
+      spriteID: e13019d561e9f5d418470e06352c0f0e
+      internalID: 1950028878
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: zone_test_hill-b1_5
+      name: zone_test_loop-a_bi_5
       rect:
         serializedVersion: 2
-        x: 144
-        y: 48
+        x: 16
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -238,14 +238,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 24ca765d0373c744d8fad3749e151cc7
-      internalID: -804842166
+      spriteID: c4077930495b011469e536bdd270b5ab
+      internalID: 1295206923
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: zone_test_hill-b1_6
+      name: zone_test_loop-a_bi_6
       rect:
         serializedVersion: 2
         x: 32
@@ -260,14 +260,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 38361a8b13cce024b842cc1829999384
-      internalID: -2080892285
+      spriteID: c3f764f35c5f36c45a1bdfc927127752
+      internalID: -598405982
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: zone_test_hill-b1_7
+      name: zone_test_loop-a_bi_7
       rect:
         serializedVersion: 2
         x: 48
@@ -282,102 +282,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 10c7eb119c739cc438e9139c445f6210
-      internalID: -700402353
+      spriteID: 9a9cc34eb8b30db47aefce3333388a47
+      internalID: -277148770
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: zone_test_hill-b1_8
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 32
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a4a6e8f58d77437409b68b32b1afec24
-      internalID: 262216385
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: zone_test_hill-b1_9
-      rect:
-        serializedVersion: 2
-        x: 144
-        y: 32
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d3a7c3089686a154ba5516c49ad918cd
-      internalID: -150771466
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: zone_test_hill-b1_10
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 32
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: caa4327d64497384a91ddb3f283b2bf1
-      internalID: 1521931146
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: zone_test_hill-b1_11
-      rect:
-        serializedVersion: 2
-        x: 176
-        y: 32
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4e30a97024c836143932d87bc0c852aa
-      internalID: -720949403
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: zone_test_hill-b1_12
+      name: zone_test_loop-a_bi_8
       rect:
         serializedVersion: 2
         x: 0
@@ -392,14 +304,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2738fda51c5c3c345bd683d2d0d1b805
-      internalID: -1091656833
+      spriteID: 49903b0581c83ff46a08f6cedec4ab44
+      internalID: -1553319633
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: zone_test_hill-b1_13
+      name: zone_test_loop-a_bi_9
       rect:
         serializedVersion: 2
         x: 16
@@ -414,14 +326,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6f5636648502de5468fe1373548d7fb9
-      internalID: 473218061
+      spriteID: 8166d7c5512d49e40a5c67278ef4c636
+      internalID: -1968995779
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: zone_test_hill-b1_14
+      name: zone_test_loop-a_bi_10
       rect:
         serializedVersion: 2
         x: 32
@@ -436,14 +348,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8680763e618134348af95b221afc565a
-      internalID: -1686230985
+      spriteID: 83df3b3dc7a385446a3d9f77322ced71
+      internalID: 1154900329
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: zone_test_hill-b1_15
+      name: zone_test_loop-a_bi_11
       rect:
         serializedVersion: 2
         x: 48
@@ -458,102 +370,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c419c4f85875f51479b7f0cf8e9bc84a
-      internalID: 2021190530
+      spriteID: d025ae66b5b5b464389323ea5e57694c
+      internalID: -1982018352
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: zone_test_hill-b1_16
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3f956e2e5c9661f47b45b70f198d2b2a
-      internalID: 866846632
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: zone_test_hill-b1_17
-      rect:
-        serializedVersion: 2
-        x: 176
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c4d820fd8bd66c14a8623003e9ed48d9
-      internalID: 1628399512
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: zone_test_hill-b1_18
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4f5a95b119309204691dadfbf96b0f70
-      internalID: -645664988
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: zone_test_hill-b1_19
-      rect:
-        serializedVersion: 2
-        x: 208
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 978d0765762b05a458bc9c8059134ac9
-      internalID: -2134283066
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: zone_test_hill-b1_20
+      name: zone_test_loop-a_bi_12
       rect:
         serializedVersion: 2
         x: 0
@@ -568,14 +392,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 83c8d920cc7ebcf4882bec8a21099999
-      internalID: 1339941646
+      spriteID: c6d117dbffb6291419401af7fea0fe13
+      internalID: 388967121
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: zone_test_hill-b1_21
+      name: zone_test_loop-a_bi_13
       rect:
         serializedVersion: 2
         x: 16
@@ -590,17 +414,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d6f37a33526ebb44f9df89fdd43199b9
-      internalID: 1917474954
+      spriteID: 4cc2917a78fef4d4b856ee2afcd95118
+      internalID: -323984925
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: zone_test_hill-b1_22
+      name: zone_test_loop-a_bi_14
       rect:
         serializedVersion: 2
-        x: 192
+        x: 32
         y: 0
         width: 16
         height: 16
@@ -612,17 +436,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f93ded5708b328540894847aaea08d70
-      internalID: 1340621793
+      spriteID: 5a0a1cbe90167394d9894b5db187097e
+      internalID: 1000680650
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: zone_test_hill-b1_23
+      name: zone_test_loop-a_bi_15
       rect:
         serializedVersion: 2
-        x: 208
+        x: 48
         y: 0
         width: 16
         height: 16
@@ -634,8 +458,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a720b9be08750334ea4b3a5eb9060212
-      internalID: 343736015
+      spriteID: 808fe321782b4eb45accd57762b5e602
+      internalID: -1354699160
       vertices: []
       indices: 
       edges: []
@@ -644,7 +468,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: d0126cfbb660b0b42bd6b9af1f428318
+    spriteID: 285a67386509cde4ab4458cb8f484ec4
     internalID: 0
     vertices: []
     indices: 
@@ -656,30 +480,22 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":16.0,"y":16.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      zone_test_hill-b1_0: -666887058220036560
-      zone_test_hill-b1_1: 980167937
-      zone_test_hill-b1_10: 1521931146
-      zone_test_hill-b1_11: -720949403
-      zone_test_hill-b1_12: -1091656833
-      zone_test_hill-b1_13: 473218061
-      zone_test_hill-b1_14: -1686230985
-      zone_test_hill-b1_15: 2021190530
-      zone_test_hill-b1_16: 866846632
-      zone_test_hill-b1_17: 1628399512
-      zone_test_hill-b1_18: -645664988
-      zone_test_hill-b1_19: -2134283066
-      zone_test_hill-b1_2: -2094535105
-      zone_test_hill-b1_20: 1339941646
-      zone_test_hill-b1_21: 1917474954
-      zone_test_hill-b1_22: 1340621793
-      zone_test_hill-b1_23: 343736015
-      zone_test_hill-b1_3: -431602906
-      zone_test_hill-b1_4: 326138735
-      zone_test_hill-b1_5: -804842166
-      zone_test_hill-b1_6: -2080892285
-      zone_test_hill-b1_7: -700402353
-      zone_test_hill-b1_8: 262216385
-      zone_test_hill-b1_9: -150771466
+      zone_test_loop-a_bi_0: 7270235271066403968
+      zone_test_loop-a_bi_1: -1068612780
+      zone_test_loop-a_bi_10: 1154900329
+      zone_test_loop-a_bi_11: -1982018352
+      zone_test_loop-a_bi_12: 388967121
+      zone_test_loop-a_bi_13: -323984925
+      zone_test_loop-a_bi_14: 1000680650
+      zone_test_loop-a_bi_15: -1354699160
+      zone_test_loop-a_bi_2: -1777916728
+      zone_test_loop-a_bi_3: 1397103402
+      zone_test_loop-a_bi_4: 1950028878
+      zone_test_loop-a_bi_5: 1295206923
+      zone_test_loop-a_bi_6: -598405982
+      zone_test_loop-a_bi_7: -277148770
+      zone_test_loop-a_bi_8: -1553319633
+      zone_test_loop-a_bi_9: -1968995779
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
