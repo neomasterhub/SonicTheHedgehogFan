@@ -28,7 +28,7 @@ public class Sound
     if (_playCondition())
     {
       _audioSource.PlayDelayed(_delay);
-      _delay -= _loopDelay;
+      _delay = 0;
     }
 
     return this;
@@ -39,7 +39,7 @@ public class Sound
     if (_stopCondition())
     {
       _audioSource.Stop();
-      _delay += _loopDelay;
+      _delay = _loopDelay;
     }
 
     return this;
