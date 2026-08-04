@@ -300,8 +300,8 @@ public partial class SonicController
       .WithDisplayName("Spin dash charging/Exit")
       .WithCondition(() =>
         _isSpinDashCharging
-        || !_isCurlingUp
-        || !_inputSystem.Held.HasAny(PlayerInput.C))
+        && (!_isCurlingUp
+        || !_inputSystem.Held.HasAny(PlayerInput.C)))
       .WithAction(() =>
       {
         _isSpinDashCharging = false;
@@ -319,6 +319,7 @@ public partial class SonicController
       .WithCondition(() =>
         !_isSpinDashCharging
         && _isCurlingUp
+        && _inputSystem.CheckLastPressed(new[] { PlayerInput.C })
         && _inputSystem.Held.HasAny(PlayerInput.C))
       .WithAction(() =>
       {
