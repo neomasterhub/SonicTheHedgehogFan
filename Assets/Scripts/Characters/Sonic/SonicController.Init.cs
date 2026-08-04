@@ -279,6 +279,12 @@ public partial class SonicController
       return input;
     }
 
+    if (_isSpinDashCharging)
+    {
+      return input
+        .Set(PlayerInput.Down, Input.GetKey(KeyCode.DownArrow));
+    }
+
     return input
       .Set(PlayerInput.Up, Input.GetKey(KeyCode.UpArrow))
       .Set(PlayerInput.Down, Input.GetKey(KeyCode.DownArrow))
