@@ -35,6 +35,7 @@ public partial class SonicController
     _prevHasShield = _hasShield;
     _prevIsGrounded = _isGrounded;
     _prevIsRolling = _isRolling;
+    _prevIsSpinDashCharging = _isSpinDashCharging;
     _prevPhysicsMode = _physicsMode;
     _prevSizeMode = _sizeMode;
 
