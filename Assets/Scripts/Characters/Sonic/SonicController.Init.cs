@@ -147,6 +147,10 @@ public partial class SonicController
         () => _isDownGroundedMoving && !_isJumping && _isRolling && !_prevIsRolling,
         () => !_isRolling && !roll.isPlaying),
 
+      new(roll,
+        () => _isSpinDashCharging && !_prevIsSpinDashCharging,
+        () => !_isSpinDashCharging && !roll.isPlaying),
+
       new(skid,
         () => _speedSystem.IsSkidding && !skid.isPlaying,
         () => !_speedSystem.IsSkidding && !skid.isPlaying),
