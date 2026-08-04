@@ -36,7 +36,7 @@ public partial class SonicController
   {
     get
     {
-      if (_isCurlingUp)
+      if (_isCurlingUp && !_isSpinDashCharging)
       {
         return VerticalDirection.Down;
       }
