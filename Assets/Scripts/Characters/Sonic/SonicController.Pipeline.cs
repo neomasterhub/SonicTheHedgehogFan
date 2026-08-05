@@ -177,6 +177,7 @@ public partial class SonicController
     {
       _speedContext = SonicSpeedContext.GetGrounded(
         IsHit,
+        _horizontalDirection,
         GetHitHorizontalDirection(),
         _isDying,
         _isRolling,
@@ -188,12 +189,14 @@ public partial class SonicController
         _isDownGrounded && _rightWallDetectionResult?.AngleDeg == 0 ? _rightWallDetectionResult.Value.Distance : null,
         ContactBlock,
         _reboundGroundSpeed,
-        _isStoppedByCeiling);
+        _isStoppedByCeiling,
+        _isSpinDashReleased);
     }
     else
     {
       _speedContext = SonicSpeedContext.GetAirborne(
         IsHit,
+        _horizontalDirection,
         GetHitHorizontalDirection(),
         _isDying,
         _isRolling,
@@ -294,6 +297,7 @@ public partial class SonicController
     _isGettingRingFromMonitor = false;
     _isGettingShieldFromMonitor = false;
     _isStoppedByCeiling = false;
+    _isSpinDashReleased = false;
     _reboundSignal = null;
     _ringCollected = false;
     _ringsLost = false;
