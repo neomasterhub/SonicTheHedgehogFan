@@ -320,7 +320,8 @@ public partial class SonicController
       .WithCondition(() =>
         !_isSpinDashCharging
         && _prevIsSpinDashCharging
-        && _inputSystem.Held.HasAny(PlayerInput.Down))
+        && _inputSystem.Held.HasAny(PlayerInput.Down)
+        && _spinDashCharge >= MinSpinDashCharge)
       .WithAction(() =>
       {
         _isSpinDashReleased = true;

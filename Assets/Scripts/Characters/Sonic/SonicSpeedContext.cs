@@ -21,8 +21,9 @@ public readonly struct SonicSpeedContext
   public readonly Vector2? ReboundAirSpeed;
   public readonly bool IsStoppedByCeiling;
   public readonly bool IsSpinDashReleased;
+  public readonly float SpinDashCharge;
 
-  private SonicSpeedContext(bool isHit, bool horizontalDirection, float hitHorizontalDirection, bool isDying, bool isRolling, bool isJumping, bool isGrounded, bool prevIsGrounded, float? groundAngleRad, float? distanceToGround, float? distanceToLeftWall, float? distanceToRightWall, float? ceilingAngleDeg, float? distanceToCeiling, IBlock contactBlock, float? reboundGroundSpeed, Vector2? reboundAirSpeed, bool isStoppedByCeiling, bool isSpinDashReleased)
+  private SonicSpeedContext(bool isHit, bool horizontalDirection, float hitHorizontalDirection, bool isDying, bool isRolling, bool isJumping, bool isGrounded, bool prevIsGrounded, float? groundAngleRad, float? distanceToGround, float? distanceToLeftWall, float? distanceToRightWall, float? ceilingAngleDeg, float? distanceToCeiling, IBlock contactBlock, float? reboundGroundSpeed, Vector2? reboundAirSpeed, bool isStoppedByCeiling, bool isSpinDashReleased, float spinDashCharge)
   {
     IsHit = isHit;
     HorizontalDirection = horizontalDirection;
@@ -43,15 +44,16 @@ public readonly struct SonicSpeedContext
     ReboundAirSpeed = reboundAirSpeed;
     IsStoppedByCeiling = isStoppedByCeiling;
     IsSpinDashReleased = isSpinDashReleased;
+    SpinDashCharge = spinDashCharge;
   }
 
-  public static SonicSpeedContext GetGrounded(bool isHit, bool horizontalDirection, float hitHorizontalDirection, bool isDying, bool isRolling, bool isJumping, bool prevIsGrounded, float groundAngleRad, float distanceToGround, float? distanceToLeftWall, float? distanceToRightWall, IBlock contactBlock, float? reboundGroundSpeed, bool isStoppedByCeiling, bool isSpinDashReleased)
+  public static SonicSpeedContext GetGrounded(bool isHit, bool horizontalDirection, float hitHorizontalDirection, bool isDying, bool isRolling, bool isJumping, bool prevIsGrounded, float groundAngleRad, float distanceToGround, float? distanceToLeftWall, float? distanceToRightWall, IBlock contactBlock, float? reboundGroundSpeed, bool isStoppedByCeiling, bool isSpinDashReleased, float spinDashCharge)
   {
-    return new(isHit, horizontalDirection, hitHorizontalDirection, isDying, isRolling, isJumping, true, prevIsGrounded, groundAngleRad, distanceToGround, distanceToLeftWall, distanceToRightWall, null, null, contactBlock, reboundGroundSpeed, null, isStoppedByCeiling, isSpinDashReleased);
+    return new(isHit, horizontalDirection, hitHorizontalDirection, isDying, isRolling, isJumping, true, prevIsGrounded, groundAngleRad, distanceToGround, distanceToLeftWall, distanceToRightWall, null, null, contactBlock, reboundGroundSpeed, null, isStoppedByCeiling, isSpinDashReleased, spinDashCharge);
   }
 
   public static SonicSpeedContext GetAirborne(bool isHit, bool horizontalDirection, float hitHorizontalDirection, bool isDying, bool isRolling, bool isJumping, bool prevIsGrounded, float? distanceToLeftWall, float? distanceToRightWall, float? ceilingAngleDeg, float? distanceToCeiling, Vector2? reboundAirSpeed, bool isStoppedByCeiling)
   {
-    return new(isHit, horizontalDirection, hitHorizontalDirection, isDying, isRolling, isJumping, false, prevIsGrounded, null, null, distanceToLeftWall, distanceToRightWall, ceilingAngleDeg, distanceToCeiling, null, null, reboundAirSpeed, isStoppedByCeiling, false);
+    return new(isHit, horizontalDirection, hitHorizontalDirection, isDying, isRolling, isJumping, false, prevIsGrounded, null, null, distanceToLeftWall, distanceToRightWall, ceilingAngleDeg, distanceToCeiling, null, null, reboundAirSpeed, isStoppedByCeiling, false, float.NaN);
   }
 }

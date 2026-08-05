@@ -190,7 +190,8 @@ public partial class SonicController
         ContactBlock,
         _reboundGroundSpeed,
         _isStoppedByCeiling,
-        _isSpinDashReleased);
+        _isSpinDashReleased,
+        _spinDashCharge);
     }
     else
     {
@@ -306,6 +307,7 @@ public partial class SonicController
     IsHit = false;
     ContactBlock = null;
     ContactEnemy = null;
+    UpdateSpinDashCharge();
   }
 
   private void SetSizes(SonicSizeMode sizeMode)
@@ -489,6 +491,18 @@ public partial class SonicController
     if (_hasInvincibilityStars)
     {
       _timerSystem.StartIfNotRunning(_invincibilityStarsTimer);
+    }
+  }
+
+  private void UpdateSpinDashCharge()
+  {
+    if (_prevIsSpinDashCharging && _isSpinDashCharging)
+    {
+      _spinDashCharge = Mathf.Min(MaxSpinDashCharge, _spinDashCharge + Time.fixedDeltaTime);
+    }
+    else
+    {
+      _spinDashCharge = 0;
     }
   }
 }
