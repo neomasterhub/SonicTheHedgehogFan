@@ -95,6 +95,17 @@ public class SonicViewSystem
       _animator.speed = Mathf.Max(
         RollingSpeedMin,
         animatorParameterSpeed / _configs.PhysicsModeConfig.TopSpeed * RollingSpeedFactor);
+
+      return;
+    }
+
+    if (animatorState.IsName(AnimatorStates.SpinDashCharging))
+    {
+      _animator.speed = Mathf.Max(
+        SpinDashChargingSpeedMin,
+        SpinDashChargingSpeedMax * _context.SpinDashSpeedFactor);
+
+      return;
     }
   }
 

@@ -32,6 +32,7 @@ public static class SharedConsts
     public static class States
     {
       public const string Rolling = nameof(Rolling);
+      public const string SpinDashCharging = nameof(SpinDashCharging);
       public const string Walking = nameof(Walking);
     }
   }

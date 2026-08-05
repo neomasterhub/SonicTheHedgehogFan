@@ -17,10 +17,11 @@ public readonly struct SonicViewContext
   public readonly float GroundSpeed;
   public readonly float GroundAngleDeg;
   public readonly float DeltaTime;
+  public readonly float SpinDashSpeedFactor;
   public readonly GroundSide GroundSide;
   public readonly GroundSide PrevGroundSide;
 
-  public SonicViewContext(bool horizontalDirection, bool isHurt, bool isDying, bool isGrounded, bool isSkidding, bool isBalancing, bool isCurlingUp, bool isLookingUp, bool isRolling, bool isPushing, bool isSpinDashCharging, bool isZeroGroundSpeedProgressReached, char triggeredGroundSensorId, float speedX, float groundSpeed, float groundAngleDeg, float deltaTime, GroundSide groundSide, GroundSide prevGroundSide)
+  public SonicViewContext(bool horizontalDirection, bool isHurt, bool isDying, bool isGrounded, bool isSkidding, bool isBalancing, bool isCurlingUp, bool isLookingUp, bool isRolling, bool isPushing, bool isSpinDashCharging, bool isZeroGroundSpeedProgressReached, char triggeredGroundSensorId, float speedX, float groundSpeed, float groundAngleDeg, float deltaTime, float spinDashSpeedFactor, GroundSide groundSide, GroundSide prevGroundSide)
   {
     HorizontalDirection = horizontalDirection;
     IsHurt = isHurt;
@@ -39,6 +40,7 @@ public readonly struct SonicViewContext
     GroundSpeed = groundSpeed;
     GroundAngleDeg = groundAngleDeg;
     DeltaTime = deltaTime;
+    SpinDashSpeedFactor = spinDashSpeedFactor;
     GroundSide = groundSide;
     PrevGroundSide = prevGroundSide;
   }
