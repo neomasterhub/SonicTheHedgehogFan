@@ -35,6 +35,8 @@ public static class SonicConsts
     public const float RingCollectorDisabledDuration = 0.5f;
     public const float OLength = Sizes.Big.VRadius + 0.4f;
     public const float WallClearance = 0.07f;
+    public const float MinSpinDashCharge = 0.5f;
+    public const float MaxSpinDashCharge = 2.5f;
     public static readonly Vector3 TopUDFLengths = new(0.2f, 0.2f, 0.5f);
     public static readonly Vector3 BottomUDFLengths = new(0.2f, 0.2f, 0.5f);
     public static readonly Vector2 WallToAirSpeedDelta = new(0.011f, 0);
@@ -67,7 +69,8 @@ public static class SonicConsts
       Normal.HurtSpeedXPx / PxPerUnit,
       Normal.HurtSpeedYPx / PxPerUnit,
       Normal.HurtGravitySpx / SpxPerUnit,
-      Normal.DeathBounceSpeedPx / PxPerUnit);
+      Normal.DeathBounceSpeedPx / PxPerUnit,
+      Normal.SpinDashReleaseSpeedPx / PxPerUnit);
 
     private static class Normal
     {
@@ -95,6 +98,7 @@ public static class SonicConsts
       public const float HurtSpeedYPx = 4;
       public const float HurtGravitySpx = 48;
       public const float DeathBounceSpeedPx = 7;
+      public const float SpinDashReleaseSpeedPx = 12;
     }
   }
 
@@ -124,6 +128,8 @@ public static class SonicConsts
     public const float AirborneSpeedMin = 0.02f;
     public const float RollingSpeedMin = 1.5f;
     public const float RollingSpeedFactor = 3;
+    public const float SpinDashChargingSpeedMin = 0.6f;
+    public const float SpinDashChargingSpeedMax = 1.3f;
     public const float WalkingSpeedMin = 0.5f;
     public const float WalkingSpeedFactor = 3;
     public const float StandingStraightAngleDegMax = 38;

@@ -23,6 +23,9 @@ public partial class SonicController
     _effects.AddStep(CreateEffect_Jumping_Exit());
     _effects.AddStep(CreateEffect_Jumping_Enter());
     _effects.AddStep(CreateEffect_Rolling_Exit());
+    _effects.AddStep(CreateEffect_SpinDashCharging_Exit());
+    _effects.AddStep(CreateEffect_SpinDashRelease());
+    _effects.AddStep(CreateEffect_SpinDashCharging_Enter());
     _effects.AddStep(CreateEffect_CurlingUp_Exit());
     _effects.AddStep(CreateEffect_CurlingUp_Enter());
     _effects.AddStep(CreateEffect_LookingUp_Exit());
@@ -292,16 +295,80 @@ public partial class SonicController
       .Build();
   }
 
+  private PipelineStep CreateEffect_SpinDashCharging_Exit()
+  {
+    return PipelineStepBuilder.Create()
+      .WithDisplayName("Spin dash charging/Exit")
+      .WithCondition(() =>
+        _isSpinDashCharging
+        && (!_isCurlingUp
+        || !_inputSystem.Held.HasAny(PlayerInput.C)))
+      .WithAction(() =>
+      {
+        _isSpinDashCharging = false;
+        IsAttacking = false;
+
+        return PipelineStepResult.Continue;
+      })
+      .Build();
+  }
+
+  private PipelineStep CreateEffect_SpinDashRelease()
+  {
+    return PipelineStepBuilder.Create()
+      .WithDisplayName("Spin dash release")
+      .WithCondition(() =>
+        !_isSpinDashCharging
+        && _prevIsSpinDashCharging
+        && _inputSystem.Held.HasAny(PlayerInput.Down)
+        && _spinDashCharge >= MinSpinDashCharge)
+      .WithAction(() =>
+      {
+        _isSpinDashReleased = true;
+        _isRolling = true;
+        IsAttacking = true;
+        SetSizes(SonicSizeMode.Small);
+
+        return PipelineStepResult.Break;
+      })
+      .Build();
+  }
+
+  private PipelineStep CreateEffect_SpinDashCharging_Enter()
+  {
+    return PipelineStepBuilder.Create()
+      .WithDisplayName("Spin dash charging/Enter")
+      .WithCondition(() =>
+        !_isSpinDashCharging
+        && _isCurlingUp
+        && _inputSystem.CheckLastPressed(new[] { PlayerInput.C })
+        && _inputSystem.Held.HasAny(PlayerInput.C))
+      .WithAction(() =>
+      {
+        _isSpinDashCharging = true;
+        IsAttacking = true;
+
+        return PipelineStepResult.Continue;
+      })
+      .Build();
+  }
+
   private PipelineStep CreateEffect_CurlingUp_Exit()
   {
     return PipelineStepBuilder.Create()
       .WithDisplayName("Curling up/Exit")
       .WithCondition(() =>
         _isCurlingUp
-        && _inputSystem.Released == PlayerInput.Down)
+        && (_inputSystem.Released.HasAny(PlayerInput.Down)
+        || IsHurt
+        || _isDying))
       .WithAction(() =>
       {
-        SetSizes(SonicSizeMode.Big);
+        if (!_isRolling)
+        {
+          SetSizes(SonicSizeMode.Big);
+        }
+
         _isCurlingUp = false;
 
         return PipelineStepResult.Break;
@@ -333,7 +400,9 @@ public partial class SonicController
       .WithDisplayName("Looking up/Exit")
       .WithCondition(() =>
         _isLookingUp
-        && _inputSystem.Released == PlayerInput.Up)
+        && (_inputSystem.Released.HasAny(PlayerInput.Up)
+        || IsHurt
+        || _isDying))
       .WithAction(() =>
       {
         _isLookingUp = false;
@@ -367,7 +436,7 @@ public partial class SonicController
       .WithCondition(() => _isDownGroundedMoving)
       .WithAction(() =>
       {
-        if (_isCurlingUp)
+        if (_isCurlingUp && !_isRolling)
         {
           SetSizes(SonicSizeMode.Big);
         }

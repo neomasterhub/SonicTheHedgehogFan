@@ -38,6 +38,9 @@ public partial class SonicController : MonoBehaviour
   private bool _isDead;
   private bool _isRollingJumped;
   private bool _isStoppedByCeiling;
+  private bool _isSpinDashCharging;
+  private bool _isSpinDashReleased;
+  private bool _prevIsSpinDashCharging;
   private bool _prevIsGrounded;
   private bool _prevIsRolling;
   private bool _postWallDetachDpadLock;
@@ -65,6 +68,8 @@ public partial class SonicController : MonoBehaviour
   private float _absGroundSpeed;
   private float? _reboundGroundSpeed;
   private float _slopeFactor;
+  private float _spinDashCharge;
+  private float _spinDashChargeNormalized;
   private Animator _animator;
   private AudioSource _ringAudioSource;
   private AudioSource _shieldAudioSource;
@@ -130,6 +135,15 @@ public partial class SonicController : MonoBehaviour
   [SerializeField]
   [InspectorLabel("Skid")]
   private AudioClip _skidAudioClip;
+  [SerializeField]
+  [InspectorLabel("Spin dash start")]
+  private AudioClip _spinDashStartAudioClip;
+  [SerializeField]
+  [InspectorLabel("Spin dash charging")]
+  private AudioClip _spinDashChargingAudioClip;
+  [SerializeField]
+  [InspectorLabel("Spin dash release")]
+  private AudioClip _spinDashReleaseAudioClip;
 
   [Header("Prefabs")]
   [SerializeField]

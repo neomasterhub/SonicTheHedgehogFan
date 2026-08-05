@@ -240,6 +240,7 @@ public class SonicSpeedSystem : SpeedSystemBase
 
     GravitySpeed = 0;
     SetSpeed_Grounded_FromAirborne();
+    SetSpeed_Grounded_SpinDash();
     SetSpeed_Grounded_Rebound();
 
     if (_context.IsJumping)
@@ -295,6 +296,15 @@ public class SonicSpeedSystem : SpeedSystemBase
         (SpeedX * _groundAngleCos) + (SpeedY * _groundAngleSin),
         -_config.TopSpeed,
         _config.TopSpeed);
+    }
+  }
+
+  private void SetSpeed_Grounded_SpinDash()
+  {
+    if (_context.IsSpinDashReleased)
+    {
+      GroundSpeed = _context.SpinDashSpeedFactor
+        * (_context.HorizontalDirection ? _config.SpinDashReleaseSpeed : -_config.SpinDashReleaseSpeed);
     }
   }
 

@@ -76,6 +76,7 @@ public class SonicViewSystem
     _animator.SetBool(AnimatorParameters.Pushing, _context.IsPushing);
     _animator.SetBool(AnimatorParameters.Rolling, _context.IsRolling);
     _animator.SetBool(AnimatorParameters.Skidding, _context.IsSkidding);
+    _animator.SetBool(AnimatorParameters.SpinDashCharging, _context.IsSpinDashCharging);
     _animator.SetFloat(AnimatorParameters.Speed, animatorParameterSpeed);
 
     var animatorState = _animator.GetCurrentAnimatorStateInfo(0);
@@ -94,6 +95,17 @@ public class SonicViewSystem
       _animator.speed = Mathf.Max(
         RollingSpeedMin,
         animatorParameterSpeed / _configs.PhysicsModeConfig.TopSpeed * RollingSpeedFactor);
+
+      return;
+    }
+
+    if (animatorState.IsName(AnimatorStates.SpinDashCharging))
+    {
+      _animator.speed = Mathf.Max(
+        SpinDashChargingSpeedMin,
+        SpinDashChargingSpeedMax * _context.SpinDashSpeedFactor);
+
+      return;
     }
   }
 

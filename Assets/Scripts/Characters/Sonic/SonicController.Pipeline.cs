@@ -20,6 +20,7 @@ public partial class SonicController
     ApplyEffects();
     ApplyRebound();
     ApplyMovement();
+    UpdateCounters();
     UpdateView();
     UpdatePosition();
     UpdateSounds();
@@ -35,6 +36,7 @@ public partial class SonicController
     _prevHasShield = _hasShield;
     _prevIsGrounded = _isGrounded;
     _prevIsRolling = _isRolling;
+    _prevIsSpinDashCharging = _isSpinDashCharging;
     _prevPhysicsMode = _physicsMode;
     _prevSizeMode = _sizeMode;
 
@@ -176,6 +178,7 @@ public partial class SonicController
     {
       _speedContext = SonicSpeedContext.GetGrounded(
         IsHit,
+        _horizontalDirection,
         GetHitHorizontalDirection(),
         _isDying,
         _isRolling,
@@ -187,12 +190,15 @@ public partial class SonicController
         _isDownGrounded && _rightWallDetectionResult?.AngleDeg == 0 ? _rightWallDetectionResult.Value.Distance : null,
         ContactBlock,
         _reboundGroundSpeed,
-        _isStoppedByCeiling);
+        _isStoppedByCeiling,
+        _isSpinDashReleased,
+        _spinDashChargeNormalized);
     }
     else
     {
       _speedContext = SonicSpeedContext.GetAirborne(
         IsHit,
+        _horizontalDirection,
         GetHitHorizontalDirection(),
         _isDying,
         _isRolling,
@@ -211,7 +217,7 @@ public partial class SonicController
 
   private void UpdateView()
   {
-    _viewContext = new(_horizontalDirection, IsHurt, _isDying, _isGrounded, _speedSystem.IsSkidding, _isBalancing, _isCurlingUp, _isLookingUp, _isRolling, _speedSystem.IsPushing, _speedSystem.IsZeroGroundSpeedProgressReached, _triggeredGroundSensorId, _speedSystem.SpeedX, _speedSystem.GroundSpeed, _groundInfoSystem.Current.AngleDeg, Time.fixedDeltaTime, _groundInfoSystem.Current.Side, _groundInfoSystem.Previous.Side);
+    _viewContext = new(_horizontalDirection, IsHurt, _isDying, _isGrounded, _speedSystem.IsSkidding, _isBalancing, _isCurlingUp, _isLookingUp, _isRolling, _speedSystem.IsPushing, _isSpinDashCharging, _speedSystem.IsZeroGroundSpeedProgressReached, _triggeredGroundSensorId, _speedSystem.SpeedX, _speedSystem.GroundSpeed, _groundInfoSystem.Current.AngleDeg, Time.fixedDeltaTime, _spinDashChargeNormalized, _groundInfoSystem.Current.Side, _groundInfoSystem.Previous.Side);
     _viewSystem.Update(_viewContext);
   }
 
@@ -293,6 +299,7 @@ public partial class SonicController
     _isGettingRingFromMonitor = false;
     _isGettingShieldFromMonitor = false;
     _isStoppedByCeiling = false;
+    _isSpinDashReleased = false;
     _reboundSignal = null;
     _ringCollected = false;
     _ringsLost = false;
@@ -484,6 +491,25 @@ public partial class SonicController
     if (_hasInvincibilityStars)
     {
       _timerSystem.StartIfNotRunning(_invincibilityStarsTimer);
+    }
+  }
+
+  private void UpdateCounters()
+  {
+    UpdateCounters_UpdateSpinDashCharge();
+  }
+
+  private void UpdateCounters_UpdateSpinDashCharge()
+  {
+    if (_prevIsSpinDashCharging && _isSpinDashCharging)
+    {
+      _spinDashCharge = Mathf.Min(MaxSpinDashCharge, _spinDashCharge + Time.fixedDeltaTime);
+      _spinDashChargeNormalized = _spinDashCharge / MaxSpinDashCharge;
+    }
+    else
+    {
+      _spinDashCharge = 0;
+      _spinDashChargeNormalized = 0;
     }
   }
 }

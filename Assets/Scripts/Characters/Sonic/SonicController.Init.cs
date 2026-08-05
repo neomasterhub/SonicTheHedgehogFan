@@ -116,10 +116,22 @@ public partial class SonicController
 
     var roll = this.AddComponent<AudioSource>();
     roll.clip = _rollAudioClip;
-    roll.volume = 0.3f;
+    roll.volume = 0.4f;
 
     var skid = this.AddComponent<AudioSource>();
     skid.clip = _skidAudioClip;
+
+    var spinDashStart = this.AddComponent<AudioSource>();
+    spinDashStart.clip = _spinDashStartAudioClip;
+    spinDashStart.volume = 0.4f;
+
+    var spinDashCharging = this.AddComponent<AudioSource>();
+    spinDashCharging.clip = _spinDashChargingAudioClip;
+    spinDashCharging.volume = 0.4f;
+
+    var spinDashRelease = this.AddComponent<AudioSource>();
+    spinDashRelease.clip = _spinDashReleaseAudioClip;
+    spinDashRelease.volume = 0.4f;
 
     _sounds = new Sound[]
     {
@@ -146,6 +158,19 @@ public partial class SonicController
       new(roll,
         () => _isDownGroundedMoving && !_isJumping && _isRolling && !_prevIsRolling,
         () => !_isRolling && !roll.isPlaying),
+
+      new(spinDashStart,
+        () => _isSpinDashCharging && !_prevIsSpinDashCharging,
+        () => (!_isSpinDashCharging && !spinDashStart.isPlaying) || _isSpinDashReleased),
+
+      new(spinDashCharging,
+        () => _isSpinDashCharging && !spinDashCharging.isPlaying,
+        () => !_isSpinDashCharging || spinDashRelease.isPlaying || _isSpinDashReleased,
+        loopDelay: 0.4f),
+
+      new(spinDashRelease,
+        () => _isSpinDashReleased && !spinDashRelease.isPlaying,
+        () => !_isSpinDashReleased && !spinDashRelease.isPlaying),
 
       new(skid,
         () => _speedSystem.IsSkidding && !skid.isPlaying,
@@ -260,6 +285,12 @@ public partial class SonicController
       || _postWallDetachDpadLock)
     {
       return input;
+    }
+
+    if (_isSpinDashCharging)
+    {
+      return input
+        .Set(PlayerInput.Down, Input.GetKey(KeyCode.DownArrow));
     }
 
     return input
