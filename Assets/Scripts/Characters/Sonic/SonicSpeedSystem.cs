@@ -303,7 +303,7 @@ public class SonicSpeedSystem : SpeedSystemBase
   {
     if (_context.IsSpinDashReleased)
     {
-      GroundSpeed = _context.SpinDashCharge / MaxSpinDashCharge
+      GroundSpeed = _context.SpinDashSpeedFactor
         * (_context.HorizontalDirection ? _config.SpinDashReleaseSpeed : -_config.SpinDashReleaseSpeed);
     }
   }
