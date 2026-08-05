@@ -20,6 +20,7 @@ public partial class SonicController
     ApplyEffects();
     ApplyRebound();
     ApplyMovement();
+    UpdateCounters();
     UpdateView();
     UpdatePosition();
     UpdateSounds();
@@ -191,7 +192,7 @@ public partial class SonicController
         _reboundGroundSpeed,
         _isStoppedByCeiling,
         _isSpinDashReleased,
-        _spinDashCharge);
+        _spinDashChargeNormalized);
     }
     else
     {
@@ -307,7 +308,6 @@ public partial class SonicController
     IsHit = false;
     ContactBlock = null;
     ContactEnemy = null;
-    UpdateSpinDashCharge();
   }
 
   private void SetSizes(SonicSizeMode sizeMode)
@@ -494,15 +494,22 @@ public partial class SonicController
     }
   }
 
-  private void UpdateSpinDashCharge()
+  private void UpdateCounters()
+  {
+    UpdateCounters_UpdateSpinDashCharge();
+  }
+
+  private void UpdateCounters_UpdateSpinDashCharge()
   {
     if (_prevIsSpinDashCharging && _isSpinDashCharging)
     {
       _spinDashCharge = Mathf.Min(MaxSpinDashCharge, _spinDashCharge + Time.fixedDeltaTime);
+      _spinDashChargeNormalized = _spinDashCharge / MaxSpinDashCharge;
     }
     else
     {
       _spinDashCharge = 0;
+      _spinDashChargeNormalized = 0;
     }
   }
 }

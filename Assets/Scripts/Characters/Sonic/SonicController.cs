@@ -69,6 +69,7 @@ public partial class SonicController : MonoBehaviour
   private float? _reboundGroundSpeed;
   private float _slopeFactor;
   private float _spinDashCharge;
+  private float _spinDashChargeNormalized;
   private Animator _animator;
   private AudioSource _ringAudioSource;
   private AudioSource _shieldAudioSource;
