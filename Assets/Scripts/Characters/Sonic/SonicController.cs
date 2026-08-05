@@ -139,6 +139,9 @@ public partial class SonicController : MonoBehaviour
   [SerializeField]
   [InspectorLabel("Spin dash charging")]
   private AudioClip _spinDashChargingAudioClip;
+  [SerializeField]
+  [InspectorLabel("Spin dash release")]
+  private AudioClip _spinDashReleaseAudioClip;
 
   [Header("Prefabs")]
   [SerializeField]

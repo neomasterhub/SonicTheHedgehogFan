@@ -129,6 +129,10 @@ public partial class SonicController
     spinDashCharging.clip = _spinDashChargingAudioClip;
     spinDashCharging.volume = 0.4f;
 
+    var spinDashRelease = this.AddComponent<AudioSource>();
+    spinDashRelease.clip = _spinDashReleaseAudioClip;
+    spinDashRelease.volume = 0.4f;
+
     _sounds = new Sound[]
     {
       new(_ringAudioSource,
@@ -157,12 +161,16 @@ public partial class SonicController
 
       new(spinDashStart,
         () => _isSpinDashCharging && !_prevIsSpinDashCharging,
-        () => !_isSpinDashCharging && !spinDashStart.isPlaying),
+        () => (!_isSpinDashCharging && !spinDashStart.isPlaying) || _isSpinDashReleased),
 
       new(spinDashCharging,
         () => _isSpinDashCharging && !spinDashCharging.isPlaying,
-        () => !_isSpinDashCharging,
+        () => !_isSpinDashCharging || spinDashRelease.isPlaying || _isSpinDashReleased,
         loopDelay: 0.4f),
+
+      new(spinDashRelease,
+        () => _isSpinDashReleased && !spinDashRelease.isPlaying,
+        () => !_isSpinDashReleased && !spinDashRelease.isPlaying),
 
       new(skid,
         () => _speedSystem.IsSkidding && !skid.isPlaying,
