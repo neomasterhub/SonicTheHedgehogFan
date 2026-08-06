@@ -23,6 +23,13 @@ public static class SonicConsts
 
       SpeedVectorColor = Color.cyan;
     }
+
+    public static class ShortVideoMode
+    {
+      public static readonly Vector3 DiagnosticsPanelPosition = new(325, 0);
+      public static readonly Vector3 EffectsPanelPosition = new(325, 0);
+      public static readonly Vector3 ScenePanelPosition = new(-325, 0);
+    }
   }
 
   public static class Physics
