@@ -5,11 +5,11 @@ using static SonicConsts.Sizes;
 
 public class SonicSensorSystem
 {
-  private static readonly Color _aColor = Color.softGreen;
+  private static readonly Color _aColor = Color.lightGreen;
   private static readonly Color _bColor = Color.green;
-  private static readonly Color _cColor = Color.softYellow;
-  private static readonly Color _dColor = Color.yellow;
-  private static readonly Color _oColor = Color.white;
+  private static readonly Color _cColor = Color.skyBlue;
+  private static readonly Color _dColor = Color.deepSkyBlue;
+  private static readonly Color _oColor = Color.deepPink;
 
   private readonly SonicSensorGroup _bigUpSensorGroup;
   private readonly SonicSensorGroup _bigDownSensorGroup;

@@ -7,7 +7,7 @@ public static class SonicConsts
   public static class Debug
   {
     public const float NormalWidth = 0.08f;
-    public const float SpeedVectorWidth = 0.03f;
+    public const float SpeedVectorWidth = 0.06f;
     public const float SpeedVectorFactor = 4;
     public static readonly Color CeilingNormalColor;
     public static readonly Color GroundNormalColor;
@@ -15,13 +15,14 @@ public static class SonicConsts
 
     static Debug()
     {
-      CeilingNormalColor = Color.yellow;
+      CeilingNormalColor = Color.cyan;
       CeilingNormalColor.a = 0.5f;
 
       GroundNormalColor = Color.green;
       GroundNormalColor.a = 0.5f;
 
-      SpeedVectorColor = Color.cyan;
+      SpeedVectorColor = Color.deepSkyBlue;
+      SpeedVectorColor.a = 0.8f;
     }
 
     public static class ShortVideoMode
