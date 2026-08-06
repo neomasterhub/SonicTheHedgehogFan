@@ -4,6 +4,7 @@ using UnityEngine;
 #endif
 using static SharedConsts.Rendering;
 using static SonicConsts.Debug;
+using static SonicConsts.Debug.ShortVideoMode;
 
 /// <summary>
 /// Debug.
@@ -27,6 +28,7 @@ public partial class SonicController
 
     if (_debugMode)
     {
+      Debug_ShiftPanels();
       Debug_UpdateDiagnostics();
       Debug_UpdateEffectHistory();
     }
@@ -40,6 +42,27 @@ public partial class SonicController
   {
     _diagnosticsPanel.SetActive(_debugMode);
     _effectHistoryPanel.SetActive(_debugMode);
+  }
+
+  private void Debug_ShiftPanels()
+  {
+    if (_prevShortVideoMode == _shortVideoMode)
+    {
+      return;
+    }
+
+    if (_shortVideoMode)
+    {
+      _diagnosticsPanel.transform.position = DiagnosticsPanelPosition;
+      _effectHistoryPanel.transform.position = EffectsPanelPosition;
+      _sceneHistoryPanel.transform.position = ScenePanelPosition;
+    }
+    else
+    {
+      _diagnosticsPanel.transform.position = _diagnosticsPanelInitialPosition;
+      _effectHistoryPanel.transform.position = _effectsPanelInitialPosition;
+      _sceneHistoryPanel.transform.position = _scenePanelInitialPosition;
+    }
   }
 
   private void Debug_UpdateDiagnostics()
