@@ -23,6 +23,16 @@ public static class SonicConsts
 
       SpeedVectorColor = Color.cyan;
     }
+
+    public static class ShortVideoMode
+    {
+      public static class PanelOffsets
+      {
+        public static readonly Vector3 Diagnostics = new(135, 0);
+        public static readonly Vector3 EffectHistory = new(135, 0);
+        public static readonly Vector3 SceneDiagnostics = new(-246, 0);
+      }
+    }
   }
 
   public static class Physics

@@ -24,7 +24,7 @@ public partial class SonicController
     UpdateView();
     UpdatePosition();
     UpdateSounds();
-    UpdateDebug();
+    Debug();
     EndFrame();
   }
 
@@ -39,6 +39,7 @@ public partial class SonicController
     _prevIsSpinDashCharging = _isSpinDashCharging;
     _prevPhysicsMode = _physicsMode;
     _prevSizeMode = _sizeMode;
+    _prevShortVideoMode = _shortVideoMode;
 
     _reboundAirSpeed = null;
     _reboundGroundSpeed = null;
@@ -95,6 +96,15 @@ public partial class SonicController
       {
         _timerSystem.StartIfNotRunning(_speedShoesTimer);
       }
+
+      return;
+    }
+
+    if (_inputSystem.CheckLastPressed(ToggleShortVideoMode))
+    {
+      _shortVideoMode = !_shortVideoMode;
+
+      return;
     }
   }
 

@@ -98,6 +98,7 @@ public static class SharedConsts
     public static readonly PlayerInput[] ToggleInvincibilityStars = new[] { A, A, Y };
     public static readonly PlayerInput[] ToggleShield = new[] { B, B, Y };
     public static readonly PlayerInput[] ToggleSpeedShoes = new[] { X, Y, B };
+    public static readonly PlayerInput[] ToggleShortVideoMode = new[] { X, Down, Y, Down };
   }
 
   public static class Sounds

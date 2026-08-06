@@ -64,6 +64,8 @@ public partial class SonicController : MonoBehaviour
   private bool _hasSpeedShoes;
   private bool _isGettingRingFromMonitor;
   private bool _isGettingShieldFromMonitor;
+  private bool _shortVideoMode;
+  private bool _prevShortVideoMode;
   private char _triggeredGroundSensorId;
   private float _absGroundSpeed;
   private float? _reboundGroundSpeed;
@@ -77,6 +79,7 @@ public partial class SonicController : MonoBehaviour
   private CeilingDetectionResult? _ceilingDetectionResult;
   private GameObject _diagnosticsPanel;
   private GameObject _effectHistoryPanel;
+  private GameObject _sceneDiagnosticsPanel;
   private GameObject _invincibilityStars;
   private GameObject _shield;
   private GroundDetectionResult _lastGroundDetectionResult;

@@ -4,6 +4,7 @@ using UnityEngine;
 #endif
 using static SharedConsts.Rendering;
 using static SonicConsts.Debug;
+using static SonicConsts.Debug.ShortVideoMode;
 
 /// <summary>
 /// Debug.
@@ -14,21 +15,22 @@ public partial class SonicController
   {
     if (_debugMode)
     {
-      DrawDebug();
+      DrawDebugTools();
     }
   }
 
-  private void UpdateDebug()
+  private void Debug()
   {
     if (_debugMode != _prevDebugMode)
     {
-      UpdateDebug_Toggle();
+      Debug_Toggle();
     }
 
     if (_debugMode)
     {
-      UpdateDebug_Diagnostics();
-      UpdateDebug_EffectHistory();
+      Debug_ShiftPanels();
+      Debug_UpdateDiagnostics();
+      Debug_UpdateEffectHistory();
     }
 
 #if UNITY_EDITOR
@@ -36,13 +38,34 @@ public partial class SonicController
 #endif
   }
 
-  private void UpdateDebug_Toggle()
+  private void Debug_Toggle()
   {
     _diagnosticsPanel.SetActive(_debugMode);
     _effectHistoryPanel.SetActive(_debugMode);
   }
 
-  private void UpdateDebug_Diagnostics()
+  private void Debug_ShiftPanels()
+  {
+    if (_prevShortVideoMode == _shortVideoMode)
+    {
+      return;
+    }
+
+    if (_shortVideoMode)
+    {
+      _diagnosticsPanel.transform.position += PanelOffsets.Diagnostics;
+      _effectHistoryPanel.transform.position += PanelOffsets.EffectHistory;
+      _sceneDiagnosticsPanel.transform.position += PanelOffsets.SceneDiagnostics;
+    }
+    else
+    {
+      _diagnosticsPanel.transform.position -= PanelOffsets.Diagnostics;
+      _effectHistoryPanel.transform.position -= PanelOffsets.EffectHistory;
+      _sceneDiagnosticsPanel.transform.position -= PanelOffsets.SceneDiagnostics;
+    }
+  }
+
+  private void Debug_UpdateDiagnostics()
   {
     _diagnosticsText
       .Clear()
@@ -64,7 +87,7 @@ public partial class SonicController
     _diagnosticsTextMesh.SetText(_diagnosticsText);
   }
 
-  private void UpdateDebug_EffectHistory()
+  private void Debug_UpdateEffectHistory()
   {
     _effectHistoryText.Clear();
 
@@ -102,7 +125,7 @@ public partial class SonicController
     return $"{wall.Value.AngleDeg:0;-0;0}° {wall.Value.Distance * DebugScale:0}";
   }
 
-  private void DrawDebug()
+  private void DrawDebugTools()
   {
     var sensorFlags = GetSensorFlags();
     _sensorSystem.Update(new(_sizeMode, _groundInfoSystem.Current.Side, transform.position, sensorFlags, _sensorRayLengths));
