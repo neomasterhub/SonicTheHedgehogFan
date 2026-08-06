@@ -55,15 +55,12 @@ public partial class SonicController
     _meshRenderer = _meshRendererObj.GetComponent<IMeshRenderer>();
 
     _effectHistoryPanel = _canvas.transform.Find("Sonic Effect History Panel").gameObject;
-    _effectHistoryPanelInitialPosition = _effectHistoryPanel.transform.position;
     _effectHistoryTextMesh = _effectHistoryPanel.transform.Find("Text").GetComponent<TextMeshProUGUI>();
 
     _diagnosticsPanel = _canvas.transform.Find("Sonic Diagnostics Panel").gameObject;
-    _diagnosticsPanelInitialPosition = _diagnosticsPanel.transform.position;
     _diagnosticsTextMesh = _diagnosticsPanel.transform.Find("Text").GetComponent<TextMeshProUGUI>();
 
     _sceneDiagnosticsPanel = _canvas.transform.Find("Scene Diagnostics Panel").gameObject;
-    _sceneDiagnosticsPanelInitialPosition = _sceneDiagnosticsPanel.transform.position;
 
     _shield = transform.Find("Shield").gameObject;
     _invincibilityStars = transform.Find("Invincibility Stars").gameObject;

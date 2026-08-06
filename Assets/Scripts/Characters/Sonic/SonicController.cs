@@ -107,9 +107,6 @@ public partial class SonicController : MonoBehaviour
   private Transform _contactLeftWallTransform;
   private Transform _contactRightWallTransform;
   private Vector2? _reboundAirSpeed;
-  private Vector3 _diagnosticsPanelInitialPosition;
-  private Vector3 _effectHistoryPanelInitialPosition;
-  private Vector3 _sceneDiagnosticsPanelInitialPosition;
   private WallDetectionResult? _leftWallDetectionResult;
   private WallDetectionResult? _rightWallDetectionResult;
 

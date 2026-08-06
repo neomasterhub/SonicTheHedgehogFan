@@ -53,15 +53,15 @@ public partial class SonicController
 
     if (_shortVideoMode)
     {
-      _diagnosticsPanel.transform.position = DiagnosticsPanelPosition;
-      _effectHistoryPanel.transform.position = EffectsPanelPosition;
-      _sceneDiagnosticsPanel.transform.position = ScenePanelPosition;
+      _diagnosticsPanel.transform.position += PanelOffsets.Diagnostics;
+      _effectHistoryPanel.transform.position += PanelOffsets.EffectHistory;
+      _sceneDiagnosticsPanel.transform.position += PanelOffsets.SceneDiagnostics;
     }
     else
     {
-      _diagnosticsPanel.transform.position = _diagnosticsPanelInitialPosition;
-      _effectHistoryPanel.transform.position = _effectHistoryPanelInitialPosition;
-      _sceneDiagnosticsPanel.transform.position = _sceneDiagnosticsPanelInitialPosition;
+      _diagnosticsPanel.transform.position -= PanelOffsets.Diagnostics;
+      _effectHistoryPanel.transform.position -= PanelOffsets.EffectHistory;
+      _sceneDiagnosticsPanel.transform.position -= PanelOffsets.SceneDiagnostics;
     }
   }
 
