@@ -39,6 +39,7 @@ public partial class SonicController
     _prevIsSpinDashCharging = _isSpinDashCharging;
     _prevPhysicsMode = _physicsMode;
     _prevSizeMode = _sizeMode;
+    _prevShortVideoMode = _shortVideoMode;
 
     _reboundAirSpeed = null;
     _reboundGroundSpeed = null;

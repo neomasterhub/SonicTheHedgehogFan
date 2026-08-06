@@ -64,6 +64,8 @@ public partial class SonicController : MonoBehaviour
   private bool _hasSpeedShoes;
   private bool _isGettingRingFromMonitor;
   private bool _isGettingShieldFromMonitor;
+  private bool _shortVideoMode;
+  private bool _prevShortVideoMode;
   private char _triggeredGroundSensorId;
   private float _absGroundSpeed;
   private float? _reboundGroundSpeed;
