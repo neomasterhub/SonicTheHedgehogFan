@@ -161,9 +161,17 @@ public partial class SonicController
     }
 
     // Speed vector
+    var sideSpeed = _groundInfoSystem.Current.Side switch
+    {
+      GroundSide.Down => new Vector3(_speedSystem.SpeedX, _speedSystem.SpeedY),
+      GroundSide.Right => new Vector3(-_speedSystem.SpeedY, _speedSystem.SpeedX),
+      GroundSide.Up => new Vector3(-_speedSystem.SpeedX, -_speedSystem.SpeedY),
+      GroundSide.Left => new Vector3(_speedSystem.SpeedY, -_speedSystem.SpeedX),
+      _ => throw _groundInfoSystem.Current.Side.ArgumentOutOfRangeException(),
+    };
     _meshRenderer.DrawLine(
       pos,
-      pos + (SpeedVectorFactor * new Vector3(_speedSystem.SpeedX, _speedSystem.SpeedY)),
+      pos + (SpeedVectorFactor * sideSpeed),
       SpeedVectorWidth,
       SpeedVectorColor);
   }
