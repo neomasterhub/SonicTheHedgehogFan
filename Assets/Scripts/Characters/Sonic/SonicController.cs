@@ -79,6 +79,7 @@ public partial class SonicController : MonoBehaviour
   private CeilingDetectionResult? _ceilingDetectionResult;
   private GameObject _diagnosticsPanel;
   private GameObject _effectHistoryPanel;
+  private GameObject _sceneHistoryPanel;
   private GameObject _invincibilityStars;
   private GameObject _shield;
   private GroundDetectionResult _lastGroundDetectionResult;
