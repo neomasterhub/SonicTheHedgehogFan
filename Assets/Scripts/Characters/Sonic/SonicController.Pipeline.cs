@@ -24,7 +24,7 @@ public partial class SonicController
     UpdateView();
     UpdatePosition();
     UpdateSounds();
-    UpdateDebug();
+    Debug();
     EndFrame();
   }
 
