@@ -79,7 +79,7 @@ public partial class SonicController : MonoBehaviour
   private CeilingDetectionResult? _ceilingDetectionResult;
   private GameObject _diagnosticsPanel;
   private GameObject _effectHistoryPanel;
-  private GameObject _sceneHistoryPanel;
+  private GameObject _sceneDiagnosticsPanel;
   private GameObject _invincibilityStars;
   private GameObject _shield;
   private GroundDetectionResult _lastGroundDetectionResult;
@@ -108,8 +108,8 @@ public partial class SonicController : MonoBehaviour
   private Transform _contactRightWallTransform;
   private Vector2? _reboundAirSpeed;
   private Vector3 _diagnosticsPanelInitialPosition;
-  private Vector3 _effectsPanelInitialPosition;
-  private Vector3 _scenePanelInitialPosition;
+  private Vector3 _effectHistoryPanelInitialPosition;
+  private Vector3 _sceneDiagnosticsPanelInitialPosition;
   private WallDetectionResult? _leftWallDetectionResult;
   private WallDetectionResult? _rightWallDetectionResult;
 

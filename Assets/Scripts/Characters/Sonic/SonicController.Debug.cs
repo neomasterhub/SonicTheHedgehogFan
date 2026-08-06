@@ -55,13 +55,13 @@ public partial class SonicController
     {
       _diagnosticsPanel.transform.position = DiagnosticsPanelPosition;
       _effectHistoryPanel.transform.position = EffectsPanelPosition;
-      _sceneHistoryPanel.transform.position = ScenePanelPosition;
+      _sceneDiagnosticsPanel.transform.position = ScenePanelPosition;
     }
     else
     {
       _diagnosticsPanel.transform.position = _diagnosticsPanelInitialPosition;
-      _effectHistoryPanel.transform.position = _effectsPanelInitialPosition;
-      _sceneHistoryPanel.transform.position = _scenePanelInitialPosition;
+      _effectHistoryPanel.transform.position = _effectHistoryPanelInitialPosition;
+      _sceneDiagnosticsPanel.transform.position = _sceneDiagnosticsPanelInitialPosition;
     }
   }
 

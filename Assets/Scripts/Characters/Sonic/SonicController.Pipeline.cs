@@ -96,6 +96,15 @@ public partial class SonicController
       {
         _timerSystem.StartIfNotRunning(_speedShoesTimer);
       }
+
+      return;
+    }
+
+    if (_inputSystem.CheckLastPressed(ToggleShortVideoMode))
+    {
+      _shortVideoMode = !_shortVideoMode;
+
+      return;
     }
   }
 
