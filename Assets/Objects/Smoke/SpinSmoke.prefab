@@ -4852,4 +4852,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SpinSmokeController
   _alphaMax: 0.5
   _alphaInc: 0.005
-  _alphaDec: 0.01
+  _alphaDec: 0.02

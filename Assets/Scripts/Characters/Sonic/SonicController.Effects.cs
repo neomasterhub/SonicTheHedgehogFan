@@ -349,7 +349,9 @@ public partial class SonicController
       {
         _isSpinDashCharging = true;
         IsAttacking = true;
-        SpinSmoke = Instantiate(_spinSmokePrefab).GetComponent<ISpinSmoke>();
+
+        SpinSmoke = Instantiate(_spinSmokePrefab, transform.position, default)
+          .GetComponent<ISpinSmoke>();
 
         return PipelineStepResult.Continue;
       })
