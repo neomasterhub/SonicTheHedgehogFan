@@ -4,7 +4,7 @@ using UnityEngine;
 /// Data.
 /// </summary>
 [RequireComponent(typeof(ParticleSystem))]
-public partial class SpinSmokeController : MonoBehaviour
+public partial class SpinSmokeController : MonoBehaviour, ISpinSmoke
 {
   private ISpinSmokeSource _source;
   private ParticleSystem _particleSystem;

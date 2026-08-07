@@ -132,4 +132,6 @@ public partial class SonicController
   public bool HasInvincibilityStars => _hasInvincibilityStars;
 
   public ZoneType IntersectingZones { get; set; }
+
+  public ISpinSmoke SpinSmoke { get; private set; }
 }

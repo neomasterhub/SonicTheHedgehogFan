@@ -15,17 +15,7 @@ public partial class SpinSmokeController
     var psm = _particleSystem.main;
     var color = psm.startColor.color;
 
-    if (_source == null)
-    {
-      if (color.a == 0)
-      {
-        return;
-      }
-
-      color.a = Mathf.Max(0, color.a - _alphaStep);
-      psm.startColor = new ParticleSystem.MinMaxGradient(color);
-    }
-    else
+    if (_source.SpinSmoke == this)
     {
       if (color.a == _alphaMax)
       {
@@ -33,6 +23,16 @@ public partial class SpinSmokeController
       }
 
       color.a = Mathf.Min(_alphaMax, color.a + _alphaStep);
+      psm.startColor = new ParticleSystem.MinMaxGradient(color);
+    }
+    else
+    {
+      if (color.a == 0)
+      {
+        return;
+      }
+
+      color.a = Mathf.Max(0, color.a - _alphaStep);
       psm.startColor = new ParticleSystem.MinMaxGradient(color);
     }
   }
