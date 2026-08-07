@@ -8,6 +8,7 @@ public partial class SpinSmokeController
 {
   private void Awake()
   {
+    _particleSystem = GetComponent<ParticleSystem>();
     _source = GameObject.FindWithTag(Tags.Player).GetComponent<ISpinSmokeSource>();
   }
 }
