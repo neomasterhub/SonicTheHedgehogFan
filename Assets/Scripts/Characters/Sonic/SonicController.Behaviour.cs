@@ -14,6 +14,7 @@ public partial class SonicController
   IRingCollector,
   ISceneObjectDebug,
   ISceneObjectPlayer,
+  ISpinSmokeSource,
   IZoneObject
 {
   public bool IsInvincible { get; private set; }
