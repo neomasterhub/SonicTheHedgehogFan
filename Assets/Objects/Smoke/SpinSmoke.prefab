@@ -4850,5 +4850,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f52fea462b1f2454e89d6bb6d7ffc723, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpinSmokeController
-  _alphaMax: 0.6
-  _alphaStep: 0.002
+  _alphaMax: 0.5
+  _alphaInc: 0.005
+  _alphaDec: 0.01

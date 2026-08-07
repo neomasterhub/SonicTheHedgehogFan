@@ -22,7 +22,7 @@ public partial class SpinSmokeController
         return;
       }
 
-      color.a = Mathf.Min(_alphaMax, color.a + _alphaStep);
+      color.a = Mathf.Min(_alphaMax, color.a + _alphaInc);
       psm.startColor = new ParticleSystem.MinMaxGradient(color);
     }
     else
@@ -32,7 +32,7 @@ public partial class SpinSmokeController
         return;
       }
 
-      color.a = Mathf.Max(0, color.a - _alphaStep);
+      color.a = Mathf.Max(0, color.a - _alphaDec);
       psm.startColor = new ParticleSystem.MinMaxGradient(color);
     }
   }

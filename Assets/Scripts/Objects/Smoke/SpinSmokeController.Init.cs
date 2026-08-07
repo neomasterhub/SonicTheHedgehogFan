@@ -10,7 +10,8 @@ public partial class SpinSmokeController
   public SpinSmokeController()
   {
     _alphaMax = AlphaMax;
-    _alphaStep = AlphaStep;
+    _alphaInc = AlphaInc;
+    _alphaDec = AlphaDec;
   }
 
   private void Awake()

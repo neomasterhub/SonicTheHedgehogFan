@@ -12,5 +12,7 @@ public partial class SpinSmokeController : MonoBehaviour, ISpinSmoke
   [SerializeField]
   private float _alphaMax;
   [SerializeField]
-  private float _alphaStep;
+  private float _alphaInc;
+  [SerializeField]
+  private float _alphaDec;
 }
