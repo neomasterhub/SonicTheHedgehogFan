@@ -155,6 +155,7 @@ public partial class SonicController
         IsInvincible = true;
         IsAttacking = false;
         CanCollectRing = false;
+        SpinSmoke = null;
         AnalyzeEnvironment_Airborne();
 
         return PipelineStepResult.Continue;
@@ -307,6 +308,7 @@ public partial class SonicController
       {
         _isSpinDashCharging = false;
         IsAttacking = false;
+        SpinSmoke = null;
 
         return PipelineStepResult.Continue;
       })
@@ -347,6 +349,7 @@ public partial class SonicController
       {
         _isSpinDashCharging = true;
         IsAttacking = true;
+        SpinSmoke = Instantiate(_spinSmokePrefab).GetComponent<ISpinSmoke>();
 
         return PipelineStepResult.Continue;
       })
