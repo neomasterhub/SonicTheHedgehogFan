@@ -155,6 +155,9 @@ public partial class SonicController : MonoBehaviour
   [SerializeField]
   [InspectorLabel("Ring")]
   private GameObject _ringPrefab;
+  [SerializeField]
+  [InspectorLabel("Spin smoke")]
+  private GameObject _spinSmokePrefab;
 
   [Header("Tools")]
   [SerializeField]
