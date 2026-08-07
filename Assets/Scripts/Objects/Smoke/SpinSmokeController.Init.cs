@@ -9,6 +9,8 @@ public partial class SpinSmokeController
 {
   public SpinSmokeController()
   {
+    _timerSystem = new();
+
     _alphaMax = AlphaMax;
     _alphaInc = AlphaInc;
     _alphaDec = AlphaDec;
@@ -17,6 +19,9 @@ public partial class SpinSmokeController
   private void Awake()
   {
     _source = GameObject.FindWithTag(Tags.Player).GetComponent<ISpinSmokeSource>();
+
+    _destroyTimer = new Timer(1)
+      .WhenCompleted(() => Destroy(gameObject));
 
     InitializeParticleSystem();
   }
