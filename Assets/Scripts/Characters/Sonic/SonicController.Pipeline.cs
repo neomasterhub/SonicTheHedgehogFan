@@ -530,7 +530,7 @@ public partial class SonicController
       && _isSpinDashCharging
       && _overheatProgress < 1)
     {
-      _overheatProgress = Mathf.Min(1, _overheatProgress + _configs.PhysicsModeConfig.SpinDashChargingHeatRate);
+      _overheatProgress = Mathf.Min(1, _overheatProgress + _configs.PhysicsModeConfig.SpinDashChargingHeatingSpeed);
       return;
     }
 
@@ -538,7 +538,7 @@ public partial class SonicController
       && !_isSpinDashCharging
       && _overheatProgress > 0)
     {
-      _overheatProgress = Mathf.Max(0, _overheatProgress - _configs.PhysicsModeConfig.SpinDashChargingHeatRate);
+      _overheatProgress = Mathf.Max(0, _overheatProgress - _configs.PhysicsModeConfig.SpinDashChargingCoolingSpeed);
       return;
     }
   }
