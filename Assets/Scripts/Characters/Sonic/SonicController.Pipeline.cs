@@ -507,6 +507,7 @@ public partial class SonicController
   private void UpdateCounters()
   {
     UpdateCounters_SpinDashCharging();
+    UpdateCounters_Overheat();
   }
 
   private void UpdateCounters_SpinDashCharging()
@@ -520,6 +521,25 @@ public partial class SonicController
     {
       _spinDashCharge = 0;
       _spinDashChargeNormalized = 0;
+    }
+  }
+
+  private void UpdateCounters_Overheat()
+  {
+    if (_prevIsSpinDashCharging
+      && _isSpinDashCharging
+      && _overheatProgress < 1)
+    {
+      _overheatProgress = Mathf.Min(1, _overheatProgress + _configs.PhysicsModeConfig.SpinDashChargingHeatRate);
+      return;
+    }
+
+    if (!_prevIsSpinDashCharging
+      && !_isSpinDashCharging
+      && _overheatProgress > 0)
+    {
+      _overheatProgress = Mathf.Max(0, _overheatProgress - _configs.PhysicsModeConfig.SpinDashChargingHeatRate);
+      return;
     }
   }
 }
