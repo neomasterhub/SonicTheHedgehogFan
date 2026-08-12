@@ -38,6 +38,7 @@ public class SonicViewSystem
     _context = context;
     _blinker.Update(_context.DeltaTime);
     UpdateAnimator();
+    UpdateSpriteColors();
     RotateSprite();
   }
 
@@ -107,6 +108,14 @@ public class SonicViewSystem
 
       return;
     }
+  }
+
+  private void UpdateSpriteColors()
+  {
+    var color = _spriteRenderer.color;
+    color.g = Mathf.Lerp(1, OverheatColorG, _context.OverheatProgress);
+    color.b = Mathf.Lerp(1, OverheatColorB, _context.OverheatProgress);
+    _spriteRenderer.color = color;
   }
 
   private void RotateSprite()

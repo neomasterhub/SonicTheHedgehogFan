@@ -111,7 +111,7 @@ public static class SonicConsts
       public const float HurtGravitySpx = 48;
       public const float DeathBounceSpeedPx = 7;
       public const float SpinDashReleaseSpeedPx = 12;
-      public const float SpinDashChargingHeatRate = 0.07f;
+      public const float SpinDashChargingHeatRate = 0.004f;
     }
   }
 
@@ -149,5 +149,7 @@ public static class SonicConsts
     public const float WallToAirAngleDegDelta = 3;
     public const float CeilingToAirAngleDegDelta = 6;
     public const float BlinkingInterval = 0.1f;
+    public const float OverheatColorG = 0.7f;
+    public const float OverheatColorB = 0.7f;
   }
 }
