@@ -506,10 +506,10 @@ public partial class SonicController
 
   private void UpdateCounters()
   {
-    UpdateCounters_UpdateSpinDashCharge();
+    UpdateCounters_SpinDashCharging();
   }
 
-  private void UpdateCounters_UpdateSpinDashCharge()
+  private void UpdateCounters_SpinDashCharging()
   {
     if (_prevIsSpinDashCharging && _isSpinDashCharging)
     {
