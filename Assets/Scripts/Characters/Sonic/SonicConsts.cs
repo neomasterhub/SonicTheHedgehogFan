@@ -81,7 +81,8 @@ public static class SonicConsts
       Normal.HurtSpeedYPx / PxPerUnit,
       Normal.HurtGravitySpx / SpxPerUnit,
       Normal.DeathBounceSpeedPx / PxPerUnit,
-      Normal.SpinDashReleaseSpeedPx / PxPerUnit);
+      Normal.SpinDashReleaseSpeedPx / PxPerUnit,
+      Normal.SpinDashChargingHeatRate);
 
     private static class Normal
     {
@@ -110,6 +111,7 @@ public static class SonicConsts
       public const float HurtGravitySpx = 48;
       public const float DeathBounceSpeedPx = 7;
       public const float SpinDashReleaseSpeedPx = 12;
+      public const float SpinDashChargingHeatRate = 0.07f;
     }
   }
 
