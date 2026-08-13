@@ -53,6 +53,19 @@ public class SonicSpeedSystem : SpeedSystemBase
   public int ZeroGroundSpeedProgress { get; private set; }
   public bool IsZeroGroundSpeedProgressReached { get; private set; }
 
+  public float SpeedMagnitude
+  {
+    get
+    {
+      if (_context.IsGrounded)
+      {
+        return Mathf.Abs(GroundSpeed);
+      }
+
+      return Mathf.Sqrt((SpeedX * SpeedX) + (SpeedY * SpeedY));
+    }
+  }
+
   public override void RoundSpeed()
   {
     base.RoundSpeed();
