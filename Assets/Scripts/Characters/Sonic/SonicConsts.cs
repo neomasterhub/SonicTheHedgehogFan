@@ -119,7 +119,7 @@ public static class SonicConsts
       public const float SpinDashChargingCoolingSpeedSpx = 32;
       public const float FlowCooldownSpeedFactor = 0.02f;
       public const float FlowCooldownSpeedSaturationPx = 4;
-      public const float MaxOverheatDuration = 2;
+      public const float MaxOverheatDuration = 1;
     }
   }
 
