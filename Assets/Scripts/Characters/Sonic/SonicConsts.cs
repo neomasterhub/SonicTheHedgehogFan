@@ -85,7 +85,8 @@ public static class SonicConsts
       Normal.SpinDashChargingHeatingSpeedSpx / SpxPerUnit,
       Normal.SpinDashChargingCoolingSpeedSpx / SpxPerUnit,
       Normal.FlowCooldownSpeedFactor,
-      Normal.FlowCooldownSpeedSaturationPx / PxPerUnit);
+      Normal.FlowCooldownSpeedSaturationPx / PxPerUnit,
+      Normal.MaxOverheatDuration);
 
     private static class Normal
     {
@@ -118,6 +119,7 @@ public static class SonicConsts
       public const float SpinDashChargingCoolingSpeedSpx = 32;
       public const float FlowCooldownSpeedFactor = 0.02f;
       public const float FlowCooldownSpeedSaturationPx = 4;
+      public const float MaxOverheatDuration = 2;
     }
   }
 
