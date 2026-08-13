@@ -69,6 +69,7 @@ public partial class SonicController : MonoBehaviour
   private char _triggeredGroundSensorId;
   private float _absGroundSpeed;
   private float _overheatProgress;
+  private float _overheatDuration;
   private float? _reboundGroundSpeed;
   private float _slopeFactor;
   private float _spinDashCharge;

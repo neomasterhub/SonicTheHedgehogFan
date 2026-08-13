@@ -548,5 +548,20 @@ public partial class SonicController
 
       return;
     }
+
+    if (_overheatProgress == 1)
+    {
+      _overheatDuration += Time.fixedDeltaTime;
+    }
+    else if (_overheatProgress > 0)
+    {
+      _overheatDuration = Mathf.Max(0, _overheatDuration - Time.fixedDeltaTime);
+    }
+    else
+    {
+      _overheatDuration = 0;
+    }
+
+    UnityEngine.Debug.Log(_overheatDuration);
   }
 }
