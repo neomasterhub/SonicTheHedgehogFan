@@ -526,27 +526,25 @@ public partial class SonicController
 
   private void UpdateCounters_Overheat()
   {
-    if (_prevIsSpinDashCharging
-      && _isSpinDashCharging
-      && _overheatProgress < 1)
+    if (_isSpinDashCharging)
     {
-      _overheatProgress = Mathf.Min(1, _overheatProgress + _configs.PhysicsModeConfig.SpinDashChargingHeatingSpeed);
-      return;
+      if (_overheatProgress < 1)
+      {
+        _overheatProgress = Mathf.Min(1, _overheatProgress + _configs.PhysicsModeConfig.SpinDashChargingHeatingSpeed);
+      }
     }
-
-    if (!_prevIsSpinDashCharging
-      && !_isSpinDashCharging
-      && _overheatProgress > 0)
+    else
     {
-      var config = _configs.PhysicsModeConfig;
+      if (_overheatProgress > 0)
+      {
+        var config = _configs.PhysicsModeConfig;
 
-      var cooldownSpeed = config.SpinDashChargingCoolingSpeed
-        + (config.FlowCooldownSpeedFactor
-        * Mathf.Clamp01(_speedSystem.SpeedMagnitude / config.FlowCooldownSpeedSaturation));
+        var cooldownSpeed = config.SpinDashChargingCoolingSpeed
+          + (config.FlowCooldownSpeedFactor
+          * Mathf.Clamp01(_speedSystem.SpeedMagnitude / config.FlowCooldownSpeedSaturation));
 
-      _overheatProgress = Mathf.Max(0, _overheatProgress - cooldownSpeed);
-
-      return;
+        _overheatProgress = Mathf.Max(0, _overheatProgress - cooldownSpeed);
+      }
     }
 
     if (_overheatProgress == 1)
@@ -561,7 +559,5 @@ public partial class SonicController
     {
       _overheatDuration = 0;
     }
-
-    UnityEngine.Debug.Log(_overheatDuration);
   }
 }
