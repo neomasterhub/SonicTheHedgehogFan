@@ -1,6 +1,6 @@
 public class SonicPhysicsModeConfig
 {
-  public SonicPhysicsModeConfig(float accelerationSpeed, float decelerationSpeed, float minSkiddingSpeed, float frictionSpeed, float minWallSpeed, float minCeilingSpeed, float topSpeed, float airAccelerationSpeed, float airTopSpeed, float gravitySpeed, float maxFallSpeed, float slopeFactor, float rollDecelerationSpeed, float rollFrictionSpeed, float rollUphillSlopeFactor, float rollDownhillSlopeFactor, float rollMinWallSpeed, float rollMinCeilingSpeed, float jumpSpeed, float jumpCutoffSpeed, float hurtSpeedX, float hurtSpeedY, float hurtGravitySpeed, float deathBounceSpeed, float spinDashReleaseSpeed, float spinDashChargingHeatSpeed, float spinDashChargingCoolingSpeed, float flowCooldownSpeedFactor)
+  public SonicPhysicsModeConfig(float accelerationSpeed, float decelerationSpeed, float minSkiddingSpeed, float frictionSpeed, float minWallSpeed, float minCeilingSpeed, float topSpeed, float airAccelerationSpeed, float airTopSpeed, float gravitySpeed, float maxFallSpeed, float slopeFactor, float rollDecelerationSpeed, float rollFrictionSpeed, float rollUphillSlopeFactor, float rollDownhillSlopeFactor, float rollMinWallSpeed, float rollMinCeilingSpeed, float jumpSpeed, float jumpCutoffSpeed, float hurtSpeedX, float hurtSpeedY, float hurtGravitySpeed, float deathBounceSpeed, float spinDashReleaseSpeed, float spinDashChargingHeatSpeed, float spinDashChargingCoolingSpeed, float flowCooldownSpeedFactor, float flowCooldownSpeedSaturation)
   {
     AccelerationSpeed = accelerationSpeed;
     DecelerationSpeed = decelerationSpeed;
@@ -30,6 +30,7 @@ public class SonicPhysicsModeConfig
     SpinDashChargingHeatingSpeed = spinDashChargingHeatSpeed;
     SpinDashChargingCoolingSpeed = spinDashChargingCoolingSpeed;
     FlowCooldownSpeedFactor = flowCooldownSpeedFactor;
+    FlowCooldownSpeedSaturation = flowCooldownSpeedSaturation;
   }
 
   public float AccelerationSpeed { get; }
@@ -60,4 +61,5 @@ public class SonicPhysicsModeConfig
   public float SpinDashChargingHeatingSpeed { get; }
   public float SpinDashChargingCoolingSpeed { get; }
   public float FlowCooldownSpeedFactor { get; }
+  public float FlowCooldownSpeedSaturation { get; }
 }

@@ -84,7 +84,8 @@ public static class SonicConsts
       Normal.SpinDashReleaseSpeedPx / PxPerUnit,
       Normal.SpinDashChargingHeatingSpeedSpx / SpxPerUnit,
       Normal.SpinDashChargingCoolingSpeedSpx / SpxPerUnit,
-      Normal.FlowCooldownSpeedFactor);
+      Normal.FlowCooldownSpeedFactor,
+      Normal.FlowCooldownSpeedSaturationPx / PxPerUnit);
 
     private static class Normal
     {
@@ -115,7 +116,8 @@ public static class SonicConsts
       public const float SpinDashReleaseSpeedPx = 12;
       public const float SpinDashChargingHeatingSpeedSpx = 48;
       public const float SpinDashChargingCoolingSpeedSpx = 32;
-      public const float FlowCooldownSpeedFactor = 2;
+      public const float FlowCooldownSpeedFactor = 0.02f;
+      public const float FlowCooldownSpeedSaturationPx = 4;
     }
   }
 
