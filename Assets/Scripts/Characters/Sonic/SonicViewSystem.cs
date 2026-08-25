@@ -11,6 +11,7 @@ public class SonicViewSystem
   private readonly PlayerInputSystem _inputSystem;
   private readonly PlayerViewRotatorProvider<SonicViewRotatorContext> _rotatorProvider;
 
+  private float _prevOverheatProgress;
   private float _groundedAnimatorParameterSpeed;
   private Animator _animator;
   private SonicViewContext _context;
@@ -36,9 +37,13 @@ public class SonicViewSystem
   public void Update(SonicViewContext context)
   {
     _context = context;
+
     _blinker.Update(_context.DeltaTime);
     UpdateAnimator();
+    UpdateSpriteColors();
     RotateSprite();
+
+    _prevOverheatProgress = _context.OverheatProgress;
   }
 
   public void StartBlinking(float alpha, float timer, float interval)
@@ -106,6 +111,17 @@ public class SonicViewSystem
         SpinDashChargingSpeedMax * _context.SpinDashSpeedFactor);
 
       return;
+    }
+  }
+
+  private void UpdateSpriteColors()
+  {
+    if (_prevOverheatProgress != _context.OverheatProgress)
+    {
+      var color = _spriteRenderer.color;
+      color.g = Mathf.Lerp(1, OverheatColorG, _context.OverheatProgress);
+      color.b = Mathf.Lerp(1, OverheatColorB, _context.OverheatProgress);
+      _spriteRenderer.color = color;
     }
   }
 

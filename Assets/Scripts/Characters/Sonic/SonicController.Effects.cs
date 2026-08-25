@@ -12,6 +12,7 @@ public partial class SonicController
   {
     _effects.AddStep(CreateEffect_Disable());
     _effects.AddStep(CreateEffect_DeathZone());
+    _effects.AddStep(CreateEffect_DeathOverheat());
     _effects.AddStep(CreateEffect_FallingBlockOnHead());
     _effects.AddStep(CreateEffect_SetHit());
     _effects.AddStep(CreateEffect_Attacked());
@@ -60,6 +61,23 @@ public partial class SonicController
       .WithCondition(() =>
         !_isDying
         && IntersectingZones.HasAny(ZoneType.Death))
+      .WithAction(() =>
+      {
+        IsHit = true;
+        Dying();
+
+        return PipelineStepResult.Break;
+      })
+      .Build();
+  }
+
+  private PipelineStep CreateEffect_DeathOverheat()
+  {
+    return PipelineStepBuilder.Create()
+      .WithDisplayName("Death overheat")
+      .WithCondition(() =>
+        !_isDying
+        && _overheatDuration > _configs.PhysicsModeConfig.MaxOverheatDuration)
       .WithAction(() =>
       {
         IsHit = true;
@@ -155,6 +173,7 @@ public partial class SonicController
         IsInvincible = true;
         IsAttacking = false;
         CanCollectRing = false;
+        SpinSmoke = null;
         AnalyzeEnvironment_Airborne();
 
         return PipelineStepResult.Continue;
@@ -307,6 +326,7 @@ public partial class SonicController
       {
         _isSpinDashCharging = false;
         IsAttacking = false;
+        SpinSmoke = null;
 
         return PipelineStepResult.Continue;
       })
@@ -347,6 +367,9 @@ public partial class SonicController
       {
         _isSpinDashCharging = true;
         IsAttacking = true;
+
+        SpinSmoke = Instantiate(_spinSmokePrefab, transform.position, default)
+          .GetComponent<ISpinSmoke>();
 
         return PipelineStepResult.Continue;
       })

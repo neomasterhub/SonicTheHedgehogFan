@@ -68,6 +68,8 @@ public partial class SonicController : MonoBehaviour
   private bool _prevShortVideoMode;
   private char _triggeredGroundSensorId;
   private float _absGroundSpeed;
+  private float _overheatProgress;
+  private float _overheatDuration;
   private float? _reboundGroundSpeed;
   private float _slopeFactor;
   private float _spinDashCharge;
@@ -155,6 +157,9 @@ public partial class SonicController : MonoBehaviour
   [SerializeField]
   [InspectorLabel("Ring")]
   private GameObject _ringPrefab;
+  [SerializeField]
+  [InspectorLabel("Spin smoke")]
+  private GameObject _spinSmokePrefab;
 
   [Header("Tools")]
   [SerializeField]

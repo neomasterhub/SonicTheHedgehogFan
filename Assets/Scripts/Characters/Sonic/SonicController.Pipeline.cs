@@ -227,7 +227,7 @@ public partial class SonicController
 
   private void UpdateView()
   {
-    _viewContext = new(_horizontalDirection, IsHurt, _isDying, _isGrounded, _speedSystem.IsSkidding, _isBalancing, _isCurlingUp, _isLookingUp, _isRolling, _speedSystem.IsPushing, _isSpinDashCharging, _speedSystem.IsZeroGroundSpeedProgressReached, _triggeredGroundSensorId, _speedSystem.SpeedX, _speedSystem.GroundSpeed, _groundInfoSystem.Current.AngleDeg, Time.fixedDeltaTime, _spinDashChargeNormalized, _groundInfoSystem.Current.Side, _groundInfoSystem.Previous.Side);
+    _viewContext = new(_horizontalDirection, IsHurt, _isDying, _isGrounded, _speedSystem.IsSkidding, _isBalancing, _isCurlingUp, _isLookingUp, _isRolling, _speedSystem.IsPushing, _isSpinDashCharging, _speedSystem.IsZeroGroundSpeedProgressReached, _triggeredGroundSensorId, _speedSystem.SpeedX, _speedSystem.GroundSpeed, _groundInfoSystem.Current.AngleDeg, Time.fixedDeltaTime, _spinDashChargeNormalized, _overheatProgress, _groundInfoSystem.Current.Side, _groundInfoSystem.Previous.Side);
     _viewSystem.Update(_viewContext);
   }
 
@@ -506,10 +506,11 @@ public partial class SonicController
 
   private void UpdateCounters()
   {
-    UpdateCounters_UpdateSpinDashCharge();
+    UpdateCounters_SpinDashCharging();
+    UpdateCounters_Overheat();
   }
 
-  private void UpdateCounters_UpdateSpinDashCharge()
+  private void UpdateCounters_SpinDashCharging()
   {
     if (_prevIsSpinDashCharging && _isSpinDashCharging)
     {
@@ -520,6 +521,43 @@ public partial class SonicController
     {
       _spinDashCharge = 0;
       _spinDashChargeNormalized = 0;
+    }
+  }
+
+  private void UpdateCounters_Overheat()
+  {
+    if (_isSpinDashCharging)
+    {
+      if (_overheatProgress < 1)
+      {
+        _overheatProgress = Mathf.Min(1, _overheatProgress + _configs.PhysicsModeConfig.SpinDashChargingHeatingSpeed);
+      }
+    }
+    else
+    {
+      if (_overheatProgress > 0)
+      {
+        var config = _configs.PhysicsModeConfig;
+
+        var cooldownSpeed = config.SpinDashChargingCoolingSpeed
+          + (config.FlowCooldownSpeedFactor
+          * Mathf.Clamp01(_speedSystem.SpeedMagnitude / config.FlowCooldownSpeedSaturation));
+
+        _overheatProgress = Mathf.Max(0, _overheatProgress - cooldownSpeed);
+      }
+    }
+
+    if (_overheatProgress == 1)
+    {
+      _overheatDuration += Time.fixedDeltaTime;
+    }
+    else if (_overheatProgress > 0)
+    {
+      _overheatDuration = Mathf.Max(0, _overheatDuration - Time.fixedDeltaTime);
+    }
+    else
+    {
+      _overheatDuration = 0;
     }
   }
 }

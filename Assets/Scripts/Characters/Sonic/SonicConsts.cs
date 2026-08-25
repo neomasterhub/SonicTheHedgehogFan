@@ -81,7 +81,12 @@ public static class SonicConsts
       Normal.HurtSpeedYPx / PxPerUnit,
       Normal.HurtGravitySpx / SpxPerUnit,
       Normal.DeathBounceSpeedPx / PxPerUnit,
-      Normal.SpinDashReleaseSpeedPx / PxPerUnit);
+      Normal.SpinDashReleaseSpeedPx / PxPerUnit,
+      Normal.SpinDashChargingHeatingSpeedSpx / SpxPerUnit,
+      Normal.SpinDashChargingCoolingSpeedSpx / SpxPerUnit,
+      Normal.FlowCooldownSpeedFactor,
+      Normal.FlowCooldownSpeedSaturationPx / PxPerUnit,
+      Normal.MaxOverheatDuration);
 
     private static class Normal
     {
@@ -110,6 +115,11 @@ public static class SonicConsts
       public const float HurtGravitySpx = 48;
       public const float DeathBounceSpeedPx = 7;
       public const float SpinDashReleaseSpeedPx = 12;
+      public const float SpinDashChargingHeatingSpeedSpx = 48;
+      public const float SpinDashChargingCoolingSpeedSpx = 32;
+      public const float FlowCooldownSpeedFactor = 0.02f;
+      public const float FlowCooldownSpeedSaturationPx = 4;
+      public const float MaxOverheatDuration = 1;
     }
   }
 
@@ -147,5 +157,7 @@ public static class SonicConsts
     public const float WallToAirAngleDegDelta = 3;
     public const float CeilingToAirAngleDegDelta = 6;
     public const float BlinkingInterval = 0.1f;
+    public const float OverheatColorG = 0.7f;
+    public const float OverheatColorB = 0.7f;
   }
 }

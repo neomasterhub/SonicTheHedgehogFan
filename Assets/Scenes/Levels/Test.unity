@@ -4315,6 +4315,7 @@ MonoBehaviour:
   _spinDashReleaseAudioClip: {fileID: 8300000, guid: fd55eb0e7b8d2804fa7456c04155e413, type: 3}
   _invincibilityStarsTrailPrefab: {fileID: 3470931886647774454, guid: baecbd0c50edcac40b9ea0694a77be97, type: 3}
   _ringPrefab: {fileID: 5601778466645593367, guid: e75974286517f944dac2e72436689482, type: 3}
+  _spinSmokePrefab: {fileID: 6220123470929009126, guid: 7f50ca6140dc09f41b7cb1ad679aea32, type: 3}
   _meshRendererObj: {fileID: 2109289686}
 --- !u!61 &710850506
 BoxCollider2D:

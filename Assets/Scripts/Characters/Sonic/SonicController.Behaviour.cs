@@ -14,6 +14,7 @@ public partial class SonicController
   IRingCollector,
   ISceneObjectDebug,
   ISceneObjectPlayer,
+  ISpinSmokeSource,
   IZoneObject
 {
   public bool IsInvincible { get; private set; }
@@ -131,4 +132,6 @@ public partial class SonicController
   public bool HasInvincibilityStars => _hasInvincibilityStars;
 
   public ZoneType IntersectingZones { get; set; }
+
+  public ISpinSmoke SpinSmoke { get; private set; }
 }
